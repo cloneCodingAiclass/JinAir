@@ -1,0 +1,60 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<div th:replace="/adminpage/fragment/head :: head"></div>
+<link rel="stylesheet" href="/adminpage/lib/css/schedule/aircraft_list.css">
+<script src="/adminpage/app/schedule/aircraft_list.js"></script>
+</head>
+    <body>
+        <div id="wrap">
+            <div th:replace="/adminpage/fragment/header :: header"></div>
+            <div id="container">
+                <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+                <div class="contents">
+                    <div class="contwrap">
+                        <p class="title">항공기 조회</p>
+                        <div class="contents_main">
+                            <table>
+                                <tr>
+                                    <td>항공사 이름</td>
+                                    <td>항공사 아이디</td>
+                                    <td>좌석수</td>
+                                    <td>추가 차지<br>(퍼스트클래스)</td>
+                                    <td>추가 차지<br>(비즈니스)</td>
+                                </tr>
+                                <tr>
+                                    <td>진에어</td>
+                                    <td>B777-200ER</td>
+                                    <td>393석</td>
+                                    <td>100,000원</td>
+                                    <td>50,000원</td>
+                                </tr>
+                                <tr>
+                                    <td>진에어</td>
+                                    <td>B777-200ER</td>
+                                    <td>393석</td>
+                                    <td>100,000원</td>
+                                    <td>50,000원</td>
+                                </tr>
+                                <tr>
+                                    <td>진에어</td>
+                                    <td>B777-200ER</td>
+                                    <td>393석</td>
+                                    <td>100,000원</td>
+                                    <td>50,000원</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="btn_box">
+                            <input
+                                type="button"
+                                value="항공기 신규 등록"
+                                onclick="location.href='aircrift_regist.html'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
