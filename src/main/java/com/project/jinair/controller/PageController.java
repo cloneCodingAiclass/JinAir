@@ -24,12 +24,24 @@ public class PageController {
     @RequestMapping("/admin/cm_list/cm_detail")
     public ModelAndView cm_detail() {
         return new ModelAndView("/adminpage/pages/cm/cm_detail")
-                .addObject("code", "cm_list");
+                .addObject("code", "cm_detail");
     }
 
     @RequestMapping("/admin/cm_list/cm_modify")
     public ModelAndView cm_modify() {
         return new ModelAndView("/adminpage/pages/cm/cm_modify")
-                .addObject("code", "cm_list");
+                .addObject("code", "cm_modify");
+    }
+
+    @RequestMapping("/admin/item")
+    public ModelAndView item() {
+        return new ModelAndView("/adminpage/pages/item/item")
+                .addObject("code", "item");
+    }
+
+    @RequestMapping("/admin/item/itemadd")
+    public ModelAndView itemadd() {
+        return new ModelAndView("/adminpage/pages/item/itemadd")
+                .addObject("code", "itemadd");
     }
 }
