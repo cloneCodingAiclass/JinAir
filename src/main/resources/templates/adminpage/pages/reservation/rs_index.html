@@ -1,0 +1,66 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<div th:replace="/adminpage/fragment/head :: head"></div>
+<link rel="stylesheet" href="/adminpage/lib/css/reservation/rs_index.css">
+<script src="/adminpage/app/reservation/rs_index.js"></script>
+<!-- head.html 끝-->
+<body>
+<div id="wrap">
+    <div th:replace="/adminpage/fragment/header :: header"></div>
+    <div id="container">
+        <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+        <div class="contents">
+            <div class="contwrap">
+                <div class="search">
+                    <p class="title">운항별 예약자 조회</p>
+                </div>
+                <div class="searchwrap">
+                    <form action="./rs_result.html">
+                        <table>
+                            <tr>
+                                <th>항공편 명</th>
+                                <th>출발일</th>
+                                <th>도착일</th>
+                                <th>출발지</th>
+                                <th>도착지</th>
+                                <th rowspan="2">
+                                    <input type="submit" value="검색" class="yelgback searchbutt">
+                                </th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="searchbox yelgcolor" placeholder="(예)001, 세자리"></td>
+                                <td><input type="date" name="start_date" id="start_date" class="searchbox yelgcolor" required></td>
+                                <td><input type="date" name="end_date" id="end_date" class="searchbox yelgcolor" required/></td>
+                                <td>
+                                    <select name="from_place" class="searchbox">
+                                        <option value="">선택</option>
+                                        <option value="GMP">GMP</option>
+                                        <option value="CJU">CJU</option>
+                                        <option value="USN">USN</option>
+                                        <option value="TAE">TAE</option>
+                                        <option value="ICN">ICN</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select value="to_place" class="searchbox">
+                                        <option>선택</option>
+                                        <option value="GMP">GMP</option>
+                                        <option value="CJU">CJU</option>
+                                        <option value="USN">USN</option>
+                                        <option value="TAE">TAE</option>
+                                        <option value="ICN">ICN</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

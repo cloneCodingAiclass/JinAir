@@ -1,0 +1,177 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<div th:replace="/adminpage/fragment/head :: head"></div>
+<link rel="stylesheet" href="/adminpage/lib/css/reservation/rs_user.css">
+<script src="/adminpage/app/reservation/rs_sch.js"></script>
+<!-- head.html 끝-->
+<body>
+<div id="wrap">
+    <div th:replace="/adminpage/fragment/header :: header"></div>
+    <div id="container">
+        <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+        <div class="contents">
+            <div class="contwrap">
+                <div class="search">
+                    <p class="title">운항편(LJ438) 예약자 조회</p>
+                </div>
+                <div class="searchwrap">
+                    <!-- 예약자 리스트 -->
+                    <div class="rs_list">
+                        <table>
+                            <tr class="table_tit">
+                                <th>항공기 아이디</th>
+                                <th>운항편</th>
+                                <th>출발 일자</th>
+                                <th>출발지</th>
+                                <th>출발 시간</th>
+                                <th>도착지</th>
+                                <th>도착 시간</th>
+                            </tr>
+                            <tr>
+                                <td>B777-200ER</td>
+                                <td>LJ438</td>
+                                <td>2022-01-30</td>
+                                <td>서울/김포(GMP)</td>
+                                <td>08:20</td>
+                                <td>제주(CJU)</td>
+                                <td>09:10</td>
+                            </tr>
+                            <tr class="table_tit">
+                                <th>수용 좌석수</th>
+                                <th>예약된 좌석</th>
+                                <th>예약 가능 좌석수</th>
+                                <th>비행시간</th>
+                                <th>가격</th>
+                                <th colspan="2">나비포인트</th>
+                            </tr>
+                            <tr>
+                                <td>180</td>
+                                <td>148</td>
+                                <td>32</td>
+                                <td>00시간 50분</td>
+                                <td>32,000원</td>
+                                <td colspan="2">2%</td>
+                            </tr>
+                        </table>
+                        <table class="table_list">
+                            <tr class="table_tit">
+                                <th>예약 번호</th>
+                                <th>성명</th>
+                                <th>좌석 번호</th>
+                                <th>이메일</th>
+                                <th>생년월일</th>
+                                <th>연락처</th>
+                                <th>회원여부</th>
+                            </tr>
+                            <tr>
+                                <td><a href="./rs_user_info.html">11Q32D</a></td>
+                                <td><a href="./rs_user_info.html">홍길동(HONG GILDONG)</a></td>
+                                <td><a href="./rs_user_info.html">B2</a></td>
+                                <td><a href="./rs_user_info.html">dongdong@naver.com</a></td>
+                                <td><a href="./rs_user_info.html">1996-10-22</a></td>
+                                <td><a href="./rs_user_info.html">010-0000-0000</a></td>
+                                <td><a href="./rs_user_info.html">○</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="./rs_user_info.html">11Q33D</a></td>
+                                <td><a href="./rs_user_info.html">한효주(HAN HYOJU)</a></td>
+                                <td><a href="./rs_user_info.html">A2</a></td>
+                                <td><a href="./rs_user_info.html">hansworld@naver.com</a></td>
+                                <td><a href="./rs_user_info.html">2001-09-15</a></td>
+                                <td><a href="./rs_user_info.html">010-0000-0000</a></td>
+                                <td><a href="./rs_user_info.html">○</a></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><a href="./rs_user_info.html">11Q34D</a></td>
+                                <td><a href="./rs_user_info.html">배애리(BAE AEIL)</a></td>
+                                <td><a href="./rs_user_info.html">A3</a></td>
+                                <td><a href="./rs_user_info.html">berry@daum.net</a></td>
+                                <td><a href="./rs_user_info.html">1969-08-28</a></td>
+                                <td><a href="./rs_user_info.html">010-1234-5678</a></td>
+                                <td><a href="./rs_user_info.html">x</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="./rs_user_info.html">11Q35D</a></td>
+                                <td><a href="./rs_user_info.html">손흥민(SON HEUNGMIN)</a></td>
+                                <td><a href="./rs_user_info.html">C11</a></td>
+                                <td><a href="./rs_user_info.html">superstar@gmail.com</a></td>
+                                <td><a href="./rs_user_info.html">1995-01-21</a></td>
+                                <td><a href="./rs_user_info.html">010-0000-0000</a></td>
+                                <td><a href="./rs_user_info.html">○</a></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><a href="./rs_user_info.html">11Q36D</a></td>
+                                <td><a href="./rs_user_info.html">김연아(KIM YEONA</a></td>
+                                <td><a href="./rs_user_info.html">D2</a></td>
+                                <td><a href="./rs_user_info.html">icequeen@naver.com</a></td>
+                                <td><a href="./rs_user_info.html">1988-08-17</a></td>
+                                <td><a href="./rs_user_info.html">010-0123-4567</a></td>
+                                <td><a href="./rs_user_info.html">○</a></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><a href="./rs_user_info.html">11Q37D</a></td>
+                                <td><a href="./rs_user_info.html">김연경(KIM YEONKYONG)</a></td>
+                                <td><a href="./rs_user_info.html">A9</a></td>
+                                <td><a href="./rs_user_info.html">yeon@naver.com</a></td>
+                                <td><a href="./rs_user_info.html">1965-03-25</a></td>
+                                <td><a href="./rs_user_info.html">010-1345-8679</a></td>
+                                <td><a href="./rs_user_info.html">x</a></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><a href="./rs_user_info.html">11Q32D</a></td>
+                                <td><a href="./rs_user_info.html">홍길동(HONG GILDONG)</a></td>
+                                <td><a href="./rs_user_info.html">B2</a></td>
+                                <td><a href="./rs_user_info.html">dongdong@naver.com</a></td>
+                                <td><a href="./rs_user_info.html">1996-10-22</a></td>
+                                <td><a href="./rs_user_info.html">010-0000-0000</a></td>
+                                <td><a href="./rs_user_info.html">○</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="./rs_user_info.html">11Q33D</a></td>
+                                <td><a href="./rs_user_info.html">한효주(HAN HYOJU)</a></td>
+                                <td><a href="./rs_user_info.html">A2</a></td>
+                                <td><a href="./rs_user_info.html">hansworld@naver.com</a></td>
+                                <td><a href="./rs_user_info.html">2001-09-15</a></td>
+                                <td><a href="./rs_user_info.html">010-0000-0000</a></td>
+                                <td><a href="./rs_user_info.html">○</a></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><a href="./rs_user_info.html">11Q34D</a></td>
+                                <td><a href="./rs_user_info.html">배애리(BAE AEIL)</a></td>
+                                <td><a href="./rs_user_info.html">A3</a></td>
+                                <td><a href="./rs_user_info.html">berry@daum.net</a></td>
+                                <td><a href="./rs_user_info.html">1969-08-28</a></td>
+                                <td><a href="./rs_user_info.html">010-1234-5678</a></td>
+                                <td><a href="./rs_user_info.html">x</a></td>
+                            </tr>
+                        </table>
+                        <div class="footer">
+                            <div class="center">
+                                <table>
+                                    <tr>
+                                        <td><a href="#">1</a></td>
+                                        <td><a href="#">2</a></td>
+                                        <td><a href="#">3</a></td>
+                                        <td><a href="#">4</a></td>
+                                        <td><a href="#">5</a></td>
+                                        <td><a href="#"></a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 예약자 리스트 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

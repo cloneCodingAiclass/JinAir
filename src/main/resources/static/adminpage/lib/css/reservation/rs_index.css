@@ -1,0 +1,105 @@
+#container > .contents > .contwrap{
+    width: 88%;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+.contents > .contwrap > .search{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 35px;
+}
+.contents > .contwrap > .search > .title{
+    font-size: 1.4rem; 
+    font-weight: 700;
+    display: inline;
+    align-self: flex-start;
+}
+.contents > .contwrap > .searchwrap {
+    position: relative;
+    background-color: #f2f2f2;
+    /* border-radius: 10px; */
+    padding: 15px;
+    width: 100%;
+    height: 90px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bolder;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+    background-color: #fff;
+}
+
+.contents > .contwrap > .searchwrap table {
+    width: 60%;
+    height: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    
+}
+
+
+.contents > .contwrap > .searchwrap table th {
+    font-size: 16px;
+    text-align: center;
+}
+
+
+.contents > .contwrap > .searchwrap table td {
+    height: 30px;
+    padding: 5px;
+    text-align: left;
+}
+
+.contents > .contwrap input {
+    float: left;
+}
+
+.contents > .contwrap input+span {
+    display: inline-block;
+}
+
+
+.contents > .contwrap input.searchbutt{
+    border-radius: 2px;
+    outline: none;
+    width: 90px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: bolder;
+    cursor: pointer;
+    background-color: #bdd600;
+    border: none;
+    color: #444;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+}
+.contents > .contwrap .searchbox {
+    width: 150px; 
+    height: 30px;
+    font-size: 14px;
+    text-indent: 8px;
+    font-weight: bolder;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+
+.contents > .contwrap >.searchwrap p{
+    display: inline-block;
+    margin: 0 10px;
+}
+.contents > .contwrap >.searchwrap > p:nth-child(1) input[type="text"]{
+    width: 150px;
+    height: 30px;
+}
+
+.searchbox{
+    color: #444;
+}
