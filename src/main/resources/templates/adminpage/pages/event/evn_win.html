@@ -1,0 +1,107 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<head><div th:replace="/adminpage/fragment/head :: head"></div>
+    <link rel="stylesheet" href="/adminpage/lib/css/style.css">
+    <link rel="stylesheet" href="/adminpage/lib/css/event/evn_win.css">
+    <script src="/adminpage/app/event/evn_ing.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div th:replace="/adminpage/fragment/header :: header"></div>
+        <div id="container">
+            <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+            <div class="contents">
+                <div class="contwrap">
+                    <div class="event">
+                        <p class="title">이벤트</p>
+                    </div>
+                    <div class="event_wrap">
+                        <table class="event_kind">
+                            <colgroup>
+                                <col width="333">
+                                <col width="333">
+                                <col width="333">
+                            </colgroup>
+                            <tr>
+                                <th><a href="../../../../../../../../JinAirCloneCoding/AdminPage/event/evn_ing.html">진행중 이벤트</a></th>
+                                <th><a href="evn_end.html">종료된 이벤트</a></th>
+                                <th class="current_list"><a href="evn_win.html">당첨자 발표</a></th>
+                            </tr>
+                        </table>
+                        <table class="event_list">
+                            <colgroup>
+                                <col width="130">
+                                <col width="600">
+                                <col width="270">
+                            </colgroup>
+                            <tr>
+                                <th>번호</th>
+                                <th>제목</th>
+                                <th>등록일</th>
+                            </tr>
+                            <tr>
+                                <td>57</td>
+                                <td class="list_tit"><a href="evn_view.html">딜라이트 팝업 스토어 22년 1월 당첨자 안내</a></td>
+                                <td>2021-12-31</td>
+                            </tr>
+                            <tr>
+                                <td>56</td>
+                                <td class="list_tit"><a href="evn_view.html">인스타 방탈출 이벤트 2탄 당첨자 발표</a></td>
+                                <td>2019-11-01</td>
+                            </tr>
+                            <tr>
+                                <td>55</td>
+                                <td class="list_tit"><a href="evn_view.html">인스타 방탈출 이벤트 당첨자 발표</a></td>
+                                <td>2017-04-02</td>
+                            </tr>
+                            <tr>
+                                <td>54</td>
+                                <td class="list_tit"><a href="evn_view.html">그린 서포터즈 해외 탐장 배틀전 프로모션</a></td>
+                                <td>2016-12-01</td>
+                            </tr>
+                            <tr>
+                                <td>53</td>
+                                <td class="list_tit"><a href="evn_view.html">메리 크리스마스, 메리 오키나와 퀴즈 1차 이벤트 당첨자 발표</a></td>
+                                <td>2016-12-01</td>
+                            </tr>
+                            <tr>
+                                <td>52</td>
+                                <td class="list_tit"><a href="evn_view.html">진에어 타고 코코몽 메코 파크로 이벤트</a></td>
+                                <td>2016-01-15</td>
+                            </tr>
+                            <tr class="last_list">
+                                <td>51</td>
+                                <td class="list_tit"><a href="evn_view.html">겨울엔, JIN한 커피 한 잔 할까요?</a></td>
+                                <td>2015-12-01</td>
+                            </tr>
+                        </table>
+                        <div class="footer">
+                            <div class="center">
+                                <table>
+                                    <tr>
+                                        <td><a href="#">1</a></td>
+                                        <td><a href="#">2</a></td>
+                                        <td><a href="#">3</a></td>
+                                        <td><a href="#">4</a></td>
+                                        <td><a href="#">5</a></td>
+                                        <td><a href="#">6</a></td>
+                                        <td><a href="#">7</a></td>
+                                        <td><a href="#">8</a></td>
+                                        <td><a href="#">9</a></td>
+                                        <td><a href="#">10</a></td>
+                                        <td><a href="#"></a></td>
+                                        <td><a href="#"></a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <a href="evn_write.html" class="notice_write"><input type="button" value="작성하기"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
