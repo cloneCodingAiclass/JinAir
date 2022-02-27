@@ -1,0 +1,117 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<head><div th:replace="/adminpage/fragment/head :: head"></div>
+    <link rel="stylesheet" href="/adminpage/lib/css/style.css">
+    <link rel="stylesheet" href="/adminpage/lib/css/event/evn_end.css">
+    <script src="/adminpage/app/event/evn_end.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div th:replace="/adminpage/fragment/header :: header"></div>
+        <div id="container">
+            <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+            <div class="contents">
+                <div class="contwrap">
+                    <div class="event">
+                        <p class="title">이벤트</p>
+                    </div>
+                    <div class="event_wrap">
+                        <table class="event_kind">
+                            <colgroup>
+                                <col width="333">
+                                <col width="333">
+                                <col width="333">
+                            </colgroup>
+                            <tr>
+                                <th><a href="../../../../../../../../JinAirCloneCoding/AdminPage/event/evn_ing.html">진행중 이벤트</a></th>
+                                <th class="current_list"><a href="evn_end.html">종료된 이벤트</a></th>
+                                <th><a href="evn_win.html">당첨자 발표</a></th>
+                            </tr>
+                        </table>
+                        <table class="event_list">
+                            <colgroup>
+                                <col width="100">
+                                <col width="400">
+                                <col width="260">
+                                <col width="140">
+                            </colgroup>
+                            <tr>
+                                <th>번호</th>
+                                <th>제목</th>
+                                <th>이벤트 기간</th>
+                                <th>등록일</th>
+                            </tr>
+                            <tr>
+                                <td>70</td>
+                                <td class="list_tit"><a href="evn_view.html">[이벤트] 사천 신규취향 기념 혜택</a></td>
+                                <td>2022-01-03 ~ 2022-12-30</td>
+                                <td>2022-01-02</td>
+                            </tr>
+                            <tr>
+                                <td>69</td>
+                                <td class="list_tit"><a href="evn_view.html">[이벤트] 2022년 스카일해 진에어</a></td>
+                                <td>2022-01-03 ~ 2022-12-30</td>
+                                <td>2022-01-02</td>
+                            </tr>
+                            <tr>
+                                <td>68</td>
+                                <td class="list_tit"><a href="evn_view.html">[이벤트] 작심삼일 3일 쿠폰</a></td>
+                                <td>2022-01-03 ~ 2022-12-30</td>
+                                <td>2022-01-02</td>
+                            </tr>
+                            <tr>
+                                <td>67</td>
+                                <td class="list_tit"><a href="evn_view.html">[이벤트] 나비포인트 이메일 클릭 프로모션</a></td>
+                                <td>2022-01-03 ~ 2022-12-30</td>
+                                <td>2022-01-02</td>
+                            </tr>
+                            <tr>
+                                <td>66</td>
+                                <td class="list_tit"><a href="evn_view.html">[이벤트] 신규회원 할인 쿠폰 팩!</a></td>
+                                <td>2022-01-03 ~ 2022-12-30</td>
+                                <td>2022-01-02</td>
+                            </tr>
+                            <tr>
+                                <td>65</td>
+                                <td class="list_tit"><a href="evn_view.html">[이벤트] 부산항공권 최대 90% 할인</a></td>
+                                <td>2022-01-03 ~ 2022-12-30</td>
+                                <td>2022-01-02</td>
+                            </tr>
+                            <tr class="last_list">
+                                <td>64</td>
+                                <td class="list_tit"><a href="evn_view.html">[이벤트] 매월 3번째 수요일부터 삼성카드 할인</a></td>
+                                <td>2022-01-03 ~ 2022-12-30</td>
+                                <td>2022-01-02</td>
+                            </tr>
+                        </table>
+                        
+                        <div class="footer">
+                            <div class="center">
+                                <table>
+                                    <tr>
+                                        <td><a href="#">1</a></td>
+                                        <td><a href="#">2</a></td>
+                                        <td><a href="#">3</a></td>
+                                        <td><a href="#">4</a></td>
+                                        <td><a href="#">5</a></td>
+                                        <td><a href="#">6</a></td>
+                                        <td><a href="#">7</a></td>
+                                        <td><a href="#">8</a></td>
+                                        <td><a href="#">9</a></td>
+                                        <td><a href="#">10</a></td>
+                                        <td><a href="#"></a></td>
+                                        <td><a href="#"></a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <a href="evn_write.html" class="notice_write"><input type="button" value="작성하기"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

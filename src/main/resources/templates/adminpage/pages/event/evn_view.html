@@ -1,0 +1,66 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<head><div th:replace="/adminpage/fragment/head :: head"></div>
+    <link rel="stylesheet" href="/adminpage/lib/css/style.css">
+    <link rel="stylesheet" href="/adminpage/lib/css/event/evn_view.css">
+    <script src="/adminpage/app/event/evn_view.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div th:replace="/adminpage/fragment/header :: header"></div>
+        <div id="container">
+            <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+            <div class="contents">
+                <div class="contwrap">
+                    <div class="event_wrap">
+                        <div class="event">
+                            <p class="title">이벤트</p>
+                        </div>
+                        <div class="event_view">
+                            <form action="#">
+                                <table>
+                                    <colgroup>
+                                        <col style="width:85%;">
+                                        <col style="width:15%;">
+                                    </colgroup>
+                                    <tr>
+                                        <th class="botbor"><div class="tit">[이벤트]제주면세점 진에어 회원혜택</div><div class="evndate">이벤트 기간 : <p>2021-12-22 ~ 2022-01-31</p></div></th>
+                                        <th class="right botbor">등록일 <p class="wrdate">2022-01-28</p></th>
+                                    </tr>
+                                    <tr>
+                                        <td class="file" colspan="2"><img src="/adminpage/lib/img/event.jpg" alt="이벤트사진"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="content_txt" colspan="2">유의사항 본 프로모션은 진에어 홈페이지 회원 대상으로 진행됩니다.<br/>
+                                            본 프로모션은 당사 또는 제휴사 사정에 의하여 사전 고지 없이 변경 및 조기 종료될 수 있습니다.<br/>
+                                            면세할인 쿠폰은 제주관광공사 인터넷면세점 가입 후 '마이페이지 > 쿠폰 > 쿠폰 바로 등록'을 통해 등록할 수 있습니다.<br/>
+                                            면세할인 쿠폰은 면세점 회원 기준 1인 1매 사용가능하며 일부 품목 및 브랜드는 쿠폰 사용이 제한될 수 있습니다.<br/><br/>
+                                            <p class="bottT">Fly, better fly Jin Air</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="footer">
+                                    <input type="button" value="목록" class="butt list_btn" onclick="location.href='../../../../../../../../JinAirCloneCoding/AdminPage/event/evn_ing.html'">
+                                    <input type="button" value="삭제" class="butt canc_btn">
+                                    <input type="button" value="수정" class="butt write_btn" onclick="location.href='../../../../../../../../JinAirCloneCoding/AdminPage/event/evn_edit.html'">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="modal_isdelete">
+                <div id="modal_isdelete_content">
+                    <div id="modal_isdelete_title"><p class="text">이벤트를 삭제하시겠습니까?</p></div>
+                    <div>
+                        <button class="modal_isdelete_btn uncomplete">취소</button>
+                        <button class="modal_isdelete_btn complete" onclick="location.href='../../../../../../../../JinAirCloneCoding/AdminPage/event/evn_ing.html'">삭제</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

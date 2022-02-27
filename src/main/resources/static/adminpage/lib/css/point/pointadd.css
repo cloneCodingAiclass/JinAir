@@ -1,0 +1,241 @@
+#container > .contents > .con_wrap{
+    width: 88%;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+#container > .contents .title{ 
+    font-size: 1.4rem; 
+    font-weight: 700;
+    display: inline;
+    align-self: flex-start;
+}
+#container > .contents .point_tap{
+    width: 100%;
+    /* 임시 배경 */
+    background-color: #f4f4f4;
+    height: 450px;
+    padding: 5px;
+    margin-top: 20px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+}
+#container > .contents .point_tap{
+    display: flex;
+    justify-content: space-between;
+}
+#container > .contents .left_side{
+    width: 25%;
+}
+#container > .contents .table_area{
+    text-align: center;
+    margin: 0 auto;
+    width: 75%;
+    padding-left: 5px;
+}
+
+#container > .contents .point_op{
+    text-align: center;
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding-top: 35px;
+    margin-bottom: 5px;
+}
+#container > .contents .point_op p{
+    display: inline;
+    font-size: 16px;
+    font-weight: bolder;
+    margin-right: 10px;
+}
+#container > .contents .point_box{
+    width: 60%;
+}
+#container > .contents .point_category{
+    text-align: left;
+    width: 100%;
+    height: 330px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding-top: 35px;
+}
+#container > .contents .point_category p{
+    font-size: 16px;
+    font-weight: bolder;
+}
+#container > .contents .point_category > p{
+    text-align: center;
+    margin-bottom: 35px;
+}
+#container > .contents .point_category > div{
+    width: 100%;
+    height: 50px;
+    padding: 0 20px;
+    margin-bottom: 6px;
+}
+#container > .contents .point_category > div p{
+    display: inline-block;
+}
+#container > .contents .point_category > div input, select{
+    text-align: center;
+    height: 30px;
+    border-radius: 2px;
+    outline: none;
+    font-size: 14px;
+    font-weight: bolder;
+}
+#container > .contents .point_category > div input{
+    width: 73%;
+}
+#container > .contents .point_category > div select:nth-child(1){
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+}
+#container > .contents .point_category > div select:nth-child(2){
+    margin-left: 13px;
+    width: 73%;
+}
+#container > .contents .point_category p{
+    font-size: 16px;
+    font-weight: bolder;
+}
+#container > .contents .point_category .btn_search{
+    display: block;
+    margin: 0 auto;
+    outline: none;
+    background-color: #BDD600;
+    border: none;
+    cursor: pointer;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+}
+
+#container > .contents .user_category{
+    text-align: left;
+    width: 100%;
+    height: 330px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding-top: 35px;
+}
+#container > .contents .user_category p{
+    font-size: 16px;
+    font-weight: bolder;
+}
+#container > .contents .user_category > p{
+    text-align: center;
+    margin-bottom: 35px;
+}
+#container > .contents .user_category > div{
+    width: 100%;
+    height: 50px;
+    padding: 0 20px;
+    margin-bottom: 30px;
+}
+#container > .contents .user_category > div p{
+    display: inline-block;
+}
+#container > .contents .user_category > div input{
+    text-align: center;
+    height: 30px;
+    border-radius: 2px;
+    outline: none;
+    font-size: 14px;
+    font-weight: bolder;
+    width: 73%;
+}
+#container > .contents .user_category .btn_usersearch{
+    display: block;
+    margin: 0 auto;
+    outline: none;
+    background-color: #BDD600;
+    border: none;
+    cursor: pointer;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+}
+
+
+.table_area form > table{
+    width: 100%;
+    height: 40px;
+    margin-top: 1px;
+    text-align: center;
+    background-color: white;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-collapse: collapse;
+    font-size: 14px;
+    font-weight: bold;
+}
+.table_area form > table tr:nth-child(1){
+    background-color: #F2F2F2;
+    border-bottom: 1px solid #ccc;
+}
+.table_area .wrapper{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 300px;
+}
+.table_area .userwraper{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 50px;
+}
+.table_area form .userwraper > table{
+    width: 100%;
+    height: 40px;
+    margin-top: 1px;
+    text-align: center;
+    background-color: white;
+    border-collapse: collapse;
+    font-size: 14px;
+    font-weight: bold;
+}
+.table_area form .wrapper > table{
+    width: 100%;
+    height: 40px;
+    margin-top: 1px;
+    text-align: center;
+    background-color: white;
+    border-collapse: collapse;
+    font-size: 14px;
+    font-weight: bold;
+}
+.table_area table tr{
+    height: 40px;
+}
+.point_footer{
+    width: 100%;
+    text-align: right;
+    margin-top: 5px;
+}
+.point_footer .pointnumber{
+    width: 100px;
+    height: 26px;
+    text-align: right;
+    font-size: 16px;
+    font-weight: bolder;
+    outline: none;
+}
+.point_footer .readonly{
+    width: 18px;
+    height: 30px;
+    border: none;
+    background-color: #F2F2F2;
+    margin-left: 5px;
+}
+.point_footer input[type="submit"]{
+    text-align: center;
+    width: 80px;
+    height: 30px;
+    border: none;
+    border-radius: 2px;
+    background-color: #BDD600;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0px 10px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+}
+
+
+
