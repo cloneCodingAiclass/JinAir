@@ -15,7 +15,6 @@ public class PageController {
                 .addObject("code", "admin_index");
     }
 
-
     // admin 스케줄 상세
     @RequestMapping("/admin/scheduleResultInfo")
     public ModelAndView scheduleResultInfo() {
