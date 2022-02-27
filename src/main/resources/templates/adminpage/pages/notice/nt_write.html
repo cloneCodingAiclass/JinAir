@@ -1,76 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항 | 공지사항 등록</title>
-    <link rel="stylesheet" href="/AdminPage/css/style.css">
-    <link rel="stylesheet" href="./css/nt_write.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="./js/nt_write.js"></script>
-</head>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+
+<!-- head.html -->
+<div th:replace="/adminpage/fragment/head :: head"></div>
+<link rel="stylesheet" href="/adminpage/lib/css/notice/nt_write.css">
+<script src="/adminpage/app/notice/nt_write.js"></script>
+<!-- head.html 끝-->
 <body>
     <div id="wrap">
-        <header>
-            <div class="header_inner">
-                <a href="../admin_index.html"><div class="img"></div></a><a href="/AdminPage/admin_index.html"><span>관리자 센터</span></a>
-                <div class="logout"><p class="myname">반하나</p><input type="text" value="님" class="nim"><input type="button" value="Logout" onclick="location.href='../admin_login.html'"></div>
-            </div>
-        </header>
+        <div th:replace="/adminpage/fragment/header :: header"></div>
         <div id="container">
-            <div class="sidebar">
-                <nav>
-                    <ul>
-                        <p class="nav1"><a href="../admin_index.html">메인페이지</a></p>
-                    </ul>
-                    <ul>
-                        <p class="nav2"><a href="#">운항스케줄</a></p>
-                        <li><a href="../schedule/aircraft_list.html">- 항공기 정보 조회</a></li>
-                        <li><a href="../schedule/sc_list.html">- 운항스케줄 조회</a></li>
-                        <li><a href="../schedule/sc_regist.html">- 운항 스케줄 등록</a></li>
-                    </ul>
-                    <ul>
-                        <p class="nav3"><a href="#">예약 조회</a></p>
-                        <li><a href="../reservation/rs_index.html">- 운항 별 예약자 조회</a></li>
-                        <li><a href="../reservation/rs_sch.html">- 예약자 명 조회</a></li>
-                    </ul>
-                    <ul>
-                        <p class="nav4"><a href="#">고객관리</a></p>
-                        <li><a href="../cm/cm_list.html">- 고객 조회</a></li>
-                    </ul>
-                    <ul>
-                        <p class="nav5"><a href="#">유실물 관리</a></p>
-                        <li><a href="../item/item.html">- 유실물 조회</a></li>
-                        <li><a href="../item/itemadd.html">- 유실물 등록</a></li>
-                    </ul>
-                    <ul>
-                        <p class="nav6"><a href="./notice.html">공지사항</a></p>
-                    </ul>
-                    <ul>
-                        <p class="nav7"><a href="#">문의</a></p>
-                        <li><a href="../inquiry/qna_main.html">- Q&A 관리</a></li>
-                        <li><a href="../inquiry/faq_main.html">- FAQ 관리</a></li>
-                    </ul>
-                    <ul>
-                        <p class="nav8"><a href="../event/evn_ing.html">이벤트</a></p>
-                    </ul>
-                    <ul>
-                        <p class="nav9"><a href="#">나비 포인트</a></p>
-                        <li><a href="../point/pointadd.html">- 지니 포인트 등록</a></li>
-                        <li><a href="../point/usepointlist.html">- 포인트 사용 내역 조회</a></li>
-                    </ul>
-                    <ul>
-                        <p class="nav10"><a href="#">지니 쿠폰</a></p>
-                        <li><a href="../coupon/couponadd.html">- 지니 쿠폰 발급</a></li>
-                        <li><a href="../coupon/usecouponlist.html">- 지니 쿠폰 사용 내역 조회</a></li>
-                    </ul>
-                    <ul>
-                        <p class="nav11"><a href="#">지니 매거진</a></p>
-                        <li><a href="../magazine/genieList.html">- 매거진 등록</a></li>
-                    </ul>
-                </nav>
-            </div>
+            <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
             <div class="contents">
                 <div class="con_wrap">
                     <div class="search">

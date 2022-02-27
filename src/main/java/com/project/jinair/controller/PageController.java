@@ -82,6 +82,12 @@ public class PageController {
                 .addObject("code", "qna_view");
     }
 
+    // 공지 작성
+    @RequestMapping("/admin/nt_write")
+    public ModelAndView ntWrite() {
+        return new ModelAndView("/adminpage/pages/notice/nt_write")
+                .addObject("code", "nt_write");
+    }
 
 
 
