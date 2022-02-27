@@ -1,0 +1,104 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<div th:replace="/adminpage/fragment/head :: head"></div>
+<link rel="stylesheet" href="/adminpage/lib/css/item/itemadd.css">
+<script src="/adminpage/app/item/itemadd.js"></script>
+<!-- head.html 끝-->
+<body>
+<div id="wrap">
+    <div th:replace="/adminpage/fragment/header :: header"></div>
+    <div id="container">
+        <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+        <div class="contents">
+            <div class="contents_box">
+                <div id="itemadd_title">유실물 등록</div>
+                <div id="itemadd_contents">
+                    <form action="./item.html">
+                        <table>
+                            <tr>
+                                <td>항공편</td>
+                                <td>
+                                    <input
+                                            type="text"
+                                            name="aircraft_name"
+                                            id="aircraft_name"
+                                            placeholder="(예) 항공편명 LJ"
+                                    />
+                                </td>
+                                <td>물품 유형</td>
+                                <td>
+                                    <select name="" id="item_list">
+                                        <option value="" selected>전체</option>
+                                        <option value="">가방</option>
+                                        <option value="">기타 전자제품</option>
+                                        <option value="">노트북/테블릿</option>
+                                        <option value="">담배</option>
+                                        <option value="">도서</option>
+                                        <option value="">모자</option>
+                                        <option value="">배게/담요</option>
+                                        <option value="">시계</option>
+                                        <option value="">식품</option>
+                                        <option value="">신발</option>
+                                        <option value="">안경/선글라스</option>
+                                        <option value="">액세서리</option>
+                                        <option value="">의류</option>
+                                        <option value="">이어폰/휴대폰</option>
+                                        <option value="">주류</option>
+                                        <option value="">자갑</option>
+                                        <option value="">화장품</option>
+                                        <option value="">기타</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>도착 날짜</td>
+                                <td>
+                                    <input
+                                            type="date"
+                                            name="arrival_date"
+                                            id="arrival_date"
+                                    />
+                                </td>
+                                <td>도착지 공항</td>
+                                <td>
+                                    <select name="arrival_airport_list" id="arrival_airport_list">
+                                        <option value="" selected>전체</option>
+                                        <option value="">인천</option>
+                                        <option value="">김포</option>
+                                        <option value="">부산</option>
+                                        <option value="">제주</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    이미지 첨부
+                                    <label for="item_img">
+                                        첨부파일
+                                        <input
+                                                type="file"
+                                                name="item_img"
+                                                id="item_img"
+                                        />
+                                    </label>
+                                    <input
+                                            class="item_img_upload"
+                                            value="파일이름"
+                                            readonly
+                                    />
+                                </td>
+                            </tr>
+                        </table>
+                        <div id="form_btn">
+                            <a href="./item.html"><input type="button" value="취소" /></a> <input type="submit" value="등록" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
