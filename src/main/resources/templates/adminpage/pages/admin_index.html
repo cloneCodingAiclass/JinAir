@@ -1,0 +1,306 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<div th:replace="/adminpage/fragment/head :: head"></div>
+<link rel="stylesheet" href="/adminpage/lib/css/admin_main.css">
+<script src="/adminpage/app/admin_main.js"></script>
+<!-- head.html 끝-->
+<body>
+    <div id="wrap">
+        <div th:replace="/adminpage/fragment/header :: header"></div>
+        <div id="container">
+            <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+            <div class="contents">
+                <div class="contwrap">
+                    <div class="topcont">
+                        <div class="korea">
+                            <div class="korea_name"><p>대한민국</p>
+                                <div id="korea_time"></div>
+                            </div>
+                        </div>
+                        <div class="totalair">
+                            <div class="totalair_top">
+                                <p>날씨</p>
+                            </div>
+                        </div>
+                        <div class="other">
+                            <div class="other_name">
+                                <select name="other_select" class="other_select" id="other_select">
+                                    <option value="베이징">베이징</option>
+                                    <option value="하노이">하노이</option>
+                                    <option value="두바이">두바이</option>
+                                    <option value="도하">도하</option>
+                                    <option value="카이로">카이로</option>
+                                    <option value="부다페스트">부다페스트</option>
+                                    <option value="런던">런던</option>
+                                    <option value="뉴욕" selected>뉴욕</option>
+                                </select>
+                                <div id="other_time"></div>
+                            </div>
+                        </div>
+                        <div class="totalair">
+                            <div class="totalair_top">
+                                <p>날씨</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chartcontainer">  
+                        <canvas id="line-chart"></canvas>
+                    </div>
+                    <div class="bottcont">
+                        <div class="QnA">
+                            <p><a href="/AdminPage/inquiry/qna_main.html">Q&A</a></p> 
+                            <p>새로 등록된 게시글 : (75)개</p>
+                            <table>
+                                <tr>
+                                    <td><a href="/AdminPage/inquiry/qna_view.html">문의드립니다.</a></td>
+                                    <td>답변 필요</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/AdminPage/inquiry/qna_view.html">문의</a></td>
+                                    <td>답변 필요</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/AdminPage/inquiry/qna_view.html">수하물관련 문의</a></td>
+                                    <td>답변 필요</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/AdminPage/inquiry/qna_view.html">부가서비스 신청하고싶습니다. 답변 바랍니다.</a></td>
+                                    <td>답변 필요</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/AdminPage/inquiry/qna_view.html">공항 이용 불만 제언하고자합니다.</a></td>
+                                    <td>답변 필요</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/AdminPage/inquiry/qna_view.html">항공권 관련 문의드립니다. 답변 바랍니다.</a></td>
+                                    <td>답변 불필요</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/AdminPage/inquiry/qna_view.html">항공권 관련 문의드립니다. 답변 바랍니다.</a></td>
+                                    <td>답변 필요</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/AdminPage/inquiry/qna_view.html">예약 관련 문의드립니다.</a></td>
+                                    <td>답변 불필요</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/AdminPage/inquiry/qna_view.html">유실물 관련 문의드립니다.</a></td>
+                                    <td>답변 필요</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/AdminPage/inquiry/qna_view.html">지니 포인트 관련 문의드립니다.</a></td>
+                                    <td>답변 필요</td>
+                                </tr>
+                            </table>
+                            <p><a href="/AdminPage/inquiry/qna_main.html">more</a></p>
+                        </div>
+
+                        <div class="notice">
+                            <p><a href="/AdminPage/notice/notice.html">운항 스케줄</a></p>
+                            <table>
+                                <tr>
+                                    <td>운항편</td>
+                                    <td>출발 일자</td>
+                                    <td>출발지</td>
+                                    <td>출발시간</td>
+                                    <td>도착지</td>
+                                    <td>도착시간</td>
+                                    <td>예약 가능 좌석<br>(수용 좌석)</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <p><a href="/AdminPage/schedule/sc_list.html">more</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="/adminpage/app/chart.js"></script>
