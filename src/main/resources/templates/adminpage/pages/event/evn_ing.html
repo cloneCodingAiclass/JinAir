@@ -1,0 +1,111 @@
+<html lang="ko"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<head><div th:replace="/adminpage/fragment/head :: head"></div>
+    <link rel="stylesheet" href="/adminpage/lib/css/style.css">
+    <link rel="stylesheet" href="/adminpage/lib/css/event/evn_ing.css">
+    <script src="/adminpage/app/event/evn_ing.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div th:replace="/adminpage/fragment/header :: header"></div>
+    <div id="container">
+        <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+        <div class="contents">
+            <div class="contwrap">
+                <div class="event">
+                    <p class="title">이벤트</p>
+                </div>
+                <div class="event_wrap">
+                    <table class="event_kind">
+                        <colgroup>
+                            <col width="33%">
+                            <col width="33%">
+                            <col width="33%">
+                        </colgroup>
+                        <tr>
+                            <th class="current_list"><a href="./evn_ing.html">진행중 이벤트</a></th>
+                            <th><a href="./evn_end.html">종료된 이벤트</a></th>
+                            <th><a href="./evn_win.html">당첨자 발표</a></th>
+                        </tr>
+                    </table>
+                    <table class="event_list">
+                        <colgroup>
+                            <col width="100">
+                            <col width="400">
+                            <col width="260">
+                            <col width="140">
+                        </colgroup>
+                        <tr>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>이벤트 기간</th>
+                            <th>등록일</th>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td class="list_tit"><a href="./evn_view.html">[이벤트] LG U+ 여행콕 신설 진에어 단독</a></td>
+                            <td>2022-01-03 ~ 2022-12-30</td>
+                            <td>2022-01-02</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td class="list_tit"><a href="./evn_view.html">[이벤트] 오직 민크에서만 지니쿠폰 할인</a></td>
+                            <td>2022-01-03 ~ 2022-12-30</td>
+                            <td>2022-01-02</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td class="list_tit"><a href="./evn_view.html">[이벤트] 진에어X하나카드 크로스 혜택</a></td>
+                            <td>2022-01-03 ~ 2022-12-30</td>
+                            <td>2022-01-02</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td class="list_tit"><a href="./evn_view.html">[이벤트] 제주면세점 진에어 회원혜택</a></td>
+                            <td>2022-01-03 ~ 2022-12-30</td>
+                            <td>2022-01-02</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td class="list_tit"><a href="./evn_view.html">[이벤트] 비즈니스 클래스 런칭</a></td>
+                            <td>2022-01-03 ~ 2022-12-30</td>
+                            <td>2022-01-02</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td class="list_tit"><a href="./evn_view.html">[이벤트] 우리카드 한밤 중 쏟아지는 심야 할인</a></td>
+                            <td>2022-01-03 ~ 2022-12-30</td>
+                            <td>2022-01-02</td>
+                        </tr>
+                        <tr class="last_list">
+                            <td>1</td>
+                            <td class="list_tit"><a href="./evn_view.html">[이벤트] 무료 수하물/기내식</a></td>
+                            <td>2022-01-03 ~ 2022-12-30</td>
+                            <td>2022-01-02</td>
+                        </tr>
+                    </table>
+                    <div class="footer">
+                        <div class="center">
+                            <table>
+                                <tr>
+                                    <td><a href="#">1</a></td>
+                                    <td><a href="#">2</a></td>
+                                    <td><a href="#">3</a></td>
+                                    <td><a href="#">4</a></td>
+                                    <td><a href="#">5</a></td>
+                                    <td><a href="#">6</a></td>
+                                    <td><a href="#"></a></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <a href="./evn_write.html" class="notice_write"><input type="button" value="작성하기"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
