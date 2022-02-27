@@ -9,6 +9,7 @@ public class JinAirApplication {
     public static void main(String[] args) {
         SpringApplication.run(JinAirApplication.class, args);
         System.out.println("dsfsfd");
+        System.out.println("sdfseuhdksjl;");
     }
 
 }
