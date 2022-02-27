@@ -1,0 +1,46 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<div th:replace="/adminpage/fragment/head :: head"></div>
+<link rel="stylesheet" href="/adminpage/lib/css/schedule/aircrift_regist.css">
+<script src="/adminpage/app/schedule/aircraft_list.js"></script>
+    </head>
+    <body>
+        <div id="wrap">
+            <div th:replace="/adminpage/fragment/header :: header"></div>
+            <div id="container">
+                <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+                <div class="contents">
+                    <div class="contwrap">
+                        <p class="title">항공기 신규 등록</p>
+                        <form action="aircraft_list.html">
+                            <div class="contents_main">
+                                <table>
+                                    <tr>
+                                        <td>항공사 이름</td>
+                                        <td>항공사 아이디</td>
+                                        <td>좌석수</td>
+                                        <td>추가 차지<br>(퍼스트클래스)</td>
+                                        <td>추가 차지<br>(비즈니스)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>진에어</td>
+                                        <td><input type="text" id="airplane_id" class="airplane_id"></td>
+                                        <td><input type="text" id="airplane_seat" class="airplane_seat"></td>
+                                        <td><input type="text" id="airplane_firstclass" class="airplane_firstclass"></td>
+                                        <td><input type="text" id="airplane_business" class="airplane_business"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="btn_box">
+                                <input type="button" value="취소" onclick="location.href='aircraft_list.html'">
+                                <input type="submit" value="등록">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
