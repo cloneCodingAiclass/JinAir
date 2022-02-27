@@ -1,0 +1,241 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<div th:replace="/adminpage/fragment/head :: head"></div>
+<link rel="stylesheet" href="/adminpage/lib/css/cm/cm_detail.css">
+<script src="/adminpage/app/cm/cm_list.js"></script>
+<!-- head.html -->
+<body>
+<div id="wrap">
+    <div th:replace="/adminpage/fragment/header :: header"></div>
+    <div id="container">
+        <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+        <div class="contents">
+            <div id="cm_detail_box">
+                <div class="title_wrap">
+                    <p id="cm_detail_title">고객 상세정보</p>
+                </div>
+                <div id="cm_detail">
+                    <table>
+                        <colgroup>
+                            <col width="20%">
+                            <col width="30%">
+                            <col width="20%">
+                            <col width="30%">
+                        </colgroup>
+                        <tr>
+                            <th>고유번호</th>
+                            <td>234565</td>
+                            <th>우편번호</th>
+                            <td>
+                                <input
+                                        type="text"
+                                        name="zipcode"
+                                        id="zipcode"
+                                        value="11111"
+                                        readonly
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>아이디</th>
+                            <td>apple</td>
+                            <th>주소</th>
+                            <td>
+                                <input
+                                        type="text"
+                                        name="address1"
+                                        id="address2"
+                                        readonly
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>비밀번호</th>
+                            <td></td>
+                            <th>상세주소</th>
+                            <td>
+                                <input
+                                        type="text"
+                                        name="address2"
+                                        id="address2"
+                                        value="501호"
+                                        readonly
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>성명(KOR)</th>
+                            <td>
+                                <input
+                                        type="text"
+                                        name="kor_first_name"
+                                        id="kor_first_name"
+                                        value="김"
+                                        readonly
+                                />
+                                <input
+                                        type="text"
+                                        name="kor_last_name"
+                                        id="kor_last_name"
+                                        value="사과"
+                                        readonly
+                                />
+                            </td>
+                            <th>가입일자</th>
+                            <td>2022-01-28</td>
+                        </tr>
+                        <tr>
+                            <th>성명(ENG)</th>
+                            <td>
+                                <input
+                                        type="text"
+                                        name="eng_first_name"
+                                        id="eng_first_name"
+                                        value="KIM"
+                                        readonly
+                                />
+                                <input
+                                        type="text"
+                                        name="eng_last_name"
+                                        id="eng_last_name"
+                                        value="SAGWA"
+                                        readonly
+                                />
+                            </td>
+                            <th>이메일</th>
+                            <td>
+                                <input
+                                        type="email"
+                                        name="email"
+                                        id="email"
+                                        value="apple@apple.com"
+                                        readonly
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>성별</th>
+                            <td>
+                                <label>
+                                    <span>남자</span>
+                                    <input
+                                            type="radio"
+                                            name="gender"
+                                            value="남자"
+                                    />
+                                </label>
+                                <label>
+                                    <span>여자</span>
+                                    <input
+                                            type="radio"
+                                            name="gender"
+                                            value="여자"
+                                            checked
+                                    />
+                                </label>
+                            </td>
+                            <th>이메일 수신동의</th>
+                            <td>
+                                <label>
+                                    <span>동의</span>
+                                    <input
+                                            type="radio"
+                                            name="email_isagree"
+                                            value="동의"
+                                            checked
+                                    />
+                                </label>
+                                <label>
+                                    <span>미동의</span>
+                                    <input
+                                            type="radio"
+                                            name="email_isagree"
+                                            value="미동의"
+                                    />
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>생년월일</th>
+                            <td>
+                                <input
+                                        type="text"
+                                        name="birth"
+                                        id="birth"
+                                        value="19990101"
+                                        readonly
+                                />
+                            </td>
+                            <th>SNS/앱 푸시 동의</th>
+                            <td>
+                                <label>
+                                    <span>동의</span>
+                                    <input
+                                            type="radio"
+                                            name="sns_isagree"
+                                            value="동의"
+                                            checked
+                                    />
+                                </label>
+                                <label>
+                                    <span>미동의</span>
+                                    <input
+                                            type="radio"
+                                            name="sns_isagree"
+                                            value="미동의"
+                                    />
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>국적</th>
+                            <td>
+                                <input type="text" value="한국(Republic of Korea)">
+                            </td>
+                            <th>예약 비행기</th>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <th>거주국가</th>
+                            <td>
+                                <input type="text" value="한국(Republic of Korea)">
+                            </td>
+                            <th>나비 포인트</th>
+                            <td>
+                                <input
+                                        type="text"
+                                        name="point"
+                                        id="point"
+                                        value="3600"
+                                        readonly
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>연락처</th>
+                            <td>
+                                <input
+                                        type="tel"
+                                        name="hp"
+                                        id="hp"
+                                        value="010-1111-1111"
+                                        readonly
+                                />
+                            </td>
+                            <th>쿠폰</th>
+                            <td>-</td>
+                        </tr>
+                    </table>
+                    <div id="form_btn">
+                        <input type="button" value="목록" onclick="location.href='./cm_list.html'" >
+                        <input type="submit" value="고객 정보 수정" onclick="location.href='./cm_modify.html'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
