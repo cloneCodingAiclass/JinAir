@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 | 진에어</title>
-    <link rel="stylesheet" href="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/css/login.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/js/index.js"></script>
+    <title>예약 | 진에어</title>
+    <link rel="stylesheet" href="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/css/Mypage_main.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/js/Mypage_main.js"></script>
 </head>
+
 <body>
-    <ul class="skipnavi"><!--책갈피 역할-->
-        <li><a href="#container">본문내용</a></li> 
+    <ul class="skipnavi">
+        <!--책갈피 역할-->
+        <li><a href="#container">본문내용</a></li>
     </ul>
     <!--wrap-->
     <div id="wrap">
@@ -20,9 +24,12 @@
             <!--상당 메뉴-->
             <div class="header_sub">
                 <div class="header_wrap">
-                    <h1 class="logo"><a href="/index.html"><img src="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/logo_02.png" alt=""></a></h1>
+                    <h1 class="logo"><a href="/index.html"><img src="../../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/logo_02.png" alt=""></a></h1>
                     <ul class="login">
-                        <li><a href="login.html">로그인</a><span>|</span><p class="lang">한국(한국어)<span>/ </span>KRW</p><p class="lang_img"></p></li>
+                        <li><a href="login.html">로그인</a><span>|</span>
+                            <p class="lang">한국(한국어)<span>/ </span>KRW</p>
+                            <p class="lang_img"></p>
+                        </li>
                     </ul>
                     <nav>
                         <ul class="nav_all">
@@ -53,16 +60,16 @@
                         <a href="/UserPage/reservation/LCCpage/lcc.html">최저가 항공권</a>
                     </div>
                     <div>
+                        <a href="#" class="subNav_title">나의 예약</a>
+                        <a href="/UserPage/index/mypage/Mypage_main.html">예약 조회/변경/취소</a>
+                        <a href="/UserPage/index/mypage/Mypage_main.html">부가서비스 신청/취소</a>
+                        <a href="/UserPage/index/mypage/Mypage_main.html">웹/모바일 체크인</a>
+                    </div>
+                    <div>
                         <a href="/UserPage/index/mypage/Mypage_main.html" class="subNav_title">나의 예약</a>
                         <a href="/UserPage/index/mypage/Mypage_main.html">예약 조회/변경/취소</a>
                         <a href="/UserPage/payment/extras.html">부가서비스 신청/취소</a>
                         <a href="/UserPage/serviceCount/airport/checkinfo/checkinfo_list.html">웹/모바일 체크인</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/reservation/flight_info/flight.html" class="subNav_title">운항 정보</a>
-                        <a href="/UserPage/reservation/flight_info/flight.html?directId=flightCont1">스케줄 조회</a>
-                        <a href="/UserPage/reservation/flight_info/flight.html?directId=flightCont2">출도착 안내</a>
-                        <a href="/UserPage/reservation/flight_info/flight.html?directId=flightCont3">취향 노선 안내</a>
                     </div>
                     <div>
                         <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html" class="subNav_title">예약 및 운임 안내</a>
@@ -169,64 +176,107 @@
                     </div>
                 </div>
             </div>
-        <!--상당 메뉴 끝-->
+            <!--상당 메뉴 끝-->
         </header>
         <!--header 끝-->
         <!--container-->
         <div id="container">
-            <div class="login_container">
-                <div class="login_top">
-                    <p>로그인</p>
+            <div class="mypage_main">
+                <div class="mypage_menu">
+                    <p>마이<br>페이지</p>
+                    <ul>
+                        <li class="booking"><a href="Mypage_main.html">예약조회/변경/취소</a></li>
+                        <li class="mypoint"><a href="Mypage_point.html">나의 나비포인트</a><div class="mypoint_sum"><span>0p</span></div></li>
+<li class="coupon"><a href="Mypage_coupons.html">나의 할인쿠폰</a><div class="mycoupon_sum"><span>0</span></div></li>
+                        <li class="qna"><a href="Mypage_qna.html">나의 Q&A</a></li>
+                        <li class="edit"><a href="#">회원정보 수정</a></li>
+                    </ul>
                 </div>
-                <div class="login_main">
-                    <form action="./login_ok.html" method="post">
-                    <input type="text" placeholder="아이디" id="mem_userid" class="mem_userid">
-                    <input type="text" placeholder="비밀번호" id="mem_userpw" class="mem_userpw">
-                    <input type="submit" value="확인">
-                    <p class="find"><a href="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/join/joinGate.html">회원가입</a> | <a href="find_info.html?page=findid">아이디 찾기</a> | <a href="find_info.html?page=findpw">비밀번호 찾기</a></p>
-                    <p class="find"><a href="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/AdminPage/admin_login.html">(관리자 페이지 바로가기)</a></p>
-                    <div class="btn_sns">
-                        <a href="#" class="kakao"><img src="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/ico_sns_kakao.png" alt="카카오"></a>
-                        <a href="#" class="facebook"><img src="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/ico_sns_facebook.png" alt="페이스북"></a>
-                        <a href="#" class="naver"><img src="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/ico_sns_naver.png" alt="네이버"></a>
-                        <a href="#" class="google"><img src="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/ico_sns_google.png" alt="구글"></a>
-                        <a href="#" class="linkedin"><img src="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/ico_sns_linkedin.png" alt="링크드인"></a>
+                <div class="menu_title">
+                    <p>예약조회/변경/취소</p>
+                </div>
+                <div class="sub_menu_check">
+                    <ul>
+                        <li class="now_booking">예약조회</li>
+                        <li class="old_booking">지난예약</li>
+                    </ul>
+                </div>
+                <div class="booking_list">
+                    <div class="detailTbl">
+                        <p class="short">
+                            <strong>예약일</strong>
+                            <span class="cont">시간</span></p>
+                        <p class="short"><strong>예약번호</strong>
+                            <span class="cont" id="{{:pnrNumber}}">번호</span></p>
+                        <p class="short ctar">
+                            <strong>예약상태</strong>
+                            <span class="cont">진행중</span></p>
+                        <p class="long">
+                            <strong>여정<br><span class="tripType"></span></strong>
+                            <span class="cont line">
+                                <span class="tit">여정
+                                    <strong>LJ301</strong>
+                                </span>
+                                <span>
+                                    <strong>제주</strong>
+                                    <span id="bp{{:depSegment.pnrNumber}}{{:depSegment.flightSegmentGroupID}}">[출발] 2022-10-25(화) 06:05</span>
+                                </span>
+                                <span class="arrow">
+                                    <img src="../../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/right_arrow.PNG" alt="에서">
+                                </span>
+                                <span>
+                                    <strong>서울</strong>
+                                    <span id="op{{:depSegment.pnrNumber}}{{:depSegment.flightSegmentGroupID}}">[도착] 2022-10-25(화) 06:05</span>
+                                </span>
+                                <span id="st{{:depSegment.pnrNumber}}{{:depSegment.flightSegmentGroupID}}"
+                                    class="infoTxt"></span>
+                            </span>
+                        </p>
+                        <p class="long">
+                            <strong>탑승객수</strong>
+                            <span class="cont">1 명</span>
+                            <span class="btn">
+                                <a name="btnDetail" href="/UserPage/index/mypage/Mypage_getReservationDetail.html">상세조회</a>
+                            </span>
+                        </p>
                     </div>
-                    </form>
                 </div>
-                <div class="login_footer">
-                    <input type="radio" name="slide" id="slide01" checked>
-                    <input type="radio" name="slide" id="slide02">
-                    <input type="radio" name="slide" id="slide03">
-                    <div class="list_wrap">
-                        <ul class="login_fad_list">
-                            <li>
-                                <a href="https://www.jinair.com/travel/hotel?snsLang=ko_KR&ctrCd=KOR" target="_blank">
-                                    <label for="slide03" class="left"></label><img src="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/img_login_bn_01.jpg" alt="1" >
-                                    <label for="slide02" class="right"></label></a>
-                            </li>
-                            <li>
-                                <a href="https://www.jinair.com/promotion/eventView?evntSeq=11337&snsLang=ko_KR&ctrCd=KOR" target="_blank">
-                                    <label for="slide01" class="left"></label><img src="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/img_login_bn_2105_02.jpg" alt="2"><label for="slide03" class="right"></label></a>
-                            </li>
-                            <li>
-                                <a href="https://www.jinair.com/travel/rentcar?snsLang=ko_KR&ctrCd=KOR" target="_blank">
-                                    <label for="slide02" class="left"></label><img src="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/img_login_bn_03.jpg" alt="3"><label for="slide01" class="right"></label></a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="old_booking_list">
+                    <ul>
+                        <li>지난 항공권 예약 내역이 없습니다.</li>
+                    </ul>
                 </div>
+                <dir class="sub_text">
+                    <p>* 비회원/고객센터/여행사/외부채널 예약고객</p>
+                    <a herf="#">나의 예약</a>
+                </dir>
+            <div class="footer_info">
+                <div class="footer_text">
+                    <p>나비포인트 이용방법</p>
+                    <p class="subtext">1.항공기 탑승 후 30일 이내 진에어 홈페이지에서 포인트를 적립하세요.
+                    <p class="subtext">2.누적 포인트를 이용하여 국내선 보너스 항공권을 예약하세요.</p>
+                </div>
+                <div class="point_info">
+                    <a href="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/nabipoint/pointList.html">나비포인트 안내</a>
+                </div>
+            </div>
             </div>
         </div>
         <!--container 끝-->
         <!-- 푸터-->
-        <div id="footerCont"><!--푸터-->
+        <div id="footerCont">
+            <!--푸터-->
             <div id="foot_topwraper">
-                <div id="foot_top"><!--위쪽 푸터-->
-                    <div id="top_menu"><!--상단메뉴 컨테이너-->
-                        <div class="menu_wrap"><!--첫번째 메뉴-->
-                            <p class="men_tit"><a href="">회사안내</a></p><!--메뉴 타이틀-->
-                            <ul class="horiz"><!--하위 메뉴 컨테이너-->
+                <div id="foot_top">
+                    <!--위쪽 푸터-->
+                    <div id="top_menu">
+                        <!--상단메뉴 컨테이너-->
+                        <div class="menu_wrap">
+                            <!--첫번째 메뉴-->
+                            <p class="men_tit"><a href="">회사안내</a></p>
+                            <!--메뉴 타이틀-->
+                            <ul class="horiz">
+                                <!--하위 메뉴 컨테이너-->
                                 <li><a href="">공지사항</a></li>
                                 <li><a href="">채용정보</a></li>
                                 <li><a href="">CEO인사말</a></li>
@@ -240,9 +290,12 @@
                                 <li><a href="">홍보센터</a></li>
                             </ul>
                         </div>
-                        <div class="menu_wrap"><!--두번째 메뉴-->
-                            <p class="men_tit"><a href="">약관 및 안내</a></p><!--메뉴 타이틀-->
-                            <ul class="horiz"><!--하위 메뉴 컨테이너-->
+                        <div class="menu_wrap">
+                            <!--두번째 메뉴-->
+                            <p class="men_tit"><a href="">약관 및 안내</a></p>
+                            <!--메뉴 타이틀-->
+                            <ul class="horiz">
+                                <!--하위 메뉴 컨테이너-->
                                 <li class="f_black"><a href=""><b>개인정보 처리방침</b></a></li>
                                 <li><a href="">홈페이지 이용약관</a></li>
                                 <li><a href="">여객운송약관 및 기타 고지사항</a></li>
@@ -252,39 +305,65 @@
                                 <li><a href="">사이트맵</a></li>
                             </ul>
                         </div>
-                        <div class="menu_wrap"><!--세번째 메뉴-->
-                            <p class="men_tit"><a href="">고객서비스</a></p><!--메뉴 타이틀-->
-                            <ul class="horiz"><!--하위 메뉴 컨테이너-->
+                        <div class="menu_wrap">
+                            <!--세번째 메뉴-->
+                            <p class="men_tit"><a href="">고객서비스</a></p>
+                            <!--메뉴 타이틀-->
+                            <ul class="horiz">
+                                <!--하위 메뉴 컨테이너-->
                                 <li><a href="/UserPage/index/mypage/faq_list.html">자주 묻는 질문(FAQ)</a></li>
                                 <li><a href="/UserPage/index/mypage/add_qna.html">고객의 말씀(Q&A)</a></li>
-                                <li><a href="/UserPage/serviceCount/airport/baggage/baggage.html?directId=findbaggage">기내 유실물 찾기</a></li>
+                                <li><a
+                                        href="/UserPage/serviceCount/airport/baggage/baggage.html?directId=findbaggage">기내
+                                        유실물 찾기</a></li>
                             </ul>
                         </div>
-                    </div><!--상단메뉴 컨테이너 끝-->
-                </div><!--위쪽푸터 끝-->
+                    </div>
+                    <!--상단메뉴 컨테이너 끝-->
+                </div>
+                <!--위쪽푸터 끝-->
             </div>
             <div id="foot_bottwraper">
-                <div id="foot_bott"><!--아래쪽 푸터-->
-                    <div id="bott_menu"><!--하단메뉴 컨테이너-->
-                        <div id="app_ico"><!--apple icon-->
-                            <ul class="Sicon"><!--sns icon-->
-                                <li><a href=""><p class="twit circle">트위터</p></a></li>
-                                <li><a href=""><p class="faceb circle">페이스북</p></a></li>
-                                <li><a href=""><p class="youtub circle">유튜브</p></a></li>
-                                <li><a href=""><p class="insta circle">인스타</p></a></li>
-                                <li><a href=""><p class="blog circle">블로그</p></a></li>
+                <div id="foot_bott">
+                    <!--아래쪽 푸터-->
+                    <div id="bott_menu">
+                        <!--하단메뉴 컨테이너-->
+                        <div id="app_ico">
+                            <!--apple icon-->
+                            <ul class="Sicon">
+                                <!--sns icon-->
+                                <li><a href="">
+                                        <p class="twit circle">트위터</p>
+                                    </a></li>
+                                <li><a href="">
+                                        <p class="faceb circle">페이스북</p>
+                                    </a></li>
+                                <li><a href="">
+                                        <p class="youtub circle">유튜브</p>
+                                    </a></li>
+                                <li><a href="">
+                                        <p class="insta circle">인스타</p>
+                                    </a></li>
+                                <li><a href="">
+                                        <p class="blog circle">블로그</p>
+                                    </a></li>
                             </ul>
-                            <ul class="Aicon"><!--app icon-->
+                            <ul class="Aicon">
+                                <!--app icon-->
                                 <li class="Aicon_txt">APP 다운로드</li>
-                                <li><a href=""><img src="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/ico_apple.png" alt=""></a></li>
-                                <li><a href=""><img src="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/google.PNG" alt=""></a></li>
+                                <li><a href=""><img src="../../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/ico_apple.png" alt=""></a></li>
+                                <li><a href=""><img src="../../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/google.PNG" alt=""></a></li>
                             </ul>
                             <ul class="site">
-                                <li><a href="#"><p class="sit circle">대리점 사이트</p></a></li>
+                                <li><a href="#">
+                                        <p class="sit circle">대리점 사이트</p>
+                                    </a></li>
                                 <li class="Aicon_txt">대리점 사이트 바로가기</li>
                             </ul>
-                        </div><!--apple icon 끝-->
-                        <div id="news"><!--뉴스레터-->
+                        </div>
+                        <!--apple icon 끝-->
+                        <div id="news">
+                            <!--뉴스레터-->
                             <ul>
                                 <li class="sub_txt">뉴스레터 신청</li>
                             </ul>
@@ -293,10 +372,12 @@
                                 <li><input type="submit"></li>
                             </ul>
                             <ul>
-                                <li><img src="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/ico_isms.png" alt="인증"></li>
+                                <li><img src="../../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/ico_isms.png" alt="인증"></li>
                             </ul>
-                        </div><!--뉴스레터 끝-->
-                        <div id="info"><!--정보-->
+                        </div>
+                        <!--뉴스레터 끝-->
+                        <div id="info">
+                            <!--정보-->
                             <ul>
                                 <li>
                                     <b>고객서비스센터 1600-6200, 02-6099-1200</b>
@@ -310,17 +391,36 @@
                                 <li class="small_txt">주소 : 서울시 강서구 공항대로 453<p class="pdiv"></p>개인정보보호책임자 : 이광</li>
                                 <li class="small_txt">Copyright © JIN AIR. All Rights Reserved.</li>
                             </ul>
-                        </div><!--정보 끝-->
-                    </div><!--하단메뉴 컨테이너 끝-->
-                </div><!--아래쪽 푸터 끝-->
-            </div> 
-        </div><!--푸터 끝-->
+                        </div>
+                        <!--정보 끝-->
+                    </div>
+                    <!--하단메뉴 컨테이너 끝-->
+                </div>
+                <!--아래쪽 푸터 끝-->
+            </div>
+        </div>
+        <!--푸터 끝-->
     </div>
     <!--wrap 끝-->
     <!--퀵 메뉴-->
     <!--퀵 메뉴 끝-->
-
     <div class="modal">
+    </div>
+    <div class="pwcheck_modal">
+        <form action="#" method="post">
+        <div class="pwcheck_title">
+            <p>비밀번호 확인</p>
+        </div>
+        <div class="pwcheck_box">
+            <p>고객님의 개인정보를 소중하게 보호하려고 노력하고 있으며,<br>회원님의 동의 없이는 회원정보를 제공하지 않습니다.</p>
+            <p>비밀번호 입력 <input type="password"></p>
+            <div class="btn">
+                <input type="button" class="btn_agree" value="확인" onclick="location.href='/UserPage/index/mypage/Mypage_edit.html'">
+                <input type="button" class="btn_cancel" value="취소">
+            </div>
+        </div>
+        </form>
     </div>
 </body>
 </html>
+
