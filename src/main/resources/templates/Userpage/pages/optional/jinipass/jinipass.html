@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>보딩패스 | 제휴 | 진에어</title>
+    <link rel="stylesheet" href="./css/jinipass.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./js/jinipass.js"></script>
+    <script src="/UserPage/quickmenu/quickmenu.js"></script>
+    <link rel="stylesheet" href="/UserPage/quickmenu/quickmenu.css">
+</head>
+<body>
+    <ul class="skipnavi"><!--책갈피 역할-->
+        <li><a href="#container">본문내용</a></li> 
+    </ul>
+    <!--wrap-->
+    <div id="wrap">
+        <!--header-->
+        <header id="header">
+            <!--상단 메뉴-->
+            <div class="header_sub">
+                <div class="header_wrap">
+                    <h1 class="logo"><a href="/index.html"><img src="../../../../index_img/logo_02.png" alt=""></a></h1>
+                    <ul class="login">
+                        <li><a href="../../index/login/login.html">로그인</a><span>|</span><p class="lang">한국(한국어)<span>/ </span>KRW</p><p class="lang_img"></p></li>
+                    </ul>
+                    <nav>
+                        <ul class="nav_all">
+                            <li class="open1">
+                                <a href="#">예약</a>
+                            </li>
+                            <li class="open2">
+                                <a href="#">서비스</a>
+                            </li>
+                            <li class="open3">
+                                <a href="#">프로모션</a>
+                            </li>
+                            <li class="open4">
+                                <a href="#">나비포인트</a>
+                            </li>
+                            <li class="open5">
+                                <a href="#">부가 서비스</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="sub_nav reservation">
+                <div class="subnav_warp">
+                    <div>
+                        <a href="/index.html" class="subNav_title">항공권 예약</a>
+                        <a href="/index.html">예약</a>
+                        <a href="/UserPage/reservation/LCCpage/lcc.html">최저가 항공권</a>
+                    </div>
+                    <div>
+                        <a href="/UserPage/index/mypage/Mypage_main.html" class="subNav_title">나의 예약</a>
+                        <a href="/UserPage/index/mypage/Mypage_main.html">예약 조회/변경/취소</a>
+                        <a href="/UserPage/payment/extras.html">부가서비스 신청/취소</a>
+                        <a href="/UserPage/serviceCount/airport/checkinfo/checkinfo_list.html">웹/모바일 체크인</a>
+                    </div>
+                    <div>
+                        <a href="/UserPage/reservation/flight_info/flight.html" class="subNav_title">운항 정보</a>
+                        <a href="/UserPage/reservation/flight_info/flight.html?directId=flightCont1">스케줄 조회</a>
+                        <a href="/UserPage/reservation/flight_info/flight.html?directId=flightCont2">출도착 안내</a>
+                        <a href="/UserPage/reservation/flight_info/flight.html?directId=flightCont3">취향 노선 안내</a>
+                    </div>
+                    <div>
+                        <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html" class="subNav_title">예약 및 운임 안내</a>
+                        <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html?directId=fareRule1">예매 서비스</a>
+                        <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html?directId=fareRule2">국내선 운임</a>
+                        <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html?directId=fareRule3">국제선 운임</a>
+                        <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html?directId=fareRule4">비즈니스 운임</a>
+                    </div>
+                    <div>
+                        <a href="/UserPage/reservation/discount_info/discount.html" class="subNav_title">할인안내</a>
+                        <a href="/UserPage/reservation/discount_info/discount.html?directId=discount1">가족운임 할인제도</a>
+                        <a href="/UserPage/reservation/discount_info/discount.html?directId=discount2">사용우대 프로그램</a>
+                        <a href="/UserPage/reservation/discount_info/discount.html?directId=discount3">제주도민 할인제도</a>
+                        <a href="/UserPage/reservation/discount_info/discount.html?directId=discount4">제외/명예도민 할인제도</a>
+                        <a href="/UserPage/reservation/discount_info/discount.html?directId=discount5">군산시민 할인제도</a>
+                    </div>
+                </div>
+            </div>
+            <div class="sub_nav service">
+                <div class="subnav_warp">
+                    <div>
+                        <a href="/UserPage/serviceCount/airport/counter/counter.html" class="subNav_title">공항서비스</a>
+                        <a href="/UserPage/serviceCount/airport/counter/counter.html">공항카운터 안내</a>
+                        <a href="/UserPage/serviceCount/airport/baggage/baggage.html">수하물</a>
+                        <a href="/UserPage/serviceCount/airport/help/help.html">도움이 필요하신 고객</a>
+                        <a href="/UserPage/serviceCount/airport/checkinfo/checkinfo.html">체크인 안내</a>
+                        <a href="/UserPage/serviceCount/airport/arrivalCard/arrivalcard.html">입국신고서 작성 안내</a>
+                    </div>
+                    <div>
+                        <a href="/UserPage/serviceCount/aircraft/guide/guide.html" class="subNav_title">기내 서비스</a>
+                        <a href="/UserPage/serviceCount/aircraft/guide/guide.html">기내 여행 가이드</a>
+                        <a href="/UserPage/serviceCount/aircraft/Shopping/cabinShopping.html">기내유상판매</a>
+                        <a href="/UserPage/serviceCount/aircraft/taxFree/taxFree.html">기내 면세품</a>
+                        <a href="/UserPage/serviceCount/aircraft/jiniInsight/jiniInsight.html">기내 매거진</a>
+                        <a href="/UserPage/serviceCount/aircraft/eventflight/eventflight.html">이벤트 플라잇</a>
+                    </div>
+                    <div>
+                        <a href="/UserPage/serviceCount/optional/bundle/bundle.html" class="subNav_title">부가 서비스</a>
+                        <a href="/UserPage/serviceCount/optional/bundle/bundle.html">번들 서비스</a>
+                        <a href="/UserPage/serviceCount/optional/seat/seat.html">사전좌석지정</a>
+                        <a href="/UserPage/serviceCount/optional/airlineFood/airlineFood.html">기내식</a>
+                        <a href="/UserPage/serviceCount/optional/jiniPlay/jiniPlay.html">기내 엔터테인먼트</a>
+                    </div>
+                </div>
+            </div>
+            <div class="sub_nav benefit">
+                <div class="subnav_warp">
+                    <div>
+                        <a href="/UserPage/promotion/event/nowLeave.html" class="subNav_title">프로모션</a>
+                        <a href="/UserPage/promotion/event/nowLeave.html">이벤트</a>
+                        <a href="/UserPage/promotion/jinicoupon/jiniCoupon.html">지니쿠폰</a>
+                    </div>
+                    <div>
+                        <a href="/UserPage/promotion/card_exchange/associatedCard.html" class="subNav_title">카드 및 환전 혜택</a>
+                        <a href="/UserPage/promotion/card_exchange/associatedCard.html?directId=associatedCard1">제휴 카드</a>
+                        <a href="/UserPage/promotion/card_exchange/associatedCard.html?directId=associatedCard2">환율 우대</a>
+                        <a href="/UserPage/promotion/card_exchange/associatedCard.html?directId=associatedCard3">무이자 할부</a>
+                    </div>
+                </div>
+            </div>
+            <div class="sub_nav point">
+                <div class="subnav_warp">
+                    <div>
+                        <a href="/UserPage/index/mypage/Mypage_point.html" class="subNav_title">나의 나비포인트</a>
+                    </div>
+                    <div>
+                        <a href="/UserPage/nabipoint/pointList.html" class="subNav_title">적립안내</a>
+                    </div>
+                    <div>
+                        <a href="/UserPage/nabipoint/pointList.html" class="subNav_title">사용안내</a>
+                    </div>
+                </div>
+            </div>
+            <div class="sub_nav optional">
+                <div class="subnav_warp">
+                    <div>
+                        <a href="https://jinistore.jinair.com/main.do" class="subNav_title">지니스토어</a>
+                    </div>
+                    <div>
+                        <a href="/UserPage/optional/jinipass/jinipass.html" class="subNav_title">보딩패스 할인</a>
+                    </div>
+                    <div>
+                        <a href="/UserPage/optional/activity/activity.html" class="subNav_title">액티비티</a>
+                        <a href="https://www.klook.com/ko/promo/jinairon?aff_adid=100885&aff_af_wid=8227&aid=8227&utm_medium=affiliate-alwayson&utm_source=non-network&utm_campaign=8227&utm_term=&utm_content=">클룩</a>
+                        <a href="https://www.yokosojapanpass.com/donki_fuel/public/coupon/index/0010789">돈키호테</a>
+                    </div>
+                    <div>
+                        <a href="/UserPage/optional/hotel/hotel.html" class="subNav_title">호텔</a>
+                        <a href="https://sp.booking.com/index.ko.html?aid=1486529&lang=ko">부킹닷컴</a>
+                        <a href="https://www.hotelscombined.co.kr/?languageCode=KO">호텔스 컴바인</a>
+                        <a href="https://kr.trip.com/hotels?locale=ko-KR&allianceid=1307583&sid=4088763">트립닷컴</a>
+                    </div>
+                    <div>
+                        <a href="/UserPage/optional/rentcar/rentcar.html" class="subNav_title">차량서비스</a>
+                        <a href="https://www.skcarrental.com/rent/frame/wps/reservation.do?corpNm=jinAir&corpCd=&result=0000&resultMessage=ok">SK렌트카</a>
+                        <a href="https://www.rentalcars.com/?affiliateCode=jinair&adplat=jinimall&preflang=ko">렌탈카스</a>
+                        <a href="https://jinair.happartners.com/index.php/booking/plantrip">허츠렌트카</a>
+                        <a href="https://tagogayo.co.kr/?ali=jinair15">공항 벤</a>
+                    </div>
+                    <div>
+                        <a href="/UserPage/optional/insurance/insurance.html" class="subNav_title">여행 안심 서비스</a>
+                        <a href="/UserPage/optional/insurance/Chubb.html">Chubb 해외 여행보험</a>
+                        <a href="/UserPage/optional/insurance/insurance3.html">Assistcard 여행토탈케어</a>
+                    </div>
+                </div>
+            </div>
+        <!--상당 메뉴 끝-->
+        </header>
+        <!--header 끝-->
+        <!--container-->
+        <div id="container">
+            <div class="contentswrap">
+                <div class="discount">
+                    <p class="title_img"></p>
+                    <p class="discount_title">보딩패스 할인</p>
+                    <p class="title_sub">진에어 탑승권을 제시하면<br>
+                        다양한 혜택을 받을 수 있습니다.</p>
+                </div>
+                <div class="discount_kind">
+                    <p class="meal_title">지니 보딩패스</p>
+                    <table>
+                        <tr>
+                            <th class="dis_kor cursor">국내</th>
+                            <th class="dis_eastnorth cursor">동북아</th>
+                            <th class="dis_eastsouth cursor">동남아</th>
+                            <th class="dis_poli cursor">대양주</th>
+                            <th class="dis_usa cursor">미주</th>
+                        </tr>
+                    </table>
+                </div>
+                <!--제휴 카드-->
+                <div class="kor">
+                    <div class="korwrap">
+                        <p class="textcontent">진에어 지니 보딩패스(JINI Boarding Pass)는 진에어 홈페이지에 소개되어 있는 제휴사에 탑승권을 제시 하시면 각종 혜택을 드리는 진에어의 고객</p> 
+                        <p class="textcontent2">서비스 프로그램입니다.</p>
+                        <p class="textcontent">제휴사 혜택은 별도 운전기사를 동반하지 않는 개별 이용객에 한합니다.(단체 이용객 제외)</p>
+                        <p class="textcontent">홈페이지에 제휴사별 명시되어 있는 프로그램 혜택은 탑승객 본인에게만 제공되는 것으로 탑승일로부터 31일 이내에 사용 가능합니다.</p>
+                        <p class="textcontent">제휴사에서 제공하는 혜택을 받기 위해서는 탑승권 원본과 신분확인이 가능한 신분증이 필요합니다.</p>
+                        <p class="textcontent">진에어는 제휴사에서 제공하는 모든 서비스에 대해 보증하고 있지 않습니다.</p>
+                        <p class="textcontent">진에어와 제휴사는 사전 고지 없이 프로그램을 변경하거나 종료할 수 있습니다.</p>
+                        <p class="textcontent">제휴사에 따라 이용 가능 기간 및 혜택이 변경될 수 있으니 이용 전 진에어 홈페이지를 통해 확인 해 주시기 바랍니다.</p>
+                        <p class="textcontent">제휴사 혜택은 타 혜택과 중복하여 사용하실 수 없습니다.</p>
+                        <p class="textcontent">업체별로 서비스 시간 및 혜택이 상이하오니 자세한 사항은 해당 업체로 문의하시기 바랍니다.</p>
+                        <p class="textcontent">제휴문의 : marketing@jinair.com</p>
+                    </div>
+                    <div class="img_content">
+                        <div class="imgcontent1">
+                            <div class="imgcontent1_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>엔터테인먼트</p>
+                                <p>빅오쇼(여수) ( 한국 )</p>
+                                <p>난타 홍대/제주 전용관 ( 서울/김포(GMP) )</p>
+                                <p>페인터즈 히어로(제주-CJU) ( 서울/김포(GMP) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent2_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>EXPERIENCE</p>
+                                <p>제주 타이거탱크 힐링파크 ( 한국 )</p>
+                                <p>스포츠몬스터(하남점/고양점/안성점) ( 한국 )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent3_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>맛집</p>
+                                <p>KAL 호텔 뷔페 레스토랑 (제주/서귀포) ( 제주(CJU) )</p>
+                                <p>이가한우한돈(부산) ( 한국 )</p>
+                                <p>해밀레스토랑 ( 제주(CJU) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent4_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>관광지</p>
+                                <p>태성해운 ( 포항(KPO) )</p>
+                                <p>키자니아 서울/부산 ( 한국 )</p>
+                                <p>제주민속촌 ( 제주(CJU) )</p>
+                                <p>코엑스 아쿠아리움 ( 서울/김포(GMP) )</p>
+                                <p>부산 트릭아이미술관 ( 부산(PUS) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent5_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>레져</p>
+                                <p>The bay 101 요트클럽 ( 부산(PUS) )</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="eastnorth">
+                    <div class="eastnorthwrap">
+                        <p class="textcontent">진에어 지니 보딩패스(JINI Boarding Pass)는 진에어 홈페이지에 소개되어 있는 제휴사에 탑승권을 제시 하시면 각종 혜택을 드리는 진에어의 고객</p> 
+                        <p class="textcontent2">서비스 프로그램입니다.</p>
+                        <p class="textcontent">제휴사 혜택은 별도 운전기사를 동반하지 않는 개별 이용객에 한합니다.(단체 이용객 제외)</p>
+                        <p class="textcontent">홈페이지에 제휴사별 명시되어 있는 프로그램 혜택은 탑승객 본인에게만 제공되는 것으로 탑승일로부터 31일 이내에 사용 가능합니다.</p>
+                        <p class="textcontent">제휴사에서 제공하는 혜택을 받기 위해서는 탑승권 원본과 신분확인이 가능한 신분증이 필요합니다.</p>
+                        <p class="textcontent">진에어는 제휴사에서 제공하는 모든 서비스에 대해 보증하고 있지 않습니다.</p>
+                        <p class="textcontent">진에어와 제휴사는 사전 고지 없이 프로그램을 변경하거나 종료할 수 있습니다.</p>
+                        <p class="textcontent">제휴사에 따라 이용 가능 기간 및 혜택이 변경될 수 있으니 이용 전 진에어 홈페이지를 통해 확인 해 주시기 바랍니다.</p>
+                        <p class="textcontent">제휴사 혜택은 타 혜택과 중복하여 사용하실 수 없습니다.</p>
+                        <p class="textcontent">업체별로 서비스 시간 및 혜택이 상이하오니 자세한 사항은 해당 업체로 문의하시기 바랍니다.</p>
+                        <p class="textcontent">제휴문의 : marketing@jinair.com</p>
+                    </div>
+                    <div class="img_content">
+                        <div class="imgcontent1">
+                            <div class="imgcontent6_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>통신</p>
+                                <p>말톡 ( 오사카/간사이(KIX) )</p>
+                                <p>텔레콤스퀘어 ( 도쿄/나리타(NRT) )</p>
+                                <p>와이파이도시락 ( 오사카/간사이(KIX) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent7_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>EXPERIENCE</p>
+                                <p>GPA ( 도쿄/나리타(NRT) )</p>
+                                <p>교토 유메야카타 ( 오사카/간사이(KIX) )</p>
+                                <p>AJ Hackett Macau Tower ( 마카오(MFM) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent8_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>쇼핑</p>
+                                <p>AMU PLAZA ( 기타큐슈(KKJ) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent9_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>관광지</p>
+                                <p>마카오 타워 ( 마카오(MFM) )</p>
+                                <p>가이쿄 드라마십(Kaikyo Dramaship) ( 기타큐슈(KKJ) )</p>
+                                <p>구 모지 미쓰이 클럽(Former Moji Mitsui Club) ( 기타큐슈(KKJ) )</p>
+                                <p>Former Osaka Shosen Mercantile Steamship Co. Building ( 기타큐슈(KKJ) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent10_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>교통</p>
+                                <p>사라쿠라 케이블카 ( 기타큐슈(KKJ) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent11_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>호텔</p>
+                                <p>STATION HOTEL KOKURA ( 기타큐슈(KKJ) )</p>
+                                <p>고쿠라베이호텔 ( 기타큐슈(KKJ) )</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="eastsouth">
+                    <div class="eastsouthwrap">
+                        <p class="textcontent">진에어 지니 보딩패스(JINI Boarding Pass)는 진에어 홈페이지에 소개되어 있는 제휴사에 탑승권을 제시 하시면 각종 혜택을 드리는 진에어의 고객</p> 
+                        <p class="textcontent2">서비스 프로그램입니다.</p>
+                        <p class="textcontent">제휴사 혜택은 별도 운전기사를 동반하지 않는 개별 이용객에 한합니다.(단체 이용객 제외)</p>
+                        <p class="textcontent">홈페이지에 제휴사별 명시되어 있는 프로그램 혜택은 탑승객 본인에게만 제공되는 것으로 탑승일로부터 31일 이내에 사용 가능합니다.</p>
+                        <p class="textcontent">제휴사에서 제공하는 혜택을 받기 위해서는 탑승권 원본과 신분확인이 가능한 신분증이 필요합니다.</p>
+                        <p class="textcontent">진에어는 제휴사에서 제공하는 모든 서비스에 대해 보증하고 있지 않습니다.</p>
+                        <p class="textcontent">진에어와 제휴사는 사전 고지 없이 프로그램을 변경하거나 종료할 수 있습니다.</p>
+                        <p class="textcontent">제휴사에 따라 이용 가능 기간 및 혜택이 변경될 수 있으니 이용 전 진에어 홈페이지를 통해 확인 해 주시기 바랍니다.</p>
+                        <p class="textcontent">제휴사 혜택은 타 혜택과 중복하여 사용하실 수 없습니다.</p>
+                        <p class="textcontent">업체별로 서비스 시간 및 혜택이 상이하오니 자세한 사항은 해당 업체로 문의하시기 바랍니다.</p>
+                        <p class="textcontent">제휴문의 : marketing@jinair.com</p>
+                    </div>
+                    <div class="img_content">
+                        <div class="imgcontent1">
+                            <div class="imgcontent12_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>통신</p>
+                                <p>말톡 ( 하노이(HAN) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent13_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>엔터테인먼트</p>
+                                <p>난타 방콕전용관 ( 방콕(BKK) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent14_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>쇼핑</p>
+                                <p>R&F Mall Johor Bahru ( 조호르바루(JHB) )</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="poli">
+                    <div class="poliwrap">
+                        <p class="textcontent">진에어 지니 보딩패스(JINI Boarding Pass)는 진에어 홈페이지에 소개되어 있는 제휴사에 탑승권을 제시 하시면 각종 혜택을 드리는 진에어의 고객</p> 
+                        <p class="textcontent2">서비스 프로그램입니다.</p>
+                        <p class="textcontent">제휴사 혜택은 별도 운전기사를 동반하지 않는 개별 이용객에 한합니다.(단체 이용객 제외)</p>
+                        <p class="textcontent">홈페이지에 제휴사별 명시되어 있는 프로그램 혜택은 탑승객 본인에게만 제공되는 것으로 탑승일로부터 31일 이내에 사용 가능합니다.</p>
+                        <p class="textcontent">제휴사에서 제공하는 혜택을 받기 위해서는 탑승권 원본과 신분확인이 가능한 신분증이 필요합니다.</p>
+                        <p class="textcontent">진에어는 제휴사에서 제공하는 모든 서비스에 대해 보증하고 있지 않습니다.</p>
+                        <p class="textcontent">진에어와 제휴사는 사전 고지 없이 프로그램을 변경하거나 종료할 수 있습니다.</p>
+                        <p class="textcontent">제휴사에 따라 이용 가능 기간 및 혜택이 변경될 수 있으니 이용 전 진에어 홈페이지를 통해 확인 해 주시기 바랍니다.</p>
+                        <p class="textcontent">제휴사 혜택은 타 혜택과 중복하여 사용하실 수 없습니다.</p>
+                        <p class="textcontent">업체별로 서비스 시간 및 혜택이 상이하오니 자세한 사항은 해당 업체로 문의하시기 바랍니다.</p>
+                        <p class="textcontent">제휴문의 : marketing@jinair.com</p>
+                    </div>
+                    <div class="img_content">
+                        <div class="imgcontent1">
+                            <div class="imgcontent15_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>통신</p>
+                                <p>말톡 ( 괌(GUM) )</p>
+                                <p>와이파이도시락 ( 괌(GUM) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgconten16_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>엔터테인먼트</p>
+                                <p>글로우브 나이트 클럽 ( 괌(GUM) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent17_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>EXPERIENCE</p>
+                                <p>BIG 선셋 디너 크루즈 ( 괌(GUM) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent18_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>레져</p>
+                                <p>괌 스타샌드 투어 ( 괌(GUM) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent19_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>관광지</p>
+                                <p>샌드캐슬 매직 디너쇼 ( 괌(GUM) )</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="usa">
+                    <div class="usawrap">
+                        <p class="textcontent">진에어 지니 보딩패스(JINI Boarding Pass)는 진에어 홈페이지에 소개되어 있는 제휴사에 탑승권을 제시 하시면 각종 혜택을 드리는 진에어의 고객</p> 
+                        <p class="textcontent2">서비스 프로그램입니다.</p>
+                        <p class="textcontent">제휴사 혜택은 별도 운전기사를 동반하지 않는 개별 이용객에 한합니다.(단체 이용객 제외)</p>
+                        <p class="textcontent">홈페이지에 제휴사별 명시되어 있는 프로그램 혜택은 탑승객 본인에게만 제공되는 것으로 탑승일로부터 31일 이내에 사용 가능합니다.</p>
+                        <p class="textcontent">제휴사에서 제공하는 혜택을 받기 위해서는 탑승권 원본과 신분확인이 가능한 신분증이 필요합니다.</p>
+                        <p class="textcontent">진에어는 제휴사에서 제공하는 모든 서비스에 대해 보증하고 있지 않습니다.</p>
+                        <p class="textcontent">진에어와 제휴사는 사전 고지 없이 프로그램을 변경하거나 종료할 수 있습니다.</p>
+                        <p class="textcontent">제휴사에 따라 이용 가능 기간 및 혜택이 변경될 수 있으니 이용 전 진에어 홈페이지를 통해 확인 해 주시기 바랍니다.</p>
+                        <p class="textcontent">제휴사 혜택은 타 혜택과 중복하여 사용하실 수 없습니다.</p>
+                        <p class="textcontent">업체별로 서비스 시간 및 혜택이 상이하오니 자세한 사항은 해당 업체로 문의하시기 바랍니다.</p>
+                        <p class="textcontent">제휴문의 : marketing@jinair.com</p>
+                    </div>
+                    <div class="img_content">
+                        <div class="imgcontent1">
+                            <div class="imgcontent20_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>통신</p>
+                                <p>말톡 ( 하와이, 호놀룰루(HNL) )</p>
+                                <p>와이파이도시락 ( 하와이, 호놀룰루(HNL) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent21_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>쇼핑</p>
+                                <p>와이켈레 프리미엄 아울렛 (Waikele Premium Outlets) ( 하와이, 호놀룰루(HNL) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent22_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>교통</p>
+                                <p>Waikiki Trolley(와이키키 트롤리) ( 하와이, 호놀룰루(HNL) )</p>
+                            </div>
+                        </div>
+                        <div class="imgcontent1">
+                            <div class="imgcontent23_img"></div>
+                            <div class="imgcontent1_text">
+                                <p>관광지</p>
+                                <p>폴리네시안 문화센터(PCC, Polynesian Cultural Center) ( 하와이, 호놀룰루(HNL) )</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- container 끝-->
+        <!-- 푸터-->
+        <div id="footerCont"><!--푸터-->
+            <div id="foot_topwraper">
+                <div id="foot_top"><!--위쪽 푸터-->
+                    <div id="top_menu"><!--상단메뉴 컨테이너-->
+                        <div class="menu_wrap"><!--첫번째 메뉴-->
+                            <p class="men_tit"><a href="">회사안내</a></p><!--메뉴 타이틀-->
+                            <ul class="horiz"><!--하위 메뉴 컨테이너-->
+                                <li><a href="">공지사항</a></li>
+                                <li><a href="">채용정보</a></li>
+                                <li><a href="">CEO인사말</a></li>
+                                <li><a href="">기업개요</a></li>
+                                <li><a href="">기업지배구조</a></li>
+                                <li><a href="">윤리경영</a></li>
+                                <li><a href="">CI소개</a></li>
+                                <li><a href="">항공기 소개</a></li>
+                                <li><a href="">투자정보</a></li>
+                                <li><a href="">화물운송</a></li>
+                                <li><a href="">홍보센터</a></li>
+                            </ul>
+                        </div>
+                        <div class="menu_wrap"><!--두번째 메뉴-->
+                            <p class="men_tit"><a href="">약관 및 안내</a></p><!--메뉴 타이틀-->
+                            <ul class="horiz"><!--하위 메뉴 컨테이너-->
+                                <li class="f_black"><a href=""><b>개인정보 처리방침</b></a></li>
+                                <li><a href="">홈페이지 이용약관</a></li>
+                                <li><a href="">여객운송약관 및 기타 고지사항</a></li>
+                                <li><a href="">항공교통이용자 서비스 계획</a></li>
+                                <li><a href="">피해구제계획</a></li>
+                                <li><a href="">e-티켓 확인증 법적 고지문</a></li>
+                                <li><a href="">사이트맵</a></li>
+                            </ul>
+                        </div>
+                        <div class="menu_wrap"><!--세번째 메뉴-->
+                            <p class="men_tit"><a href="">고객서비스</a></p><!--메뉴 타이틀-->
+                            <ul class="horiz"><!--하위 메뉴 컨테이너-->
+                                <li><a href="/UserPage/index/mypage/faq_list.html">자주 묻는 질문(FAQ)</a></li>
+                                <li><a href="/UserPage/index/mypage/add_qna.html">고객의 말씀(Q&A)</a></li>
+                                <li><a href="/UserPage/serviceCount/airport/baggage/baggage.html?directId=findbaggage">기내 유실물 찾기</a></li>
+                            </ul>
+                        </div>
+                    </div><!--상단메뉴 컨테이너 끝-->
+                </div><!--위쪽푸터 끝-->
+            </div>
+            <div id="foot_bottwraper">
+                <div id="foot_bott"><!--아래쪽 푸터-->
+                    <div id="bott_menu"><!--하단메뉴 컨테이너-->
+                        <div id="app_ico"><!--apple icon-->
+                            <ul class="Sicon"><!--sns icon-->
+                                <li><a href=""><p class="twit circle">트위터</p></a></li>
+                                <li><a href=""><p class="faceb circle">페이스북</p></a></li>
+                                <li><a href=""><p class="youtub circle">유튜브</p></a></li>
+                                <li><a href=""><p class="insta circle">인스타</p></a></li>
+                                <li><a href=""><p class="blog circle">블로그</p></a></li>
+                            </ul>
+                            <ul class="Aicon"><!--app icon-->
+                                <li class="Aicon_txt">APP 다운로드</li>
+                                <li><a href=""><img src="../../../../index_img/ico_apple.png" alt=""></a></li>
+                                <li><a href=""><img src="../../../../index_img/google.PNG" alt=""></a></li>
+                            </ul>
+                            <ul class="site">
+                                <li><a href="#"><p class="sit circle">대리점 사이트</p></a></li>
+                                <li class="Aicon_txt">대리점 사이트 바로가기</li>
+                            </ul>
+                        </div><!--apple icon 끝-->
+                        <div id="news"><!--뉴스레터-->
+                            <ul>
+                                <li class="sub_txt">뉴스레터 신청</li>
+                            </ul>
+                            <ul class="mail_box">
+                                <li><input type="text" placeholder="Email Address"></li>
+                                <li><input type="submit"></li>
+                            </ul>
+                            <ul>
+                                <li><img src="../../../../index_img/ico_isms.png" alt="인증"></li>
+                            </ul>
+                        </div><!--뉴스레터 끝-->
+                        <div id="info"><!--정보-->
+                            <ul>
+                                <li>
+                                    <b>고객서비스센터 1600-6200, 02-6099-1200</b>
+                                    <p class="pdiv">업무시간 오전 08:00~오후 19:00</p>
+                                </li>
+                                <li class="small_txt">(주)진에어
+                                    <p class="pdiv">대표이사 최정호</p>
+                                    <p class="pdiv">사업자등록번호 121-81-89086</p>
+                                    <p class="pdiv">통신판매업 신고번호 : 제2008-서울 강서-0408</p>
+                                </li>
+                                <li class="small_txt">주소 : 서울시 강서구 공항대로 453<p class="pdiv"></p>개인정보보호책임자 : 이광</li>
+                                <li class="small_txt">Copyright © JIN AIR. All Rights Reserved.</li>
+                            </ul>
+                        </div><!--정보 끝-->
+                    </div><!--하단메뉴 컨테이너 끝-->
+                </div><!--아래쪽 푸터 끝-->
+            </div> 
+        </div><!--푸터 끝-->
+    </div>
+    <!--wrap 끝-->
+    <div class="modal"></div>
+    <!--퀵 메뉴-->        <div class="quickmanu">
+            <div class="quickmanuwrapper">
+                <a href="/index.html">
+                    <div class="quick1 quickbox">예약하기</div>
+                </a>
+                <a href="/UserPage/index/mypage/Mypage_main.html">
+                    <div class="quick2 quickbox">예약조회</div>
+                </a>
+                <a href="/UserPage/reservation/flight_info/flight.html">
+                    <div class="quick3 quickbox">출도작 조회</div>
+                </a>
+                <a href="/UserPage/reservation/LCCpage/lcc.html">
+                    <div class="quick4 quickbox">최저가 조회</div>
+                </a>
+                <a href="/UserPage/index/mypage/Mypage_point.html">
+                    <div class="quick5 quickbox">마이포인트</div>
+                </a>
+                <a href="/UserPage/index/mypage/faq_list.html">
+                    <div class="quick6 quickbox">FAQ</div>
+                </a>
+                <a href="/UserPage/index/mypage/add_qna.html">
+                    <div class="quick7 quickbox">고객의 말씀</div>
+                </a>
+                <a href="#" class="quick_topback">
+                    <div class="quicktop">TOP</div>
+                </a>
+            </div>
+        </div>
+    <!--퀵 메뉴 끝-->
+</body>
+</html>
