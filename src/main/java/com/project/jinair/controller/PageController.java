@@ -53,4 +53,36 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/inquiry/faq_edit")
                 .addObject("code", "faq_edit");
     }
+
+    // faq 작성
+    @RequestMapping("/admin/faq_write")
+    public ModelAndView faqWrite() {
+        return new ModelAndView("/adminpage/pages/inquiry/faq_write")
+                .addObject("code", "faq_write");
+    }
+
+    // qna 메인
+    @RequestMapping("/admin/qna_main")
+    public ModelAndView qnaMain() {
+        return new ModelAndView("/adminpage/pages/inquiry/qna_main")
+                .addObject("code", "qna_main");
+    }
+
+    // qna 댓글
+    @RequestMapping("/admin/qna_reply")
+    public ModelAndView qnaReply() {
+        return new ModelAndView("/adminpage/pages/inquiry/qna_reply")
+                .addObject("code", "qna_reply");
+    }
+
+    // qna 뷰
+    @RequestMapping("/admin/qna_view")
+    public ModelAndView qnaView() {
+        return new ModelAndView("/adminpage/pages/inquiry/qna_view")
+                .addObject("code", "qna_view");
+    }
+
+
+
+
 }
