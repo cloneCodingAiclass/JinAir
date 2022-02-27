@@ -1,0 +1,157 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<div th:replace="/adminpage/fragment/head :: head"></div>
+<link rel="stylesheet" href="/adminpage/lib/css/item/item.css">
+<script src="/adminpage/app/item/item.js"></script>
+<!-- head.html 끝-->
+<body>
+<div id="wrap">
+    <div th:replace="/adminpage/fragment/header :: header"></div>
+    <div id="container">
+        <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+        <div class="contents">
+            <div class="con_wrap">
+                <div class="search">
+                    <p class="title">기내 유실물 조회</p>
+                </div>
+                <div id="item_search">
+                    <!-- 유실물 조회 -->
+                    <form action="#">
+                        <fieldset>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <span>항공편명</span>
+                                        <input type="text" name="aircraft_name" id="aircraft_name" placeholder="(예) 항공편명 LJ">
+                                    </td>
+                                    <td>
+                                        <span>도착지 공항</span>
+                                        <select name="arrival_airport_list" id="arrival_airport_list">
+                                            <option value="" selected>전체</option>
+                                            <option value="">인천</option>
+                                            <option value="">김포</option>
+                                            <option value="">부산</option>
+                                            <option value="">제주</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <span>물품 유형</span>
+                                        <select name="" class="item_list">
+                                            <option value="" selected>전체</option>
+                                            <option value="">가방</option>
+                                            <option value="">기타 전자제품</option>
+                                            <option value="">노트북/테블릿</option>
+                                            <option value="">담배</option>
+                                            <option value="">도서</option>
+                                            <option value="">모자</option>
+                                            <option value="">배게/담요</option>
+                                            <option value="">시계</option>
+                                            <option value="">식품</option>
+                                            <option value="">신발</option>
+                                            <option value="">안경/선글라스</option>
+                                            <option value="">액세서리</option>
+                                            <option value="">의류</option>
+                                            <option value="">이어폰/휴대폰</option>
+                                            <option value="">주류</option>
+                                            <option value="">자갑</option>
+                                            <option value="">화장품</option>
+                                            <option value="">기타</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <span>검색기간</span>
+                                        <input type="date" name="item_start_date" id="item_start_date" required > ~
+                                        <input type="date" name="item_end_date" id="item_end_date" required >
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                        <div id="item_search_btn">
+                            <input type="submit" value="검색" />
+                        </div>
+                    </form>
+                    <!-- 유실물 조회 끝 -->
+                </div>
+                <div class="search">
+                    <p class="title">조회 결과</p>
+                </div>
+                <div class="item_list">
+                    <!-- 유실물 리스트 -->
+                    <table>
+                        <tr>
+                            <th>관리번호</th>
+                            <th>이미지</th>
+                            <th>물품 유형</th>
+                            <th>항공편</th>
+                            <th>출발 일자</th>
+                            <th>도착지 공항</th>
+                            <th>수령방법</th>
+                            <th>유실물 수령 상태</th>
+                            <th>삭제</th>
+                        </tr>
+                        <tr>
+                            <td>403094</td>
+                            <td>이미지 파일</td>
+                            <td>모자</td>
+                            <td>LJ438</td>
+                            <td>2022-01-28</td>
+                            <td>GMP</td>
+                            <td>방문수령</td>
+                            <td><button class="item_isfind_btn">완료</button></td>
+                            <td><button>삭제</button></td>
+                        </tr>
+                        <tr>
+                            <td>403094</td>
+                            <td>이미지 파일</td>
+                            <td>안경/선글라스</td>
+                            <td>LJ438</td>
+                            <td>2022-01-28</td>
+                            <td>GMP</td>
+                            <td>방문수령</td>
+                            <td><button class="item_isfind_btn">미완료</button></td>
+                            <td><button>삭제</button></td>
+                        </tr>
+                    </table>
+                    <div class="footer">
+                        <div class="center">
+                            <table>
+                                <tr>
+                                    <td><a href="#">1</a></td>
+                                    <td><a href="#">2</a></td>
+                                    <td><a href="#">3</a></td>
+                                    <td><a href="#">4</a></td>
+                                    <td><a href="#">5</a></td>
+                                    <td><a href="#">6</a></td>
+                                    <td><a href="#">7</a></td>
+                                    <td><a href="#">8</a></td>
+                                    <td><a href="#">9</a></td>
+                                    <td><a href="#">10</a></td>
+                                    <td><a href="#"></a></td>
+                                    <td><a href="#"></a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 유실물 리스트 -->
+                </div>
+            </div>
+        </div>
+        <!-- 모달창 -->
+        <div id="modal_isfind">
+            <div id="modal_isfind_content">
+                <div id="modal_isfind_title">유실물 상태 변경</div>
+                <div>
+                    <button class="modal_isfind_btn complete">완료</button>
+                    <button class="modal_isfind_btn uncomplete">미완료</button>
+                </div>
+            </div>
+        </div>
+        <!-- 모달창 끝 -->
+    </div>
+</div>
+</body>
+</html>

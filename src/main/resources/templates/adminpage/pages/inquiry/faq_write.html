@@ -1,0 +1,51 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+
+<!-- head.html -->
+<div th:replace="/adminpage/fragment/head :: head"></div>
+<link rel="stylesheet" href="/adminpage/lib/css/inquiry/faq_write.css">
+<script src="/adminpage/app/inquiry/faq_main.js"></script>
+<!-- head.html 끝-->
+<body>
+    <div id="wrap">
+        <div th:replace="/adminpage/fragment/header :: header"></div>
+        <div id="container">
+            <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+            <div class="contents">
+                <div class="con_wrap">
+                    <div class="title">
+                        <p>FAQ 작성하기</p>
+                    </div>
+                    <form action="./faq_main.html">
+                        <div class="contents_main">
+                            <table>
+                                <tr>
+                                    <td><select>
+                                        <option>항공권 예매</option>
+                                        <option>할인 제도</option>
+                                        <option>수하물</option>
+                                        <option>기내 서비스</option>
+                                        <option>기타</option>
+                                    </select></td>
+                                    <td><input type="text" placeholder="제목을 입력하세요"></td>
+                                    <td>등록일</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><textarea name="" id=""></textarea></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="contents_bottom">
+                            <div class="faq_btn_add">                        
+                                <a href="./faq_main.html"><input type="button" value="목록"></a>
+                                <input type="submit" value="등록">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

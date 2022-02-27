@@ -1,0 +1,137 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<div th:replace="/adminpage/fragment/head :: head"></div>
+<link rel="stylesheet" href="/adminpage/lib/css/schedule/sc_list.css">
+<script src="/adminpage/app/schedule/sc_list.js"></script>
+    <body>
+        <div id="wrap">
+            <div th:replace="/adminpage/fragment/header :: header"></div>
+            <div id="container">
+                <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+                <div class="contents">
+                    <div class="contwrap">
+                        <div class="btn_top">
+                            <p class="title">운항 스케줄 조회</p>
+                            <input type="button" value="조건 조회" class="btn_search">
+                        </div>
+                        <div class="contents_main">
+                            <table>
+                                <tr>
+                                    <td>운항편</td>
+                                    <td>출발 일자</td>
+                                    <td>출발지</td>
+                                    <td>출발시간</td>
+                                    <td>도착지</td>
+                                    <td>도착시간</td>
+                                    <td>예약 가능 좌석<br>(수용 좌석)</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="sc_resultinfo.html">LJ438</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">2022-01-28</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">서울/김포(GMP)</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">08:20</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">제주(CJU)</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">09:10</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">278(430)</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="sc_resultinfo.html">LJ438</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">2022-01-28</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">서울/김포(GMP)</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">08:20</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">제주(CJU)</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">09:10</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">278(430)</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="sc_resultinfo.html">LJ438</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">2022-01-28</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">서울/김포(GMP)</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">08:20</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">제주(CJU)</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">09:10</a>
+                                    </td>
+                                    <td>
+                                        <a href="sc_resultinfo.html">278(430)</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="btn_box">
+                            <input type="button" value="운항 스케줄 등록" onclick="location.href='sc_regist.html'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 모달 창-->
+            <div class="modal_container">
+                <div class="modal">
+                    <form action="sc_result.html">
+                        <p>항공편명
+                            <input type="text" placeholder="(예) 001, 세자리">
+                            <select>
+                                <optgroup label="출발지">
+                                    <option>서울/김포(GMP)</option>
+                                    <option>서울/인천(ICH)</option>
+                                </optgroup>
+                            </select>
+                            <select>
+                                <optgroup label="도착지">
+                                    <option>서울/김포(GMP)</option>
+                                    <option>서울/인천(ICH)</option>
+                                </optgroup>
+                            </select>
+                        </p>
+                        <p>검색기간
+                            <input type="date" id="datepicker"><input type="text" id="datepicker"></p>
+                        <div class="btn_modal">
+                            <input type="button" value="취소" class="modal_cancel">
+                            <input type="submit" value="검색" class="modal_search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
