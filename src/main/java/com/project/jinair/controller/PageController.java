@@ -14,4 +14,43 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/admin_index")
                 .addObject("code", "admin_index");
     }
+
+    // faq 메인
+    @RequestMapping("/admin/faq_main")
+    public ModelAndView faqMain() {
+        return new ModelAndView("/adminpage/pages/inquiry/faq_main")
+                .addObject("code", "faq_main");
+    }
+    @RequestMapping("/admin/faq_main1")
+    public ModelAndView faqMain1() {
+        return new ModelAndView("/adminpage/pages/inquiry/faq_main1")
+                .addObject("code", "faq_main1");
+    }
+    @RequestMapping("/admin/faq_main2")
+    public ModelAndView faqMain2() {
+        return new ModelAndView("/adminpage/pages/inquiry/faq_main2")
+                .addObject("code", "faq_main2");
+    }
+    @RequestMapping("/admin/faq_main3")
+    public ModelAndView faqMain3() {
+        return new ModelAndView("/adminpage/pages/inquiry/faq_main3")
+                .addObject("code", "faq_main3");
+    }
+    @RequestMapping("/admin/faq_main4")
+    public ModelAndView faqMain4() {
+        return new ModelAndView("/adminpage/pages/inquiry/faq_main4")
+                .addObject("code", "faq_main4");
+    }
+    @RequestMapping("/admin/faq_main5")
+    public ModelAndView faqMain5() {
+        return new ModelAndView("/adminpage/pages/inquiry/faq_main5")
+                .addObject("code", "faq_main5");
+    }
+
+    // faq 수정
+    @RequestMapping("/admin/faq_edit")
+    public ModelAndView faqEdit() {
+        return new ModelAndView("/adminpage/pages/inquiry/faq_edit")
+                .addObject("code", "faq_edit");
+    }
 }

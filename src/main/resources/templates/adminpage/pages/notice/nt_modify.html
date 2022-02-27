@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항 | 공지사항 수정</title>
+    <link rel="stylesheet" href="/AdminPage/css/style.css">
+    <link rel="stylesheet" href="./css/nt_modify.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./js/nt_modify.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <header>
+            <div class="header_inner">
+                <a href="../admin_index.html"><div class="img"></div></a><a href="/AdminPage/admin_index.html"><span>관리자 센터</span></a>
+                <div class="logout"><p class="myname">반하나</p><input type="text" value="님" class="nim"><input type="button" value="Logout" onclick="location.href='../admin_login.html'"></div>
+            </div>
+        </header>
+        <div id="container">
+            <div class="sidebar">
+                <nav>
+                    <ul>
+                        <p class="nav1"><a href="../admin_index.html">메인페이지</a></p>
+                    </ul>
+                    <ul>
+                        <p class="nav2"><a href="#">운항스케줄</a></p>
+                        <li><a href="../schedule/aircraft_list.html">- 항공기 정보 조회</a></li>
+                        <li><a href="../schedule/sc_list.html">- 운항스케줄 조회</a></li>
+                        <li><a href="../schedule/sc_regist.html">- 운항 스케줄 등록</a></li>
+                    </ul>
+                    <ul>
+                        <p class="nav3"><a href="#">예약 조회</a></p>
+                        <li><a href="../reservation/rs_index.html">- 운항 별 예약자 조회</a></li>
+                        <li><a href="../reservation/rs_sch.html">- 예약자 명 조회</a></li>
+                    </ul>
+                    <ul>
+                        <p class="nav4"><a href="#">고객관리</a></p>
+                        <li><a href="../cm/cm_list.html">- 고객 조회</a></li>
+                    </ul>
+                    <ul>
+                        <p class="nav5"><a href="#">유실물 관리</a></p>
+                        <li><a href="../item/item.html">- 유실물 조회</a></li>
+                        <li><a href="../item/itemadd.html">- 유실물 등록</a></li>
+                    </ul>
+                    <ul>
+                        <p class="nav6"><a href="./notice.html">공지사항</a></p>
+                    </ul>
+                    <ul>
+                        <p class="nav7"><a href="#">문의</a></p>
+                        <li><a href="../inquiry/qna_main.html">- Q&A 관리</a></li>
+                        <li><a href="../inquiry/faq_main.html">- FAQ 관리</a></li>
+                    </ul>
+                    <ul>
+                        <p class="nav8"><a href="../event/evn_ing.html">이벤트</a></p>
+                    </ul>
+                    <ul>
+                        <p class="nav9"><a href="#">나비 포인트</a></p>
+                        <li><a href="../point/pointadd.html">- 지니 포인트 등록</a></li>
+                        <li><a href="../point/usepointlist.html">- 포인트 사용 내역 조회</a></li>
+                    </ul>
+                    <ul>
+                        <p class="nav10"><a href="#">지니 쿠폰</a></p>
+                        <li><a href="../coupon/couponadd.html">- 지니 쿠폰 발급</a></li>
+                        <li><a href="../coupon/usecouponlist.html">- 지니 쿠폰 사용 내역 조회</a></li>
+                    </ul>
+                    <ul>
+                        <p class="nav11"><a href="#">지니 매거진</a></p>
+                        <li><a href="../magazine/genieList.html">- 매거진 등록</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="contents">
+                <div class="con_wrap">
+                    <div class="search">
+                        <p class="title">공지사항 목록(수정)</p>
+                    </div>
+                    <form action="./nt_view.html">
+                        <table>
+                            <tr>
+                                <th><input type="text" value="진에어 국제선 비정상운항 안내"></th>
+                                <th>등록일 2022-01-24</th>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="file-upload">
+                                        <input type="text" placeholder="파일첨부" class="filetext">
+                                        <label for="ex_file" class="ex_file">찾아보기</label>
+                                        <input type="file" id="ex_file">
+                                    </div>
+                                    <textarea style="resize: none;">
+일부 노선 항공편 비정상운항 계획에 대해 아래와 같이 공지 드립니다.	
+해당 기간 아래 노선을 이용하시는 고객께서는 참고하여 주시기 바라며, 여행에 불편을 끼쳐드려 죄송한 말씀 드립니다. 
+
+1. 환불 위약금, 재발행 수수료 면제 안내
+ 
+  -  대상 항공편 환불 및 여정변경 시 발생되는 환불위약금, 재발행 수수료는 최초 1회에 한하여 면제 가능합니다.      
+     (예시 : 재발행수수료 1회 면제 후 환불 시 환불위약금 면제 불가)
+
+
+2. 항공권 예약 변경 및 환불
+
+ 1)  당사 홈페이지/모바일 구매 항공권
+  : 당사 홈페이지/모바일 로그인 후 마이페이지에서 환불위약금 자동 면제 후 환불 가능
+
+ 2)  진에어 고객서비스센터/공항지점 구매 항공권
+ : 진에어 고객서비스센터(1600-6200)를 통하여 환불위약금 면제 후 환불 가능
+ : 전화량 폭주로 연결 불가 시 홈페이지 내 고객의 말씀(Q&A) 코너를 이용 요청/문의하시면 처리 후 등록된 이메일로 회신
+
+Fly, better fly Jin Air 
+
+                                    </textarea>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="footer">
+                            <a href="./nt_view.html" class="btn_notice btn_cancel"><input type="button" value="취소"></a>
+                            <a class="btn_notice btn_modify"><input type="submit" value="수정완료"></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
