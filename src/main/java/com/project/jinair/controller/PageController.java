@@ -9,14 +9,12 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/pages")
 public class PageController {
 
-
     @RequestMapping("/admin_index")
     public ModelAndView adminIndex() {
         return new ModelAndView("/adminpage/pages/admin_index")
                 .addObject("code", "admin_index");
     }
 
-<<<<<<< HEAD
 
     // admin 스케줄 상세
     @RequestMapping("/admin/scheduleResultInfo")
@@ -149,8 +147,6 @@ public class PageController {
     }
 
 
-=======
->>>>>>> 57160a0318d5d48cec14b6ffb54b3ae30c9d3ab0
     /* 이벤트 */
     @RequestMapping("/admin/evn_ing")
     public ModelAndView evn_ing() {
@@ -181,7 +177,6 @@ public class PageController {
     public ModelAndView evn_write() {
         return new ModelAndView("/adminpage/pages/event/evn_write")
                 .addObject("code", "evn_write");
-<<<<<<< HEAD
     }
 
 
@@ -234,20 +229,6 @@ public class PageController {
     public ModelAndView faqEdit() {
         return new ModelAndView("/adminpage/pages/inquiry/faq_edit")
                 .addObject("code", "faq_edit");
-=======
-    }
-
-    /* 포인트 */
-    @RequestMapping("/admin/usepointlist")
-    public ModelAndView usepointlist() {
-        return new ModelAndView("/adminpage/pages/point/usepointlist")
-                .addObject("code", "usepointlist");
-    }
-    @RequestMapping("/admin/pointadd")
-    public ModelAndView pointadd() {
-        return new ModelAndView("/adminpage/pages/point/pointadd")
-                .addObject("code", "pointadd");
->>>>>>> 57160a0318d5d48cec14b6ffb54b3ae30c9d3ab0
     }
     // faq 작성
     @RequestMapping("/admin/faq_write")
