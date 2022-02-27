@@ -1,15 +1,7 @@
 $(function () {
-    // 모달
-    $('.modal_container').hide();
-    $('.modal_btn').on('click', function(){
-        $('.modal_container').fadeIn(200);
-    })
-    $('.btn_cancel').on('click', function(){
-        $('.modal_container').fadeOut(200);
-    })
-
-    $('.nav6').find('a').css({"color":"#BDD600"});
-    $('.nav6').siblings('li').css({"display":"block"});
+    $('.nav10').find('a').css({"color":"#BDD600"});
+    $('.nav10').siblings('li').css({"display":"block"});
+    $('.nav10').siblings('li').eq(1).find('a').css({"color":"#BDD600"});
     
     $('.nav1').on('mouseover', function(e){
         e.stopPropagation();
@@ -90,24 +82,17 @@ $(function () {
     });
     $('header').on('mouseover', function (e) {
         e.stopPropagation();
-        $('.nav6').parent().siblings().find('a').css({"color":"#adb5bd"});
-        $('.nav6').find('a').css({"color":"#BDD600"});
-        $('.nav6').siblings('li').css({"display":"block"});
-        $('.nav6').parent().siblings().find('li').css({"display":"none"});
+        $('.nav10').parent().siblings().find('a').css({"color":"#adb5bd"});
+        $('.nav10').find('a').css({"color":"#BDD600"});
+        $('.nav10').siblings('li').css({"display":"block"});
+        $('.nav10').parent().siblings().find('li').css({"display":"none"});
     })
     $('.contents').on('mouseover', function (e) {
         e.stopPropagation();
-        $('.nav6').parent().siblings().find('a').css({"color":"#adb5bd"});
-        $('.nav6').find('a').css({"color":"#BDD600"});
-        $('.nav6').siblings('li').css({"display":"block"});
-        $('.nav6').parent().siblings().find('li').css({"display":"none"});
+        $('.nav10').parent().siblings().find('a').css({"color":"#adb5bd"});
+        $('.nav10').find('a').css({"color":"#BDD600"});
+        $('.nav10').siblings('li').css({"display":"block"});
+        $('.nav10').parent().siblings().find('li').css({"display":"none"});
+        $('.nav10').siblings('li').eq(1).find('a').css({"color":"#BDD600"});
     })
-    $('.modal_container').hide();
-    $('.modal_btn').on('click', function(){
-        $('.modal_container').fadeIn(200);
-    })
-    $('.btn_cancel').on('click', function(){
-        $('.modal_container').fadeOut(200);
-    })
-
 });

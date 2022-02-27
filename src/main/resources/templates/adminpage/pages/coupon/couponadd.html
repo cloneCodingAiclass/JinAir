@@ -1,0 +1,227 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<div th:replace="/adminpage/fragment/head :: head"></div>
+        <link rel="stylesheet" href="/adminpage/lib/css/coupon/couponadd.css">
+        <link rel="stylesheet" href="/adminpage/lib/css/style.css">
+        <script src="/adminpage/app/coupon/couponadd.js"></script>
+    <body>
+        <div id="wrap">
+            <div th:replace="/adminpage/fragment/header :: header"></div>
+            <div id="container">
+                <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+                <div class="contents">
+                    <div class="contwrap">
+                        <div class="search">
+                            <p class="title">지니 쿠폰 발급</p>
+                        </div>
+                        <div class="contents_main">
+                            <div class="contents_sch btn_box">
+                                <form action="#">
+                                    <select class="coupon_box">
+                                        <option value="" selected="selected">국내/외 선택</option>
+                                        <option value="국내">국내</option>
+                                        <option value="국내">국외</option>
+                                    </select>
+                                    <select class="coupon_box">
+                                        <option value="" selected="selected">노선선택</option>
+                                        <option value="전 노선">전 노선</option>
+                                        <option value="CJU">CJU</option>
+                                        <option value="USN">USN</option>
+                                        <option value="TAE">TAE</option>
+                                    </select>
+                                    <input class="coupon_box3" type="text" placeholder="할인률">
+                                    <input type="text" value="%" class="coupon_box1" readonly="readonly">
+                                    <input class="coupon_box4" type="date" placeholder="시작 일자">
+                                    <input type="text" value="~" class="coupon_box1" readonly="readonly">
+                                    <input class="coupon_box2" type="date" placeholder="종료 일자">
+                                    <input class="coupon_box3" type="text" placeholder="수량">
+                                    <input type="submit" value="쿠폰발급" class="coupon_btn">
+                                </form>
+                            </div>
+                            <table class="coupon_tb">
+                                <colgroup>
+                                    <col width="100">
+                                    <col width="120">
+                                    <col width="280">
+                                    <col width="120">
+                                    <col width="120">
+                                    <col width="80">
+                                    <col width="100">
+                                    <col width="80">
+                                </colgroup>
+                                <tr>
+                                    <td>쿠폰 번호</td>
+                                    <td>발급 일자</td>
+                                    <td>쿠폰 명</td>
+                                    <td>시작일자</td>
+                                    <td>종료일자</td>
+                                    <td>쿠폰 수</td>
+                                    <td>미등록 쿠폰</td>
+                                    <td>상태</td>
+                                </tr>
+                                <tr>
+                                    <td>10010103</td>
+                                    <td>2021-12-30</td>
+                                    <td>선착순 고객 국내여행 전 노선 10%</td>
+                                    <td>2022-01-20</td>
+                                    <td>2022-01-30</td>
+                                    <td>100</td>
+                                    <td>31</td>
+                                    <td>유효</td>
+                                </tr>
+                                <tr>
+                                    <td>10010103</td>
+                                    <td>2021-12-30</td>
+                                    <td>선착순 고객 국내여행 전 노선 10%</td>
+                                    <td>2022-01-20</td>
+                                    <td>2022-01-30</td>
+                                    <td>100</td>
+                                    <td>31</td>
+                                    <td>유효</td>
+                                </tr>
+                                <tr>
+                                    <td>10010103</td>
+                                    <td>2021-12-30</td>
+                                    <td>선착순 고객 국내여행 전 노선 10%</td>
+                                    <td>2022-01-20</td>
+                                    <td>2022-01-30</td>
+                                    <td>100</td>
+                                    <td>31</td>
+                                    <td>유효</td>
+                                </tr>
+                                <tr>
+                                    <td>10010103</td>
+                                    <td>2021-12-30</td>
+                                    <td>선착순 고객 국내여행 전 노선 10%</td>
+                                    <td>2022-01-20</td>
+                                    <td>2022-01-30</td>
+                                    <td>100</td>
+                                    <td>31</td>
+                                    <td>유효</td>
+                                </tr>
+                                <tr>
+                                    <td>10010103</td>
+                                    <td>2021-12-30</td>
+                                    <td>선착순 고객 국내여행 전 노선 10%</td>
+                                    <td>2022-01-20</td>
+                                    <td>2022-01-30</td>
+                                    <td>100</td>
+                                    <td>31</td>
+                                    <td>유효</td>
+                                </tr>
+                                <tr>
+                                    <td>10010103</td>
+                                    <td>2021-12-30</td>
+                                    <td>선착순 고객 국내여행 전 노선 10%</td>
+                                    <td>2022-01-20</td>
+                                    <td>2022-01-30</td>
+                                    <td>100</td>
+                                    <td>31</td>
+                                    <td>유효</td>
+                                </tr>
+                                <tr>
+                                    <td>10010103</td>
+                                    <td>2021-12-30</td>
+                                    <td>선착순 고객 국내여행 전 노선 10%</td>
+                                    <td>2022-01-20</td>
+                                    <td>2022-01-30</td>
+                                    <td>100</td>
+                                    <td>31</td>
+                                    <td>유효</td>
+                                </tr>
+                                <tr>
+                                    <td>10010103</td>
+                                    <td>2021-12-30</td>
+                                    <td>선착순 고객 국내여행 전 노선 10%</td>
+                                    <td>2022-01-20</td>
+                                    <td>2022-01-30</td>
+                                    <td>100</td>
+                                    <td>31</td>
+                                    <td>유효</td>
+                                </tr>
+                                <tr>
+                                    <td>10010103</td>
+                                    <td>2021-12-30</td>
+                                    <td>선착순 고객 국내여행 전 노선 10%</td>
+                                    <td>2022-01-20</td>
+                                    <td>2022-01-30</td>
+                                    <td>100</td>
+                                    <td>31</td>
+                                    <td>유효</td>
+                                </tr>
+                                <tr>
+                                    <td>10010103</td>
+                                    <td>2021-12-30</td>
+                                    <td>선착순 고객 국내여행 전 노선 10%</td>
+                                    <td>2022-01-20</td>
+                                    <td>2022-01-30</td>
+                                    <td>100</td>
+                                    <td>31</td>
+                                    <td>유효</td>
+                                </tr>
+                            </table>
+                            <div class="footer">
+                                <div class="center">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <a href="#">1</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">2</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">3</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">4</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">5</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">6</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">7</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">8</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">9</a>
+                                            </td>
+                                            <td>
+                                                <a href="#">10</a>
+                                            </td>
+                                            <td>
+                                                <a href="#"></a>
+                                            </td>
+                                            <td>
+                                                <a href="#"></a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="modal_isfind">
+                    <div id="modal_isfind_content">
+                        <div id="modal_isfind_title">[선착순 고객 국내여행 전노선
+                            <br>40% 2022-01-15 / 2021-01-30 100매 ]<br><br>
+                            쿠폰발급을 하시겠습니까?
+                        </div>
+                        <div>
+                            <button class="modal_isfind_btn uncomplete">취소</button>
+                            <button class="modal_isfind_btn complete">확인</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
