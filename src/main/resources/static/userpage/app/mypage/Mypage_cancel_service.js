@@ -93,7 +93,7 @@ $(function () {
                 $('.false_modal').css('display', 'none');
             });
         }else{
-            location.href='/UserPage/payment/cancelComplete.html'
+            location.href='/UserPage/payment/completePayment.html'
         }
     })
 
