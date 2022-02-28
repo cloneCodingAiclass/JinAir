@@ -34,11 +34,80 @@ public class PageController {
                 .addObject("code", "onewaycal");
     }
 
+    // 부가서비스 액티비티
+    @RequestMapping("/optional/activity")
+    public ModelAndView optional() {
+        return new ModelAndView("/userpage/pages/optional/activity/activity")
+                .addObject("code", "activity");
+    }
 
+    // 부가서비스 호텔
+    @RequestMapping("/optional/hotel")
+    public ModelAndView hotel() {
+        return new ModelAndView("/userpage/pages/optional/hotel/hotel")
+                .addObject("code", "hotel");
+    }
 
+    // 부가서비스 여행안심서비스
+    @RequestMapping("/optional/insurance")
+    public ModelAndView insurance() {
+        return new ModelAndView("/userpage/pages/optional/insurance/insurance")
+                .addObject("code", "insurance");
+    }
 
+    // 부가서비스 cubb 해외여행보험
+    @RequestMapping("/optional/insurance2")
+    public ModelAndView insurance2() {
+        return new ModelAndView("/userpage/pages/optional/insurance/chubb")
+                .addObject("code", "chubb");
+    }
 
+    // 부가서비스 Assistcard여행토탈케어
+    @RequestMapping("/optional/insurance3")
+    public ModelAndView insurance3() {
+        return new ModelAndView("/userpage/pages/optional/insurance/insurance3")
+                .addObject("code", "insurance3");
+    }
+    // 부가서비스 jinipass
+    @RequestMapping("/optional/jinipass")
+    public ModelAndView jinipass() {
+        return new ModelAndView("/userpage/pages/optional/jinipass/jinipass")
+                .addObject("code", "jinipass");
+    }
+    // 부가서비스 차량서비스
+    @RequestMapping("/optional/rentcar")
+    public ModelAndView rentcar() {
+        return new ModelAndView("/userpage/pages/optional/rentcar/rentcar")
+                .addObject("code", "rentcar");
+    }
 
+    // 로그인
+    @RequestMapping("/mypage/login")
+    public ModelAndView login() {
+        return new ModelAndView("/userpage/pages/mypage/login/login")
+                .addObject("code", "login");
+    }
+
+    // 프로모션 카드
+    @RequestMapping("/promotion/card_exchange")
+    public ModelAndView card() {
+        return new ModelAndView("/userpage/pages/promotion/card_exchange/associatedCard")
+                .addObject("code", "associatedCard");
+    }
+
+    // 프로모션 이벤트
+    @RequestMapping("/promotion/event")
+    public ModelAndView event() {
+        return new ModelAndView("/userpage/pages/promotion/event/nowLeave")
+                .addObject("code", "nowLeave");
+    }
+
+    // 프로모션 지니쿠폰
+    @RequestMapping("/promotion/coupon")
+    public ModelAndView jinicoupon() {
+        return new ModelAndView("/userpage/pages/promotion/jinicoupon/jiniCoupon")
+                .addObject("code", "jinicoupon");
+    }
 
 
 
