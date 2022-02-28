@@ -9,6 +9,97 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/pages")
 public class PageController {
 
+
+    // 마이페이지
+    @RequestMapping("/index/addQna")
+    public ModelAndView addQna() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/add_qna")
+                .addObject("code", "add_qna");
+    }
+    @RequestMapping("/index/faqList")
+    public ModelAndView faqList() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/faq_list")
+                .addObject("code", "faq_list");
+    }
+    @RequestMapping("/index/mypageCancelService")
+    public ModelAndView mypageCancelService() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_cancel_service")
+                .addObject("code", "Mypage_cancel_service");
+    }
+    @RequestMapping("/index/mypageCoupons")
+    public ModelAndView mypageCoupons() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_coupons")
+                .addObject("code", "Mypage_coupons");
+    }
+    @RequestMapping("/index/mypageEdit")
+    public ModelAndView mypageEdit() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_edit")
+                .addObject("code", "Mypage_edit");
+    }
+    @RequestMapping("/index/mypageGetReservationDetail")
+    public ModelAndView mypageGetReservationDetail() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_getReservationDetail")
+                .addObject("code", "Mypage_getReservationDetail");
+    }
+    @RequestMapping("/index/mypageMain")
+    public ModelAndView mypageMain() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_main")
+                .addObject("code", "Mypage_main");
+    }
+    @RequestMapping("/index/mypagePoint")
+    public ModelAndView mypagePoint() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_point")
+                .addObject("code", "Mypage_point");
+    }
+    @RequestMapping("/index/mypageQna")
+    public ModelAndView mypageQna() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_qna")
+                .addObject("code", "Mypage_qna");
+    }
+    @RequestMapping("/index/passwordEdit")
+    public ModelAndView passwordEdit() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/password_edit")
+                .addObject("code", "password_edit");
+    }
+
+    // 조인
+    @RequestMapping("/index/joinConfirm")
+    public ModelAndView joinConfirm() {
+        return new ModelAndView("/userpage/pages/mypage/join/join_confirm")
+                .addObject("code", "join_confirm");
+    }
+    @RequestMapping("/index/joinForm")
+    public ModelAndView joinForm() {
+        return new ModelAndView("/userpage/pages/mypage/join/joinForm")
+                .addObject("code", "joinForm");
+    }
+    @RequestMapping("/index/joinGate")
+    public ModelAndView joinGate() {
+        return new ModelAndView("/userpage/pages/mypage/join/joinGate")
+                .addObject("code", "joinGate");
+    }
+    @RequestMapping("/index/termsAgree")
+    public ModelAndView termsAgree() {
+        return new ModelAndView("/userpage/pages/mypage/join/termsAgree")
+                .addObject("code", "termsAgree");
+    }
+    // 아이프레임 joinForm_popup
+    @RequestMapping("/index/termsAgree/popup1")
+    public ModelAndView popup1() {
+        return new ModelAndView("/userpage/pages/mypage/join/joinForm_popup1")
+                .addObject("code", "joinForm_popup1");
+    }
+    @RequestMapping("/index/termsAgree/popup2")
+    public ModelAndView popup2() {
+        return new ModelAndView("/userpage/pages/mypage/join/joinForm_popup2")
+                .addObject("code", "joinForm_popup2");
+    }
+    @RequestMapping("/index/termsAgree/popup3")
+    public ModelAndView popup3() {
+        return new ModelAndView("/userpage/pages/mypage/join/joinForm_popup3")
+                .addObject("code", "joinForm_popup3");
+    }
+
     // 사용자 인덱스
     @RequestMapping("/index")
     public ModelAndView index() {
@@ -33,83 +124,6 @@ public class PageController {
         return new ModelAndView("/userpage/pages/cal/onewaycal")
                 .addObject("code", "onewaycal");
     }
-
-    // 부가서비스 액티비티
-    @RequestMapping("/optional/activity")
-    public ModelAndView optional() {
-        return new ModelAndView("/userpage/pages/optional/activity/activity")
-                .addObject("code", "activity");
-    }
-
-    // 부가서비스 호텔
-    @RequestMapping("/optional/hotel")
-    public ModelAndView hotel() {
-        return new ModelAndView("/userpage/pages/optional/hotel/hotel")
-                .addObject("code", "hotel");
-    }
-
-    // 부가서비스 여행안심서비스
-    @RequestMapping("/optional/insurance")
-    public ModelAndView insurance() {
-        return new ModelAndView("/userpage/pages/optional/insurance/insurance")
-                .addObject("code", "insurance");
-    }
-
-    // 부가서비스 cubb 해외여행보험
-    @RequestMapping("/optional/insurance2")
-    public ModelAndView insurance2() {
-        return new ModelAndView("/userpage/pages/optional/insurance/chubb")
-                .addObject("code", "chubb");
-    }
-
-    // 부가서비스 Assistcard여행토탈케어
-    @RequestMapping("/optional/insurance3")
-    public ModelAndView insurance3() {
-        return new ModelAndView("/userpage/pages/optional/insurance/insurance3")
-                .addObject("code", "insurance3");
-    }
-    // 부가서비스 jinipass
-    @RequestMapping("/optional/jinipass")
-    public ModelAndView jinipass() {
-        return new ModelAndView("/userpage/pages/optional/jinipass/jinipass")
-                .addObject("code", "jinipass");
-    }
-    // 부가서비스 차량서비스
-    @RequestMapping("/optional/rentcar")
-    public ModelAndView rentcar() {
-        return new ModelAndView("/userpage/pages/optional/rentcar/rentcar")
-                .addObject("code", "rentcar");
-    }
-
-    // 로그인
-    @RequestMapping("/mypage/login")
-    public ModelAndView login() {
-        return new ModelAndView("/userpage/pages/mypage/login/login")
-                .addObject("code", "login");
-    }
-
-    // 프로모션 카드
-    @RequestMapping("/promotion/card_exchange")
-    public ModelAndView card() {
-        return new ModelAndView("/userpage/pages/promotion/card_exchange/associatedCard")
-                .addObject("code", "associatedCard");
-    }
-
-    // 프로모션 이벤트
-    @RequestMapping("/promotion/event")
-    public ModelAndView event() {
-        return new ModelAndView("/userpage/pages/promotion/event/nowLeave")
-                .addObject("code", "nowLeave");
-    }
-
-    // 프로모션 지니쿠폰
-    @RequestMapping("/promotion/coupon")
-    public ModelAndView jinicoupon() {
-        return new ModelAndView("/userpage/pages/promotion/jinicoupon/jiniCoupon")
-                .addObject("code", "jinicoupon");
-    }
-
-
 
     @RequestMapping("/admin_index")
     public ModelAndView adminIndex() {
@@ -397,7 +411,6 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/magazine/genieList_view")
                 .addObject("code", "genieListView");
     }
-
 
 
 
