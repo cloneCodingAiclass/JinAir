@@ -33,15 +33,231 @@ public class PageController {
         return new ModelAndView("/userpage/pages/cal/onewaycal")
                 .addObject("code", "onewaycal");
     }
+    // 코로나
+    @RequestMapping("/index/covid19Info")
+    public ModelAndView covid19Info() {
+        return new ModelAndView("/userpage/pages/index/covid19Info")
+                .addObject("code", "covid19Info");
+    }
+    //-------------------------------------------------------------------------------------------
+
+    // 로그인
+    @RequestMapping("/mypage/login")
+    public ModelAndView login() {
+        return new ModelAndView("/userpage/pages/mypage/login/login")
+                .addObject("code", "login");
+    }
+    //-------------------------------------------------------------------------------------------
+
+    // 마이페이지
+    @RequestMapping("/index/addQna")
+    public ModelAndView addQna() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/add_qna")
+                .addObject("code", "add_qna");
+    }
+    @RequestMapping("/index/faqList")
+    public ModelAndView faqList() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/faq_list")
+                .addObject("code", "faq_list");
+    }
+    @RequestMapping("/index/mypageCancelService")
+    public ModelAndView mypageCancelService() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_cancel_service")
+                .addObject("code", "Mypage_cancel_service");
+    }
+    @RequestMapping("/index/mypageCoupons")
+    public ModelAndView mypageCoupons() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_coupons")
+                .addObject("code", "Mypage_coupons");
+    }
+    @RequestMapping("/index/mypageEdit")
+    public ModelAndView mypageEdit() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_edit")
+                .addObject("code", "Mypage_edit");
+    }
+    @RequestMapping("/index/mypageGetReservationDetail")
+    public ModelAndView mypageGetReservationDetail() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_getReservationDetail")
+                .addObject("code", "Mypage_getReservationDetail");
+    }
+    @RequestMapping("/index/mypageMain")
+    public ModelAndView mypageMain() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_main")
+                .addObject("code", "Mypage_main");
+    }
+    @RequestMapping("/index/mypagePoint")
+    public ModelAndView mypagePoint() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_point")
+                .addObject("code", "Mypage_point");
+    }
+    @RequestMapping("/index/mypageQna")
+    public ModelAndView mypageQna() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_qna")
+                .addObject("code", "Mypage_qna");
+    }
+    @RequestMapping("/index/passwordEdit")
+    public ModelAndView passwordEdit() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/password_edit")
+                .addObject("code", "password_edit");
+    }
+
+    // 조인
+    @RequestMapping("/index/joinConfirm")
+    public ModelAndView joinConfirm() {
+        return new ModelAndView("/userpage/pages/mypage/join/join_confirm")
+                .addObject("code", "join_confirm");
+    }
+    @RequestMapping("/index/joinForm")
+    public ModelAndView joinForm() {
+        return new ModelAndView("/userpage/pages/mypage/join/joinForm")
+                .addObject("code", "joinForm");
+    }
+    @RequestMapping("/index/joinGate")
+    public ModelAndView joinGate() {
+        return new ModelAndView("/userpage/pages/mypage/join/joinGate")
+                .addObject("code", "joinGate");
+    }
+    @RequestMapping("/index/termsAgree")
+    public ModelAndView termsAgree() {
+        return new ModelAndView("/userpage/pages/mypage/join/termsAgree")
+                .addObject("code", "termsAgree");
+    }
+    // 아이프레임 joinForm_popup
+    @RequestMapping("/index/termsAgree/popup1")
+    public ModelAndView popup1() {
+        return new ModelAndView("/userpage/pages/mypage/join/joinForm_popup1")
+                .addObject("code", "joinForm_popup1");
+    }
+    @RequestMapping("/index/termsAgree/popup2")
+    public ModelAndView popup2() {
+        return new ModelAndView("/userpage/pages/mypage/join/joinForm_popup2")
+                .addObject("code", "joinForm_popup2");
+    }
+    @RequestMapping("/index/termsAgree/popup3")
+    public ModelAndView popup3() {
+        return new ModelAndView("/userpage/pages/mypage/join/joinForm_popup3")
+                .addObject("code", "joinForm_popup3");
+    }
+    //-------------------------------------------------------------------------------------------
+
+    // 최저가 항공권
+    @RequestMapping("/reservation/lcc")
+    public ModelAndView nowMoment() {
+        return new ModelAndView("/userpage/pages/reservation/lccpage/lcc")
+                .addObject("code", "pointList");
+    }
+    // 운항정보
+    @RequestMapping("/reservation/flight")
+    public ModelAndView flight() {
+        return new ModelAndView("/userpage/pages/reservation/flight_info/flight")
+                .addObject("code", "flight");
+    }
+    // 운항정보 결과
+    @RequestMapping("/reservation/iframe")
+    public ModelAndView iframe() {
+        return new ModelAndView("/userpage/pages/reservation/flight_info/iframe")
+                .addObject("code", "iframe");
+    }
+    // 운임안내
+    @RequestMapping("/reservation/fareRule")
+    public ModelAndView fareRule() {
+        return new ModelAndView("/userpage/pages/reservation/freight_info/fareRule")
+                .addObject("code", "fareRule");
+    }
+    // 운임안내 -> 법적고지문
+    @RequestMapping("/reservation/fareRule/eTicket")
+    public ModelAndView eTicket() {
+        return new ModelAndView("/userpage/pages/reservation/freight_info/eTicket")
+                .addObject("code", "eTicket");
+    }
+    // 할인안내
+    @RequestMapping("/reservation/discount")
+    public ModelAndView discount() {
+        return new ModelAndView("/userpage/pages/reservation/discount_info/discount")
+                .addObject("code", "discount");
+    }
+    //-------------------------------------------------------------------------------------------
 
 
 
 
 
+    //-------------------------------------------------------------------------------------------
+
+    // 나비포인트
+    @RequestMapping("/point")
+    public ModelAndView point() {
+        return new ModelAndView("/userpage/pages/nabipoint/pointList")
+                .addObject("code", "pointList");
+    }
+    //-------------------------------------------------------------------------------------------
+    
+    // 부가서비스 액티비티
+    @RequestMapping("/optional/activity")
+    public ModelAndView optional() {
+        return new ModelAndView("/userpage/pages/optional/activity/activity")
+                .addObject("code", "activity");
+    }
+    // 부가서비스 호텔
+    @RequestMapping("/optional/hotel")
+    public ModelAndView hotel() {
+        return new ModelAndView("/userpage/pages/optional/hotel/hotel")
+                .addObject("code", "hotel");
+    }
+    // 부가서비스 여행안심서비스
+    @RequestMapping("/optional/insurance")
+    public ModelAndView insurance() {
+        return new ModelAndView("/userpage/pages/optional/insurance/insurance")
+                .addObject("code", "insurance");
+    }
+    // 부가서비스 cubb 해외여행보험
+    @RequestMapping("/optional/insurance2")
+    public ModelAndView insurance2() {
+        return new ModelAndView("/userpage/pages/optional/insurance/chubb")
+                .addObject("code", "chubb");
+    }
+    // 부가서비스 Assistcard여행토탈케어
+    @RequestMapping("/optional/insurance3")
+    public ModelAndView insurance3() {
+        return new ModelAndView("/userpage/pages/optional/insurance/insurance3")
+                .addObject("code", "insurance3");
+    }
+    // 부가서비스 jinipass
+    @RequestMapping("/optional/jinipass")
+    public ModelAndView jinipass() {
+        return new ModelAndView("/userpage/pages/optional/jinipass/jinipass")
+                .addObject("code", "jinipass");
+    }
+    // 부가서비스 차량서비스
+    @RequestMapping("/optional/rentcar")
+    public ModelAndView rentcar() {
+        return new ModelAndView("/userpage/pages/optional/rentcar/rentcar")
+                .addObject("code", "rentcar");
+    }
+    // 프로모션 카드
+    @RequestMapping("/promotion/card_exchange")
+    public ModelAndView card() {
+        return new ModelAndView("/userpage/pages/promotion/card_exchange/associatedCard")
+                .addObject("code", "associatedCard");
+    }
+    // 프로모션 이벤트
+    @RequestMapping("/promotion/event")
+    public ModelAndView event() {
+        return new ModelAndView("/userpage/pages/promotion/event/nowLeave")
+                .addObject("code", "nowLeave");
+    }
+    // 프로모션 지니쿠폰
+    @RequestMapping("/promotion/coupon")
+    public ModelAndView jinicoupon() {
+        return new ModelAndView("/userpage/pages/promotion/jinicoupon/jiniCoupon")
+                .addObject("code", "jinicoupon");
+    }
 
 
 
 
+    //-------------------------------------------------------------------------------------------
+    // admin_index
     @RequestMapping("/admin_index")
     public ModelAndView adminIndex() {
         return new ModelAndView("/adminpage/pages/admin_index")
@@ -84,7 +300,7 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/schedule/aircraft_list")
                 .addObject("code", "aircraft_list");
     }
-
+    //-------------------------------------------------------------------------------------------
 
     // reservation
     // 운항별 예약자 조회
@@ -123,7 +339,7 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/reservation/rs_user")
                 .addObject("code", "rs_user");
     }
-
+    //-------------------------------------------------------------------------------------------
 
     // 고객관리
     // 고객관리 조회
@@ -144,7 +360,7 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/cm/cm_modify")
                 .addObject("code", "cm_modify");
     }
-
+    //-------------------------------------------------------------------------------------------
 
     // 유실물
     // 유실물 조회
@@ -159,7 +375,7 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/item/itemadd")
                 .addObject("code", "itemadd");
     }
-
+    //-------------------------------------------------------------------------------------------
 
     // 공지사항
     @RequestMapping("/admin/notice")
@@ -177,7 +393,7 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/notice/nt_view")
                 .addObject("code", "ntView");
     }
-
+    //-------------------------------------------------------------------------------------------
 
     /* 이벤트 */
     @RequestMapping("/admin/evn_ing")
@@ -210,7 +426,7 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/event/evn_write")
                 .addObject("code", "evn_write");
     }
-
+    //-------------------------------------------------------------------------------------------
 
     /* 포인트 */
     @RequestMapping("/admin/usepointlist")
@@ -223,7 +439,7 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/point/pointadd")
                 .addObject("code", "pointadd");
     }
-
+    //-------------------------------------------------------------------------------------------
 
     // faq 메인
     @RequestMapping("/admin/faq_main")
@@ -292,7 +508,7 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/notice/nt_write")
                 .addObject("code", "nt_write");
     }
-
+    //-------------------------------------------------------------------------------------------
 
     /* 지니 쿠폰 */
     @RequestMapping("/admin/couponadd")
@@ -305,7 +521,7 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/coupon/usecouponlist")
                 .addObject("code", "useCouponList");
     }
-
+    //-------------------------------------------------------------------------------------------
 
     /* 지니 매거진 */
     @RequestMapping("/admin/genielist")

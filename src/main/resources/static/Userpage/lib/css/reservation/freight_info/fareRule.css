@@ -147,7 +147,7 @@ body{
 }
 #header .login > li .lang_img{
     display: inline-block;
-    background: url(../index_img/down.png) no-repeat right;
+    background: url(/userpage/lib/img/down.png) no-repeat right;
     background-size: 13px;
     width: 13px;
     height: 13px;
@@ -413,28 +413,28 @@ body{
     background-color: rgb(248, 248, 248);
 }
 .Sicon .twit {
-    background-image: url('../index_img/twitter.png');
+    background-image: url('/userpage/lib/img/twitter.png');
     background-size: 70%;    opacity: 0.7;
     margin-left: 10px
     !important;
 }
 .Sicon .faceb {
-    background-image: url('../index_img/face.png');
+    background-image: url('/userpage/lib/img/face.png');
     background-size: 50%;    opacity: 0.8;
     margin-left: 4px
 }
 .Sicon .youtub {
-    background-image: url('../index_img/youtube.png');
+    background-image: url('/userpage/lib/img/youtube.png');
     background-size: 45%;   opacity: 0.6;
     margin-left: 4px
 }
 .Sicon .insta {
-    background-image: url('../index_img/insta.png');
+    background-image: url('/userpage/lib/img/insta.png');
     background-size: 60%;    opacity: 0.8;
     margin-left: 4px
 }
 .Sicon .blog {
-    background-image: url('../index_img/blog.PNG');
+    background-image: url('/userpage/lib/img/blog.PNG');
     background-size: 140%;
     margin-left: 4px
 }
@@ -454,7 +454,7 @@ body{
 }
 .sit {
     margin-left: 10px;
-    background-image: url('../index_img/site.PNG');
+    background-image: url('/userpage/lib/img/site.PNG');
     background-size: 140%;
 }
 .Aicon img {
@@ -539,7 +539,7 @@ body{
     height: 45px;
     padding: 13px;
     left: -15px;
-    background-image: url('../index_img/btn_srch.gif');
+    background-image: url('/userpage/lib/img/btn_srch.gif');
     background-position: center;
     padding-top: 20px;
     border: none;
@@ -677,16 +677,16 @@ ul li{
     display: block;
     width: 130px;
     height: 100px;
-    background:url(../index_img/person.png) no-repeat;
+    background:url(/userpage/lib/img/person.png) no-repeat;
 }
 #fareRules2 .basic_box ul li.second:before{
-    background:url(../index_img/bagage.png) no-repeat;
+    background:url(/userpage/lib/img/bagage.png) no-repeat;
 }
 #fareRules2 .basic_box ul li.thrid:before{
-    background:url(../index_img/count.png) no-repeat;
+    background:url(/userpage/lib/img/count.png) no-repeat;
 }
 #fareRules2 .basic_box ul li.fourth:before{
-    background:url(../index_img/bagage.png) no-repeat;
+    background:url(/userpage/lib/img/service.png) no-repeat;
 }
 
 #fareRules2 .bundle_wrap{
@@ -835,7 +835,7 @@ margin-bottom: 50px;
 .midWrap > h1 > .close{
     display: flex;
     position: absolute;
-    background-image: url(/img/btn_close3.png);
+    background-image: url(/userpage/lib/img/btn_close3.png);
     width: 26px;
     height: 26px;
     left: 950px;
