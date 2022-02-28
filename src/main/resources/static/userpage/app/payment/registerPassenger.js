@@ -121,8 +121,8 @@ $(function () {
 
     /*하단 총액 모달창 */
 
-    $("#info_table_wrap").css("overflow", "hidden");
-    $("#info_table_wrap").css("overflow-x", "none");
+    $(".info_table_wrap").css("overflow", "hidden");
+    $(".info_table_wrap").css("overflow-x", "none");
 
     $(".img").on('click', () => {
         $(".img").css("display", "none");
@@ -153,15 +153,15 @@ $(function () {
     })
 
     $(".plus_1").on('click', () => {
-        $("#info_table_wrap").css("overflow", "scroll");
-        $("#info_table_wrap").css("overflow-x", "hidden");
-        $("#info_table_wrap").animate({ scrollTop: 300 }, 600);
+        $(".info_table_wrap").css("overflow", "scroll");
+        $(".info_table_wrap").css("overflow-x", "hidden");
+        $(".info_table_wrap").animate({ scrollTop: 300 }, 600);
         $(".plus_1").css("display", "none");
         $(".minus_1").css("display", "inline-block");
     })
     $(".minus_1").on('click', () => {
-        $("#info_table_wrap").css("overflow", "hidden");
-        $("#info_table_wrap").css("overflow-x", "none");
+        $(".info_table_wrap").css("overflow", "hidden");
+        $(".info_table_wrap").css("overflow-x", "none");
         $(".plus_1").css("display", "inline-block");
         $(".minus_1").css("display", "none");
     })

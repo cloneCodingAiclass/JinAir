@@ -59,7 +59,6 @@ a:visited{color:#444;}
     background-color: #BDD600;
 }
 body{
-    height: 1; 
     color: #444;
     white-space: normal; 
     word-wrap: break-word; 
@@ -148,7 +147,7 @@ body{
 }
 #header .login > li .lang_img{
     display: inline-block;
-    background: url("../img/down.png") no-repeat right;
+    background: url("/userpage/lib/img/down.png") no-repeat right;
     background-size: 13px;
     width: 13px;
     height: 13px;
@@ -380,7 +379,7 @@ body{
     top: 15px;
     width: 25px;
     height: 25px;
-    background-image: url("../img/down.png");
+    background-image: url("/userpage/lib/img/down.png");
     background-size: 130%;
     background-repeat: no-repeat;
     background-position: center;
@@ -388,7 +387,7 @@ body{
 
 .trip_info > .schedule > .arrow_up_img {
     display: none;
-    background-image: url("../img/up.png");
+    background-image: url("/userpage/lib/img/up.png");
 }
 
 .trip_info > .trip_area, .trip_info2 > .trip_area {
@@ -397,7 +396,7 @@ body{
 
 .trip_info > .trip_area .arr_area::before, .trip_info2 > .trip_area .arr_area::before {
     content:" ";
-    background-image: url("../img/right_arrow.PNG");
+    background-image: url("/userpage/lib/img/right_arrow.PNG");
     background-size:35px 14px;
     background-repeat: no-repeat;
     width: 35px;
@@ -645,7 +644,7 @@ body{
     height: 18px;
     margin: 0px 10px 0 0;
     content: " ";
-    background: url("../img/section_check.png");
+    background: url("/userpage/lib/img/section_check.png");
 }
 
 .service_title1 a.checkBox_2::before {
@@ -654,7 +653,7 @@ body{
     height: 18px;
     margin: 2px 10px 0 0;
     content: " ";
-    background: url("../img/section_no_check.png");
+    background: url("/userpage/lib/img/section_no_check.png");
     background-size: 100%;
 }
 /*서비스 타이틀 끝*/
@@ -728,7 +727,7 @@ body{
     font-size: 25px;
     top: 5px;
     right: 0px;
-    border: 0.5px soli rgba(168, 168, 168, 0.5);
+    border: 0.5px solid rgba(168, 168, 168, 0.5);
     color: rgba(168, 165, 165, 0.5);
     font-weight: 400;
     z-index: 1;
@@ -858,7 +857,7 @@ body{
     background: #f86480; 
 } */
 .SSC:checked + .seat_sel {
-    background: url("../img/check.png");
+    background: url("/userpage/lib/img/check.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -887,7 +886,7 @@ body{
 .SSC:checked + .box7 {
     padding: 0px;
     font-size: 40px;
-    background-image: url('../img/none_select.png');
+    background-image: url('/userpage/lib/img/none_select.png');
     background-repeat: no-repeat;
     background-size: 130%;
     background-position: center;
@@ -895,7 +894,7 @@ body{
 }
 
 .SSC2:checked + .seat_sel {
-    background: url("../img/check.png");
+    background: url("/userpage/lib/img/check.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -924,7 +923,7 @@ body{
 .SSC2:checked + .box7 {
     padding: 0px;
     font-size: 40px;
-    background-image: url('../img/none_select.png');
+    background-image: url('/userpage/lib/img/none_select.png');
     background-repeat: no-repeat;
     background-size: 130%;
     background-position: center;
@@ -1043,7 +1042,7 @@ body{
 .service_content .box7 {
     padding: 0px;
     font-size: 40px;
-    background-image: url('../img/none_select.png');
+    background-image: url('/userpage/lib/img/none_select.png');
     background-repeat: no-repeat;
     background-size: 130%;
     background-position: center;
@@ -1132,7 +1131,7 @@ body{
 .select_seat_wrap .select_seat {
     width: 470px;
     height: 100%;
-    background: url('../img/select_seat_back.png');
+    background: url('/userpage/lib/img/select_seat_back.png');
     background-size: 100%;
     padding: 40px;
     padding-top: 30px;
@@ -1231,7 +1230,7 @@ body{
     top: 80px;
     width: 105px;
     height: 400px;
-    background: url('../img/seat_map.png');
+    background: url('/userpage/lib/img/seat_map.png');
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -1400,7 +1399,6 @@ body{
     padding: 10px;
     font-weight: bold;
     letter-spacing: 1px;
-    border-radius: none;
 }
 
 .service_content_wrap2 .service_content .passenger_info .section1 {
@@ -2058,7 +2056,7 @@ body{
 }
 
 .modal_free_wrap .modal_content_wrap .modal_content2 ul {
-    margin-top: 25px 0;
+    margin-top: 25px;
 }
 .modal_free_wrap .modal_content_wrap .modal_content2 ul li {
     padding: 3px;
@@ -2101,7 +2099,6 @@ body{
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     left: 0; right: 0; top: 0; bottom: 0;
-    display: none;
     justify-content: center;
     align-items: center;
     z-index: 800;
@@ -2110,7 +2107,6 @@ body{
 
 #modal_notice_wrap .modal_notice_wrap {
     font-weight: 600;
-    margin: 0 auto;
     width: 40%;
     height: 800px;
     background-color: #fff;
@@ -2249,15 +2245,13 @@ body{
     background: rgba(0, 0, 0, 0.5);
     left: 0; right: 0; top: 0; bottom: 0;
     display: none;
-    justify-content: center;
-    align-items: center;
     z-index: 800;
 }
 
 #modal_insurance_info_wrap .modal_insurance_info_wrap {
     position: absolute;
-    top: 150px;
-    left: 26.8%;
+    top: 50px;
+    left: 400px;
     width: 1160px;
     height: 800px;
 }
@@ -2279,7 +2273,7 @@ body{
 #modal_insurance_info_wrap .modal_insurance_info_wrap .title .close {
     position: absolute;
     right: 20px;
-    top: 0px;
+    top: 20px;
     width: 30px;
 }
 
@@ -2398,7 +2392,7 @@ body{
     height: 25px;
     margin: 0px 0 0 10px;
     content: " ";
-    background: url("../img/ico_ins.png");
+    background: url("/userpage/lib/img/ico_ins.png");
     background-size: 100%;
 }
 
@@ -2483,7 +2477,10 @@ table .pointer {
 }
 
 #modal_agreement_wrap .modal_agreement_wrap {
+    position: absolute;
     width: 58%;
+    top: 50px;
+    left: 400px;
     height: 800px;
     background-color: #fff;
 }
@@ -2757,7 +2754,6 @@ h2 {
     width: 200px;
     font-size: 14px;
     padding: 15px 25px;
-    margin-left: 15px;
     border: 1px solid #BDD600;
     background-color: #fff;
     margin-left: 60px;
@@ -2774,7 +2770,7 @@ h2 {
 }
 
 #modal_service_app_wrap .modal_service_app_wrap .modal_contents table .img_seat {
-    background: url(../img/menu1.png);
+    background: url(/userpage/lib/img/menu1.png);
     background-size: 90%;
     background-position: center;
     background-repeat: no-repeat;
@@ -2782,7 +2778,7 @@ h2 {
 }
 
 #modal_service_app_wrap .modal_service_app_wrap .modal_contents table .img_bagg {
-    background: url(../img/menu2.PNG);
+    background: url(/userpage/lib/img/menu2.PNG);
     background-size: 80%;
     background-position: center;
     background-repeat: no-repeat;
@@ -2790,7 +2786,7 @@ h2 {
 }
 
 #modal_service_app_wrap .modal_service_app_wrap .modal_contents table .img_ins {
-    background: url(../img/menu3.png);
+    background: url(/userpage/lib/img/menu3.png);
     background-size: 80%;
     background-position: center;
     background-repeat: no-repeat;
@@ -2906,7 +2902,6 @@ label.checkbox_wrap {
 
 #addmodal_autoCheck_noti .addmodal_autoCheck_noti .modal_contents {
     padding: 20px;
-    font-weight: 600;
     width: 100%;
     height: 570px;
     font-weight: 400;
@@ -2999,15 +2994,15 @@ label.checkbox_wrap {
 
 
 .fix_bott .seat_img {
-    background: url('../img/menu1.png');
+    background: url('/userpage/lib/img/menu1.png');
     background-size: 80%;
 } 
 .fix_bott .baggage_img {
-    background: url('../img/menu2.png');
+    background: url('/userpage/lib/img/menu2.png');
     background-size: 80%;
 } 
 .fix_bott .insurance_img {
-    background: url('../img/menu3.png');
+    background: url('/userpage/lib/img/menu3.png');
     background-size: 70%;
 } 
 
@@ -3038,7 +3033,7 @@ label.checkbox_wrap {
 }
 
 .fix_bott table td.img {
-    background-image: url("../img/up.png");
+    background-image: url("/userpage/lib/img/up.png");
     background-repeat: no-repeat;
     background-size: 80%;
     background-position: center;
@@ -3047,7 +3042,7 @@ label.checkbox_wrap {
 }
 
 .fix_bott table td.img2 {
-    background-image: url("../img/down.png");
+    background-image: url("/userpage/lib/img/down.png");
     background-repeat: no-repeat;
     background-size: 80%;
     background-position: center;
@@ -3147,7 +3142,7 @@ label.checkbox_wrap {
 
 .jour_wrap h2, .jour_wrap .flight{
     display: inline;
-    font-weight: 400px;
+    font-weight: 400;
 }
 
 .jour_wrap .jour_info_wrap{
@@ -3191,11 +3186,11 @@ label.checkbox_wrap {
     margin-right: 60px;
 }
 
-#info_table_wrap {
+.info_table_wrap {
     margin-top: 20px;
     width: 500px;
     height: 240px;
-    overflow: none;
+    overflow: hidden;
     background-color: rgb(248, 248, 248);
 }
 
@@ -3402,9 +3397,9 @@ td.cur::before {
 .detD1 {
     width: 100%;
     padding: 0px;
-    background-image: url("../img/det.PNG");
+    background-image: url("/userpage/lib/img/det.PNG");
     background-size: 100%;
-    background-repeat: none;
+    background-repeat: no-repeat;
     background-color: rgb(248, 248, 248);
     display: none;
 }
@@ -3412,9 +3407,9 @@ td.cur::before {
 .detD2 {
     width: 100%;
     padding: 0px;
-    background-image: url("../img/det.PNG");
+    background-image: url("/userpage/lib/img/det.PNG");
     background-size: 100%;
-    background-repeat: none;
+    background-repeat: no-repeat;
     background-color: rgb(248, 248, 248);
     display: none;
 }
@@ -3459,7 +3454,7 @@ td.cur::before {
     justify-content: space-between;
     align-items: flex-start;
     word-break: keep-all;
-    white-space: wrap;
+    white-space: nowrap;
 }
 .men_tit {
     font-size: 16px;
@@ -3467,8 +3462,7 @@ td.cur::before {
     width: 70px;
     height: 20px;
     padding: 5px;
-    padding-left: 5px
-    !important;
+    padding-left: 5px !important;
     white-space: nowrap;
     margin-right: 87px;
 }
@@ -3544,28 +3538,28 @@ td.cur::before {
     background-color: rgb(248, 248, 248);
 }
 .Sicon .twit {
-    background-image: url('../index_img/twitter.png');
+    background-image: url('/userpage/lib/img/twitter.png');
     background-size: 70%;    opacity: 0.7;
     margin-left: 10px
     !important;
 }
 .Sicon .faceb {
-    background-image: url('../index_img/face.png');
+    background-image: url('/userpage/lib/img/face.png');
     background-size: 50%;    opacity: 0.8;
     margin-left: 4px
 }
 .Sicon .youtub {
-    background-image: url('../index_img/youtube.png');
+    background-image: url('/userpage/lib/img/youtube.png');
     background-size: 45%;   opacity: 0.6;
     margin-left: 4px
 }
 .Sicon .insta {
-    background-image: url('../index_img/insta.png');
+    background-image: url('/userpage/lib/img/insta.png');
     background-size: 60%;    opacity: 0.8;
     margin-left: 4px
 }
 .Sicon .blog {
-    background-image: url('../index_img/blog.PNG');
+    background-image: url('/userpage/lib/img/blog.PNG');
     background-size: 140%;
     margin-left: 4px
 }
@@ -3585,7 +3579,7 @@ td.cur::before {
 }
 .sit {
     margin-left: 10px;
-    background-image: url('../index_img/site.PNG');
+    background-image: url('/userpage/lib/img/site.PNG');
     background-size: 140%;
 }
 .Aicon img {
@@ -3670,7 +3664,7 @@ td.cur::before {
     height: 45px;
     padding: 13px;
     left: -15px;
-    background-image: url('../index_img/btn_srch.gif');
+    background-image: url('/userpage/lib/img/btn_srch.gif');
     background-position: center;
     padding-top: 20px;
     border: none;
@@ -3686,7 +3680,7 @@ td.cur::before {
     position: fixed;
     background: rgba(0, 0, 0, 0.5);
     left: 0; right: 0; top: 0; bottom: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -3738,7 +3732,7 @@ td.cur::before {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: url(../img/ico_radio.png) no-repeat 0 0;
+    background: url(/userpage/lib/img/ico_radio.png) no-repeat 0 0;
 }
 .edit_jour_wrap .radio_wrap input[type="radio"]:checked {
     background-position-y: 100%;
@@ -3787,7 +3781,7 @@ td.cur::before {
     padding: 20px;
     font-weight: bold;
     padding-right: 30px;
-    background: url(../img/down2.png) no-repeat;
+    background: url(/userpage/lib/img/down2.png) no-repeat;
     background-size: 10%;
     background-position: 95% 45%;
 }
@@ -4052,7 +4046,6 @@ td.cur::before {
 .arrive_layerbtn span,
 .arrive_layerbtn2 span {
     font-weight: bold;
-    line-height: 2;
     line-height: 3;
 }
 .arrive_layer{
@@ -4136,7 +4129,6 @@ td.cur::before {
 .go_date_layerbtn span,
 .go_date_layerbtn2 span {
     font-weight: bold;
-    line-height: 2;
     line-height: 3;
 }
 
@@ -4149,7 +4141,6 @@ td.cur::before {
 }
 .come_date_layerbtn span {
     font-weight: bold;
-    line-height: 2;
     line-height: 3;
 }
 
@@ -4183,7 +4174,7 @@ td.cur::before {
     width: 100%;
     text-align: center;
     padding-right: 30px;
-    background: url(../img/down2.png) no-repeat;
+    background: url(/userpage/lib/img/down2.png) no-repeat;
     background-size: 10%;
     background-position: 95% 45%;
 }
@@ -4196,7 +4187,7 @@ td.cur::before {
 .go_date_select_opt2.on {
     width: 100%;
     text-align: center;
-    background: url(../index_img/up.png) no-repeat;
+    background: url(/userpage/lib/img/up.png) no-repeat;
     background-size: 10%;
     background-position: 95% 45%;
 }
@@ -4219,7 +4210,7 @@ td.cur::before {
     height: 23px;
     margin: -4px 16px 0 -8px;
     vertical-align: middle;
-    background: url(../img/ico_submit_btn.png) no-repeat 0 0;
+    background: url(/userpage/lib/img/ico_submit_btn.png) no-repeat 0 0;
 }
 
 /* 예약 다음 버튼 */
@@ -4257,7 +4248,6 @@ td.cur::before {
     right: 0;
     top: 0;
     bottom: 0;
-    display: flex;
     justify-content: center;
     display: none;
     padding: 20px 0 0 0;
@@ -4270,7 +4260,6 @@ td.cur::before {
     right: 0;
     top: 0;
     bottom: 0;
-    display: flex;
     justify-content: center;
     display: none;
     padding: 20px 0 0 0;
@@ -4319,7 +4308,7 @@ td.cur::before {
     position: relative;
     bottom: 20px;
     left: 450px;
-    background: url(../img/down.png) no-repeat;
+    background: url(/userpage/lib/img/down.png) no-repeat;
     background-size: 15%;
     background-position: 95% 10%;
 }

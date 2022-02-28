@@ -1130,7 +1130,7 @@ td > ul > li::before {
   background-color: #bdd600;
 }
 
-.pay_wrap #checkbox {
+.pay_wrap .checkbox {
   width: 20px;
   height: 20px;
   margin-right: 8px;
@@ -1499,7 +1499,7 @@ td > ul > li::before {
   background-color: #bdd600;
 }
 
-#checkBox {
+.checkBox {
   width: 15px;
   height: 15px;
   margin-right: 8px;
