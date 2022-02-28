@@ -9,6 +9,39 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/pages")
 public class PageController {
 
+    // 사용자 인덱스
+    @RequestMapping("/index")
+    public ModelAndView index() {
+        return new ModelAndView("/userpage/pages/index/index")
+                .addObject("code", "index");
+    }
+    // 왕복달력
+    @RequestMapping("/index/cal")
+    public ModelAndView Cal() {
+        return new ModelAndView("/userpage/pages/cal/cal")
+                .addObject("code", "cal");
+    }
+    // 다구간달력
+    @RequestMapping("/index/multical")
+    public ModelAndView multiCal() {
+        return new ModelAndView("/userpage/pages/cal/multical")
+                .addObject("code", "multical");
+    }
+    // 편도달력
+    @RequestMapping("/index/onewaycal")
+    public ModelAndView oneWayCal() {
+        return new ModelAndView("/userpage/pages/cal/onewaycal")
+                .addObject("code", "onewaycal");
+    }
+
+
+
+
+
+
+
+
+
     @RequestMapping("/admin_index")
     public ModelAndView adminIndex() {
         return new ModelAndView("/adminpage/pages/admin_index")
