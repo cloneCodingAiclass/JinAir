@@ -546,12 +546,14 @@ $(window).scroll(function () {
   } else {
     $(".fix_trip_info").css("top", "0px");
     $("#header").css("position", "absolute");
+    $("#header nav").css("position", "absolute");
+
   }
 });
 /* 항공기 위험물 안내 모달창 */
 $(() => {
   $("#modal_restricted_items_wrap").hide();
-  $("#modal_restricted_items_wrap #modal_conf_ok").hide();
+  $("#modal_restricted_items_wrap .modal_conf_ok_wrap").hide();
 
   $(".checkbox_wrap #checkbox").on("click", () => {
     $("#modal_restricted_items_wrap").fadeIn();
@@ -573,13 +575,13 @@ $(() => {
       $(".checkbox_wrap #checkbox").prop("checked", true);
       $("body").css("overflow", "scroll");
     } else {
-      $("#modal_restricted_items_wrap #modal_conf_ok").fadeIn();
-      $(".modal_restricted_items_wrap #modal_conf_ok").fadeIn();
+      $("#modal_restricted_items_wrap .modal_conf_ok_wrap").fadeIn();
+      $(".modal_restricted_items_wrap .modal_conf_ok_wrap").fadeIn();
     }
   });
-  $("#modal_restricted_items_wrap #modal_conf_ok").on("click", () => {
-    $("#modal_restricted_items_wrap #modal_conf_ok").fadeOut();
-    $(".modal_restricted_items_wrap #modal_conf_ok").fadeOut();
+  $("#modal_restricted_items_wrap .modal_conf_ok_wrap").on("click", () => {
+    $("#modal_restricted_items_wrap .modal_conf_ok_wrap").fadeOut();
+    $(".modal_restricted_items_wrap .modal_conf_ok_wrap").fadeOut();
   });
 });
 /* 항공기 위험물 안내 모달창 끝*/
@@ -587,7 +589,7 @@ $(() => {
 /*운임 규정 안내 모달창 */
 $(() => {
   $("#modal_fare_rules").hide();
-  $("#modal_fare_rules #modal_conf_ok").hide();
+  $("#modal_fare_rules .modal_conf_ok_wrap").hide();
 
   /* 운송제한품목 체크 후 결제 이동*/
 
@@ -626,11 +628,11 @@ $(() => {
       $("#modal_fare_rules").fadeOut();
       $("body").css("overflow", "scroll");
     } else {
-      $("#modal_fare_rules > #modal_conf_ok").fadeIn();
+      $("#modal_fare_rules > .modal_conf_ok_wrap").fadeIn();
     }
   });
-  $("#modal_conf_ok .butt_conf").on("click", () => {
-    $("#modal_fare_rules #modal_conf_ok").fadeOut();
+  $(".modal_conf_ok_wrap .butt_conf").on("click", () => {
+    $("#modal_fare_rules .modal_conf_ok_wrap").fadeOut();
   });
 });
 
