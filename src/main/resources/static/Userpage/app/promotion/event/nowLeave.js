@@ -114,7 +114,6 @@ $(function () {
     })
 
 });
-
 $(() => {
     let thisSlide, autoPlayBtn, autoPlayState;
     let swiper = new Swiper(".mySwiper", {
