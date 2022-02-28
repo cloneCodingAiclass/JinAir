@@ -19,11 +19,11 @@
     bottom: 20px;
 }
 .result_top .result_top_left{
-    background: url(../img/left.png) no-repeat left;
+    background: url(/userpage/lib/img/left.png) no-repeat left;
     background-size: 30%;
 }
 .result_top .result_top_right{
-    background: url(../img/right.png) no-repeat right;
+    background: url(/userpage/lib/img/right_iframe.png) no-repeat right;
     background-size: 30%;
 }
 .result_wrapper > table{
