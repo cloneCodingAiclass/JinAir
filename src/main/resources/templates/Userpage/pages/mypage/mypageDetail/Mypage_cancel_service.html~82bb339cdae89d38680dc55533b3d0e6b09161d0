@@ -1,0 +1,133 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<div th:replace="userpage/fragment/head :: head"></div>
+    <link rel="stylesheet" href="/userpage/lib/css/mypage/Mypage_cancel_service.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/userpage/app/mypage/Mypage_cancel_service.js"></script>
+<body>
+    <ul class="skipnavi">
+        <!--책갈피 역할-->
+        <li><a href="#container">본문내용</a></li>
+    </ul>
+    <!--wrap-->
+    <div id="wrap">
+        <!--header-->
+        <div th:replace="userpage/fragment/menu :: menu"></div>
+        <!--header 끝-->
+        <!--container-->
+        <div id="container">
+            <div class="mypage_main">
+                <div class="mypage_menu">
+                    <p>마이<br>페이지</p>
+                    <ul>
+                        <li class="booking"><a href="Mypage_main.html">예약조회/변경/취소</a></li>
+                        <li class="mypoint"><a href="Mypage_point.html">나의 나비포인트</a></li>
+                        <li class="coupon"><a href="Mypage_coupons.html">나의 할인쿠폰</a></li>
+                        <li class="qna"><a href="Mypage_qna.html">나의 Q&A</a></li>
+                        <li class="edit"><a href="#">회원정보 수정</a></li>
+                    </ul>
+                </div>
+                <div class="menu_title">
+                    <p>부가서비스 취소</p>
+                </div>
+                <h2>취소할 부가서비스 선택</h2>
+                <div class="cancel_choice">
+                    <table>
+                        <thead>
+                            <th colspan="3">라승현</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>구간 1</th>
+                                <div>
+                                    <td>
+                                        <input type="checkbox">
+                                        <img src="/userpage/lib/img/chair.png">
+                                        <span>사전좌석지정 30C</span>
+                                    </td>
+                                    <td>KRW 5,000</td>
+                                </div>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="btn">
+                        <p class="confirm_btn cursor">확인</p>
+                        <p class="cancel_btn cursor">취소</p>
+                    </div>
+                </div>
+                <div class="refund_info">
+                    <div class="totalPrice_main">
+                        <div class="totalPrice_box">
+                            <span>기존 결제금액</span>
+                            <p>
+                                <span class="unit">현금/카드</span>
+                                <strong>KRW 5,000</strong>
+                            </p>
+                        </div>
+                        <div class="totalPrice_box">
+                            <span>환불 위약금 (환불 불가 금액)</span>
+                            <p>
+                                <span class="unit">현금/카드</span>
+                                <strong>0</strong>
+                            </p>
+                        </div>
+                        <div class="totalPrice_box">
+                            <span>최종 환불금액</span>
+                            <p>
+                                <span class="unit">현금/카드</span>
+                                <strong>KRW -5,000</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="final_btn">
+                    <p>위와 같이 환불을 진행하시겠습니까?</p>
+                    <div>
+                        <input type="submit" value="환불" class="final_cancel cursor">
+                        <input type="button" value="취소" class="cancel_btn cursor">
+                    </div>
+                    <div class="check_box">
+                    <input type="checkbox" id="confirm_check" class="confirm_check"><label for="confirm_check" class="confirm_text">* 동의 시 환불이 완료됩니다.</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--container 끝-->
+        <!-- 푸터-->
+        <div th:replace="userpage/fragment/footer :: footer"></div>
+        <!--푸터 끝-->
+    </div>
+    <!--wrap 끝-->
+    <!--퀵 메뉴-->
+    <!--퀵 메뉴 끝-->
+    <div class="modal">
+    </div>
+    <div class="pwcheck_modal">
+        <form action="#" method="post">
+            <div class="pwcheck_title">
+                <p>비밀번호 확인</p>
+            </div>
+            <div class="pwcheck_box">
+                <p>고객님의 개인정보를 소중하게 보호하려고 노력하고 있으며,<br>회원님의 동의 없이는 회원정보를 제공하지 않습니다.</p>
+                <p>비밀번호 입력 <input type="password"></p>
+                <div class="btn">
+                    <input type="button" class="btn_agree" value="확인" onclick="location.href='/UserPage/index/mypage/Mypage_edit.html'">
+                    <input type="button" class="btn_cancel" value="취소">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="false_modal">
+        <div class="false_modal_box">
+            <p>내용을 확인 후 동의하셔야 예약취소 및 환불신청이 완료됩니다.</p>
+            <div class="modal_btn">
+                <p class="confirm_btn cursor">확인</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

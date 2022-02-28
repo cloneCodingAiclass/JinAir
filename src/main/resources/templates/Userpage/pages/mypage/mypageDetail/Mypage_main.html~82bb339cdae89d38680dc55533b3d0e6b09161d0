@@ -1,0 +1,130 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<div th:replace="userpage/fragment/head :: head"></div>
+    <link rel="stylesheet" href="/userpage/lib/css/mypage/Mypage_main.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/userpage/app/mypage/Mypage_main.js"></script>
+<body>
+    <ul class="skipnavi">
+        <!--책갈피 역할-->
+        <li><a href="#container">본문내용</a></li>
+    </ul>
+    <!--wrap-->
+    <div id="wrap">
+        <!--header-->
+        <div th:replace="userpage/fragment/menu :: menu"></div>
+        <!--header 끝-->
+        <!--container-->
+        <div id="container">
+            <div class="mypage_main">
+                <div class="mypage_menu">
+                    <p>마이<br>페이지</p>
+                    <ul>
+                        <li class="booking"><a href="Mypage_main.html">예약조회/변경/취소</a></li>
+                        <li class="mypoint"><a href="Mypage_point.html">나의 나비포인트</a><div class="mypoint_sum"><span>0p</span></div></li>
+<li class="coupon"><a href="Mypage_coupons.html">나의 할인쿠폰</a><div class="mycoupon_sum"><span>0</span></div></li>
+                        <li class="qna"><a href="Mypage_qna.html">나의 Q&A</a></li>
+                        <li class="edit"><a href="#">회원정보 수정</a></li>
+                    </ul>
+                </div>
+                <div class="menu_title">
+                    <p>예약조회/변경/취소</p>
+                </div>
+                <div class="sub_menu_check">
+                    <ul>
+                        <li class="now_booking">예약조회</li>
+                        <li class="old_booking">지난예약</li>
+                    </ul>
+                </div>
+                <div class="booking_list">
+                    <div class="detailTbl">
+                        <p class="short">
+                            <strong>예약일</strong>
+                            <span class="cont">시간</span></p>
+                        <p class="short"><strong>예약번호</strong>
+                            <span class="cont" id="{{:pnrNumber}}">번호</span></p>
+                        <p class="short ctar">
+                            <strong>예약상태</strong>
+                            <span class="cont">진행중</span></p>
+                        <p class="long">
+                            <strong>여정<br><span class="tripType"></span></strong>
+                            <span class="cont line">
+                                <span class="tit">여정
+                                    <strong>LJ301</strong>
+                                </span>
+                                <span>
+                                    <strong>제주</strong>
+                                    <span id="bp{{:depSegment.pnrNumber}}{{:depSegment.flightSegmentGroupID}}">[출발] 2022-10-25(화) 06:05</span>
+                                </span>
+                                <span class="arrow">
+                                    <img src="../../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/index/index_img/right_arrow.PNG" alt="에서">
+                                </span>
+                                <span>
+                                    <strong>서울</strong>
+                                    <span id="op{{:depSegment.pnrNumber}}{{:depSegment.flightSegmentGroupID}}">[도착] 2022-10-25(화) 06:05</span>
+                                </span>
+                                <span id="st{{:depSegment.pnrNumber}}{{:depSegment.flightSegmentGroupID}}"
+                                    class="infoTxt"></span>
+                            </span>
+                        </p>
+                        <p class="long">
+                            <strong>탑승객수</strong>
+                            <span class="cont">1 명</span>
+                            <span class="btn">
+                                <a name="btnDetail" href="/UserPage/index/mypage/Mypage_getReservationDetail.html">상세조회</a>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="old_booking_list">
+                    <ul>
+                        <li>지난 항공권 예약 내역이 없습니다.</li>
+                    </ul>
+                </div>
+                <dir class="sub_text">
+                    <p>* 비회원/고객센터/여행사/외부채널 예약고객</p>
+                    <a herf="#">나의 예약</a>
+                </dir>
+            <div class="footer_info">
+                <div class="footer_text">
+                    <p>나비포인트 이용방법</p>
+                    <p class="subtext">1.항공기 탑승 후 30일 이내 진에어 홈페이지에서 포인트를 적립하세요.
+                    <p class="subtext">2.누적 포인트를 이용하여 국내선 보너스 항공권을 예약하세요.</p>
+                </div>
+                <div class="point_info">
+                    <a href="/pages/point">나비포인트 안내</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!--container 끝-->
+        <!-- 푸터-->
+        <div th:replace="userpage/fragment/footer :: footer"></div>
+        <!--푸터 끝-->
+    </div>
+    <!--wrap 끝-->
+    <!--퀵 메뉴-->
+    <!--퀵 메뉴 끝-->
+    <div class="modal">
+    </div>
+    <div class="pwcheck_modal">
+        <form action="#" method="post">
+        <div class="pwcheck_title">
+            <p>비밀번호 확인</p>
+        </div>
+        <div class="pwcheck_box">
+            <p>고객님의 개인정보를 소중하게 보호하려고 노력하고 있으며,<br>회원님의 동의 없이는 회원정보를 제공하지 않습니다.</p>
+            <p>비밀번호 입력 <input type="password"></p>
+            <div class="btn">
+                <input type="button" class="btn_agree" value="확인" onclick="location.href='/UserPage/index/mypage/Mypage_edit.html'">
+                <input type="button" class="btn_cancel" value="취소">
+            </div>
+        </div>
+        </form>
+    </div>
+</body>
+</html>
+
