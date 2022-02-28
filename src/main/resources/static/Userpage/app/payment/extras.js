@@ -933,15 +933,15 @@ $(function () {
 
 
   $(".plus_1").on('click', () => {
-    $("#info_table_wrap").css("overflow", "scroll");
-    $("#info_table_wrap").css("overflow-x", "hidden");
-    $("#info_table_wrap").animate({ scrollTop: 300 }, 600);
+    $(".info_table_wrap").css("overflow", "scroll");
+    $(".info_table_wrap").css("overflow-x", "hidden");
+    $(".info_table_wrap").animate({ scrollTop: 300 }, 600);
     $(".plus_1").css("display", "none");
     $(".minus_1").css("display", "inline-block");
   })
   $(".minus_1").on('click', () => {
-    $("#info_table_wrap").css("overflow", "hidden");
-    $("#info_table_wrap").css("overflow-x", "none");
+    $(".info_table_wrap").css("overflow", "hidden");
+    $(".info_table_wrap").css("overflow-x", "none");
     $(".plus_1").css("display", "inline-block");
     $(".minus_1").css("display", "none");
   })
@@ -949,7 +949,6 @@ $(function () {
 
   $(window).scroll(function () {
     let y = $(".fix_bott_wrap").offset().top - 650;
-    let h = $(document).scrollTop();
     if (window.pageYOffset <= y) {
       $(".fix_bott").css("position", "fixed");
       $(".fix_bott").css("bottom", "0px");

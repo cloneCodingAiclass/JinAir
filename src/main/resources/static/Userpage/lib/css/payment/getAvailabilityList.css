@@ -72,7 +72,6 @@ a:visited {
   background-color: #bdd600;
 }
 body {
-  height: 1;
   color: #444;
   white-space: normal;
   word-wrap: break-word;
@@ -161,7 +160,7 @@ body {
 }
 #header .login > li .lang_img {
   display: inline-block;
-  background: url(./img/down.png) no-repeat right;
+  background: url(/userpage/lib/img/down.png) no-repeat right;
   background-size: 13px;
   width: 13px;
   height: 13px;
@@ -379,7 +378,7 @@ body {
   top: 15px;
   width: 25px;
   height: 25px;
-  background-image: url("../img/down.png");
+  background-image: url("/userpage/lib/img/down.png");
   background-size: 130%;
   background-repeat: no-repeat;
   background-position: center;
@@ -387,7 +386,7 @@ body {
 
 .trip_info > .schedule > .arrow_up_img {
   display: none;
-  background-image: url("../img/up.png");
+  background-image: url("/userpage/lib/img/up.png");
 }
 
 .trip_info > .trip_area,
@@ -398,7 +397,7 @@ body {
 .trip_info > .trip_area .arr_area::before,
 .trip_info2 > .trip_area .arr_area::before {
   content: " ";
-  background-image: url("../img/right_arrow.PNG");
+  background-image: url("/userpage/lib/img/right_arrow.PNG");
   background-size: 35px 14px;
   background-repeat: no-repeat;
   width: 35px;
@@ -516,7 +515,7 @@ body {
 }
 
 #cul {
-  background: url("../img/down.png");
+  background: url("/userpage/lib/img/down.png");
   background-repeat: no-repeat;
   background-size: 20%;
   background-position: 95% 40%;
@@ -552,7 +551,7 @@ body {
 
 .air_list_wrap .arr_area::before {
   content: " ";
-  background-image: url("../img/right_arrow.PNG");
+  background-image: url("/userpage/lib/img/right_arrow.PNG");
   background-size: 40px 16px;
   background-repeat: no-repeat;
   width: 45px;
@@ -884,7 +883,7 @@ div.none_seat p {
 }
 
 .fix_bott table td.img {
-  background-image: url("../img/up.png");
+  background-image: url("/userpage/lib/img/up.png");
   background-repeat: no-repeat;
   background-size: 80%;
   background-position: center;
@@ -893,7 +892,7 @@ div.none_seat p {
 }
 
 .fix_bott table td.img2 {
-  background-image: url("../img/down.png");
+  background-image: url("/userpage/lib/img/down.png");
   background-repeat: no-repeat;
   background-size: 80%;
   background-position: center;
@@ -990,7 +989,7 @@ div.none_seat p {
 
 .jour_wrap h2, .jour_wrap .flight{
   display: inline;
-  font-weight: 400px;
+  font-weight: 400;
 }
 
 .jour_wrap .jour_info_wrap{
@@ -1033,11 +1032,11 @@ div.none_seat p {
   margin-right: 60px;
 }
 
-#info_table_wrap {
+.info_table_wrap {
   margin-top: 0px;
   width: 500px;
   height: 240px;
-  overflow: none;
+  overflow: hidden;
   background-color: rgb(248, 248, 248);
 }
 
@@ -1251,7 +1250,7 @@ td.cur::before {
   width: 100%;
   height: 60px;
   padding: 0px;
-  background-image: url("../img/det.PNG");
+  background-image: url("/userpage/lib/img/det.PNG");
   background-size: 100%;
   background-repeat: none;
   background-color: rgb(248, 248, 248);
@@ -1262,9 +1261,9 @@ td.cur::before {
   width: 100%;
   height: 60px;
   padding: 0px;
-  background-image: url("../img/det.PNG");
+  background-image: url("/userpage/lib/img/det.PNG");
   background-size: 100%;
-  background-repeat: none;
+  background-repeat: no-repeat;
   background-color: rgb(248, 248, 248);
   display: none;
 }
@@ -1584,7 +1583,7 @@ td.cur::before {
   justify-content: space-between;
   align-items: flex-start;
   word-break: keep-all;
-  white-space: wrap;
+  white-space: nowrap;
 }
 .men_tit {
   font-size: 16px;
@@ -1666,31 +1665,31 @@ td.cur::before {
   background-color: rgb(248, 248, 248);
 }
 .Sicon .twit {
-  background-image: url("../index_img/twitter.png");
+  background-image: url("/userpage/lib/img/twitter.png");
   background-size: 70%;
   opacity: 0.7;
   margin-left: 10px !important;
 }
 .Sicon .faceb {
-  background-image: url("../index_img/face.png");
+  background-image: url("/userpage/lib/img/face.png");
   background-size: 50%;
   opacity: 0.8;
   margin-left: 4px;
 }
 .Sicon .youtub {
-  background-image: url("../index_img/youtube.png");
+  background-image: url("/userpage/lib/img/youtube.png");
   background-size: 45%;
   opacity: 0.6;
   margin-left: 4px;
 }
 .Sicon .insta {
-  background-image: url("../index_img/insta.png");
+  background-image: url("/userpage/lib/img/insta.png");
   background-size: 60%;
   opacity: 0.8;
   margin-left: 4px;
 }
 .Sicon .blog {
-  background-image: url("../index_img/blog.PNG");
+  background-image: url("/userpage/lib/img/blog.PNG");
   background-size: 140%;
   margin-left: 4px;
 }
@@ -1710,7 +1709,7 @@ td.cur::before {
 }
 .sit {
   margin-left: 10px;
-  background-image: url("../index_img/site.PNG");
+  background-image: url("/userpage/lib/img/site.PNG");
   background-size: 140%;
 }
 .Aicon img {
@@ -1795,7 +1794,7 @@ td.cur::before {
   height: 45px;
   padding: 13px;
   left: -15px;
-  background-image: url("../index_img/btn_srch.gif");
+  background-image: url("/userpage/lib/img/btn_srch.gif");
   background-position: center;
   padding-top: 20px;
   border: none;
@@ -1854,7 +1853,7 @@ td.cur::before {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background: url(../img/ico_radio.png) no-repeat 0 0;
+  background: url(/userpage/lib/img/ico_radio.png) no-repeat 0 0;
 }
 .edit_jour_wrap .radio_wrap input[type="radio"]:checked {
   background-position-y: 100%;
@@ -1914,7 +1913,7 @@ td.cur::before {
   padding: 20px;
   font-weight: bold;
   padding-right: 30px;
-  background: url(../img/down2.png) no-repeat;
+  background: url(/userpage/lib/img/down2.png) no-repeat;
   background-size: 10%;
   background-position: 95% 45%;
 }
@@ -2173,7 +2172,6 @@ td.cur::before {
 .arrive_layerbtn span,
 .arrive_layerbtn2 span {
   font-weight: bold;
-  line-height: 2;
   line-height: 3;
 }
 .arrive_layer{
@@ -2257,7 +2255,6 @@ td.cur::before {
 .go_date_layerbtn span,
 .go_date_layerbtn2 span {
   font-weight: bold;
-  line-height: 2;
   line-height: 3;
 }
 
@@ -2270,7 +2267,6 @@ td.cur::before {
 }
 .come_date_layerbtn span {
   font-weight: bold;
-  line-height: 2;
   line-height: 3;
 }
 
@@ -2304,7 +2300,7 @@ td.cur::before {
   width: 100%;
   text-align: center;
   padding-right: 30px;
-  background: url(../img/down2.png) no-repeat;
+  background: url(/userpage/lib/img/down2.png) no-repeat;
   background-size: 10%;
   background-position: 95% 45%;
 }
@@ -2317,7 +2313,7 @@ td.cur::before {
 .go_date_select_opt2.on {
   width: 100%;
   text-align: center;
-  background: url(../index_img/up.png) no-repeat;
+  background: url(/userpage/lib/img/up.png) no-repeat;
   background-size: 10%;
   background-position: 95% 45%;
 }
@@ -2340,7 +2336,7 @@ td.cur::before {
   height: 23px;
   margin: -4px 16px 0 -8px;
   vertical-align: middle;
-  background: url(../img/ico_submit_btn.png) no-repeat 0 0;
+  background: url(/userpage/lib/img/ico_submit_btn.png) no-repeat 0 0;
 }
 
 /* 예약 다음 버튼 */
@@ -2378,7 +2374,6 @@ td.cur::before {
   right: 0;
   top: 0;
   bottom: 0;
-  display: flex;
   justify-content: center;
   display: none;
   padding: 20px 0 0 0;
@@ -2391,7 +2386,6 @@ td.cur::before {
   right: 0;
   top: 0;
   bottom: 0;
-  display: flex;
   justify-content: center;
   display: none;
   padding: 20px 0 0 0;
@@ -2440,7 +2434,7 @@ td.cur::before {
   position: relative;
   bottom: 20px;
   left: 450px;
-  background: url(../img/down.png) no-repeat;
+  background: url(/userpage/lib/img/down.png) no-repeat;
   background-size: 15%;
   background-position: 95% 10%;
 }

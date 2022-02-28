@@ -72,7 +72,6 @@ a:visited {
     background-color: #bdd600;
 }
 body {
-    height: 1;
     color: #444;
     white-space: normal;
     word-wrap: break-word;
@@ -162,7 +161,7 @@ body {
 }
 #header .login > li .lang_img {
     display: inline-block;
-    background: url(../img/down.png) no-repeat right;
+    background: url(/userpage/lib/img/down.png) no-repeat right;
     background-size: 13px;
     width: 13px;
     height: 13px;
@@ -347,7 +346,7 @@ body {
 }
 #container .wrap .reserve_info table th,
 #container .wrap .reserve_info table td{
-    border-bottom: 1px solid rgb(153, 153, 153, 0.2)t;
+    border-bottom: 1px solid rgb(153, 153, 153, 0.2);
     height: 60px;
 }
 #container .wrap .reserve_info table th{
@@ -390,6 +389,7 @@ body {
     font-weight: bold;
 }
 #container .wrap .user_info table {
+    text-align: center;
     border-top: 2px solid rgb(102, 102, 102, 0.5);
     border-bottom: 2px solid rgb(102, 102, 102, 0.5);
     width: 100%;
@@ -501,7 +501,7 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     word-break: keep-all;
-    white-space: wrap;
+    white-space: nowrap;
 }
 .men_tit {
     font-size: 16px;
@@ -583,31 +583,31 @@ body {
     background-color: rgb(248, 248, 248);
 }
 .Sicon .twit {
-    background-image: url("../index_img/twitter.png");
+    background-image: url("/userpage/lib/img/twitter.png");
     background-size: 70%;
     opacity: 0.7;
     margin-left: 10px !important;
 }
 .Sicon .faceb {
-    background-image: url("../index_img/face.png");
+    background-image: url("/userpage/lib/img/face.png");
     background-size: 50%;
     opacity: 0.8;
     margin-left: 4px;
 }
 .Sicon .youtub {
-    background-image: url("../index_img/youtube.png");
+    background-image: url("/userpage/lib/img/youtube.png");
     background-size: 45%;
     opacity: 0.6;
     margin-left: 4px;
 }
 .Sicon .insta {
-    background-image: url("../index_img/insta.png");
+    background-image: url("/userpage/lib/img/insta.png");
     background-size: 60%;
     opacity: 0.8;
     margin-left: 4px;
 }
 .Sicon .blog {
-    background-image: url("../index_img/blog.PNG");
+    background-image: url("/userpage/lib/img/blog.PNG");
     background-size: 140%;
     margin-left: 4px;
 }
@@ -627,7 +627,7 @@ body {
 }
 .sit {
     margin-left: 10px;
-    background-image: url("../index_img/site.PNG");
+    background-image: url("/userpage/lib/img/site.PNG");
     background-size: 140%;
 }
 .Aicon img {
@@ -712,7 +712,7 @@ body {
     height: 45px;
     padding: 13px;
     left: -15px;
-    background-image: url("../index_img/btn_srch.gif");
+    background-image: url("/userpage/lib/img/btn_srch.gif");
     background-position: center;
     padding-top: 20px;
     border: none;
@@ -731,7 +731,5 @@ body {
     right: 0;
     top: 0;
     bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: none;
 }
