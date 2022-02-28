@@ -9,6 +9,97 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/pages")
 public class PageController {
 
+
+    // 마이페이지
+    @RequestMapping("/index/addQna")
+    public ModelAndView addQna() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/add_qna")
+                .addObject("code", "add_qna");
+    }
+    @RequestMapping("/index/faqList")
+    public ModelAndView faqList() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/faq_list")
+                .addObject("code", "faq_list");
+    }
+    @RequestMapping("/index/mypageCancelService")
+    public ModelAndView mypageCancelService() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_cancel_service")
+                .addObject("code", "Mypage_cancel_service");
+    }
+    @RequestMapping("/index/mypageCoupons")
+    public ModelAndView mypageCoupons() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_coupons")
+                .addObject("code", "Mypage_coupons");
+    }
+    @RequestMapping("/index/mypageEdit")
+    public ModelAndView mypageEdit() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_edit")
+                .addObject("code", "Mypage_edit");
+    }
+    @RequestMapping("/index/mypageGetReservationDetail")
+    public ModelAndView mypageGetReservationDetail() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_getReservationDetail")
+                .addObject("code", "Mypage_getReservationDetail");
+    }
+    @RequestMapping("/index/mypageMain")
+    public ModelAndView mypageMain() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_main")
+                .addObject("code", "Mypage_main");
+    }
+    @RequestMapping("/index/mypagePoint")
+    public ModelAndView mypagePoint() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_point")
+                .addObject("code", "Mypage_point");
+    }
+    @RequestMapping("/index/mypageQna")
+    public ModelAndView mypageQna() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_qna")
+                .addObject("code", "Mypage_qna");
+    }
+    @RequestMapping("/index/passwordEdit")
+    public ModelAndView passwordEdit() {
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/password_edit")
+                .addObject("code", "password_edit");
+    }
+
+    // 조인
+    @RequestMapping("/index/joinConfirm")
+    public ModelAndView joinConfirm() {
+        return new ModelAndView("/userpage/pages/mypage/join/join_confirm")
+                .addObject("code", "join_confirm");
+    }
+    @RequestMapping("/index/joinForm")
+    public ModelAndView joinForm() {
+        return new ModelAndView("/userpage/pages/mypage/join/joinForm")
+                .addObject("code", "joinForm");
+    }
+    @RequestMapping("/index/joinGate")
+    public ModelAndView joinGate() {
+        return new ModelAndView("/userpage/pages/mypage/join/joinGate")
+                .addObject("code", "joinGate");
+    }
+    @RequestMapping("/index/termsAgree")
+    public ModelAndView termsAgree() {
+        return new ModelAndView("/userpage/pages/mypage/join/termsAgree")
+                .addObject("code", "termsAgree");
+    }
+    // 아이프레임 joinForm_popup
+    @RequestMapping("/index/termsAgree/popup1")
+    public ModelAndView popup1() {
+        return new ModelAndView("/userpage/pages/mypage/join/joinForm_popup1")
+                .addObject("code", "joinForm_popup1");
+    }
+    @RequestMapping("/index/termsAgree/popup2")
+    public ModelAndView popup2() {
+        return new ModelAndView("/userpage/pages/mypage/join/joinForm_popup2")
+                .addObject("code", "joinForm_popup2");
+    }
+    @RequestMapping("/index/termsAgree/popup3")
+    public ModelAndView popup3() {
+        return new ModelAndView("/userpage/pages/mypage/join/joinForm_popup3")
+                .addObject("code", "joinForm_popup3");
+    }
+
     // 사용자 인덱스
     @RequestMapping("/index")
     public ModelAndView index() {
@@ -256,8 +347,11 @@ public class PageController {
 
 
 
+<<<<<<< HEAD
     //-------------------------------------------------------------------------------------------
     // admin_index
+=======
+>>>>>>> 6cc52b6ce17516b3893283f8bfb2a806ea831a83
     @RequestMapping("/admin_index")
     public ModelAndView adminIndex() {
         return new ModelAndView("/adminpage/pages/admin_index")
@@ -544,7 +638,6 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/magazine/genieList_view")
                 .addObject("code", "genieListView");
     }
-
 
 
 
