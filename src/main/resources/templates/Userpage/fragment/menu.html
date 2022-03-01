@@ -39,7 +39,7 @@
                 </nav>
             </div>
         </div>
-        <div class="sub_nav reservation">
+        <div class="sub_nav reservation" th:each="entry : ${menuList}">
             <div class="subnav_warp">
                 <div>
                     <a href="/index.html" class="subNav_title">항공권 예약</a>
