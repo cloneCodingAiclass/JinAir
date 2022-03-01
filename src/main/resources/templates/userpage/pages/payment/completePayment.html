@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>결제 | 진에어</title>
-    <link rel="stylesheet" href="./css/completePayment.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="./js/completePayment.js"></script>
-</head>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<div th:replace="userpage/fragment/head :: head"></div>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/userpage/lib/css/payment/completePayment.css">
+    <script src="/userpage/app/payment/completePayment.js"></script>
 
 <body>
     <ul class="skipnavi">
@@ -20,175 +16,7 @@
     <!--wrap-->
     <div id="wrap">
         <!--header-->
-        <header id="header">
-            <!--상당 메뉴-->
-            <div class="header_sub">
-                <div class="header_wrap">
-                    <h1 class="logo"><a href="/index.html"><img src="../../index_img/logo_02.png" alt=""></a></h1>
-                    <ul class="login">
-                        <li><a href="login.html">로그인</a><span>|</span>
-                            <p class="lang">한국(한국어)<span>/ </span>KRW</p>
-                            <p class="lang_img"></p>
-                        </li>
-                    </ul>
-                    <nav>
-                        <ul class="nav_all">
-                            <li class="open1">
-                                <a href="#">예약</a>
-                            </li>
-                            <li class="open2">
-                                <a href="#">서비스</a>
-                            </li>
-                            <li class="open3">
-                                <a href="#">프로모션</a>
-                            </li>
-                            <li class="open4">
-                                <a href="#">나비포인트</a>
-                            </li>
-                            <li class="open5">
-                                <a href="#">부가 서비스</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="sub_nav reservation">
-                <div class="subnav_warp">
-                    <div>
-                        <a href="/index.html" class="subNav_title">항공권 예약</a>
-                        <a href="/index.html">예약</a>
-                        <a href="/UserPage/reservation/LCCpage/lcc.html">최저가 항공권</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/index/mypage/Mypage_main.html" class="subNav_title">나의 예약</a>
-                        <a href="/UserPage/index/mypage/Mypage_main.html">예약 조회/변경/취소</a>
-                        <a href="/UserPage/payment/extras.html">부가서비스 신청/취소</a>
-                        <a href="/UserPage/serviceCount/airport/checkinfo/checkinfo_list.html">웹/모바일 체크인</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/reservation/flight_info/flight.html" class="subNav_title">운항 정보</a>
-                        <a href="/UserPage/reservation/flight_info/flight.html?directId=flightCont1">스케줄 조회</a>
-                        <a href="/UserPage/reservation/flight_info/flight.html?directId=flightCont2">출도착 안내</a>
-                        <a href="/UserPage/reservation/flight_info/flight.html?directId=flightCont3">취향 노선 안내</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html" class="subNav_title">예약 및
-                            운임 안내</a>
-                        <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html?directId=fareRule1">예매
-                            서비스</a>
-                        <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html?directId=fareRule2">국내선
-                            운임</a>
-                        <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html?directId=fareRule3">국제선
-                            운임</a>
-                        <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html?directId=fareRule4">비즈니스
-                            운임</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/reservation/discount_info/discount.html" class="subNav_title">할인안내</a>
-                        <a href="/UserPage/reservation/discount_info/discount.html?directId=discount1">가족운임 할인제도</a>
-                        <a href="/UserPage/reservation/discount_info/discount.html?directId=discount2">사용우대 프로그램</a>
-                        <a href="/UserPage/reservation/discount_info/discount.html?directId=discount3">제주도민 할인제도</a>
-                        <a href="/UserPage/reservation/discount_info/discount.html?directId=discount4">제외/명예도민 할인제도</a>
-                        <a href="/UserPage/reservation/discount_info/discount.html?directId=discount5">군산시민 할인제도</a>
-                    </div>
-                </div>
-            </div>
-            <div class="sub_nav service">
-                <div class="subnav_warp">
-                    <div>
-                        <a href="/UserPage/serviceCount/airport/counter/counter.html" class="subNav_title">공항서비스</a>
-                        <a href="/UserPage/serviceCount/airport/counter/counter.html">공항카운터 안내</a>
-                        <a href="/UserPage/serviceCount/airport/baggage/baggage.html">수하물</a>
-                        <a href="/UserPage/serviceCount/airport/help/help.html">도움이 필요하신 고객</a>
-                        <a href="/UserPage/serviceCount/airport/checkinfo/checkinfo.html">체크인 안내</a>
-                        <a href="/UserPage/serviceCount/airport/arrivalCard/arrivalcard.html">입국신고서 작성 안내</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/serviceCount/aircraft/guide/guide.html" class="subNav_title">기내 서비스</a>
-                        <a href="/UserPage/serviceCount/aircraft/guide/guide.html">기내 여행 가이드</a>
-                        <a href="/UserPage/serviceCount/aircraft/Shopping/cabinShopping.html">기내유상판매</a>
-                        <a href="/UserPage/serviceCount/aircraft/taxFree/taxFree.html">기내 면세품</a>
-                        <a href="/UserPage/serviceCount/aircraft/jiniInsight/jiniInsight.html">기내 매거진</a>
-                        <a href="/UserPage/serviceCount/aircraft/eventflight/eventflight.html">이벤트 플라잇</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/serviceCount/optional/bundle/bundle.html" class="subNav_title">부가 서비스</a>
-                        <a href="/UserPage/serviceCount/optional/bundle/bundle.html">번들 서비스</a>
-                        <a href="/UserPage/serviceCount/optional/seat/seat.html">사전좌석지정</a>
-                        <a href="/UserPage/serviceCount/optional/airlineFood/airlineFood.html">기내식</a>
-                        <a href="/UserPage/serviceCount/optional/jiniPlay/jiniPlay.html">기내 엔터테인먼트</a>
-                    </div>
-                </div>
-            </div>
-            <div class="sub_nav benefit">
-                <div class="subnav_warp">
-                    <div>
-                        <a href="/UserPage/promotion/event/nowLeave.html" class="subNav_title">프로모션</a>
-                        <a href="/UserPage/promotion/event/nowLeave.html">이벤트</a>
-                        <a href="/UserPage/promotion/jinicoupon/jiniCoupon.html">지니쿠폰</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/promotion/card_exchange/associatedCard.html" class="subNav_title">카드 및 환전
-                            혜택</a>
-                        <a href="/UserPage/promotion/card_exchange/associatedCard.html?directId=associatedCard1">제휴
-                            카드</a>
-                        <a href="/UserPage/promotion/card_exchange/associatedCard.html?directId=associatedCard2">환율
-                            우대</a>
-                        <a href="/UserPage/promotion/card_exchange/associatedCard.html?directId=associatedCard3">무이자
-                            할부</a>
-                    </div>
-                </div>
-            </div>
-            <div class="sub_nav point">
-                <div class="subnav_warp">
-                    <div>
-                        <a href="/UserPage/index/mypage/Mypage_point.html" class="subNav_title">나의 나비포인트</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/nabipoint/pointList.html" class="subNav_title">적립안내</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/nabipoint/pointList.html" class="subNav_title">사용안내</a>
-                    </div>
-                </div>
-            </div>
-            <div class="sub_nav optional">
-                <div class="subnav_warp">
-                    <div>
-                        <a href="https://jinistore.jinair.com/main.do" class="subNav_title">지니스토어</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/optional/jinipass/jinipass.html" class="subNav_title">보딩패스 할인</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/optional/activity/activity.html" class="subNav_title">액티비티</a>
-                        <a
-                            href="https://www.klook.com/ko/promo/jinairon?aff_adid=100885&aff_af_wid=8227&aid=8227&utm_medium=affiliate-alwayson&utm_source=non-network&utm_campaign=8227&utm_term=&utm_content=">클룩</a>
-                        <a href="https://www.yokosojapanpass.com/donki_fuel/public/coupon/index/0010789">돈키호테</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/optional/hotel/hotel.html" class="subNav_title">호텔</a>
-                        <a href="https://sp.booking.com/index.ko.html?aid=1486529&lang=ko">부킹닷컴</a>
-                        <a href="https://www.hotelscombined.co.kr/?languageCode=KO">호텔스 컴바인</a>
-                        <a href="https://kr.trip.com/hotels?locale=ko-KR&allianceid=1307583&sid=4088763">트립닷컴</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/optional/rentcar/rentcar.html" class="subNav_title">차량서비스</a>
-                        <a
-                            href="https://www.skcarrental.com/rent/frame/wps/reservation.do?corpNm=jinAir&corpCd=&result=0000&resultMessage=ok">SK렌트카</a>
-                        <a href="https://www.rentalcars.com/?affiliateCode=jinair&adplat=jinimall&preflang=ko">렌탈카스</a>
-                        <a href="https://jinair.happartners.com/index.php/booking/plantrip">허츠렌트카</a>
-                        <a href="https://tagogayo.co.kr/?ali=jinair15">공항 벤</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/optional/insurance/insurance.html" class="subNav_title">여행 안심 서비스</a>
-                        <a href="/UserPage/optional/insurance/Chubb.html">Chubb 해외 여행보험</a>
-                        <a href="/UserPage/optional/insurance/insurance3.html">Assistcard 여행토탈케어</a>
-                    </div>
-                </div>
-            </div>
-            <!--상당 메뉴 끝-->
-        </header>
+        <div th:replace="userpage/fragment/menu :: menu"></div>
         <!--header 끝-->
         <!--container-->
         <div id="container">
@@ -208,142 +36,9 @@
                 </div>
             </div>
         </div>
-    <!--container 끝-->
+        <!--container 끝-->
     <!-- 푸터-->
-    <div id="footerCont">
-        <!--푸터-->
-        <div id="foot_topwraper">
-            <div id="foot_top">
-                <!--위쪽 푸터-->
-                <div id="top_menu">
-                    <!--상단메뉴 컨테이너-->
-                    <div class="menu_wrap">
-                        <!--첫번째 메뉴-->
-                        <p class="men_tit"><a href="">회사안내</a></p>
-                        <!--메뉴 타이틀-->
-                        <ul class="horiz">
-                            <!--하위 메뉴 컨테이너-->
-                            <li><a href="">공지사항</a></li>
-                            <li><a href="">채용정보</a></li>
-                            <li><a href="">CEO인사말</a></li>
-                            <li><a href="">기업개요</a></li>
-                            <li><a href="">기업지배구조</a></li>
-                            <li><a href="">윤리경영</a></li>
-                            <li><a href="">CI소개</a></li>
-                            <li><a href="">항공기 소개</a></li>
-                            <li><a href="">투자정보</a></li>
-                            <li><a href="">화물운송</a></li>
-                            <li><a href="">홍보센터</a></li>
-                        </ul>
-                    </div>
-                    <div class="menu_wrap">
-                        <!--두번째 메뉴-->
-                        <p class="men_tit"><a href="">약관 및 안내</a></p>
-                        <!--메뉴 타이틀-->
-                        <ul class="horiz">
-                            <!--하위 메뉴 컨테이너-->
-                            <li class="f_black"><a href=""><b>개인정보 처리방침</b></a></li>
-                            <li><a href="">홈페이지 이용약관</a></li>
-                            <li><a href="">여객운송약관 및 기타 고지사항</a></li>
-                            <li><a href="">항공교통이용자 서비스 계획</a></li>
-                            <li><a href="">피해구제계획</a></li>
-                            <li><a href="">e-티켓 확인증 법적 고지문</a></li>
-                            <li><a href="">사이트맵</a></li>
-                        </ul>
-                    </div>
-                    <div class="menu_wrap">
-                        <!--세번째 메뉴-->
-                        <p class="men_tit"><a href="">고객서비스</a></p>
-                        <!--메뉴 타이틀-->
-                        <ul class="horiz">
-                            <!--하위 메뉴 컨테이너-->
-                            <li><a href="">자주 묻는 질문(FAQ)</a></li>
-                            <li><a href="">고객의 말씀(Q&A)</a></li>
-                            <li><a href="/UserPage/serviceCount/airport/baggage/baggage.html?directId=findbaggage">기내
-                                    유실물 찾기</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!--상단메뉴 컨테이너 끝-->
-            </div>
-            <!--위쪽푸터 끝-->
-        </div>
-        <div id="foot_bottwraper">
-            <div id="foot_bott">
-                <!--아래쪽 푸터-->
-                <div id="bott_menu">
-                    <!--하단메뉴 컨테이너-->
-                    <div id="app_ico">
-                        <!--apple icon-->
-                        <ul class="Sicon">
-                            <!--sns icon-->
-                            <li><a href="">
-                                    <p class="twit circle">트위터</p>
-                                </a></li>
-                            <li><a href="">
-                                    <p class="faceb circle">페이스북</p>
-                                </a></li>
-                            <li><a href="">
-                                    <p class="youtub circle">유튜브</p>
-                                </a></li>
-                            <li><a href="">
-                                    <p class="insta circle">인스타</p>
-                                </a></li>
-                            <li><a href="">
-                                    <p class="blog circle">블로그</p>
-                                </a></li>
-                        </ul>
-                        <ul class="Aicon">
-                            <!--app icon-->
-                            <li class="Aicon_txt">APP 다운로드</li>
-                            <li><a href=""><img src="../index_img/ico_apple.png" alt=""></a></li>
-                            <li><a href=""><img src="../index_img/google.PNG" alt=""></a></li>
-                        </ul>
-                        <ul class="site">
-                            <li><a href="#">
-                                    <p class="sit circle">대리점 사이트</p>
-                                </a></li>
-                            <li class="Aicon_txt">대리점 사이트 바로가기</li>
-                        </ul>
-                    </div>
-                    <!--apple icon 끝-->
-                    <div id="news">
-                        <!--뉴스레터-->
-                        <ul>
-                            <li class="sub_txt">뉴스레터 신청</li>
-                        </ul>
-                        <ul class="mail_box">
-                            <li><input type="text" placeholder="Email Address"></li>
-                            <li><input type="submit"></li>
-                        </ul>
-                        <ul>
-                            <li><img src="../index_img/ico_isms.png" alt="인증"></li>
-                        </ul>
-                    </div>
-                    <!--뉴스레터 끝-->
-                    <div id="info">
-                        <!--정보-->
-                        <ul>
-                            <li>
-                                <b>고객서비스센터 1600-6200, 02-6099-1200</b>
-                                <p class="pdiv">업무시간 오전 08:00~오후 19:00</p>
-                            </li>
-                            <li class="small_txt">(주)진에어
-                                <p class="pdiv">대표이사 최정호</p>
-                                <p class="pdiv">사업자등록번호 121-81-89086</p>
-                                <p class="pdiv">통신판매업 신고번호 : 제2008-서울 강서-0408</p>
-                            </li>
-                            <li class="small_txt">주소 : 서울시 강서구 공항대로 453<p class="pdiv"></p>개인정보보호책임자 : 이광</li>
-                            <li class="small_txt">Copyright © JIN AIR. All Rights Reserved.</li>
-                        </ul>
-                    </div>
-                    <!--정보 끝-->
-                </div>
-                <!--하단메뉴 컨테이너 끝-->
-            </div>
-            <!--아래쪽 푸터 끝-->
-        </div>
-    </div>
+        <div th:replace="userpage/fragment/footer :: footer"></div>
     <!--푸터 끝-->
     </div>
     <!--wrap 끝-->
@@ -360,7 +55,7 @@
             <div class="modal_flight_content">
                 <p class="cont_P">
                     <ul>
-                        <li><구간 1></li>
+                        <li>구간 1</li>
                         <li>편명 : LJ309</li>
                         <li>출발 : 2022-02-24(목) 08:05 서울/김포(GMP)</li>
                         <li>도착 : 2022-02-24(목) 09:15 제주(CJU)</li>
@@ -381,7 +76,7 @@
             <div class="modal_flight_content">
                 <p class="cont_P">
                     <ul>
-                        <li><구간 2></li>
+                        <li>구간 2</li>
                         <li>편명 : LJ309</li>
                         <li>출발 : 2022-02-24(목) 08:05 서울/김포(GMP)</li>
                         <li>도착 : 2022-02-24(목) 09:15 제주(CJU)</li>
