@@ -19,7 +19,7 @@
 <!--wrap-->
 <div id="wrap">
     <!--header-->
-    <div th:replace="userpage/fragment/menu :: menu"></div>
+    <div th:replace="userpage/fragment/menu :: menu(${code}, ${login})"></div>
     <!--header 끝-->
     <!--container-->
     <div id="container">
