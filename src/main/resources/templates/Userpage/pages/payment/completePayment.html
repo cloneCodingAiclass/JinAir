@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -344,13 +345,76 @@
             <!--아래쪽 푸터 끝-->
         </div>
     </div>
+=======
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<div th:replace="userpage/fragment/head :: head"></div>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/userpage/lib/css/payment/completePayment.css">
+<script src="/userpage/app/payment/completePayment.js"></script>
+
+<body>
+<ul class="skipnavi">
+    <!--책갈피 역할-->
+    <li><a href="#container">본문내용</a></li>
+</ul>
+<!--wrap-->
+<div id="wrap">
+    <!--header-->
+    <div th:replace="userpage/fragment/menu :: menu"></div>
+    <!--header 끝-->
+    <!--container-->
+    <div id="container">
+        <div class="mypage_main w_1160">
+            <div class="menu_title">
+                <p>취소가 완료 되었습니다.</p>
+            </div>
+            <div class="main_txt">
+                <ul>
+                    <li>ㆍ선택하신 예약이 모두 취소되었으며 취소하신 항공권, 부가서비스 등은 복구되지 않습니다.</li>
+                    <li>ㆍ재예약을 원하시는 경우 신규 예약을 진행해 주시기 바랍니다.</li>
+                    <li>ㆍ신용카드 결제의 경우 환불 소요 기간은 취소일로부터 5~7일 소요되며, 신용카드사 규정에 따라 차이가 있습니다.<br> 정확한 환불 일자는 3일(영업일 기준) 경과 후 신용카드사로 문의해 주시기 바랍니다.</li>
+                </ul>
+            </div>
+            <div class="btn">
+                <p>메인</p>
+            </div>
+        </div>
+    </div>
+    <!--container 끝-->
+    <!-- 푸터-->
+    <div th:replace="userpage/fragment/footer :: footer"></div>
+>>>>>>> c4d4007d149847c4a75556cdba35a7db116692de
     <!--푸터 끝-->
+</div>
+<!--wrap 끝-->
+<!--퀵 메뉴-->
+<!--퀵 메뉴 끝-->
+<div class="modal">
+</div>
+<!--모달 1-->
+<div class="modal_flight_info1 modal_flight_info">
+    <div class="modal_flight_title">
+        <span class="tit">항공편 안내</span>
+        <span class="cursor close1"><img src="./img/close.png" alt="닫기" width="20px"></span>
     </div>
-    <!--wrap 끝-->
-    <!--퀵 메뉴-->
-    <!--퀵 메뉴 끝-->
-    <div class="modal">
+    <div class="modal_flight_content">
+        <p class="cont_P">
+        <ul>
+            <li>구간 1</li>
+            <li>편명 : LJ309</li>
+            <li>출발 : 2022-02-24(목) 08:05 서울/김포(GMP)</li>
+            <li>도착 : 2022-02-24(목) 09:15 제주(CJU)</li>
+            <li>비행시간 : 01h 10m</li>
+            <li>대기시간 : 00h 00m</li>
+            <li>A/C 타입 : B737-800</li>
+        </ul>
+        </p>
     </div>
+<<<<<<< HEAD
         <!--모달 1-->
         <div class="modal_flight_info1 modal_flight_info">
             <div class="modal_flight_title">
@@ -393,5 +457,30 @@
             </div>
         </div>
         <!--모달 2끝-->
+=======
+</div>
+<!--모달 1끝-->
+<!--모달 2-->
+<div class="modal_flight_info2 modal_flight_info">
+    <div class="modal_flight_title">
+        <span class="tit">항공편 안내</span>
+        <span class="cursor close2"><img src="./img/close.png" alt="닫기" width="20px"></span>
+    </div>
+    <div class="modal_flight_content">
+        <p class="cont_P">
+        <ul>
+            <li>구간 2</li>
+            <li>편명 : LJ309</li>
+            <li>출발 : 2022-02-24(목) 08:05 서울/김포(GMP)</li>
+            <li>도착 : 2022-02-24(목) 09:15 제주(CJU)</li>
+            <li>비행시간 : 01h 10m</li>
+            <li>대기시간 : 00h 00m</li>
+            <li>A/C 타입 : B737-800</li>
+        </ul>
+        </p>
+    </div>
+</div>
+<!--모달 2끝-->
+>>>>>>> c4d4007d149847c4a75556cdba35a7db116692de
 </body>
 </html>
