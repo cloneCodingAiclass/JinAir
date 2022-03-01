@@ -470,7 +470,7 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/schedule/sc_regist")
                 .addObject("code", "sc_regist")
                 .addObject("menuList", menuService.getMenu())
-                .addObject("schedule", menuService.getMenu());
+                .addObject("schedule", menuService.scheduleMenu());
     }
     // admin 스케줄 목록
     @RequestMapping("/admin/scheduleList")
