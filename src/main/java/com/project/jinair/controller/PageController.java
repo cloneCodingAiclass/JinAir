@@ -47,6 +47,30 @@ public class PageController {
         return new ModelAndView("/userpage/pages/mypage/login/login")
                 .addObject("code", "login");
     }
+    // 아이디/비밀번호 찾기
+    @RequestMapping("/mypage/find_info")
+    public ModelAndView findInfo() {
+        return new ModelAndView("/userpage/pages/mypage/login/find_info")
+                .addObject("code", "findInfo");
+    }
+    // 아이디 찾기
+    @RequestMapping("/mypage/find_id")
+    public ModelAndView findId() {
+        return new ModelAndView("/userpage/pages/mypage/login/findId")
+                .addObject("code", "findId");
+    }
+    // 비밀번호 찾기
+    @RequestMapping("/mypage/find_pw")
+    public ModelAndView findPw() {
+        return new ModelAndView("/userpage/pages/mypage/login/findPw")
+                .addObject("code", "findPw");
+    }
+    // 일치하는 회원정보 없음
+    @RequestMapping("/mypage/noResult")
+    public ModelAndView noResult() {
+        return new ModelAndView("/userpage/pages/mypage/login/noResult")
+                .addObject("code", "noResult");
+    }
     //-------------------------------------------------------------------------------------------
 
     // 마이페이지
@@ -139,6 +163,49 @@ public class PageController {
                 .addObject("code", "joinForm_popup3");
     }
     //-------------------------------------------------------------------------------------------
+    // 예약
+    // 사용자 항공권 예약 getAvailabilityList
+    @RequestMapping("/getAvailabilityList")
+    public ModelAndView getAvailabilityList(){
+        return new ModelAndView("/userpage/pages/payment/getAvailabilityList")
+                .addObject("code", "getAvailabilityList");
+    }
+    // 사용자 항공권 예약 registerPassenger
+    @RequestMapping("/registerPassenger")
+    public ModelAndView registerPassenger(){
+        return new ModelAndView("/userpage/pages/payment/registerPassenger")
+                .addObject("code", "registerPassenger");
+    }
+    // 사용자 엑스트라 페이지
+    @RequestMapping("/extras")
+    public ModelAndView extra() {
+        return new ModelAndView("/userpage/pages/payment/extras")
+                .addObject("code", "extra");
+    }
+    // 엑스트라 보험 인수 제한 국가
+    @RequestMapping("/extras/restricted")
+    public ModelAndView restrictedCountry() {
+        return new ModelAndView("/userpage/pages/payment/restrictedCountry")
+                .addObject("code", "restrictedCountry");
+    }
+    // 사용자 예약 취소
+    @RequestMapping("/cancel")
+    public ModelAndView cancel(){
+        return new ModelAndView("/userpage/pages/payment/cancel_booking")
+                .addObject("code", "cancel_booking");
+    }
+    // 사용자 예약 취소 완료
+    @RequestMapping("/cancel/complete")
+    public ModelAndView cancelComplete() {
+        return new ModelAndView("/userpage/pages/payment/completePayment")
+                .addObject("code", "completePayment");
+    }
+    // 사용자 결제 완료
+    @RequestMapping("/complete")
+    public ModelAndView complete() {
+        return new ModelAndView("/userpage/pages/payment/complete")
+                .addObject("code", "complete");
+    }
 
     // 최저가 항공권
     @RequestMapping("/reservation/lcc")
@@ -178,8 +245,116 @@ public class PageController {
     }
     //-------------------------------------------------------------------------------------------
 
+    /* 서비스카운트 */
+    // aircraft
+    // cabinShopping
+    @RequestMapping("/index/cabinShopping")
+    public ModelAndView cabinShopping() {
+        return new ModelAndView("/Userpage/pages/serviceCount/aircraft/cabinShopping")
+                .addObject("code", "cabinShopping");
+    }
+    // eventflight
+    @RequestMapping("/index/eventflight")
+    public ModelAndView eventflight() {
+        return new ModelAndView("/Userpage/pages/serviceCount/aircraft/eventflight")
+                .addObject("code", "eventflight");
+    }
+    // guide
+    @RequestMapping("/index/guide")
+    public ModelAndView guide() {
+        return new ModelAndView("/Userpage/pages/serviceCount/aircraft/guide")
+                .addObject("code", "guide");
+    }
+    // jiniInsight
+    @RequestMapping("/index/jiniInsight")
+    public ModelAndView jiniInsight() {
+        return new ModelAndView("/Userpage/pages/serviceCount/aircraft/jiniInsight")
+                .addObject("code", "jiniInsight");
+    }
+    // taxFree
+    @RequestMapping("/index/taxFree")
+    public ModelAndView taxFree() {
+        return new ModelAndView("/Userpage/pages/serviceCount/aircraft/taxFree")
+                .addObject("code", "taxFree");
+    }
 
+    // airport
+    // arrivalcard
+    @RequestMapping("/index/arrivalcard")
+    public ModelAndView arrivalcard() {
+        return new ModelAndView("/Userpage/pages/serviceCount/airport/arrivalcard")
+                .addObject("code", "arrivalcard");
+    }
+    // baggage
+    @RequestMapping("/index/baggage")
+    public ModelAndView baggage() {
+        return new ModelAndView("/Userpage/pages/serviceCount/airport/baggage")
+                .addObject("code", "baggage");
+    }
+    // checkin_login
+    @RequestMapping("/index/checkin_login")
+    public ModelAndView checkin_login() {
+        return new ModelAndView("/Userpage/pages/serviceCount/airport/checkin_login")
+                .addObject("code", "checkin_login");
+    }
+    // checkinfo
+    @RequestMapping("/index/checkinfo")
+    public ModelAndView checkinfo() {
+        return new ModelAndView("/Userpage/pages/serviceCount/airport/checkinfo")
+                .addObject("code", "checkinfo");
+    }
+    // checkinfo_list
+    @RequestMapping("/index/checkinfo_list")
+    public ModelAndView checkinfo_list() {
+        return new ModelAndView("/Userpage/pages/serviceCount/airport/checkinfo_list")
+                .addObject("code", "checkinfo_list");
+    }
+    // counter
+    @RequestMapping("/index/counter")
+    public ModelAndView counter() {
+        return new ModelAndView("/Userpage/pages/serviceCount/airport/counter")
+                .addObject("code", "counter");
+    }
+    // help
+    @RequestMapping("/index/help")
+    public ModelAndView help() {
+        return new ModelAndView("/Userpage/pages/serviceCount/airport/help")
+                .addObject("code", "help");
+    }
 
+    // optional
+
+    // airlineFood
+    @RequestMapping("/index/airlineFood")
+    public ModelAndView airlineFood() {
+        return new ModelAndView("/Userpage/pages/serviceCount/optional/airlineFood")
+                .addObject("code", "airlineFood");
+    }
+    // bundle
+    @RequestMapping("/index/bundle")
+    public ModelAndView bundle() {
+        return new ModelAndView("/Userpage/pages/serviceCount/optional/bundle")
+                .addObject("code", "bundle");
+    }
+    // jiniPlay
+    @RequestMapping("/index/jiniPlay")
+    public ModelAndView jiniPlay() {
+        return new ModelAndView("/Userpage/pages/serviceCount/optional/jiniPlay")
+                .addObject("code", "jiniPlay");
+    }
+    // lounge
+    @RequestMapping("/index/lounge")
+    public ModelAndView lounge() {
+        return new ModelAndView("/Userpage/pages/serviceCount/optional/lounge")
+                .addObject("code", "lounge");
+    }
+    // lounge
+    @RequestMapping("/index/seat")
+    public ModelAndView seat() {
+        return new ModelAndView("/Userpage/pages/serviceCount/optional/seat")
+                .addObject("code", "seat");
+    }
+    /* 서비스 카운트 끝 */
 
 
     //-------------------------------------------------------------------------------------------
