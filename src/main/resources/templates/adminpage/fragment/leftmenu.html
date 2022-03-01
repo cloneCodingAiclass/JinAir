@@ -16,13 +16,15 @@
             <th:block th:if="${entry.id == 'nav2'}">
             <li th:each="submenu : ${schedule}">
                     <a th:href="${submenu.url}">
-                        <span th:text="${submenu.title}"></span></a>
+                        <span th:text="${submenu.title}"></span>
+                    </a>
             </li>
             </th:block>
             <th:block th:if="${entry.id == 'nav3'}">
                 <li th:each="submenu : ${reservation}">
                     <a th:href="${submenu.url}">
-                        <span th:text="${submenu.title}"></span></a>
+                        <span th:text="${submenu.title}"></span>
+                    </a>
                 </li>
             </th:block>
             <th:block th:if="${entry.id == 'nav5'}">

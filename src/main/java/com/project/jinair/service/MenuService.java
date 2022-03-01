@@ -17,10 +17,10 @@ public class MenuService {
                 Menu.builder().title("고객 조회").url("/pages/admin/cmList").code("cm_list").id("nav4").build(),
                 Menu.builder().title("유실물 관리").url("/pages/admin/item").code("item").id("nav5").build(),
                 Menu.builder().title("공지사항").url("/pages/admin/notice").code("notice").id("nav6").build(),
-                Menu.builder().title("문의").url("/admin/qna_main").code("qna_main").id("nav7").build(),
+                Menu.builder().title("문의").url("/pages/admin/qna_main").code("qna_main").id("nav7").build(),
                 Menu.builder().title("이벤트").url("/pages/admin/evn_ing").code("evn_ing").id("nav8").build(),
                 Menu.builder().title("나비포인트").url("/pages/admin/usepointlist").code("usepointlist").id("nav9").build(),
-                Menu.builder().title("지니 쿠폰").url("/pages/admin/usecouponlist").code("useCouponList").id("nav10").build(),
+                Menu.builder().title("지니 쿠폰").url("/pages/admin/couponadd").code("couponAdd").id("nav10").build(),
                 Menu.builder().title("지니매거진").url("/pages/admin/genielist").code("genieList").id("nav11").build()
         );
     }
@@ -33,8 +33,8 @@ public class MenuService {
     }
     public List<Menu> reservationMenu() {
         return Arrays.asList(
-                Menu.builder().title("운항 별 예약자 조회").url("/admin/rsIndex").code("rs_index").build(),
-                Menu.builder().title("예약자 명 조회").url("/admin/rs_sch_result").code("rs_sch_result").build()
+                Menu.builder().title("운항 별 예약자 조회").url("/pages/admin/rsIndex").code("rs_index").build(),
+                Menu.builder().title("예약자 명 조회").url("/pages/admin/rs_sch_result").code("rs_sch_result").build()
         );
     }
     public List<Menu> itemMenu() {
@@ -58,7 +58,7 @@ public class MenuService {
     public List<Menu> pointMenu() {
         return Arrays.asList(
                 Menu.builder().title("지니포인트 조회").url("/pages/admin/usepointlist").code("usepointlist").build(),
-                Menu.builder().title("지니포인트 등록").url("/pages/admin/admin/pointadd").code("pointadd").build()
+                Menu.builder().title("지니포인트 등록").url("/pages/admin/pointadd").code("pointadd").build()
         );
     }
 }
