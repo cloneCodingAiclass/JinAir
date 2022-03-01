@@ -909,8 +909,8 @@ $(function () {
 
 
   /*하단 총액 모달창 */
-  $("#info_table_wrap").css("overflow", "hidden");
-  $("#info_table_wrap").css("overflow-x", "none");
+  $(".info_table_wrap").css("overflow", "hidden");
+  $(".info_table_wrap").css("overflow-x", "none");
 
   $(".img").on('click', () => {
     $(".img").css("display", "none");
