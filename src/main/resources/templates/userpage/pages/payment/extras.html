@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>항공권 예매 | 진에어</title>
-    <link rel="stylesheet" href="./css/extras.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="./js/extras.js"></script>
-</head>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!-- head.html -->
+<div th:replace="userpage/fragment/head :: head"></div>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/userpage/lib/css/payment/extras.css">
+    <script src="/userpage/app/payment/extras.js"></script>
 
 <body>
     <ul class="skipnavi">
@@ -20,175 +16,7 @@
     <!--wrap-->
     <div id="wrap">
         <!--header-->
-        <header id="header">
-            <!--상당 메뉴-->
-            <div class="header_sub">
-                <div class="header_wrap">
-                    <h1 class="logo"><a href="/index.html"><img src="./index_img/logo_02.png" alt=""></a></h1>
-                    <ul class="login">
-                        <li><a href="#">로그인</a><span>|</span>
-                            <p class="lang">한국(한국어)<span>/ </span>KRW</p>
-                            <p class="lang_img"></p>
-                        </li>
-                    </ul>
-                    <nav>
-                        <ul class="nav_all">
-                            <li class="open1">
-                                <a href="#">예약</a>
-                            </li>
-                            <li class="open2">
-                                <a href="#">서비스</a>
-                            </li>
-                            <li class="open3">
-                                <a href="#">프로모션</a>
-                            </li>
-                            <li class="open4">
-                                <a href="#">나비포인트</a>
-                            </li>
-                            <li class="open5">
-                                <a href="#">부가 서비스</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="sub_nav reservation">
-                <div class="subnav_warp">
-                    <div>
-                        <a href="/index.html" class="subNav_title">항공권 예약</a>
-                        <a href="/index.html">예약</a>
-                        <a href="/UserPage/reservation/LCCpage/lcc.html">최저가 항공권</a>
-                    </div>
-                    <div>
-                        <a href="#" class="subNav_title">나의 예약</a>
-                        <a href="/UserPage/index/mypage/Mypage_main.html">예약 조회/변경/취소</a>
-                        <a href="/UserPage/index/mypage/Mypage_main.html">부가서비스 신청/취소</a>
-                        <a href="/UserPage/index/mypage/Mypage_main.html">웹/모바일 체크인</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/reservation/flight_info/flight.html" class="subNav_title">운항 정보</a>
-                        <a href="/UserPage/reservation/flight_info/flight.html?directId=flightCont1">스케줄 조회</a>
-                        <a href="/UserPage/reservation/flight_info/flight.html?directId=flightCont2">출도착 안내</a>
-                        <a href="/UserPage/reservation/flight_info/flight.html?directId=flightCont3">취향 노선 안내</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html" class="subNav_title">예약 및
-                            운임 안내</a>
-                        <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html?directId=fareRule1">예매
-                            서비스</a>
-                        <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html?directId=fareRule2">국내선
-                            운임</a>
-                        <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html?directId=fareRule3">국제선
-                            운임</a>
-                        <a href="/UserPage/reservation/freight_info/fareRules/fareRule.html?directId=fareRule4">비즈니스
-                            운임</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/reservation/discount_info/discount.html" class="subNav_title">할인안내</a>
-                        <a href="/UserPage/reservation/discount_info/discount.html?directId=discount1">가족운임 할인제도</a>
-                        <a href="/UserPage/reservation/discount_info/discount.html?directId=discount2">사용우대 프로그램</a>
-                        <a href="/UserPage/reservation/discount_info/discount.html?directId=discount3">제주도민 할인제도</a>
-                        <a href="/UserPage/reservation/discount_info/discount.html?directId=discount4">제외/명예도민 할인제도</a>
-                        <a href="/UserPage/reservation/discount_info/discount.html?directId=discount5">군산시민 할인제도</a>
-                    </div>
-                </div>
-            </div>
-            <div class="sub_nav service">
-                <div class="subnav_warp">
-                    <div>
-                        <a href="/UserPage/serviceCount/airport/counter/counter.html" class="subNav_title">공항서비스</a>
-                        <a href="/UserPage/serviceCount/airport/counter/counter.html">공항카운터 안내</a>
-                        <a href="/UserPage/serviceCount/airport/baggage/baggage.html">수하물</a>
-                        <a href="/UserPage/serviceCount/airport/help/help.html">도움이 필요하신 고객</a>
-                        <a href="/UserPage/serviceCount/airport/checkinfo/checkinfo.html">체크인 안내</a>
-                        <a href="/UserPage/serviceCount/airport/arrivalCard/arrivalcard.html">입국신고서 작성 안내</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/serviceCount/aircraft/guide/guide.html" class="subNav_title">기내 서비스</a>
-                        <a href="/UserPage/serviceCount/aircraft/guide/guide.html">기내 여행 가이드</a>
-                        <a href="/UserPage/serviceCount/aircraft/Shopping/cabinShopping.html">기내유상판매</a>
-                        <a href="/UserPage/serviceCount/aircraft/taxFree/taxFree.html">기내 면세품</a>
-                        <a href="/UserPage/serviceCount/aircraft/jiniInsight/jiniInsight.html">기내 매거진</a>
-                        <a href="/UserPage/serviceCount/aircraft/eventflight/eventflight.html">이벤트 플라잇</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/serviceCount/optional/bundle/bundle.html" class="subNav_title">부가 서비스</a>
-                        <a href="/UserPage/serviceCount/optional/bundle/bundle.html">번들 서비스</a>
-                        <a href="/UserPage/serviceCount/optional/seat/seat.html">사전좌석지정</a>
-                        <a href="/UserPage/serviceCount/optional/airlineFood/airlineFood.html">기내식</a>
-                        <a href="/UserPage/serviceCount/optional/jiniPlay/jiniPlay.html">기내 엔터테인먼트</a>
-                    </div>
-                </div>
-            </div>
-            <div class="sub_nav benefit">
-                <div class="subnav_warp">
-                    <div>
-                        <a href="/UserPage/promotion/event/nowLeave.html" class="subNav_title">프로모션</a>
-                        <a href="/UserPage/promotion/event/nowLeave.html">이벤트</a>
-                        <a href="/UserPage/promotion/jinicoupon/jiniCoupon.html">지니쿠폰</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/promotion/card_exchange/associatedCard.html" class="subNav_title">카드 및 환전
-                            혜택</a>
-                        <a href="/UserPage/promotion/card_exchange/associatedCard.html?directId=associatedCard1">제휴
-                            카드</a>
-                        <a href="/UserPage/promotion/card_exchange/associatedCard.html?directId=associatedCard2">환율
-                            우대</a>
-                        <a href="/UserPage/promotion/card_exchange/associatedCard.html?directId=associatedCard3">무이자
-                            할부</a>
-                    </div>
-                </div>
-            </div>
-            <div class="sub_nav point">
-                <div class="subnav_warp">
-                    <div>
-                        <a href="/UserPage/index/mypage/Mypage_point.html" class="subNav_title">나의 나비포인트</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/nabipoint/pointList.html" class="subNav_title">적립안내</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/nabipoint/pointList.html" class="subNav_title">사용안내</a>
-                    </div>
-                </div>
-            </div>
-            <div class="sub_nav optional">
-                <div class="subnav_warp">
-                    <div>
-                        <a href="https://jinistore.jinair.com/main.do" class="subNav_title">지니스토어</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/optional/jinipass/jinipass.html" class="subNav_title">보딩패스 할인</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/optional/activity/activity.html" class="subNav_title">액티비티</a>
-                        <a
-                            href="https://www.klook.com/ko/promo/jinairon?aff_adid=100885&aff_af_wid=8227&aid=8227&utm_medium=affiliate-alwayson&utm_source=non-network&utm_campaign=8227&utm_term=&utm_content=">클룩</a>
-                        <a href="https://www.yokosojapanpass.com/donki_fuel/public/coupon/index/0010789">돈키호테</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/optional/hotel/hotel.html" class="subNav_title">호텔</a>
-                        <a href="https://sp.booking.com/index.ko.html?aid=1486529&lang=ko">부킹닷컴</a>
-                        <a href="https://www.hotelscombined.co.kr/?languageCode=KO">호텔스 컴바인</a>
-                        <a href="https://kr.trip.com/hotels?locale=ko-KR&allianceid=1307583&sid=4088763">트립닷컴</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/optional/rentcar/rentcar.html" class="subNav_title">차량서비스</a>
-                        <a
-                            href="https://www.skcarrental.com/rent/frame/wps/reservation.do?corpNm=jinAir&corpCd=&result=0000&resultMessage=ok">SK렌트카</a>
-                        <a href="https://www.rentalcars.com/?affiliateCode=jinair&adplat=jinimall&preflang=ko">렌탈카스</a>
-                        <a href="https://jinair.happartners.com/index.php/booking/plantrip">허츠렌트카</a>
-                        <a href="https://tagogayo.co.kr/?ali=jinair15">공항 벤</a>
-                    </div>
-                    <div>
-                        <a href="/UserPage/optional/insurance/insurance.html" class="subNav_title">여행 안심 서비스</a>
-                        <a href="/UserPage/optional/insurance/Chubb.html">Chubb 해외 여행보험</a>
-                        <a href="/UserPage/optional/insurance/insurance3.html">Assistcard 여행토탈케어</a>
-                    </div>
-                </div>
-            </div>
-            <!--상단 메뉴 끝-->
-        </header>
+        <div th:replace="userpage/fragment/menu :: menu"></div>
         <!--header 끝-->
         <!--container-->
         <form action="#">
@@ -258,20 +86,20 @@
                             <table>
                                 <tr>
                                     <td class="cursor menu1">
-                                        <img src="./img/menu1.png" alt="메뉴1" class="menu1img">
-                                        <img src="./img/menu1.png" alt="메뉴1색상반전" class="menu1_invert">사전좌석지정
+                                        <img src="/userpage/lib/img/menu1.png" alt="메뉴1" class="menu1img">
+                                        <img src="/userpage/lib/img/menu1.png" alt="메뉴1색상반전" class="menu1_invert">사전좌석지정
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="cursor menu2">
-                                        <img src="./img/menu2.png" alt="메뉴2" class="menu2img">
-                                        <img src="./img/menu2.png" alt="메뉴2색상반전" class="menu2_invert">초과수하물
+                                        <img src="/userpage/lib/imgg/menu2.png" alt="메뉴2" class="menu2img">
+                                        <img src="/userpage/lib/img/menu2.png" alt="메뉴2색상반전" class="menu2_invert">초과수하물
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="cursor menu3">
-                                        <img src="./img/menu3.png" alt="메뉴3" class="menu3img">
-                                        <img src="./img/menu3.png" alt="메뉴3색상반전" class="menu3_invert">여행보험
+                                        <img src="/userpage/lib/img/menu3.png" alt="메뉴3" class="menu3img">
+                                        <img src="/userpage/lib/img/menu3.png" alt="메뉴3색상반전" class="menu3_invert">여행보험
                                 </tr>
                                 </tr>
                                 <tr>
@@ -298,7 +126,7 @@
                             <div class="passenger_info_wrap passenger_info_wrap1">
                                 <div class="passenger_info">
                                     <h3>탑승객 1</h3>
-                                    <p><img src="./img/ico-person.png" alt=""><span>유/영은</span></p>
+                                    <p><img src="/userpage/lib/img/ico-person.png" alt=""><span>유/영은</span></p>
                                     <p class="select_seat_num select_seat_num1">
                                         <span class="seat_num seat_num1"></span>
                                         <span class="close cursor">x</span>
@@ -313,7 +141,7 @@
                             <div class="seat_info_wrap seat_info_wrap1">
                                 <div class="seat_info">
                                     <div class="info seat_info_mod cursor">
-                                        <img src="./img/seat.png" alt="" width="23px"><span>좌석안내</span>
+                                        <img src="/userpage/lib/img/seat.png" alt="" width="23px"><span>좌석안내</span>
                                     </div>
                                     <div class="jini_stretch seat_box">
                                         <p class="box1 box"></p>
@@ -386,7 +214,7 @@
                             <div class="select_seat_wrap select_seat_wrap1">
                                 <div class="select_seat select_seat1">
                                     <div class="top_toilet_area toilet_area">
-                                        <img src="./img/toilet.png" alt="" height="60px">
+                                        <img src="/userpage/lib/img/toilet.png" alt="" height="60px">
                                     </div>
                                     <div class="top_exit_area exit_area">
                                         <p class="exit1">비상구</p>
@@ -848,21 +676,21 @@
                                             <div class="row">50</div>
                                             <div class="right_seat">
                                                 <input type="checkbox" id="D50" value="D50" class="SSC">
-                                                <label for="D50" for="D50 class=" seat_sel box6">D50</label>
+                                                <label for="D50" class=" seat_sel box6">D50</label>
                                                 <input type="checkbox" id="E50" value="E50" class="SSC">
-                                                <label for="E50" for="E50 class=" seat_sel box6">E50</label>
+                                                <label for="E50" class=" seat_sel box6">E50</label>
                                                 <input type="checkbox" id="F50" value="F50" class="SSC">
-                                                <label for="F50" for="F50 class=" seat_sel box6">F50</label>
+                                                <label for="F50" class=" seat_sel box6">F50</label>
                                             </div>
                                         </div>
                                         <div class="seat">
                                             <div class="left_seat">
                                                 <input type="checkbox" id="A51" value="A51" class="SSC">
-                                                <label for="A51" for="A51 class=" seat_sel box6">A51</label>
+                                                <label for="A51" class=" seat_sel box6">A51</label>
                                                 <input type="checkbox" id="B51" value="B51" class="SSC">
-                                                <label for="B51" for="B51 class=" seat_sel box6">B51</label>
+                                                <label for="B51" class=" seat_sel box6">B51</label>
                                                 <input type="checkbox" id="C51" value="C51" class="SSC">
-                                                <label for="C51" for="C51 class=" seat_sel box6">C51</label>
+                                                <label for="C51" class=" seat_sel box6">C51</label>
                                             </div>
                                             <div class="row">51</div>
                                             <div class="right_seat">
@@ -1029,7 +857,7 @@
                                     </div>
 
                                     <div class="bottom_toilet_area toilet_area"><img src="./img/toilet.png" alt=""><img
-                                            src="./img/toilet.png" alt=""></div>
+                                            src="/userpage/lib/img/toilet.png" alt=""></div>
                                     <div class="bottom_exit_area exit_area">
                                         <p class="exit1">비상구</p>
                                         <p class="exit2">비상구</p>
@@ -1050,7 +878,7 @@
                             <div class="passenger_info_wrap passenger_info_wrap2">
                                 <div class="passenger_info">
                                     <h3>탑승객 1</h3>
-                                    <p><img src="./img/ico-person.png" alt=""><span>유/영은</span></p>
+                                    <p><img src="/userpage/lib/img/ico-person.png" alt=""><span>유/영은</span></p>
                                     <p class="select_seat_num select_seat_num2">
                                         <span class="seat_num seat_num2"></span>
                                         <span class="close cursor">x</span>
@@ -1065,7 +893,7 @@
                             <div class="seat_info_wrap seat_info_wrap2">
                                 <div class="seat_info">
                                     <div class="info seat_info_mod cursor">
-                                        <img src="./img/seat.png" alt="" width="23px"><span>좌석안내</span>
+                                        <img src="/userpage/lib/img/seat.png" alt="" width="23px"><span>좌석안내</span>
                                     </div>
                                     <div class="jini_stretch seat_box">
                                         <p class="box1 box"></p>
@@ -1137,7 +965,7 @@
                             <div class="select_seat_wrap2  select_seat_wrap">
                                 <div class="select_seat select_seat2">
                                     <div class="top_toilet_area toilet_area">
-                                        <img src="./img/toilet.png" alt="" height="60px">
+                                        <img src="/userpage/lib/img/toilet.png" alt="" height="60px">
                                     </div>
                                     <div class="top_exit_area exit_area">
                                         <p class="exit1">비상구</p>
@@ -1265,7 +1093,7 @@
                                                 <input type="checkbox" id="2_E33" value="E33" class="SSC2">
                                                 <label for="2_E33" class="seat_sel box5">E33</label>
                                                 <input type="checkbox" id="2_F33" value="F33" class="SSC2">
-                                                <label for="2_33" class="seat_sel box5">F33</label>
+                                                <label for="2_F33" class="seat_sel box5">F33</label>
                                             </div>
                                         </div>
                                         <div class="seat">
@@ -1389,7 +1217,7 @@
                                                 <input type="checkbox" id="2_B40" value="B40" class="SSC2">
                                                 <label for="2_B40" class="seat_sel box7">B40</label>
                                                 <input type="checkbox" id="2_C40" value="C40" class="SSC2">
-                                                <label for="2_40" class="seat_sel box7">C40</label>
+                                                <label for="2_C40" class="seat_sel box7">C40</label>
                                             </div>
                                             <div class="row">40</div>
                                             <div class="right_seat">
@@ -1408,7 +1236,7 @@
                                                 <input type="checkbox" id="2_B41" value="B41" class="SSC2">
                                                 <label for="2_B41" class="seat_sel box7">B41</label>
                                                 <input type="checkbox" id="2_C41" value="C41" class="SSC2">
-                                                <label for="2_41" class="seat_sel box7">C41</label>
+                                                <label for="2_C41" class="seat_sel box7">C41</label>
                                             </div>
                                             <div class="row">41</div>
                                             <div class="right_seat">
@@ -1497,7 +1325,7 @@
                                                 <input type="checkbox" id="2_B45" value="B45" class="SSC2">
                                                 <label for="2_B45" class="seat_sel box6">B45</label>
                                                 <input type="checkbox" id="2_C45" value="C45" class="SSC2">
-                                                <label for="2_45" class="seat_sel box6">C45</label>
+                                                <label for="2_C45" class="seat_sel box6">C45</label>
                                             </div>
                                             <div class="row">45</div>
                                             <div class="right_seat">
@@ -1597,21 +1425,21 @@
                                             <div class="row">50</div>
                                             <div class="right_seat">
                                                 <input type="checkbox" id="2_D50" value="D50" class="SSC2">
-                                                <label for="2_D50" for="D50 class=" seat_sel box6">D50</label>
+                                                <label for="2_D50" class=" seat_sel box6">D50</label>
                                                 <input type="checkbox" id="2_E50" value="E50" class="SSC2">
-                                                <label for="2_E50" for="E50 class=" seat_sel box6">E50</label>
+                                                <label for="2_E50" class=" seat_sel box6">E50</label>
                                                 <input type="checkbox" id="2_F50" value="F50" class="SSC2">
-                                                <label for="2_F50" for="F50 class=" seat_sel box6">F50</label>
+                                                <label for="2_F50" class=" seat_sel box6">F50</label>
                                             </div>
                                         </div>
                                         <div class="seat">
                                             <div class="left_seat">
                                                 <input type="checkbox" id="2_A51" value="A51" class="SSC2">
-                                                <label for="2_A51" for="A51 class=" seat_sel box6">A51</label>
+                                                <label for="2_A51" class=" seat_sel box6">A51</label>
                                                 <input type="checkbox" id="2_B51" value="B51" class="SSC2">
-                                                <label for="2_B51" for="B51 class=" seat_sel box6">B51</label>
+                                                <label for="2_B51" class=" seat_sel box6">B51</label>
                                                 <input type="checkbox" id="2_C51" value="C51" class="SSC2">
-                                                <label for="2_C51" for="C51 class=" seat_sel box6">C51</label>
+                                                <label for="2_C51" class=" seat_sel box6">C51</label>
                                             </div>
                                             <div class="row">51</div>
                                             <div class="right_seat">
@@ -1776,8 +1604,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="bottom_toilet_area toilet_area"><img src="./img/toilet.png" alt=""><img
-                                            src="./img/toilet.png" alt=""></div>
+                                    <div class="bottom_toilet_area toilet_area">
+                                        <img src="/userpage/lib/img/toilet.png" alt="">
+                                        <img src="/userpage/lib/img/toilet.png" alt="">
+                                    </div>
                                     <div class="bottom_exit_area exit_area">
                                         <p class="exit1">비상구</p>
                                         <p class="exit2">비상구</p>
@@ -1815,9 +1645,9 @@
                             <div class="passenger_info_wrap">
                                 <div class="passenger_info">
                                     <h3>탑승객 1</h3>
-                                    <p><img src="./img/ico-person.png" alt=""><span>유/영은</span></p>
+                                    <p><img src="/userpage/lib/img/ico-person.png" alt=""><span>유/영은</span></p>
 
-                                    <p class="section1 section"><img src="./img/airplane2.png" alt="비행기">구간1</p>
+                                    <p class="section1 section"><img src="/userpage/lib/img/airplane2.png" alt="비행기">구간1</p>
                                     <p class="select_bagg_price select_bagg_price1">
                                         <span class="select_bagg"></span>
                                         <span class="close cursor">x</span>
@@ -1825,7 +1655,7 @@
                                     <p class="bot_bagg_price bot_bagg_price1"><span class="cur">KRW</span><span
                                             class="price"></span></p>
 
-                                    <p class="section2 section"><img src="./img/airplane2.png" alt="비행기">구간2</p>
+                                    <p class="section2 section"><img src="/userpage/lib/img/airplane2.png" alt="비행기">구간2</p>
                                     <p class="select_bagg_price select_bagg_price2">
                                         <span class="select_bagg"></span>
                                         <span class="close cursor">x</span>
@@ -1839,7 +1669,7 @@
                             <div class="select_baggage_wrap">
                                 <div class="baggage_wrap">
                                     <div class="baggage_1">
-                                        <p class="section1 section"><img src="./img/airplane2.png" alt="비행기">구간1(탑승객 1)
+                                        <p class="section1 section"><img src="/userpage/lib/img/airplane2.png" alt="비행기">구간1(탑승객 1)
                                         </p>
                                         <select name="bagg1" id="bagg1">
                                             <option value="">초과수하물 추가 선택</option>
@@ -1850,7 +1680,7 @@
                                         </select>
                                     </div>
                                     <div class="baggage_2">
-                                        <p class="section1 section"><img src="./img/airplane2.png" alt="비행기">구간2(탑승객 1)
+                                        <p class="section1 section"><img src="/userpage/lib/img/airplane2.png" alt="비행기">구간2(탑승객 1)
                                         </p>
                                         <select name="bagg2" id="bagg2">
                                             <option value="">초과수하물 추가 선택</option>
@@ -1885,7 +1715,7 @@
                                 <div class="passenger_info_wrap">
                                     <div class="passenger_info">
                                         <h3>탑승객 1</h3>
-                                        <p><img src="./img/ico-person.png" alt=""><span>유/영은</span></p>
+                                        <p><img src="/userpage/lib/img/ico-person.png" alt=""><span>유/영은</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -1902,16 +1732,17 @@
                                         <p class="ins_menu2 ins_menu">Step 2 안내 확인 및 동의</p>
                                     </div>
                                     <div class="insContent1 insContent">
-                                        <p class="tit_img"><img src="./img/airplane2.png" alt="비행기"><span>여행 국가 | 한국
-                                                </sp>
+                                        <p class="tit_img"><img src="/userpage/lib/img/airplane2.png" alt="비행기">
+                                            <span>여행 국가 | 한국</span>
                                         </p>
                                         <hr>
-                                        <p class="tit_img"><img src="./img/airplane2.png" alt="비행기"><span>여행 기간</span>
+                                        <p class="tit_img"><img src="/userpage/lib/img/airplane2.png" alt="비행기"><span>여행 기간</span>
                                         </p>
                                         <div class="date_wrap">
-                                            <input type="text" id="start_date" value="2022-02-16"
-                                                class="date"></input><span>부터</span><input type="date" id="end_date"
-                                                class="date date2"></input><span>까지</span>
+                                            <input type="text" id="start_date" value="2022-02-16"class="date"/>
+                                            <span>부터</span>
+                                            <input type="date" id="end_date"class="date date2"/>
+                                            <span>까지</span>
                                         </div>
                                         <ul>
                                             <li>보험은 일자 별로 신청 가능하며 1일 적용 기준은 00시~24시 입니다.</li>
@@ -2081,7 +1912,7 @@
                                     <div class="modal_insurance_info_wrap">
                                         <div class="title">
                                             <span>보험계약 중요 안내사항</span><span class="close cursor"><img
-                                                    src="./img/close.png" alt=""></span>
+                                                    src="/userpage/lib/img/close.png" alt=""></span>
                                         </div>
                                         <div class="content">
                                             <table class="product_int">
@@ -2562,7 +2393,7 @@
                                     <div class="modal_agreement_wrap">
                                         <div class="title">
                                             <span class="txt">여행자보험 가입규약 및 개인정보 제3자 제공 동의</span>
-                                            <span class="close cursor"><img src="./img/close.png" alt="닫기"></span>
+                                            <span class="close cursor"><img src="/userpage/lib/img/close.png" alt="닫기"></span>
                                         </div>
                                         <div class="content">
                                             <h2>단체(취급)여행보험 가입규약</h2>
@@ -2613,7 +2444,7 @@
                                                 자동 체크인 서비스 유의사항
                                             </span>
                                             <span class="tit_close cursor">
-                                                <img src="./img/close.png" alt="닫기" width="30px">
+                                                <img src="/userpage/lib/img/close.png" alt="닫기" width="30px">
                                             </span>
                                         </div>
                                         <div class="modal_contents">
@@ -2670,7 +2501,7 @@
                                 부가 서비스 신청내역
                             </span>
                             <span class="tit_close">
-                                <img src="./img/close.png" alt="닫기" width="30px">
+                                <img src="/userpage/lib/img/close.png" alt="닫기" width="30px">
                             </span>
                         </div>
                         <div class="modal_contents">
@@ -2804,7 +2635,7 @@
                             <div class="tit_text">
                                 무료 수하물 / 무료 기내식 안내
                             </div>
-                            <div class="close"><img src="./img/close.png" alt="닫기" width="30px" class="cursor"></div>
+                            <div class="close"><img src="/userpage/lib/img/close.png" alt="닫기" width="30px" class="cursor"></div>
                         </div>
                         <div class="modal_content_wrap">
                             <div class="modal_menu_wrap">
@@ -2973,7 +2804,7 @@
                     <div class="modal_notice_wrap">
                         <div class="modal_title">
                             <p class="tit_text">비상구 좌석 지정 시 유의 사항 안내</p>
-                            <span class="close cursor"><img src="./img/close.png" alt="닫기"></span>
+                            <span class="close cursor"><img src="/userpage/lib/img/close.png" alt="닫기"></span>
                         </div>
                         <div class="modal_content_wrap">
                             <div class="content">
@@ -3070,7 +2901,7 @@
                                         <td class="curr">(통화:KRW)</td>
                                     </tr>
                                 </table>
-                                <div id="info_table_wrap">
+                                <div class="info_table_wrap">
                                     <table class="price_info_wrap price_info_wrap1">
                                         <colgroup>
                                             <col width="80%">
@@ -3091,8 +2922,8 @@
                                         <tr>
                                             <td>
                                                 <p class="plus cursor">
-                                                    더보기<img src="./img/curr.PNG" alt="" class="plus_1"><img
-                                                        src="./img/min.PNG" alt="" class="minus_1">
+                                                    더보기<img src="/userpage/lib/img/curr.PNG" alt="" class="plus_1"><img
+                                                        src="/userpage/lib/img/min.PNG" alt="" class="minus_1">
                                                 </p>
                                             </td>
                                         </tr>
@@ -3199,7 +3030,7 @@
                                         <td class="curr">(통화:KRW)</td>
                                     </tr>
                                 </table>
-                                <div id="info_table_wrap">
+                                <div class="info_table_wrap">
                                     <table class="price_info_wrap">
                                         <colgroup>
                                             <col width="80%">
@@ -3221,8 +3052,8 @@
                                         <tr>
                                             <td>
                                                 <p class="plus cursor">
-                                                    더보기<img src="./img/curr.PNG" alt="" class="plus_2"><img
-                                                        src="./img/min.PNG" alt="" class="minus_2">
+                                                    더보기<img src="/userpage/lib/img/curr.PNG" alt="" class="plus_2"><img
+                                                        src="/userpage/lib/img/min.PNG" alt="" class="minus_2">
                                                 </p>
                                             </td>
                                         </tr>
@@ -3259,148 +3090,16 @@
                 </div>
                 <!--fix_bott 총액 확인 끝-->
             </div>
-    </div>
-    </form>
-    <!--container 끝-->
-    <div class="modal"></div>
-    <!-- 푸터-->
-    <div id="footerCont">
-        <!--푸터-->
-        <div id="foot_topwraper">
-            <div id="foot_top">
-                <!--위쪽 푸터-->
-                <div id="top_menu">
-                    <!--상단메뉴 컨테이너-->
-                    <div class="menu_wrap">
-                        <!--첫번째 메뉴-->
-                        <p class="men_tit"><a href="">회사안내</a></p>
-                        <!--메뉴 타이틀-->
-                        <ul class="horiz">
-                            <!--하위 메뉴 컨테이너-->
-                            <li><a href="">공지사항</a></li>
-                            <li><a href="">채용정보</a></li>
-                            <li><a href="">CEO인사말</a></li>
-                            <li><a href="">기업개요</a></li>
-                            <li><a href="">기업지배구조</a></li>
-                            <li><a href="">윤리경영</a></li>
-                            <li><a href="">CI소개</a></li>
-                            <li><a href="">항공기 소개</a></li>
-                            <li><a href="">투자정보</a></li>
-                            <li><a href="">화물운송</a></li>
-                            <li><a href="">홍보센터</a></li>
-                        </ul>
-                    </div>
-                    <div class="menu_wrap">
-                        <!--두번째 메뉴-->
-                        <p class="men_tit"><a href="">약관 및 안내</a></p>
-                        <!--메뉴 타이틀-->
-                        <ul class="horiz">
-                            <!--하위 메뉴 컨테이너-->
-                            <li class="f_black"><a href=""><b>개인정보 처리방침</b></a></li>
-                            <li><a href="">홈페이지 이용약관</a></li>
-                            <li><a href="">여객운송약관 및 기타 고지사항</a></li>
-                            <li><a href="">항공교통이용자 서비스 계획</a></li>
-                            <li><a href="">피해구제계획</a></li>
-                            <li><a href="">e-티켓 확인증 법적 고지문</a></li>
-                            <li><a href="">사이트맵</a></li>
-                        </ul>
-                    </div>
-                    <div class="menu_wrap">
-                        <!--세번째 메뉴-->
-                        <p class="men_tit"><a href="">고객서비스</a></p>
-                        <!--메뉴 타이틀-->
-                        <ul class="horiz">
-                            <!--하위 메뉴 컨테이너-->
-                            <li><a href="">자주 묻는 질문(FAQ)</a></li>
-                            <li><a href="">고객의 말씀(Q&A)</a></li>
-                            <li><a href="">기내 유실물 찾기</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!--상단메뉴 컨테이너 끝-->
-
-            </div>
-            <!--위쪽푸터 끝-->
-        </div>
-        <div id="foot_bottwraper">
-            <div id="foot_bott">
-                <!--아래쪽 푸터-->
-                <div id="bott_menu">
-                    <!--하단메뉴 컨테이너-->
-                    <div id="app_ico">
-                        <!--apple icon-->
-                        <ul class="Sicon">
-                            <!--sns icon-->
-                            <li><a href="">
-                                    <p class="twit circle">트위터</p>
-                                </a></li>
-                            <li><a href="">
-                                    <p class="faceb circle">페이스북</p>
-                                </a></li>
-                            <li><a href="">
-                                    <p class="youtub circle">유튜브</p>
-                                </a></li>
-                            <li><a href="">
-                                    <p class="insta circle">인스타</p>
-                                </a></li>
-                            <li><a href="">
-                                    <p class="blog circle">블로그</p>
-                                </a></li>
-                        </ul>
-                        <ul class="Aicon">
-                            <!--app icon-->
-                            <li class="Aicon_txt">APP 다운로드</li>
-                            <li><a href=""><img src="./index_img/ico_apple.png" alt=""></a></li>
-                            <li><a href=""><img src="./index_img/google.PNG" alt=""></a></li>
-                        </ul>
-                        <ul class="site">
-                            <li><a href="#">
-                                    <p class="sit circle">대리점 사이트</p>
-                                </a></li>
-                            <li class="Aicon_txt">대리점 사이트 바로가기</li>
-                        </ul>
-                    </div>
-                    <!--apple icon 끝-->
-                    <div id="news">
-                        <!--뉴스레터-->
-                        <ul>
-                            <li class="sub_txt">뉴스레터 신청</li>
-                        </ul>
-                        <ul class="mail_box">
-                            <li><input type="text" placeholder="Email Address"></li>
-                            <li><input type="submit"></li>
-                        </ul>
-                        <ul>
-                            <li><img src="./index_img/ico_isms.png" alt="인증"></li>
-                        </ul>
-                    </div>
-                    <!--뉴스레터 끝-->
-                    <div id="info">
-                        <!--정보-->
-                        <ul>
-                            <li>
-                                <b>고객서비스센터 1600-6200, 02-6099-1200</b>
-                                <p class="pdiv">업무시간 오전 08:00~오후 19:00</p>
-                            </li>
-                            <li class="small_txt">(주)진에어
-                                <p class="pdiv">대표이사 최정호</p>
-                                <p class="pdiv">사업자등록번호 121-81-89086</p>
-                                <p class="pdiv">통신판매업 신고번호 : 제2008-서울 강서-0408</p>
-                            </li>
-                            <li class="small_txt">주소 : 서울시 강서구 공항대로 453<p class="pdiv"></p>개인정보보호책임자 : 이광</li>
-                            <li class="small_txt">Copyright © JIN AIR. All Rights Reserved.</li>
-                        </ul>
-                    </div>
-                    <!--정보 끝-->
-                </div>
-                <!--하단메뉴 컨테이너 끝-->
-            </div>
-            <!--아래쪽 푸터 끝-->
-        </div>
-    </div>
-    <!--푸터 끝-->
+        </form>
+        <!--container 끝-->
     </div>
     <!--wrap 끝-->
+
+    <div class="modal"></div>
+    <!-- 푸터-->
+    <div th:replace="userpage/fragment/footer :: footer"></div>
+    <!--푸터 끝-->
+
     <div class="modal">
     </div>
     <!--퀵 메뉴-->
@@ -3409,7 +3108,7 @@
     <div id="modal_edit_jour_wrap">
         <div class="edit_jour_wrap">
             <div class="modal_edit_close">
-                <img class="modal_edit_close_btn cursor" src="./index_img/x_icon.png" alt="닫기">
+                <img class="modal_edit_close_btn cursor" src="/userpage/lib/img/x_icon.png" alt="닫기">
             </div>
             <div class="radio_wrap">
                 <input type="radio" value="왕복" id="round" class="cursor" name="tripType" checked>
@@ -3452,7 +3151,7 @@
                                             <span role="person-type-option" class="person_type2 person_font">소아
                                             </span>
                                             <button class="child_info_btn">
-                                                <img src="./index_img/ico_question.png" alt="질문">
+                                                <img src="/userpage/lib/img/ico_question.png" alt="질문">
                                             </button>
                                             <div class="child_modal">
                                                 <p>소아<em>(탑승일 기준)</em></p>
@@ -3481,7 +3180,7 @@
                                             <span role="person-type-option" class="person_type3 person_font">유아
                                             </span>
                                             <button class="baby_info_btn">
-                                                <img src="./index_img/ico_question.png" alt="질문">
+                                                <img src="/userpage/lib/img/ico_question.png" alt="질문">
                                             </button>
                                             <div class="infant_modal">
                                                 <p>유아<em>(탑승일 기준)</em></p>
@@ -3718,7 +3417,7 @@
                                             <span role="person-type-option" class="person_type2 person_font">소아
                                             </span>
                                             <button class="child_info_btn">
-                                                <img src="./index_img/ico_question.png" alt="질문">
+                                                <img src="/userpage/lib/img/ico_question.png" alt="질문">
                                             </button>
                                             <div class="child_modal">
                                                 <p>소아<em>(탑승일 기준)</em></p>
@@ -3747,7 +3446,7 @@
                                             <span role="person-type-option" class="person_type3 person_font">유아
                                             </span>
                                             <button class="baby_info_btn">
-                                                <img src="./index_img/ico_question.png" alt="질문">
+                                                <img src="/userpage/lib/img/ico_question.png" alt="질문">
                                             </button>
                                             <div class="infant_modal">
                                                 <p>유아<em>(탑승일 기준)</em></p>
@@ -3978,7 +3677,7 @@
                                             <span role="person-type-option" class="person_type2 person_font">소아
                                             </span>
                                             <button class="child_info_btn">
-                                                <img src="./index_img/ico_question.png" alt="질문">
+                                                <img src="/userpage/lib/img/ico_question.png" alt="질문">
                                             </button>
                                             <div class="child_modal">
                                                 <p>소아<em>(탑승일 기준)</em></p>
@@ -4007,7 +3706,7 @@
                                             <span role="person-type-option" class="person_type3 person_font">유아
                                             </span>
                                             <button class="baby_info_btn">
-                                                <img src="./index_img/ico_question.png" alt="질문">
+                                                <img src="/userpage/lib/img/ico_question.png" alt="질문">
                                             </button>
                                             <div class="infant_modal">
                                                 <p>유아<em>(탑승일 기준)</em></p>
@@ -4389,11 +4088,11 @@
             </table>
             <div class="calinner">
                 <div class="calscroll">
-                    <iframe src="./cal/cal.html" frameborder="0" id="ifm"></iframe>
+                    <iframe src="/pages/index/cal" frameborder="0" id="ifm"></iframe>
                 </div>
             </div>
         </div>
-        <div class="x_box"><img src="./img/image-removebg-preview.png" alt=""></div>
+        <div class="x_box"><img src="/userpage/lib/img/image-removebg-preview.png" alt=""></div>
     </div>
     <div class="cal2">
         <div class="calwrapper">
@@ -4414,11 +4113,11 @@
             </table>
             <div class="calinner">
                 <div class="calscroll">
-                    <iframe src="./cal/onewaycal.html" frameborder="0" id="ifm"></iframe>
+                    <iframe src="/pages/index/onewaycal" frameborder="0" id="ifm1"></iframe>
                 </div>
             </div>
         </div>
-        <div class="x_box"><img src="./img/image-removebg-preview.png" alt=""></div>
+        <div class="x_box"><img src="/userpage/lib/img/image-removebg-preview.png" alt=""></div>
     </div>
     <div class="cal3">
         <div class="calwrapper">
@@ -4439,11 +4138,11 @@
             </table>
             <div class="calinner">
                 <div class="calscroll">
-                    <iframe src="./cal/multical.html" frameborder="0" id="ifm"></iframe>
+                    <iframe src="/pages/index/multical" frameborder="0" id="ifm2"></iframe>
                 </div>
             </div>
         </div>
-        <div class="x_box"><img src="./img/image-removebg-preview.png" alt=""></div>
+        <div class="x_box"><img src="/userpage/lib/img/image-removebg-preview.png" alt=""></div>
     </div>
 </body>
 
