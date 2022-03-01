@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @SequenceGenerator(
-        name="seq_member_idx",
-        sequenceName = "seq_member_idx",
+        name="seq_visitor_idx",
+        sequenceName = "seq_visitor_idx",
         initialValue = 1,
         allocationSize = 1
 )

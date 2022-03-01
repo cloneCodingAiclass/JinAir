@@ -13,5 +13,6 @@ public class Menu {
     private String title;
     private String url;
     private String code;
+    private String id;
 
 }

@@ -466,26 +466,30 @@ public class PageController {
     @RequestMapping("/admin/scheduleRegist")
     public ModelAndView scheduleRegist() {
         return new ModelAndView("/adminpage/pages/schedule/sc_regist")
-                .addObject("code", "sc_regist");
+                .addObject("code", "sc_regist")
+                .addObject("schedule", menuService.getMenu());
     }
     // admin 스케줄 목록
     @RequestMapping("/admin/scheduleList")
     public ModelAndView scheduleList() {
         return new ModelAndView("/adminpage/pages/schedule/sc_list")
                 .addObject("code", "sc_list")
-                .addObject("menuList", menuService.getMenu());
+                .addObject("menuList", menuService.getMenu())
+                .addObject("schedule", menuService.scheduleMenu());
     }
     // admin 항공기 등록
     @RequestMapping("/admin/aircraftRegist")
     public ModelAndView aircraftRegist() {
         return new ModelAndView("/adminpage/pages/schedule/aircraft_regist")
-                .addObject("code", "aircraft_regist");
+                .addObject("code", "aircraft_regist")
+                .addObject("schedule", menuService.scheduleMenu());
     }
     // admin 항공기 조회
     @RequestMapping("/admin/aircraftList")
     public ModelAndView aircraftList() {
         return new ModelAndView("/adminpage/pages/schedule/aircraft_list")
-                .addObject("code", "aircraft_list");
+                .addObject("code", "aircraft_list")
+                .addObject("schedule", menuService.scheduleMenu());
     }
     //-------------------------------------------------------------------------------------------
 
@@ -495,7 +499,8 @@ public class PageController {
     public ModelAndView rsIndex() {
         return new ModelAndView("/adminpage/pages/reservation/rs_index")
                 .addObject("code", "rs_index")
-                .addObject("menuList", menuService.getMenu());
+                .addObject("menuList", menuService.getMenu())
+                .addObject("reservation", menuService.reservationMenu());
     }
     // 운항별 예약자 조회 결과
     @RequestMapping("/admin/rs_result")
@@ -507,7 +512,8 @@ public class PageController {
     @RequestMapping("/admin/rs_sch_result")
     public ModelAndView rsSchResult() {
         return new ModelAndView("/adminpage/pages/reservation/rs_sch_result")
-                .addObject("code", "rs_sch_result");
+                .addObject("code", "rs_sch_result")
+                .addObject("reservation", menuService.reservationMenu());
     }
     // 예약자 명 조회
     @RequestMapping("/admin/rs_sch")
@@ -557,13 +563,15 @@ public class PageController {
     public ModelAndView item() {
         return new ModelAndView("/adminpage/pages/item/item")
                 .addObject("code", "item")
-                .addObject("menuList", menuService.getMenu());
+                .addObject("menuList", menuService.getMenu())
+                .addObject("item", menuService.itemMenu());
     }
     // 유실물 추가
     @RequestMapping("/admin/item/itemadd")
     public ModelAndView itemAdd() {
         return new ModelAndView("/adminpage/pages/item/itemadd")
-                .addObject("code", "itemadd");
+                .addObject("code", "itemadd")
+                .addObject("item", menuService.itemMenu());
     }
     //-------------------------------------------------------------------------------------------
 
@@ -625,12 +633,14 @@ public class PageController {
     public ModelAndView usepointlist() {
         return new ModelAndView("/adminpage/pages/point/usepointlist")
                 .addObject("code", "usepointlist")
-                .addObject("menuList", menuService.getMenu());
+                .addObject("menuList", menuService.getMenu())
+                .addObject("point", menuService.pointMenu());
     }
     @RequestMapping("/admin/pointadd")
     public ModelAndView pointadd() {
         return new ModelAndView("/adminpage/pages/point/pointadd")
-                .addObject("code", "pointadd");
+                .addObject("code", "pointadd")
+                .addObject("point", menuService.pointMenu());
     }
     //-------------------------------------------------------------------------------------------
 
@@ -638,7 +648,8 @@ public class PageController {
     @RequestMapping("/admin/faq_main")
     public ModelAndView faqMain() {
         return new ModelAndView("/adminpage/pages/inquiry/faq_main")
-                .addObject("code", "faq_main");
+                .addObject("code", "faq_main")
+                .addObject("inquiry", menuService.qnaMenu());
     }
     @RequestMapping("/admin/faq_main1")
     public ModelAndView faqMain1() {
@@ -682,7 +693,8 @@ public class PageController {
     public ModelAndView qnaMain() {
         return new ModelAndView("/adminpage/pages/inquiry/qna_main")
                 .addObject("code", "qna_main")
-                .addObject("menuList", menuService.getMenu());
+                .addObject("menuList", menuService.getMenu())
+                .addObject("inquiry", menuService.qnaMenu());
     }
     // qna 댓글
     @RequestMapping("/admin/qna_reply")
@@ -708,13 +720,15 @@ public class PageController {
     @RequestMapping("/admin/couponadd")
     public ModelAndView couponAdd() {
         return new ModelAndView("/adminpage/pages/coupon/couponadd")
-                .addObject("code", "couponAdd");
+                .addObject("code", "couponAdd")
+                .addObject("coupon", menuService.couponMenu());
     }
     @RequestMapping("/admin/usecouponlist")
     public ModelAndView useCouponList() {
         return new ModelAndView("/adminpage/pages/coupon/usecouponlist")
                 .addObject("code", "useCouponList")
-                .addObject("menuList", menuService.getMenu());
+                .addObject("menuList", menuService.getMenu())
+                .addObject("coupon", menuService.couponMenu());
     }
     //-------------------------------------------------------------------------------------------
 
