@@ -1,0 +1,33 @@
+package com.project.jinair.model.entity.schedule;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@SequenceGenerator(
+        name ="seq_airplaneseat_idx",
+        sequenceName = "seq_airplaneseat_idx",
+        initialValue = 1,
+        allocationSize = 1
+)
+@EntityListeners(AuditingEntityListener.class)
+@Builder
+public class TbAirplaneSeat {   // 비행기 좌석 정보
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_airplaneseat_idx")
+    private Long as_index;
+    private String as_code;
+    private String as_price;
+    private Long ap_index;
+
+    private Long fk_as_idx;
+}
