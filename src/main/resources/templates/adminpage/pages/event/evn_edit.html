@@ -12,7 +12,7 @@
     <div id="wrap">
         <div th:replace="/adminpage/fragment/header :: header"></div>
         <div id="container">
-            <div th:replace="/adminpage/fragment/leftmenu :: leftmenu"></div>
+            <div th:replace="/adminpage/fragment/leftmenu :: leftmenu(${code}, ${menuList})"></div>
             <div class="contents">
                 <div class="contwrap">
                     <div class="event_wrap">
