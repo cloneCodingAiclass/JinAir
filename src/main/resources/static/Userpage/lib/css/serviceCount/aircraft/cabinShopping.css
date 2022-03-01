@@ -148,7 +148,7 @@ body{
 }
 #header .login > li .lang_img{
     display: inline-block;
-    background: url(./index_img/down.png) no-repeat right;
+    background: url("/userpage/lib/img/down.png") no-repeat right;
     background-size: 13px;
     width: 13px;
     height: 13px;
@@ -323,7 +323,7 @@ body{
     letter-spacing: 1.2px;
 }
 #container > .contentswrap > .discount > .title_img {
-    background: url(../img/icon_top.png) no-repeat center;
+    background: url("/userpage/lib/img/icon_top.png") no-repeat center;
     background-size: 75%;
     display: inline;
     width: 170px;
@@ -390,14 +390,14 @@ p.jini_sub{
 }
 .login_footer .list_wrap .login_fad_list .left{
     left: 0;
-    background: url(../img/left.png) no-repeat;
+    background: url("/userpage/lib/img/left.png") no-repeat;
     background-size: 30%;
     background-position: 0% 50%;
 }
 
 .login_footer .list_wrap .login_fad_list .right{
     right: 3px;
-    background: url(../img/right.png) no-repeat;
+    background: url("/userpage/lib/img/right.png") no-repeat;
     background-size: 30%;
     background-position: 100% 50%;
 }
@@ -429,7 +429,7 @@ p.jini_sub{
 .jini_left > .jini_img{
     width: 300px;
     height: 400px;
-    background: url(../img/img_jini_store.jpg) no-repeat;
+    background: url("/userpage/lib/img/img_jini_store.jpg") no-repeat;
 }
 .jini_left > input[type="button"]{
     width: 283px;
@@ -623,28 +623,28 @@ p.jini_box_text1{
     background-color: rgb(248, 248, 248);
 }
 .Sicon .twit {
-    background-image: url('../../../../../index_img/twitter.png');
+    background-image: url("/userpage/lib/img/twitter.png");
     background-size: 70%;    opacity: 0.7;
     margin-left: 10px
     !important;
 }
 .Sicon .faceb {
-    background-image: url('../../../../../index_img/face.png');
+    background-image: url("/userpage/lib/img/face.png");
     background-size: 50%;    opacity: 0.8;
     margin-left: 4px
 }
 .Sicon .youtub {
-    background-image: url('../../../../../index_img/youtube.png');
+    background-image: url("/userpage/lib/img/youtube.png");
     background-size: 45%;   opacity: 0.6;
     margin-left: 4px
 }
 .Sicon .insta {
-    background-image: url('../../../../../index_img/insta.png');
+    background-image: url("/userpage/lib/img/insta.png");
     background-size: 60%;    opacity: 0.8;
     margin-left: 4px
 }
 .Sicon .blog {
-    background-image: url('../../../../../index_img/blog.PNG');
+    background-image: url("/userpage/lib/img/blog.PNG");
     background-size: 140%;
     margin-left: 4px
 }
@@ -664,7 +664,7 @@ p.jini_box_text1{
 }
 .sit {
     margin-left: 10px;
-    background-image: url('../../../../../index_img/site.PNG');
+    background-image: url("/userpage/lib/img/site.PNG");
     background-size: 140%;
 }
 .Aicon img {
@@ -749,7 +749,7 @@ p.jini_box_text1{
     height: 45px;
     padding: 13px;
     left: -15px;
-    background-image: url('../../../../../index_img/btn_srch.gif');
+    background-image: url("/userpage/lib/img/btn_srch.gif");
     background-position: center;
     padding-top: 20px;
     border: none;
@@ -798,37 +798,37 @@ p.jini_box_text1{
     font-weight: bolder;
 }
 .quick1{
-    background: url(../img/quick_1.png)no-repeat center;
+    background: url("/userpage/lib/img/quick_1.png")no-repeat center;
     background-size: 55%;
     background-position: 50% 20%;
 }
 .quick2{
-    background: url(../img/quick_2.png)no-repeat center;
+    background: url("/userpage/lib/img/quick_2.png")no-repeat center;
     background-size: 48%;
     background-position: 50% 20%;
 }
 .quick3{
-    background: url(../img/quick_3.png)no-repeat center;
+    background: url("/userpage/lib/img/quick_3.png")no-repeat center;
     background-size: 55%;
     background-position: 50% 25%;
 }
 .quick4{
-    background: url(../img/quick_4.png)no-repeat center;
+    background: url("/userpage/lib/img/quick_4.png")no-repeat center;
     background-size: 50%;
     background-position: 50% 20%;
 }
 .quick5{
-    background: url(../img/quick_5.png)no-repeat center;
+    background: url("/userpage/lib/img/quick_5.png")no-repeat center;
     background-size: 45%;
     background-position: 50% 20%;
 }
 .quick6{
-    background: url(../img/quick_6.png)no-repeat center;
+    background: url("/userpage/lib/img/quick_6.png")no-repeat center;
     background-size: 58%;
     background-position: 50% 20%;
 }
 .quick7{
-    background: url(../img/quick_7.png)no-repeat center;
+    background: url("/userpage/lib/img/quick_7.png")no-repeat center;
     background-size: 50%;
     background-position: 50% 20%;
 }
@@ -841,7 +841,7 @@ p.jini_box_text1{
     background-color: rgb(102, 30, 67);
 }
 .quicktop{
-    background: url(../img/quick_up.png)no-repeat center;
+    background: url("/userpage/lib/img/quick_up.png")no-repeat center;
     background-size: 27%;
     width: 100px;
     height: 20px;
