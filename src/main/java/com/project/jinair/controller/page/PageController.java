@@ -1,4 +1,4 @@
-package com.project.jinair.controller;
+package com.project.jinair.controller.page;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,12 +47,14 @@ public class PageController {
         return new ModelAndView("/userpage/pages/mypage/login/login")
                 .addObject("code", "login");
     }
+
     // 아이디/비밀번호 찾기
     @RequestMapping("/mypage/find_info")
     public ModelAndView findInfo() {
         return new ModelAndView("/userpage/pages/mypage/login/find_info")
                 .addObject("code", "findInfo");
     }
+
     // 아이디 찾기
     @RequestMapping("/mypage/find_id")
     public ModelAndView findId() {
@@ -71,6 +73,7 @@ public class PageController {
         return new ModelAndView("/userpage/pages/mypage/login/noResult")
                 .addObject("code", "noResult");
     }
+
     //-------------------------------------------------------------------------------------------
 
     // 마이페이지
@@ -427,6 +430,7 @@ public class PageController {
         return new ModelAndView("/userpage/pages/promotion/jinicoupon/jiniCoupon")
                 .addObject("code", "jinicoupon");
     }
+
 
 
 
