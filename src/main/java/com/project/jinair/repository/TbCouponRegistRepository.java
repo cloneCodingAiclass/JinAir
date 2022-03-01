@@ -10,10 +10,10 @@ import java.util.Optional;
 @Repository
 public interface TbCouponRegistRepository extends JpaRepository<TbCouponRegist, Long> {
     // 쿠폰코드
-    Optional<TbCouponRegist> findByCrCode(String CrCode);
+    Optional<TbCouponRegist> findByCrCode(String crCode);
 
-    // 쿠폰 타이틀
-    Optional<TbCouponRegist> findByCrRegdate(LocalDateTime regDate);
+    // 쿠폰 타입
+    Optional<TbCouponRegist> findByCrType(String crType);
 
 
 }
