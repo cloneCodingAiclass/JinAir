@@ -24,10 +24,10 @@ public class TbAirplaneSeat {   // 비행기 좌석 정보
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_airplaneseat_idx")
-    private Long as_index;
-    private String as_code;
-    private String as_price;
-    private Long ap_index;
+    private Long asIndex;
+    private String asCode;
+    private String asPrice;
+    private Long apIndex;
 
-    private Long fk_as_idx;
+    private Long fkAsIdx;
 }

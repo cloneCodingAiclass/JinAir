@@ -25,10 +25,10 @@ public class TbAirport {    // 항공 정보
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_airport_idx")
-    private Long apt_index;
-    private String apt_nation;
-    private String apt_airport;
-    private String apt_revtype;
-    private String apt_typedetail;
+    private Long aptIndex;
+    private String aptNation;
+    private String aptAirport;
+    private String aptRevType;
+    private String aptTypeDetail;
 
 }

@@ -27,13 +27,13 @@ public class TbSchedule {   // 스케줄 테이블
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_schedule_idx")
     private Long sch_index;
-    private LocalDateTime sch_departure_date;
-    private LocalDateTime sch_arrival_date;
-    private String sch_departure_point;
-    private String sch_arrival_point;
-    private Long sch_basic_price;
-    private String sch_airplane_type;
-    private Long sch_airplaneidex;
-    private Long sch_areaindex;
+    private LocalDateTime schDepartureDate;
+    private LocalDateTime schArrivalDate;
+    private String schDeparturePoint;
+    private String schArrivalPoint;
+    private Long schBasicPrice;
+    private String schAirplaneType;
+    private Long schAirplaneIdex;
+    private Long schAreaIndex;
 
 }

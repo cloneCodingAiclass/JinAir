@@ -24,8 +24,8 @@ public class TbAirplane {   // 비행기 정보
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_airplane_idx")
-    private Long ap_index;
-    private String ap_name;
-    private String ap_id;
-    private Long ap_seat;
+    private Long apIndex;
+    private String apName;
+    private String apId;
+    private Long apSeat;
 }
