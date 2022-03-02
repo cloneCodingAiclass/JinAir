@@ -34,5 +34,5 @@ public class TbSeatDetail { // 비행기 좌석 디테일
 
 
     @ManyToOne
-    private TbAirplane tbAirplane;
+    private TbAirport tbAirport;
 }
