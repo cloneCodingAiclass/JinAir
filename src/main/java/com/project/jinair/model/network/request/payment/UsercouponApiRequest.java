@@ -25,5 +25,4 @@ public class UsercouponApiRequest {
     private CouponStatus ucIsUse;
     private String ucTotcoupon;
 
-    private TbMember tbMember;
 }

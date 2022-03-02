@@ -19,5 +19,4 @@ public class QnaAnswerApiRequest {
     private String qaContent;
     private LocalDateTime qaRegdate;
 
-    private TbQna tbQna;
 }

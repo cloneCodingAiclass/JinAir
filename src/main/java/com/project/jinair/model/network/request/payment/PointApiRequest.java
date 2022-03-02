@@ -15,5 +15,4 @@ public class PointApiRequest {
     private Long pPoint;
     private String pMemo;
 
-    private TbMember tbMember;
 }

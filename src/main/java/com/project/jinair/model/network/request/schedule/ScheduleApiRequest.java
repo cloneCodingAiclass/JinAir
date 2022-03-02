@@ -18,7 +18,6 @@ public class ScheduleApiRequest {
     private String schDeparturePoint;
     private String schArrivalPoint;
     private Long schBasicPrice;
-
     private String schAirplaneType;
     private Long schAirplaneIdex;
     private Long schAreaIndex;

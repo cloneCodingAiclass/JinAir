@@ -16,7 +16,6 @@ public class ReserveApiRequest {
     private Long rIndex;
     private Long rPercentpoint;
     private PaymentStatus rStatus;
-
     private String rUserStatus;
     private String rReserNum;
     private String rPayment;
