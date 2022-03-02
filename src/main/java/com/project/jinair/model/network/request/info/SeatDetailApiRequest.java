@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class SeatDetailApiRequest {
-    private Long sd_index;
-    private String sd_id;
-    private AirplaneSeatStatus sd_status;
-    private Long sd_seatcnt;
+    private Long sdIndex;
+    private String sdId;
+    private AirplaneSeatStatus sdStatus;
+    private Long sdSeatcnt;
 
 }
