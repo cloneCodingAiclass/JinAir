@@ -18,6 +18,6 @@ public class QnaAnswerApiResponse {
     private String qaTitle;
     private String qaContent;
     private LocalDateTime qaRegdate;
+    private String qaQnaindex;
 
-    private TbQna tbQna;
 }

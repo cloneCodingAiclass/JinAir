@@ -14,6 +14,6 @@ public class PointApiResponse {
     private Long pIndex;
     private Long pPoint;
     private String pMemo;
+    private String pUserindex;
 
-    private TbMember tbMember;
 }

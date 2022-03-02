@@ -24,6 +24,6 @@ public class UsercouponApiResponse {
     private LocalDateTime ucEndday;
     private CouponStatus ucIsUse;
     private String ucTotcoupon;
+    private Long ucUserindex;
 
-    private TbMember tbMember;
 }

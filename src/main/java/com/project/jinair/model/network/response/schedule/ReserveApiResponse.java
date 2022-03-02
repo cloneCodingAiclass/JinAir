@@ -25,6 +25,7 @@ public class ReserveApiResponse {
     private Long rInsuranceidx;
     private Long rScheduleidx;
     private Long rTotal;
+    private Long rUserindex;
 
     // 여러 좌석을 예매시
     private List<ScheduleApiResponse> scheduleApiResponseList;

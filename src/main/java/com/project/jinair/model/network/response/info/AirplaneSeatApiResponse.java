@@ -11,10 +11,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SeatApiResponse {
+public class AirplaneSeatApiResponse {
     private Long asIndex;
     private String asCode;
     private String asPrice;
+    private Long ap_index;
 
     private List<SeatDetailApiResponse> seatDetailApiResponseList;
 }

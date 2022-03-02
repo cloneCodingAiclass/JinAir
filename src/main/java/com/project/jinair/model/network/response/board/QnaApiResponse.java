@@ -22,6 +22,7 @@ public class QnaApiResponse {
     private QnaStatus qnaIsans;
     private LocalDateTime qnaRegdate;
     private LocalDateTime qnaAnsdate;
+    private Long qnaUserindex;
 
     private List<QnaAnswerApiResponse> qnaAnswerApiResponseList;
 }
