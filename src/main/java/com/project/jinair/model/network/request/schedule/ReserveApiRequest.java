@@ -26,5 +26,4 @@ public class ReserveApiRequest {
     private Long rScheduleidx;
     private Long rTotal;
 
-    private List<ScheduleApiRequest> scheduleApiResponseList;
 }

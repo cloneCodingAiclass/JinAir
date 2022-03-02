@@ -17,5 +17,4 @@ public class AirplaneSeatApiResponse {
     private String asPrice;
     private Long ap_index;
 
-    private List<SeatDetailApiResponse> seatDetailApiResponseList;
 }

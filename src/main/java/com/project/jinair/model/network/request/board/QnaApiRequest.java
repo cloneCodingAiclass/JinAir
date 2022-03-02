@@ -22,5 +22,4 @@ public class QnaApiRequest {
     private LocalDateTime qnaRegdate;
     private LocalDateTime qnaAnsdate;
 
-    private List<QnaAnswerApiRequest> qnaAnswerApiResponseList;
 }
