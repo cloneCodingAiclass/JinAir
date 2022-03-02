@@ -14,5 +14,4 @@ public class Menu {
     private String url;
     private String code;
     private String id;
-
 }
