@@ -3,6 +3,7 @@ package com.project.jinair.model.entity.member;
 import com.project.jinair.model.entity.board.TbQna;
 import com.project.jinair.model.entity.payment.TbPoint;
 import com.project.jinair.model.entity.payment.TbUsercoupon;
+import com.project.jinair.model.entity.schedule.TbReservation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -57,7 +58,7 @@ public class TbMember { // 회원 테이블
     private List<TbPoint> tbPointList;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember") // 하나의 카테고리에 여러게의 파트너가 연결
-    private List<TbMember> tbMemberList;
+    private List<TbReservation> tbReservationsList;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember") // 하나의 카테고리에 여러게의 파트너가 연결
     private List<TbUsercoupon> tbUsercouponList;
