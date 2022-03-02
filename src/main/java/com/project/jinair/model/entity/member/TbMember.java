@@ -1,5 +1,8 @@
 package com.project.jinair.model.entity.member;
 
+import com.project.jinair.model.entity.board.TbQna;
+import com.project.jinair.model.entity.payment.TbPoint;
+import com.project.jinair.model.entity.payment.TbUsercoupon;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -48,4 +52,16 @@ public class TbMember { // 회원 테이블
     private String memSnsIsagree;
     @CreatedDate
     private LocalDateTime memRegdate;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember") // 하나의 카테고리에 여러게의 파트너가 연결
+    private List<TbPoint> tbPointList;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember") // 하나의 카테고리에 여러게의 파트너가 연결
+    private List<TbMember> tbMemberList;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember") // 하나의 카테고리에 여러게의 파트너가 연결
+    private List<TbUsercoupon> tbUsercouponList;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember") // 하나의 카테고리에 여러게의 파트너가 연결
+    private List<TbQna> tbQnaList;
 }
