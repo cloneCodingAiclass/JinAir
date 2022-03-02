@@ -2,6 +2,7 @@ package com.project.jinair.model.network.response.member;
 
 import com.project.jinair.model.enumclass.GenderStatus;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
+import com.project.jinair.model.network.response.payment.PointApiResponse;
 import com.project.jinair.model.network.response.payment.UsercouponApiResponse;
 import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
 import lombok.AllArgsConstructor;
@@ -45,4 +46,7 @@ public class MemberApiResponse {
 
     // QnA 리스트
     private List<QnaApiResponse> qnaApiResponseList;
+
+    // 포인트 리스트
+    private List<PointApiResponse> pointApiResponseList;
 }
