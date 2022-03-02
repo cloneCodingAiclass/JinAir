@@ -25,13 +25,13 @@ import javax.persistence.*;
 public class TbSeatDetail { // 비행기 좌석 디테일
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_airport_idx")
-//    private Long sd_index;
+    private Long sd_index;
     private String sd_id;
     @Enumerated(EnumType.STRING)
     private AirplaneSeatStatus sd_status;
     private Long sd_seatcnt;
     private Long sd_price;
-    private Long as_index;
+//    private Long as_index;
 
 
     @ManyToOne

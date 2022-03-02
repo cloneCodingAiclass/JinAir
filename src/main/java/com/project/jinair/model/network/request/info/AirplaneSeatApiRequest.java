@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SeatApiRequest {
+public class AirplaneSeatApiRequest {
     private Long asIndex;
     private String asCode;
     private String asPrice;

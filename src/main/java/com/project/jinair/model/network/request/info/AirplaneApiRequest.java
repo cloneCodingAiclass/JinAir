@@ -18,5 +18,5 @@ public class AirplaneApiRequest {
 
     private Long apSeat;
 
-    private List<SeatApiRequest> seatApiResponseList;
+    private List<AirplaneSeatApiRequest> airplaneSeatApiRequests;
 }
