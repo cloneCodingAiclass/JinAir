@@ -36,6 +36,5 @@ public class MemberApiRequest {
     private String memSnsIsagree;
 
 
-    private List<ReserveApiResponse> reserveApiResponseList;
 
 }

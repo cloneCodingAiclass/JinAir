@@ -16,5 +16,4 @@ public class SeatApiResponse {
     private String asCode;
     private String asPrice;
 
-    private List<SeatDetailApiResponse> seatDetailApiResponseList;
 }

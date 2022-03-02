@@ -18,5 +18,4 @@ public class VisitApiRequest {
     private String visHp;
     private String visCode;
 
-    private List<ReserveApiResponse> reserveApiResponseList;
 }

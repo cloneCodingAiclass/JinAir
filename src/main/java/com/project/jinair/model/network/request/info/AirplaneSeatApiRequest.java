@@ -16,5 +16,4 @@ public class AirplaneSeatApiRequest {
     private String asCode;
     private String asPrice;
 
-    private List<SeatDetailApiRequest> seatDetailApiResponseList;
 }
