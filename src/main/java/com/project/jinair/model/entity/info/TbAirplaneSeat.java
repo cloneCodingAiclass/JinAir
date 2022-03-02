@@ -1,5 +1,6 @@
-package com.project.jinair.model.entity.schedule;
+package com.project.jinair.model.entity.info;
 
+import com.project.jinair.model.entity.member.TbMember;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,7 +28,8 @@ public class TbAirplaneSeat {   // 비행기 좌석 정보
     private Long asIndex;
     private String asCode;
     private String asPrice;
-    private Long apIndex;
+//    private Long apIndex;
 
-    private Long fkAsIdx;
+    @ManyToOne
+    private TbAirplane tbAirplane;
 }
