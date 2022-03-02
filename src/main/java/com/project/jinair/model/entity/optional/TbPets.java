@@ -1,5 +1,6 @@
 package com.project.jinair.model.entity.optional;
 
+import com.project.jinair.model.enumclass.ApplyStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,7 +27,8 @@ public class TbPets {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pt_idx")
     private Long ptIndex;
     private BigDecimal ptPrice;
-    private String ptStatus;
+    @Enumerated(EnumType.STRING)
+    private ApplyStatus ptStatus;
 
     private Long aptIndex;
 }

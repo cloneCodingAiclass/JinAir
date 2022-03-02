@@ -1,6 +1,7 @@
 package com.project.jinair.model.entity.schedule;
 
 import com.project.jinair.model.entity.member.TbMember;
+import com.project.jinair.model.enumclass.PaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,7 +30,9 @@ public class TbReservation {
     private Long rIndex;
 //    private Long rUserindex;
     private Long rPercentpoint;
-    private String rStatus;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus rStatus;
+    // 이넘 클래스 없음
     private String rUserStatus;
     private String rReserNum;
     private String rPayment;

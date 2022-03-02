@@ -1,5 +1,6 @@
 package com.project.jinair.model.entity.optional;
 
+import com.project.jinair.model.enumclass.ApplyStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,5 +28,6 @@ public class TbBaggage {
     private Long bgIndex;
     private String bgType;
     private BigDecimal bgPrice;
-    private String bgStatus;
+    @Enumerated(EnumType.STRING)
+    private ApplyStatus bgStatus;
 }

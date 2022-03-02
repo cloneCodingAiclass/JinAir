@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -28,8 +29,10 @@ public class TbAirplaneSeat {   // 비행기 좌석 정보
     private Long asIndex;
     private String asCode;
     private String asPrice;
-//    private Long apIndex;
 
     @ManyToOne
     private TbAirplane tbAirplane;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbAirplaneSeat")
+    private List<TbSeatDetail> tbSeatDetailList;
 }

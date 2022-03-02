@@ -4,6 +4,7 @@ import com.project.jinair.model.entity.board.TbQna;
 import com.project.jinair.model.entity.payment.TbPoint;
 import com.project.jinair.model.entity.payment.TbUsercoupon;
 import com.project.jinair.model.entity.schedule.TbReservation;
+import com.project.jinair.model.enumclass.GenderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,7 +42,8 @@ public class TbMember { // 회원 테이블
     private String memHpNation;
     private String memHp;
     private String memEmail;
-    private String memGender;
+    @Enumerated(EnumType.STRING)
+    private GenderStatus memGender;
     private String memBirth;
     private String memPassport;
     private String memNation;

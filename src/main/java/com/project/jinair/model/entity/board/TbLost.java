@@ -1,6 +1,7 @@
 package com.project.jinair.model.entity.board;
 
 
+import com.project.jinair.model.enumclass.LostStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,7 +34,8 @@ public class TbLost { // 유실물관리 테이블
     private String losAirportArea;
     private LocalDateTime losArrivedate;
     private String losUser;
-    private String losIsfind;
+    @Enumerated(EnumType.STRING)
+    private LostStatus losIsfind;
     @CreatedDate
     private LocalDateTime losRegdate;
 }

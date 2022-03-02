@@ -32,7 +32,4 @@ public class TbAirport {    // 항공 정보
     private String aptAirport;
     private String aptRevType;
     private String aptTypeDetail;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbAirport") // 하나의 카테고리에 여러게의 파트너가 연결
-    private List<TbSeatDetail> tbSeatDetailList;
 }

@@ -1,6 +1,7 @@
 package com.project.jinair.model.entity.board;
 
 import com.project.jinair.model.entity.member.TbMember;
+import com.project.jinair.model.enumclass.QnaStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,7 +31,8 @@ public class TbQna {
 //    private Long qnaUserindex;
     private String qnaTitle;
     private String qnaContent;
-    private String qnaIsans;
+    @Enumerated(EnumType.STRING)
+    private QnaStatus qnaIsans;
     @CreatedDate
     private LocalDateTime qnaRegdate;
     private LocalDateTime qnaAnsdate;
