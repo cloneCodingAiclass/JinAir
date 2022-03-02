@@ -1,6 +1,6 @@
 package com.project.jinair.repository;
 
-import com.project.jinair.model.entity.schedule.TbAirport;
+import com.project.jinair.model.entity.info.TbAirport;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
