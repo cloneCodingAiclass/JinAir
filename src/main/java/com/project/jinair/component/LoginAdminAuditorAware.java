@@ -1,4 +1,4 @@
-package com.project.jinair.repository.component;
+package com.project.jinair.component;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
