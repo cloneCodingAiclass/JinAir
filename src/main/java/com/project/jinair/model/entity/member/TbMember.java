@@ -42,8 +42,7 @@ public class TbMember { // 회원 테이블
     private String memHpNation;
     private String memHp;
     private String memEmail;
-    @Enumerated(EnumType.STRING)
-    private GenderStatus memGender;
+    private String memGender;
     private String memBirth;
     private String memPassport;
     private String memNation;

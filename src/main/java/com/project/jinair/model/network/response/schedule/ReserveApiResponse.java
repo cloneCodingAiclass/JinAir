@@ -4,7 +4,7 @@ import com.project.jinair.model.enumclass.PaymentStatus;
 import com.project.jinair.model.network.response.Optional.BaggageApiResponse;
 import com.project.jinair.model.network.response.Optional.InsuranceApiResponse;
 import com.project.jinair.model.network.response.Optional.PetsApiResponse;
-import com.project.jinair.model.network.response.member.VisitApiresponse;
+import com.project.jinair.model.network.response.member.VisitApiResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,5 +41,5 @@ public class ReserveApiResponse {
     private List<PetsApiResponse> petsApiResponseList;
 
     //비회원 정보
-    private List<VisitApiresponse> visitApiresponseList;
+    private List<VisitApiResponse> visitApiResponseList;
 }

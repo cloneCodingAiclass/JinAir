@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class VisitApiresponse {
+public class VisitApiResponse {
     private Long visIndex;
     private String visName;
     private String visHp;
