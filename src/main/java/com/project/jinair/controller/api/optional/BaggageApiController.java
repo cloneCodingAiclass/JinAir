@@ -4,7 +4,7 @@ import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.Optional.BaggageApiRequest;
 import com.project.jinair.model.network.response.Optional.BaggageApiResponse;
-import com.project.jinair.service.BaggageApiLogicService;
+import com.project.jinair.service.optional.BaggageApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,8 +1,7 @@
-package com.project.jinair.service;
+package com.project.jinair.service.optional;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.optional.TbInsurance;
-import com.project.jinair.model.enumclass.ApplyStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.Optional.InsuranceApiRequest;
 import com.project.jinair.model.network.response.Optional.InsuranceApiResponse;

@@ -1,4 +1,4 @@
-package com.project.jinair.service;
+package com.project.jinair.service.optional;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.optional.TbPets;

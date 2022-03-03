@@ -4,7 +4,7 @@ import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.Optional.PetsApiRequest;
 import com.project.jinair.model.network.response.Optional.PetsApiResponse;
-import com.project.jinair.service.PetApiLogicService;
+import com.project.jinair.service.optional.PetApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

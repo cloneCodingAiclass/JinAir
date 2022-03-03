@@ -3,9 +3,8 @@ package com.project.jinair.controller.api.optional;
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.Optional.InsuranceApiRequest;
-import com.project.jinair.model.network.request.Optional.PetsApiRequest;
 import com.project.jinair.model.network.response.Optional.InsuranceApiResponse;
-import com.project.jinair.service.InsuranceApiLogicService;
+import com.project.jinair.service.optional.InsuranceApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
