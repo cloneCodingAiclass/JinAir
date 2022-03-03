@@ -460,20 +460,23 @@ public class PageController {
 
     // admin_index
     @PostMapping("/admin_index")
-    public ModelAndView adminIndex(HttpServletRequest request, String admin_id, String admin_pw, Model model) {
-        if(admin_id.equals(adminApiLoginService.IdPwRead(admin_id).getData().getAdminId()) &&
-                admin_pw.equals(adminApiLoginService.IdPwRead(admin_id).getData().getAdminPw())){
+    public ModelAndView adminIndex(HttpServletRequest request, String admin_id, String admin_pw, Model model) throws Exception{
+    if(adminApiLoginService.IdPwRead(admin_id).getData() != null) {
+        if (admin_id.equals(adminApiLoginService.IdPwRead(admin_id).getData().getAdminId()) &&
+                admin_pw.equals(adminApiLoginService.IdPwRead(admin_id).getData().getAdminPw())) {
             HttpSession session = request.getSession();
             String name = adminApiLoginService.IdPwRead(admin_id).getData().getAdminName();
             session.setAttribute("name", name); // 세션 생성
-            model.addAttribute("str", (String)session.getAttribute("name"));
+            model.addAttribute("str", (String) session.getAttribute("name"));
             return new ModelAndView("/adminpage/pages/admin_index")
                     .addObject("code", "admin_index")
                     .addObject("menuList", menuService.getadminMenu());
-        }else{
+        } else {
             return new ModelAndView("/adminpage/pages/admin_login");
         }
-
+    }else{
+        return new ModelAndView("/adminpage/pages/admin_login");
+    }
     }
 
     // admin 스케줄 상세
