@@ -112,6 +112,9 @@
     display: inline-block;
     margin-left: 5px;
     margin: 0 0px 0 10px;
+    background: url(/adminpage/lib/img/weather1.jpg) no-repeat;
+    background-position: 50% 60%;
+    background-size: 100%;
 }
 .contents > .contwrap .totalair p{
     font-weight: 900;
@@ -269,4 +272,22 @@
 .contents > .contwrap .notice p:last-child:hover{
     text-decoration: underline; 
     color: #737373;
+}
+.weather_weather{
+    text-align: center;
+}
+.weather_weather table{
+    text-align: center;
+    width: 100%;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 auto;
+}
+.weather_weather table td{
+    margin: 0px 5px;
+    height: 10px;
+}
+.weather_weather img{
+    width: 33px;
+    height: 30px;
 }

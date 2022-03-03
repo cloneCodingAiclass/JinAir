@@ -97,7 +97,34 @@ $(function () {
 
 });
 
-$(function () {
+$.getJSON('http://api.openweathermap.org/data/2.5/forecast?id=1835848&appid=9740e18a73afd421d3a171aba5b9780a&units=Metric', function(data) {
+
+    $('.weather_weather1').append(`<img src="http://openweathermap.org/img/wn/${data.list[3].weather[0].icon}@2x.png"alt="">`);
+    $('.weather_weather2').append(`<img src="http://openweathermap.org/img/wn/${data.list[4].weather[0].icon}@2x.png"alt="">`);
+    $('.weather_weather3').append(`<img src="http://openweathermap.org/img/wn/${data.list[5].weather[0].icon}@2x.png"alt="">`);
+    $('.weather_weather4').append(`<img src="http://openweathermap.org/img/wn/${data.list[6].weather[0].icon}@2x.png"alt="">`);
+    $('.weather_weather5').append(`<img src="http://openweathermap.org/img/wn/${data.list[7].weather[0].icon}@2x.png"alt="">`);
+    $('.weather_weather6').append(`<img src="http://openweathermap.org/img/wn/${data.list[8].weather[0].icon}@2x.png"alt="">`);
+    $('.weather_weather7').append(`<img src="http://openweathermap.org/img/wn/${data.list[9].weather[0].icon}@2x.png"alt="">`);
+
+
+    $('.weather_clock1').append(data.list[3].dt_txt.substr(-8, 2) + '시');
+    $('.weather_clock2').append(data.list[4].dt_txt.substr(-8, 2) + '시');
+    $('.weather_clock3').append(data.list[5].dt_txt.substr(-8, 2) + '시');
+    $('.weather_clock4').append(data.list[6].dt_txt.substr(-8, 2) + '시');
+    $('.weather_clock5').append(data.list[7].dt_txt.substr(-8, 2) + '시');
+    $('.weather_clock6').append(data.list[8].dt_txt.substr(-8, 2) + '시');
+    $('.weather_clock7').append(data.list[9].dt_txt.substr(-8, 2) + '시');
+
+    $('.weather_wind1').append(data.list[3].wind.speed);
+    $('.weather_wind2').append(data.list[4].wind.speed);
+    $('.weather_wind3').append(data.list[5].wind.speed);
+    $('.weather_wind4').append(data.list[6].wind.speed);
+    $('.weather_wind5').append(data.list[7].wind.speed);
+    $('.weather_wind6').append(data.list[8].wind.speed);
+    $('.weather_wind7').append(data.list[9].wind.speed);
+});
+    $(function () {
 
     function printtime(){ // 부다페스트
         let date = new Date();
