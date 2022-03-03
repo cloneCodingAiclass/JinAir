@@ -99,4 +99,21 @@ $(function () {
         $('.nav2').siblings('li').eq(0).find('a').css({"color":"#BDD600"});
     })
 
+
+    //데이터 리스트
+    let itemList = new Vue({
+        el : '#itemList',
+        data : {
+            itemList : {}
+        }
+    });
+
+    searchStart();
+
+    function searchStart(){
+        $.get("/api/airplane/list", function(response){
+            console.dir(response);
+            itemList.itemList = response.data;
+        })
+    };
 });

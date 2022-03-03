@@ -531,7 +531,7 @@ public class PageController {
                 .addObject("schedule", menuService.adminScheduleMenu());
     }
     // admin 항공기 조회
-    @RequestMapping("/admin/aircraftList")
+    @RequestMapping("/admin/airplane")
     public ModelAndView aircraftList() {
         return new ModelAndView("/adminpage/pages/schedule/aircraft_list")
                 .addObject("code", "aircraft_list")

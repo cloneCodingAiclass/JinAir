@@ -13,27 +13,27 @@
                 <div class="contents">
                     <div class="contwrap">
                         <p class="title">항공기 신규 등록</p>
-                        <form action="aircraft_list.html">
+                        <form th:action="@{/api/airplane/post}" method="post">
                             <div class="contents_main">
                                 <table>
                                     <tr>
                                         <td>항공사 이름</td>
                                         <td>항공사 아이디</td>
                                         <td>좌석수</td>
-                                        <td>추가 차지<br>(퍼스트클래스)</td>
-                                        <td>추가 차지<br>(비즈니스)</td>
+                                        <td>추가 차지<br>(지니비즈)</td>
+                                        <td>추가 차지<br>(지니플러스)</td>
                                     </tr>
                                     <tr>
-                                        <td>진에어</td>
-                                        <td><input type="text" id="airplane_id" class="airplane_id"></td>
-                                        <td><input type="text" id="airplane_seat" class="airplane_seat"></td>
-                                        <td><input type="text" id="airplane_firstclass" class="airplane_firstclass"></td>
-                                        <td><input type="text" id="airplane_business" class="airplane_business"></td>
+                                        <td th:name="apName">진에어</td>
+                                        <td><input type="text" class="airplane_id" th:name="apId"></td>
+                                        <td><input type="text" class="airplane_seat" th:name="apSeatSum"></td>
+                                        <td><input type="text" class="airplane_firstclass" th:name="apSeatBiz"></td>
+                                        <td><input type="text" class="airplane_business" th:name="apSeatPlus"></td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="btn_box">
-                                <input type="button" value="취소" onclick="location.href='aircraft_list.html'">
+                                <input type="button" value="취소" onclick="history.back()">
                                 <input type="submit" value="등록">
                             </div>
                         </form>

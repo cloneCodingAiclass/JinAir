@@ -349,5 +349,3 @@ document.getElementById("korea_time").innerHTML = yyyy + "년 " + mo + "월 " + 
 
 const st = window.setInterval(printtime);  // 입장시 시간 출력
 
-
-

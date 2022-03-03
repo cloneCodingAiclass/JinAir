@@ -1,6 +1,7 @@
 package com.project.jinair.controller.api.info;
 
 import com.project.jinair.ifs.CrudInterface;
+import com.project.jinair.model.entity.info.TbAirplane;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.info.AirplaneApiRequest;
 import com.project.jinair.model.network.response.info.AirplaneApiResponse;
@@ -8,16 +9,19 @@ import com.project.jinair.service.info.AirplaneApiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/airplane")
 @RequiredArgsConstructor
 public class AirplaneApiController implements CrudInterface<AirplaneApiRequest, AirplaneApiResponse> {
 
+
     private final AirplaneApiService airplaneApiService;
 
     @Override
-    @PostMapping("")                    // http:localhost:8080/api/airplane(post)
+    @PostMapping("/post")        // http:localhost:8080/api/airplane(post)
     public Header<AirplaneApiResponse> create(@RequestBody Header<AirplaneApiRequest> request) {
         return airplaneApiService.create(request);
     }
@@ -39,4 +43,10 @@ public class AirplaneApiController implements CrudInterface<AirplaneApiRequest, 
     public Header<AirplaneApiResponse> delete(@PathVariable(name="id") Long id) {
         return airplaneApiService.delete(id);
     }
+
+    @GetMapping("/list") // http://localhost:8080/api/airplane
+    public Header<List<AirplaneApiResponse>> findAll(){
+        return airplaneApiService.search();
+    }
+
 }
