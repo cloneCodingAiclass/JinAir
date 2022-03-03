@@ -15,8 +15,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Entity
 @SequenceGenerator(
-        name = "seq_pt_idx",
-        sequenceName = "seq_pt_idx",
+        name = "seq_pets_idx",
+        sequenceName = "seq_pets_idx",
         initialValue = 1,
         allocationSize = 1
 )
@@ -24,11 +24,10 @@ import java.math.BigDecimal;
 @EntityListeners(AuditingEntityListener.class)
 public class TbPets {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pt_idx")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pets_idx")
     private Long ptIndex;
     private BigDecimal ptPrice;
     @Enumerated(EnumType.STRING)
     private ApplyStatus ptStatus;
-
     private Long aptIndex;
 }

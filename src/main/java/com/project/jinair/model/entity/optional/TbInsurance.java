@@ -15,8 +15,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Entity
 @SequenceGenerator(
-        name = "seq_is_idx",
-        sequenceName = "seq_is_idx",
+        name = "seq_insurance_idx",
+        sequenceName = "seq_insurance_idx",
         initialValue = 1,
         allocationSize = 1
 )
@@ -24,7 +24,7 @@ import java.math.BigDecimal;
 @EntityListeners(AuditingEntityListener.class)
 public class TbInsurance {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_is_idx")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_insurance_idx")
     private Long isIndex;
     private String isType;
     private BigDecimal isPrice;
