@@ -1,11 +1,17 @@
 package com.project.jinair.controller.page;
 
 import com.project.jinair.service.MenuService;
+import com.project.jinair.service.member.AdminApiLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/pages")
@@ -13,6 +19,9 @@ public class PageController {
 
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    AdminApiLoginService adminApiLoginService;
 
     // 사용자 인덱스
     @RequestMapping("/index")
@@ -439,14 +448,48 @@ public class PageController {
 
 
 
-
     //-------------------------------------------------------------------------------------------
+    // admin_login
+    @RequestMapping("/admin_login") // pages/admin_login
+    public String adminLogin(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.invalidate(); // 세션 삭제
+        return "/adminpage/pages/admin_login";
+    }
+
+    @PostMapping("/admin_enter")
+    public ModelAndView adminLoginOk(HttpServletRequest request, String admin_id, String admin_pw, Model model) throws Exception{
+        if(adminApiLoginService.IdPwRead(admin_id).getData() != null) {
+            if (admin_id.equals(adminApiLoginService.IdPwRead(admin_id).getData().getAdminId()) &&
+                    admin_pw.equals(adminApiLoginService.IdPwRead(admin_id).getData().getAdminPw())) {
+                HttpSession session = request.getSession();
+                String name = adminApiLoginService.IdPwRead(admin_id).getData().getAdminName();
+                session.setAttribute("name", name); // 세션 생성
+                model.addAttribute("str", (String) session.getAttribute("name"));
+                return new ModelAndView("/adminpage/pages/admin_index")
+                        .addObject("code", "admin_index")
+                        .addObject("menuList", menuService.getadminMenu());
+            } else {
+                return new ModelAndView("/adminpage/pages/admin_login");
+            }
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
+    }
+
+
     // admin_index
-    @RequestMapping("/admin_index")
-    public ModelAndView adminIndex() {
-        return new ModelAndView("/adminpage/pages/admin_index")
-                .addObject("code", "admin_index")
-                .addObject("menuList", menuService.getadminMenu());
+    @GetMapping("/admin_index")
+    public ModelAndView adminIndex(HttpServletRequest request, Model model) throws Exception{
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/admin_index")
+                    .addObject("code", "admin_index")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
 
     // admin 스케줄 상세

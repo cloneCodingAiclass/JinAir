@@ -38,4 +38,10 @@ public class AdminApiController implements CrudInterface<AdminApiRequest, AdminA
     public Header<AdminApiResponse> delete(@PathVariable(name = "id") Long id) {
         return adminApiLoginService.delete(id);
     }
+
+
+    @PostMapping("/login") // 관리자 페이지 아이디 비번 불러오기
+    public Header<AdminApiResponse> IdPwRead(String admin_id) {
+        return adminApiLoginService.IdPwRead(admin_id);
+    }
 }
