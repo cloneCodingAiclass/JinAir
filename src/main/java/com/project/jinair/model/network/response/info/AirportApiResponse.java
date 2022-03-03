@@ -1,9 +1,12 @@
 package com.project.jinair.model.network.response.info;
 
+import com.project.jinair.model.network.response.Optional.PetsApiResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -15,4 +18,10 @@ public class AirportApiResponse {
     private String aptAirport;
     private String aptRevType;
     private String aptTypeDetail;
+
+    // 애완동물
+    private List<PetsApiResponse> petsApiResponselist;
+
+    // 좌석 디테일
+    private List<SeatDetailApiResponse> seatDetailApiResponseList;
 }

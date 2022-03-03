@@ -1,12 +1,14 @@
 package com.project.jinair.model.network.response.board;
 
 import com.project.jinair.model.enumclass.LostStatus;
+import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -22,4 +24,8 @@ public class LostApiResponse {
     private String losUser;
     private LostStatus losIsfind;
     private LocalDateTime losRegdate;
+
+
+    // 스케줄
+    private List<ScheduleApiResponse> scheduleApiResponseList;
 }
