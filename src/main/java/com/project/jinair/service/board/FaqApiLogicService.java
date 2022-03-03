@@ -69,15 +69,15 @@ public class FaqApiLogicService implements CrudInterface<FaqApiRequest, FaqApiRe
         Optional<TbFaq> tbFaq = tbFaqRepository.findById(faqApiRequest.getFaqIndex());
 
         return tbFaq.map(faq -> {
-                    faq.setFaqIndex(faqApiRequest.getFaqIndex());
-                    faq.setFaqType(faqApiRequest.getFaqType());
-                    faq.setFaqTitle(faqApiRequest.getFaqTitle());
-                    faq.setFaqRegdate(faqApiRequest.getFaqRegdate());
+            faq.setFaqIndex(faqApiRequest.getFaqIndex());
+            faq.setFaqType(faqApiRequest.getFaqType());
+            faq.setFaqTitle(faqApiRequest.getFaqTitle());
+            faq.setFaqRegdate(faqApiRequest.getFaqRegdate());
 
-                    return faq;
-                }).map(faq -> tbFaqRepository.save(faq))
-                .map(faq -> response(faq))
-                .orElseGet(() -> Header.ERROR("데이터 없음"));
+            return faq;
+        }).map(faq -> tbFaqRepository.save(faq))
+        .map(faq -> response(faq))
+        .orElseGet(() -> Header.ERROR("데이터 없음"));
     }
 
     // 게시판 글삭제
