@@ -553,14 +553,14 @@ public class PageController {
                 .addObject("menuList", menuService.getadminMenu());
     }
     // 고객관리 상세상세
-    @RequestMapping("/admin/cm_list/cm_detail")
+    @RequestMapping("/admin/cm_list/cm_detail/{id}")
     public ModelAndView cmDetail() {
         return new ModelAndView("/adminpage/pages/cm/cm_detail")
-                .addObject("code", "cm_list")
+                .addObject("code", "cm_detail")
                 .addObject("menuList", menuService.getadminMenu());
     }
     // 고객정보 수정
-    @RequestMapping("/admin/cm_list/cm_modify")
+    @RequestMapping("/admin/cm_list/cm_modify/{id}")
     public ModelAndView cmModify() {
         return new ModelAndView("/adminpage/pages/cm/cm_modify")
                 .addObject("code", "cm_modify")

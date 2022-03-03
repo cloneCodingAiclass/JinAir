@@ -4,7 +4,8 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/cm/cm_modify.css">
-<script src="/adminpage/app/cm/cm_list.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 <!-- head.html -->
 <body>
 <div id="wrap">
@@ -16,7 +17,7 @@
                 <div class="title_wrap">
                     <p id="cm_detail_title">고객 상세정보 수정</p>
                 </div>
-                <div id="cm_detail">
+                <div class="cm_detail" id="memberUpdate">
                     <form action="./cm_detail.html">
                         <table>
                             <colgroup>
@@ -27,27 +28,18 @@
                             </colgroup>
                             <tr>
                                 <th>고유번호</th>
-                                <td>234565</td>
+                                <td>{{memberUpdate.memIndex}}</td>
                                 <th>우편번호</th>
                                 <td>
-                                    <input
-                                            type="text"
-                                            name="zipcode"
-                                            id="zipcode"
-                                            value="11111"
-                                    />
+                                    <input type="text" name="zipcode" id="zipcode" th:value="${memberUpdate?.memZipcode}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th>아이디</th>
-                                <td>apple</td>
+                                <td>{{memberUpdate.memUserid}}</td>
                                 <th>주소</th>
                                 <td>
-                                    <input
-                                            type="text"
-                                            name="address1"
-                                            id="address2"
-                                    />
+                                    <input type="text" name="address1" id="address1" th:value="${memberUpdate?.memAddress1}"/>
                                 </td>
                             </tr>
                             <tr>
@@ -55,29 +47,14 @@
                                 <td></td>
                                 <th>상세주소</th>
                                 <td>
-                                    <input
-                                            type="text"
-                                            name="address2"
-                                            id="address2"
-                                            value="501호"
-                                    />
+                                    <input type="text" name="address2" id="address2" th:value="${memberUpdate?.memAddress2}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th>성명(KOR)</th>
                                 <td>
-                                    <input
-                                            type="text"
-                                            name="kor_first_name"
-                                            id="kor_first_name"
-                                            value="김"
-                                    />
-                                    <input
-                                            type="text"
-                                            name="kor_last_name"
-                                            id="kor_last_name"
-                                            value="사과"
-                                    />
+                                    <input type="text" name="kor_first_name" id="kor_first_name" th:value="${memberUpdate?.memKorFirstName}"/>
+                                    <input type="text" name="kor_last_name"id="kor_last_name" th:value="${memberUpdate?.memKorLastName}"/>
                                 </td>
                                 <th>가입일자</th>
                                 <td>2022-01-28</td>
@@ -85,27 +62,12 @@
                             <tr>
                                 <th>성명(ENG)</th>
                                 <td>
-                                    <input
-                                            type="text"
-                                            name="eng_first_name"
-                                            id="eng_first_name"
-                                            value="KIM"
-                                    />
-                                    <input
-                                            type="text"
-                                            name="eng_last_name"
-                                            id="eng_last_name"
-                                            value="SAGWA"
-                                    />
+                                    <input type="text" name="eng_first_name" id="eng_first_name" value="KIM"/>
+                                    <input type="text" name="eng_last_name" id="eng_last_name" value="SAGWA"/>
                                 </td>
                                 <th>이메일</th>
                                 <td>
-                                    <input
-                                            type="email"
-                                            name="email"
-                                            id="email"
-                                            value="apple@apple.com"
-                                    />
+                                    <input type="email" name="email" id="email" value="apple@apple.com"/>
                                 </td>
                             </tr>
                             <tr>
@@ -113,32 +75,18 @@
                                 <td>
                                     <label>
                                         <span>남자</span>
-                                        <input
-                                                type="radio"
-                                                name="gender"
-                                                value="남자"
-                                        />
+                                        <input type="radio" name="gender" value="남자"/>
                                     </label>
                                     <label>
                                         <span>여자</span>
-                                        <input
-                                                type="radio"
-                                                name="gender"
-                                                value="여자"
-                                                checked
-                                        />
+                                        <input type="radio" name="gender" value="여자" checked/>
                                     </label>
                                 </td>
                                 <th>이메일 수신동의</th>
                                 <td>
                                     <label>
                                         <span>동의</span>
-                                        <input
-                                                type="radio"
-                                                name="email_isagree"
-                                                value="동의"
-                                                checked
-                                        />
+                                        <input type="radio" name="email_isagree" value="동의" checked/>
                                     </label>
                                     <label>
                                         <span>미동의</span>
@@ -153,38 +101,24 @@
                             <tr>
                                 <th>생년월일</th>
                                 <td>
-                                    <input
-                                            type="text"
-                                            name="birth"
-                                            id="birth"
-                                            value="19990101"
-                                    />
+                                    <input type="text" name="birth" id="birth" value="19990101"/>
                                 </td>
                                 <th>SNS/앱 푸시 동의</th>
                                 <td>
                                     <label>
                                         <span>동의</span>
-                                        <input
-                                                type="radio"
-                                                name="sns_isagree"
-                                                value="동의"
-                                                checked
-                                        />
+                                        <input type="radio" name="sns_isagree" value="동의" checked/>
                                     </label>
                                     <label>
                                         <span>미동의</span>
-                                        <input
-                                                type="radio"
-                                                name="sns_isagree"
-                                                value="미동의"
-                                        />
+                                        <input type="radio" name="sns_isagree" value="미동의"/>
                                     </label>
                                 </td>
                             </tr>
                             <tr>
                                 <th>국적</th>
                                 <td>
-                                    <select name="" id="item_list">
+                                    <select name="" id="nation_list">
                                         <option value="">선택</option>
                                         <option value="">대만</option>
                                         <option value="" selected>한국</option>
@@ -229,7 +163,7 @@
                             <tr>
                                 <th>거주국가</th>
                                 <td>
-                                    <select name="" id="item_list">
+                                    <select name="" id="passport_list">
                                         <option value="">선택</option>
                                         <option value="">대만</option>
                                         <option value="" selected>한국</option>
@@ -270,38 +204,21 @@
                                 </td>
                                 <th>나비 포인트</th>
                                 <td>
-                                    <input
-                                            type="text"
-                                            name="point"
-                                            id="point"
-                                            value="3600"
-                                    />
+                                    <input type="text" name="point" id="point" value="3600"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th>연락처</th>
                                 <td>
-                                    <input
-                                            type="tel"
-                                            name="hp"
-                                            id="hp"
-                                            value="010-1111-1111"
-                                    />
+                                    <input type="tel" name="hp" id="hp" value="010-1111-1111"/>
                                 </td>
                                 <th>쿠폰</th>
                                 <td>-</td>
                             </tr>
                         </table>
                         <div id="form_btn">
-                            <input
-                                    type="button"
-                                    value="취소"
-                                    onclick="history.back()"
-                            />
-                            <input
-                                    type="submit"
-                                    value="수정 완료"
-                            />
+                            <input type="button" value="취소" onclick="history.back()"/>
+                            <input type="submit" value="수정 완료"/>
                         </div>
                     </form>
                 </div>
@@ -309,5 +226,6 @@
         </div>
     </div>
 </div>
+<script src="/adminpage/app/cm/cm_modify.js"></script>
 </body>
 </html>

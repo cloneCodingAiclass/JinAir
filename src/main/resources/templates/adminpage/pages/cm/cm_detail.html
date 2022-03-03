@@ -4,7 +4,7 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/cm/cm_detail.css">
-<script src="/adminpage/app/cm/cm_list.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <!-- head.html -->
 <body>
 <div id="wrap">
@@ -12,11 +12,11 @@
     <div id="container">
         <div th:replace="/adminpage/fragment/leftmenu :: leftmenu(${code}, ${menuList})"></div>
         <div class="contents">
-            <div id="cm_detail_box">
+            <div class="cm_detail_box">
                 <div class="title_wrap">
                     <p id="cm_detail_title">고객 상세정보</p>
                 </div>
-                <div id="cm_detail">
+                <div class="cm_detail" id="memberDetail">
                     <table>
                         <colgroup>
                             <col width="20%">
@@ -26,216 +26,80 @@
                         </colgroup>
                         <tr>
                             <th>고유번호</th>
-                            <td>234565</td>
+                            <td>{{memberDetail.memIndex}}</td>
                             <th>우편번호</th>
-                            <td>
-                                <input
-                                        type="text"
-                                        name="zipcode"
-                                        id="zipcode"
-                                        value="11111"
-                                        readonly
-                                />
-                            </td>
+                            <td>{{memberDetail.memZipcode}}</td>
                         </tr>
                         <tr>
                             <th>아이디</th>
-                            <td>apple</td>
+                            <td>{{memberDetail.memUserid}}</td>
                             <th>주소</th>
-                            <td>
-                                <input
-                                        type="text"
-                                        name="address1"
-                                        id="address2"
-                                        readonly
-                                />
-                            </td>
+                            <td>{{memberDetail.memAddress1}}</td>
                         </tr>
                         <tr>
                             <th>비밀번호</th>
                             <td></td>
                             <th>상세주소</th>
-                            <td>
-                                <input
-                                        type="text"
-                                        name="address2"
-                                        id="address2"
-                                        value="501호"
-                                        readonly
-                                />
-                            </td>
+                            <td>{{memberDetail.memAddress2}}</td>
                         </tr>
                         <tr>
                             <th>성명(KOR)</th>
-                            <td>
-                                <input
-                                        type="text"
-                                        name="kor_first_name"
-                                        id="kor_first_name"
-                                        value="김"
-                                        readonly
-                                />
-                                <input
-                                        type="text"
-                                        name="kor_last_name"
-                                        id="kor_last_name"
-                                        value="사과"
-                                        readonly
-                                />
-                            </td>
+                            <td>{{memberDetail.memKorFirstName}} {{memberDetail.memKorLastName}}</td>
                             <th>가입일자</th>
-                            <td>2022-01-28</td>
+                            <td>{{memberDetail.memRegdate}}</td>
                         </tr>
                         <tr>
                             <th>성명(ENG)</th>
-                            <td>
-                                <input
-                                        type="text"
-                                        name="eng_first_name"
-                                        id="eng_first_name"
-                                        value="KIM"
-                                        readonly
-                                />
-                                <input
-                                        type="text"
-                                        name="eng_last_name"
-                                        id="eng_last_name"
-                                        value="SAGWA"
-                                        readonly
-                                />
-                            </td>
+                            <td>{{memberDetail.memEngFirstName}} {{memberDetail.memEngLastName}}</td>
                             <th>이메일</th>
-                            <td>
-                                <input
-                                        type="email"
-                                        name="email"
-                                        id="email"
-                                        value="apple@apple.com"
-                                        readonly
-                                />
-                            </td>
+                            <td>{{memberDetail.memEmail}}</td>
                         </tr>
                         <tr>
                             <th>성별</th>
-                            <td>
-                                <label>
-                                    <span>남자</span>
-                                    <input
-                                            type="radio"
-                                            name="gender"
-                                            value="남자"
-                                    />
-                                </label>
-                                <label>
-                                    <span>여자</span>
-                                    <input
-                                            type="radio"
-                                            name="gender"
-                                            value="여자"
-                                            checked
-                                    />
-                                </label>
-                            </td>
+                            <td>{{memberDetail.memGender}}</td>
                             <th>이메일 수신동의</th>
-                            <td>
-                                <label>
-                                    <span>동의</span>
-                                    <input
-                                            type="radio"
-                                            name="email_isagree"
-                                            value="동의"
-                                            checked
-                                    />
-                                </label>
-                                <label>
-                                    <span>미동의</span>
-                                    <input
-                                            type="radio"
-                                            name="email_isagree"
-                                            value="미동의"
-                                    />
-                                </label>
-                            </td>
+                            <td>{{memberDetail.memEmailIsagree}}</td>
                         </tr>
                         <tr>
                             <th>생년월일</th>
-                            <td>
-                                <input
-                                        type="text"
-                                        name="birth"
-                                        id="birth"
-                                        value="19990101"
-                                        readonly
-                                />
-                            </td>
+                            <td>{{memberDetail.memBirth}}</td>
                             <th>SNS/앱 푸시 동의</th>
-                            <td>
-                                <label>
-                                    <span>동의</span>
-                                    <input
-                                            type="radio"
-                                            name="sns_isagree"
-                                            value="동의"
-                                            checked
-                                    />
-                                </label>
-                                <label>
-                                    <span>미동의</span>
-                                    <input
-                                            type="radio"
-                                            name="sns_isagree"
-                                            value="미동의"
-                                    />
-                                </label>
-                            </td>
+                            <td>{{memberDetail.memSnsIsagree}}</td>
                         </tr>
                         <tr>
                             <th>국적</th>
-                            <td>
-                                <input type="text" value="한국(Republic of Korea)">
-                            </td>
+                            <td>{{memberDetail.memPassport}}</td>
                             <th>예약 비행기</th>
                             <td>-</td>
                         </tr>
                         <tr>
                             <th>거주국가</th>
-                            <td>
-                                <input type="text" value="한국(Republic of Korea)">
-                            </td>
+                            <td>{{memberDetail.memNation}}</td>
                             <th>나비 포인트</th>
                             <td>
-                                <input
-                                        type="text"
-                                        name="point"
-                                        id="point"
-                                        value="3600"
-                                        readonly
-                                />
+                                <input type="text" name="point" id="point" value="3600" readonly/>
                             </td>
                         </tr>
                         <tr>
                             <th>연락처</th>
-                            <td>
-                                <input
-                                        type="tel"
-                                        name="hp"
-                                        id="hp"
-                                        value="010-1111-1111"
-                                        readonly
-                                />
-                            </td>
+                            <td>{{memberDetail.memHp}}</td>
                             <th>쿠폰</th>
                             <td>-</td>
                         </tr>
                     </table>
                     <div id="form_btn">
-                        <input type="button" value="목록" onclick="location.href='./cm_list.html'" >
-                        <input type="submit" value="고객 정보 수정" onclick="location.href='./cm_modify.html'">
+                        <button class="toList">
+                        <a :href=`/pages/admin/cmList`>목록</a>
+                        </button>
+                        <button class="toUpdate">
+                        <a :href=`/pages/admin/cm_list/cm_modify/${memberDetail.memIndex}`>고객 정보 수정</a>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="/adminpage/app/cm/cm_detail.js"></script>
 </body>
 </html>

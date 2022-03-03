@@ -99,48 +99,26 @@ $(function () {
     })
 });
 
-(function ($) {
+(function ($){
 
-    let indexBtn = [];
+    let idx = $(location).attr('href').split('/')[7];
 
-    let pagination = {
-        total_page : 0,
-        total_element : 0,
-        current_page : 0,
-        curren_elements : 0
-    }
-
-    // 페이지 정보
-    let showPage = new Vue({
-        el : '#showPage',
+    let memberUpdate = new Vue({
+        el : '#memberUpdate',
         data : {
-            totalElements : {},
-            currentPage : {}
+            memberUpdate : {}
         }
     })
 
-    let memberList = new Vue({
-        el : '#memList',
-        data : {
-            memberList : {}
-        }
-    })
+    search(idx);
 
-    search(0);
-
-    function search(page){
-        console.log("page : " + page);
-        $.get("/api/user?page="+page, function (response){
+    function search(index){
+        console.log("index : " + index);
+        $.get("/api/user/"+index, function (response){
             console.dir(response);
 
-            indexBtn = [];
-            pagination = response.pagination;
-
-            showPage.totalElements = pagination.currentPage;
-            showPage.currentPage = pagination.currentPage + 1;
-
-            memberList.memberList = response.data;
+            memberUpdate.memberUpdate = response.data;
         })
     }
 
-})(jQuery);
+})(jQuery)
