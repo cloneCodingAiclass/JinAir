@@ -10,6 +10,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -27,7 +28,7 @@ public class MemberApiResponse {
     private String memHpNation;
     private String memHp;
     private String memEmail;
-    private GenderStatus memGender;
+    private String memGender;
     private String memBirth;
     private String memPassport;
     private String memNation;
@@ -37,6 +38,7 @@ public class MemberApiResponse {
     private String memAddress3;
     private String memEmailIsagree;
     private String memSnsIsagree;
+    private LocalDateTime memRegdate;
 
     // 예약 리스트
     private List<ReserveApiResponse> reserveApiResponseList;

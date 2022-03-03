@@ -2,6 +2,7 @@ package com.project.jinair.repository;
 
 import com.project.jinair.JinAirApplicationTests;
 import com.project.jinair.model.entity.payment.TbCouponRegist;
+import com.project.jinair.model.enumclass.CouponStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +22,7 @@ public class TbCouponRegistTest extends JinAirApplicationTests {
                 .crPrice(0L)
                 .crDesc("국내선 30% 할인")
                 .crCode("1234567vv")
-                .crStatus("사용 가능")
+                .crStatus(CouponStatus.AddCoupon)
                 .crDiscount(30)
                 .crIssuanceDay(LocalDateTime.now())
                 .crEndDay(LocalDateTime.now())
