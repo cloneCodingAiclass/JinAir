@@ -16,8 +16,8 @@ public class AirportApiResponse {
     private Long aptIndex;
     private String aptNation;
     private String aptAirport;
-    private String aptRevType;
-    private String aptTypeDetail;
+    private String aptRevtype;
+    private String aptTypedetail;
 
     // 애완동물
     private List<PetsApiResponse> petsApiResponselist;

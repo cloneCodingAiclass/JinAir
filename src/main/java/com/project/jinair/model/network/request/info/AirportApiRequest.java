@@ -13,6 +13,6 @@ public class AirportApiRequest {
     private Long aptIndex;
     private String aptNation;
     private String aptAirport;
-    private String aptRevType;
-    private String aptTypeDetail;
+    private String aptRevtype;
+    private String aptTypedetail;
 }

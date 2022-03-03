@@ -30,6 +30,6 @@ public class TbAirport {    // 항공 정보
     private Long aptIndex;
     private String aptNation;
     private String aptAirport;
-    private String aptRevType;
-    private String aptTypeDetail;
+    private String aptRevtype;
+    private String aptTypedetail;
 }
