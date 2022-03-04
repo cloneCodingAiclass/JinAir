@@ -97,6 +97,7 @@ $(function () {
 
 });
 
+// 한국 날씨
 $.getJSON('http://api.openweathermap.org/data/2.5/forecast?id=1835848&appid=9740e18a73afd421d3a171aba5b9780a&units=Metric', function(data) {
 
     $('.weather_weather1').append(`<img src="http://openweathermap.org/img/wn/${data.list[3].weather[0].icon}@2x.png"alt="">`);
@@ -124,7 +125,66 @@ $.getJSON('http://api.openweathermap.org/data/2.5/forecast?id=1835848&appid=9740
     $('.weather_wind6').append(data.list[8].wind.speed);
     $('.weather_wind7').append(data.list[9].wind.speed);
 });
-    $(function () {
+
+// 외국 날씨
+function aaa(code){
+    $.getJSON(`http://api.openweathermap.org/data/2.5/forecast?id=${code}&appid=9740e18a73afd421d3a171aba5b9780a&units=Metric`, function(data) {
+
+        $('.other_weather1').append(`<img src="http://openweathermap.org/img/wn/${data.list[3].weather[0].icon}@2x.png"alt="">`);
+        $('.other_weather2').append(`<img src="http://openweathermap.org/img/wn/${data.list[4].weather[0].icon}@2x.png"alt="">`);
+        $('.other_weather3').append(`<img src="http://openweathermap.org/img/wn/${data.list[5].weather[0].icon}@2x.png"alt="">`);
+        $('.other_weather4').append(`<img src="http://openweathermap.org/img/wn/${data.list[6].weather[0].icon}@2x.png"alt="">`);
+        $('.other_weather5').append(`<img src="http://openweathermap.org/img/wn/${data.list[7].weather[0].icon}@2x.png"alt="">`);
+        $('.other_weather6').append(`<img src="http://openweathermap.org/img/wn/${data.list[8].weather[0].icon}@2x.png"alt="">`);
+        $('.other_weather7').append(`<img src="http://openweathermap.org/img/wn/${data.list[9].weather[0].icon}@2x.png"alt="">`);
+
+
+        $('.other_clock1').append(data.list[3].dt_txt.substr(-8, 2) + '시');
+        $('.other_clock2').append(data.list[4].dt_txt.substr(-8, 2) + '시');
+        $('.other_clock3').append(data.list[5].dt_txt.substr(-8, 2) + '시');
+        $('.other_clock4').append(data.list[6].dt_txt.substr(-8, 2) + '시');
+        $('.other_clock5').append(data.list[7].dt_txt.substr(-8, 2) + '시');
+        $('.other_clock6').append(data.list[8].dt_txt.substr(-8, 2) + '시');
+        $('.other_clock7').append(data.list[9].dt_txt.substr(-8, 2) + '시');
+
+        $('.other_wind1').append(data.list[3].wind.speed);
+        $('.other_wind2').append(data.list[4].wind.speed);
+        $('.other_wind3').append(data.list[5].wind.speed);
+        $('.other_wind4').append(data.list[6].wind.speed);
+        $('.other_wind5').append(data.list[7].wind.speed);
+        $('.other_wind6').append(data.list[8].wind.speed);
+        $('.other_wind7').append(data.list[9].wind.speed);
+    });
+}
+function bbb(){
+        $('.other_weather1').html('');
+        $('.other_weather2').html('');
+        $('.other_weather3').html('');
+        $('.other_weather4').html('');
+        $('.other_weather5').html('');
+        $('.other_weather6').html('');
+        $('.other_weather7').html('');
+
+
+        $('.other_clock1').html('');
+        $('.other_clock2').html('');
+        $('.other_clock3').html('');
+        $('.other_clock4').html('');
+        $('.other_clock5').html('');
+        $('.other_clock6').html('');
+        $('.other_clock7').html('');
+
+        $('.other_wind1').html('');
+        $('.other_wind2').html('');
+        $('.other_wind3').html('');
+        $('.other_wind4').html('');
+        $('.other_wind5').html('');
+        $('.other_wind6').html('');
+        $('.other_wind7').html('');
+}
+
+
+$(function () {
 
     function printtime(){ // 부다페스트
         let date = new Date();
@@ -278,6 +338,7 @@ $.getJSON('http://api.openweathermap.org/data/2.5/forecast?id=1835848&appid=9740
         if(ss < 10) ss = `0${ss}`;
         document.getElementById("other_time").innerHTML = yyyy + "년 " + mo + "월 " + dd + "일<br><br>" + (hh) + " : " + mm + " : " + ss;
     }
+
     let st;
     let st1;
     let st2;
@@ -288,6 +349,7 @@ $.getJSON('http://api.openweathermap.org/data/2.5/forecast?id=1835848&appid=9740
     let st7;
 
     st2 = window.setInterval(printtime2);
+    aaa(5662162);
         
         $('#other_select').on('change', function(){
             window.clearInterval(st);   
@@ -297,38 +359,35 @@ $.getJSON('http://api.openweathermap.org/data/2.5/forecast?id=1835848&appid=9740
             window.clearInterval(st4); 
             window.clearInterval(st5); 
             window.clearInterval(st6); 
-            window.clearInterval(st7); 
+            window.clearInterval(st7);
+            bbb();
 
                 if($('#other_select').val()=='부다페스트'){
-                    console.log($('#other_select').val());
                     st = window.setInterval(printtime);
+                    aaa(3054643);
                 }else if($('#other_select').val()=='런던'){
-                    console.log($('#other_select').val());
                     st1 = window.setInterval(printtime1);
+                    aaa(2643743);
                 }else if($('#other_select').val()=='뉴욕'){
-                    console.log($('#other_select').val());
                     st2 = window.setInterval(printtime2);
+                    aaa(5662162);
                 }else if($('#other_select').val()=='베이징'){
-                    console.log($('#other_select').val());
                     st3 = window.setInterval(printtime3);
+                    aaa(1816670);
                 }else if($('#other_select').val()=='하노이'){
-                    console.log($('#other_select').val());
                     st4 = window.setInterval(printtime4);
+                    aaa(1581130);
                 }else if($('#other_select').val()=='두바이'){
-                    console.log($('#other_select').val());
                     st5 = window.setInterval(printtime5);
+                    aaa(292223);
                 }else if($('#other_select').val()=='도하'){
-                    console.log($('#other_select').val());
                     st6 = window.setInterval(printtime6);
+                    aaa(290030);
                 }else if($('#other_select').val()=='카이로'){
-                    console.log($('#other_select').val());
                     st7 = window.setInterval(printtime7);
+                    aaa(360630);
                 }
-
         })
-
-
-
 });
 
 function printtime(){
