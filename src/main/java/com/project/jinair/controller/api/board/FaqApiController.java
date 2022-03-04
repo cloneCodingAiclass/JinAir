@@ -25,7 +25,7 @@ public class FaqApiController implements CrudInterface<FaqApiRequest, FaqApiResp
 
     // 게시판 글작성
     @Override
-    @PostMapping("")
+    @PostMapping("/write")
     public Header<FaqApiResponse> create(@RequestBody Header<FaqApiRequest> request) {
         return faqApiLogicService.create(request);
     }
