@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,13 +13,14 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 @SequenceGenerator(
         name="seq_qnaanswer_idx",
         sequenceName="seq_qnaanswer_idx",
         initialValue = 1,
         allocationSize = 1
 )
-@Entity
+@EntityListeners(AuditingEntityListener.class)
 @Builder
 public class TbQnaAnswer {
     @Id
@@ -29,9 +31,8 @@ public class TbQnaAnswer {
     private String qaContent;
     @CreatedDate
     private LocalDateTime qaRegdate;
-//    private Long qaQnaindex;
+    private Long qaQnaindex;
 
 
-    @ManyToOne
-    private TbQna tbQna;
+
 }

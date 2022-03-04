@@ -17,5 +17,6 @@ public class QnaAnswerApiRequest {
     private String qaTitle;
     private String qaContent;
     private LocalDateTime qaRegdate;
+    private Long qaQnaindex;
 
 }
