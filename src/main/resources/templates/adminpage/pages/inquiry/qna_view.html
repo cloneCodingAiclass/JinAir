@@ -6,6 +6,7 @@
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/inquiry/qna_main.css">
 <script src="/adminpage/app/inquiry/qna_main.js"></script>
+<script src="/adminpage/app/inquiry/qna_view.js"></script>
 <!-- head.html 끝-->
 <body>
     <div id="wrap">
@@ -30,19 +31,19 @@
                         </table>
                     </div>
                     <div class="answer_table">
-                    <table>
+                    <table id="itemList">
                             <tr>
-                                <td th:text="${qnaAnswerApiResponseList.qaTitle}"></td>
-                                <td>답변일 : <span th:text="${#strings.substring(qnaAnswerApiResponseList.qaRegdate,0, 10)}"></span></td>
+                                <td id="qaTitle">{{itemList.qaTitle}}</td>
+                                <td>답변일 : {{itemList.qaRegdate.substr(0,10)}}</td>
                             </tr>
                             <tr>
-                                <td colspan="3"><textarea name="" id="" readonly th:text="${qnaAnswerApiResponseList.qaContent}"></textarea></td>
+                                <td colspan="3"><textarea name="" id="qaContent" readonly>{{itemList.qaContent}}</textarea></td>
                             </tr>
                         </table>
                     </div>
                     <div class="footer">
                         <a th:href="@{'/pages/admin/qna_main'}" class="list"><input type="button" value="목록"></a>
-                        <a th:href="@{'/pages/admin/qna_reply/'+ ${qnaApiResponses.qnaIndex}}" class="reply"><input type="button" value="답변하기"></a>
+                        <a><input type="button" value="답변하기" class="reply qa_btn"></a>
                     </div>
                 </div>
             </div>

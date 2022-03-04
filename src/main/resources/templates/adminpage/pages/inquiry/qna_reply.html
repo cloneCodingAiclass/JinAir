@@ -6,6 +6,7 @@
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/inquiry/qna_reply.css">
 <script src="/adminpage/app/inquiry/qna_main.js"></script>
+<script src="/adminpage/app/inquiry/qna_reply.js"></script>
 <!-- head.html 끝-->
 <body>
     <div id="wrap">
@@ -18,52 +19,33 @@
                         <p>Q&A 세부내용</p>
                     </div>
                     <div class="qustion_table">
-                        <table>
+                        <table class="itemList">
                             <tr>
-                                <td th:text="${qnaApiResponses.qnaTitle}"></td>
-                                <td class="user_name">작성자 : <span th:text="${qnaApiResponses.qnaUserName}"></span></td>
-                                <td>등록일 : <span th:text="${#strings.substring(qnaApiResponses.qnaRegdate,0, 10)}"></span></td>
+                                <td>{{itemList.qnaTitle}}</td>
+                                <td class="user_name">작성자 : {{itemList.qnaUserName}}</td>
+                                <td>등록일 : {{itemList.qnaRegdate.substr(0,10)}}</td>
                             </tr>
                             <tr>
-                                <td colspan="3"><textarea name="" id="" readonly th:text="${qnaApiResponses.qnaContent}"></textarea></td>
+                                <td colspan="3"><textarea name="" id="" readonly >{{itemList.qnaContent}}</textarea></td>
                             </tr>
                         </table>
                     </div>
-                    <form action="./qna_view.html">
-                        <div class="answer_table">
-                        <table>
+                    <div class="answer_table">
+                        <form th:id="form">
+                            <table>
                                 <tr>
-                                    <td></td>
-                                    <td>답변일 : </td>
+                                    <td><input type="text" th:name="qaTitle" th:id="qaTitle" th:class="qaTitle"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3"><textarea name=""></textarea></td>
+                                    <td><textarea th:name="qaContent" th:id="qaContent" th:class="qaContent"></textarea></td>
                                 </tr>
                             </table>
-                        </div>
-                        <div class="footer">
-                            <a onclick=history.back() class="list"><input type="button" value="취소"></a>
-                            <a class="reply"><input type="submit" value="답변등록"></a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="btn_user_container">
-                <div class="btn_user_info">
-                    <p class="btn_user">작성자 정보 보기</p>
-                </div>
-            </div>
-            <div class="user_container">
-                <div class="user_info">
-                    <p>고객정보</p>
-                    <p>이름 : <span th:text="${qnaApiResponses.qnaUserName}"></span></p>
-                    <p>아이디 : <span th:text="${qnaApiResponses.qnaUserId}"></span></p>
-                    <p>연락처 : <span th:text="${qnaApiResponses.qnaUserHp}"></span></p>
-                    <p>이메일 : <span th:text="${qnaApiResponses.qnaUserEmail}"></span></p>
-                    <p>예약번호 : DFDG-1111-3422-SDFD</p>
-                    <p>외신 불요 여부 문의 : <span th:text="${qnaApiResponses.qnaUserEmailIsagree}"></span></p>
-                    <p>개인정보 수집 동의 : <span th:text="${qnaApiResponses.qnaUserSnsIsagree}"></span></p>
-                <input type="button" value="확인" class="btn_check">
+                            <div class="footer">
+                                <a onclick=history.back() class="list"><input type="button" value="취소"></a>
+                                <a class="reply"><input type="button" value="답변등록" class="qa_btn"></a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

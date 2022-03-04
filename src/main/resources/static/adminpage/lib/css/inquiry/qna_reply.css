@@ -78,6 +78,13 @@
     font-weight: bold;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
+#container > .contents .answer_table table input[type="text"]{
+    width: 80%;
+    height: 30px;
+    outline-style: none;
+    border: 1px solid rgb(199, 199, 199);
+    text-indent: 10px;
+}
 #container > .contents .answer_table table tr:first-child{
     background-color: #F2F2F2;
 }
@@ -97,7 +104,7 @@
 #container > .contents .answer_table table textarea{
     width: 98%;
     height: 150px;
-    margin-top: 4px;
+    margin: 4px 0px;
     border: 1px solid rgb(199, 199, 199);
     outline: none;
     padding: 5px;

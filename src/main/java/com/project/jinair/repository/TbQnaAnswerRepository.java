@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface TbQnaAnswerRepository extends JpaRepository<TbQnaAnswer, Long> {
-    List<TbQnaAnswer> findByQaQnaindex(Long id);
+    Optional<TbQnaAnswer> findByQaQnaindex(Long id);
     Optional<TbQnaAnswer> findById(Long id);
 }
