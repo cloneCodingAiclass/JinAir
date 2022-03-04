@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,13 +17,14 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 @SequenceGenerator(
         name="seq_qna_idx",
         sequenceName="seq_qna_idx",
         initialValue = 1,
         allocationSize = 1
 )
-@Entity
+@EntityListeners(AuditingEntityListener.class)
 @Builder
 public class TbQna {
     @Id
@@ -43,6 +45,5 @@ public class TbQna {
     @ManyToOne
     @JoinColumn(name ="qnaUserindex", referencedColumnName="memIndex")
     private TbMember tbMember;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbQna") // 하나의 카테고리에 여러게의 파트너가 연결
-    private List<TbQnaAnswer> tbQnaAnswerList;
+
 }

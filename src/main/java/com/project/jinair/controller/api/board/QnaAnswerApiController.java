@@ -16,6 +16,7 @@ public class QnaAnswerApiController implements CrudInterface<QnaAnswerApiRequest
 
     private final QnaAnswerApiLogicService qnaAnswerApiLogicService;
 
+
     @Override
     @PostMapping("")
     public Header<QnaAnswerApiResponse> create(@RequestBody Header<QnaAnswerApiRequest> request) {
