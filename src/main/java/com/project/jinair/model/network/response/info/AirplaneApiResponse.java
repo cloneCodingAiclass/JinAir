@@ -16,7 +16,9 @@ public class AirplaneApiResponse {
     private String apName;
     private String apId;
     // 좌석수
-    private Long apSeat;
+    private Long apSeatSum;
+    private Long apSeatBiz;
+    private Long apSeatPlus;
 
     private List<AirplaneSeatApiResponse> airplaneSeatApiResponseList;
 }

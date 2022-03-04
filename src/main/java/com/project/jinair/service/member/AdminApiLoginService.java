@@ -79,4 +79,10 @@ public class AdminApiLoginService implements CrudInterface<AdminApiRequest, Admi
                 .build();
         return Header.OK(adminApiResponse);
     }
+
+    public Header<AdminApiResponse> IdPwRead(String admin_id) {
+        return adminRepository.findByAdminId(admin_id)
+                .map(admin -> response(admin))
+                .orElseGet(() -> Header.ERROR("데이터 없음"));
+    }
 }

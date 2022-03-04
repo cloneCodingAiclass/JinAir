@@ -15,4 +15,6 @@ public interface AdminRepository extends JpaRepository<TbAdmin, Long> {
     // select * from tb_admin where admin_index=?
     Optional<TbAdmin> findByAdminIndex(Long idx);
 
+    Optional<TbAdmin> findByAdminId(String adminId);
+
 }

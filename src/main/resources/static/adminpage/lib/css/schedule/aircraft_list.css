@@ -34,6 +34,7 @@
 }
 #container > .contents > .contwrap > .contents_main tr td{
     height: 40px;
+    text-align: center;
 }
 #container > .contents > .contwrap > .btn_box{
     width: 100%;
