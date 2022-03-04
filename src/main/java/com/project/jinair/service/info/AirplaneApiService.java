@@ -3,13 +3,10 @@ package com.project.jinair.service.info;
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.info.TbAirplane;
 import com.project.jinair.model.network.Header;
-import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.info.AirplaneApiRequest;
 import com.project.jinair.model.network.response.info.AirplaneApiResponse;
 import com.project.jinair.repository.TbAirplaneRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

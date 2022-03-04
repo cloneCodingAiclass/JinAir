@@ -21,7 +21,7 @@ public class AirplaneApiController implements CrudInterface<AirplaneApiRequest, 
     private final AirplaneApiService airplaneApiService;
 
     @Override
-    @PostMapping("/post")        // http:localhost:8080/api/airplane(post)
+    @PostMapping("")        // http:localhost:8080/api/airplane(post)
     public Header<AirplaneApiResponse> create(@RequestBody Header<AirplaneApiRequest> request) {
         return airplaneApiService.create(request);
     }
