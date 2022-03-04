@@ -12,20 +12,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController // json 형식으로 데이터 주고 받음. 해당 url를 통해 접근하는 방식.
-@RequestMapping("/api/board")
+@RequestMapping("/api/faq")
 @RequiredArgsConstructor
 public class FaqApiController implements CrudInterface<FaqApiRequest, FaqApiResponse> {
     private final FaqApiLogicService faqApiLogicService;
 
     // 게시판 리스트
     @GetMapping("/list")
-    public List<TbFaq> list() {
+    public Header<List<FaqApiResponse>> list() {
         return faqApiLogicService.getFaqList();
     }
 
     // 게시판 글작성
     @Override
-    @PostMapping("")
+    @PostMapping("/write")
     public Header<FaqApiResponse> create(@RequestBody Header<FaqApiRequest> request) {
         return faqApiLogicService.create(request);
     }

@@ -45,7 +45,8 @@ public class AirplaneApiController implements CrudInterface<AirplaneApiRequest, 
     }
 
     @GetMapping("/list") // http://localhost:8080/api/airplane
-    public Header<List<AirplaneApiResponse>> findAll(){
+    public Header<List<AirplaneApiResponse>> findAll()
+    {
         return airplaneApiService.search();
     }
 
