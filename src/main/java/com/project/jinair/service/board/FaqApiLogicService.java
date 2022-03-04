@@ -2,16 +2,13 @@ package com.project.jinair.service.board;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.board.TbFaq;
-import com.project.jinair.model.entity.board.TbQna;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.board.FaqApiRequest;
 import com.project.jinair.model.network.response.board.FaqApiResponse;
-import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.repository.TbFaqRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,7 +21,7 @@ public class FaqApiLogicService implements CrudInterface<FaqApiRequest, FaqApiRe
 
 
     // 게시판 리스트
-    public Header<List<FaqApiResponse>> getFaqList() {
+    public Header<List<FaqApiResponse>> search() {
         List<TbFaq> tbFaq = tbFaqRepository.findAll();
         List<FaqApiResponse> faqList = tbFaq.stream()
                 .map(users -> responseFaq(users))

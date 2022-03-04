@@ -117,4 +117,21 @@ $(function () {
         e.stopPropagation();
     });
 
+
+    // 데이터 리스트
+    let itemList = new Vue({
+        el : 'itemList',
+        data : {
+            itemList : {}
+        }
+    })
+
+    // searchStart();
+    //
+    // function searchStart(){
+    //     $.get("/api/faq/list", function (response){
+    //         console.dir(response)
+    //     })
+    // }
+
 });

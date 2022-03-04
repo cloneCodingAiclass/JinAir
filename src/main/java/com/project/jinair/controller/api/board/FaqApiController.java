@@ -19,13 +19,12 @@ public class FaqApiController implements CrudInterface<FaqApiRequest, FaqApiResp
 
     // 게시판 리스트
     @GetMapping("/list")
-    public Header<List<FaqApiResponse>> list() {
-        return faqApiLogicService.getFaqList();
+    public Header<List<FaqApiResponse>> findAll() {
+        return faqApiLogicService.search();
     }
 
     // 게시판 글작성
-    @Override
-    @PostMapping("/write")
+    @PostMapping("/post")
     public Header<FaqApiResponse> create(@RequestBody Header<FaqApiRequest> request) {
         return faqApiLogicService.create(request);
     }
