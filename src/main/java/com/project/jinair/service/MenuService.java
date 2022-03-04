@@ -30,7 +30,7 @@ public class MenuService {
         return Arrays.asList(
                 Menu.builder().title("운항 스케줄 조회").url("/pages/admin/scheduleList").code("sc_list").build(),
                 Menu.builder().title("운항 스케줄 등록").url("/pages/admin/scheduleRegist").code("sc_regist").build(),
-                Menu.builder().title("항공기 정보 조회").url("/pages/admin/aircraftList").code("aircraft_list").build()
+                Menu.builder().title("항공기 정보 조회").url("/pages/admin/airplane").code("aircraft_list").build()
         );
     }
     public List<Menu> adminReservationMenu() {

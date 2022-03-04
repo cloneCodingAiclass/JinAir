@@ -116,4 +116,40 @@ $(function () {
             itemList.itemList = response.data;
         })
     };
+
+    function register(){
+        let apname = document.getElementById("apName").value;
+        let apid = document.getElementById("apId").value;
+        let apseatsum = document.getElementById("apSeatSum").value;
+        let apseatbiz = document.getElementById("apSeatBiz").value;
+        let apseatplus = document.getElementById("apSeatPlus").value;
+
+        let airplaneData = {
+            data: {
+                apName: apname,
+                apId: apid,
+                apSeatSum: apseatsum,
+                apSeatBiz: apseatbiz,
+                apSeatPlus: apseatplus
+            }
+        }
+
+        console.log(airplaneData);
+
+        $.ajax({
+            url : '/api/airplane',
+            type : 'POST',
+            dataType : 'json',
+            data : JSON.stringify(airplaneData),
+            dataType:"text",
+            contentType : "application/json"
+        });
+    }
+
+    $('#regist').click( () =>{
+       register();
+       location.href='/pages/admin/airplane';
+    })
 });
+
+

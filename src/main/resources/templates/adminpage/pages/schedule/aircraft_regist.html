@@ -1,10 +1,11 @@
 <html lang="ko"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org/">
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/schedule/aircrift_regist.css">
-<script src="/adminpage/app/schedule/aircraft_list.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <body>
         <div id="wrap">
             <div th:replace="/adminpage/fragment/header :: header"></div>
@@ -13,7 +14,6 @@
                 <div class="contents">
                     <div class="contwrap">
                         <p class="title">항공기 신규 등록</p>
-                        <form th:action="@{/api/airplane/post}" method="post">
                             <div class="contents_main">
                                 <table>
                                     <tr>
@@ -24,22 +24,22 @@
                                         <td>추가 차지<br>(지니플러스)</td>
                                     </tr>
                                     <tr>
-                                        <td th:name="apName">진에어</td>
-                                        <td><input type="text" class="airplane_id" th:name="apId"></td>
-                                        <td><input type="text" class="airplane_seat" th:name="apSeatSum"></td>
-                                        <td><input type="text" class="airplane_firstclass" th:name="apSeatBiz"></td>
-                                        <td><input type="text" class="airplane_business" th:name="apSeatPlus"></td>
+                                        <td><input type="text" class="airplane_name" id="apName"></td>
+                                        <td><input type="text" class="airplane_id" id="apId"></td>
+                                        <td><input type="text" class="airplane_seat" id="apSeatSum"></td>
+                                        <td><input type="text" class="airplane_firstclass" id="apSeatBiz"></td>
+                                        <td><input type="text" class="airplane_business" id="apSeatPlus"></td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="btn_box">
                                 <input type="button" value="취소" onclick="history.back()">
-                                <input type="submit" value="등록">
+                                <input type="submit" id="regist" value="등록"/>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </body>
+<script src="/adminpage/app/schedule/aircraft_list.js"></script>
 </html>
