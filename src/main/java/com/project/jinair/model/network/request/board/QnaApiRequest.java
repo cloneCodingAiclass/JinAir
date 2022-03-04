@@ -1,6 +1,7 @@
 package com.project.jinair.model.network.request.board;
 
 import com.project.jinair.model.enumclass.QnaStatus;
+import com.project.jinair.model.enumclass.QnaType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,11 +16,12 @@ import java.util.List;
 @Builder
 public class QnaApiRequest {
     private Long qnaIndex;
-    private String qnaType;
+    private QnaType qnaType;
     private String qnaTitle;
     private String qnaContent;
     private QnaStatus qnaIsans;
     private LocalDateTime qnaRegdate;
     private LocalDateTime qnaAnsdate;
+    private Long qnaUserindex;
 
 }

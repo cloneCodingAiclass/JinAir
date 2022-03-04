@@ -8,10 +8,12 @@ import lombok.Getter;
 
 public enum QnaStatus {
 
-    Complete(0,"완료", "답변 완료"),
-    NotComplete(1,"미완료", "답변 미완료");
+    NotComplete(0,"false", "답변 미완료"),
+    Complete(1,"ture", " 완료");
+
 
     private Integer id;
     private String title;
     private String description;
+
 }

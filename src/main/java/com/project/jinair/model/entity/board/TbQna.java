@@ -2,6 +2,7 @@ package com.project.jinair.model.entity.board;
 
 import com.project.jinair.model.entity.member.TbMember;
 import com.project.jinair.model.enumclass.QnaStatus;
+import com.project.jinair.model.enumclass.QnaType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,7 +28,8 @@ public class TbQna {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_qna_idx")
     private Long qnaIndex;
-    private String qnaType;
+    @Enumerated(EnumType.STRING)
+    private QnaType qnaType;
 //    private Long qnaUserindex;
     private String qnaTitle;
     private String qnaContent;

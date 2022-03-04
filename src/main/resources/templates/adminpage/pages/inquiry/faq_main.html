@@ -6,6 +6,9 @@
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/inquiry/faq_main.css">
 <script src="/adminpage/app/inquiry/faq_main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
 <!-- head.html 끝-->
 <body>
     <div id="wrap">
@@ -32,7 +35,7 @@
                         </div>
                     </div>
                     <div class="contents_main">
-                        <table>
+                        <table id="tableboard">
                             <tr>
                                 <td>번호</td>
                                 <td>제목</td>
@@ -40,7 +43,7 @@
                             </tr>
                             <tr>
                                 <td>5</td>
-                                <td><a href="./faq_view.html">코로나지만 해외 출국하려고하는데 국가별 출입국시 제한사항을 알고 싶어요.</a></td>
+                                <td><a href="./faq_view.html">{{faqTitle}}</a></td>
                                 <td>2022-02-03</td>
                             </tr>
                             <tr>
@@ -64,6 +67,11 @@
                                 <td>2022-02-03</td>
                             </tr>
                         </table>
+                        <script>
+                            new Vue{
+                                
+                            }
+                        </script>
                     </div>
                     <div class="contents_bottom">
                         <div class="faq_btn_write">

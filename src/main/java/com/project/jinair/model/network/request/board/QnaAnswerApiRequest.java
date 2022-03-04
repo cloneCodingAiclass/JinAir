@@ -1,6 +1,5 @@
 package com.project.jinair.model.network.request.board;
 
-import com.project.jinair.model.entity.board.TbQna;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
