@@ -19,7 +19,7 @@ public class QnaApiController implements CrudInterface<QnaApiRequest, QnaApiResp
     private final QnaApiLogicService qnaApiLogicService;
 
     @GetMapping("/list")
-    public List<TbQna> list() {
+    public Header<List<QnaApiResponse>> List() {
         return qnaApiLogicService.getQnaList();
     }
 

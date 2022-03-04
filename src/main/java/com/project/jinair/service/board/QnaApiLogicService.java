@@ -2,6 +2,7 @@ package com.project.jinair.service.board;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.board.TbQna;
+import com.project.jinair.model.enumclass.QnaStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.board.QnaApiRequest;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,23 +22,14 @@ public class QnaApiLogicService implements CrudInterface<QnaApiRequest, QnaApiRe
     private final TbQnaRepository tbQnaRepository;
 
     // 게시판 리스트
-    public List<TbQna> getQnaList() {
-        List<TbQna> tbQnaList = tbQnaRepository.findAll();
-        List<TbQna> qnaList = new ArrayList<>();
+    public Header<List<QnaApiResponse>> getQnaList() {
+        List<TbQna> tbQna = tbQnaRepository.findAll();
+        List<QnaApiResponse> qnaApiResponseList = tbQna.stream()
+                .map(user -> responseQna(user))
+                .collect(Collectors.toList());
+        return Header.OK(qnaApiResponseList);
 
-        for (TbQna tbQna : tbQnaList) {
-            TbQna qna = TbQna.builder()
-                    .qnaIndex(tbQna.getQnaIndex())
-                    .qnaType(tbQna.getQnaType())
-                    .qnaTitle(tbQna.getQnaTitle())
-                    .qnaContent(tbQna.getQnaContent())
-                    .qnaIsans(tbQna.getQnaIsans())
-                    .qnaRegdate(tbQna.getQnaRegdate())
-                    .qnaAnsdate(tbQna.getQnaAnsdate())
-                    .build();
-            qnaList.add(qna);
-        }
-        return qnaList;
+
     }
 
     @Override
@@ -47,7 +40,7 @@ public class QnaApiLogicService implements CrudInterface<QnaApiRequest, QnaApiRe
                 .qnaType(qnaApiRequest.getQnaType())
                 .qnaTitle(qnaApiRequest.getQnaTitle())
                 .qnaContent(qnaApiRequest.getQnaContent())
-                .qnaIsans(qnaApiRequest.getQnaIsans())
+                .qnaIsans(QnaStatus.NotComplete)
                 .qnaAnsdate(qnaApiRequest.getQnaAnsdate())
                 .qnaRegdate(qnaApiRequest.getQnaRegdate())
                 .build();
@@ -100,5 +93,15 @@ public class QnaApiLogicService implements CrudInterface<QnaApiRequest, QnaApiRe
                 .qnaRegdate(tbQna.getQnaRegdate())
                 .build();
         return Header.OK(qnaApiResponse);
+    }
+    private QnaApiResponse responseQna(TbQna tbQna){
+        QnaApiResponse qnaApiResponse = QnaApiResponse.builder()
+                .qnaIndex(tbQna.getQnaIndex())
+                .qnaType(tbQna.getQnaType())
+                .qnaTitle(tbQna.getQnaTitle())
+                .qnaContent(tbQna.getQnaContent())
+                .qnaRegdate(tbQna.getQnaRegdate())
+                .build();
+        return qnaApiResponse;
     }
 }

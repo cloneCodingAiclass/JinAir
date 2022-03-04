@@ -25,15 +25,7 @@ public class FaqApiLogicService implements CrudInterface<FaqApiRequest, FaqApiRe
         List<TbFaq> tbFaqList = tbFaqRepository.findAll();
         List<TbFaq> faqList = new ArrayList<>();
 
-        for (TbFaq tbFaq : tbFaqList) {
-            TbFaq faq = TbFaq.builder()
-                    .faqIndex(tbFaq.getFaqIndex())
-                    .faqType(tbFaq.getFaqType())
-                    .faqTitle(tbFaq.getFaqTitle())
-                    .faqContent(tbFaq.getFaqContent())
-                    .build();
-            faqList.add(faq);
-        }
+
         return faqList;
     }
 
