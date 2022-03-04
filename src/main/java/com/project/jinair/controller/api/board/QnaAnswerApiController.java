@@ -8,6 +8,8 @@ import com.project.jinair.service.board.QnaAnswerApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/qnaAns")
@@ -15,6 +17,11 @@ import org.springframework.web.bind.annotation.*;
 public class QnaAnswerApiController implements CrudInterface<QnaAnswerApiRequest, QnaAnswerApiResponse> {
 
     private final QnaAnswerApiLogicService qnaAnswerApiLogicService;
+
+    @GetMapping("/list/{id}")
+    public Header<List<QnaAnswerApiResponse>> List(@PathVariable(name = "id") Long id) {
+        return qnaAnswerApiLogicService.getQnaList(id);
+    }
 
 
     @Override
@@ -24,7 +31,7 @@ public class QnaAnswerApiController implements CrudInterface<QnaAnswerApiRequest
     }
 
     @Override
-    @GetMapping("/list/{id}")
+//    @GetMapping("/list/{id}")
     public Header<QnaAnswerApiResponse> read(@PathVariable(name = "id") Long id) {
         return qnaAnswerApiLogicService.read(id);
     }

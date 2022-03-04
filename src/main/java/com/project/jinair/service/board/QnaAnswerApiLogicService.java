@@ -6,16 +6,37 @@ import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.board.QnaAnswerApiRequest;
 import com.project.jinair.model.network.response.board.QnaAnswerApiResponse;
 import com.project.jinair.repository.TbQnaAnswerRepository;
-import com.project.jinair.repository.TbQnaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class QnaAnswerApiLogicService implements CrudInterface<QnaAnswerApiRequest, QnaAnswerApiResponse> {
 
     private final TbQnaAnswerRepository tbQnaAnswerRepository;
-    private final TbQnaRepository tbQnaRepository;
+
+    public Header<List<QnaAnswerApiResponse>> getQnaList(Long id) {
+        List<TbQnaAnswer> tbQnaAnswer = tbQnaAnswerRepository.findByQaQnaindex(id);
+        List<QnaAnswerApiResponse> qnaAnswerApiResponseList = tbQnaAnswer.stream()
+                .map(user -> responseQna(user))
+                .collect(Collectors.toList());
+        return Header.OK(qnaAnswerApiResponseList);
+    }
+
+    private QnaAnswerApiResponse responseQna(TbQnaAnswer tbQnaAnswer){
+        QnaAnswerApiResponse qnaAnswerApiResponse = QnaAnswerApiResponse.builder()
+                .qaIndex(tbQnaAnswer.getQaIndex())
+                .qaType(tbQnaAnswer.getQaType())
+                .qaTitle(tbQnaAnswer.getQaTitle())
+                .qaContent(tbQnaAnswer.getQaContent())
+                .qaRegdate(tbQnaAnswer.getQaRegdate())
+                .build();
+        return qnaAnswerApiResponse;
+    }
+
 
     @Override
     public Header<QnaAnswerApiResponse> create(Header<QnaAnswerApiRequest> request) {
