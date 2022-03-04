@@ -1,6 +1,5 @@
 package com.project.jinair.model.entity.board;
 
-import com.project.jinair.model.entity.member.TbMember;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,11 +29,9 @@ public class TbQnaAnswer {
     private String qaContent;
     @CreatedDate
     private LocalDateTime qaRegdate;
-//    private String qaQnaindex;
+//    private Long qaQnaindex;
 
 
     @ManyToOne
     private TbQna tbQna;
-
-
 }

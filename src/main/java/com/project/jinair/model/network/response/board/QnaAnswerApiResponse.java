@@ -1,6 +1,5 @@
 package com.project.jinair.model.network.response.board;
 
-import com.project.jinair.model.entity.board.TbQna;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +17,6 @@ public class QnaAnswerApiResponse {
     private String qaTitle;
     private String qaContent;
     private LocalDateTime qaRegdate;
-    private String qaQnaindex;
+    private Long qaQnaindex;
 
 }

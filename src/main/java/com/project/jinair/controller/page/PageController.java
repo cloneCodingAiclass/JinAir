@@ -1,17 +1,22 @@
 package com.project.jinair.controller.page;
 
+import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.service.MenuService;
+import com.project.jinair.service.board.QnaApiLogicService;
 import com.project.jinair.service.member.AdminApiLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/pages")
@@ -22,6 +27,9 @@ public class PageController {
 
     @Autowired
     AdminApiLoginService adminApiLoginService;
+
+    @Autowired
+    QnaApiLogicService qnaApiLogicService;
 
     // 사용자 인덱스
     @RequestMapping("/index")
@@ -761,22 +769,29 @@ public class PageController {
     }
     // qna 메인
     @RequestMapping("/admin/qna_main")
-    public ModelAndView qnaMain() {
+    public ModelAndView qnaMain(Model model) {
+        Header<List<QnaApiResponse>> qnaApiResponsesList = qnaApiLogicService.getQnaList();
+        model.addAttribute("qnaApiResponsesList", qnaApiResponsesList.getData());
+
         return new ModelAndView("/adminpage/pages/inquiry/qna_main")
                 .addObject("code", "qna_main")
                 .addObject("menuList", menuService.getadminMenu())
                 .addObject("inquiry", menuService.adminQnaMenu());
     }
     // qna 댓글
-    @RequestMapping("/admin/qna_reply")
-    public ModelAndView qnaReply() {
+    @GetMapping("/admin/qna_reply/{id}")
+    public ModelAndView qnaReply(Model model, @PathVariable(name = "id") Long id) {
+        Header<QnaApiResponse> qnaApiResponses = qnaApiLogicService.read(id);
+        model.addAttribute("qnaApiResponses", qnaApiResponses.getData());
         return new ModelAndView("/adminpage/pages/inquiry/qna_reply")
                 .addObject("code", "qna_reply")
                 .addObject("menuList", menuService.getadminMenu());
     }
     // qna 뷰
-    @RequestMapping("/admin/qna_view")
-    public ModelAndView qnaView() {
+    @GetMapping("/admin/qna_view/{id}")
+    public ModelAndView qnaView(Model model, @PathVariable(name = "id") Long id) {
+        Header<QnaApiResponse> qnaApiResponses = qnaApiLogicService.read(id);
+        model.addAttribute("qnaApiResponses", qnaApiResponses.getData());
         return new ModelAndView("/adminpage/pages/inquiry/qna_view")
                 .addObject("code", "qna_view")
                 .addObject("menuList", menuService.getadminMenu());

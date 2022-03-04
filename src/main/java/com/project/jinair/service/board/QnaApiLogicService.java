@@ -10,7 +10,6 @@ import com.project.jinair.repository.TbQnaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,21 +27,16 @@ public class QnaApiLogicService implements CrudInterface<QnaApiRequest, QnaApiRe
                 .map(user -> responseQna(user))
                 .collect(Collectors.toList());
         return Header.OK(qnaApiResponseList);
-
-
     }
 
     @Override
     public Header<QnaApiResponse> create(Header<QnaApiRequest> request) {
         QnaApiRequest qnaApiRequest = request.getData();
         TbQna tbQna = TbQna.builder()
-                .qnaIndex(qnaApiRequest.getQnaIndex())
                 .qnaType(qnaApiRequest.getQnaType())
                 .qnaTitle(qnaApiRequest.getQnaTitle())
                 .qnaContent(qnaApiRequest.getQnaContent())
                 .qnaIsans(QnaStatus.NotComplete)
-                .qnaAnsdate(qnaApiRequest.getQnaAnsdate())
-                .qnaRegdate(qnaApiRequest.getQnaRegdate())
                 .build();
         TbQna newTbQna = tbQnaRepository.save(tbQna);
         return response(newTbQna);
@@ -67,7 +61,6 @@ public class QnaApiLogicService implements CrudInterface<QnaApiRequest, QnaApiRe
                     qna.setQnaType(qnaApiRequest.getQnaType());
                     qna.setQnaTitle(qnaApiRequest.getQnaTitle());
                     qna.setQnaContent(qnaApiRequest.getQnaContent());
-                    qna.setQnaAnsdate(qnaApiRequest.getQnaAnsdate());
 
                     return qna;
                 }).map(qna -> tbQnaRepository.save(qna))
@@ -90,17 +83,31 @@ public class QnaApiLogicService implements CrudInterface<QnaApiRequest, QnaApiRe
                 .qnaType(tbQna.getQnaType())
                 .qnaTitle(tbQna.getQnaTitle())
                 .qnaContent(tbQna.getQnaContent())
+                .qnaIsans(tbQna.getQnaIsans())
+                .qnaAnsdate(tbQna.getQnaAnsdate())
                 .qnaRegdate(tbQna.getQnaRegdate())
+                .qnaUserindex(tbQna.getTbMember().getMemIndex())
+                .qnaUserName(tbQna.getTbMember().getMemKorFirstName()+tbQna.getTbMember().getMemKorLastName())
+                .qnaUserId(tbQna.getTbMember().getMemUserid())
+                .qnaUserHp(tbQna.getTbMember().getMemHp())
+                .qnaUserEmail(tbQna.getTbMember().getMemEmail())
+                .qnaUserEmailIsagree(tbQna.getTbMember().getMemEmailIsagree())
+                .qnaUserSnsIsagree(tbQna.getTbMember().getMemSnsIsagree())
                 .build();
         return Header.OK(qnaApiResponse);
     }
+
     private QnaApiResponse responseQna(TbQna tbQna){
         QnaApiResponse qnaApiResponse = QnaApiResponse.builder()
                 .qnaIndex(tbQna.getQnaIndex())
                 .qnaType(tbQna.getQnaType())
                 .qnaTitle(tbQna.getQnaTitle())
                 .qnaContent(tbQna.getQnaContent())
+                .qnaIsans(tbQna.getQnaIsans())
+                .qnaAnsdate(tbQna.getQnaAnsdate())
                 .qnaRegdate(tbQna.getQnaRegdate())
+                .qnaUserindex(tbQna.getTbMember().getMemIndex())
+                .qnaUserName(tbQna.getTbMember().getMemKorFirstName()+tbQna.getTbMember().getMemKorLastName())
                 .build();
         return qnaApiResponse;
     }
