@@ -2,9 +2,11 @@ package com.project.jinair.service.board;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.board.TbFaq;
+import com.project.jinair.model.entity.board.TbQna;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.board.FaqApiRequest;
 import com.project.jinair.model.network.response.board.FaqApiResponse;
+import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.repository.TbFaqRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,12 +24,13 @@ public class FaqApiLogicService implements CrudInterface<FaqApiRequest, FaqApiRe
 
 
     // 게시판 리스트
-    public List<TbFaq> getFaqList() {
-        List<TbFaq> tbFaqList = tbFaqRepository.findAll();
-        List<TbFaq> faqList = new ArrayList<>();
+    public Header<List<FaqApiResponse>> getFaqList() {
+        List<TbFaq> tbFaq = tbFaqRepository.findAll();
+        List<FaqApiResponse> faqList = tbFaq.stream()
+                .map(users -> responseFaq(users))
+                .collect(Collectors.toList());
 
-
-        return faqList;
+        return Header.OK(faqList);
     }
 
     // 게시판 글작성
@@ -91,5 +95,16 @@ public class FaqApiLogicService implements CrudInterface<FaqApiRequest, FaqApiRe
                 .faqRegdate(tbFaq.getFaqRegdate())
                 .build();
         return Header.OK(faqApiResponse);
+    }
+
+    private FaqApiResponse responseFaq(TbFaq tbFaq){
+        FaqApiResponse faqApiResponse = FaqApiResponse.builder()
+                .faqIndex(tbFaq.getFaqIndex())
+                .faqType(tbFaq.getFaqType())
+                .faqTitle(tbFaq.getFaqTitle())
+                .faqContent(tbFaq.getFaqContent())
+                .faqRegdate(tbFaq.getFaqRegdate())
+                .build();
+        return faqApiResponse;
     }
 }
