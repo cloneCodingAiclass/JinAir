@@ -3,13 +3,18 @@ package com.project.jinair.service.info;
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.info.TbAirplane;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.info.AirplaneApiRequest;
 import com.project.jinair.model.network.response.info.AirplaneApiResponse;
 import com.project.jinair.repository.TbAirplaneRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +27,8 @@ public class AirplaneApiService implements CrudInterface<AirplaneApiRequest, Air
         AirplaneApiRequest airplaneApiRequest = request.getData();
         TbAirplane tbAirplane = TbAirplane.builder()
                 .apIndex(airplaneApiRequest.getApIndex()).apName(airplaneApiRequest.getApName()).apId(airplaneApiRequest.getApId())
-                .apSeat(airplaneApiRequest.getApSeat()).build();
+                .apSeatSum(airplaneApiRequest.getApSeatSum()).apSeatBiz(airplaneApiRequest.getApSeatBiz())
+                .apSeatPlus(airplaneApiRequest.getApSeatPlus()).build();
         TbAirplane newAirplane = tbAirplaneRepository.save(tbAirplane);
         return response(newAirplane);
     }
@@ -44,7 +50,9 @@ public class AirplaneApiService implements CrudInterface<AirplaneApiRequest, Air
         return tbAirplane.map(airplane -> {
             airplane.setApName(airplaneApiRequest.getApName());
             airplane.setApId(airplaneApiRequest.getApId());
-            airplane.setApSeat(airplaneApiRequest.getApSeat());
+            airplane.setApSeatSum(airplaneApiRequest.getApSeatSum());
+            airplane.setApSeatBiz(airplaneApiRequest.getApSeatBiz());
+            airplane.setApSeatPlus(airplaneApiRequest.getApSeatPlus());
 
             return airplane;
         }).map(airplane -> tbAirplaneRepository.save(airplane))
@@ -69,8 +77,30 @@ public class AirplaneApiService implements CrudInterface<AirplaneApiRequest, Air
                 .apIndex(tbAirplane.getApIndex())
                 .apName(tbAirplane.getApName())
                 .apId(tbAirplane.getApId())
-                .apSeat(tbAirplane.getApSeat())
-                .build();
+                .apSeatSum(tbAirplane.getApSeatSum())
+                .apSeatBiz(tbAirplane.getApSeatBiz())
+                .apSeatPlus(tbAirplane.getApSeatPlus()).build();
         return Header.OK(airplaneApiResponse);
     }
+    private AirplaneApiResponse responseAirplane(TbAirplane tbAirplane){
+        AirplaneApiResponse airplaneApiResponse = AirplaneApiResponse.builder()
+                .apIndex(tbAirplane.getApIndex())
+                .apName(tbAirplane.getApName())
+                .apId(tbAirplane.getApId())
+                .apSeatSum(tbAirplane.getApSeatSum())
+                .apSeatBiz(tbAirplane.getApSeatBiz())
+                .apSeatPlus(tbAirplane.getApSeatPlus()).build();
+        return airplaneApiResponse;
+    }
+
+    public Header<List<AirplaneApiResponse>> search() {
+        List<TbAirplane> tbAirplane = tbAirplaneRepository.findAll();
+        List<AirplaneApiResponse> airplaneApiResponseList = tbAirplane.stream()
+                .map(users -> responseAirplane(users))
+                .collect(Collectors.toList());
+
+        return Header.OK(airplaneApiResponseList);
+    }
+
+
 }

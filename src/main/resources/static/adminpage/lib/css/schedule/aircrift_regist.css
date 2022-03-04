@@ -29,6 +29,9 @@
     border-top: 1px solid #ccc;
     height: 40px;
 }
+#container > .contents > .contwrap .contents_main tr td{
+    text-align: center !important;
+}
 #container > .contents > .contwrap .contents_main tr:first-child td{
     width: 333px;
 }

@@ -105,16 +105,17 @@
     text-align: center;
     width: 25%;
     height: 100px;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(127, 197, 255);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
     background-color: white;
     border-radius: 3px;
     display: inline-block;
     margin-left: 5px;
     margin: 0 0px 0 10px;
-    background: url(/adminpage/lib/img/weather1.jpg) no-repeat;
-    background-position: 50% 60%;
-    background-size: 100%;
+    /*background: url(/adminpage/lib/img/weather1.jpg) no-repeat;*/
+    /*background-position: 50% 60%;*/
+    /*background-size: 100%;*/
+    background-color: rgb(127, 197, 255);
 }
 .contents > .contwrap .totalair p{
     font-weight: 900;
@@ -125,7 +126,7 @@
     height: 30px;
     display: inline-block;
     padding-top: 10px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid rgb(169, 216, 255);
 }
 .contents > .contwrap > .bottcont{
     width: 100%;

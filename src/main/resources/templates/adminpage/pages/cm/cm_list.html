@@ -4,7 +4,7 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/cm/cm_list.css">
-<script src="/adminpage/app/cm/cm_list.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <!-- head.html 끝-->
 <body>
 <div id="wrap">
@@ -22,94 +22,26 @@
                 </div>
                 <div id="cm_list">
                     <table>
-                        <tr>
-                            <th>고유 번호</th>
-                            <th>아이디</th>
-                            <th>성명</th>
-                            <th>생년월일</th>
-                            <th>연락처</th>
-                            <th>가입일자</th>
-                        </tr>
-                        <tr>
-                            <td><a href="./cm_detail.html">234564</a> </td>
-                            <td><a href="./cm_detail.html">APPLE</a></td>
-                            <td><a href="./cm_detail.html">김 사과(KIM SAGWA)</a></td>
-                            <td><a href="./cm_detail.html">19990101</a></td>
-                            <td><a href="./cm_detail.html">010-1111-1111</a></td>
-                            <td><a href="./cm_detail.html">2022-02-03</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="./cm_detail.html">234565</a> </td>
-                            <td><a href="./cm_detail.html">APPLE</a></td>
-                            <td><a href="./cm_detail.html">배 애리(BAE AERRI)</a></td>
-                            <td><a href="./cm_detail.html">19970912</a></td>
-                            <td><a href="./cm_detail.html">010-2222-2222</a></td>
-                            <td><a href="./cm_detail.html">2022-02-03</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="./cm_detail.html">234566</a> </td>
-                            <td><a href="./cm_detail.html">APPLE</a></td>
-                            <td><a href="./cm_detail.html">이 메론(LEE MELON)</a></td>
-                            <td><a href="./cm_detail.html">19960521</a></td>
-                            <td><a href="./cm_detail.html">010-3333-3333</a></td>
-                            <td><a href="./cm_detail.html">2022-02-03</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="./cm_detail.html">234567</a> </td>
-                            <td><a href="./cm_detail.html">banana</a></td>
-                            <td><a href="./cm_detail.html">반 하나(BAN HANA)</a></td>
-                            <td><a href="./cm_detail.html">19870630</a></td>
-                            <td><a href="./cm_detail.html">010-4444-4444</a></td>
-                            <td><a href="./cm_detail.html">2022-02-03</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="./cm_detail.html">234568</a> </td>
-                            <td><a href="./cm_detail.html">avocado</a></td>
-                            <td><a href="./cm_detail.html">안 가도(AHN GADO)</a></td>
-                            <td><a href="./cm_detail.html">19620114</a></td>
-                            <td><a href="./cm_detail.html">010-5555-5555</a></td>
-                            <td><a href="./cm_detail.html">2022-02-03</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="./cm_detail.html">234569</a> </td>
-                            <td><a href="./cm_detail.html">APPLE</a></td>
-                            <td><a href="./cm_detail.html">김 사과(KIM SAGWA)</a></td>
-                            <td><a href="./cm_detail.html">20070314</a></td>
-                            <td><a href="./cm_detail.html">010-6666-6666</a></td>
-                            <td><a href="./cm_detail.html">2022-02-03</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="./cm_detail.html">234570</a> </td>
-                            <td><a href="./cm_detail.html">APPLE</a></td>
-                            <td><a href="./cm_detail.html">김 사과(KIM SAGWA)</a></td>
-                            <td><a href="./cm_detail.html">19990101</a></td>
-                            <td><a href="./cm_detail.html">010-7777-7777</a></td>
-                            <td><a href="./cm_detail.html">2022-02-03</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="./cm_detail.html">234571</a> </td>
-                            <td><a href="./cm_detail.html">APPLE</a></td>
-                            <td><a href="./cm_detail.html">김 사과(KIM SAGWA)</a></td>
-                            <td><a href="./cm_detail.html">19990101</a></td>
-                            <td><a href="./cm_detail.html">010-8888-8888</a></td>
-                            <td><a href="./cm_detail.html">2022-02-03</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="./cm_detail.html">234572</a> </td>
-                            <td><a href="./cm_detail.html">APPLE</a></td>
-                            <td><a href="./cm_detail.html">김 사과(KIM SAGWA)</a></td>
-                            <td><a href="./cm_detail.html">19990101</a></td>
-                            <td><a href="./cm_detail.html">010-9999-9999</a></td>
-                            <td><a href="./cm_detail.html">2022-02-03</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="./cm_detail.html">234573</a> </td>
-                            <td><a href="./cm_detail.html">APPLE</a></td>
-                            <td><a href="./cm_detail.html">김 사과(KIM SAGWA)</a></td>
-                            <td><a href="./cm_detail.html">19990101</a></td>
-                            <td><a href="./cm_detail.html">010-1234-5678</a></td>
-                            <td><a href="./cm_detail.html">2022-02-03</a></td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>고유 번호</th>
+                                <th>아이디</th>
+                                <th>성명</th>
+                                <th>생년월일</th>
+                                <th>연락처</th>
+                                <th>가입일자</th>
+                            </tr>
+                        </thead>
+                        <tbody id="memList">
+                            <tr role="row" v-for="dto in memberList">
+                                <td scope="row"><a :href=`/pages/admin/cm_list/cm_detail/${dto.memIndex}`>{{dto.memIndex}}</a></td>
+                                <td><a :href=`/pages/admin/cm_list/cm_detail/${dto.memIndex}`>{{dto.memUserid}}</a></td>
+                                <td><a :href=`/pages/admin/cm_list/cm_detail/${dto.memIndex}`>{{dto.memKorFirstName}} {{dto.memKorLastName}}({{dto.memEngFirstName}} {{dto.memEngLastName}})</a></td>
+                                <td><a :href=`/pages/admin/cm_list/cm_detail/${dto.memIndex}`>{{dto.memBirth}}</a></td>
+                                <td><a :href=`/pages/admin/cm_list/cm_detail/${dto.memIndex}`>{{dto.memHp}}</a></td>
+                                <td><a :href=`/pages/admin/cm_list/cm_detail/${dto.memIndex}`>{{dto.memRegdate}}</a></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div class="footer">
@@ -136,5 +68,6 @@
         </div>
     </div>
 </div>
+<script src="/adminpage/app/cm/cm_list.js"></script>
 </body>
 </html>

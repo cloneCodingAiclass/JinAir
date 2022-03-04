@@ -21,7 +21,7 @@
 }
 
 /* table */
-#cm_detail table {
+.cm_detail table {
     margin-top: 20px;
     width: 80%;
     text-align: center;
@@ -34,24 +34,24 @@
     margin: 50px auto;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
-#cm_detail table tr{
+.cm_detail table tr{
     font-size: 14px;
     height: 40px;
     border-bottom: 1px solid #ccc;
 }
-#cm_detail table th {
+.cm_detail table th {
     font-weight: bold;
     background-color: #F2F2F2;
 }
 
-#cm_detail table td #kor_first_name,
-#cm_detail table td #kor_last_name,
-#cm_detail table td #eng_first_name,
-#cm_detail table td #eng_last_name {
+.cm_detail table td #kor_first_name,
+.cm_detail table td #kor_last_name,
+.cm_detail table td #eng_first_name,
+.cm_detail table td #eng_last_name {
     text-align: center;
     width: 120px;
 }
-#cm_detail table input, #cm_detail table select{
+.cm_detail table input, .cm_detail table select{
     outline: none;
     height: 26px;
     font-size: 13px;
@@ -59,27 +59,27 @@
     text-indent: 5px;
     text-align: center;
 }
-#cm_detail table input[type="text"]{
+.cm_detail table input[type="text"]{
     width: 320px
 }
-#cm_detail table input[type="email"]{
+.cm_detail table input[type="email"]{
     width: 320px
 }
-#cm_detail table input[type="tel"]{
+.cm_detail table input[type="tel"]{
     width: 320px
 }
-#cm_detail table select{
+.cm_detail table select{
     width: 320px;
     border: none;
 }
-#cm_detail table span{
+.cm_detail table span{
     position: relative;
     bottom: 8px;
 }
-#cm_detail table input[type="radio"]{
+.cm_detail table input[type="radio"]{
     margin: 0 15px 0 0;
 }
-#cm_detail table td input{
+.cm_detail table td input{
     border: none;
 }
 

@@ -1,26 +1,26 @@
 /* contents */
-#cm_detail_box {
+.cm_detail_box {
     width: 88%;
     margin-left: 50px;
     margin-top: 50px;
 }
 
 /* title */
-#cm_detail_box .title_wrap {
+.cm_detail_box .title_wrap {
     width: 100%;
     align-items: center;
     display: flex;
     justify-content: center;
 }
 
-#cm_detail_box #cm_detail_title {
+.cm_detail_box #cm_detail_title {
     font-size: 1.4rem; 
     font-weight: 700;
     display: inline;
     align-self: flex-start;
 }
 /* table */
-#cm_detail table {
+.cm_detail table {
     margin-top: 20px;
     width: 80%;
     text-align: center;
@@ -33,24 +33,24 @@
     margin: 50px auto;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
-#cm_detail table tr{
+.cm_detail table tr{
     font-size: 14px;
     height: 40px;
     border-bottom: 1px solid #ccc;
 }
-#cm_detail table th {
+.cm_detail table th {
     font-weight: bold;
     background-color: #F2F2F2;
 }
 
-#cm_detail table td #kor_first_name,
-#cm_detail table td #kor_last_name,
-#cm_detail table td #eng_first_name,
-#cm_detail table td #eng_last_name {
+.cm_detail table td #kor_first_name,
+.cm_detail table td #kor_last_name,
+.cm_detail table td #eng_first_name,
+.cm_detail table td #eng_last_name {
     text-align: center;
     width: 120px;
 }
-#cm_detail table input, #cm_detail table select{
+.cm_detail table input, .cm_detail table select{
     outline: none;
     height: 26px;
     font-size: 13px;
@@ -58,27 +58,27 @@
     text-indent: 5px;
     text-align: center;
 }
-#cm_detail table input[type="text"]{
+.cm_detail table input[type="text"]{
     width: 320px
 }
-#cm_detail table input[type="email"]{
+.cm_detail table input[type="email"]{
     width: 320px
 }
-#cm_detail table input[type="tel"]{
+.cm_detail table input[type="tel"]{
     width: 320px
 }
-#cm_detail table select{
+.cm_detail table select{
     width: 320px;
     border: none;
 }
-#cm_detail table span{
+.cm_detail table span{
     position: relative;
     bottom: 8px;
 }
-#cm_detail table input[type="radio"]{
+.cm_detail table input[type="radio"]{
     margin: 0 15px 0 0;
 }
-#cm_detail table td input{
+.cm_detail table td input{
     border: none;
 }
 
@@ -89,7 +89,7 @@
     text-align: right;
     margin: 20px auto;
 }
-#form_btn input[type="submit"] {
+#form_btn .toUpdate {
     width: 130px;
     border: none;
     background-color: rgb(188, 216, 53);
@@ -101,7 +101,7 @@
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
     margin-left: 5px;
 }
-#form_btn input[type="button"] {
+#form_btn .toList {
     width: 80px;
     border: 3px solid rgb(188, 216, 53);
     background-color: #fff;
