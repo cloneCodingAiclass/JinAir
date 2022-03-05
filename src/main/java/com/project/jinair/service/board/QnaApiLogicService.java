@@ -3,6 +3,7 @@ package com.project.jinair.service.board;
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.board.TbQna;
 import com.project.jinair.model.enumclass.QnaStatus;
+import com.project.jinair.model.enumclass.QnaType;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.board.QnaApiRequest;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
@@ -23,6 +24,22 @@ public class QnaApiLogicService implements CrudInterface<QnaApiRequest, QnaApiRe
     // 게시판 리스트
     public Header<List<QnaApiResponse>> getQnaList() {
         List<TbQna> tbQna = tbQnaRepository.findAll();
+        List<QnaApiResponse> qnaApiResponseList = tbQna.stream()
+                .map(user -> responseQna(user))
+                .collect(Collectors.toList());
+        return Header.OK(qnaApiResponseList);
+    }
+
+    public Header<List<QnaApiResponse>> getQnaList(QnaType a) {
+        List<TbQna> tbQna = tbQnaRepository.findByQnaType(a);
+        List<QnaApiResponse> qnaApiResponseList = tbQna.stream()
+                .map(user -> responseQna(user))
+                .collect(Collectors.toList());
+        return Header.OK(qnaApiResponseList);
+    }
+
+    public Header<List<QnaApiResponse>> getQnaList(String a) {
+        List<TbQna> tbQna = tbQnaRepository.findByQnaTitleContaining(a);
         List<QnaApiResponse> qnaApiResponseList = tbQna.stream()
                 .map(user -> responseQna(user))
                 .collect(Collectors.toList());

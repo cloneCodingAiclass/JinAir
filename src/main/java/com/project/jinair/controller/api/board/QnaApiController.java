@@ -1,6 +1,7 @@
 package com.project.jinair.controller.api.board;
 
 import com.project.jinair.ifs.CrudInterface;
+import com.project.jinair.model.enumclass.QnaType;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.board.QnaApiRequest;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
@@ -39,6 +40,17 @@ public class QnaApiController implements CrudInterface<QnaApiRequest, QnaApiResp
     public Header<List<QnaApiResponse>> List() {
         return qnaApiLogicService.getQnaList();
     }
+
+    @GetMapping("/listdetail/{a}")
+    public Header<List<QnaApiResponse>> List(@PathVariable QnaType a) {
+        return qnaApiLogicService.getQnaList(a);
+    }
+
+    @GetMapping("/listsearch/{a}")
+    public Header<List<QnaApiResponse>> Listsearch(@PathVariable String a) {
+        return qnaApiLogicService.getQnaList(a);
+    }
+
 
     @Override
     @PostMapping("")

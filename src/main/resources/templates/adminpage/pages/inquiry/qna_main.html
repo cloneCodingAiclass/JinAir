@@ -29,26 +29,29 @@
                             </select>
                         </div> 
                         <div class="btn_top">
-                            <input type="text" placeholder="검색어를 입력하세요">
-                            <input type="button" value="검색">
+                            <input type="text" placeholder="검색어를 입력하세요" class="searchQna">
+                            <input type="button" value="검색" class="btn_searchQna">
                         </div>
                     </div>
                     <div class="contents_main">
                         <table>
-                            <tr>
+                            <tr class="conatainsss">
                                 <td>번호</td>
                                 <td>제목</td>
                                 <td>작성자</td>
                                 <td>답변여부</td>
                                 <td>등록일</td>
                             </tr>
-                            <tr th:each="i:${#numbers.sequence(qnaApiResponsesList.size()-1,0,-1)}" th:with="entry=${qnaApiResponsesList[i]}" id="itemList">
-                                <td th:text="${entry.qnaIndex}"></td>
-                                <td><a th:href="@{'/pages/admin/qna_view/'+${entry.qnaIndex}}" th:text="${entry.qnaTitle}"></a></td>
-                                <td th:text="${entry.qnaUserName}"></td>
-                                <td th:text="${entry.qnaIsans}"></td>
-                                <td th:text="${#strings.substring(entry.qnaRegdate,0, 10)}"></td>
-                            </tr>
+                            <tbody id="itemList">
+                                <tr v-for="dto in itemList.slice().reverse()">
+                                    <td>{{dto.qnaIndex}}</td>
+                                    <td>
+                                        <a :href=`/pages/admin/qna_view/${dto.qnaIndex}`>{{dto.qnaTitle}}</a></td>
+                                    <td>{{dto.qnaUserName}}</td>
+                                    <td>{{dto.qnaIsans}}</td>
+                                    <td>{{dto.qnaRegdate.substr(0,10)}}</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>

@@ -57,24 +57,25 @@
     text-align: center;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
-    background-color: #fff;
+    background-color: #F2F2F2;
     border-collapse: collapse;
     font-size: 15px;
     font-weight: bold;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
-#container > .contents .contents_main table tr:first-child{
+#container > .contents .contents_main table .conatainsss{
     background-color: #F2F2F2;
-}
-#container > .contents .contents_main table tr:first-child td{
     border-bottom: 1px solid #ccc;
+}
+#container > .contents .contents_main table tbody tr{
+    background-color: #FFF;
 }
 #container > .contents .contents_main table tr td{
     width: 125px;
     height: 40px;
     text-align: center;
 }
-#container > .contents .contents_main table tr:nth-child(1) td:nth-child(2){
+#container > .contents .contents_main table .conatainsss td:nth-child(2){
     text-align: center;
 }
 #container > .contents .contents_main table tr td:nth-child(2){

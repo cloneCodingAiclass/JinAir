@@ -98,24 +98,66 @@ $(function () {
         $('.nav7').siblings('li').eq(0).find('a').css({"color":"#BDD600"});
     })
 
-    $('.btn_user_container').hide();
-    $('.user_container').hide();
-    $('.user_name').on('click', function(e){
-        x = e.clientX;
-        y = e.clientY;
-        $('.btn_user_container').css("position", "absolute").css("top", y).css("left", x);
-        $('.btn_user_container').fadeIn(200);
+
+
+    let itemList = new Vue({
+        el : '#itemList',
+        data : {
+            itemList : {}
+        },
+        methods:{
+        }
     });
 
-    $('.btn_user').on('click', function(){
-        $('.btn_user_container').hide();
-        $('.user_container').fadeIn(200);
+    // ALL
+    searchStart();
+    function searchStart(){
+        $.get("/api/qna/list", function(response){
+            // 검색 데이터
+            itemList.itemList = response.data;
+
+        });
+    }
+
+
+    // 카테로리
+    function asd(a){
+        $.get("/api/qna/listdetail/"+a, function(response){
+            // 검색 데이터
+            itemList.itemList = response.data;
+
+        });
+    }
+    $('select').on('change', function (){
+        if($(this).val()=="기내홈쇼핑"){
+            asd("HomeShopping");
+        }else if($(this).val()=="칭송"){
+            asd("Praise");
+        }else if($(this).val()=="불만"){
+            asd("Complaint");
+        }else if($(this).val()=="문의요청"){
+            asd("Inquiry");
+        }else if($(this).val()=="제언"){
+            asd("Proposal");
+        }else{
+            searchStart();
+        }
     });
 
-    $('.btn_check').on('click', function(e){
-        $('.user_container').fadeOut(200);
-        e.stopPropagation();
+    // 검색어로 찾기
+    function searchQna(searchQna){
+        $.get("/api/qna/listsearch/"+searchQna, function(response){
+            // 검색 데이터
+            itemList.itemList = response.data;
+        });
+    }
+    $('.btn_searchQna').on('click', function (){
+        searchQna($('.searchQna').val());
+        if ( $('.searchQna').val().length == 0){
+            alert('검색어를 확인해주세요.');
+        }
     });
+
 
 
 });

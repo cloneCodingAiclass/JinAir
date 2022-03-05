@@ -788,14 +788,16 @@ public class PageController {
         model.addAttribute("qnaApiResponses", qnaApiResponses.getData());
         return new ModelAndView("/adminpage/pages/inquiry/qna_view")
                 .addObject("code", "qna_view")
-                .addObject("menuList", menuService.getadminMenu());
+                .addObject("menuList", menuService.getadminMenu())
+                .addObject("inquiry", menuService.adminQnaMenu());
     }
     // qna 댓글
     @GetMapping("/admin/qna_reply/{id}")
     public ModelAndView qnaReply() throws Exception{
         return new ModelAndView("/adminpage/pages/inquiry/qna_reply")
                 .addObject("code", "qna_reply")
-                .addObject("menuList", menuService.getadminMenu());
+                .addObject("menuList", menuService.getadminMenu())
+                .addObject("inquiry", menuService.adminQnaMenu());
     }
 
     // 공지 작성
