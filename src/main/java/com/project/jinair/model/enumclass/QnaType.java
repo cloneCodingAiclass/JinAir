@@ -10,7 +10,7 @@ public enum QnaType {
     Praise(1,"Praise", "칭송"),
     Complaint(2,"Complaint", " 불만"),
     Inquiry(3,"Inquiry", " 문의요청"),
-    Proposal(4,"ture", " 제언");
+    Proposal(4,"Proposal", " 제언");
 
 
     private Integer id;
