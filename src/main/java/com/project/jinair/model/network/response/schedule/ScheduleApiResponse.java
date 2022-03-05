@@ -15,16 +15,18 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class ScheduleApiResponse {
-    private Long sch_index;
+    private Long schIndex;
+    private String schAirplaneId;
+    private String schAirplaneName;
     private LocalDateTime schDepartureDate;
-    private LocalDateTime schArrivalDate;
     private String schDeparturePoint;
+    private LocalDateTime schStartTime;
     private String schArrivalPoint;
+    private LocalDateTime schArrivalDate;
+    private Long schAirplaneSeat;
+    private LocalDateTime schFlyingTime;
     private Long schBasicPrice;
-    // 이넘 클래스 없음
-    private String schAirplaneType;
-    private Long schAirplaneIdex;
-    private Long schAreaIndex;
+    private Long schPoint;
 
     // 공항 리스트
     private List<AirportApiResponse> airportApiResponseList;

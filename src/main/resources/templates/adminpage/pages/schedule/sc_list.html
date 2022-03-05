@@ -4,7 +4,8 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/schedule/sc_list.css">
-<script src="/adminpage/app/schedule/sc_list.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <body>
         <div id="wrap">
             <div th:replace="/adminpage/fragment/header :: header"></div>
@@ -17,7 +18,7 @@
                             <input type="button" value="조건 조회" class="btn_search">
                         </div>
                         <div class="contents_main">
-                            <table>
+                            <table id="itemList">
                                 <tr>
                                     <td>운항편</td>
                                     <td>출발 일자</td>
@@ -27,79 +28,33 @@
                                     <td>도착시간</td>
                                     <td>예약 가능 좌석<br>(수용 좌석)</td>
                                 </tr>
-                                <tr>
+                                <tr v-for="dto in itemList">
                                     <td>
-                                        <a href="sc_resultinfo.html">LJ438</a>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${dto.schIndex}`>{{dto.schAirplaneId}}</a>
                                     </td>
                                     <td>
-                                        <a href="sc_resultinfo.html">2022-01-28</a>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${dto.schIndex}` id="startDay">{{dto.schDepartureDate.substr(0,10)}}</a>
                                     </td>
                                     <td>
-                                        <a href="sc_resultinfo.html">서울/김포(GMP)</a>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${dto.schIndex}`>{{dto.schDeparturePoint}}</a>
                                     </td>
                                     <td>
-                                        <a href="sc_resultinfo.html">08:20</a>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${dto.schIndex}`>{{dto.schStartTime.substr(11,16)}}</a>
                                     </td>
                                     <td>
-                                        <a href="sc_resultinfo.html">제주(CJU)</a>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${dto.schIndex}`>{{dto.schArrivalPoint}}</a>
                                     </td>
                                     <td>
-                                        <a href="sc_resultinfo.html">09:10</a>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${dto.schIndex}`>{{dto.schArrivalDate.substr(11,16)}}</a>
                                     </td>
                                     <td>
-                                        <a href="sc_resultinfo.html">278(430)</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="sc_resultinfo.html">LJ438</a>
-                                    </td>
-                                    <td>
-                                        <a href="sc_resultinfo.html">2022-01-28</a>
-                                    </td>
-                                    <td>
-                                        <a href="sc_resultinfo.html">서울/김포(GMP)</a>
-                                    </td>
-                                    <td>
-                                        <a href="sc_resultinfo.html">08:20</a>
-                                    </td>
-                                    <td>
-                                        <a href="sc_resultinfo.html">제주(CJU)</a>
-                                    </td>
-                                    <td>
-                                        <a href="sc_resultinfo.html">09:10</a>
-                                    </td>
-                                    <td>
-                                        <a href="sc_resultinfo.html">278(430)</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="sc_resultinfo.html">LJ438</a>
-                                    </td>
-                                    <td>
-                                        <a href="sc_resultinfo.html">2022-01-28</a>
-                                    </td>
-                                    <td>
-                                        <a href="sc_resultinfo.html">서울/김포(GMP)</a>
-                                    </td>
-                                    <td>
-                                        <a href="sc_resultinfo.html">08:20</a>
-                                    </td>
-                                    <td>
-                                        <a href="sc_resultinfo.html">제주(CJU)</a>
-                                    </td>
-                                    <td>
-                                        <a href="sc_resultinfo.html">09:10</a>
-                                    </td>
-                                    <td>
-                                        <a href="sc_resultinfo.html">278(430)</a>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${dto.schIndex}`>278(430)</a>
                                     </td>
                                 </tr>
                             </table>
                         </div>
                         <div class="btn_box">
-                            <input type="button" value="운항 스케줄 등록" onclick="location.href='sc_regist.html'">
+                            <input type="button" value="운항 스케줄 등록" onclick="location.href='/pages/admin/scheduleRegist'">
                         </div>
                     </div>
                 </div>
@@ -107,7 +62,6 @@
             <!-- 모달 창-->
             <div class="modal_container">
                 <div class="modal">
-                    <form action="sc_result.html">
                         <p>항공편명
                             <input type="text" placeholder="(예) 001, 세자리">
                             <select>
@@ -124,14 +78,14 @@
                             </select>
                         </p>
                         <p>검색기간
-                            <input type="date" id="datepicker"><input type="text" id="datepicker"></p>
+                            <input type="date"><input type="text"></p>
                         <div class="btn_modal">
                             <input type="button" value="취소" class="modal_cancel">
                             <input type="submit" value="검색" class="modal_search">
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
     </body>
+<script src="/adminpage/app/schedule/sc_list.js"></script>
 </html>

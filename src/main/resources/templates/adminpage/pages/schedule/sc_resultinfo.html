@@ -4,7 +4,8 @@
     <!-- head.html -->
     <div th:replace="/adminpage/fragment/head :: head"></div>
     <link rel="stylesheet" href="/adminpage/lib/css/schedule/sc_regist.css">
-    <script src="/adminpage/app/schedule/sc_resultinfo.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <body>
         <div id="wrap">
             <div th:replace="/adminpage/fragment/header :: header"></div>
@@ -71,15 +72,13 @@
                     <p>이미 예약자가 있을 경우 삭제가
                         <span>불가능</span>합니다.</p>
                     <form action="#">
-                        <input type="button" value="취소" onclick="location.href='sc_resultinfo.html'" id="cnl_btn">
+                        <input type="button" value="취소" onclick="location.href='/pages/admin/scList'" id="cnl_btn">
                         <input
-                            type="button"
-                            value="삭제"
-                            id="del_btn"
-                            onclick="location.href='sc_list.html'">
+                            type="button" value="삭제" id="del_btn" onclick="location.href='/pages/admin/scList'">
                     </form>
                 </div>
             </div>
         </div>
     </body>
+    <script src="/adminpage/app/schedule/sc_resultinfo.js"></script>
 </html>

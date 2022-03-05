@@ -108,4 +108,40 @@ $(function () {
         $('.nav2').siblings('li').eq(1).find('a').css({"color":"#BDD600"});
     })
 
+    let indexbtn = [];
+    let pagination = {
+        total_pages : 0,
+        total_elements : 0,
+        current_page : 0,
+        current_elements : 0
+    };
+
+    let showPage = new Vue({
+        el : '#showPage',
+        data : {
+            totalElements : {},
+            currentPage : {}
+        }
+    });
+
+    let itemList = new Vue({
+        el : '#itemList',
+        data : {
+            itemList : {}
+        }
+    })
+
+    sclist();
+
+    function sclist(){
+        $.get("/api/schedule/list", function(response){
+            console.dir(response);
+
+
+            // 검색 데이터
+            itemList.itemList = response.data;
+
+        })
+
+    }
 });

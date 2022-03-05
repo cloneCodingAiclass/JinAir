@@ -6,19 +6,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ScheduleApiRequest {
-    private Long sch_index;
+    private Long schIndex;
+    private String schAirplaneId;
+    private String schAirplaneName;
     private LocalDateTime schDepartureDate;
-    private LocalDateTime schArrivalDate;
     private String schDeparturePoint;
+    private LocalDateTime schStartTime;
     private String schArrivalPoint;
+    private LocalDateTime schArrivalDate;
+    private Long schAirplaneSeat;
+    private LocalDateTime schFlyingTime;
     private Long schBasicPrice;
-    private String schAirplaneType;
-    private Long schAirplaneIdex;
-    private Long schAreaIndex;
+    private Long schPoint;
+
 }

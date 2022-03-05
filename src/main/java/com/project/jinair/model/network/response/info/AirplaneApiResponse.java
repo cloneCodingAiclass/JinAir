@@ -1,10 +1,13 @@
 package com.project.jinair.model.network.response.info;
 
+import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Data
@@ -21,4 +24,5 @@ public class AirplaneApiResponse {
     private Long apSeatPlus;
 
     private List<AirplaneSeatApiResponse> airplaneSeatApiResponseList;
+
 }

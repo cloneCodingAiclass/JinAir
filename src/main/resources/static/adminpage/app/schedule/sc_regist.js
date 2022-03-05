@@ -108,9 +108,85 @@ $(function () {
         $('.nav2').siblings('li').eq(2).find('a').css({"color":"#BDD600"});
     })
 
-        
-    $(() => {
-        document.getElementById('item_start_date').valueAsDate = new Date();
-        document.getElementById('item_end_date').valueAsDate = new Date();
+    // 24시간 표시
+    $(document).ready(function (){
+        $('input.timepicker').timepicker({
+            timeFormat: "HH:mm",
+            interval: 30,
+            startTime : '00:00',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        })
+    })
+
+
+    let apList = new Vue({
+        el : '#aplist',
+        data : {
+            apList : {}
+        }
+    })
+
+    sclist();
+
+    function sclist(){
+        $.get("/api/airplane/list", function(response){
+            console.dir(response);
+
+
+            // 검색 데이터
+            apList.apList = response.data;
+
+        })
+    }
+
+
+    function register(){
+
+        let apname = document.getElementById("apname").value;
+        let apid = document.getElementById("adid").value;
+        let startdate = document.getElementById("startdate").value + "T08:00:00";
+        let departurepoint = document.getElementById("departurepoint").value;
+        let starttime = "2022-04-06T" + document.getElementById("starttime").value;
+        let arrivalpoint = document.getElementById("arrivalpoint").value;
+        let arrivaldate = "2022-04-06T" + document.getElementById("arrivaldate").value ;
+        let resultseat = document.getElementById("resultseat").value;
+        let flyingtime = "2022-04-06T" + document.getElementById("flyingtime").value;
+        let price = document.getElementById("price").value;
+        let point = document.getElementById("point").value;
+
+        let schedule = {
+            data: {
+                schAirplaneName: apname,
+                schAirplaneId: apid,
+                schDepartureDate: startdate,
+                schDeparturePoint: departurepoint,
+                schStartTime: starttime,
+                schArrivalPoint: arrivalpoint,
+                schArrivalDate: arrivaldate,
+                schAirplaneSeat: resultseat,
+                schFlyingTime: flyingtime,
+                schBasicPrice: price,
+                schPoint: point
+            }
+        }
+
+        console.log(schedule);
+
+        $.ajax({
+            url : '/api/schedule',
+            type : 'POST',
+            dataType : 'json',
+            data : JSON.stringify(schedule),
+            dataType:"text",
+            contentType : "application/json"
+        });
+    }
+
+    $('#regist').click( () =>{
+        register();
+        location.href='/pages/admin/scheduleList';
+
     })
 });
