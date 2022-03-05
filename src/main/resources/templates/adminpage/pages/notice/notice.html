@@ -2,9 +2,10 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org/">
 <!-- head.html -->
-    <link rel="stylesheet" href="/adminpage/lib/css/style.css">
-    <link rel="stylesheet" href="/adminpage/lib/css/notice/notice.css">
-    <script src="/adminpage/app/notice/notice.js"></script>
+<div th:replace="/adminpage/fragment/head :: head"></div>
+<link rel="stylesheet" href="/adminpage/lib/css/style.css">
+<link rel="stylesheet" href="/adminpage/lib/css/notice/notice.css">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <body>
     <div id="wrap">
         <header>
@@ -25,61 +26,16 @@
                             <input type="submit" value="검색">
                         </form>
                     </div>
-                    <table>
+                    <table id="notiList">
                         <tr>
                             <th>번호</th>
                             <th>제목</th>
                             <th>등록일</th>
                         </tr>
-                        <tr>
-                            <td>[공지]</td>
-                            <td style="text-align: left;"><a href="./nt_view.html">국내선 신분증 미소지 승객 탑승 불가 안내</a></td>
-                            <td>2022-01-24</td>
-                        </tr>
-                        <tr>
-                            <td>[공지]</td>
-                            <td style="text-align: left;"><a href="./nt_view.html">진에어 국제선 비정상운항 안내</a></td>
-                            <td>2022-01-22</td>
-                        </tr>
-                        <tr>
-                            <td>[공지]</td>
-                            <td style="text-align: left;"><a href="./nt_view.html">진에어 국내선 비정상운항 안내</a></td>
-                            <td>2022-01-10</td>
-                        </tr>
-                        <tr>
-                            <td>131</td>
-                            <td style="text-align: left;"><a href="./nt_view.html">개인정보처리방침 개정 안내</a></td>
-                            <td>2021-12-24</td>
-                        </tr>
-                        <tr>
-                            <td>130</td>
-                            <td style="text-align: left;"><a href="./nt_view.html">국내선 유류할등료 안내(2022년 2월)</a></td>
-                            <td>2021-12-12</td>
-                        </tr>
-                        <tr>
-                            <td>129</td>
-                            <td style="text-align: left;"><a href="./nt_view.html">국내선 신규 정기노선 운임 공지(김포 - 사천 노선)</a></td>
-                            <td>2021-07-23</td>
-                        </tr>
-                        <tr>
-                            <td>128</td>
-                            <td style="text-align: left;"><a href="./nt_view.html">국내선 신규 정기노선 운임 공지(김포 - 양양 노선)</a></td>
-                            <td>2021-07-23</td>
-                        </tr>
-                        <tr>
-                            <td>127</td>
-                            <td style="text-align: left;"><a href="./nt_view.html">지니쿠폰 운영 정책 변경 안내</a></td>
-                            <td>2021-01-28</td>
-                        </tr>
-                        <tr>
-                            <td>126</td>
-                            <td style="text-align: left;"><a href="./nt_view.html">국내선 신분증 미소지 승객 탑승 면책 조항 개설</a></td>
-                            <td>2021-01-21</td>
-                        </tr>
-                        <tr>
-                            <td>130</td>
-                            <td style="text-align: left;"><a href="./nt_view.html">국내선 유류할등료 안내(2021년 1월)</a></td>
-                            <td>2021-01-01</td>
+                        <tr v-for="noti in notiList" :key="noti.noIndex">
+                            <td>{{ noti.noIndex }}</td>
+                            <td><a href="/pages/admin/notice/view/">{{ noti.noTitle }}</a></td>
+                            <td>{{ noti.noRegdate }}</td>
                         </tr>
                     </table>
                     <div class="footer">
@@ -108,4 +64,5 @@
         </div>
     </div>
 </body>
+<script src="/adminpage/app/notice/notice.js"></script>
 </html>

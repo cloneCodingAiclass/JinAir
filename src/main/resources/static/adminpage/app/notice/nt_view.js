@@ -1,12 +1,4 @@
 $(function () {
-    // 모달
-    $('.modal_container').hide();
-    $('.modal_btn').on('click', function(){
-        $('.modal_container').fadeIn(200);
-    })
-    $('.btn_cancel').on('click', function(){
-        $('.modal_container').fadeOut(200);
-    })
 
     $('.nav6').find('a').css({"color":"#BDD600"});
     $('.nav6').siblings('li').css({"display":"block"});
@@ -102,12 +94,14 @@ $(function () {
         $('.nav6').siblings('li').css({"display":"block"});
         $('.nav6').parent().siblings().find('li').css({"display":"none"});
     })
+});
+
+$(()=> {
     $('.modal_container').hide();
-    $('.modal_btn').on('click', function(){
-        $('.modal_container').fadeIn(200);
+    $('.modal_btn').on('click', () => {
+        $(".modal_container").fadeIn(200);
     })
-    $('.btn_cancel').on('click', function(){
+    $('.btn_cancel').on('click', () => {
         $('.modal_container').fadeOut(200);
     })
-
-});
+})

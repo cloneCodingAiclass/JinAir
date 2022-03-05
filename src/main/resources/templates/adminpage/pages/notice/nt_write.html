@@ -6,6 +6,7 @@
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/notice/nt_write.css">
 <script src="/adminpage/app/notice/nt_write.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <!-- head.html 끝-->
 <body>
     <div id="wrap">
@@ -23,22 +24,22 @@
                                 <col width="1000">
                             </colgroup>
                             <tr>
-                                <th style="text-align: left;"><input type="text" placeholder="제목을 입력하세요"></th>
+                                <th style="text-align: left;"><input name="title" type="text" placeholder="제목을 입력하세요"></th>
                             </tr>
                             <tr>
                                 <td colspan="1">
                                     <div class="file-upload">
                                         <input type="text" placeholder="파일첨부" class="filetext">
                                         <label for="ex_file" class="ex_file">찾아보기</label>
-                                        <input type="file" id="ex_file">
+                                        <input name="file" type="file" id="ex_file">
                                     </div>
-                                    <textarea style="resize: none;" placeholder="내용을 입력하세요."></textarea>
+                                    <textarea name="content" style="resize: none;" placeholder="내용을 입력하세요."></textarea>
                                 </td>
                             </tr>
                         </table>
                         <div class="footer">
                             <a href="./notice.html" class="btn_notice btn_cancel"><input type="button" value="취소"></a>
-                            <a class="btn_notice btn_add"><input type="submit" value="등록"></a>
+                            <a class="btn_notice btn_add"><input type="submit" value="등록" @click="write"></a>
                         </div>
                     </form>
                 </div>
@@ -46,4 +47,5 @@
         </div>
     </div>
 </body>
+<script src="/adminpage/app/inquiry/nt_write.js"></script>
 </html>

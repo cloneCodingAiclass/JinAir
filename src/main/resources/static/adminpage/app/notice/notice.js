@@ -94,4 +94,22 @@ $(function () {
         $('.nav6').parent().siblings().find('li').css({"display":"none"});
     })
 
+    //데이터 리스트
+    let notiList = new Vue({
+        el : '#notiList',
+        data : {
+            notiList : {}
+        }
+    });
+
+    searchStart();
+
+    function searchStart(){
+        $.get("/api/notify/list", function(response){
+            console.dir(response);
+            notiList.notiList = response.data;
+        })
+    };
+
+
 });
