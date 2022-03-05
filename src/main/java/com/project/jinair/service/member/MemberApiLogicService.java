@@ -118,10 +118,13 @@ public class MemberApiLogicService implements CrudInterface<MemberApiRequest, Me
     }
 
     // 고객 아이디 검색
-    public Header<MemberApiResponse> search(String userid){
-        return memberRepository.findByMemUserid(userid)
-                .map(member -> response(member))
-                .orElseGet(() -> Header.ERROR("데이터 없음"));
+    public Header<List<MemberApiResponse>> search(String userid){
+        Optional<TbMember> member = memberRepository.findByMemUserid(userid);
+        List<MemberApiResponse> memberApiResponseList = member.stream()
+                .map(mem -> responseMember(mem))
+                .collect(Collectors.toList());
+
+        return Header.OK(memberApiResponseList);
     }
 
     private Header<MemberApiResponse> response(TbMember member){

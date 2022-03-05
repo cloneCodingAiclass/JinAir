@@ -51,8 +51,8 @@ public class MemberApiController implements CrudInterface<MemberApiRequest, Memb
     }
 
     // 회원 검색
-    @GetMapping("{userid}")
-    public Header<MemberApiResponse> search(@PathVariable(value = "userid") String userid){
+    @GetMapping("/search/{userid}")
+    public Header<List<MemberApiResponse>> search(@PathVariable(value = "userid") String userid){
         return memberApiLogicService.search(userid);
     }
 

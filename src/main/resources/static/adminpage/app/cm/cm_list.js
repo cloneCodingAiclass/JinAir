@@ -142,7 +142,8 @@ $(function () {
     }
 
     function search(id){
-        $.get("/api/user?userid=" + id, function (response){
+        $.get("/api/user/search/" + id, function (response){
+            console.dir(response);
             memberList.memberList = response.data;
         })
     }
