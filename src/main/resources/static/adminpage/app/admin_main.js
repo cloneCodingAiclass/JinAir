@@ -95,6 +95,30 @@ $(function () {
         $('.nav1').parent().siblings().find('li').css({"display":"none"});
     })
 
+    // Qna
+    let itemList = new Vue({
+        el : '#itemList',
+        data : {
+            itemList : {}
+        },
+        methods:{
+        }
+    });
+
+    // ALL
+    searchStart();
+    function searchStart(){
+        $.get("/api/qna/list/NotComplete", function(response){
+            // 검색 데이터
+            itemList.itemList = response.data;
+
+        });
+    }
+
+
+
+
+
 });
 
 // 한국 날씨

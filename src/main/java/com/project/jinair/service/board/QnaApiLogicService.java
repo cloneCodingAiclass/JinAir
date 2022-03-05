@@ -9,6 +9,7 @@ import com.project.jinair.model.network.request.board.QnaApiRequest;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.repository.TbQnaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class QnaApiLogicService implements CrudInterface<QnaApiRequest, QnaApiRe
 
     // 게시판 리스트
     public Header<List<QnaApiResponse>> getQnaList() {
-        List<TbQna> tbQna = tbQnaRepository.findAll();
+        List<TbQna> tbQna = tbQnaRepository.findAll(Sort.by(Sort.Direction.ASC, "QnaIndex"));
         List<QnaApiResponse> qnaApiResponseList = tbQna.stream()
                 .map(user -> responseQna(user))
                 .collect(Collectors.toList());
@@ -32,6 +33,14 @@ public class QnaApiLogicService implements CrudInterface<QnaApiRequest, QnaApiRe
 
     public Header<List<QnaApiResponse>> getQnaList(QnaType a) {
         List<TbQna> tbQna = tbQnaRepository.findByQnaType(a);
+        List<QnaApiResponse> qnaApiResponseList = tbQna.stream()
+                .map(user -> responseQna(user))
+                .collect(Collectors.toList());
+        return Header.OK(qnaApiResponseList);
+    }
+
+    public Header<List<QnaApiResponse>> getQnaLists() {
+        List<TbQna> tbQna = tbQnaRepository.findByQnaIsans(QnaStatus.NotComplete);
         List<QnaApiResponse> qnaApiResponseList = tbQna.stream()
                 .map(user -> responseQna(user))
                 .collect(Collectors.toList());
