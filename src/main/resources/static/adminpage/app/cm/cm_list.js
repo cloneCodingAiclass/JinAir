@@ -126,13 +126,11 @@ $(function () {
         }
     })
 
-    search(0);
+    list(0);
 
-    function search(page){
+    function list(page){
         console.log("page : " + page);
         $.get("/api/user?page="+page, function (response){
-            console.dir(response);
-
             indexBtn = [];
             pagination = response.pagination;
 
@@ -142,5 +140,20 @@ $(function () {
             memberList.memberList = response.data;
         })
     }
+
+    function search(id){
+        $.get("/api/user/search/" + id, function (response){
+            console.dir(response);
+            memberList.memberList = response.data;
+        })
+    }
+
+    $("#searchSubmit").click(() => {
+        search($("#searchUserid").val());
+        if($("#searchUserid").val() == null){
+            alert("검색어를 확인해주세요");
+        }
+    })
+
 
 })(jQuery);
