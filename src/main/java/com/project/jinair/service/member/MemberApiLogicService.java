@@ -102,6 +102,7 @@ public class MemberApiLogicService implements CrudInterface<MemberApiRequest, Me
         ).orElseGet(() -> Header.ERROR("데이터 없음"));
     }
 
+    // 고객 리스트
     public Header<List<MemberApiResponse>> list(Pageable pageable){
         Page<TbMember> members = memberRepository.findAll(pageable);
         List<MemberApiResponse> memberApiResponseList = members.stream()
@@ -114,6 +115,13 @@ public class MemberApiLogicService implements CrudInterface<MemberApiRequest, Me
                 .currentElements(members.getNumberOfElements())
                 .build();
         return Header.OK(memberApiResponseList, pagination);
+    }
+
+    // 고객 아이디 검색
+    public Header<MemberApiResponse> search(String userid){
+        return memberRepository.findByMemUserid(userid)
+                .map(member -> response(member))
+                .orElseGet(() -> Header.ERROR("데이터 없음"));
     }
 
     private Header<MemberApiResponse> response(TbMember member){

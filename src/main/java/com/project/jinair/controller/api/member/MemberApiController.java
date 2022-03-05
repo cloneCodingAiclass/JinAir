@@ -49,4 +49,11 @@ public class MemberApiController implements CrudInterface<MemberApiRequest, Memb
     public Header<List<MemberApiResponse>> list(@PageableDefault(sort = {"memIndex"}, direction = Sort.Direction.DESC)Pageable pageable){
         return memberApiLogicService.list(pageable);
     }
+
+    // 회원 검색
+    @GetMapping("{userid}")
+    public Header<MemberApiResponse> search(@PathVariable(value = "userid") String userid){
+        return memberApiLogicService.search(userid);
+    }
+
 }
