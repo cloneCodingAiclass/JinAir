@@ -1,12 +1,15 @@
 package com.project.jinair.controller.api.board;
 
 import com.project.jinair.ifs.CrudInterface;
-import com.project.jinair.model.entity.board.TbNotifi;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.board.NotifyApiRequest;
 import com.project.jinair.model.network.response.board.NotifyApiResponse;
-import com.project.jinair.service.board.NotifyApiLogicService;
+import com.project.jinair.service.board.NotifyLogicService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,12 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NotifiApiController implements CrudInterface<NotifyApiRequest, NotifyApiResponse> {
 
-    private final NotifyApiLogicService notifyLogicService;
-
-    @GetMapping("/list")
-    public List<TbNotifi> list() {
-        return notifyLogicService.getNotiList();
-    }
+    private final NotifyLogicService notifyLogicService;
 
     @Override
     @PostMapping("")
@@ -46,4 +44,10 @@ public class NotifiApiController implements CrudInterface<NotifyApiRequest, Noti
     public Header<NotifyApiResponse> delete(@PathVariable(name = "id") Long id) {
         return notifyLogicService.delete(id);
     }
+
+    @GetMapping("/list")
+    public Header<List<NotifyApiResponse>> list() {
+        return notifyLogicService.search();
+    }
+
 }

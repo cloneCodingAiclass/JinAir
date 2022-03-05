@@ -3,38 +3,25 @@ package com.project.jinair.service.board;
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.board.TbNotifi;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.board.NotifyApiRequest;
 import com.project.jinair.model.network.response.board.NotifyApiResponse;
 import com.project.jinair.repository.TbNotifiRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class NotifyApiLogicService implements CrudInterface<NotifyApiRequest, NotifyApiResponse> {
+public class NotifyLogicService implements CrudInterface<NotifyApiRequest, NotifyApiResponse> {
 
     private final TbNotifiRepository tbNotifiRepository;
-    // 리스트
-    public List<TbNotifi> getNotiList() {
-        List<TbNotifi> tbNotifiList = tbNotifiRepository.findAll();
-        List<TbNotifi> notifiList = new ArrayList<>();
-
-        for (TbNotifi tbNotifi : tbNotifiList) {
-            TbNotifi notify = TbNotifi.builder()
-                    .noIndex(tbNotifi.getNoIndex())
-                    .noTitle(tbNotifi.getNoTitle())
-                    .noContents(tbNotifi.getNoContents())
-                    .noFile(tbNotifi.getNoFile())
-                    .noRegdate(tbNotifi.getNoRegdate())
-                    .build();
-            notifiList.add(notify);
-        }
-        return notifiList;
-    }
 
     @Override
     public Header<NotifyApiResponse> create(Header<NotifyApiRequest> request) {
@@ -94,4 +81,36 @@ public class NotifyApiLogicService implements CrudInterface<NotifyApiRequest, No
                 .build();
         return Header.OK(notifyApiResponse);
     }
+
+    public NotifyApiResponse responseNotifi(TbNotifi tbNotifi) {
+        NotifyApiResponse notifyApiResponse = NotifyApiResponse.builder()
+                .noIndex(tbNotifi.getNoIndex())
+                .noTitle(tbNotifi.getNoTitle())
+                .noContents(tbNotifi.getNoContents())
+                .noFile(tbNotifi.getNoFile())
+                .noRegdate(tbNotifi.getNoRegdate())
+                .build();
+        return notifyApiResponse;
+    }
+
+    // 리스트
+    public Header<List<NotifyApiResponse>> search() {
+        List<TbNotifi> tbNotifi = tbNotifiRepository.findAll();
+        List<NotifyApiResponse> notifyApiResponseList = tbNotifi.stream()
+                .map(notifi -> responseNotifi(notifi))
+                .collect(Collectors.toList());
+
+        return Header.OK(notifyApiResponseList);
+    }
+
+    // 게시글 상세보기
+    public Header<List<NotifyApiResponse>> view(Long id) {
+        Optional<TbNotifi> tbNotifi = tbNotifiRepository.findById(id);
+        List<NotifyApiResponse> notifyApiResponseList = tbNotifi.stream()
+                .map(notifi -> responseNotifi(notifi))
+                .collect(Collectors.toList());
+
+        return Header.OK(notifyApiResponseList);
+    }
+
 }

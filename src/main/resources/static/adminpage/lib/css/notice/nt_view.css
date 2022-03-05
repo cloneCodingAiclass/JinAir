@@ -3,15 +3,11 @@
     position: absolute;
     background: rgba(0, 0, 0, 0.5);
     left: 0; right: 0; top: 0; bottom: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
-.modal_container > .modal p{
-    margin-bottom: 20px;
-    font-size: 16px;
-    font-weight: 900;
-}
+
 .modal_container > .modal{
     width: 500px;
     height: 300px;
@@ -24,7 +20,14 @@
     justify-content: center;
     align-items: center;
 }
-.modal_container > .modal form{
+
+.modal_container > .modal p{
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.modal_container .box_wrap{
     display: flex;
     justify-content: center;
 }
