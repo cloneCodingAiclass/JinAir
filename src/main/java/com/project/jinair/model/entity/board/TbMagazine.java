@@ -31,5 +31,6 @@ public class TbMagazine { // 매거진 테이블
     private String mzAnswer;
     private String mzPdf;
     @CreatedDate
-    private LocalDateTime evRegdate;
+    private LocalDateTime mzRegdate;
+
 }

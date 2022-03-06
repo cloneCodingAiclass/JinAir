@@ -1,5 +1,6 @@
 package com.project.jinair.model.entity.info;
 
+import com.project.jinair.model.entity.schedule.TbSchedule;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.nio.channels.FileChannel;
 import java.util.List;
 
 @Data
@@ -28,7 +30,6 @@ public class TbAirplane {   // 비행기 정보
     private Long apIndex;
     private String apName;
     private String apId;
-    // 좌석수
     private Long apSeatSum;
     private Long apSeatBiz;
     private Long apSeatPlus;

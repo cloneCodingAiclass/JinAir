@@ -1,11 +1,10 @@
 package com.project.jinair.controller.page;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.project.jinair.model.entity.board.TbMagazine;
 import com.project.jinair.model.network.Header;
-import com.project.jinair.model.network.request.board.QnaAnswerApiRequest;
-import com.project.jinair.model.network.response.board.QnaAnswerApiResponse;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.service.MenuService;
+import com.project.jinair.service.board.MagazineApiLoginService;
 import com.project.jinair.service.board.QnaAnswerApiLogicService;
 import com.project.jinair.service.board.QnaApiLogicService;
 import com.project.jinair.service.member.AdminApiLoginService;
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +34,9 @@ public class PageController {
 
     @Autowired
     QnaAnswerApiLogicService qnaAnswerApiLogicService;
+
+    @Autowired
+    MagazineApiLoginService magazineApiLoginService;
 
     // 사용자 인덱스
     @RequestMapping("/index")
@@ -505,7 +508,7 @@ public class PageController {
     }
 
     // admin 스케줄 상세
-    @RequestMapping("/admin/scheduleResultInfo")
+    @RequestMapping("/admin/scheduleResultInfo/{id}")
     public ModelAndView scheduleResultInfo() {
         return new ModelAndView("/adminpage/pages/schedule/sc_resultinfo")
                 .addObject("code", "sc_resultinfo")
@@ -828,28 +831,44 @@ public class PageController {
 
     /* 지니 매거진 */
     @RequestMapping("/admin/genielist")
-    public ModelAndView genieList() {
+    public ModelAndView genieList(Model model) {
+//        List<TbMagazine> tbMagazines = magazineApiLoginService.getFiles();
+//        model.addAttribute("tbMagazines", tbMagazines);
         return new ModelAndView("/adminpage/pages/magazine/genieList")
                 .addObject("code", "genieList")
                 .addObject("menuList", menuService.getadminMenu());
     }
+
+    @PostMapping("/uploadFiles")
+    public String uploadMultipleFiles(@PathVariable(name = "mzTitle") String mzTitle,
+                                      @RequestParam("file1") MultipartFile file1,
+                                      @RequestParam("file2") MultipartFile file2,
+                                      @RequestParam("file3") MultipartFile file3) {
+        magazineApiLoginService.saveFile(mzTitle, file1, file2, file3);
+        return "redirect:/pages/admin/genielist";
+    }
+
+    @GetMapping("/admin/genielist_view/{id}")
+    public ModelAndView genieListView(@PathVariable(name = "id") Long id) {
+        return new ModelAndView("/adminpage/pages/magazine/genieList_view")
+                .addObject("code", "genieListView")
+                .addObject("menuList", menuService.getadminMenu());
+    }
+
+    @GetMapping("/admin/genielist_edit/{id}")
+    public ModelAndView genieListEdit(@PathVariable(name = "id") Long id) {
+        return new ModelAndView("/adminpage/pages/magazine/genieList_edit")
+                .addObject("code", "genieListEdit")
+                .addObject("menuList", menuService.getadminMenu());
+    }
+
     @RequestMapping("/admin/genielist_add")
     public ModelAndView genieListAdd() {
         return new ModelAndView("/adminpage/pages/magazine/genieList_add")
                 .addObject("code", "genieListAdd")
                 .addObject("menuList", menuService.getadminMenu());
     }
-    @RequestMapping("/admin/genielist_edit")
-    public ModelAndView genieListEdit() {
-        return new ModelAndView("/adminpage/pages/magazine/genieList_edit")
-                .addObject("code", "genieListEdit")
-                .addObject("menuList", menuService.getadminMenu());
-    }
-    @RequestMapping("/admin/genielist_view")
-    public ModelAndView genieListView() {
-        return new ModelAndView("/adminpage/pages/magazine/genieList_view")
-                .addObject("code", "genieListView")
-                .addObject("menuList", menuService.getadminMenu());
-    }
+
+
 
 }

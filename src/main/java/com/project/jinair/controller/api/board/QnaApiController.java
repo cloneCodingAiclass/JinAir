@@ -1,6 +1,7 @@
 package com.project.jinair.controller.api.board;
 
 import com.project.jinair.ifs.CrudInterface;
+import com.project.jinair.model.enumclass.QnaStatus;
 import com.project.jinair.model.enumclass.QnaType;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.board.QnaApiRequest;
@@ -44,6 +45,11 @@ public class QnaApiController implements CrudInterface<QnaApiRequest, QnaApiResp
     @GetMapping("/listdetail/{a}")
     public Header<List<QnaApiResponse>> List(@PathVariable QnaType a) {
         return qnaApiLogicService.getQnaList(a);
+    }
+
+    @GetMapping("/list/NotComplete")
+    public Header<List<QnaApiResponse>> ListUnComplete() {
+        return qnaApiLogicService.getQnaLists();
     }
 
     @GetMapping("/listsearch/{a}")

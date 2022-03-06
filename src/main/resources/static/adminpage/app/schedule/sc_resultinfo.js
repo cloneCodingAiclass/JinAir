@@ -106,4 +106,25 @@ $(function () {
         $('.nav2').parent().siblings().find('li').css({"display":"none"});
         $('.nav2').siblings('li').eq(1).find('a').css({"color":"#BDD600"});
     })
+
+
+    let apList = new Vue({
+        el : '#aplist',
+        data : {
+            apList : {}
+        }
+    })
+
+    let str = $(location).attr('href').split('/');
+    sclist(str[6]);
+
+    function sclist(index){
+        $.get("/api/schedule/"+index, function(response){
+            console.dir(response);
+
+            // 검색 데이터
+            apList.aplist = response.data;
+        })
+    }
+
 });
