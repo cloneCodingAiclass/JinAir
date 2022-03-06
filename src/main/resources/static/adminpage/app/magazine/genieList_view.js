@@ -104,9 +104,11 @@ $(function () {
         }
     });
 
-    searchStart();
-    function searchStart(){
-        $.get("/api/magazine/list", function(response){
+    var str = $(location).attr('href').split('/');
+    searchStart(str[6]);
+
+    function searchStart(index){
+        $.get("/api/magazine/view/"+index, function(response){
             // 검색 데이터
             itemList.itemList = response.data;
 
@@ -114,4 +116,21 @@ $(function () {
     }
 
 
+    $('#add_btn').on('click',function(){
+        $.get("/api/magazine/delete/"+str[6], function(response){
+            location.href='/pages/admin/genielist';
+        });
+    });
+
+
 });
+
+$(()=> {
+    $(".modal_isfind").hide();
+    $(".del_btn").on('click', () => {
+        $(".modal_isfind").fadeIn(200);
+    })
+    $(".btn_cancel").on('click', () => {
+        $(".modal_isfind").fadeOut(200);
+    })
+})

@@ -94,24 +94,53 @@ $(function () {
         $('.nav11').parent().siblings().find('li').css({"display":"none"});
     })
 
-    // list
-    let itemList = new Vue({
-        el : '#itemList',
-        data : {
-            itemList : {}
-        },
-        methods:{
-        }
+
+    $('#ex_file1').on('change', function(){
+        console.log($('#ex_file1').val());
+        $('.filetext1').val($('#ex_file1').val());
     });
 
-    searchStart();
-    function searchStart(){
-        $.get("/api/magazine/list", function(response){
-            // 검색 데이터
-            itemList.itemList = response.data;
+    $('#ex_file2').on('change', function(){
+        $('.filetext2').val($('#ex_file2').val());
+    });
 
+    $('#ex_file3').on('change', function(){
+        $('.filetext3').val($('#ex_file3').val());
+    });
+
+    let jsonData;
+    function updating(){
+        jsonData = {
+            data : {
+                mzTitle: $('#magazine_rg').val(),
+                mzImg: $('#filetext1').val(),
+                mzAnswer : $('#filetext2').val(),
+                mzPdf :  $('#filetext3').val()
+            }
+        }
+        $.ajax({
+            url : "/api/magazine",
+            type : "POST",
+            data : JSON.stringify(jsonData),
+            dataType : "text",
+            contentType : "application/json"
         });
     }
+
+    $(".edit_btn").click( () => {
+        if( $('#magazine_rg').val().length == 0 ||
+            $('#filetext1').val().length == 0 ||
+            $('#filetext2').val().length == 0 ||
+            $('#filetext3').val().length == 0
+        ) {
+            alert('제목 혹은 내용을 정확히 입력해주세요');
+        }else{
+            updating();
+            location.href = `/pages/admin/genielist`;
+        }
+    })
+
+
 
 
 });

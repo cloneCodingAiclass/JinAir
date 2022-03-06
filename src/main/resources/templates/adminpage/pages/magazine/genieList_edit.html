@@ -4,22 +4,16 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
     <link rel="stylesheet" href="/adminpage/lib/css/magazine/genieList_edit.css">
-    <link rel="stylesheet" href="/adminpage/lib/css/style.css">
-    <script src="/adminpage/app/magazine/genieList.js"></script>
+    <script src="/adminpage/app/magazine/genieList_edit.js"></script>
+<!-- head.html 끝-->
 <body>
     <form action="./genieList_view.html">
         <div id="wrap">
-            <header>
-                <div class="header_inner">
-                    <a href="../admin_index.html"><div class="img"></div></a><a href="/AdminPage/admin_index.html"><span>관리자 센터</span></a>
-                    <div class="logout"><p class="myname">반하나</p><input type="text" value="님" class="nim"><input type="button" value="Logout" onclick="location.href='../admin_login.html'"></div>
-                </div>
-            </header>
             <div th:replace="/adminpage/fragment/header :: header"></div>
             <div id="container">
                 <div th:replace="/adminpage/fragment/leftmenu :: leftmenu(${code}, ${menuList})"></div>
                 <div class="contents">
-                    <div class="contwrap">
+                    <div class="contwrap" id="itemList">
                         <div class="search">
                             <p class="title">지니매거진 세부 수정</p>
                         </div>
@@ -31,26 +25,26 @@
                             </colgroup>
                             <tr>
                                 <td>제목</td>
-                                <td>VOL.39매거진(2020년 5월)</td>
-                                <td>등록일 2020-05-01</td>
+                                <td>{{itemList.mzTitle}}</td>
+                                <td>등록일 {{itemList.mzRegdate.substr(0,10)}}</td>
                             </tr>
                             <tr>
                                 <td  colspan="3" class="file_id">
                                     <div class="file-upload">
                                         메인 페이지 파일 첨부
-                                        <input type="text" class="filetext1">
+                                        <input type="text" class="filetext1" :value="itemList.mzImg">
                                         <label for="ex_file1" class="ex_file">찾아보기</label>
                                         <input type="file" id="ex_file1">
                                     </div>
                                     <div class="file-upload">
                                         퀴즈 파일 첨부
-                                        <input type="text" class="filetext2">
+                                        <input type="text" class="filetext2" :value="itemList.mzAnswer">
                                         <label for="ex_file2" class="ex_file">찾아보기</label>
                                         <input type="file" id="ex_file2">
                                     </div>
                                     <div class="file-upload">
                                         매거진 파일 첨부
-                                        <input type="text" class="filetext3">
+                                        <input type="text" class="filetext3" :value="itemList.mzPdf">
                                         <label for="ex_file3" class="ex_file">찾아보기</label>
                                         <input type="file" id="ex_file3">
                                     </div>
@@ -68,7 +62,7 @@
                         <div id="modal_isfind_title">수정하시겠습니까?</div>
                         <div>
                             <input type="button" value="취소" class="modal_isfind_btn uncomplete">
-                            <input type="submit" value="수정" class="modal_isfind_btn complete">
+                            <input type="button" value="수정" class="modal_isfind_btn complete">
                         </div>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -18,6 +19,7 @@ public class LostApiRequest {
     private String losImg;
     private String losAirplane;
     private String losAirportArea;
+    @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:SS")
     private LocalDateTime losArrivedate;
     private String losUser;
     private LostStatus losIsfind;

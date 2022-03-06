@@ -17,5 +17,5 @@ public class MagazineApiRequest {
     private String mzImg;
     private String mzAnswer;
     private String mzPdf;
-    private LocalDateTime evRegdate;
+    private LocalDateTime mzRegdate;
 }
