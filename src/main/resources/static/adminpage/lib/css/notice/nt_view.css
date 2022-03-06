@@ -89,6 +89,9 @@
 .contents > .con_wrap > table th:nth-child(2){
     width: 20%;
 }
+#ntTitle {
+    padding-left: 10px;
+}
 .contents > .con_wrap > table textarea{
     width: 98%;
     height: 350px;

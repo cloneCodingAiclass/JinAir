@@ -1,9 +1,13 @@
 package com.project.jinair.controller.api.board;
 
 import com.project.jinair.ifs.CrudInterface;
+import com.project.jinair.model.entity.board.TbNotifi;
+import com.project.jinair.model.entity.board.TbQna;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.board.NotifyApiRequest;
 import com.project.jinair.model.network.response.board.NotifyApiResponse;
+import com.project.jinair.model.network.response.board.QnaApiResponse;
+import com.project.jinair.repository.TbNotifiRepository;
 import com.project.jinair.service.board.NotifyLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -11,8 +15,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController // json 형식으로 데이터 주고 받음. 해당 url를 통해 접근하는 방식.
 @RequestMapping("/api/notify")
@@ -46,8 +52,13 @@ public class NotifiApiController implements CrudInterface<NotifyApiRequest, Noti
     }
 
     @GetMapping("/list")
-    public Header<List<NotifyApiResponse>> list() {
-        return notifyLogicService.search();
+    public Header<List<NotifyApiResponse>> findAll(@PageableDefault(size = 10, sort = {"noIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+
+        return notifyLogicService.search(pageable);
     }
 
+    @GetMapping("/searchlist/{a}")
+    public Header<List<NotifyApiResponse>> searchList(@PathVariable String a, @PageableDefault(size = 10, sort = {"noIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        return notifyLogicService.searchList(a, pageable);
+    }
 }

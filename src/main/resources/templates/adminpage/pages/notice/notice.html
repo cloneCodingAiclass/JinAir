@@ -22,19 +22,19 @@
                     <div class="search">
                         <p class="title">공지사항 목록</p>
                         <form method="get" action="#">
-                            <input type="text" placeholder="검색어를 입력하세요">
-                            <input type="submit" value="검색">
+                            <input type="text" placeholder="검색어를 입력하세요" id="searchText">
+                            <input type="submit" value="검색" id="searchNoti">
                         </form>
                     </div>
                     <table id="notiList">
                         <tr>
                             <th>번호</th>
-                            <th>제목</th>
+                            <th style="text-align: left">제목</th>
                             <th>등록일</th>
                         </tr>
-                        <tr v-for="noti in notiList" :key="noti.noIndex">
+                        <tr v-for="noti in notiList">
                             <td>{{ noti.noIndex }}</td>
-                            <td><a href="/pages/admin/notice/view/">{{ noti.noTitle }}</a></td>
+                            <td style="text-align: left"><a :href=`/pages/admin/notice/nt_view/${noti.noIndex}`>{{ noti.noTitle }}</a></td>
                             <td>{{ noti.noRegdate }}</td>
                         </tr>
                     </table>
@@ -42,22 +42,22 @@
                         <div class="center">
                             <table>
                                 <tr>
-                                    <td><a href="#">1</a></td>
-                                    <td><a href="#">2</a></td>
-                                    <td><a href="#">3</a></td>
-                                    <td><a href="#">4</a></td>
-                                    <td><a href="#">5</a></td>
-                                    <td><a href="#">6</a></td>
-                                    <td><a href="#">7</a></td>
-                                    <td><a href="#">8</a></td>
-                                    <td><a href="#">9</a></td>
-                                    <td><a href="#">10</a></td>
+                                    <td>1</td>
+<!--                                    <td><a href="#">2</a></td>-->
+<!--                                    <td><a href="#">3</a></td>-->
+<!--                                    <td><a href="#">4</a></td>-->
+<!--                                    <td><a href="#">5</a></td>-->
+<!--                                    <td><a href="#">6</a></td>-->
+<!--                                    <td><a href="#">7</a></td>-->
+<!--                                    <td><a href="#">8</a></td>-->
+<!--                                    <td><a href="#">9</a></td>-->
+<!--                                    <td><a href="#">10</a></td>-->
                                     <td><a href="#"></a></td>
                                     <td><a href="#"></a></td>
                                 </tr>
                             </table>
                         </div>
-                        <a href="./nt_write.html" class="notice_write"><input type="button" value="공지사항 등록"></a>
+                        <a href="/pages/admin/notice/nt_write" class="notice_write"><input type="button" value="공지사항 등록"></a>
                     </div>
                 </div>
             </div>

@@ -649,16 +649,23 @@ public class PageController {
                 .addObject("code", "notice")
                 .addObject("menuList", menuService.getadminMenu());
     }
-    @RequestMapping("/admin/nt_modify")
+    @RequestMapping("/admin/notice/nt_modify/{id}")
     public ModelAndView ntModify(){
         return new ModelAndView("/adminpage/pages/notice/nt_modify")
                 .addObject("code", "ntModify")
                 .addObject("menuList", menuService.getadminMenu());
     }
-    @RequestMapping("/admin/nt_view")
+    @RequestMapping("/admin/notice/nt_view/{id}")
     public ModelAndView ntView(){
         return new ModelAndView("/adminpage/pages/notice/nt_view")
                 .addObject("code", "ntView")
+                .addObject("menuList", menuService.getadminMenu());
+    }
+    // 공지 작성
+    @RequestMapping("/admin/notice/nt_write")
+    public ModelAndView ntWrite() {
+        return new ModelAndView("/adminpage/pages/notice/nt_write")
+                .addObject("code", "nt_write")
                 .addObject("menuList", menuService.getadminMenu());
     }
     //-------------------------------------------------------------------------------------------
@@ -800,13 +807,6 @@ public class PageController {
                 .addObject("inquiry", menuService.adminQnaMenu());
     }
 
-    // 공지 작성
-    @RequestMapping("/admin/nt_write")
-    public ModelAndView ntWrite() {
-        return new ModelAndView("/adminpage/pages/notice/nt_write")
-                .addObject("code", "nt_write")
-                .addObject("menuList", menuService.getadminMenu());
-    }
     //-------------------------------------------------------------------------------------------
 
     /* 지니 쿠폰 */

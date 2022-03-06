@@ -29,6 +29,7 @@ public class TbNotifi { // 공지사항 테이블
     private String noTitle;
     private String noContents;
     private String noFile;
+//    private String noFilePath;
     @CreatedDate
     private LocalDateTime noRegdate;
 }

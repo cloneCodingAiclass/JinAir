@@ -94,22 +94,63 @@ $(function () {
         $('.nav6').parent().siblings().find('li').css({"display":"none"});
     })
 
-    //데이터 리스트
+});
+
+(function ($) {
+
+    let indexBtn = [];
+
+    let pagination = {
+        total_page : 0,
+        total_element : 0,
+        current_page : 0,
+        current_elements : 0
+    }
+
+    // 페이지 정보
+    let showPage = new Vue({
+        el : '#showPage',
+        data : {
+            totalElements : {},
+            currentPage : {}
+        }
+    })
+
+
     let notiList = new Vue({
         el : '#notiList',
         data : {
             notiList : {}
         }
-    });
+    })
 
-    searchStart();
+    list(0);
 
-    function searchStart(){
-        $.get("/api/notify/list", function(response){
+    function list(page){
+        $.get("/api/notify/list?page="+page, function(response){
             console.dir(response);
             notiList.notiList = response.data;
+
+            showPage.showPage = response.pagination;
+            showPage.totalElements = pagination.currentPage;
+            showPage.currentPage = pagination.currentPage + 1;
         })
     };
 
+    console.log("개수가이눠ㅏㅣㄴ아ㅣ" + showPage.totalElements);
 
-});
+    // 검색 데이터
+    function searchNoti(key){
+        $.get("/api/notify/searchlist/"+key, function(response){
+            notiList.notiList = response.data;
+        });
+    }
+
+    $('#searchNoti').on('click', function (){
+        searchNoti($('#searchText').val());
+        if ( $('#searchText').val().length == 0){
+            alert('검색어를 확인해주세요.');
+        }
+    });
+
+})(jQuery);
