@@ -2,10 +2,10 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org/">
 <!-- head.html -->
+<div th:replace="/adminpage/fragment/head :: head"></div>
     <link rel="stylesheet" href="/adminpage/lib/css/magazine/genieList_view.css">
-    <link rel="stylesheet" href="/adminpage/lib/css/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="/adminpage/app/magazine/genieList.js"></script>
+    <script src="/adminpage/app/magazine/genieList_view.js"></script>
+<!-- head.html 끝-->
 <body>
     <div id="wrap">
         <header>
@@ -18,7 +18,7 @@
         <div id="container">
             <div th:replace="/adminpage/fragment/leftmenu :: leftmenu(${code}, ${menuList})"></div>
             <div class="contents">
-                <div class="contwrap">
+                <div class="contwrap" id="itemList">
                     <div class="search">
                         <p class="title">지니매거진 세부</p>
                     </div>
@@ -30,30 +30,30 @@
                         </colgroup>
                         <tr>
                             <td>제목</td>
-                            <td>VOL.39매거진(2020년 5월)</td>
-                            <td>등록일 2020-05-01</td>
+                            <td>{{itemList.mzTitle}}</td>
+                            <td>등록일 {{itemList.mzRegdate.substr(0,10)}}</td>
                         </tr>
                         <tr>
                             <td  colspan="3" class="file_id">
                                 <div class="file-upload">
                                     메인 페이지 파일 첨부
-                                    <input type="text" class="filetext1">
+                                    <input type="text" class="filetext1" id="filetext1" name="filetext1" readonly :value="itemList.mzImg">
                                 </div>
                                 <div class="file-upload">
                                     퀴즈 파일 첨부
-                                    <input type="text" class="filetext2">
+                                    <input type="text" class="filetext2" id="filetext2" name="filetext2" readonly :value="itemList.mzAnswer">
                                 </div>
                                 <div class="file-upload">
                                     매거진 파일 첨부
-                                    <input type="text" class="filetext3">
+                                    <input type="text" class="filetext3" id="filetext3" name="filetext3" readonly :value="itemList.mzPdf">
                                 </div>
                             </td>
                         </tr>
                     </table>
                     <div class="footer">
-                        <a href="./genieList.html" class="notice_write"><input type="button" value="목록"></a>
+                        <a href="/pages/admin/genielist" class="notice_write"><input type="button" value="목록"></a>
                         <input type="button" value="삭제" class="del_btn">
-                        <a href="./genieList_edit.html" class="notice_write"><input type="button" value="수정"></a>
+                        <a :href=`/pages/admin/genielist_edit/${itemList.mzIndex}` class="notice_write"><input type="button" value="수정"></a>
                     </div>
                 </div>  
             </div>
@@ -64,7 +64,7 @@
                     <p>삭제된 경우 <span>데이터</span> 복구가 어려우니 유의바랍니다.</p>
                     <form action="#">
                         <input type="button" class="btn_cancel" value="취소">
-                        <input type="button" value="삭제" id="add_btn" onclick="location.href='./genieList.html'">
+                        <input type="button" value="삭제" id="add_btn">
                     </form>
                 </div>
             </div>

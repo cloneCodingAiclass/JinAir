@@ -42,12 +42,15 @@
 }
 .file-upload .filetext1{
     margin-left: 20px;
+    border: none;
 }
 .file-upload .filetext2{
     margin-left: 60px;
+    border: none;
 }
 .file-upload .filetext3{
     margin-left: 48px;
+    border: none;
 }
 .file-upload input[type="text"]{
     width: 350px;

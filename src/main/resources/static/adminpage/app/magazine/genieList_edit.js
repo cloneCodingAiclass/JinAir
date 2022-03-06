@@ -94,6 +94,28 @@ $(function () {
         $('.nav11').parent().siblings().find('li').css({"display":"none"});
     })
 
+
+    $(".edit_btn").on('click', () => {
+        $("#modal_isfind").css("display","flex");
+    })
+    $(".uncomplete").on('click', () => {
+        $("#modal_isfind").css("display","none");
+    })
+
+    $('#ex_file1').on('change', function(){
+        console.log($('#ex_file1').val());
+        $('.filetext1').val($('#ex_file1').val());
+    });
+
+    $('#ex_file2').on('change', function(){
+        $('.filetext2').val($('#ex_file2').val());
+    });
+
+    $('#ex_file3').on('change', function(){
+        $('.filetext3').val($('#ex_file3').val());
+    });
+
+
     // list
     let itemList = new Vue({
         el : '#itemList',
@@ -104,14 +126,17 @@ $(function () {
         }
     });
 
-    searchStart();
-    function searchStart(){
-        $.get("/api/magazine/list", function(response){
+    var str = $(location).attr('href').split('/');
+    searchStart(str[6]);
+
+    function searchStart(index){
+        $.get("/api/magazine/view/"+index, function(response){
             // 검색 데이터
             itemList.itemList = response.data;
 
         });
     }
+
 
 
 });
