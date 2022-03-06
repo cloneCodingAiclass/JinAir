@@ -119,19 +119,20 @@ $(function () {
 
 
     // 데이터 리스트
-    let itemList = new Vue({
-        el : 'itemList',
+    let tableBoard = new Vue({
+        el : '#tableBoard',
         data : {
-            itemList : {}
+            tableBoard : {}
         }
-    })
+    });
 
-    // searchStart();
-    //
-    // function searchStart(){
-    //     $.get("/api/faq/list", function (response){
-    //         console.dir(response)
-    //     })
-    // }
+    searchStart();
+
+    function searchStart(){
+        $.get("/api/faq/list", function (response){
+            console.dir(response);
+            tableBoard.tableBoard = response.data;
+        })
+    };
 
 });
