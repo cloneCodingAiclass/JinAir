@@ -508,7 +508,7 @@ public class PageController {
     }
 
     // admin 스케줄 상세
-    @RequestMapping("/admin/scheduleResultInfo")
+    @RequestMapping("/admin/scheduleResultInfo/{id}")
     public ModelAndView scheduleResultInfo() {
         return new ModelAndView("/adminpage/pages/schedule/sc_resultinfo")
                 .addObject("code", "sc_resultinfo")
