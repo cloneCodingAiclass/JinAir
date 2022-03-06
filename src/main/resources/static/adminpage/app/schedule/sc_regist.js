@@ -134,7 +134,6 @@ $(function () {
         $.get("/api/airplane/list", function(response){
             console.dir(response);
 
-
             // 검색 데이터
             apList.apList = response.data;
 
@@ -171,8 +170,6 @@ $(function () {
                 schPoint: point
             }
         }
-
-        console.log(schedule);
 
         $.ajax({
             url : '/api/schedule',

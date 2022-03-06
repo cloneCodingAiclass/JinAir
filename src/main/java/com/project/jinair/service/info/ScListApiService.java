@@ -71,6 +71,7 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
 
     private Header<ScheduleApiResponse> response(TbSchedule tbSchedule){
         ScheduleApiResponse scheduleApiResponse = ScheduleApiResponse.builder()
+                .schIndex(tbSchedule.getSchIndex())
                 .schAirplaneId(tbSchedule.getSchAirplaneId())
                 .schAirplaneName(tbSchedule.getSchAirplaneName())
                 .schDepartureDate(tbSchedule.getSchDepartureDate())
@@ -87,6 +88,7 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
     }
     private ScheduleApiResponse responseSchedule(TbSchedule tbSchedule) {
         ScheduleApiResponse scheduleApiResponse = ScheduleApiResponse.builder()
+                .schIndex(tbSchedule.getSchIndex())
                 .schAirplaneId(tbSchedule.getSchAirplaneId())
                 .schAirplaneName(tbSchedule.getSchAirplaneName())
                 .schDepartureDate(tbSchedule.getSchDepartureDate())

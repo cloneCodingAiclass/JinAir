@@ -8,6 +8,7 @@ import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import com.project.jinair.service.info.AirplaneApiService;
 import com.project.jinair.service.info.ScListApiService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 

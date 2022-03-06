@@ -137,7 +137,6 @@ $(function () {
         $.get("/api/schedule/list", function(response){
             console.dir(response);
 
-
             // 검색 데이터
             itemList.itemList = response.data;
 
@@ -161,7 +160,7 @@ $(function () {
 
     $('.modal_search').on('click', function (){
         let schAirplaneId = $('#schAirplaneId').val();
-        let schDepartureDate = $('#schDepartureDate').val() + "T03:41:46";
+        let schDepartureDate = $('#schDepartureDate').val() + "T08:00:00";
         let schDeparturePoint = $('#schDeparturePoint').val();
         let schArrivalPoint = $('#schArrivalPoint').val();
         console.log(schAirplaneId)
