@@ -63,26 +63,32 @@
             <div class="modal_container">
                 <div class="modal">
                         <p>항공편명
-                            <input type="text" placeholder="(예) 001, 세자리">
-                            <select>
+                            <input type="text" placeholder="(예) 001, 세자리" id="schAirplaneId">
+                            검색기간 <input type="date" id="schDepartureDate">
+                        </p>
+                        <p> 출발지
+                            <select id="schDeparturePoint">
                                 <optgroup label="출발지">
-                                    <option>서울/김포(GMP)</option>
-                                    <option>서울/인천(ICH)</option>
+                                    <option>국내/김포(GMP)</option>
+                                    <option>국내인천(ICN)</option>
+                                    <option>국내/인천(ICN)</option>
                                 </optgroup>
                             </select>
-                            <select>
+                            도착지
+                            <select id="schArrivalPoint">
                                 <optgroup label="도착지">
-                                    <option>서울/김포(GMP)</option>
-                                    <option>서울/인천(ICH)</option>
+                                    <option>국내/김포(GMP)</option>
+                                    <option>국내/인천(ICH)</option>
+                                    <option>국내제주(CJU)</option>
+                                    <option>국내/제주(CJU)</option>
                                 </optgroup>
                             </select>
                         </p>
-                        <p>검색기간
-                            <input type="date"><input type="text"></p>
                         <div class="btn_modal">
                             <input type="button" value="취소" class="modal_cancel">
-                            <input type="submit" value="검색" class="modal_search">
+                            <input type="submit" value="검색" class="modal_search" >
                         </div>
+                    </div>
                 </div>
             </div>
         </div>

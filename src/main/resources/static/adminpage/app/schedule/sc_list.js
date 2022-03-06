@@ -144,4 +144,32 @@ $(function () {
         })
 
     }
+
+    // 조건으로 찾기
+    function findByDate(schAirplaneId, schDepartureDate, schDeparturePoint, schArrivalPoint){
+        $.post({
+            url: "/api/schedule/list/find",
+            data: "schAirplaneId=" + schAirplaneId + "&schDepartureDate=" + schDepartureDate + "&schDeparturePoint=" + schDeparturePoint + "&schArrivalPoint=" + schArrivalPoint,
+            dateType: 'text',
+            success : function(response){
+                console.dir(response);
+                itemList.itemList = response.data;
+            }
+            // 검색 데이터
+        });
+    }
+
+    $('.modal_search').on('click', function (){
+        let schAirplaneId = $('#schAirplaneId').val();
+        let schDepartureDate = $('#schDepartureDate').val() + "T03:41:46";
+        let schDeparturePoint = $('#schDeparturePoint').val();
+        let schArrivalPoint = $('#schArrivalPoint').val();
+        console.log(schAirplaneId)
+        console.log(schDepartureDate)
+        console.log(schDeparturePoint)
+        console.log(schArrivalPoint)
+        findByDate(schAirplaneId, schDepartureDate, schDeparturePoint, schArrivalPoint);
+
+        $('.modal_container').fadeOut(200);
+    });
 });
