@@ -99,16 +99,16 @@
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
 .footer table td:nth-child(11){
-    background: url(../../img/right.png) center no-repeat;
-    background-color: #fff;
+    background: url(../../img/one_arrow.png) center no-repeat;
     background-size: 21px;
     cursor: pointer;
+    background-color: #fff;
 }
 .footer table td:nth-child(12){
-    background: url(../../img/double_right.png) center no-repeat;
-    background-color: #fff;
+    background: url(../../img/double_arrow.png) center no-repeat;
     background-size: 21px;
     cursor: pointer;
+    background-color: #fff;
 }
 .footer table td:nth-child(1){
     background-color: rgb(102, 30, 67);

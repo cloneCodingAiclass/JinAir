@@ -9,8 +9,10 @@ import com.project.jinair.model.network.response.board.NotifyApiResponse;
 import com.project.jinair.repository.TbNotifiRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,7 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
 
     @Override
     public Header<NotifyApiResponse> read(Long id) {
-        return tbNotifiRepository.findById(id)
+        return tbNotifiRepository.findByNoIndexOrderByNoIndexDesc(id)
             .map(notify -> response(notify))
             .orElseGet(
                     () -> Header.ERROR("데이터 없음")
@@ -64,7 +66,7 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
 
     @Override
     public Header delete(Long id) {
-        Optional<TbNotifi> notify = tbNotifiRepository.findByNoIndex(id);
+        Optional<TbNotifi> notify = tbNotifiRepository.findByNoIndexOrderByNoIndexDesc(id);
         return notify.map(noti -> {
             tbNotifiRepository.delete(noti);
             return Header.OK();
@@ -94,22 +96,26 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
     }
 
     // 리스트
-    public Header<List<NotifyApiResponse>> search() {
-        List<TbNotifi> tbNotifi = tbNotifiRepository.findAll();
+    public Header<List<NotifyApiResponse>> search(Pageable pageable) {
+        Page<TbNotifi> tbNotifi = tbNotifiRepository.findAll(pageable);
         List<NotifyApiResponse> notifyApiResponseList = tbNotifi.stream()
                 .map(notifi -> responseNotifi(notifi))
                 .collect(Collectors.toList());
-
-        return Header.OK(notifyApiResponseList);
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbNotifi.getTotalPages())
+                .totalElements(tbNotifi.getTotalElements())
+                .currentPage(tbNotifi.getNumber())
+                .currentElements(tbNotifi.getNumberOfElements())
+                .build();
+        return Header.OK(notifyApiResponseList, pagination);
     }
 
-    // 게시글 상세보기
-    public Header<List<NotifyApiResponse>> view(Long id) {
-        Optional<TbNotifi> tbNotifi = tbNotifiRepository.findById(id);
-        List<NotifyApiResponse> notifyApiResponseList = tbNotifi.stream()
-                .map(notifi -> responseNotifi(notifi))
-                .collect(Collectors.toList());
 
+    public Header<List<NotifyApiResponse>> searchList(String a, Pageable pageable) {
+        List<TbNotifi> tbNotifi = tbNotifiRepository.findByNoTitleContaining(a, pageable);
+        List<NotifyApiResponse> notifyApiResponseList = tbNotifi.stream()
+                .map(noti -> responseNotifi(noti))
+                .collect(Collectors.toList());
         return Header.OK(notifyApiResponseList);
     }
 

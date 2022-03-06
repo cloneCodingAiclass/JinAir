@@ -18,30 +18,28 @@
                     <div class="search">
                         <p class="title">공지사항 등록</p>
                     </div>
-                    <form action="./notice.html">
-                        <table>
-                            <colgroup>
-                                <col width="1000">
-                            </colgroup>
-                            <tr>
-                                <th style="text-align: left;"><input name="title" type="text" placeholder="제목을 입력하세요"></th>
-                            </tr>
-                            <tr>
-                                <td colspan="1">
-                                    <div class="file-upload">
-                                        <input type="text" placeholder="파일첨부" class="filetext">
-                                        <label for="ex_file" class="ex_file">찾아보기</label>
-                                        <input name="file" type="file" id="ex_file">
-                                    </div>
-                                    <textarea name="content" style="resize: none;" placeholder="내용을 입력하세요."></textarea>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="footer">
-                            <a href="./notice.html" class="btn_notice btn_cancel"><input type="button" value="취소"></a>
-                            <a class="btn_notice btn_add"><input type="submit" value="등록" @click="write"></a>
-                        </div>
-                    </form>
+                    <table>
+                        <colgroup>
+                            <col width="1000">
+                        </colgroup>
+                        <tr>
+                            <th style="text-align: left;"><input name="title" type="text" placeholder="제목을 입력하세요" id="ntTitle"></th>
+                        </tr>
+                        <tr>
+                            <td colspan="1">
+                                <form class="file-upload" enctype="multipart/form-data">
+                                    <input type="text" placeholder="파일첨부" class="filetext">
+                                    <label for="ex_file" class="ex_file">찾아보기</label>
+                                    <input name="file" type="file" id="ex_file">
+                                </form>
+                                <textarea name="content" style="resize: none;" placeholder="내용을 입력하세요." id="ntContent"></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="footer">
+                        <a href="/pages/admin/notice" class="btn_notice btn_cancel"><input type="button" value="취소"></a>
+                        <a class="btn_notice btn_add"><input type="button" value="등록" id="writeNoti"></a>
+                    </div>
                 </div>
             </div>
         </div>

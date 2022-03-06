@@ -5,7 +5,7 @@
 <div th:replace="/adminpage/fragment/head :: head"></div>
     <link rel="stylesheet" href="/adminpage/lib/css/magazine/genieList_add.css">
     <link rel="stylesheet" href="/adminpage/lib/css/style.css">
-    <script src="/adminpage/app/magazine/genieList.js"></script>
+    <script src="/adminpage/app/magazine/genieList_add.js"></script>
 <body>
     <div id="wrap">
         <header>
@@ -22,7 +22,7 @@
                     <div class="search">
                         <p class="title">지니매거진 등록</p>
                     </div>
-                    <form action="./genieList.html">
+                    <form id="uploadFiles" name="uploadFiles" method="post" th:action="@{/uploadFiles}" encType="multipart/form-data">
                         <table>
                             <colgroup>
                                 <col width="150">
@@ -30,34 +30,34 @@
                             </colgroup>
                             <tr>
                                 <td>제목</td>
-                                <td><input type="text" class="magazine_rg"></td>
+                                <td><input type="text" class="magazine_rg" id="magazine_rg" name="mzTitle"></td>
                             </tr>
                             <tr>
                                 <td  colspan="2" class="file_id">
                                     <div class="file-upload">
                                         메인 페이지 파일 첨부
-                                        <input type="text" class="filetext1">
+                                        <input type="text" class="filetext1" id="filetext1" name="file1">
                                         <label for="ex_file1" class="ex_file">찾아보기</label>
-                                        <input type="file" id="ex_file1">
+                                        <input type="file" id="ex_file1" multiple>
                                     </div>
                                     <div class="file-upload">
                                         퀴즈 파일 첨부
-                                        <input type="text" class="filetext2">
+                                        <input type="text" class="filetext2" id="filetext2" name="file2">
                                         <label for="ex_file2" class="ex_file">찾아보기</label>
-                                        <input type="file" id="ex_file2">
+                                        <input type="file" id="ex_file2" multiple>
                                     </div>
                                     <div class="file-upload">
                                         매거진 파일 첨부
-                                        <input type="text" class="filetext3">
+                                        <input type="text" class="filetext3" id="filetext3" name="file3">
                                         <label for="ex_file3" class="ex_file">찾아보기</label>
-                                        <input type="file" id="ex_file3">
+                                        <input type="file" id="ex_file3" multiple>
                                     </div>
                                 </td>
                             </tr>
                         </table>
                         <div class="footer">
                             <input type="button" value="취소" onclick="history.back()" class="goback">
-                            <input type="submit" value="등록" class="edit_btn">
+                            <input type="submit" value="등록">
                         </div>
                     </form>
                 </div>  

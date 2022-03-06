@@ -4,8 +4,8 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
     <link rel="stylesheet" href="/adminpage/lib/css/magazine/genieList.css">
-    <link rel="stylesheet" href="/adminpage/lib/css/magazine/style.css">
     <script src="/adminpage/app/magazine/genieList.js"></script>
+<!-- head.html 끝-->
 <body>
     <div id="wrap">
         <div th:replace="/adminpage/fragment/header :: header"></div>
@@ -16,7 +16,7 @@
                     <div class="search">
                         <p class="title">지니매거진</p>
                     </div>
-                    <table>
+                    <table id="itemList">
                         <colgroup>
                             <col width="100">
                             <col width="460">
@@ -31,75 +31,12 @@
                             <td>PDF다운로드</td>
                             <td>등록일</td>
                         </tr>
-                        <tr>
-                            <td>38</td>
-                            <td><a href="./genieList_view.html">VOL.38 매거진(2020년 03월)</a></td>
-                            <td>jiniquiz_38.pdf</td>
-                            <td>jiniquiz_38.pdf</td>
-                            <td>2020-03-01</td>
-                        </tr>
-                        <tr>
-                            <td>37</td>
-                            <td><a href="./genieList_view.html">VOL.37 매거진(타이베이)(2020년 03월)</a></td>
-                            <td>jiniquiz_37.pdf</td>
-                            <td>jiniquiz_37.pdf</td>
-                            <td>2020-01-01</td>
-                        </tr>
-                        <tr>
-                            <td>36</td>
-                            <td><a href="./genieList_view.html">VOL.38 매거진(다낭)(2019년 12월)</a></td>
-                            <td>jiniquiz_36.pdf</td>
-                            <td>jiniquiz_36.pdf</td>
-                            <td>2019-12-01</td>
-                        </tr>
-                        <tr>
-                            <td>35</td>
-                            <td><a href="./genieList_view.html">VOL.38 매거진(방콕)(2019년 1월)</a></td>
-                            <td>jiniquiz_35.pdf</td>
-                            <td>jiniquiz_35.pdf</td>
-                            <td>2019-11-01</td>
-                        </tr>
-                        <tr>
-                            <td>34</td>
-                            <td><a href="./genieList_view.html">VOL.38 매거진(방콕)(2019년 1월)</a></td>
-                            <td>jiniquiz_35.pdf</td>
-                            <td>jiniquiz_35.pdf</td>
-                            <td>2019-11-01</td>
-                        </tr>
-                        <tr>
-                            <td>33</td>
-                            <td><a href="./genieList_view.html">VOL.38 매거진(방콕)(2019년 1월)</a></td>
-                            <td>jiniquiz_35.pdf</td>
-                            <td>jiniquiz_35.pdf</td>
-                            <td>2019-11-01</td>
-                        </tr>
-                        <tr>
-                            <td>32</td>
-                            <td><a href="./genieList_view.html">VOL.38 매거진(방콕)(2019년 1월)</a></td>
-                            <td>jiniquiz_35.pdf</td>
-                            <td>jiniquiz_35.pdf</td>
-                            <td>2019-11-01</td>
-                        </tr>
-                        <tr>
-                            <td>31</td>
-                            <td><a href="./genieList_view.html">VOL.38 매거진(방콕)(2019년 1월)</a></td>
-                            <td>jiniquiz_35.pdf</td>
-                            <td>jiniquiz_35.pdf</td>
-                            <td>2019-11-01</td>
-                        </tr>
-                        <tr>
-                            <td>30</td>
-                            <td><a href="./genieList_view.html">VOL.38 매거진(방콕)(2019년 1월)</a></td>
-                            <td>jiniquiz_35.pdf</td>
-                            <td>jiniquiz_35.pdf</td>
-                            <td>2019-11-01</td>
-                        </tr>
-                        <tr>
-                            <td>29</td>
-                            <td><a href="./genieList_view.html">VOL.38 매거진(방콕)(2019년 1월)</a></td>
-                            <td>jiniquiz_35.pdf</td>
-                            <td>jiniquiz_35.pdf</td>
-                            <td>2019-11-01</td>
+                        <tr v-for="dto in itemList">
+                            <td>{{dto.mzIndex}}</td>
+                            <td><a :href=`/pages/admin/genielist_view/${dto.mzIndex}`>{{dto.mzTitle}}</a></td>
+                            <td>{{dto.mzAnswer}}</td>
+                            <td>{{dto.mzAnswer}}</td>
+                            <td>{{dto.mzRegdate.substr(0,10)}}</td>
                         </tr>
                     </table>
                     <div class="footer">
@@ -121,7 +58,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <a href="./genieList_add.html" class="notice_write"><input type="button" value="작성하기"></a>
+                        <a href="/pages/admin/genielist_add" class="notice_write"><input type="button" value="작성하기"></a>
                     </div>
                 </div>
             </div>
