@@ -106,11 +106,69 @@ $(() => {
     document.getElementById('item_end_date').valueAsDate = new Date();
 })
 
+
+$(() =>{
+    let indexBtn = [];
+
+    let pagination = {
+        total_page : 0,
+        total_element : 0,
+        current_page : 0,
+        curren_elements : 0
+    }
+
+    // 페이지 정보
+    let showPage = new Vue({
+        el : '#showPage',
+        data : {
+            totalElements : {},
+            currentPage : {}
+        }
+    })
+
+    let lostList = new Vue({
+        el : '#lostList',
+        data : {
+            lostList : {}
+        }
+    })
+
+    list(0);
+
+    function list(page){
+        console.log("page : " + page);
+        $.get("/api/lost?page="+page, function (response){
+            indexBtn = [];
+            pagination = response.pagination;
+
+            lostList.lostList = response.data;
+        })
+    }
+
+    /*
+    function search(id){
+        $.get("/api/user/search/" + id, function (response){
+            console.dir(response);
+            memberList.memberList = response.data;
+        })
+    }
+
+    $("#searchSubmit").click(() => {
+        search($("#searchUserid").val());
+        if($("#searchUserid").val() == null){
+            alert("검색어를 확인해주세요");
+        }
+    })
+
+     */
+})
+
 // 모달창 수령완료 / 미완료
 $(()=> {
     $('#modal_isfind').hide();
 
-    $(".item_isfind_btn").on('click', () => {
+    $("#item_isfind_btn").click(() => {
+        console.log("작동되냐")
         $("#modal_isfind").fadeIn(200);
     })
     $(".complete").on('click', () => {
@@ -120,3 +178,4 @@ $(()=> {
         $("#modal_isfind").fadeOut(200);
     })
 })
+

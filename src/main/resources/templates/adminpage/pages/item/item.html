@@ -4,7 +4,7 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/item/item.css">
-<script src="/adminpage/app/item/item.js"></script>
+
 <!-- head.html 끝-->
     <body>
         <div id="wrap">
@@ -82,43 +82,34 @@
                 <div class="item_list">
                     <!-- 유실물 리스트 -->
                     <table>
+                        <thead>
                         <tr>
                             <th>관리번호</th>
                             <th>이미지</th>
                             <th>물품 유형</th>
                             <th>항공편</th>
-                            <th>출발 일자</th>
+                            <th>도착 일자</th>
                             <th>도착지 공항</th>
-                            <th>수령방법</th>
                             <th>유실물 수령 상태</th>
                             <th>삭제</th>
                         </tr>
-                        <tr>
-                            <td>403094</td>
-                            <td>이미지 파일</td>
-                            <td>모자</td>
-                            <td>LJ438</td>
-                            <td>2022-01-28</td>
-                            <td>GMP</td>
-                            <td>방문수령</td>
-                            <td><button class="item_isfind_btn">완료</button></td>
+                        </thead>
+                        <tbody id="lostList">
+                        <tr role="row" v-for="dto in lostList">
+                            <td scope="row">{{dto.losIndex}}</td>
+                            <td>{{dto.losImg}}</td>
+                            <td>{{dto.losType}}</td>
+                            <td>{{dto.losAirplane}}</td>
+                            <td>{{dto.losArrivedate}}</td>
+                            <td>{{dto.losAirportArea}}</td>
+                            <td><button id="item_isfind_btn">완료</button></td>
                             <td><button>삭제</button></td>
                         </tr>
-                        <tr>
-                            <td>403094</td>
-                            <td>이미지 파일</td>
-                            <td>안경/선글라스</td>
-                            <td>LJ438</td>
-                            <td>2022-01-28</td>
-                            <td>GMP</td>
-                            <td>방문수령</td>
-                            <td><button class="item_isfind_btn">미완료</button></td>
-                            <td><button>삭제</button></td>
-                        </tr>
+                        </tbody>
                     </table>
                     <div class="footer">
                         <div class="center">
-                            <table>
+                            <table id="showPage">
                                 <tr>
                                     <td><a href="#">1</a></td>
                                     <td><a href="#">2</a></td>
@@ -153,5 +144,6 @@
         <!-- 모달창 끝 -->
     </div>
 </div>
+<script src="/adminpage/app/item/item.js"></script>
 </body>
 </html>
