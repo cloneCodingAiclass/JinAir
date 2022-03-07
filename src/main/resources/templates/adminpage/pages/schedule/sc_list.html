@@ -53,45 +53,56 @@
                                 </tr>
                             </table>
                         </div>
+                    </div>
+                    <div class="footer_box">
+                        <div id="button">
+                        </div>
+<!--                        <div class="col-sm-5">-->
+<!--                            <button @click="minus" id="minus"> < </button>-->
+<!--                            <div id="showPage" class="dataTables_info" role="status" aria-live="polite">-->
+<!--                              {{ currentPage + 1 }} / {{ totalPages }} 페이지-->
+<!--                            </div>-->
+<!--                            <button @click="plus" id="plus"> > </button>-->
+<!--                        </div>-->
                         <div class="btn_box">
                             <input type="button" value="운항 스케줄 등록" onclick="location.href='/pages/admin/scheduleRegist'">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 모달 창-->
-            <div class="modal_container">
-                <div class="modal">
-                        <p>항공편명
-                            <input type="text" placeholder="(예) 001, 세자리" id="schAirplaneId">
-                            검색기간 <input type="date" id="schDepartureDate">
-                        </p>
-                        <p> 출발지
-                            <select id="schDeparturePoint">
-                                <optgroup label="출발지">
-                                    <option>국내/김포(GMP)</option>
-                                    <option>국내인천(ICN)</option>
-                                    <option>국내/인천(ICN)</option>
-                                </optgroup>
-                            </select>
-                            도착지
-                            <select id="schArrivalPoint">
-                                <optgroup label="도착지">
-                                    <option>국내/김포(GMP)</option>
-                                    <option>국내/인천(ICH)</option>
-                                    <option>국내제주(CJU)</option>
-                                    <option>국내/제주(CJU)</option>
-                                </optgroup>
-                            </select>
-                        </p>
-                        <div class="btn_modal">
-                            <input type="button" value="취소" class="modal_cancel">
-                            <input type="submit" value="검색" class="modal_search" >
+                            <input type="button" onclick="pageNum()" value="d">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+            <!-- 모달 창-->
+        <div class="modal_container">
+            <div class="modal">
+                <p>항공편명
+                    <input type="text" placeholder="(예) 001, 세자리" id="schAirplaneId">
+                    검색기간 <input type="date" id="schDepartureDate">
+                </p>
+                <p> 출발지
+                    <select id="schDeparturePoint">
+                        <optgroup label="출발지">
+                           <option>국내/김포(GMP)</option>
+                           <option>국내인천(ICN)</option>
+                           <option>국내/인천(ICN)</option>
+                        </optgroup>
+                    </select>
+                        도착지
+                    <select id="schArrivalPoint">
+                        <optgroup label="도착지">
+                            <option>국내/김포(GMP)</option>
+                            <option>국내/인천(ICH)</option>
+                            <option>국내제주(CJU)</option>
+                            <option>국내/제주(CJU)</option>
+                        </optgroup>
+                    </select>
+                </p>
+                <div class="btn_modal">
+                    <input type="button" value="취소" class="modal_cancel">
+                    <input type="button" value="검색" class="modal_search" >
+                </div>
+            </div>
+        </div>
     </body>
-<script src="/adminpage/app/schedule/sc_list.js"></script>
+    <script src="/adminpage/app/schedule/sc_list.js"></script>
 </html>
