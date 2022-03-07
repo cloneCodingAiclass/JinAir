@@ -2,6 +2,7 @@ package com.project.jinair.controller.page;
 
 import com.project.jinair.model.entity.board.TbMagazine;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.response.board.MagazineApiResponse;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.service.MenuService;
 import com.project.jinair.service.board.MagazineApiLoginService;
@@ -829,23 +830,13 @@ public class PageController {
     }
     //-------------------------------------------------------------------------------------------
 
+
     /* 지니 매거진 */
     @RequestMapping("/admin/genielist")
     public ModelAndView genieList(Model model) {
-//        List<TbMagazine> tbMagazines = magazineApiLoginService.getFiles();
-//        model.addAttribute("tbMagazines", tbMagazines);
         return new ModelAndView("/adminpage/pages/magazine/genieList")
                 .addObject("code", "genieList")
                 .addObject("menuList", menuService.getadminMenu());
-    }
-
-    @PostMapping("/uploadFiles")
-    public String uploadMultipleFiles(@PathVariable(name = "mzTitle") String mzTitle,
-                                      @RequestParam("file1") MultipartFile file1,
-                                      @RequestParam("file2") MultipartFile file2,
-                                      @RequestParam("file3") MultipartFile file3) {
-        magazineApiLoginService.saveFile(mzTitle, file1, file2, file3);
-        return "redirect:/pages/admin/genielist";
     }
 
     @GetMapping("/admin/genielist_view/{id}")
@@ -856,7 +847,9 @@ public class PageController {
     }
 
     @GetMapping("/admin/genielist_edit/{id}")
-    public ModelAndView genieListEdit(@PathVariable(name = "id") Long id) {
+    public ModelAndView genieListEdit(@PathVariable(name = "id") Long id, Model model) {
+        MagazineApiResponse magazineApiResponse = magazineApiLoginService.read(id).getData();
+        model.addAttribute("images", magazineApiResponse);
         return new ModelAndView("/adminpage/pages/magazine/genieList_edit")
                 .addObject("code", "genieListEdit")
                 .addObject("menuList", menuService.getadminMenu());
@@ -868,7 +861,6 @@ public class PageController {
                 .addObject("code", "genieListAdd")
                 .addObject("menuList", menuService.getadminMenu());
     }
-
 
 
 }
