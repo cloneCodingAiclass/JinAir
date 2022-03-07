@@ -4,11 +4,14 @@ import com.project.jinair.model.entity.board.TbMagazine;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.response.board.MagazineApiResponse;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
+import com.project.jinair.repository.TbMagazineRepository;
 import com.project.jinair.service.MenuService;
 import com.project.jinair.service.board.MagazineApiLoginService;
 import com.project.jinair.service.board.QnaAnswerApiLogicService;
 import com.project.jinair.service.board.QnaApiLogicService;
 import com.project.jinair.service.member.AdminApiLoginService;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -863,4 +868,160 @@ public class PageController {
     }
 
 
+    @PostMapping("/admin/genielist_add/upload")
+    public String uploadFile(@RequestPart(value = "mzTitle") String mzTitle,
+                             @RequestPart(value = "imgs", required = false) MultipartFile imgs,
+                             @RequestPart(value = "answers", required = false) MultipartFile answers,
+                             @RequestPart(value = "pdfs", required = false) MultipartFile pdfs
+    ) throws IOException {
+        TbMagazine tbMagazine = new TbMagazine();
+// 제목
+        tbMagazine.setMzTitle(mzTitle);
+// 이미지
+        String sourceImgName = imgs.getOriginalFilename();
+        String sourceFileNameExtension = FilenameUtils.getExtension(sourceImgName).toLowerCase();
+        FilenameUtils.removeExtension(sourceImgName);
+
+        File destinationImg;
+        String destinationImgName;
+        String imgUrl = "C:\\github_blog\\JinAir\\src\\main\\resources\\static\\upload\\";
+
+        do{
+            destinationImgName = RandomStringUtils.randomAlphabetic(32)+"."+sourceFileNameExtension;
+            destinationImg = new File(imgUrl + destinationImgName);
+        }while(destinationImg.exists());
+
+        destinationImg.getParentFile().mkdir();
+        imgs.transferTo(destinationImg);
+
+        tbMagazine.setMzImgName(destinationImgName);
+        tbMagazine.setMzImgOriname(sourceImgName);
+        tbMagazine.setMzImgUrl(imgUrl);
+
+// 답지
+        String sourceAnsName = answers.getOriginalFilename();
+        String sourceAnsNameExtension = FilenameUtils.getExtension(sourceAnsName).toLowerCase();
+        FilenameUtils.removeExtension(sourceAnsName);
+
+        File destinationAns;
+        String destinationAnsName;
+        String ansUrl = "C:\\github_blog\\JinAir\\src\\main\\resources\\static\\upload\\";
+
+        do{
+            destinationAnsName = RandomStringUtils.randomAlphabetic(32)+"."+sourceAnsNameExtension;
+            destinationAns = new File(ansUrl + destinationAnsName);
+        }while(destinationAns.exists());
+
+        destinationAns.getParentFile().mkdir();
+        answers.transferTo(destinationAns);
+
+        tbMagazine.setMzAnswerName(destinationAnsName);
+        tbMagazine.setMzAnswerOriname(sourceAnsName);
+        tbMagazine.setMzAnswerUrl(ansUrl);
+
+// pdf
+        String sourcePdfName = pdfs.getOriginalFilename();
+        String sourcePdfNameExtension = FilenameUtils.getExtension(sourcePdfName).toLowerCase();
+        FilenameUtils.removeExtension(sourcePdfName);
+
+        File destinationPdf;
+        String destinationPdfName;
+        String pdfUrl = "C:\\github_blog\\JinAir\\src\\main\\resources\\static\\upload\\";
+
+        do{
+            destinationPdfName = RandomStringUtils.randomAlphabetic(32)+"."+sourcePdfNameExtension;
+            destinationPdf = new File(pdfUrl + destinationPdfName);
+        }while(destinationPdf.exists());
+
+        destinationPdf.getParentFile().mkdir();
+        pdfs.transferTo(destinationPdf);
+
+        tbMagazine.setMzPdfName(destinationPdfName);
+        tbMagazine.setMzPdfOriname(sourcePdfName);
+        tbMagazine.setMzPdfUrl(pdfUrl);
+
+        magazineApiLoginService.save(tbMagazine);
+        return "redirect:/pages/admin/genielist";
+    }
+
+
+    @Autowired
+    TbMagazineRepository tbMagazineRepository;
+
+    // 수정
+    @PostMapping("/admin/genielist_edit/update")
+    public String uploadFile(@RequestPart(value = "id") Long id,
+                             @RequestPart(value = "imgs") MultipartFile imgs,
+                             @RequestPart(value = "answers") MultipartFile answers,
+                             @RequestPart(value = "pdfs") MultipartFile pdfs
+    ) throws IOException {
+
+        TbMagazine tbMagazine = tbMagazineRepository.findById(id).get();
+
+// 이미지
+        String sourceImgName = imgs.getOriginalFilename();
+        String sourceFileNameExtension = FilenameUtils.getExtension(sourceImgName).toLowerCase();
+        FilenameUtils.removeExtension(sourceImgName);
+
+        File destinationImg;
+        String destinationImgName;
+        String imgUrl = "C:\\github_blog\\JinAir\\src\\main\\resources\\static\\upload\\";
+
+        do{
+            destinationImgName = RandomStringUtils.randomAlphabetic(32)+"."+sourceFileNameExtension;
+            destinationImg = new File(imgUrl + destinationImgName);
+        }while(destinationImg.exists());
+
+        destinationImg.getParentFile().mkdir();
+        imgs.transferTo(destinationImg);
+
+        tbMagazine.setMzImgName(destinationImgName);
+        tbMagazine.setMzImgOriname(sourceImgName);
+        tbMagazine.setMzImgUrl(imgUrl);
+
+// 답지
+        String sourceAnsName = answers.getOriginalFilename();
+        String sourceAnsNameExtension = FilenameUtils.getExtension(sourceAnsName).toLowerCase();
+        FilenameUtils.removeExtension(sourceAnsName);
+
+        File destinationAns;
+        String destinationAnsName;
+        String ansUrl = "C:\\github_blog\\JinAir\\src\\main\\resources\\static\\upload\\";
+
+        do{
+            destinationAnsName = RandomStringUtils.randomAlphabetic(32)+"."+sourceAnsNameExtension;
+            destinationAns = new File(ansUrl + destinationAnsName);
+        }while(destinationAns.exists());
+
+        destinationAns.getParentFile().mkdir();
+        answers.transferTo(destinationAns);
+
+        tbMagazine.setMzAnswerName(destinationAnsName);
+        tbMagazine.setMzAnswerOriname(sourceAnsName);
+        tbMagazine.setMzAnswerUrl(ansUrl);
+
+// pdf
+        String sourcePdfName = pdfs.getOriginalFilename();
+        String sourcePdfNameExtension = FilenameUtils.getExtension(sourcePdfName).toLowerCase();
+        FilenameUtils.removeExtension(sourcePdfName);
+
+        File destinationPdf;
+        String destinationPdfName;
+        String pdfUrl = "C:\\github_blog\\JinAir\\src\\main\\resources\\static\\upload\\";
+
+        do{
+            destinationPdfName = RandomStringUtils.randomAlphabetic(32)+"."+sourcePdfNameExtension;
+            destinationPdf = new File(pdfUrl + destinationPdfName);
+        }while(destinationPdf.exists());
+
+        destinationPdf.getParentFile().mkdir();
+        pdfs.transferTo(destinationPdf);
+
+        tbMagazine.setMzPdfName(destinationPdfName);
+        tbMagazine.setMzPdfOriname(sourcePdfName);
+        tbMagazine.setMzPdfUrl(pdfUrl);
+
+        tbMagazineRepository.save(tbMagazine);
+        return "redirect:/pages/admin/genielist_view/"+id;
+    }
 }

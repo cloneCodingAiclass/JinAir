@@ -4,12 +4,15 @@ import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.board.TbMagazine;
 import com.project.jinair.model.entity.board.TbQna;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.board.MagazineApiRequest;
 import com.project.jinair.model.network.request.board.QnaApiRequest;
 import com.project.jinair.model.network.response.board.MagazineApiResponse;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.repository.TbMagazineRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -113,6 +116,40 @@ public class MagazineApiLoginService implements CrudInterface<MagazineApiRequest
         i.setMzPdfOriname(tbMagazine.getMzPdfOriname());
         i.setMzPdfUrl(tbMagazine.getMzPdfUrl());
         tbMagazineRepository.save(i);
+    }
+
+    // 페이징 처리
+    public Header<List<MagazineApiResponse>> search(Pageable pageable){
+        Page<TbMagazine> tbMagazines = tbMagazineRepository.findAll(pageable);
+        List<MagazineApiResponse> userApiResponseList = tbMagazines.stream()
+                .map(users -> responses(users))
+                .collect(Collectors.toList()); // List 타입으로 변환시켜주는 메소드
+
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbMagazines.getTotalPages())
+                .totalElements(tbMagazines.getTotalElements())
+                .currentPage(tbMagazines.getNumber())
+                .currentElements(tbMagazines.getNumberOfElements())
+                .build();
+        return Header.OK(userApiResponseList, pagination);
+    }
+
+    private MagazineApiResponse responses(TbMagazine tbMagazine){
+        MagazineApiResponse magazineApiResponse = MagazineApiResponse.builder()
+                .mzIndex(tbMagazine.getMzIndex())
+                .mzTitle(tbMagazine.getMzTitle())
+                .mzImgName(tbMagazine.getMzImgName())
+                .mzImgOriname(tbMagazine.getMzImgOriname())
+                .mzImgUrl(tbMagazine.getMzImgUrl())
+                .mzAnswerName(tbMagazine.getMzAnswerName())
+                .mzAnswerOriname(tbMagazine.getMzAnswerOriname())
+                .mzAnswerUrl(tbMagazine.getMzAnswerUrl())
+                .mzPdfName(tbMagazine.getMzPdfName())
+                .mzPdfOriname(tbMagazine.getMzPdfOriname())
+                .mzPdfUrl(tbMagazine.getMzPdfUrl())
+                .mzRegdate(tbMagazine.getMzRegdate())
+                .build();
+        return magazineApiResponse;
     }
 
 
