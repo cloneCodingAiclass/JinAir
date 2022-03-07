@@ -57,12 +57,12 @@
 #container > .contents > .contwrap > .contents_main tr:first-child td{
     width: 145px;
 }
-#container > .contents > .contwrap > .btn_box{
+#container > .contents .btn_box{
     width: 100%;
     display: flex;
     justify-content: right;
 }
-#container > .contents > .contwrap > .btn_box input[type="button"]{
+#container > .contents .btn_box input[type="button"]{
     width: 140px;
     height: 30px;
     background-color:#BDD600;
@@ -70,13 +70,33 @@
     clear: both;
     border: 0;
     font-size: 0.8rem;
-    margin-right: 20px;
+    margin-right: 50px;
     font-weight: 600;
     cursor: pointer;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
+#container > .contents .footer_box{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 50px;
+}
 
-/* 모달 */
+#container > .contents .footer_box .col-sm-5{
+    display: flex;
+    width: 400px;
+}
+
+#container > .contents .footer_box .col-sm-5 #minus, #plus{
+    margin: 0 20px;
+    align-content: center;
+    cursor : pointer;
+}
+
+#container > .contents .footer_box .col-sm-5 #showpage{
+    display: flex;
+    align-items: center;
+}
+    /* 모달 */
 .modal_container{
     position: absolute;
     background: rgba(0, 0, 0, 0.5);
@@ -160,4 +180,13 @@
 .modal_container .modal input[type="button"].modal_cancel{
     background-color: white;
     border: 3px solid #BDD600;
+}
+
+
+.pageButton{
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    border: 1px solid #888888;
+    background-color: white;
 }

@@ -1,19 +1,18 @@
 package com.project.jinair.service.info;
 
 import com.project.jinair.ifs.CrudInterface;
-import com.project.jinair.model.entity.info.TbAirplane;
 import com.project.jinair.model.entity.schedule.TbSchedule;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.schedule.ScheduleApiRequest;
-import com.project.jinair.model.network.response.info.AirplaneApiResponse;
 import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
-import com.project.jinair.repository.TbAirplaneRepository;
 import com.project.jinair.repository.TbScheduleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -104,13 +103,19 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
         return scheduleApiResponse;
     }
 
-    public Header<List<ScheduleApiResponse>> search() {
-        List<TbSchedule> tbSchedules = tbScheduleRepository.findAll();
+    public Header<List<ScheduleApiResponse>> search(Pageable pageable) {
+        Page<TbSchedule> tbSchedules = tbScheduleRepository.findAll(pageable);
         List<ScheduleApiResponse> scheduleApiResponseList = tbSchedules.stream()
                 .map(users -> responseSchedule(users))
                 .collect(Collectors.toList());
 
-        return Header.OK(scheduleApiResponseList);
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbSchedules.getTotalPages())
+                .totalElements(tbSchedules.getTotalElements())
+                .currentPage(tbSchedules.getNumber())
+                .currentElements(tbSchedules.getNumberOfElements())
+                .build();
+        return Header.OK(scheduleApiResponseList, pagination);
     }
 
     public Header<List<ScheduleApiResponse>> find(String schAirplaneName, LocalDateTime schDepartureDate, String schDeparturePoint, String schArrivalPoint){
