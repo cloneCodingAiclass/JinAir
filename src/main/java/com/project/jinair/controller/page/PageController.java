@@ -2,10 +2,8 @@ package com.project.jinair.controller.page;
 
 import com.project.jinair.model.entity.board.TbMagazine;
 import com.project.jinair.model.network.Header;
-import com.project.jinair.model.network.response.board.FaqApiResponse;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.service.MenuService;
-import com.project.jinair.service.board.FaqApiLogicService;
 import com.project.jinair.service.board.MagazineApiLoginService;
 import com.project.jinair.service.board.QnaAnswerApiLogicService;
 import com.project.jinair.service.board.QnaApiLogicService;
@@ -30,9 +28,6 @@ public class PageController {
 
     @Autowired
     AdminApiLoginService adminApiLoginService;
-
-    @Autowired
-    FaqApiLogicService faqApiLogicService;
 
     @Autowired
     QnaApiLogicService qnaApiLogicService;
@@ -657,23 +652,16 @@ public class PageController {
                 .addObject("code", "notice")
                 .addObject("menuList", menuService.getadminMenu());
     }
-    @RequestMapping("/admin/notice/nt_modify/{id}")
+    @RequestMapping("/admin/nt_modify")
     public ModelAndView ntModify(){
         return new ModelAndView("/adminpage/pages/notice/nt_modify")
                 .addObject("code", "ntModify")
                 .addObject("menuList", menuService.getadminMenu());
     }
-    @RequestMapping("/admin/notice/nt_view/{id}")
+    @RequestMapping("/admin/nt_view")
     public ModelAndView ntView(){
         return new ModelAndView("/adminpage/pages/notice/nt_view")
                 .addObject("code", "ntView")
-                .addObject("menuList", menuService.getadminMenu());
-    }
-    // 공지 작성
-    @RequestMapping("/admin/notice/nt_write")
-    public ModelAndView ntWrite() {
-        return new ModelAndView("/adminpage/pages/notice/nt_write")
-                .addObject("code", "nt_write")
                 .addObject("menuList", menuService.getadminMenu());
     }
     //-------------------------------------------------------------------------------------------
@@ -773,7 +761,7 @@ public class PageController {
                 .addObject("menuList", menuService.getadminMenu());
     }
     // faq 수정
-    @RequestMapping("/admin/faq_edit/{id}")
+    @RequestMapping("/admin/faq_edit")
     public ModelAndView faqEdit() {
         return new ModelAndView("/adminpage/pages/inquiry/faq_edit")
                 .addObject("code", "faq_edit")
@@ -785,16 +773,6 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/inquiry/faq_write")
                 .addObject("code", "faq_write")
                 .addObject("menuList", menuService.getadminMenu());
-    }
-    // faq 뷰
-    @GetMapping("/admin/faq_view/{id}")
-    public ModelAndView faqView(Model model, @PathVariable(name = "id") Long id) throws Exception{
-        Header<FaqApiResponse> faqApiResponses = faqApiLogicService.read(id);
-        model.addAttribute("faqApiResponses", faqApiResponses.getData());
-        return new ModelAndView("/adminpage/pages/inquiry/faq_view")
-                .addObject("code", "faq_view")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("inquiry", menuService.adminQnaMenu());
     }
     // qna 메인
     @RequestMapping("/admin/qna_main")
@@ -825,6 +803,13 @@ public class PageController {
                 .addObject("inquiry", menuService.adminQnaMenu());
     }
 
+    // 공지 작성
+    @RequestMapping("/admin/nt_write")
+    public ModelAndView ntWrite() {
+        return new ModelAndView("/adminpage/pages/notice/nt_write")
+                .addObject("code", "nt_write")
+                .addObject("menuList", menuService.getadminMenu());
+    }
     //-------------------------------------------------------------------------------------------
 
     /* 지니 쿠폰 */
