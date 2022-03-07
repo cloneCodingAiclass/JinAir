@@ -138,4 +138,43 @@ $(function () {
         })
     };
 
+    function searchFaq(searchFaq){
+        $.get("/api/faq/listsearch/"+searchFaq, function(response){
+            // 검색 데이터
+            tableBoard.tableBoard = response.data;
+        });
+    }
+    $('.btn_searchFaq').on('click', function (){
+        searchFaq($('.searchFaq').val());
+        if ( $('.searchFaq').val().length == 0){
+            alert('검색어를 확인해주세요.');
+        }
+    });
+
+    function writing(){
+        jsonData = {
+            data : {
+                faqType : $("#faqType").val(),
+                faqTitle : $("#faqTitle").val(),
+                faqContent : $("#faqContent").val()
+            }
+        }
+        $.ajax({
+            url : "/api/faq/",
+            type : "POST",
+            data : JSON.stringify(jsonData),
+            dataType : "text",
+            contentType : "application/json"
+        });
+    }
+
+    $("#writeFaq").click( () => {
+        if ( $("#faqTitle").val().length == 0 || $("#faqContent").val().length == 0 ) {
+            alert('내용을 입력하세요.');
+        } else {
+            writing();
+            location.href = `/pages/admin/faq_main`;
+        }
+    })
+
 });

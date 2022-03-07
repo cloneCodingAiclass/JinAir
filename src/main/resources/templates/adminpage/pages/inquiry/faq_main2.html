@@ -5,7 +5,9 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/inquiry/faq_main2.css">
-<script src="/adminpage/lib/app/faq_main.js"></script>
+<script src="/adminpage/app/inquiry/faq_main.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <!-- head.html 끝-->
 <body>
     <div id="wrap">
@@ -27,12 +29,12 @@
                             <li><a href="/pages/admin/faq_main5">기타</a></li>
                         </div>
                         <div class="btn_top">
-                            <input type="text" placeholder="검색어를 입력하세요.">
-                            <input type="button" value="검색">
+                            <input type="text" placeholder="검색어를 입력하세요."class="searchFaq" >
+                            <input type="button" value="검색" class="btn_searchFaq">
                         </div>
                     </div>
                     <div class="contents_main">
-                        <table>
+                        <table id="tableBoard">
                             <tr>
                                 <td>번호</td>
                                 <td>제목</td>
@@ -40,14 +42,14 @@
                             </tr>
                             <tr v-for="dto in tableBoard">
                                 <td>{{dto.faqIndex}}</td>
-                                <td><a :href=`/pages/admin/faq_view/${dto.fnqIndex}`>{{dto.faqTitle}}</a></td>
+                                <td><a :href=`/pages/admin/faq_view/${dto.faqIndex}`>{{dto.faqTitle}}</a></td>
                                 <td>{{dto.faqRegdate.substr(0,10)}}</td>
                             </tr>
                         </table>
                     </div>
                     <div class="contents_bottom">
                         <div class="faq_btn_write">
-                            <input type="button" value="작성하기" onclick="location.href='faq_write.html'">
+                            <a href="/pages/admin/inquiry/faq_write" class="faq_write"><input type="button" value="작성하기"></a>
                         </div>
                     </div>
                 </div>

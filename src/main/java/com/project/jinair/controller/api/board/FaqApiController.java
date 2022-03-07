@@ -5,6 +5,7 @@ import com.project.jinair.model.entity.board.TbFaq;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.board.FaqApiRequest;
 import com.project.jinair.model.network.response.board.FaqApiResponse;
+import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.service.board.FaqApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FaqApiController implements CrudInterface<FaqApiRequest, FaqApiResponse> {
     private final FaqApiLogicService faqApiLogicService;
+
+    @GetMapping("/listsearch/{a}")
+    public Header<List<FaqApiResponse>> Listsearch(@PathVariable String a) {
+        return faqApiLogicService.getFaqList(a);
+    }
 
     // 게시판 리스트
     @GetMapping("/list")

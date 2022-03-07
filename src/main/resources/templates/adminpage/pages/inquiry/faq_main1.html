@@ -29,8 +29,8 @@
                             <li><a href="/pages/admin/faq_main5">기타</a></li>
                         </div>
                         <div class="btn_top">
-                            <input type="text" placeholder="검색어를 입력하세요.">
-                            <input type="button" value="검색">
+                            <input type="text" placeholder="검색어를 입력하세요."class="searchFaq" >
+                            <input type="button" value="검색" class="btn_searchFaq">
                         </div>
                     </div>
                     <div class="contents_main">
@@ -42,14 +42,14 @@
                             </tr>
                             <tr v-for="dto in tableBoard">
                                 <td>{{dto.faqIndex}}</td>
-                                <td><a :href=`/pages/admin/faq_view/${dto.fnqIndex}`>{{dto.faqTitle}}</a></td>
+                                <td><a :href=`/pages/admin/faq_view/${dto.faqIndex}`>{{dto.faqTitle}}</a></td>
                                 <td>{{dto.faqRegdate.substr(0,10)}}</td>
                             </tr>
                         </table>
                     </div>
                     <div class="contents_bottom">
                         <div class="faq_btn_write">
-                            <input type="button" value="작성하기" onclick="location.href='faq_write.html'">
+                            <a href="/pages/admin/inquiry/faq_write" class="faq_write"><input type="button" value="작성하기"></a>
                         </div>
                     </div>
                 </div>

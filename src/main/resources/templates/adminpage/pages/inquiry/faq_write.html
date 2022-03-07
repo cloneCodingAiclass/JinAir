@@ -23,25 +23,26 @@
                         <div class="contents_main">
                             <table>
                                 <tr>
-                                    <td><select>
+                                    <td><select id="faqType">
                                         <option>항공권 예매</option>
                                         <option>할인 제도</option>
                                         <option>수하물</option>
                                         <option>기내 서비스</option>
                                         <option>기타</option>
                                     </select></td>
-                                    <td><input type="text" placeholder="제목을 입력하세요"></td>
+                                    <td><input name="title" type="text" placeholder="제목을 입력하세요" id="faqTitle"></td>
                                     <td>등록일</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3"><textarea name="" id=""></textarea></td>
+                                    <td colspan="3"><textarea name="content" placeholder="내용을 입력하세요." id="faqContent"></textarea>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
                         <div class="contents_bottom">
                             <div class="faq_btn_add">                        
-                                <a href="./faq_main.html"><input type="button" value="목록"></a>
-                                <input type="submit" value="등록">
+                                <a href="/pages/admin/faq_main"><input type="button" value="목록"></a>
+                                <a href="/pages/admin/faq_main"><input type="button" value="등록" id="writeFaq"></a>
                             </div>
                         </div>
                     </form>
