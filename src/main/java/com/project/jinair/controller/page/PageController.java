@@ -2,8 +2,10 @@ package com.project.jinair.controller.page;
 
 import com.project.jinair.model.entity.board.TbMagazine;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.response.board.FaqApiResponse;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.service.MenuService;
+import com.project.jinair.service.board.FaqApiLogicService;
 import com.project.jinair.service.board.MagazineApiLoginService;
 import com.project.jinair.service.board.QnaAnswerApiLogicService;
 import com.project.jinair.service.board.QnaApiLogicService;
@@ -28,6 +30,9 @@ public class PageController {
 
     @Autowired
     AdminApiLoginService adminApiLoginService;
+
+    @Autowired
+    FaqApiLogicService faqApiLogicService;
 
     @Autowired
     QnaApiLogicService qnaApiLogicService;
@@ -780,6 +785,16 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/inquiry/faq_write")
                 .addObject("code", "faq_write")
                 .addObject("menuList", menuService.getadminMenu());
+    }
+    // faq 뷰
+    @GetMapping("/admin/faq_view/{id}")
+    public ModelAndView faqView(Model model, @PathVariable(name = "id") Long id) throws Exception{
+        Header<FaqApiResponse> faqApiResponses = faqApiLogicService.read(id);
+        model.addAttribute("faqApiResponses", faqApiResponses.getData());
+        return new ModelAndView("/adminpage/pages/inquiry/faq_view")
+                .addObject("code", "faq_view")
+                .addObject("menuList", menuService.getadminMenu())
+                .addObject("inquiry", menuService.adminQnaMenu());
     }
     // qna 메인
     @RequestMapping("/admin/qna_main")

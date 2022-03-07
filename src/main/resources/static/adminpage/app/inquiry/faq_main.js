@@ -123,14 +123,17 @@ $(function () {
         el : '#tableBoard',
         data : {
             tableBoard : {}
+        },
+        methods:{
         }
     });
 
     searchStart();
 
     function searchStart(){
+
         $.get("/api/faq/list", function (response){
-            console.dir(response);
+
             tableBoard.tableBoard = response.data;
         })
     };

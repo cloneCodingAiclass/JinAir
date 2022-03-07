@@ -44,7 +44,7 @@
                             </tr>
                             <tr v-for="dto in tableBoard">
                                 <td>{{dto.faqIndex}}</td>
-                                <td><a :href=`/pages/admin/faq_view/${dto.fnqIndex}`>{{dto.faqTitle}}</a></td>
+                                <td><a :href=`/pages/admin/faq_view/${dto.faqIndex}`>{{dto.faqTitle}}</a></td>
                                 <td>{{dto.faqRegdate.substr(0,10)}}</td>
                             </tr>
                         </table>
