@@ -18,9 +18,9 @@ import java.util.List;
 public class FaqApiController implements CrudInterface<FaqApiRequest, FaqApiResponse> {
     private final FaqApiLogicService faqApiLogicService;
 
-    @GetMapping("/listsearch/{a}")
-    public Header<List<FaqApiResponse>> Listsearch(@PathVariable String a) {
-        return faqApiLogicService.getFaqList(a);
+    @GetMapping("/listsearch/{id}")
+    public Header<List<FaqApiResponse>> Listsearch(@PathVariable(name = "id") String id) {
+        return faqApiLogicService.getFaqList(id);
     }
 
     // 게시판 리스트

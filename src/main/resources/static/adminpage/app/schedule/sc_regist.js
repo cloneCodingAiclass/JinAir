@@ -147,11 +147,11 @@ $(function () {
         let apid = document.getElementById("adid").value;
         let startdate = document.getElementById("startdate").value + "T08:00:00";
         let departurepoint = document.getElementById("departurepoint").value;
-        let starttime = "2022-04-06T" + document.getElementById("starttime").value;
+        let starttime = "2022-01-01T" + document.getElementById("starttime").value;
         let arrivalpoint = document.getElementById("arrivalpoint").value;
-        let arrivaldate = "2022-04-06T" + document.getElementById("arrivaldate").value ;
+        let arrivaldate = "2022-01-01T" + document.getElementById("arrivaldate").value ;
         let resultseat = document.getElementById("resultseat").value;
-        let flyingtime = "2022-04-06T" + document.getElementById("flyingtime").value;
+        let flyingtime = "2022-01-01T" + document.getElementById("flyingtime").value;
         let price = document.getElementById("price").value;
         let point = document.getElementById("point").value;
 

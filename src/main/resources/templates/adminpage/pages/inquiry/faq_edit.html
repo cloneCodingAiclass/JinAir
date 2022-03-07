@@ -10,7 +10,6 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <!-- head.html 끝 -->
 <body>
-    <form action="./faq_view.html">
         <div id="wrap">
             <div th:replace="/adminpage/fragment/header :: header"></div>
             <div id="container">
@@ -24,8 +23,8 @@
                             <table>
                                 <tr>
                                     <td>{{ tableBoard.faqType }}</td>
-                                    <td>카테고리 : {{tableBoard.faqTitle}}</td>
-                                    <td>등록일 : {{tableBoard.faqRegdate}}</td>
+                                    <td>카테고리 : {{ tableBoard.faqTitle }}</td>
+                                    <td>등록일 : {{ tableBoard.faqRegdate }}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="3"><textarea name="" >
@@ -48,11 +47,10 @@
                     <p>게시글을 수정하시겠습니까?</p>
                     <div class="edit_modal">
                         <input type="button" value="취소" class="btn_cancel">
-                        <input type="submit" value="수정">
+                        <input type="button" value="수정" id="edit_agree">
                     </div>
                 </div>
             </div>
         </div>
-    </form>
 </body>
 </html>

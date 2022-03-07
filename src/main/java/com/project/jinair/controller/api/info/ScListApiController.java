@@ -1,5 +1,6 @@
 package com.project.jinair.controller.api.info;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.schedule.ScheduleApiRequest;
@@ -54,9 +55,20 @@ public class ScListApiController implements CrudInterface<ScheduleApiRequest, Sc
 //    public Header<List<ScheduleApiResponse>> find(@PathVariable(name = "schAirplaneId") String schAirplaneId) {
 //        return scListApiService.find(schAirplaneId);
 //    }
+//    @PostMapping("/list/find")
+//    public Header<List<ScheduleApiResponse>> find(@RequestParam(value = "schAirplaneId", required=false) String schAirplaneId,
+//                                                  @RequestParam(value = "schDepartureDate", required=false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime schDepartureDate,
+//                                                  @RequestParam(value = "schDeparturePoint", required=false) String schDeparturePoint,
+//                                                  @RequestParam(value = "schArrivalPoint", required=false) String schArrivalPoint) {
+//        System.out.println(schAirplaneId);
+//        System.out.println(schDepartureDate);
+//        System.out.println(schDeparturePoint);
+//        System.out.println(schArrivalPoint);
+//        return scListApiService.find(schAirplaneId, schDepartureDate, schDeparturePoint, schArrivalPoint);
+//    }
     @PostMapping("/list/find")
     public Header<List<ScheduleApiResponse>> find(@RequestParam(value = "schAirplaneId", required=false) String schAirplaneId,
-                                                  @RequestParam(value = "schDepartureDate", required=false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime schDepartureDate,
+                                                  @RequestParam(value = "schDepartureDate", required=false) LocalDateTime schDepartureDate,
                                                   @RequestParam(value = "schDeparturePoint", required=false) String schDeparturePoint,
                                                   @RequestParam(value = "schArrivalPoint", required=false) String schArrivalPoint) {
         System.out.println(schAirplaneId);

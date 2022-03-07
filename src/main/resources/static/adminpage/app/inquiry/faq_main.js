@@ -123,26 +123,24 @@ $(function () {
         el : '#tableBoard',
         data : {
             tableBoard : {}
-        },
-        methods:{
         }
     });
 
     searchStart();
 
     function searchStart(){
-
         $.get("/api/faq/list", function (response){
-
+            console.dir(response)
             tableBoard.tableBoard = response.data;
         })
     };
 
-    var str = $(location).attr('href').split('/');
-    searchStart(str[6]);
+    let str = $(location).attr('href').split('/');
+    searchFaq(str[6]);
 
-    function searchFaq(searchFaq){
-        $.get("/api/faq/listsearch/"+searchFaq, function(response){
+    function searchFaq(index){
+        $.get("/api/faq/"+index, function(response){
+            console.dir(response)
             // 검색 데이터
             tableBoard.tableBoard = response.data;
         });
@@ -181,13 +179,13 @@ $(function () {
     })
 
     $("#delete").click( () => {
-        deleteFaq();
+        deleteFaq(str[6]);
         location.href = `/pages/admin/faq_main`;
     })
 
-    function deleteFaq() {
+    function deleteFaq(index) {
         $.ajax({
-            url: `/api/faq/` + searchFaq,
+            url: `/api/faq/` + index,
             method: "DELETE",
             dataType: "text",
         })
