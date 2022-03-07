@@ -44,14 +44,14 @@ public class FaqApiController implements CrudInterface<FaqApiRequest, FaqApiResp
 
     // 게시판 글수정
     @Override
-    @PutMapping("")
+    @PutMapping("/edit/{id}")
     public Header<FaqApiResponse> update(@RequestBody Header<FaqApiRequest> request) {
         return faqApiLogicService.update(request);
     }
 
     // 게시판 글삭제
     @Override
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete/{id}")
     public Header<FaqApiResponse> delete(@PathVariable(name = "id") Long id) {
         return faqApiLogicService.delete(id);
     }

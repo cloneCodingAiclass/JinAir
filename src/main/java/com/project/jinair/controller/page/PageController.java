@@ -773,7 +773,7 @@ public class PageController {
                 .addObject("menuList", menuService.getadminMenu());
     }
     // faq 수정
-    @RequestMapping("/admin/faq_edit")
+    @RequestMapping("/admin/faq_edit/{id}")
     public ModelAndView faqEdit() {
         return new ModelAndView("/adminpage/pages/inquiry/faq_edit")
                 .addObject("code", "faq_edit")

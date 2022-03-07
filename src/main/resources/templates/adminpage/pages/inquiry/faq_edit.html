@@ -15,26 +15,21 @@
             <div th:replace="/adminpage/fragment/header :: header"></div>
             <div id="container">
                 <div th:replace="/adminpage/fragment/leftmenu :: leftmenu(${code}, ${menuList})"></div>
-                <div class="contents">
+                <div class="contents" id="tableBoard">
                     <div class="con_wrap">
                         <div class="title">
                             <p>FAQ 세부내용 수정</p>
                         </div>
-                        <div class="contents_main">
+                        <div class="fqa_table">
                             <table>
                                 <tr>
-                                    <td>항공권 예매</td>
-                                    <td>비행기 좌석을 사전에 구매할 수 있나요?</td>
-                                    <td>등록일 2022-01-28</td>
+                                    <td>{{ tableBoard.faqType }}</td>
+                                    <td>카테고리 : {{tableBoard.faqTitle}}</td>
+                                    <td>등록일 : {{tableBoard.faqRegdate}}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3"><textarea name="" id="">
-    네, 항공권예매 시 혹은 결제완료 후, 출발 24시간 전까지 나의 예약 및 마이페이지를 통해 사전좌석지정이 가능합니다.
-
-    단, 해당 좌석은 비상시 승무월을 도와야하는 좌석으로 웹 체크인이 불가하며, 비상구 좌석을 사전에 구해하셨더라도 공항현장에서 탑승 불가 승객으로
-    판단될 경우 임의로 좌석 배정이 취소될 수 있으며, 이 경우 사전 지정하신 좌석 비용은 환불처리 되지 않습니다.
-
-    Fly, better fly Jin Air    
+                                    <td colspan="3"><textarea name="" >
+                                        {{tableBoard.faqContent}}
                                     </textarea></td>
                                 </tr>
                             </table>

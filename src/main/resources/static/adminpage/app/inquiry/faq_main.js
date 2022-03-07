@@ -138,6 +138,9 @@ $(function () {
         })
     };
 
+    var str = $(location).attr('href').split('/');
+    searchStart(str[6]);
+
     function searchFaq(searchFaq){
         $.get("/api/faq/listsearch/"+searchFaq, function(response){
             // 검색 데이터
@@ -177,4 +180,20 @@ $(function () {
         }
     })
 
+    $("#delete").click( () => {
+        deleteFaq();
+        location.href = `/pages/admin/faq_main`;
+    })
+
+    function deleteFaq() {
+        $.ajax({
+            url: `/api/faq/` + searchFaq,
+            method: "DELETE",
+            dataType: "text",
+        })
+    }
 });
+
+
+
+

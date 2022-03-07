@@ -14,7 +14,7 @@
         <div th:replace="/adminpage/fragment/header :: header"></div>
         <div id="container">
             <div th:replace="/adminpage/fragment/leftmenu :: leftmenu(${code}, ${menuList})"></div>
-            <div class="contents">
+            <div class="contents"  id="tableBoard">
                 <div class="con_wrap">
                     <div class="title">
                         <p>FAQ 세부내용</p>
@@ -22,12 +22,12 @@
                     <div class="fqa_table">
                         <table>
                             <tr>
-                                <td th:text="${faqApiResponses.faqTitle}"></td>
-                                <td class="user_name">카테고리 : <span th:text="${faqApiResponses.faqType}"></span></td>
-                                <td>등록일 : <span th:text="${#strings.substring(faqApiResponses.faqRegdate,0, 10)}"></span></td>
+                                <td>{{ tableBoard.faqType }}</td>
+                                <td class="user_name">카테고리 : {{tableBoard.faqTitle}}</td>
+                                <td>등록일 : {{tableBoard.faqRegdate}}</td>
                             </tr>
                             <tr>
-                                <td colspan="3"><textarea name="" readonly th:text="${faqApiResponses.faqContent}"></textarea></td>
+                                <td colspan="3"><textarea name="" readonly > {{tableBoard.faqContent}}</textarea></td>
                             </tr>
                         </table>
                     </div>
@@ -35,7 +35,7 @@
                         <div class="faq_btn_add">
                             <a href="/pages/admin/faq_main"><input type="button" value="목록"></a>
                             <input type="button" value="삭제" class="btn_del">
-                            <a href="/pages/admin/faq_edit"><input type="button" value="수정"></a>
+                            <a :href=`/pages/admin/faq_edit/${tableBoard.faqIndex}`><input type="button" value="수정"></a>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                 <p>게시글을 정말 삭제하시겠습니까?</p>
                 <div class="del_modal">
                     <input type="button" value="취소" class="btn_cancel">
-                    <a href="/pages/admin/faq_main"><input type="button" value="삭제"></a>
+                    <a><input type="button" value="삭제" id="delete"></a>
                 </div>
             </div>
         </div>
