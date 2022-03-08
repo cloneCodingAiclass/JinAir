@@ -109,11 +109,11 @@ $(function () {
 
 
     let apList = new Vue({
-        el : '#aplist',
+        el : '#apList',
         data : {
             apList : {}
         }
-    })
+    });
 
     let str = $(location).attr('href').split('/');
     sclist(str[6]);
@@ -123,7 +123,7 @@ $(function () {
             console.dir(response);
 
             // 검색 데이터
-            apList.aplist = response.data;
+            apList.apList = response.data;
         })
     }
 

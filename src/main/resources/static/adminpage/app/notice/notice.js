@@ -94,22 +94,87 @@ $(function () {
         $('.nav6').parent().siblings().find('li').css({"display":"none"});
     })
 
-    //데이터 리스트
+
+
+});
+
+(function ($) {
+
     let notiList = new Vue({
         el : '#notiList',
         data : {
             notiList : {}
         }
-    });
+    })
 
-    searchStart();
+    list(0);
 
-    function searchStart(){
-        $.get("/api/notify/list", function(response){
+    function list(page){
+        $.get("/api/notify/list?page="+page, function(response){
             console.dir(response);
             notiList.notiList = response.data;
+            let lastPage = response.pagination.totalPages;
+            let str = "";
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pages' id="+i+">" + (i+1) + "</td>";
+            }
+            $("#showPage").html(str);
+            $(".pages").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+page+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+
         })
     };
 
 
-});
+    // 검색 데이터
+    function searchNoti(key, page){
+        $.get("/api/notify/searchlist/" + key, function(response){
+            notiList.notiList = response.data;
+            let lastPage = response.pagination.totalPages;
+            let str2 = "";
+            for (let i = 0; i < lastPage; i++) {
+                str2 += "<td class='pagesS' id="+i+">" + (i+1) + "</td>";
+            }
+            $("#showPage").html(str2);
+
+            $(".pagesS").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+page+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+        });
+    }
+
+    let searchStr =  $('#searchText').val();
+
+    $('#searchNoti').on('click', function (){
+        searchStr = $('#searchText').val();
+        searchNoti(searchStr, 0);
+        if ( searchStr.length == 0){
+            alert('검색어를 확인해주세요.');
+        }
+    });
+
+    $(document).on('click', '.pages', function(){
+        let pageId = this.id;
+        list(pageId);
+    });
+
+    $(document).on('click', '.pagesS', function(){
+        let pageId2 = this.id;
+        searchNoti(searchStr, pageId2);
+    });
+
+
+})(jQuery);

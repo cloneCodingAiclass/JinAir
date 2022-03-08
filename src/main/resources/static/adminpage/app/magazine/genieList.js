@@ -109,7 +109,6 @@ $(function () {
         $.get("/api/magazine/list", function(response){
             // 검색 데이터
             itemList.itemList = response.data;
-
         });
     }
 

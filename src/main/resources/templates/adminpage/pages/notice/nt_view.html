@@ -2,9 +2,10 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org/">
 <!-- head.html -->
-    <link rel="stylesheet" href="/adminpage/lib/css/style.css">
-    <link rel="stylesheet" href="/adminpage/lib/css/notice/nt_view.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<div th:replace="/adminpage/fragment/head :: head"></div>
+<link rel="stylesheet" href="/adminpage/lib/css/style.css">
+<link rel="stylesheet" href="/adminpage/lib/css/notice/nt_view.css">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <body>
     <div id="wrap">
         <div th:replace="/adminpage/fragment/header :: header"></div>
@@ -15,23 +16,21 @@
                     <div class="search">
                         <p class="title">공지사항 목록(상세)</p>
                     </div>
-                    <table v-for="view in notiView">
+                    <table>
                         <tr>
-                            <th style="text-align: left;">{{ view.noTitle }}</th>
-                            <th>등록일 {{ view.noRegdate }}</th>
+                            <th style="text-align: left;" id="ntTitle">{{ notiView.noTitle }}</th>
+                            <th>등록일 {{ notiView.noRegdate }}</th>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <textarea style="resize: none;" readonly>
-                                    {{ view.noContents }}
-                                </textarea>
+                                <textarea style="resize: none;" readonly>{{ notiView.noContents }}</textarea>
                             </td>
                         </tr>
                     </table>
                     <div class="footer">
-                        <a href="./nt_modify.html" class="btn_notice btn_write"><input type="button" value="수정"></a>
+                        <a :href=`/pages/admin/nt_modify/${notiView.noIndex}` class="btn_notice btn_write"><input type="button" value="수정"></a>
                         <a href="#" class="btn_notice btn_delete"><input type="button" value="삭제" class="modal_btn"></a>
-                        <a href="./notice.html" class="btn_notice btn_list"><input type="button" value="목록"></a>
+                        <a href="/pages/admin/notice" class="btn_notice btn_list"><input type="button" value="목록"></a>
                     </div>
                 </div>
             </div>
@@ -42,11 +41,10 @@
             <p>정말 게시글을 삭제 하시겠습니까?</p>
             <div class="box_wrap">
                 <input type="button" value="취소" class="btn_cancel">
-                <input type="button" value="삭제" class="btn_del" onclick="location.href='./notice.html'">
+                <input type="button" value="삭제" class="btn_del" id="delete">
             </div>
         </div>
     </div>
+    <script src="/adminpage/app/notice/nt_view.js"></script>
 </body>
-<script src="/adminpage/app/notice/nt_view.js"></script>
-
 </html>

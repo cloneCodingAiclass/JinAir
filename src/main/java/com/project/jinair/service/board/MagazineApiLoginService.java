@@ -4,14 +4,18 @@ import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.board.TbMagazine;
 import com.project.jinair.model.entity.board.TbQna;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.board.MagazineApiRequest;
 import com.project.jinair.model.network.request.board.QnaApiRequest;
 import com.project.jinair.model.network.response.board.MagazineApiResponse;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.repository.TbMagazineRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -23,24 +27,6 @@ import java.util.stream.Collectors;
 public class MagazineApiLoginService implements CrudInterface<MagazineApiRequest, MagazineApiResponse> {
 
     private final TbMagazineRepository tbMagazineRepository;
-
-    public List<TbMagazine> getFiles(){
-        return tbMagazineRepository.findAll();
-    }
-
-    public TbMagazine saveFile(String mzTitle, MultipartFile file1, MultipartFile file2, MultipartFile file3){
-        String mzImg = file1.getOriginalFilename();
-        String mzAnswer = file2.getOriginalFilename();
-        String mzPdf = file3.getOriginalFilename();
-        TbMagazine tbMagazine = TbMagazine.builder()
-                .mzTitle(mzTitle)
-                .mzImg(mzImg)
-                .mzAnswer(mzAnswer)
-                .mzPdf(mzPdf)
-                .build();
-        return tbMagazineRepository.save(tbMagazine);
-    }
-
 
 
     // 게시판 리스트
@@ -54,15 +40,7 @@ public class MagazineApiLoginService implements CrudInterface<MagazineApiRequest
 
     @Override
     public Header<MagazineApiResponse> create(Header<MagazineApiRequest> request) {
-        MagazineApiRequest magazineApiRequest = request.getData();
-        TbMagazine tbMagazine = TbMagazine.builder()
-                .mzTitle(magazineApiRequest.getMzTitle())
-                .mzImg(magazineApiRequest.getMzImg())
-                .mzAnswer(magazineApiRequest.getMzAnswer())
-                .mzPdf(magazineApiRequest.getMzPdf())
-                .build();
-        TbMagazine newTbMagazine = tbMagazineRepository.save(tbMagazine);
-        return response(newTbMagazine);
+        return null;
     }
 
     @Override
@@ -76,19 +54,7 @@ public class MagazineApiLoginService implements CrudInterface<MagazineApiRequest
 
     @Override
     public Header<MagazineApiResponse> update(Header<MagazineApiRequest> request) {
-        MagazineApiRequest magazineApiRequest = request.getData();
-        Optional<TbMagazine> tbMagazine = tbMagazineRepository.findById(magazineApiRequest.getMzIndex());
-
-        return tbMagazine.map(maz -> {
-                    maz.setMzTitle(magazineApiRequest.getMzTitle());
-                    maz.setMzImg(magazineApiRequest.getMzImg());
-                    maz.setMzAnswer(magazineApiRequest.getMzAnswer());
-                    maz.setMzPdf(magazineApiRequest.getMzPdf());
-
-                    return maz;
-                }).map(maz -> tbMagazineRepository.save(maz))
-                .map(maz -> response(maz))
-                .orElseGet(() -> Header.ERROR("데이터 없음"));
+        return null;
     }
 
     @Override
@@ -104,9 +70,15 @@ public class MagazineApiLoginService implements CrudInterface<MagazineApiRequest
         MagazineApiResponse magazineApiResponse = MagazineApiResponse.builder()
                 .mzIndex(tbMagazine.getMzIndex())
                 .mzTitle(tbMagazine.getMzTitle())
-                .mzImg(tbMagazine.getMzImg())
-                .mzAnswer(tbMagazine.getMzAnswer())
-                .mzPdf(tbMagazine.getMzPdf())
+                .mzImgName(tbMagazine.getMzImgName())
+                .mzImgOriname(tbMagazine.getMzImgOriname())
+                .mzImgUrl(tbMagazine.getMzImgUrl())
+                .mzAnswerName(tbMagazine.getMzAnswerName())
+                .mzAnswerOriname(tbMagazine.getMzAnswerOriname())
+                .mzAnswerUrl(tbMagazine.getMzAnswerUrl())
+                .mzPdfName(tbMagazine.getMzPdfName())
+                .mzPdfOriname(tbMagazine.getMzPdfOriname())
+                .mzPdfUrl(tbMagazine.getMzPdfUrl())
                 .mzRegdate(tbMagazine.getMzRegdate())
                 .build();
         return Header.OK(magazineApiResponse);
@@ -116,12 +88,69 @@ public class MagazineApiLoginService implements CrudInterface<MagazineApiRequest
         MagazineApiResponse magazineApiResponse = MagazineApiResponse.builder()
                 .mzIndex(tbMagazine.getMzIndex())
                 .mzTitle(tbMagazine.getMzTitle())
-                .mzImg(tbMagazine.getMzImg())
-                .mzAnswer(tbMagazine.getMzAnswer())
-                .mzPdf(tbMagazine.getMzPdf())
+                .mzImgName(tbMagazine.getMzImgName())
+                .mzImgOriname(tbMagazine.getMzImgOriname())
+                .mzImgUrl(tbMagazine.getMzImgUrl())
+                .mzAnswerName(tbMagazine.getMzAnswerName())
+                .mzAnswerOriname(tbMagazine.getMzAnswerOriname())
+                .mzAnswerUrl(tbMagazine.getMzAnswerUrl())
+                .mzPdfName(tbMagazine.getMzPdfName())
+                .mzPdfOriname(tbMagazine.getMzPdfOriname())
+                .mzPdfUrl(tbMagazine.getMzPdfUrl())
                 .mzRegdate(tbMagazine.getMzRegdate())
                 .build();
         return magazineApiResponse;
     }
+
+    @Transactional
+    public void save(TbMagazine tbMagazine){
+        TbMagazine i = new TbMagazine();
+        i.setMzTitle(tbMagazine.getMzTitle());
+        i.setMzImgName(tbMagazine.getMzImgName());
+        i.setMzImgOriname(tbMagazine.getMzImgOriname());
+        i.setMzImgUrl(tbMagazine.getMzImgUrl());
+        i.setMzAnswerName(tbMagazine.getMzAnswerName());
+        i.setMzAnswerOriname(tbMagazine.getMzAnswerOriname());
+        i.setMzAnswerUrl(tbMagazine.getMzAnswerUrl());
+        i.setMzPdfName(tbMagazine.getMzPdfName());
+        i.setMzPdfOriname(tbMagazine.getMzPdfOriname());
+        i.setMzPdfUrl(tbMagazine.getMzPdfUrl());
+        tbMagazineRepository.save(i);
+    }
+
+    // 페이징 처리
+    public Header<List<MagazineApiResponse>> search(Pageable pageable){
+        Page<TbMagazine> tbMagazines = tbMagazineRepository.findAll(pageable);
+        List<MagazineApiResponse> userApiResponseList = tbMagazines.stream()
+                .map(users -> responses(users))
+                .collect(Collectors.toList()); // List 타입으로 변환시켜주는 메소드
+
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbMagazines.getTotalPages())
+                .totalElements(tbMagazines.getTotalElements())
+                .currentPage(tbMagazines.getNumber())
+                .currentElements(tbMagazines.getNumberOfElements())
+                .build();
+        return Header.OK(userApiResponseList, pagination);
+    }
+
+    private MagazineApiResponse responses(TbMagazine tbMagazine){
+        MagazineApiResponse magazineApiResponse = MagazineApiResponse.builder()
+                .mzIndex(tbMagazine.getMzIndex())
+                .mzTitle(tbMagazine.getMzTitle())
+                .mzImgName(tbMagazine.getMzImgName())
+                .mzImgOriname(tbMagazine.getMzImgOriname())
+                .mzImgUrl(tbMagazine.getMzImgUrl())
+                .mzAnswerName(tbMagazine.getMzAnswerName())
+                .mzAnswerOriname(tbMagazine.getMzAnswerOriname())
+                .mzAnswerUrl(tbMagazine.getMzAnswerUrl())
+                .mzPdfName(tbMagazine.getMzPdfName())
+                .mzPdfOriname(tbMagazine.getMzPdfOriname())
+                .mzPdfUrl(tbMagazine.getMzPdfUrl())
+                .mzRegdate(tbMagazine.getMzRegdate())
+                .build();
+        return magazineApiResponse;
+    }
+
 
 }

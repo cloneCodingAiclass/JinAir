@@ -95,3 +95,59 @@ $(function () {
     })
 
 });
+
+(function ($){
+
+    console.log("url : "+$(location).attr('href'));
+
+    let idx = $(location).attr('href').split('/')[6];
+
+    let ntModify = new Vue({
+        el : '#ntModify',
+        data : {
+            ntModify : {}
+        }
+    })
+
+    search(idx);
+
+    function search(index){
+        console.log("index : " + index);
+        $.get("/api/notify/"+index, function (response){
+            console.dir(response);
+            $("#ntRegdate").text("등록일 " + response.data.noRegdate);
+            $("#ntTitle").val(response.data.noTitle);
+            $("#ntFile").val(response.data.noFile);
+            $("#ntContent").val(response.data.noContents);
+            ntModify.ntModify = response.data;
+
+        })
+    }
+
+    let jsonData
+
+    function updating(){
+        jsonData = {
+            data : {
+                noIndex : idx,
+                noTitle : $("#ntTitle").val(),
+                noFile : $("#ntFile").val(),
+                noContents : $("#ntContent").val()
+            }
+        }
+        $.ajax({
+            url : "/api/notify",
+            type : "PUT",
+            data : JSON.stringify(jsonData),
+            dataType : "text",
+            contentType : "application/json"
+        });
+    }
+
+    $("#update").click( () => {
+        updating();
+        location.href = `/pages/admin/nt_view/${idx}`;
+        console.dir(jsonData);
+    })
+
+})(jQuery)

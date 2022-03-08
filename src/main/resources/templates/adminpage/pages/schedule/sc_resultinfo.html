@@ -16,7 +16,7 @@
                         <p class="title">상세정보</p>
                         <div class="btn_top">
                         </div>
-                        <div class="contents_main" id="aplist">
+                        <div class="contents_main" id="apList">
                             <table>
                                 <tr>
                                     <td>항공기 아이디</td>
@@ -27,14 +27,14 @@
                                     <td>도착지</td>
                                     <td>도착 시간</td>
                                 </tr>
-                                <tr v-for="dto in apList">
-                                    <td>{{dto.schAirplaneName}}</td>
-                                    <td>{{dto.schAirplaneId}}</td>
-                                    <td>{{dto.schDepartureDate.substr(0,10)}}</td>
-                                    <td>{{dto.schDeparturePoint}}</td>
-                                    <td>{{dto.schStartTime.substr(11,16)}}</td>
-                                    <td>{{dto.schArrivalPoint}}</td>
-                                    <td>{{dto.schArrivalDate.substr(11,16)}}</td>
+                                <tr>
+                                    <td>{{apList.schAirplaneName}}</td>
+                                    <td>{{apList.schAirplaneId}}</td>
+                                    <td>{{apList.schDepartureDate.substr(0,10)}}</td>
+                                    <td>{{apList.schDeparturePoint}}</td>
+                                    <td>{{apList.schStartTime.substr(11,16)}}</td>
+                                    <td>{{apList.schArrivalPoint}}</td>
+                                    <td>{{apList.schArrivalDate.substr(11,16)}}</td>
                                 </tr>
                                 <tr>
                                     <td>수용 좌석수</td>
@@ -44,13 +44,13 @@
                                     <td colspan="2">가격</td>
                                     <td>나비포인트</td>
                                 </tr>
-                                <tr v-for="dto in apList">
-                                    <td>{{dto.schAirplaneSeat}}</td>
+                                <tr>
+                                    <td>{{apList.schAirplaneSeat}}</td>
                                     <td>148</td>
                                     <td>32</td>
-                                    <td>{{dto.schFlyingTime}}</td>
-                                    <td colspan="2">{{dto.basicPrice}}</td>
-                                    <td>{{dto.schPoint}}</td>
+                                    <td>{{apList.schFlyingTime.substr(11,16)}}</td>
+                                    <td colspan="2">{{apList.basicPrice}}</td>
+                                    <td>{{apList.schPoint}}</td>
                                 </tr>
                             </table>
                         </div>
@@ -66,11 +66,8 @@
                     <p>※ 주의</p>
                     <p>이미 예약자가 있을 경우 삭제가
                         <span>불가능</span>합니다.</p>
-                    <form action="#">
                         <input type="button" value="취소" onclick="location.href='/pages/admin/scList'" id="cnl_btn">
-                        <input
-                            type="button" value="삭제" id="del_btn" onclick="location.href='/pages/admin/scList'">
-                    </form>
+                        <input type="button" value="삭제" id="del_btn" onclick="location.href='/pages/admin/scList'">
                 </div>
             </div>
         </div>

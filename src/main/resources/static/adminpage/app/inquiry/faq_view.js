@@ -97,64 +97,45 @@ $(function () {
         $('.nav7').parent().siblings().find('li').css({"display": "none"});
         $('.nav7').siblings('li').eq(1).find('a').css({"color": "#BDD600"});
     });
-});
-(function ($) {
-
-
-    let pagination = {
-        total_page : 0,
-        total_element : 0,
-        current_page : 0,
-        current_elements : 0
-    }
-
-    // 페이지 정보
-    let showPage = new Vue({
-        el : '#showPage',
-        data : {
-            totalElements : {},
-            currentPage : {}
-        }
+    $('.del_container').css("display","none");
+    $('.btn_cancel').on('click', function() {
+        $('.del_container').css("display", "none");
     })
 
 
+});
+
+(function ($){
+    // 세부사항 출력
     let tableBoard = new Vue({
         el : '#tableBoard',
         data : {
             tableBoard : {}
-        }
-    })
-
-    list(0);
-
-    function list(page){
-        $.get("/api/faq/list?page="+page, function(response){
-            console.dir(response);
-            tableBoard.tableBoard = response.data;
-
-            showPage.showPage = response.pagination;
-            showPage.totalElements = pagination.currentPage;
-            showPage.currentPage = pagination.currentPage + 1;
-        })
-    };
-
-    console.log("테스트" + showPage.totalElements);
-
-    // 검색 데이터
-    function searchFaq(key){
-        $.get("/api/faq/searchlist/"+key, function(response){
-            tableBoard.tableBoard = response.data;
-        });
-    }
-
-    $('#searchFaq').on('click', function (){
-        searchFaq($('#searchText').val());
-        if ( $('#searchText').val().length == 0){
-            alert('검색어를 확인해주세요.');
+        },
+        methods:{
         }
     });
 
+    let str = $(location).attr('href').split('/');
+    searchStart(str[6]);
+
+    function searchStart(index){
+        $.get("/api/faq/"+index, function(response){
+            // 검색 데이터
+            tableBoard.tableBoard = response.data;
+
+        });
+    }
+
+    $('#delete').on('click',function(){
+        $.get("/api/faq/delete/"+str[6], function(response){
+            location.href='/pages/admin/faq_main';
+        });
+    });
 
 
-})(jQuery);
+})(jQuery)
 
+function delBtn(){
+    $('.del_container').css("display","flex");
+}

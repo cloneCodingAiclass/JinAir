@@ -8,12 +8,6 @@
 <!-- head.html 끝-->
 <body>
     <div id="wrap">
-        <header>
-            <div class="header_inner">
-                <a href="../admin_index.html"><div class="img"></div></a><a href="/AdminPage/admin_index.html"><span>관리자 센터</span></a>
-                <div class="logout"><p class="myname">반하나</p><input type="text" value="님" class="nim"><input type="button" value="Logout" onclick="location.href='../admin_login.html'"></div>
-            </div>
-        </header>
         <div th:replace="/adminpage/fragment/header :: header"></div>
         <div id="container">
             <div th:replace="/adminpage/fragment/leftmenu :: leftmenu(${code}, ${menuList})"></div>
@@ -37,22 +31,28 @@
                             <td  colspan="3" class="file_id">
                                 <div class="file-upload">
                                     메인 페이지 파일 첨부
-                                    <input type="text" class="filetext1" id="filetext1" name="filetext1" readonly :value="itemList.mzImg">
+                                    <a :href=`/api/magazine/downloadImg/${itemList.mzIndex}` download="">
+                                        <input type="text" class="filetext1" id="filetext1" name="filetext1" readonly :value="itemList.mzImgOriname">
+                                    </a>
                                 </div>
                                 <div class="file-upload">
                                     퀴즈 파일 첨부
-                                    <input type="text" class="filetext2" id="filetext2" name="filetext2" readonly :value="itemList.mzAnswer">
+                                    <a :href=`/api/magazine/downloadAns/${itemList.mzIndex}` download="">
+                                        <input type="text" class="filetext2" id="filetext2" name="filetext2" readonly :value="itemList.mzAnswerOriname">
+                                    </a>
                                 </div>
                                 <div class="file-upload">
                                     매거진 파일 첨부
-                                    <input type="text" class="filetext3" id="filetext3" name="filetext3" readonly :value="itemList.mzPdf">
+                                    <a :href=`/api/magazine/downloadPdf/${itemList.mzIndex}` download="">
+                                        <input type="text" class="filetext3" id="filetext3" name="filetext3" readonly :value="itemList.mzPdfOriname">
+                                    </a>
                                 </div>
                             </td>
                         </tr>
                     </table>
                     <div class="footer">
                         <a href="/pages/admin/genielist" class="notice_write"><input type="button" value="목록"></a>
-                        <input type="button" value="삭제" class="del_btn">
+                        <input type="button" value="삭제" class="del_btn" onclick="delBtn()"/>
                         <a :href=`/pages/admin/genielist_edit/${itemList.mzIndex}` class="notice_write"><input type="button" value="수정"></a>
                     </div>
                 </div>  

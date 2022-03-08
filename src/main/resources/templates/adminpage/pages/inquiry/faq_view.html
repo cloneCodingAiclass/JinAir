@@ -1,46 +1,38 @@
 <html lang="ko"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org/">
-
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
-<link rel="stylesheet" href="/adminpage/lib/css/inquiry/faq_veiw.css">
-<script src="/adminpage/app/inquiry/faq_main.js"></script>
+<link rel="stylesheet" href="/adminpage/lib/css/inquiry/faq_view.css">
+<link rel="stylesheet" href="/adminpage/lib/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 <!-- head.html 끝-->
 <body>
     <div id="wrap">
         <div th:replace="/adminpage/fragment/header :: header"></div>
-        <div id="container">
+        <div id="container" >
             <div th:replace="/adminpage/fragment/leftmenu :: leftmenu(${code}, ${menuList})"></div>
-            <div class="contents">
-                <div class="con_wrap">
+            <div class="contents" >
+                <div class="con_wrap" id="tableBoard">
                     <div class="title">
                         <p>FAQ 세부내용</p>
                     </div>
-                    <div class="contents_main">
                         <table>
                             <tr>
-                                <td>항공권 예매</td>
-                                <td>비행기 좌석을 사전에 구매할 수 있나요?</td>
-                                <td>등록일 2022-01-28</td>
+                                <td>{{tableBoard.faqType}}</td>
+                                <td class="user_name">{{tableBoard.faqTitle}}</td>
+                                <td>등록일 : {{tableBoard.faqRegdate.substr(0,10)}}</td>
                             </tr>
                             <tr>
-                                <td colspan="3"><textarea name="" id="">
-    네, 항공권예매 시 혹은 결제완료 후, 출발 24시간 전까지 나의 예약 및 마이페이지를 통해 사전좌석지정이 가능합니다.
-
-    단, 해당 좌석은 비상시 승무월을 도와야하는 좌석으로 웹 체크인이 불가하며, 비상구 좌석을 사전에 구해하셨더라도 공항현장에서 탑승 불가 승객으로
-    판단될 경우 임의로 좌석 배정이 취소될 수 있으며, 이 경우 사전 지정하신 좌석 비용은 환불처리 되지 않습니다.
-
-    Fly, better fly Jin Air    
-                                </textarea></td>
+                                <td colspan="3"><textarea name="" readonly> {{tableBoard.faqContent}}</textarea></td>
                             </tr>
                         </table>
-                    </div>
                     <div class="contents_bottom">
-                        <div class="faq_btn_add">                        
-                            <input type="button" value="목록" onclick="location.href='faq_main.html'">
-                            <input type="button" value="삭제" class="btn_del">
-                            <a href="./faq_edit.html"><input type="button" value="수정"></a>
+                        <div class="faq_btn_add">
+                            <a href="/pages/admin/faq_main"><input type="button" value="목록"></a>
+                            <input type="button" value="삭제" class="btn_del" onclick="delBtn()">
+                            <a :href=`/pages/admin/faq_edit/${tableBoard.faqIndex}`><input type="button" value="수정"></a>
                         </div>
                     </div>
                 </div>
@@ -51,10 +43,12 @@
                 <p>게시글을 정말 삭제하시겠습니까?</p>
                 <div class="del_modal">
                     <input type="button" value="취소" class="btn_cancel">
-                    <a href="./faq_main.html"><input type="button" value="삭제"></a>
+                    <a><input type="button" value="삭제" id="delete"></a>
                 </div>
             </div>
         </div>
     </div>
+    <script src="/adminpage/app/inquiry/faq_view.js"></script>
 </body>
+
 </html>

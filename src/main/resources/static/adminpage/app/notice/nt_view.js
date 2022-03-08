@@ -1,5 +1,4 @@
 $(function () {
-
     $('.nav6').find('a').css({"color":"#BDD600"});
     $('.nav6').siblings('li').css({"display":"block"});
     
@@ -96,12 +95,55 @@ $(function () {
     })
 });
 
-$(()=> {
+
+(function ($){
+    console.log("url : "+$(location).attr('href'));
+
+    console.log($(location).attr('href').split('/')[6]);
+    let idx = $(location).attr('href').split('/')[6];
+    console.log(idx);
+    let notiView = new Vue({
+        el : '#notiView',
+        data : {
+            notiView : {}
+        }
+    })
+
+    search(idx);
+
+    function search(idx){
+        console.log("index : " + idx);
+        $.get("/api/notify/"+idx, function (response){
+            console.dir(response);
+
+            notiView.notiView = response.data;
+        })
+    }
+
+    $("#delete").click( () => {
+        deletenoti();
+        location.href = `/pages/admin/notice`;
+    })
+
+    function deletenoti(){
+        $.ajax({
+            url: `/api/notify/`+idx,
+            method: "DELETE",
+            dataType: "text",
+        })
+    }
+
+})(jQuery)
+
+
+$(() => {
     $('.modal_container').hide();
     $('.modal_btn').on('click', () => {
         $(".modal_container").fadeIn(200);
+        $(".modal_container").css("display", "flex");
     })
     $('.btn_cancel').on('click', () => {
         $('.modal_container').fadeOut(200);
+        $(".modal_container").css("display", "none");
     })
 })

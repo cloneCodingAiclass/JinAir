@@ -4,7 +4,7 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
     <link rel="stylesheet" href="/adminpage/lib/css/magazine/genieList.css">
-    <script src="/adminpage/app/magazine/genieList.js"></script>
+
 <!-- head.html 끝-->
 <body>
     <div id="wrap">
@@ -34,27 +34,16 @@
                         <tr v-for="dto in itemList">
                             <td>{{dto.mzIndex}}</td>
                             <td><a :href=`/pages/admin/genielist_view/${dto.mzIndex}`>{{dto.mzTitle}}</a></td>
-                            <td>{{dto.mzAnswer}}</td>
-                            <td>{{dto.mzAnswer}}</td>
+                            <td><a :href=`/api/magazine/downloadAns/${dto.mzIndex}` download="">{{dto.mzAnswerOriname}}</a></td>
+                            <td><a :href=`/api/magazine/downloadPdf/${dto.mzIndex}` download="">{{dto.mzPdfOriname}}</a></td>
                             <td>{{dto.mzRegdate.substr(0,10)}}</td>
                         </tr>
                     </table>
-                    <div class="footer">
+                    <div class="footer" id="showPage">
                         <div class="center">
                             <table>
                                 <tr>
-                                    <td><a href="#">1</a></td>
-                                    <td><a href="#">2</a></td>
-                                    <td><a href="#">3</a></td>
-                                    <td><a href="#">4</a></td>
-                                    <td><a href="#">5</a></td>
-                                    <td><a href="#">6</a></td>
-                                    <td><a href="#">7</a></td>
-                                    <td><a href="#">8</a></td>
-                                    <td><a href="#">9</a></td>
-                                    <td><a href="#">10</a></td>
-                                    <td><a href="#"></a></td>
-                                    <td><a href="#"></a></td>
+                                    <td v-for="dto in totalPages" class="asdff"><a class="asd">{{dto}}</a></td>
                                 </tr>
                             </table>
                         </div>
@@ -64,5 +53,6 @@
             </div>
         </div>
     </div>
+    <script src="/adminpage/app/magazine/genieList.js"></script>
 </body>
 </html>

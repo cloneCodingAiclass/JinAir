@@ -1,15 +1,15 @@
 package com.project.jinair.controller.api.info;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.schedule.ScheduleApiRequest;
-import com.project.jinair.model.network.response.info.AirplaneApiResponse;
 import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
-import com.project.jinair.service.info.AirplaneApiService;
 import com.project.jinair.service.info.ScListApiService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -46,17 +46,28 @@ public class ScListApiController implements CrudInterface<ScheduleApiRequest, Sc
     }
 
     @GetMapping("/list") // http://localhost:8080/api/airplane
-    public Header<List<ScheduleApiResponse>> findAll() {
-        return scListApiService.search();
+    public Header<List<ScheduleApiResponse>> findAll(@PageableDefault(sort = {"schIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        return scListApiService.search(pageable);
     }
 
 //    @GetMapping("/list/{schAirplaneId}")
 //    public Header<List<ScheduleApiResponse>> find(@PathVariable(name = "schAirplaneId") String schAirplaneId) {
 //        return scListApiService.find(schAirplaneId);
 //    }
+//    @PostMapping("/list/find")
+//    public Header<List<ScheduleApiResponse>> find(@RequestParam(value = "schAirplaneId", required=false) String schAirplaneId,
+//                                                  @RequestParam(value = "schDepartureDate", required=false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime schDepartureDate,
+//                                                  @RequestParam(value = "schDeparturePoint", required=false) String schDeparturePoint,
+//                                                  @RequestParam(value = "schArrivalPoint", required=false) String schArrivalPoint) {
+//        System.out.println(schAirplaneId);
+//        System.out.println(schDepartureDate);
+//        System.out.println(schDeparturePoint);
+//        System.out.println(schArrivalPoint);
+//        return scListApiService.find(schAirplaneId, schDepartureDate, schDeparturePoint, schArrivalPoint);
+//    }
     @PostMapping("/list/find")
     public Header<List<ScheduleApiResponse>> find(@RequestParam(value = "schAirplaneId", required=false) String schAirplaneId,
-                                                  @RequestParam(value = "schDepartureDate", required=false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime schDepartureDate,
+                                                  @RequestParam(value = "schDepartureDate", required=false) LocalDateTime schDepartureDate,
                                                   @RequestParam(value = "schDeparturePoint", required=false) String schDeparturePoint,
                                                   @RequestParam(value = "schArrivalPoint", required=false) String schArrivalPoint) {
         System.out.println(schAirplaneId);

@@ -5,6 +5,7 @@ import com.project.jinair.model.entity.board.TbFaq;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.board.FaqApiRequest;
 import com.project.jinair.model.network.response.board.FaqApiResponse;
+import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.service.board.FaqApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FaqApiController implements CrudInterface<FaqApiRequest, FaqApiResponse> {
     private final FaqApiLogicService faqApiLogicService;
+
+    @GetMapping("/listsearch/{id}")
+    public Header<List<FaqApiResponse>> Listsearch(@PathVariable(name = "id") String id) {
+        return faqApiLogicService.getFaqList(id);
+    }
 
     // 게시판 리스트
     @GetMapping("/list")
@@ -38,14 +44,14 @@ public class FaqApiController implements CrudInterface<FaqApiRequest, FaqApiResp
 
     // 게시판 글수정
     @Override
-    @PutMapping("")
+    @PutMapping("/edit/{id}")
     public Header<FaqApiResponse> update(@RequestBody Header<FaqApiRequest> request) {
         return faqApiLogicService.update(request);
     }
 
     // 게시판 글삭제
     @Override
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete/{id}")
     public Header<FaqApiResponse> delete(@PathVariable(name = "id") Long id) {
         return faqApiLogicService.delete(id);
     }

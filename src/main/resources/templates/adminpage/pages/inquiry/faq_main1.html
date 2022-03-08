@@ -5,7 +5,9 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/inquiry/faq_main1.css">
-<script src="/adminpage/lib/app/faq_main.js"></script>
+<script src="/adminpage/app/inquiry/faq_main.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <!-- head.html 끝-->
 <body>
     <div id="wrap">
@@ -19,35 +21,35 @@
                     </div>
                     <div class="contents_top">
                         <div class="faq_check_box">
-                            <li><a href="./faq_main.html">전체</a></li>
-                            <li><a href="./faq_main1.html">항공권 예매</a></li>
-                            <li><a href="./faq_main2.html">할인 제도</a></li>
-                            <li><a href="./faq_main3.html">수하물</a></li>
-                            <li><a href="./faq_main4.html">기내 서비스</a></li>
-                            <li><a href="./faq_main5.html">기타</a></li>
+                            <li><a href="/pages/admin/faq_main">전체</a></li>
+                            <li><a href="/pages/admin/faq_main1">항공권 예매</a></li>
+                            <li><a href="/pages/admin/faq_main2">할인 제도</a></li>
+                            <li><a href="/pages/admin/faq_main3">수하물</a></li>
+                            <li><a href="/pages/admin/faq_main4">기내 서비스</a></li>
+                            <li><a href="/pages/admin/faq_main5">기타</a></li>
                         </div>
                         <div class="btn_top">
-                            <input type="text" placeholder="검색어를 입력하세요.">
-                            <input type="button" value="검색">
+                            <input type="text" placeholder="검색어를 입력하세요."class="searchFaq" >
+                            <input type="button" value="검색" class="btn_searchFaq">
                         </div>
                     </div>
                     <div class="contents_main">
-                        <table>
+                        <table id="tableBoard">
                             <tr>
                                 <td>번호</td>
                                 <td>제목</td>
                                 <td>등록일</td>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td><a href="./faq_view.html">코로나지만 해외 출국하려고하는데 국가별 출입국시 제한사항을 알고 싶어요.</a></td>
-                                <td>2022-02-03</td>
+                            <tr v-for="dto in tableBoard">
+                                <td>{{dto.faqIndex}}</td>
+                                <td><a :href=`/pages/admin/faq_view/${dto.faqIndex}`>{{dto.faqTitle}}</a></td>
+                                <td>{{dto.faqRegdate.substr(0,10)}}</td>
                             </tr>
                         </table>
                     </div>
                     <div class="contents_bottom">
                         <div class="faq_btn_write">
-                            <input type="button" value="작성하기" onclick="location.href='faq_write.html'">
+                            <a href="/pages/admin/inquiry/faq_write" class="faq_write"><input type="button" value="작성하기"></a>
                         </div>
                     </div>
                 </div>

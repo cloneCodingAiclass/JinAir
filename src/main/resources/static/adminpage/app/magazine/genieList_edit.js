@@ -95,12 +95,12 @@ $(function () {
     })
 
 
-    $(".edit_btn").on('click', () => {
+    $('.edit_btn').on('click', function(){
         $("#modal_isfind").css("display","flex");
-    })
-    $(".uncomplete").on('click', () => {
+    });
+    $('.uncomplete').on('click', function(){
         $("#modal_isfind").css("display","none");
-    })
+    });
 
     $('#ex_file1').on('change', function(){
         console.log($('#ex_file1').val());
@@ -108,15 +108,17 @@ $(function () {
     });
 
     $('#ex_file2').on('change', function(){
+        console.log($('#ex_file2').val());
         $('.filetext2').val($('#ex_file2').val());
     });
 
     $('#ex_file3').on('change', function(){
+        console.log($('#ex_file3').val());
         $('.filetext3').val($('#ex_file3').val());
     });
 
 
-    // list
+// list
     let itemList = new Vue({
         el : '#itemList',
         data : {
@@ -126,9 +128,8 @@ $(function () {
         }
     });
 
-    var str = $(location).attr('href').split('/');
+    let str = $(location).attr('href').split('/');
     searchStart(str[6]);
-
     function searchStart(index){
         $.get("/api/magazine/view/"+index, function(response){
             // 검색 데이터
@@ -136,7 +137,5 @@ $(function () {
 
         });
     }
-
-
 
 });

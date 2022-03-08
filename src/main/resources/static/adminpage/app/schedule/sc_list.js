@@ -108,18 +108,17 @@ $(function () {
         $('.nav2').siblings('li').eq(1).find('a').css({"color":"#BDD600"});
     })
 
-    let indexbtn = [];
     let pagination = {
-        total_pages : 0,
-        total_elements : 0,
-        current_page : 0,
-        current_elements : 0
+        totalPages : 0,
+        totalElements : 0,
+        currentPage : 0,
+        currentElements : 0
     };
 
     let showPage = new Vue({
         el : '#showPage',
         data : {
-            totalElements : {},
+            totalPages : {},
             currentPage : {}
         }
     });
@@ -131,17 +130,54 @@ $(function () {
         }
     })
 
-    sclist();
+    sclist(0);
 
-    function sclist(){
-        $.get("/api/schedule/list", function(response){
+    function sclist(index){
+        $.get("/api/schedule/list?page="+index, function(response){
             console.dir(response);
+
+            pagination = response.pagination;
+
+            showPage.totalPages = pagination.totalPages;
+            showPage.currentPage = pagination.currentPage;
+
+            // 전체 페이지
+            showPage.showPage = pagination.data;
 
             // 검색 데이터
             itemList.itemList = response.data;
 
-        })
+            let url = "";
+            let NumberPage = 0;
+            let last = showPage.totalPages;
 
+            for (NumberPage; NumberPage < last; NumberPage++){
+                url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
+            }
+            document.getElementById("button").innerHTML = url;
+
+            $(".pageButton").on('click', function (){
+                index = $(this).attr("id");
+                sclist(index);
+            })
+
+            $('#minus').on('click', function (){
+                if(NumberPage > 0) {
+                    index--;
+                    sclist(index);
+                }else{
+                    $('#minus').disableSelection();
+                }
+            });
+            $('#plus').on('click', function (){
+                if(pagination.totalPages = index){
+                    $('#plus').disableSelection();
+                }else{
+                    index++;
+                    sclist(index);
+                }
+            })
+        })
     }
 
     // 조건으로 찾기
