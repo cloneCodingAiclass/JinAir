@@ -788,7 +788,7 @@ public class PageController {
                 .addObject("code", "faq_write")
                 .addObject("menuList", menuService.getadminMenu());
     }
-    // qna 뷰
+    // faq 뷰
     @GetMapping("/admin/faq_view/{id}")
     public ModelAndView faqView(Model model, @PathVariable(name = "id") Long id) throws Exception{
         Header<FaqApiResponse> faqApiResponses = faqApiLogicService.read(id);

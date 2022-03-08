@@ -141,8 +141,8 @@ $(function () {
     console.log("테스트" + showPage.totalElements);
 
     // 검색 데이터
-    function searchFaq(key){
-        $.get("/api/faq/searchlist/"+key, function(response){
+    function searchFaq(searchFaq){
+        $.get("/api/faq/listsearch/"+searchFaq, function(response){
             tableBoard.tableBoard = response.data;
         });
     }

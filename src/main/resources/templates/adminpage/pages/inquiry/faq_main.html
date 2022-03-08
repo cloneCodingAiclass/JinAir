@@ -44,7 +44,7 @@
                             <tr v-for="faq in tableBoard">
                                 <td>{{faq.faqIndex}}</td>
                                 <td><a :href=`/pages/admin/faq_view/${faq.faqIndex}`>{{faq.faqTitle}}</a></td>
-                                <td>{{faq.faqRegdate.substr(0,10)}}</td>
+                                <td>{{faq.faqRegdate}}</td>
                             </tr>
                         </table>
                     </div>
