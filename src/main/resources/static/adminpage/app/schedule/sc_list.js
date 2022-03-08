@@ -160,23 +160,6 @@ $(function () {
                 index = $(this).attr("id");
                 sclist(index);
             })
-
-            $('#minus').on('click', function (){
-                if(NumberPage > 0) {
-                    index--;
-                    sclist(index);
-                }else{
-                    $('#minus').disableSelection();
-                }
-            });
-            $('#plus').on('click', function (){
-                if(pagination.totalPages = index){
-                    $('#plus').disableSelection();
-                }else{
-                    index++;
-                    sclist(index);
-                }
-            })
         })
     }
 

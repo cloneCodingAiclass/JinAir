@@ -29,7 +29,7 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
         TbSchedule tbSchedule = TbSchedule.builder()
                 .schAirplaneId(scheduleApiRequest.getSchAirplaneId())
                 .schAirplaneName(scheduleApiRequest.getSchAirplaneName())
-                .schDepartureDate(scheduleApiRequest.getSchDepartureDate())
+                .schDepartureDate(LocalDateTime.parse(scheduleApiRequest.getSchDepartureDate()))
                 .schDeparturePoint(scheduleApiRequest.getSchDeparturePoint())
                 .schStartTime(scheduleApiRequest.getSchStartTime())
                 .schArrivalPoint(scheduleApiRequest.getSchArrivalPoint())
@@ -52,7 +52,6 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
             );
     }
 
-    // 스케줄 Update 기능 없음
     @Override
     public Header<ScheduleApiResponse> update(Header<ScheduleApiRequest> request) {
         return null;
@@ -118,8 +117,8 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
         return Header.OK(scheduleApiResponseList, pagination);
     }
 
-    public Header<List<ScheduleApiResponse>> find(String schAirplaneName, LocalDateTime schDepartureDate, String schDeparturePoint, String schArrivalPoint){
-        List<TbSchedule> tbSchedule = tbScheduleRepository.findBySchAirplaneIdAndSchDepartureDateAndSchDeparturePointAndSchArrivalPoint(schAirplaneName, schDepartureDate, schDeparturePoint, schArrivalPoint);
+    public Header<List<ScheduleApiResponse>> find(String schAirplaneName, String schDepartureDate, String schDeparturePoint, String schArrivalPoint){
+        List<TbSchedule> tbSchedule = tbScheduleRepository.findBySchAirplaneIdAndSchDepartureDateAndSchDeparturePointAndSchArrivalPoint(schAirplaneName, LocalDateTime.parse(schDepartureDate), schDeparturePoint, schArrivalPoint);
         List<ScheduleApiResponse> scheduleApiResponseList = tbSchedule.stream()
                 .map(user -> responseSchedule(user))
                 .collect(Collectors.toList());

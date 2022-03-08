@@ -18,7 +18,7 @@ public class ScheduleApiRequest {
     private Long schIndex;
     private String schAirplaneId;
     private String schAirplaneName;
-    private LocalDateTime schDepartureDate;
+    private String schDepartureDate;
     private String schDeparturePoint;
     private LocalDateTime schStartTime;
     private String schArrivalPoint;

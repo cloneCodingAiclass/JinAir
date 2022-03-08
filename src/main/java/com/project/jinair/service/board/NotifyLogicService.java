@@ -112,11 +112,17 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
 
 
     public Header<List<NotifyApiResponse>> searchList(String a, Pageable pageable) {
-        List<TbNotifi> tbNotifi = tbNotifiRepository.findByNoTitleContaining(a, pageable);
+        Page<TbNotifi> tbNotifi = tbNotifiRepository.findByNoTitleContaining(a, pageable);
         List<NotifyApiResponse> notifyApiResponseList = tbNotifi.stream()
                 .map(noti -> responseNotifi(noti))
                 .collect(Collectors.toList());
-        return Header.OK(notifyApiResponseList);
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbNotifi.getTotalPages())
+                .totalElements(tbNotifi.getTotalElements())
+                .currentPage(tbNotifi.getNumber())
+                .currentElements(tbNotifi.getNumberOfElements())
+                .build();
+        return Header.OK(notifyApiResponseList, pagination);
     }
 
 }

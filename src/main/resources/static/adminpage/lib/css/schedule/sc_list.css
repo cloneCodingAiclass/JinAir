@@ -75,27 +75,6 @@
     cursor: pointer;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
-#container > .contents .footer_box{
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 50px;
-}
-
-#container > .contents .footer_box .col-sm-5{
-    display: flex;
-    width: 400px;
-}
-
-#container > .contents .footer_box .col-sm-5 #minus, #plus{
-    margin: 0 20px;
-    align-content: center;
-    cursor : pointer;
-}
-
-#container > .contents .footer_box .col-sm-5 #showpage{
-    display: flex;
-    align-items: center;
-}
     /* 모달 */
 .modal_container{
     position: absolute;
@@ -182,7 +161,13 @@
     border: 3px solid #BDD600;
 }
 
-#button{
+#container > .contents .footer_box{
+    display: flex;
+    justify-content: center;
+}
+
+
+#container > .contents .footer_box #button{
     display: flex;
     justify-content: center;
 }
@@ -202,5 +187,7 @@
     border-collapse: collapse;
 }
 #button .pageButton:hover{
-
+    background-color: rgb(124,0,72);
+    color: white;
+    cursor: pointer;
 }
