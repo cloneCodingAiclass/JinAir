@@ -93,6 +93,23 @@ public class LostApiLogicService implements CrudInterface<LostApiRequest, LostAp
         return Header.OK(lostApiResponseList, pagination);
     }
 
+    public Header<List<LostApiResponse>> search(String airplane, String airport, String type, String start, String end, Pageable pageable){
+        Page<TbLost> tbLostList = tbLostRepository.findAllByLosAirplaneAndLosAirportAreaAndLosTypeAndLosArrivedateBetween(airplane, airport, type, LocalDateTime.parse(start), LocalDateTime.parse(end), pageable);
+
+        List<LostApiResponse> lostApiResponseList = tbLostList.stream()
+                .map(lost -> responseLost(lost))
+                .collect(Collectors.toList());
+
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbLostList.getTotalPages())
+                .totalElements(tbLostList.getTotalElements())
+                .currentPage(tbLostList.getNumber())
+                .currentElements(tbLostList.getNumberOfElements())
+                .build();
+
+        return Header.OK(lostApiResponseList, pagination);
+    }
+
     public Header<LostApiResponse> response(TbLost tbLost) {
         LostApiResponse lostApiResponse = LostApiResponse.builder()
                 .losIndex(tbLost.getLosIndex())

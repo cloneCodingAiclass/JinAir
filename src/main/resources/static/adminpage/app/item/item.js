@@ -139,26 +139,32 @@ $(() =>{
     function list(page){
         console.log("page : " + page);
         $.get("/api/lost?page="+page, function (response){
-            console.dir(response)
             indexBtn = [];
             pagination = response.pagination;
 
 
             lostList.lostList = response.data;
-
-            // for(let i = 0; i < response.data.length; i++){
-            //     if(response.data[i].losIsfind === "Receipt") {
-            //         console.log(response.data[i].losIsfind, '완료쪽');
-            //         $("#lostList").find($("#item_isfind_btn")).val("완료");
-            //     }else{
-            //         console.log(response.data[i].losIsfind, '미완료쪽');
-            //         $("#item_isfind_btn").val("미완료");
-            //     }
-            // }
-
-
         })
     }
+
+    $("#btn_search").on('click', function (){
+        search($("#aircraft_name").val(), $("#arrival_airport_list").find('option:selected').val(), $("#item_list").find('option:selected').val(), $("#item_start_date").val() + "T00:00:00", $("#item_end_date").val() + "T00:00:00");
+    })
+
+    function search(airplane, airport, type, start, end){
+        $.post({
+            url: "/api/lost/search",
+            data : "losAirplane=" + airplane + "&losAirport=" + airport + "&losType=" + type + "&start=" + start + "&end=" + end,
+            dataType : 'text',
+            success : function(response){
+                console.dir(response)
+                let dataJson = JSON.parse(response)
+                lostList.lostList = dataJson.data;
+            }
+        })
+
+    }
+
 
 
 
