@@ -22,7 +22,7 @@
                     <div class="search">
                         <p class="title">지니매거진 등록</p>
                     </div>
-                    <form id="uploadFiles" name="uploadFiles" method="post" th:action="@{/uploadFiles}" encType="multipart/form-data">
+                    <form id="uploadFiles" name="uploadFiles" method="post" th:action="@{/api/magazine/upload}" encType="multipart/form-data">
                         <table>
                             <colgroup>
                                 <col width="150">
@@ -36,21 +36,21 @@
                                 <td  colspan="2" class="file_id">
                                     <div class="file-upload">
                                         메인 페이지 파일 첨부
-                                        <input type="text" class="filetext1" id="filetext1" name="file1">
+                                        <input type="text" class="filetext1" id="filetext1">
                                         <label for="ex_file1" class="ex_file">찾아보기</label>
-                                        <input type="file" id="ex_file1" multiple>
+                                        <input type="file" id="ex_file1" name="imgs" multiple>
                                     </div>
                                     <div class="file-upload">
                                         퀴즈 파일 첨부
-                                        <input type="text" class="filetext2" id="filetext2" name="file2">
+                                        <input type="text" class="filetext2" id="filetext2">
                                         <label for="ex_file2" class="ex_file">찾아보기</label>
-                                        <input type="file" id="ex_file2" multiple>
+                                        <input type="file" id="ex_file2" name="answers" multiple>
                                     </div>
                                     <div class="file-upload">
                                         매거진 파일 첨부
-                                        <input type="text" class="filetext3" id="filetext3" name="file3">
+                                        <input type="text" class="filetext3" id="filetext3" >
                                         <label for="ex_file3" class="ex_file">찾아보기</label>
-                                        <input type="file" id="ex_file3" multiple>
+                                        <input type="file" id="ex_file3" name="pdfs" multiple>
                                     </div>
                                 </td>
                             </tr>

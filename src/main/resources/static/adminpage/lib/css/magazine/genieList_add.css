@@ -49,18 +49,21 @@
     margin-left: 20px;
 }
 .file-upload .filetext2{
-    margin-left: 60px;
+    margin-left: 62px;
 }
 .file-upload .filetext3{
-    margin-left: 48px;
+    margin-left: 49px;
 }
 .file-upload input[type="text"]{
-    width: 350px;
+    width: 50%;
     height: 26px;
     font-size: 11px;
     font-weight: 900;
     text-indent: 7px;
     outline: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .file-upload label {
     padding: 6px 3px;

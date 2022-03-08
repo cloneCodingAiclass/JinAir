@@ -7,13 +7,14 @@
     <script src="/adminpage/app/magazine/genieList_edit.js"></script>
 <!-- head.html 끝-->
 <body>
-    <form action="./genieList_view.html">
+    <form id="uploadFiles" name="uploadFiles" method="post" th:action="@{/api/magazine/update}" encType="multipart/form-data">
+        <input th:type="hidden" th:value="${images.mzIndex}" name="id">
         <div id="wrap">
             <div th:replace="/adminpage/fragment/header :: header"></div>
             <div id="container">
                 <div th:replace="/adminpage/fragment/leftmenu :: leftmenu(${code}, ${menuList})"></div>
                 <div class="contents">
-                    <div class="contwrap" id="itemList">
+                    <div class="contwrap">
                         <div class="search">
                             <p class="title">지니매거진 세부 수정</p>
                         </div>
@@ -23,7 +24,7 @@
                                 <col width="460">
                                 <col width="180">
                             </colgroup>
-                            <tr>
+                            <tr id="itemList">
                                 <td>제목</td>
                                 <td>{{itemList.mzTitle}}</td>
                                 <td>등록일 {{itemList.mzRegdate.substr(0,10)}}</td>
@@ -32,21 +33,21 @@
                                 <td  colspan="3" class="file_id">
                                     <div class="file-upload">
                                         메인 페이지 파일 첨부
-                                        <input type="text" class="filetext1" :value="itemList.mzImg">
-                                        <label for="ex_file1" class="ex_file">찾아보기</label>
-                                        <input type="file" id="ex_file1">
+                                        <input th:type="text" th:class="filetext1" th:value="${images.mzImgOriname}">
+                                        <label th:for="ex_file1" th:class="ex_file">찾아보기</label>
+                                        <input th:type="file" th:id="ex_file1" name="imgs">
                                     </div>
                                     <div class="file-upload">
                                         퀴즈 파일 첨부
-                                        <input type="text" class="filetext2" :value="itemList.mzAnswer">
-                                        <label for="ex_file2" class="ex_file">찾아보기</label>
-                                        <input type="file" id="ex_file2">
+                                        <input th:type="text" th:class="filetext2" th:value="${images.mzAnswerOriname}">
+                                        <label th:for="ex_file2" th:class="ex_file">찾아보기</label>
+                                        <input th:type="file" th:id="ex_file2" name="answers">
                                     </div>
                                     <div class="file-upload">
                                         매거진 파일 첨부
-                                        <input type="text" class="filetext3" :value="itemList.mzPdf">
-                                        <label for="ex_file3" class="ex_file">찾아보기</label>
-                                        <input type="file" id="ex_file3">
+                                        <input th:type="text" th:class="filetext3" th:value="${images.mzPdfOriname}">
+                                        <label th:for="ex_file3" th:class="ex_file">찾아보기</label>
+                                        <input th:type="file" th:id="ex_file3" name="pdfs">
                                     </div>
                                 </td>
                             </tr>
@@ -62,7 +63,7 @@
                         <div id="modal_isfind_title">수정하시겠습니까?</div>
                         <div>
                             <input type="button" value="취소" class="modal_isfind_btn uncomplete">
-                            <input type="button" value="수정" class="modal_isfind_btn complete">
+                            <input type="submit" value="수정" class="modal_isfind_btn complete">
                         </div>
                     </div>
                 </div>

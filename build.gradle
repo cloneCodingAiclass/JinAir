@@ -32,6 +32,11 @@ dependencies {
     implementation 'com.oracle.database.security:osdt_core'
     implementation 'com.oracle.database.security:osdt_cert'
     implementation'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    // 파일 업/다운로드간 사용할 디펜던시
+    implementation 'commons-io:commons-io:2.6'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    // ----------------------------
+
 }
 
 tasks.named('test') {

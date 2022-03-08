@@ -94,7 +94,14 @@ $(function () {
         $('.nav11').parent().siblings().find('li').css({"display":"none"});
     })
 
-    // list
+
+
+    // 모달창
+    $('.btn_cancel').on('click', function(){
+        $('.modal_isfind').css("display","none");
+    })
+
+    // 세부사항 출력
     let itemList = new Vue({
         el : '#itemList',
         data : {
@@ -104,7 +111,7 @@ $(function () {
         }
     });
 
-    var str = $(location).attr('href').split('/');
+    let str = $(location).attr('href').split('/');
     searchStart(str[6]);
 
     function searchStart(index){
@@ -115,7 +122,6 @@ $(function () {
         });
     }
 
-
     $('#add_btn').on('click',function(){
         $.get("/api/magazine/delete/"+str[6], function(response){
             location.href='/pages/admin/genielist';
@@ -123,14 +129,9 @@ $(function () {
     });
 
 
+
 });
 
-$(()=> {
-    $(".modal_isfind").hide();
-    $(".del_btn").on('click', () => {
-        $(".modal_isfind").fadeIn(200);
-    })
-    $(".btn_cancel").on('click', () => {
-        $(".modal_isfind").fadeOut(200);
-    })
-})
+function delBtn(){
+    $('.modal_isfind').css("display","flex");
+}

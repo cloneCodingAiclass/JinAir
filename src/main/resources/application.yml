@@ -1,6 +1,6 @@
 spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@aiclass_high?TNS_ADMIN=D:/edu/WEB/Spring/Wallet_aiclass
+    url: jdbc:oracle:thin:@aiclass_high?TNS_ADMIN=D:/JinAirCloneCoding/Wallet_aiclass
     username: JINAIRDB
-    password: James99121400
+    password: Asdfgh951753

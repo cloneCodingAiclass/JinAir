@@ -14,8 +14,13 @@ import java.time.LocalDateTime;
 public class MagazineApiRequest {
     private Long mzIndex;
     private String mzTitle;
-    private String mzImg;
-    private String mzAnswer;
-    private String mzPdf;
-    private LocalDateTime mzRegdate;
+    private String mzImgName;
+    private String mzImgOriname;
+    private String mzImgUrl;
+    private String mzAnswerName;
+    private String mzAnswerOriname;
+    private String mzAnswerUrl;
+    private String mzPdfName;
+    private String mzPdfOriname;
+    private String mzPdfUrl;
 }

@@ -14,17 +14,17 @@
             <div th:replace="/adminpage/fragment/header :: header"></div>
             <div id="container">
                 <div th:replace="/adminpage/fragment/leftmenu :: leftmenu(${code}, ${menuList})"></div>
-                <div class="contents" id="tableBoard">
-                    <div class="con_wrap">
+                <div class="contents" id="tableBoard" >
+                    <div class="con_wrap"  >
                         <div class="title">
                             <p>FAQ 세부내용 수정</p>
                         </div>
-                        <div class="fqa_table">
+                        <div class="faq_table">
                             <table>
                                 <tr>
-                                    <td>{{ tableBoard.faqType }}</td>
-                                    <td>카테고리 : {{ tableBoard.faqTitle }}</td>
-                                    <td>등록일 : {{ tableBoard.faqRegdate }}</td>
+                                    <td>{{tableBoard.faqType}}</td>
+                                    <td class="user_name">{{tableBoard.faqTitle}}</td>
+                                    <td>등록일 : {{tableBoard.faqRegdate.substr(0,10)}}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="3"><textarea name="" >
@@ -36,7 +36,7 @@
                         <div class="contents_bottom">
                             <div class="faq_btn_add">                        
                                 <input type="button" value="취소" onclick="history.back()">
-                                <input type="button" value="수정완료" class="btn_edit">
+                                <input type="button" value="수정완료" class="btn_edit" >
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                     <p>게시글을 수정하시겠습니까?</p>
                     <div class="edit_modal">
                         <input type="button" value="취소" class="btn_cancel">
-                        <input type="button" value="수정" id="edit_agree">
+                        <input type="button" value="수정" id="update">
                     </div>
                 </div>
             </div>

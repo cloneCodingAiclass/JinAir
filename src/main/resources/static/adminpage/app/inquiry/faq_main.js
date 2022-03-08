@@ -2,7 +2,7 @@ $(function () {
     $('.nav7').find('a').css({"color":"#BDD600"});
     $('.nav7').siblings('li').css({"display":"block"});
     $('.nav7').siblings('li').eq(1).find('a').css({"color":"#BDD600"});
-    
+
     $('.nav1').on('mouseover', function(e){
         e.stopPropagation();
         $(this).parent().siblings().find('a').css({"color":"#adb5bd"});
@@ -88,7 +88,7 @@ $(function () {
         $('.nav7').siblings('li').css({"display":"block"});
         $('.nav7').parent().siblings().find('li').css({"display":"none"});
         $('.nav7').siblings('li').eq(1).find('a').css({"color":"#BDD600"});
-    })
+    });
     $('.contents').on('mouseover', function (e) {
         e.stopPropagation();
         $('.nav7').parent().siblings().find('a').css({"color":"#adb5bd"});
@@ -96,26 +96,28 @@ $(function () {
         $('.nav7').siblings('li').css({"display":"block"});
         $('.nav7').parent().siblings().find('li').css({"display":"none"});
         $('.nav7').siblings('li').eq(1).find('a').css({"color":"#BDD600"});
-    })
-
-    $('.del_container').hide();
-    $('.btn_del').on('click', function(){
-        $('.del_container').fadeIn(200);
     });
 
-    $('.btn_cancel').on('click', function(e){
-        $('.del_container').fadeOut(200);
-        e.stopPropagation();
-    });
-    $('.edit_container').hide();
-    $('.btn_edit').on('click', function(){
-        $('.edit_container').fadeIn(200);
-    });
+    $(function (){
+        $('.del_container').hide();
+        $('.btn_del').on('click', function(){
+            $('.del_container').fadeIn(200);
+        });
 
-    $('.btn_cancel').on('click', function(e){
-        $('.edit_container').fadeOut(200);
-        e.stopPropagation();
-    });
+        $('.btn_cancel').on('click', function(e){
+            $('.del_container').fadeOut(200);
+            e.stopPropagation();
+        });
+        $('.edit_container').hide();
+        $('.btn_edit').on('click', function(){
+            $('.edit_container').fadeIn(200);
+        });
+
+        $('.btn_cancel').on('click', function(e){
+            $('.edit_container').fadeOut(200);
+            e.stopPropagation();
+        });
+
 
 
     // 데이터 리스트
@@ -185,7 +187,7 @@ $(function () {
 
     function deleteFaq(index) {
         $.ajax({
-            url: `/api/faq/` + index,
+            url: `/api/faq/delete/` + index,
             method: "DELETE",
             dataType: "text",
         })
@@ -193,5 +195,32 @@ $(function () {
 });
 
 
+    let jsonData
+
+    function updating(){
+        jsonData = {
+            data : {
+                faqType : $("#faqType").val(),
+                faqTitle : $("#faqTitle").val(),
+                faqContent : $("#faqContent").val()
+            }
+        }
+        $.ajax({
+            url : "/api/faq_edit/",
+            type : "PUT",
+            data : JSON.stringify(jsonData),
+            dataType : "text",
+            contentType : "application/json"
+        });
+    }
+    console.log("idx:" + idx);
+
+    $("#update").click( () => {
+        updating();
+        location.href = `/pages/admin/faq_view/${idx}`;
+        console.dir(jsonData);
+    })
+
+});
 
 

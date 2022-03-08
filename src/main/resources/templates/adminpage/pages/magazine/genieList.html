@@ -34,8 +34,8 @@
                         <tr v-for="dto in itemList">
                             <td>{{dto.mzIndex}}</td>
                             <td><a :href=`/pages/admin/genielist_view/${dto.mzIndex}`>{{dto.mzTitle}}</a></td>
-                            <td>{{dto.mzAnswer}}</td>
-                            <td>{{dto.mzAnswer}}</td>
+                            <td><a :href=`/api/magazine/downloadAns/${dto.mzIndex}` download="">{{dto.mzAnswerOriname}}</a></td>
+                            <td><a :href=`/api/magazine/downloadPdf/${dto.mzIndex}` download="">{{dto.mzPdfOriname}}</a></td>
                             <td>{{dto.mzRegdate.substr(0,10)}}</td>
                         </tr>
                     </table>

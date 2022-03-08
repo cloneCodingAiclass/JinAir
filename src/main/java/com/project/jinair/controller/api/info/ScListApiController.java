@@ -4,13 +4,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.schedule.ScheduleApiRequest;
-import com.project.jinair.model.network.response.info.AirplaneApiResponse;
 import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
-import com.project.jinair.service.info.AirplaneApiService;
 import com.project.jinair.service.info.ScListApiService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -47,8 +46,8 @@ public class ScListApiController implements CrudInterface<ScheduleApiRequest, Sc
     }
 
     @GetMapping("/list") // http://localhost:8080/api/airplane
-    public Header<List<ScheduleApiResponse>> findAll() {
-        return scListApiService.search();
+    public Header<List<ScheduleApiResponse>> findAll(@PageableDefault(sort = {"schIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        return scListApiService.search(pageable);
     }
 
 //    @GetMapping("/list/{schAirplaneId}")

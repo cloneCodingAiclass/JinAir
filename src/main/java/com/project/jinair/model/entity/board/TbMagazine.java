@@ -27,9 +27,16 @@ public class TbMagazine { // 매거진 테이블
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_magazine_idx")
     private Long mzIndex;
     private String mzTitle;
-    private String mzImg;
-    private String mzAnswer;
-    private String mzPdf;
+    private String mzImgName;
+    private String mzImgOriname;
+    private String mzImgUrl;
+    private String mzAnswerName;
+    private String mzAnswerOriname;
+    private String mzAnswerUrl;
+    private String mzPdfName;
+    private String mzPdfOriname;
+    private String mzPdfUrl;
+
     @CreatedDate
     private LocalDateTime mzRegdate;
 
