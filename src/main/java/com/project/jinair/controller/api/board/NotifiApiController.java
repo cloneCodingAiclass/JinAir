@@ -52,13 +52,13 @@ public class NotifiApiController implements CrudInterface<NotifyApiRequest, Noti
     }
 
     @GetMapping("/list")
-    public Header<List<NotifyApiResponse>> findAll(@PageableDefault(size = 10, sort = {"noIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+    public Header<List<NotifyApiResponse>> findAll(@PageableDefault(size = 5, sort = {"noIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
 
         return notifyLogicService.search(pageable);
     }
 
     @GetMapping("/searchlist/{a}")
-    public Header<List<NotifyApiResponse>> searchList(@PathVariable String a, @PageableDefault(size = 10, sort = {"noIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+    public Header<List<NotifyApiResponse>> searchList(@PathVariable String a, @PageableDefault(size = 5, sort = {"noIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
         return notifyLogicService.searchList(a, pageable);
     }
 }

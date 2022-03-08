@@ -100,12 +100,15 @@ $(function () {
 
 (function ($) {
 
+
     let notiList = new Vue({
         el : '#notiList',
         data : {
             notiList : {}
         }
     })
+
+    let searchStr =  "";
 
     list(0);
 
@@ -133,12 +136,15 @@ $(function () {
     };
 
 
+
     // 검색 데이터
     function searchNoti(key, page){
-        $.get("/api/notify/searchlist/" + key, function(response){
+        $.get("/api/notify/searchlist/" + key + "?page=" + page, function(response){
+            console.dir(response)
             notiList.notiList = response.data;
             let lastPage = response.pagination.totalPages;
             let str2 = "";
+            console.log("마지막 페이지2 : " + lastPage);
             for (let i = 0; i < lastPage; i++) {
                 str2 += "<td class='pagesS' id="+i+">" + (i+1) + "</td>";
             }
@@ -156,13 +162,12 @@ $(function () {
         });
     }
 
-    let searchStr =  $('#searchText').val();
-
-    $('#searchNoti').on('click', function (){
+    $(document).on('click', '#searchNoti', function(){
         searchStr = $('#searchText').val();
         searchNoti(searchStr, 0);
         if ( searchStr.length == 0){
             alert('검색어를 확인해주세요.');
+            searchNoti(searchStr, 0);
         }
     });
 
@@ -175,6 +180,5 @@ $(function () {
         let pageId2 = this.id;
         searchNoti(searchStr, pageId2);
     });
-
 
 })(jQuery);

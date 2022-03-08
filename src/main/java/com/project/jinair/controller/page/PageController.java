@@ -829,6 +829,7 @@ public class PageController {
 
     // 공지 작성
     @RequestMapping("/admin/nt_write")
+    @Transactional
     public ModelAndView ntWrite() {
         return new ModelAndView("/adminpage/pages/notice/nt_write")
                 .addObject("code", "nt_write")
