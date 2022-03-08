@@ -44,8 +44,9 @@ public class FaqApiController implements CrudInterface<FaqApiRequest, FaqApiResp
 
     // 게시판 글수정
     @Override
-    @PutMapping("/view/")
+    @PutMapping("")
     public Header<FaqApiResponse> update(@RequestBody Header<FaqApiRequest> request) {
+        System.out.println(request);
         return faqApiLogicService.update(request);
     }
 

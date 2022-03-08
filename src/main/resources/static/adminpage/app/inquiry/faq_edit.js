@@ -175,28 +175,29 @@ $(function () {
         console.log("index : " + index);
         $.get("/api/faq/view/"+index, function (response){
             console.dir(response);
-            $("#faqRegdate").val(response.data.faqRegdate);
-            $("#faqTitle").val(response.data.faqTitle);
-            $("#faqType").val(response.data.faqType);
-            $("#faqContent").val(response.data.faqContent);
             tableBoard.tableBoard = response.data;
 
         })
     }
 
+
     let jsonData
 
     function updating(){
+        let title = $("#faqTitle").text();
+        let content = $("#faqContent").val();
+        let type = $("#faqType").val();
         jsonData = {
             data : {
                 faqIndex : idx,
-                faqTitle : $("#faqTitle").val(),
-                faqContent : $("#faqContent").val(),
+                faqType : $("#faqType").text(),
+                faqTitle : $("#faqTitle").text(),
+                faqContent : $("#faqContent").val()
 
             }
         }
         $.ajax({
-            url : "/api/faq/view/",
+            url : "/api/faq",
             type : "PUT",
             data : JSON.stringify(jsonData),
             dataType : "text",

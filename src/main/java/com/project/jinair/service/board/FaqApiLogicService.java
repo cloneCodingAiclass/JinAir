@@ -67,6 +67,7 @@ public class FaqApiLogicService implements CrudInterface<FaqApiRequest, FaqApiRe
             faq.setFaqIndex(faqApiRequest.getFaqIndex());
             faq.setFaqType(faqApiRequest.getFaqType());
             faq.setFaqTitle(faqApiRequest.getFaqTitle());
+            faq.setFaqContent(faqApiRequest.getFaqContent());
             faq.setFaqRegdate(faqApiRequest.getFaqRegdate());
 
             return faq;

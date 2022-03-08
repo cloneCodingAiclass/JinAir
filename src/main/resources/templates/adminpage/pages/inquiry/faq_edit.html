@@ -21,12 +21,12 @@
                         <div class="faq_table">
                             <table>
                                 <tr>
-                                    <td>{{tableBoard.faqType}}</td>
-                                    <td class="user_name" > <input type="text" id="faqTitle"></td>
-                                    <td id="faqRegdate">등록일 : {{tableBoard.faqRegDate}}</td>
+                                    <td id="faqType">{{tableBoard.faqType}}</td>
+                                    <td class="user_name" id="faqTitle"> {{tableBoard.faqTitle}}</td>
+                                    <td id="faqRegdate">등록일 : {{tableBoard.faqRegdate}}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3"><textarea id="faqContent">
+                                    <td colspan="3"><textarea id="faqContent"> {{tableBoard.faqContent}}
                                     </textarea></td>
                                 </tr>
                             </table>
