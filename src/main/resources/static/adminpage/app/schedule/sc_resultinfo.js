@@ -1,4 +1,4 @@
-$(function () {
+    $(function () {
     $('.modal_container').hide();
     $('.del_modal').on('click', function(){
         $('.modal_container').fadeIn(200);
@@ -127,4 +127,18 @@ $(function () {
         })
     }
 
+        $("#del_btn").click( () => {
+            let pageNum = $(location).attr('href').split('/');
+            let index =  pageNum[6];
+            delBtn(index);
+            location.href = `/pages/admin/scheduleList`;
+        })
+
+        function delBtn(index){
+            $.ajax({
+                url: `/api/schedule/`+index,
+                method: "DELETE",
+                dataType: "text",
+            })
+        }
 });
