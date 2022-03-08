@@ -19,8 +19,7 @@ public class LostApiRequest {
     private String losImg;
     private String losAirplane;
     private String losAirportArea;
-    @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:SS")
-    private LocalDateTime losArrivedate;
+    private String losArrivedate;
     private String losUser;
     private LostStatus losIsfind;
     private LocalDateTime losRegdate;

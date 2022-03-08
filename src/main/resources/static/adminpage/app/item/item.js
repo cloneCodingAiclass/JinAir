@@ -133,17 +133,35 @@ $(() =>{
         }
     })
 
+
     list(0);
 
     function list(page){
         console.log("page : " + page);
         $.get("/api/lost?page="+page, function (response){
+            console.dir(response)
             indexBtn = [];
             pagination = response.pagination;
 
+
             lostList.lostList = response.data;
+
+            // for(let i = 0; i < response.data.length; i++){
+            //     if(response.data[i].losIsfind === "Receipt") {
+            //         console.log(response.data[i].losIsfind, '완료쪽');
+            //         $("#lostList").find($("#item_isfind_btn")).val("완료");
+            //     }else{
+            //         console.log(response.data[i].losIsfind, '미완료쪽');
+            //         $("#item_isfind_btn").val("미완료");
+            //     }
+            // }
+
+
         })
     }
+
+
+
 
     /*
     function search(id){
@@ -162,20 +180,3 @@ $(() =>{
 
      */
 })
-
-// 모달창 수령완료 / 미완료
-$(()=> {
-    $('#modal_isfind').hide();
-
-    $("#item_isfind_btn").click(() => {
-        console.log("작동되냐")
-        $("#modal_isfind").fadeIn(200);
-    })
-    $(".complete").on('click', () => {
-        $("#modal_isfind").fadeOut(200);
-    })
-    $(".uncomplete").on('click', () => {
-        $("#modal_isfind").fadeOut(200);
-    })
-})
-

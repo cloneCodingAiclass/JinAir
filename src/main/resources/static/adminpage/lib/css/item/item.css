@@ -24,7 +24,8 @@
 #item_search fieldset {
     margin-top: 15px;
     background-color: #f2f2f2;
-    height: 150px;
+    padding: 10px 30px;
+    height: auto;
     border: none;
     border-radius: 3px;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
@@ -126,7 +127,7 @@
     height: 80px;
     border-bottom: 1px solid rgb(153, 153, 153, 0.5);
 }
-.item_list > table td button {
+.item_list > table td input {
     border: none;
     width: 60px;
     height: 30px;
@@ -135,8 +136,9 @@
     border-radius: 2px;
     background-color: #bdd600;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+    cursor: pointer;
 }
-.item_list > table td button:hover {
+.item_list > table td input:hover {
     color: #fff;
     background-color: rgb(153, 153, 153, 0.5);
 }
@@ -198,7 +200,7 @@
 #modal_isfind > #modal_isfind_content {
     width: 400px;
     height: 300px;
-    margin: 0 auto 30px;
+    margin: 150px auto 30px;
     padding-top: 30px;
     border-radius: 5px;
     border: 3px solid #BDD600;

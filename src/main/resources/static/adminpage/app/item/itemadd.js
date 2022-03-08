@@ -159,7 +159,7 @@ $(() => {
             data : {
                 losAirplane : $("#airplane_list").find('option:selected').val(),
                 losType : $("#item_list").find('option:selected').val(),
-                losArriveDate : $("#arrival_date").val(),
+                losArrivedate : $("#arrival_date").val() + "T00:00:00",
                 losAirportArea : $("#arrival_airport_list").find('option:selected').val(),
                 losImg : $("#item_img").val()
             }
@@ -175,6 +175,8 @@ $(() => {
 
     $("#createBtn").click(() => {
         insert();
+        alert('등록완료');
+        location.reload();
         console.dir(jsonData);
         console.log($("#arrival_date").val());
     })

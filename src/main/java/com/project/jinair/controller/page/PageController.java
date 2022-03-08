@@ -635,6 +635,14 @@ public class PageController {
                 .addObject("menuList", menuService.getadminMenu())
                 .addObject("item", menuService.adminItemMenu());
     }
+    // 유실물 상세내용
+    @RequestMapping("/admin/item/detail/{id}")
+    public ModelAndView itemDetail() {
+        return new ModelAndView("/adminpage/pages/item/itemDetail")
+                .addObject("code", "itemDetail")
+                .addObject("menuList", menuService.getadminMenu())
+                .addObject("item", menuService.adminItemMenu());
+    }
     // 유실물 추가
     @RequestMapping("/admin/item/itemadd")
     public ModelAndView itemAdd() {

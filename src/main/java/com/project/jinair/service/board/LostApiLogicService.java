@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,12 +28,14 @@ public class LostApiLogicService implements CrudInterface<LostApiRequest, LostAp
     public Header<LostApiResponse> create(Header<LostApiRequest> request) {
         LostApiRequest lostApiRequest = request.getData();
         System.out.println(lostApiRequest.getLosArrivedate());
+        System.out.println(lostApiRequest.getLosImg());
+        System.out.println(lostApiRequest.getLosAirplane());
         TbLost tbLost = TbLost.builder()
                 .losType(lostApiRequest.getLosType())
                 .losImg(lostApiRequest.getLosImg())
                 .losAirportArea(lostApiRequest.getLosAirportArea())
                 .losAirplane(lostApiRequest.getLosAirplane())
-                .losArrivedate(lostApiRequest.getLosArrivedate())
+                .losArrivedate(LocalDateTime.parse(lostApiRequest.getLosArrivedate()))
                 .losIsfind(LostStatus.NotReceived)
                 .build();
         TbLost newTbLost = tbLostRepository.save(tbLost);
@@ -52,11 +55,6 @@ public class LostApiLogicService implements CrudInterface<LostApiRequest, LostAp
         Optional<TbLost> tbLost = tbLostRepository.findById(lostApiRequest.getLosIndex());
 
         return tbLost.map(lost -> {
-            lost.setLosType(lostApiRequest.getLosType());
-            lost.setLosImg(lostApiRequest.getLosImg());
-            lost.setLosAirportArea(lostApiRequest.getLosAirportArea());
-            lost.setLosAirplane(lostApiRequest.getLosAirplane());
-            lost.setLosArrivedate(lostApiRequest.getLosArrivedate());
             if(lostApiRequest.getLosIsfind() == LostStatus.Receipt){
                 lost.setLosIsfind(LostStatus.Receipt);
             }else {
