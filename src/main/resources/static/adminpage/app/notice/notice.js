@@ -94,28 +94,11 @@ $(function () {
         $('.nav6').parent().siblings().find('li').css({"display":"none"});
     })
 
+
+
 });
 
 (function ($) {
-
-    let indexBtn = [];
-
-    let pagination = {
-        total_page : 0,
-        total_element : 0,
-        current_page : 0,
-        current_elements : 0
-    }
-
-    // 페이지 정보
-    let showPage = new Vue({
-        el : '#showPage',
-        data : {
-            totalElements : {},
-            currentPage : {}
-        }
-    })
-
 
     let notiList = new Vue({
         el : '#notiList',
@@ -130,27 +113,68 @@ $(function () {
         $.get("/api/notify/list?page="+page, function(response){
             console.dir(response);
             notiList.notiList = response.data;
+            let lastPage = response.pagination.totalPages;
+            let str = "";
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pages' id="+i+">" + (i+1) + "</td>";
+            }
+            $("#showPage").html(str);
+            $(".pages").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+page+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
 
-            showPage.showPage = response.pagination;
-            showPage.totalElements = pagination.currentPage;
-            showPage.currentPage = pagination.currentPage + 1;
         })
     };
 
-    console.log("개수가이눠ㅏㅣㄴ아ㅣ" + showPage.totalElements);
 
     // 검색 데이터
-    function searchNoti(key){
-        $.get("/api/notify/searchlist/"+key, function(response){
+    function searchNoti(key, page){
+        $.get("/api/notify/searchlist/" + key, function(response){
             notiList.notiList = response.data;
+            let lastPage = response.pagination.totalPages;
+            let str2 = "";
+            for (let i = 0; i < lastPage; i++) {
+                str2 += "<td class='pagesS' id="+i+">" + (i+1) + "</td>";
+            }
+            $("#showPage").html(str2);
+
+            $(".pagesS").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+page+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
         });
     }
 
+    let searchStr =  $('#searchText').val();
+
     $('#searchNoti').on('click', function (){
-        searchNoti($('#searchText').val());
-        if ( $('#searchText').val().length == 0){
+        searchStr = $('#searchText').val();
+        searchNoti(searchStr, 0);
+        if ( searchStr.length == 0){
             alert('검색어를 확인해주세요.');
         }
     });
+
+    $(document).on('click', '.pages', function(){
+        let pageId = this.id;
+        list(pageId);
+    });
+
+    $(document).on('click', '.pagesS', function(){
+        let pageId2 = this.id;
+        searchNoti(searchStr, pageId2);
+    });
+
 
 })(jQuery);

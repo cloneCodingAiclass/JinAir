@@ -110,18 +110,21 @@
     cursor: pointer;
     background-color: #fff;
 }
-.footer table td:nth-child(1){
-    background-color: rgb(102, 30, 67);
-}
-.footer table td:nth-child(1) > a{
-    color:white
-}
-.footer table td:hover{
-    background-color: #bdd600;
-}
-.footer table td:hover a{
-    color:white
-}
+/*.footer table td:nth-child(1){*/
+/*    background-color: rgb(102, 30, 67);*/
+/*}*/
+/*.footer table td:nth-child(1) > a{*/
+/*    color:white*/
+/*}*/
+/*#showPage > .pages:hover{*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*#showPage > .pages:active {*/
+/*    background-color: #661e43;*/
+/*    color: #fff;*/
+/*}*/
+
 .footer > .notice_write{ 
     display: inline;
     float: right;

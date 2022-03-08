@@ -100,7 +100,7 @@ $(function () {
 
     console.log("url : "+$(location).attr('href'));
 
-    let idx = $(location).attr('href').split('/')[7];
+    let idx = $(location).attr('href').split('/')[6];
 
     let ntModify = new Vue({
         el : '#ntModify',
@@ -120,6 +120,7 @@ $(function () {
             $("#ntFile").val(response.data.noFile);
             $("#ntContent").val(response.data.noContents);
             ntModify.ntModify = response.data;
+
         })
     }
 
@@ -135,18 +136,17 @@ $(function () {
             }
         }
         $.ajax({
-            url : "/api/notify/",
+            url : "/api/notify",
             type : "PUT",
             data : JSON.stringify(jsonData),
             dataType : "text",
             contentType : "application/json"
         });
     }
-    console.log("idx:" + idx);
 
     $("#update").click( () => {
         updating();
-        location.href = `/pages/admin/notice/nt_view/${idx}`;
+        location.href = `/pages/admin/nt_view/${idx}`;
         console.dir(jsonData);
     })
 

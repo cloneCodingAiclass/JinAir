@@ -34,26 +34,15 @@
                         </tr>
                         <tr v-for="noti in notiList">
                             <td>{{ noti.noIndex }}</td>
-                            <td style="text-align: left"><a :href=`/pages/admin/notice/nt_view/${noti.noIndex}`>{{ noti.noTitle }}</a></td>
+                            <td style="text-align: left"><a :href=`/pages/admin/nt_view/${noti.noIndex}`>{{ noti.noTitle }}</a></td>
                             <td>{{ noti.noRegdate }}</td>
                         </tr>
                     </table>
                     <div class="footer">
                         <div class="center">
                             <table>
-                                <tr>
-                                    <td>1</td>
-<!--                                    <td><a href="#">2</a></td>-->
-<!--                                    <td><a href="#">3</a></td>-->
-<!--                                    <td><a href="#">4</a></td>-->
-<!--                                    <td><a href="#">5</a></td>-->
-<!--                                    <td><a href="#">6</a></td>-->
-<!--                                    <td><a href="#">7</a></td>-->
-<!--                                    <td><a href="#">8</a></td>-->
-<!--                                    <td><a href="#">9</a></td>-->
-<!--                                    <td><a href="#">10</a></td>-->
-                                    <td><a href="#"></a></td>
-                                    <td><a href="#"></a></td>
+                                <tr id="showPage">
+
                                 </tr>
                             </table>
                         </div>
@@ -65,4 +54,5 @@
     </div>
 </body>
 <script src="/adminpage/app/notice/notice.js"></script>
+<script src="/lib/plugins/jquery-countto/jquery.countTo.js"></script>
 </html>

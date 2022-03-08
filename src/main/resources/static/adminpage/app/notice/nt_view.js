@@ -99,7 +99,8 @@ $(function () {
 (function ($){
     console.log("url : "+$(location).attr('href'));
 
-    let idx = $(location).attr('href').split('/')[7];
+    console.log($(location).attr('href').split('/')[6]);
+    let idx = $(location).attr('href').split('/')[6];
     console.log(idx);
     let notiView = new Vue({
         el : '#notiView',
@@ -110,9 +111,9 @@ $(function () {
 
     search(idx);
 
-    function search(index){
-        console.log("index : " + index);
-        $.get("/api/notify/"+index, function (response){
+    function search(idx){
+        console.log("index : " + idx);
+        $.get("/api/notify/"+idx, function (response){
             console.dir(response);
 
             notiView.notiView = response.data;
