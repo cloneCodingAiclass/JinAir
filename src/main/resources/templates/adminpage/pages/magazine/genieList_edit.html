@@ -7,7 +7,7 @@
     <script src="/adminpage/app/magazine/genieList_edit.js"></script>
 <!-- head.html 끝-->
 <body>
-    <form id="uploadFiles" name="uploadFiles" method="post" th:action="@{/api/magazine/update}" encType="multipart/form-data">
+    <form id="uploadFiles" name="uploadFiles" method="post" th:action="@{/pages/admin/genielist_edit/update}" encType="multipart/form-data">
         <input th:type="hidden" th:value="${images.mzIndex}" name="id">
         <div id="wrap">
             <div th:replace="/adminpage/fragment/header :: header"></div>
