@@ -94,6 +94,25 @@ $(function () {
         $('.nav11').parent().siblings().find('li').css({"display":"none"});
     })
 
+
+    let indexBtn = [];  // 인덱스 버튼
+    let pagination = {
+        total_pages : 0,
+        total_elements : 0,
+        current_page : 0,
+        current_elements : 0
+    };
+
+    // 페이지 정보
+    let showPage = new Vue({
+        el : '#showPage',
+        data : {
+            totalElements : {},
+            currentPage : {},
+            totalPages : {}
+        }
+    });
+
     // list
     let itemList = new Vue({
         el : '#itemList',
@@ -104,13 +123,32 @@ $(function () {
         }
     });
 
-    searchStart();
-    function searchStart(){
-        $.get("/api/magazine/list", function(response){
-            // 검색 데이터
+    searchStart(0);
+
+
+    $(document).on('click', '.asdff', function(){
+        searchStart($(this).children('.asd').html()-1);
+    })
+
+    function searchStart(index){
+        $.get("/api/magazine?page="+index, function(response){
+
+            indexBtn = [];
+            pagination = response.pagination;
+
+            // 전체 페이지
+            showPage.totalPages = pagination.totalPages;
+
+            showPage.totalElements = pagination.currentElements;
+
+            showPage.currentPage = pagination.currentPage + 1;
+
             itemList.itemList = response.data;
+
         });
     }
 
 
 });
+
+
