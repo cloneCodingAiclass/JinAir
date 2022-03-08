@@ -28,8 +28,9 @@ public class TbNotifi { // 공지사항 테이블
     private Long noIndex;
     private String noTitle;
     private String noContents;
-    private String noFile;
-//    private String noFilePath;
+    private String noFileName;
+    private String noFileOriname;
+    private String noFileUrl;
     @CreatedDate
     private LocalDateTime noRegdate;
 }

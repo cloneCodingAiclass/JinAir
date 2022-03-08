@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +33,7 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
                 .noIndex(notifyApiRequest.getNoIndex())
                 .noTitle(notifyApiRequest.getNoTitle())
                 .noContents(notifyApiRequest.getNoContents())
-                .noFile(notifyApiRequest.getNoFile())
+//                .noFileName(notifyApiRequest.getNoFile())
                 .noRegdate(notifyApiRequest.getNoRegdate())
                 .build();
         TbNotifi newNotify = tbNotifiRepository.save(tbNotify);
@@ -78,7 +79,9 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
                 .noIndex(tbNotifi.getNoIndex())
                 .noTitle(tbNotifi.getNoTitle())
                 .noContents(tbNotifi.getNoContents())
-                .noFile(tbNotifi.getNoFile())
+                .noFileName(tbNotifi.getNoFileName())
+                .noFileOriname(tbNotifi.getNoFileOriname())
+                .noFileUrl(tbNotifi.getNoFileUrl())
                 .noRegdate(tbNotifi.getNoRegdate())
                 .build();
         return Header.OK(notifyApiResponse);
@@ -89,7 +92,9 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
                 .noIndex(tbNotifi.getNoIndex())
                 .noTitle(tbNotifi.getNoTitle())
                 .noContents(tbNotifi.getNoContents())
-                .noFile(tbNotifi.getNoFile())
+                .noFileName(tbNotifi.getNoFileName())
+                .noFileOriname(tbNotifi.getNoFileOriname())
+                .noFileUrl(tbNotifi.getNoFileUrl())
                 .noRegdate(tbNotifi.getNoRegdate())
                 .build();
         return notifyApiResponse;
@@ -123,6 +128,19 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
                 .currentElements(tbNotifi.getNumberOfElements())
                 .build();
         return Header.OK(notifyApiResponseList, pagination);
+    }
+
+    @Transactional
+    public void save(TbNotifi tbNotifi){
+        TbNotifi i = new TbNotifi();
+        i.setNoIndex(tbNotifi.getNoIndex());
+        i.setNoTitle(tbNotifi.getNoTitle());
+        i.setNoContents(tbNotifi.getNoContents());
+        i.setNoFileName(tbNotifi.getNoFileName());
+        i.setNoFileOriname(tbNotifi.getNoFileOriname());
+        i.setNoFileUrl(tbNotifi.getNoFileUrl());
+        i.setNoRegdate(tbNotifi.getNoRegdate());
+        tbNotifiRepository.save(i);
     }
 
 }
