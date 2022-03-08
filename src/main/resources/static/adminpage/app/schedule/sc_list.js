@@ -120,16 +120,6 @@ $(function () {
         data : {
             totalPages : {},
             currentPage : {}
-        },
-        methods :{
-            minus() {
-                if(currentPage > 0){
-                    currentPage--;
-                }
-            },
-            plus() {
-                currentPage++;
-            }
         }
     });
 
@@ -157,38 +147,36 @@ $(function () {
             // 검색 데이터
             itemList.itemList = response.data;
 
+            let url = "";
+            let NumberPage = 0;
+            let last = showPage.totalPages;
+
+            for (NumberPage; NumberPage < last; NumberPage++){
+                url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
+            }
+            document.getElementById("button").innerHTML = url;
+
+            $(".pageButton").on('click', function (){
+                index = $(this).attr("id");
+                sclist(index);
+            })
+
             $('#minus').on('click', function (){
-                if(index >= 0) {
+                if(NumberPage > 0) {
                     index--;
                     sclist(index);
+                }else{
+                    $('#minus').disableSelection();
                 }
             });
             $('#plus').on('click', function (){
                 if(pagination.totalPages = index){
-                    $('#minus').disableSelection();
+                    $('#plus').disableSelection();
                 }else{
                     index++;
                     sclist(index);
                 }
             })
-        })
-    }
-
-    function pageNum(){
-        alert(pageNum + "실행됌")
-        let url = "";
-        let index = 0;
-        let NumberPage = index + 1;
-        let last = showPage.totalPages;
-
-        for (index = 0; index < last; index++){
-            url += "<div id=`${index}` class=`pageButton`>`${NumberPage}`</div>";
-        }
-        document.getElementById("button").innerHTML = url;
-
-        $(".pageButton").on('click', function (){
-            let index = $(this).attr(id);
-            sclist(index);
         })
     }
 

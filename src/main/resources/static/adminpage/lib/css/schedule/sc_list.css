@@ -182,11 +182,25 @@
     border: 3px solid #BDD600;
 }
 
+#button{
+    display: flex;
+    justify-content: center;
+}
 
-.pageButton{
+#button .pageButton{
+    display: flex;
     width: 20px;
     height: 20px;
-    margin: 10px;
     border: 1px solid #888888;
-    background-color: white;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+    background-color: #F2F2F2;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    font-weight: 700;
+    font-size: 15px;
+    border-collapse: collapse;
+}
+#button .pageButton:hover{
+
 }
