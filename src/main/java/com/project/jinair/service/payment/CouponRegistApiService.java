@@ -3,15 +3,22 @@ package com.project.jinair.service.payment;
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.info.TbAirplane;
 import com.project.jinair.model.entity.payment.TbCouponRegist;
+import com.project.jinair.model.entity.schedule.TbSchedule;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.info.AirplaneApiRequest;
 import com.project.jinair.model.network.request.payment.CouponRegistApiRequest;
 import com.project.jinair.model.network.response.payment.CouponRegistApiResponse;
+import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import com.project.jinair.repository.TbCouponRegistRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -116,5 +123,20 @@ public class CouponRegistApiService implements CrudInterface<CouponRegistApiRequ
                 .crRegdate(tbCouponRegist.getCrRegdate())
                 .build();
         return couponRegistApiResponse;
+    }
+
+    public Header<List<CouponRegistApiResponse>> search(Pageable pageable) {
+        Page<TbCouponRegist> tbCouponRegists = tbCouponRegistRepository.findAll(pageable);
+        List<CouponRegistApiResponse> couponRegistApiResponseList = tbCouponRegists.stream()
+                .map(users -> responseCoupon(users))
+                .collect(Collectors.toList());
+
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbCouponRegists.getTotalPages())
+                .totalElements(tbCouponRegists.getTotalElements())
+                .currentPage(tbCouponRegists.getNumber())
+                .currentElements(tbCouponRegists.getNumberOfElements())
+                .build();
+        return Header.OK(couponRegistApiResponseList, pagination);
     }
 }

@@ -19,6 +19,7 @@
                         </div>
                         <div class="contents_main">
                             <div class="contents_sch btn_box">
+                                <input class="coupon_box3" type="text" placeholder="쿠폰 명" id="title">
                                     <select class="coupon_box" id="nation">
                                         <optgroup label="국내외 선택">
                                             <option value="ALL">전체</option>
@@ -42,7 +43,7 @@
                                     <input class="coupon_box3" type="text" placeholder="수량" id="totalcoupon" v-model="totalcoupon">
                                     <input type="button" value="쿠폰발급" class="coupon_btn" id="add_btn">
                             </div>
-                            <table class="coupon_tb">
+                            <table class="coupon_tb" id="itemList">
                                 <colgroup>
                                     <col width="100">
                                     <col width="120">
@@ -51,10 +52,8 @@
                                     <col width="120">
                                     <col width="80">
                                     <col width="100">
-                                    <col width="80">
                                 </colgroup>
                                 <tr>
-                                    <td>쿠폰 번호</td>
                                     <td>발급 일자</td>
                                     <td>쿠폰 명</td>
                                     <td>시작일자</td>
@@ -63,21 +62,20 @@
                                     <td>미등록 쿠폰</td>
                                     <td>상태</td>
                                 </tr>
-                                <tr>
-                                    <td>10010103</td>
-                                    <td>2021-12-30</td>
-                                    <td>선착순 고객 국내여행 전 노선 10%</td>
-                                    <td>2022-01-20</td>
-                                    <td>2022-01-30</td>
-                                    <td>100</td>
-                                    <td>31</td>
-                                    <td>유효</td>
+                                <tr v-for="dto in itemList">
+                                    <td>{{dto.crRegdate.substr(0, 10)}}</td>
+                                    <td>{{dto.crDesc}}</td>
+                                    <td>{{dto.crIssuanceDay.substr(0, 10)}}</td>
+                                    <td>{{dto.crEndDay.substr(0, 10)}}</td>
+                                    <td>{{dto.crTotCoupon}}</td>
+                                    <td>{{dto.crStockCoupon}}</td>
+                                    <td>{{dto.crStatus}}</td>
                                 </tr>
                             </table>
                             <div class="footer">
                                 <div class="center">
                                     <table>
-                                        <tr>
+                                        <tr id="button">
 <!--                                            페이징-->
                                         </tr>
                                     </table>

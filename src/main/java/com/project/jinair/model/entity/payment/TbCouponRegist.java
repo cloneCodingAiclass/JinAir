@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 )
 @Entity
 @Builder
+@EntityListeners(AuditingEntityListener.class)
 public class TbCouponRegist {
 
     @Id
@@ -38,5 +40,6 @@ public class TbCouponRegist {
     private LocalDateTime crEndDay;
     private Integer crTotCoupon;
     private Integer crStockCoupon;
+    @CreatedDate
     private LocalDateTime crRegdate;
 }
