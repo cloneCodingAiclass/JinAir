@@ -9,6 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <!-- head.html 끝-->
 <body>
+<form class="file-upload" method="post" th:action="@{/pages/admin/nt_file/upload}" enctype="multipart/form-data">
     <div id="wrap">
         <div th:replace="/adminpage/fragment/header :: header"></div>
         <div id="container">
@@ -27,23 +28,24 @@
                         </tr>
                         <tr>
                             <td colspan="1">
-                                <form class="file-upload" enctype="multipart/form-data">
+
                                     <input type="text" placeholder="파일첨부" class="filetext">
                                     <label for="ex_file" class="ex_file">찾아보기</label>
                                     <input name="file" type="file" id="ex_file">
-                                </form>
+
                                 <textarea name="content" style="resize: none;" placeholder="내용을 입력하세요." id="ntContent"></textarea>
                             </td>
                         </tr>
                     </table>
                     <div class="footer">
                         <a href="/pages/admin/notice" class="btn_notice btn_cancel"><input type="button" value="취소"></a>
-                        <a class="btn_notice btn_add"><input type="button" value="등록" id="writeNoti"></a>
+                        <a class="btn_notice btn_add"><input type="submit" value="등록" id="writeNoti"></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</form>
 </body>
 <script src="/adminpage/app/inquiry/nt_write.js"></script>
 </html>

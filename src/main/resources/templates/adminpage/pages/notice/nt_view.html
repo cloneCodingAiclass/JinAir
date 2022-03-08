@@ -22,6 +22,9 @@
                             <th>등록일 {{ notiView.noRegdate }}</th>
                         </tr>
                         <tr>
+                            <td>첨부파일 <a :href=`api/notify/download/${notiView.noIndex}` download="">{{ notiView.noFileOriname }}</a></td>
+                        </tr>
+                        <tr>
                             <td colspan="2">
                                 <textarea style="resize: none;" readonly>{{ notiView.noContents }}</textarea>
                             </td>
