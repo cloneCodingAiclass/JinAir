@@ -108,6 +108,48 @@ $(() => {
 
 
 $(() =>{
+
+    let airplaneList = [
+        '필수 선택', 'B777-200ER', 'B737-800', 'B737-900'
+    ]
+
+    let typeList = [
+        '필수 선택', '가방', '전자제품', '노트북/테블릿', '담배', '도서', '모자'
+        , '배게/담요', '시계', '식품', '신발', '안경/선글라스', '액세서리', '의류'
+        , '이어폰/휴대폰', '주류', '지갑', '화장품', '기타'
+    ]
+
+    let airportList = [
+        '필수 선택', '인천', '김포', '부산', '제주'
+    ]
+
+    let itemList = $("#item_list");
+    let arrAirport = $("#arrival_airport_list");
+    let airplane = $("#airplane_list");
+
+    for (let i = 0; i < typeList.length; i++){
+        let option = document.createElement('option');
+        option.innerText = typeList[i];
+        option.value = typeList[i];
+        itemList.append(option);
+    }
+
+    for (let i = 0; i < airportList.length; i++){
+        let option = document.createElement('option');
+        option.innerText = airportList[i];
+        option.value = airportList[i];
+        arrAirport.append(option);
+    }
+
+    for (let i = 0; i < airplaneList.length; i++){
+        let option = document.createElement('option');
+        option.innerText = airplaneList[i];
+        option.value = airplaneList[i];
+        airplane.append(option);
+    }
+
+    $("option[value='필수 선택']").attr('selected', true);
+
     let indexBtn = [];
 
     let pagination = {
@@ -174,6 +216,7 @@ $(() =>{
             dataType : 'text',
             success : function(response){
                 console.dir(response)
+                $("#footer").css("display", "none");
                 let dataJson = JSON.parse(response)
                 lostList.lostList = dataJson.data;
             }

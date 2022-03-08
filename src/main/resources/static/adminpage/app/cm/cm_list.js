@@ -145,6 +145,7 @@ $(function () {
             let NumberPage = 0;
             let last = pagination.totalPages;
 
+
             for (NumberPage; NumberPage < last; NumberPage++){
                 url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
             }
@@ -161,6 +162,8 @@ $(function () {
         $.get("/api/user/search/" + id, function (response){
             console.dir(response);
             memberList.memberList = response.data;
+
+            $("#footer").css("display", "none");
         })
     }
 
