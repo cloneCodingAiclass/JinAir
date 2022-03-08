@@ -110,8 +110,6 @@ $(function () {
         data : {
             faqEdit : {}
         },
-        methods:{
-        }
     });
 
 
@@ -119,13 +117,11 @@ $(function () {
     searchStart(str[6]);
 
     function searchStart(index){
+        alert(index);
         $.get("/api/faq/"+index, function(response){
             console.dir(response);
-            $("#faqType").val(response.data.faqType);
-            $("#faqRegdate").text("등록일 " + response.data.faqRegdate);
-            $("#faqTitle").val(response.data.faqTitle);
-            $("#faqContent").val(response.data.faqContent);
             faqEdit.faqEdit = response.data;
+
 
         });
     }

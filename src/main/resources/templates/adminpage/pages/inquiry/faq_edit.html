@@ -5,7 +5,8 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/inquiry/faq_edit.css">
-<script src="/adminpage/app/inquiry/faq_edit.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <!-- head.html 끝 -->
 <body>
         <div id="wrap">
@@ -20,7 +21,7 @@
                         <div class="faq_table" id="faqEdit">
                             <table>
                                 <tr>
-                                    <td id="faqType"> {{faqEdit.faqType}} </td>
+                                    <td id="faqType"> </td>
                                     <td class="user_name"><input type="text" {{faqEdit.faqTitle}}></td>
                                     <td>등록일 : {{faqEdit.faqRegdate}}</td>
                                 </tr>
@@ -50,4 +51,5 @@
             </div>
         </div>
 </body>
+<script src="/adminpage/app/inquiry/faq_edit.js"></script>
 </html>
