@@ -1,16 +1,14 @@
 package com.project.jinair.controller.page;
 
 import com.project.jinair.model.entity.board.TbMagazine;
+import com.project.jinair.model.entity.board.TbNotifi;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.response.board.FaqApiResponse;
 import com.project.jinair.model.network.response.board.MagazineApiResponse;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.repository.TbMagazineRepository;
 import com.project.jinair.service.MenuService;
-import com.project.jinair.service.board.FaqApiLogicService;
-import com.project.jinair.service.board.MagazineApiLoginService;
-import com.project.jinair.service.board.QnaAnswerApiLogicService;
-import com.project.jinair.service.board.QnaApiLogicService;
+import com.project.jinair.service.board.*;
 import com.project.jinair.service.member.AdminApiLoginService;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -37,6 +35,9 @@ public class PageController {
 
     @Autowired
     AdminApiLoginService adminApiLoginService;
+
+    @Autowired
+    NotifyLogicService notifyLogicService;
 
     @Autowired
     FaqApiLogicService faqApiLogicService;
@@ -647,6 +648,14 @@ public class PageController {
                 .addObject("menuList", menuService.getadminMenu())
                 .addObject("item", menuService.adminItemMenu());
     }
+    // 유실물 상세내용
+    @RequestMapping("/admin/item/detail/{id}")
+    public ModelAndView itemDetail() {
+        return new ModelAndView("/adminpage/pages/item/itemDetail")
+                .addObject("code", "itemDetail")
+                .addObject("menuList", menuService.getadminMenu())
+                .addObject("item", menuService.adminItemMenu());
+    }
     // 유실물 추가
     @RequestMapping("/admin/item/itemadd")
     public ModelAndView itemAdd() {
@@ -677,6 +686,50 @@ public class PageController {
         return new ModelAndView("/adminpage/pages/notice/nt_view")
                 .addObject("code", "ntView")
                 .addObject("menuList", menuService.getadminMenu());
+    }
+
+    // 공지 작성
+    @RequestMapping("/admin/nt_write")
+    @Transactional
+    public ModelAndView ntWrite() {
+        return new ModelAndView("/adminpage/pages/notice/nt_write")
+                .addObject("code", "nt_write")
+                .addObject("menuList", menuService.getadminMenu());
+    }
+
+    // 공지 파일
+    @PostMapping("/admin/nt_file/upload")
+    public String uploadFile(@RequestPart(value = "title") String ntTitle,
+                             @RequestPart(value = "file", required = false) MultipartFile file,
+                             @RequestPart(value = "content") String ntContent
+    ) throws IOException {
+        TbNotifi tbNotifi = new TbNotifi();
+// 제목
+        tbNotifi.setNoTitle(ntTitle);
+        tbNotifi.setNoContents(ntContent);
+// 이미지
+        String sourceImgName = file.getOriginalFilename();
+        String sourceFileNameExtension = FilenameUtils.getExtension(sourceImgName).toLowerCase();
+        FilenameUtils.removeExtension(sourceImgName);
+
+        File destinationImg;
+        String destinationImgName;
+        String imgUrl = "D:\\project_1\\JinAir\\src\\main\\resources\\static\\upload\\";
+
+        do{
+            destinationImgName = RandomStringUtils.randomAlphabetic(32)+"."+sourceFileNameExtension;
+            destinationImg = new File(imgUrl + destinationImgName);
+        }while(destinationImg.exists());
+
+        destinationImg.getParentFile().mkdir();
+        file.transferTo(destinationImg);
+
+        tbNotifi.setNoFileName(destinationImgName);
+        tbNotifi.setNoFileOriname(sourceImgName);
+        tbNotifi.setNoFileUrl(imgUrl);
+
+        notifyLogicService.save(tbNotifi);
+        return "redirect:/pages/admin/notice";
     }
     //-------------------------------------------------------------------------------------------
 
@@ -827,13 +880,7 @@ public class PageController {
                 .addObject("inquiry", menuService.adminQnaMenu());
     }
 
-    // 공지 작성
-    @RequestMapping("/admin/nt_write")
-    public ModelAndView ntWrite() {
-        return new ModelAndView("/adminpage/pages/notice/nt_write")
-                .addObject("code", "nt_write")
-                .addObject("menuList", menuService.getadminMenu());
-    }
+
     //-------------------------------------------------------------------------------------------
 
     /* 지니 쿠폰 */

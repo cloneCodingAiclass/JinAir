@@ -76,51 +76,32 @@
     height: 40px;
     text-align: center;
 }
-
-.footer{
-    margin-top: 15px;
+#footer {
+    margin: 50px 0;
     width: 100%;
-    height: 30px;
-}
-.footer > .center{
+    text-align: center;
+    height: 50px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
-.footer table{
-    display: inline-block;
-    text-align: center;
-    font-size: 12px;
-    font-weight: bolder;
-}
-.footer table td{
-    width: 25px;
-    height: 25px;
-    border: 1px solid rgb(187, 187, 187);
-    padding-top: 2px;
+#footer .pageButton{
+    display: flex;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #888888;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
-    background-color: #fff;
+    background-color: #F2F2F2;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    font-weight: 700;
+    font-size: 15px;
+    border-collapse: collapse;
 }
-.footer table td:nth-child(11){
-    background: url(../../img/one_arrow.png) center no-repeat;
-    background-size: 21px;
-    cursor: pointer;
-    background-color: #fff;
-}
-.footer table td:nth-child(12){
-    background: url(../../img/double_arrow.png) center no-repeat;
-    background-size: 21px;
-    cursor: pointer;
-    background-color: #fff;
-}
-.footer table td:nth-child(1){
+#footer .pageButton:hover{
     background-color: rgb(124,0,72);
+    color: white;
+    cursor: pointer;
 }
-.footer table td:nth-child(1) > a{
-    color:white
-}
-.footer table td:hover{
-    background-color: #bdd600;
-}
-.footer table td:hover a{
-    color:white
-}
+

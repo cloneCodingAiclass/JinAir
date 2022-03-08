@@ -131,13 +131,30 @@ $(function () {
     function list(page){
         console.log("page : " + page);
         $.get("/api/user?page="+page, function (response){
+            console.dir(response)
             indexBtn = [];
             pagination = response.pagination;
 
             showPage.totalElements = pagination.currentPage;
-            showPage.currentPage = pagination.currentPage + 1;
+            showPage.currentPage = pagination.currentPage;
+            console.dir(showPage);
 
             memberList.memberList = response.data;
+
+            let url = "";
+            let NumberPage = 0;
+            let last = pagination.totalPages;
+
+
+            for (NumberPage; NumberPage < last; NumberPage++){
+                url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
+            }
+            document.getElementById("footer").innerHTML = url;
+
+            $(".pageButton").on('click', function (){
+                page = $(this).attr("id");
+                list(page);
+            })
         })
     }
 
@@ -145,6 +162,8 @@ $(function () {
         $.get("/api/user/search/" + id, function (response){
             console.dir(response);
             memberList.memberList = response.data;
+
+            $("#footer").css("display", "none");
         })
     }
 

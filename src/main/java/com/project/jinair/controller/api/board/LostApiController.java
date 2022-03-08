@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -47,5 +48,18 @@ public class LostApiController implements CrudInterface<LostApiRequest, LostApiR
     @GetMapping("")
     public Header<List<LostApiResponse>> list(@PageableDefault(sort = {"losIndex"}, direction = Sort.Direction.DESC, size = 3)Pageable pageable){
         return lostApiLogicService.list(pageable);
+    }
+
+    @PostMapping("/search")
+    public Header<List<LostApiResponse>> search(
+            @RequestParam(value = "losAirplane")String airplane
+            , @RequestParam(value = "losAirport")String airport
+            , @RequestParam(value = "losType")String type
+            , @RequestParam(value = "start")String start
+            , @RequestParam(value = "end")String end
+            , @PageableDefault(sort = {"losIndex"}, direction = Sort.Direction.DESC, size = 3) Pageable pageable
+    ){
+        System.out.println(airplane + airport + type + start + end);
+        return lostApiLogicService.search(airplane, airport, type, start, end, pageable);
     }
 }

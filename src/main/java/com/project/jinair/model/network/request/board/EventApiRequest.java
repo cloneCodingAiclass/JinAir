@@ -1,5 +1,6 @@
 package com.project.jinair.model.network.request.board;
 
+import com.project.jinair.model.enumclass.EventStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +19,6 @@ public class EventApiRequest {
     private LocalDateTime evStartDay;
     private LocalDateTime evEndDay;
     private LocalDateTime evRegdate;
-    private String ev_status;
+    private EventStatus evStatus;
 
 }

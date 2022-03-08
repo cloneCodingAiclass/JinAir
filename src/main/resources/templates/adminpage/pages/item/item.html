@@ -1,10 +1,11 @@
 <html lang="ko"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org/">
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/item/item.css">
-
+<script src="/adminpage/app/item/item.js" async defer></script>
 <!-- head.html 끝-->
     <body>
         <div id="wrap">
@@ -18,46 +19,23 @@
                 </div>
                 <div id="item_search">
                     <!-- 유실물 조회 -->
-                    <form action="#">
+                    <div>
                         <fieldset>
                             <table>
                                 <tr>
                                     <td>
                                         <span>항공편명</span>
-                                        <input type="text" name="aircraft_name" id="aircraft_name" placeholder="(예) 항공편명 LJ">
-                                    </td>
+                                        <select name="airplane_list" id="airplane_list"></select>
+                                       </td>
                                     <td>
                                         <span>도착지 공항</span>
                                         <select name="arrival_airport_list" id="arrival_airport_list">
-                                            <option value="" selected>전체</option>
-                                            <option value="">인천</option>
-                                            <option value="">김포</option>
-                                            <option value="">부산</option>
-                                            <option value="">제주</option>
                                         </select>
                                     </td>
                                     <td>
                                         <span>물품 유형</span>
-                                        <select name="" class="item_list">
-                                            <option value="" selected>전체</option>
-                                            <option value="">가방</option>
-                                            <option value="">기타 전자제품</option>
-                                            <option value="">노트북/테블릿</option>
-                                            <option value="">담배</option>
-                                            <option value="">도서</option>
-                                            <option value="">모자</option>
-                                            <option value="">배게/담요</option>
-                                            <option value="">시계</option>
-                                            <option value="">식품</option>
-                                            <option value="">신발</option>
-                                            <option value="">안경/선글라스</option>
-                                            <option value="">액세서리</option>
-                                            <option value="">의류</option>
-                                            <option value="">이어폰/휴대폰</option>
-                                            <option value="">주류</option>
-                                            <option value="">자갑</option>
-                                            <option value="">화장품</option>
-                                            <option value="">기타</option>
+                                        <select name="item_list" class="item_list" id="item_list">
+
                                         </select>
                                     </td>
                                 </tr>
@@ -71,9 +49,9 @@
                             </table>
                         </fieldset>
                         <div id="item_search_btn">
-                            <input type="submit" value="검색" />
+                            <input type="button" id="btn_search" value="검색" />
                         </div>
-                    </form>
+                    </div>
                     <!-- 유실물 조회 끝 -->
                 </div>
                 <div class="search">
@@ -91,41 +69,21 @@
                             <th>도착 일자</th>
                             <th>도착지 공항</th>
                             <th>유실물 수령 상태</th>
-                            <th>삭제</th>
                         </tr>
                         </thead>
                         <tbody id="lostList">
-                        <tr role="row" v-for="dto in lostList">
-                            <td scope="row">{{dto.losIndex}}</td>
-                            <td>{{dto.losImg}}</td>
-                            <td>{{dto.losType}}</td>
-                            <td>{{dto.losAirplane}}</td>
-                            <td>{{dto.losArrivedate}}</td>
-                            <td>{{dto.losAirportArea}}</td>
-                            <td><button id="item_isfind_btn">완료</button></td>
-                            <td><button>삭제</button></td>
-                        </tr>
+                            <tr role="row" v-for="dto in lostList">
+                                <td scope="row" id="itemIndex"><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losIndex}}</a></td>
+                                <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losImg}}</a></td>
+                                <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losType}}</a></td>
+                                <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losAirplane}}</a></td>
+                                <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losArrivedate}}</a></td>
+                                <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losAirportArea}}</a></td>
+                                <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losIsfind}}</a></td>
+                            </tr>
                         </tbody>
                     </table>
-                    <div class="footer">
-                        <div class="center">
-                            <table id="showPage">
-                                <tr>
-                                    <td><a href="#">1</a></td>
-                                    <td><a href="#">2</a></td>
-                                    <td><a href="#">3</a></td>
-                                    <td><a href="#">4</a></td>
-                                    <td><a href="#">5</a></td>
-                                    <td><a href="#">6</a></td>
-                                    <td><a href="#">7</a></td>
-                                    <td><a href="#">8</a></td>
-                                    <td><a href="#">9</a></td>
-                                    <td><a href="#">10</a></td>
-                                    <td><a href="#"></a></td>
-                                    <td><a href="#"></a></td>
-                                </tr>
-                            </table>
-                        </div>
+                    <div id="footer">
                     </div>
                     <!-- 유실물 리스트 -->
                 </div>
@@ -136,14 +94,13 @@
             <div id="modal_isfind_content">
                 <div id="modal_isfind_title">유실물 상태 변경</div>
                 <div>
-                    <button class="modal_isfind_btn complete">완료</button>
-                    <button class="modal_isfind_btn uncomplete">미완료</button>
+                    <button class="modal_isfind_btn complete" value="Receipt">완료</button>
+                    <button class="modal_isfind_btn uncomplete" value="NotReceived">미완료</button>
                 </div>
             </div>
         </div>
         <!-- 모달창 끝 -->
     </div>
 </div>
-<script src="/adminpage/app/item/item.js"></script>
 </body>
 </html>

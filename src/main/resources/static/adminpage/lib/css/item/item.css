@@ -24,7 +24,8 @@
 #item_search fieldset {
     margin-top: 15px;
     background-color: #f2f2f2;
-    height: 150px;
+    padding: 10px 30px;
+    height: auto;
     border: none;
     border-radius: 3px;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
@@ -126,7 +127,7 @@
     height: 80px;
     border-bottom: 1px solid rgb(153, 153, 153, 0.5);
 }
-.item_list > table td button {
+.item_list > table td input {
     border: none;
     width: 60px;
     height: 30px;
@@ -135,56 +136,39 @@
     border-radius: 2px;
     background-color: #bdd600;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+    cursor: pointer;
 }
-.item_list > table td button:hover {
+.item_list > table td input:hover {
     color: #fff;
     background-color: rgb(153, 153, 153, 0.5);
 }
-.footer{
-    margin-top: 15px;
+#footer {
+    margin: 50px 0;
     width: 100%;
-    height: 30px;
-}
-.footer > .center{
+    text-align: center;
+    height: 50px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
-.footer table{
-    display: inline-block;
-    text-align: center;
-    font-size: 12px;
-    font-weight: bolder;
+#footer .pageButton{
+    display: flex;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #888888;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+    background-color: #F2F2F2;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    font-weight: 700;
+    font-size: 15px;
+    border-collapse: collapse;
 }
-.footer table td{
-    width: 25px;
-    height: 25px;
-    border: 1px solid rgb(187, 187, 187);
-    background-color: #fff;
-    padding-top: 2px;
-}
-.footer table td:nth-child(11){
-    background: url(../../img/one_arrow.png) center no-repeat;
-    background-size: 21px;
-    background-color: #fff;
-    cursor: pointer;
-}
-.footer table td:nth-child(12){
-    background: url(../../img/double_arrow.png) center no-repeat;
-    background-size: 21px;
-    background-color: #fff;
-    cursor: pointer;
-}
-.footer table td:nth-child(1){
+#footer .pageButton:hover{
     background-color: rgb(124,0,72);
-}
-.footer table td:nth-child(1) > a{
-    color:white
-}
-.footer table td:hover{
-    background-color: #bdd600;
-}
-.footer table td:hover a{
-    color:white
+    color: white;
+    cursor: pointer;
 }
 /* 모달창 수령완료 / 미완료 */
 #modal_isfind {
@@ -198,7 +182,7 @@
 #modal_isfind > #modal_isfind_content {
     width: 400px;
     height: 300px;
-    margin: 0 auto 30px;
+    margin: 150px auto 30px;
     padding-top: 30px;
     border-radius: 5px;
     border: 3px solid #BDD600;

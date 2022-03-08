@@ -108,6 +108,48 @@ $(() => {
 
 
 $(() =>{
+
+    let airplaneList = [
+        '필수 선택', 'B777-200ER', 'B737-800', 'B737-900'
+    ]
+
+    let typeList = [
+        '필수 선택', '가방', '전자제품', '노트북/테블릿', '담배', '도서', '모자'
+        , '배게/담요', '시계', '식품', '신발', '안경/선글라스', '액세서리', '의류'
+        , '이어폰/휴대폰', '주류', '지갑', '화장품', '기타'
+    ]
+
+    let airportList = [
+        '필수 선택', '인천', '김포', '부산', '제주'
+    ]
+
+    let itemList = $("#item_list");
+    let arrAirport = $("#arrival_airport_list");
+    let airplane = $("#airplane_list");
+
+    for (let i = 0; i < typeList.length; i++){
+        let option = document.createElement('option');
+        option.innerText = typeList[i];
+        option.value = typeList[i];
+        itemList.append(option);
+    }
+
+    for (let i = 0; i < airportList.length; i++){
+        let option = document.createElement('option');
+        option.innerText = airportList[i];
+        option.value = airportList[i];
+        arrAirport.append(option);
+    }
+
+    for (let i = 0; i < airplaneList.length; i++){
+        let option = document.createElement('option');
+        option.innerText = airplaneList[i];
+        option.value = airplaneList[i];
+        airplane.append(option);
+    }
+
+    $("option[value='필수 선택']").attr('selected', true);
+
     let indexBtn = [];
 
     let pagination = {
@@ -133,6 +175,7 @@ $(() =>{
         }
     })
 
+
     list(0);
 
     function list(page){
@@ -141,9 +184,49 @@ $(() =>{
             indexBtn = [];
             pagination = response.pagination;
 
+            showPage.totalElements = pagination.currentPage;
+            showPage.currentPage = pagination.currentPage;
+
             lostList.lostList = response.data;
+
+            let url = "";
+            let NumberPage = 0;
+            let last = pagination.totalPages;
+
+            for (NumberPage; NumberPage < last; NumberPage++){
+                url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
+            }
+            document.getElementById("footer").innerHTML = url;
+
+            $(".pageButton").on('click', function (){
+                page = $(this).attr("id");
+                list(page);
+            })
         })
     }
+
+    $("#btn_search").on('click', function (){
+        search($("#aircraft_name").val(), $("#arrival_airport_list").find('option:selected').val(), $("#item_list").find('option:selected').val(), $("#item_start_date").val() + "T00:00:00", $("#item_end_date").val() + "T00:00:00");
+    })
+
+    function search(airplane, airport, type, start, end){
+        $.post({
+            url: "/api/lost/search",
+            data : "losAirplane=" + airplane + "&losAirport=" + airport + "&losType=" + type + "&start=" + start + "&end=" + end,
+            dataType : 'text',
+            success : function(response){
+                console.dir(response)
+                $("#footer").css("display", "none");
+                let dataJson = JSON.parse(response)
+                lostList.lostList = dataJson.data;
+            }
+        })
+
+    }
+
+
+
+
 
     /*
     function search(id){
@@ -162,20 +245,3 @@ $(() =>{
 
      */
 })
-
-// 모달창 수령완료 / 미완료
-$(()=> {
-    $('#modal_isfind').hide();
-
-    $("#item_isfind_btn").click(() => {
-        console.log("작동되냐")
-        $("#modal_isfind").fadeIn(200);
-    })
-    $(".complete").on('click', () => {
-        $("#modal_isfind").fadeOut(200);
-    })
-    $(".uncomplete").on('click', () => {
-        $("#modal_isfind").fadeOut(200);
-    })
-})
-

@@ -100,12 +100,15 @@ $(function () {
 
 (function ($) {
 
+
     let notiList = new Vue({
         el : '#notiList',
         data : {
             notiList : {}
         }
     })
+
+    let searchStr =  "";
 
     list(0);
 
@@ -115,10 +118,18 @@ $(function () {
             notiList.notiList = response.data;
             let lastPage = response.pagination.totalPages;
             let str = "";
+                str += "<td class='firstPage1'><<</td>";
             for (let i = 0; i < lastPage; i++) {
                 str += "<td class='pages' id="+i+">" + (i+1) + "</td>";
             }
+                str += "<td class='lastPage1'>>></td>";
             $("#showPage").html(str);
+            if(page == 0) {
+                $(".firstPage1").css("visibility", "hidden");
+            }
+            if(page == lastPage-1) {
+                $(".lastPage1").css("visibility", "hidden");
+            }
             $(".pages").css({
                 "background-color" : "#fff",
                 "color" : "#444",
@@ -128,22 +139,36 @@ $(function () {
                 "background-color" : "#661e43",
                 "color" : "white"
             });
-
+            $(document).on('click', '.firstPage1', function(){
+                list(0);
+            });
+            $(document).on('click', '.lastPage1', function(){
+                list(lastPage-1);
+            });
         })
     };
 
 
+
     // 검색 데이터
     function searchNoti(key, page){
-        $.get("/api/notify/searchlist/" + key, function(response){
+        $.get("/api/notify/searchlist/" + key + "?page=" + page, function(response){
+            console.dir(response)
             notiList.notiList = response.data;
             let lastPage = response.pagination.totalPages;
             let str2 = "";
+                str2 += "<td class='firstPage2'><<</td>";
             for (let i = 0; i < lastPage; i++) {
                 str2 += "<td class='pagesS' id="+i+">" + (i+1) + "</td>";
             }
+                str2 += "<td class='lastPage2'>>></td>";
             $("#showPage").html(str2);
-
+            if(page == 0) {
+                $(".firstPage2").css("visibility", "hidden");
+            }
+            if(page == lastPage-1) {
+                $(".lastPage2").css("visibility", "hidden");
+            }
             $(".pagesS").css({
                 "background-color" : "#fff",
                 "color" : "#444",
@@ -153,16 +178,21 @@ $(function () {
                 "background-color" : "#661e43",
                 "color" : "white"
             });
+            $(document).on('click', '.firstPage2', function(){
+                searchNoti(searchStr, 0);
+            });
+            $(document).on('click', '.lastPage2', function(){
+                searchNoti(searchStr, lastPage-1);
+            });
         });
     }
 
-    let searchStr =  $('#searchText').val();
-
-    $('#searchNoti').on('click', function (){
+    $(document).on('click', '#searchNoti', function(){
         searchStr = $('#searchText').val();
         searchNoti(searchStr, 0);
         if ( searchStr.length == 0){
             alert('검색어를 확인해주세요.');
+            searchNoti(searchStr, 0);
         }
     });
 

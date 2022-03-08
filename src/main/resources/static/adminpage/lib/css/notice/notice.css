@@ -76,7 +76,7 @@
 }
 
 .footer{
-    margin-top: 15px;
+    margin-top: 40px;
     width: 100%;
     height: 30px;
 }
@@ -142,4 +142,13 @@
     font-weight: 600;
     cursor: pointer;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+}
+
+.showPage > td:hover {
+    background-color: #BDD600;
+    color: white;
+}
+
+.firstPage1, .firstPage2, .lastPage1, .lastPage2 {
+    cursor: pointer;
 }
