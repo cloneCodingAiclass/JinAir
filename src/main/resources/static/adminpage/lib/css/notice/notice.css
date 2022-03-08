@@ -143,3 +143,12 @@
     cursor: pointer;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
+
+.showPage > td:hover {
+    background-color: #BDD600;
+    color: white;
+}
+
+.firstPage1, .firstPage2, .lastPage1, .lastPage2 {
+    cursor: pointer;
+}
