@@ -672,6 +672,7 @@ public class PageController {
                 .addObject("menuList", menuService.getadminMenu());
     }
     @RequestMapping("/admin/nt_view/{id}")
+    @Transactional
     public ModelAndView ntView(){
         return new ModelAndView("/adminpage/pages/notice/nt_view")
                 .addObject("code", "ntView")
