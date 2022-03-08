@@ -5,30 +5,27 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/inquiry/faq_edit.css">
-<script src="/adminpage/app/inquiry/faq_main.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="/adminpage/app/inquiry/faq_edit.js"></script>
 <!-- head.html 끝 -->
 <body>
         <div id="wrap">
             <div th:replace="/adminpage/fragment/header :: header"></div>
             <div id="container">
                 <div th:replace="/adminpage/fragment/leftmenu :: leftmenu(${code}, ${menuList})"></div>
-                <div class="contents" id="tableBoard" >
-                    <div class="con_wrap"  >
+                <div class="contents" >
+                    <div class="con_wrap">
                         <div class="title">
                             <p>FAQ 세부내용 수정</p>
                         </div>
-                        <div class="faq_table">
+                        <div class="faq_table" id="faqEdit">
                             <table>
                                 <tr>
-                                    <td>{{tableBoard.faqType}}</td>
-                                    <td class="user_name">{{tableBoard.faqTitle}}</td>
-                                    <td>등록일 : {{tableBoard.faqRegdate.substr(0,10)}}</td>
+                                    <td id="faqType"> {{faqEdit.faqType}} </td>
+                                    <td class="user_name"><input type="text" {{faqEdit.faqTitle}}></td>
+                                    <td>등록일 : {{faqEdit.faqRegdate}}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3"><textarea name="" >
-                                        {{tableBoard.faqContent}}
+                                    <td colspan="3"><textarea name="" {{faqEdit.faqContent}}>
                                     </textarea></td>
                                 </tr>
                             </table>

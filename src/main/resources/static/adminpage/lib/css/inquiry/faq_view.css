@@ -9,7 +9,7 @@
     display: inline;
     align-self: flex-start;
 }
-#container > .contents .faq_table table{
+#container > .contents table{
     margin-top: 20px;
     width: 100%;
     text-align: center;
@@ -21,25 +21,25 @@
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
     background-color: #fff;
 }
-#container > .contents .faq_table tr:first-child{
+#container > .contents tr:first-child{
     background-color: #F2F2F2;
     border-bottom: 1px solid #ccc;
     height: 40px;
 }
-#container > .contents .faq_table table tr td{
+#container > .contents table tr td{
     width: 150px;
     text-align: center;
     font-size: 14px;
     font-weight: bold;
 }
-#container > .contents .faq_table table tr td:nth-child(2){
+#container > .contents table tr td:nth-child(2){
     width: 700px;
     text-align: left;
 }
-#container > .contents .faq_table table tr:nth-child(2){
+#container > .contents tr:nth-child(2){
     height: 300px;
 }
-#container > .contents .faq_table table textarea{
+#container > .contents table textarea{
     width: 98%;
     height: 290px;
     margin-top: 4px;

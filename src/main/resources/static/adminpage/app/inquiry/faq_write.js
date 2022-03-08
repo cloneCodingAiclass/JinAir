@@ -97,64 +97,33 @@ $(function () {
         $('.nav7').parent().siblings().find('li').css({"display": "none"});
         $('.nav7').siblings('li').eq(1).find('a').css({"color": "#BDD600"});
     });
-});
-(function ($) {
 
-
-    let pagination = {
-        total_page : 0,
-        total_element : 0,
-        current_page : 0,
-        current_elements : 0
-    }
-
-    // 페이지 정보
-    let showPage = new Vue({
-        el : '#showPage',
-        data : {
-            totalElements : {},
-            currentPage : {}
+    function writing(){
+        jsonData = {
+            data : {
+                faqType : $("#faqType").val(),
+                faqTitle : $("#faqTitle").val(),
+                faqContent : $("#faqContent").val()
+            }
         }
-    })
-
-
-    let tableBoard = new Vue({
-        el : '#tableBoard',
-        data : {
-            tableBoard : {}
-        }
-    })
-
-    list(0);
-
-    function list(page){
-        $.get("/api/faq/list?page="+page, function(response){
-            console.dir(response);
-            tableBoard.tableBoard = response.data;
-
-            showPage.showPage = response.pagination;
-            showPage.totalElements = pagination.currentPage;
-            showPage.currentPage = pagination.currentPage + 1;
-        })
-    };
-
-    console.log("테스트" + showPage.totalElements);
-
-    // 검색 데이터
-    function searchFaq(key){
-        $.get("/api/faq/searchlist/"+key, function(response){
-            tableBoard.tableBoard = response.data;
+        $.ajax({
+            url : "/api/faq/",
+            type : "POST",
+            data : JSON.stringify(jsonData),
+            dataType : "text",
+            contentType : "application/json"
         });
     }
 
-    $('#searchFaq').on('click', function (){
-        searchFaq($('#searchText').val());
-        if ( $('#searchText').val().length == 0){
-            alert('검색어를 확인해주세요.');
+    $("#writeFaq").click( () => {
+        if ( $("#faqTitle").val().length == 0 || $("#faqContent").val().length == 0 ) {
+            alert('내용을 입력하세요.');
+        } else {
+            writing();
+            location.href = `/pages/admin/faq_main`;
         }
-    });
+    })
 
 
 
-})(jQuery);
-
+});
