@@ -1,13 +1,12 @@
 package com.project.jinair.controller.page;
 
+import com.project.jinair.model.entity.board.TbEvent;
 import com.project.jinair.model.entity.board.TbLost;
 import com.project.jinair.model.entity.board.TbMagazine;
 import com.project.jinair.model.entity.board.TbNotifi;
 import com.project.jinair.model.enumclass.LostStatus;
 import com.project.jinair.model.network.Header;
-import com.project.jinair.model.network.response.board.FaqApiResponse;
-import com.project.jinair.model.network.response.board.MagazineApiResponse;
-import com.project.jinair.model.network.response.board.QnaApiResponse;
+import com.project.jinair.model.network.response.board.*;
 import com.project.jinair.repository.TbLostRepository;
 import com.project.jinair.repository.TbMagazineRepository;
 import com.project.jinair.service.MenuService;
@@ -44,6 +43,9 @@ public class PageController {
     NotifyLogicService notifyLogicService;
 
     @Autowired
+    EventApiLogicService eventApiLogicService;
+
+    @Autowired
     FaqApiLogicService faqApiLogicService;
 
     @Autowired
@@ -54,6 +56,9 @@ public class PageController {
 
     @Autowired
     MagazineApiLoginService magazineApiLoginService;
+
+    @Autowired
+    EventWinApiLogicService eventWinApiLogicService;
 
     // 사용자 인덱스
     @RequestMapping("/index")
@@ -526,147 +531,255 @@ public class PageController {
 
     // admin 스케줄 상세
     @RequestMapping("/admin/scheduleResultInfo/{id}")
-    public ModelAndView scheduleResultInfo() {
-        return new ModelAndView("/adminpage/pages/schedule/sc_resultinfo")
-                .addObject("code", "sc_resultinfo")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView scheduleResultInfo(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/schedule/sc_resultinfo")
+                    .addObject("code", "sc_resultinfo")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // admin 스케줄 검색
     @RequestMapping("/admin/scheduleResult")
-    public ModelAndView scheduleResult() {
-        return new ModelAndView("/adminpage/pages/schedule/sc_result")
-                .addObject("code", "sc_result")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView scheduleResult(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/schedule/sc_result")
+                    .addObject("code", "sc_result")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // admin 스케줄 등록
     @RequestMapping("/admin/scheduleRegist")
-    public ModelAndView scheduleRegist() {
-        return new ModelAndView("/adminpage/pages/schedule/sc_regist")
-                .addObject("code", "sc_regist")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("schedule", menuService.adminScheduleMenu());
+    public ModelAndView scheduleRegist(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/schedule/sc_regist")
+                    .addObject("code", "sc_regist")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("schedule", menuService.adminScheduleMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // admin 스케줄 목록
     @RequestMapping("/admin/scheduleList")
-    public ModelAndView scheduleList() {
-        return new ModelAndView("/adminpage/pages/schedule/sc_list")
-                .addObject("code", "sc_list")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("schedule", menuService.adminScheduleMenu());
+    public ModelAndView scheduleList(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/schedule/sc_list")
+                    .addObject("code", "sc_list")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("schedule", menuService.adminScheduleMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // admin 항공기 등록
     @RequestMapping("/admin/aircraftRegist")
-    public ModelAndView aircraftRegist() {
-        return new ModelAndView("/adminpage/pages/schedule/aircraft_regist")
-                .addObject("code", "aircraft_regist")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("schedule", menuService.adminScheduleMenu());
+    public ModelAndView aircraftRegist(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/schedule/aircraft_regist")
+                    .addObject("code", "aircraft_regist")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("schedule", menuService.adminScheduleMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // admin 항공기 조회
     @RequestMapping("/admin/airplane")
-    public ModelAndView aircraftList() {
-        return new ModelAndView("/adminpage/pages/schedule/aircraft_list")
-                .addObject("code", "aircraft_list")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("schedule", menuService.adminScheduleMenu());
+    public ModelAndView aircraftList(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/schedule/aircraft_list")
+                    .addObject("code", "aircraft_list")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("schedule", menuService.adminScheduleMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     //-------------------------------------------------------------------------------------------
 
     // reservation
     // 운항별 예약자 조회
     @RequestMapping("/admin/rsIndex")
-    public ModelAndView rsIndex() {
-        return new ModelAndView("/adminpage/pages/reservation/rs_index")
-                .addObject("code", "rs_index")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("reservation", menuService.adminReservationMenu());
+    public ModelAndView rsIndex(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/reservation/rs_index")
+                    .addObject("code", "rs_index")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("reservation", menuService.adminReservationMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // 운항별 예약자 조회 결과
     @RequestMapping("/admin/rs_result")
-    public ModelAndView rsResult() {
-        return new ModelAndView("/adminpage/pages/reservation/rs_result")
-                .addObject("code", "rs_result")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView rsResult(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/reservation/rs_result")
+                    .addObject("code", "rs_result")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // 예약자 명 조회 결과
     @RequestMapping("/admin/rs_sch_result")
-    public ModelAndView rsSchResult() {
-        return new ModelAndView("/adminpage/pages/reservation/rs_sch_result")
-                .addObject("code", "rs_sch_result")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("reservation", menuService.adminReservationMenu());
+    public ModelAndView rsSchResult(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/reservation/rs_sch_result")
+                    .addObject("code", "rs_sch_result")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("reservation", menuService.adminReservationMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // 예약자 명 조회
     @RequestMapping("/admin/rs_sch")
-    public ModelAndView rsSch() {
-        return new ModelAndView("/adminpage/pages/reservation/rs_sch")
-                .addObject("code", "rs_sch")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView rsSch(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/reservation/rs_sch")
+                    .addObject("code", "rs_sch")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // 운항편(LJ438) 예약자 상세정보
     @RequestMapping("/admin/rs_user_info")
-    public ModelAndView rsUserInfo() {
-        return new ModelAndView("/adminpage/pages/reservation/rs_user_info")
-                .addObject("code", "rs_user_info")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView rsUserInfo(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/reservation/rs_user_info")
+                    .addObject("code", "rs_user_info")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // 운항편(LJ438) 예약자 조회
     @RequestMapping("/admin/rs_user")
-    public ModelAndView rsUser() {
-        return new ModelAndView("/adminpage/pages/reservation/rs_user")
-                .addObject("code", "rs_user")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView rsUser(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/reservation/rs_user")
+                    .addObject("code", "rs_user")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     //-------------------------------------------------------------------------------------------
 
     // 고객관리
     // 고객관리 조회
     @RequestMapping("/admin/cmList")
-    public ModelAndView cmList() {
-        return new ModelAndView("/adminpage/pages/cm/cm_list")
-                .addObject("code", "cm_list")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView cmList(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/cm/cm_list")
+                    .addObject("code", "cm_list")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // 고객관리 상세상세
     @RequestMapping("/admin/cm_list/cm_detail/{id}")
-    public ModelAndView cmDetail() {
-        return new ModelAndView("/adminpage/pages/cm/cm_detail")
-                .addObject("code", "cm_detail")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView cmDetail(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/cm/cm_detail")
+                    .addObject("code", "cm_detail")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+            }
     }
     // 고객정보 수정
     @RequestMapping("/admin/cm_list/cm_modify/{id}")
-    public ModelAndView cmModify() {
-        return new ModelAndView("/adminpage/pages/cm/cm_modify")
-                .addObject("code", "cm_modify")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView cmModify(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/cm/cm_modify")
+                    .addObject("code", "cm_modify")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+        return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     //-------------------------------------------------------------------------------------------
 
     // 유실물
     // 유실물 조회
     @RequestMapping("/admin/item")
-    public ModelAndView item() {
-        return new ModelAndView("/adminpage/pages/item/item")
-                .addObject("code", "item")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("item", menuService.adminItemMenu());
+    public ModelAndView item(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/item/item")
+                    .addObject("code", "item")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("item", menuService.adminItemMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // 유실물 상세내용
     @RequestMapping("/admin/item/detail/{id}")
-    public ModelAndView itemDetail() {
-        return new ModelAndView("/adminpage/pages/item/itemDetail")
-                .addObject("code", "itemDetail")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("item", menuService.adminItemMenu());
+    public ModelAndView itemDetail(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/item/itemDetail")
+                    .addObject("code", "itemDetail")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("item", menuService.adminItemMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // 유실물 추가
     @RequestMapping("/admin/item/itemadd")
-    public ModelAndView itemAdd() {
-        return new ModelAndView("/adminpage/pages/item/itemadd")
-                .addObject("code", "itemadd")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("item", menuService.adminItemMenu());
+    public ModelAndView itemAdd(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/item/itemadd")
+                    .addObject("code", "itemadd")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("item", menuService.adminItemMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
 
     @Autowired
@@ -716,32 +829,56 @@ public class PageController {
     // 공지사항
     @RequestMapping("/admin/notice")
     @Transactional
-    public ModelAndView notice(){
-        return new ModelAndView("/adminpage/pages/notice/notice")
-                .addObject("code", "notice")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView notice(HttpServletRequest request, Model model){
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/notice/notice")
+                    .addObject("code", "notice")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     @RequestMapping("/admin/nt_modify/{id}")
-    public ModelAndView ntModify(){
-        return new ModelAndView("/adminpage/pages/notice/nt_modify")
-                .addObject("code", "ntModify")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView ntModify(HttpServletRequest request, Model model){
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/notice/nt_modify")
+                    .addObject("code", "ntModify")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     @RequestMapping("/admin/nt_view/{id}")
     @Transactional
-    public ModelAndView ntView(){
-        return new ModelAndView("/adminpage/pages/notice/nt_view")
-                .addObject("code", "ntView")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView ntView(HttpServletRequest request, Model model){
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/notice/nt_view")
+                    .addObject("code", "ntView")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
 
     // 공지 작성
     @RequestMapping("/admin/nt_write")
     @Transactional
-    public ModelAndView ntWrite() {
-        return new ModelAndView("/adminpage/pages/notice/nt_write")
-                .addObject("code", "nt_write")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView ntWrite(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/notice/nt_write")
+                    .addObject("code", "nt_write")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
 
     // 공지 파일
@@ -761,7 +898,7 @@ public class PageController {
 
         File destinationImg;
         String destinationImgName;
-        String imgUrl = "D:\\project_1\\JinAir\\src\\main\\resources\\static\\upload\\";
+        String imgUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\";
 
         do{
             destinationImgName = RandomStringUtils.randomAlphabetic(32)+"."+sourceFileNameExtension;
@@ -781,150 +918,363 @@ public class PageController {
     //-------------------------------------------------------------------------------------------
 
     /* 이벤트 */
+    // 진행중인 이벤트
     @RequestMapping("/admin/evn_ing")
-    public ModelAndView evn_ing() {
-        return new ModelAndView("/adminpage/pages/event/evn_ing")
-                .addObject("code", "evn_ing")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView evn_ing(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/event/evn_ing")
+                    .addObject("code", "evn_ing")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
+    // 종료된 이벤트
     @RequestMapping("/admin/evn_end")
-    public ModelAndView evn_end() {
-        return new ModelAndView("/adminpage/pages/event/evn_end")
-                .addObject("code", "evn_end")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView evn_end(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/event/evn_end")
+                    .addObject("code", "evn_end")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
-    @RequestMapping("/admin/evn_view")
-    public ModelAndView evn_view() {
-        return new ModelAndView("/adminpage/pages/event/evn_view")
-                .addObject("code", "evn_view")
-                .addObject("menuList", menuService.getadminMenu());
-    }
-    @RequestMapping("/admin/evn_edit")
-    public ModelAndView evn_edit() {
-        return new ModelAndView("/adminpage/pages/event/evn_edit")
-                .addObject("code", "evn_edit")
-                .addObject("menuList", menuService.getadminMenu());
-    }
+    // 정답자
     @RequestMapping("/admin/evn_win")
-    public ModelAndView evn_win() {
-        return new ModelAndView("/adminpage/pages/event/evn_win")
-                .addObject("code", "evn_win")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView evn_win(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/event/evn_win")
+                    .addObject("code", "evn_win")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
+    // 이벤트 상세
+    @RequestMapping("/admin/evn_view/{id}")
+    public ModelAndView evn_view(HttpServletRequest request, @PathVariable(name = "id") Long id, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            EventApiResponse eventApiResponse = eventApiLogicService.read(id).getData();
+            model.addAttribute("eventApiResponse", eventApiResponse);
+            return new ModelAndView("/adminpage/pages/event/evn_view")
+                    .addObject("code", "evn_view")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
+    }
+    // 정답자 상세
+    @RequestMapping("/admin/evn_view_win/{id}")
+    public ModelAndView evn_view_win(HttpServletRequest request, @PathVariable(name = "id") Long id, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            EventWinApiResponse eventWinApiResponse = eventWinApiLogicService.read(id).getData();
+            model.addAttribute("eventWinApiResponse", eventWinApiResponse);
+            return new ModelAndView("/adminpage/pages/event/evn_view_win")
+                    .addObject("code", "evn_view")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
+    }
+    // 이벤트 수정
+    @RequestMapping("/admin/evn_edit/{id}")
+    public ModelAndView evn_edit(HttpServletRequest request, @PathVariable(name = "id") Long id, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            EventApiResponse eventApiResponse = eventApiLogicService.read(id).getData();
+            model.addAttribute("eventApiResponse", eventApiResponse);
+            return new ModelAndView("/adminpage/pages/event/evn_edit")
+                    .addObject("code", "evn_edit")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
+    }
+    // 정답자 수정
+    @RequestMapping("/admin/evn_edit_win/{id}")
+    public ModelAndView evn_edit_win(HttpServletRequest request, @PathVariable(name = "id") Long id, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            EventWinApiResponse eventWinApiResponse = eventWinApiLogicService.read(id).getData();
+            model.addAttribute("eventWinApiResponse", eventWinApiResponse);
+            return new ModelAndView("/adminpage/pages/event/evn_edit_win")
+                    .addObject("code", "evn_edit")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
+    }
+    // 이벤트 추가
     @RequestMapping("/admin/evn_write")
-    public ModelAndView evn_write() {
-        return new ModelAndView("/adminpage/pages/event/evn_write")
-                .addObject("code", "evn_write")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView evn_write(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/event/evn_write")
+                    .addObject("code", "evn_write")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
+    // 정답자 이벤트 추가
+    @RequestMapping("/admin/evn_write_win")
+    public ModelAndView evn_Winwrite(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/event/evn_write_win")
+                    .addObject("code", "evn_write")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
+    }
+
+    // 이벤트 파일
+    @PostMapping("/admin/evn_write/upload")
+    public String uploadFile(@RequestPart(value = "evTitle") String evTitle,
+                             @RequestPart(value = "startDate") String startDate,
+                             @RequestPart(value = "endDate") String endDate,
+                             @RequestPart(value = "file", required = false) MultipartFile file,
+                             @RequestPart(value = "evContent") String evContent
+    ) throws IOException {
+        TbEvent tbEvent = new TbEvent();
+// 제목
+        tbEvent.setEvTitle(evTitle);
+        tbEvent.setEvStartDay(LocalDateTime.parse(startDate + "T00:00:00"));
+        tbEvent.setEvEndDay(LocalDateTime.parse(endDate +"T00:00:00"));
+        tbEvent.setEvContent(evContent);
+// 이미지
+        String sourceImgName = file.getOriginalFilename();
+        String sourceFileNameExtension = FilenameUtils.getExtension(sourceImgName).toLowerCase();
+        FilenameUtils.removeExtension(sourceImgName);
+
+        File destinationImg;
+        String destinationImgName;
+        String imgUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\";
+
+        do{
+            destinationImgName = RandomStringUtils.randomAlphabetic(32)+"."+sourceFileNameExtension;
+            destinationImg = new File(imgUrl + destinationImgName);
+        }while(destinationImg.exists());
+
+        destinationImg.getParentFile().mkdir();
+        file.transferTo(destinationImg);
+
+        tbEvent.setEvFileName(destinationImgName);
+        tbEvent.setEvFileOriname(sourceImgName);
+        tbEvent.setEvFileUrl(imgUrl);
+
+        eventApiLogicService.save(tbEvent);
+        return "redirect:/pages/admin/evn_ing";
+    }
+
     //-------------------------------------------------------------------------------------------
 
     /* 포인트 */
     @RequestMapping("/admin/usepointlist")
-    public ModelAndView usepointlist() {
-        return new ModelAndView("/adminpage/pages/point/usepointlist")
-                .addObject("code", "usepointlist")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("point", menuService.adminPointMenu());
+    public ModelAndView usepointlist(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/point/usepointlist")
+                    .addObject("code", "usepointlist")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("point", menuService.adminPointMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     @RequestMapping("/admin/pointadd")
-    public ModelAndView pointadd() {
-        return new ModelAndView("/adminpage/pages/point/pointadd")
-                .addObject("code", "pointadd")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("point", menuService.adminPointMenu());
+    public ModelAndView pointadd(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/point/pointadd")
+                    .addObject("code", "pointadd")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("point", menuService.adminPointMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     //-------------------------------------------------------------------------------------------
 
     // faq 메인
     @RequestMapping("/admin/faq_main")
-    public ModelAndView faqMain() {
-        return new ModelAndView("/adminpage/pages/inquiry/faq_main")
-                .addObject("code", "faq_main")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("inquiry", menuService.adminQnaMenu());
+    public ModelAndView faqMain(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/inquiry/faq_main")
+                    .addObject("code", "faq_main")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("inquiry", menuService.adminQnaMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     @RequestMapping("/admin/faq_main1")
-    public ModelAndView faqMain1() {
-        return new ModelAndView("/adminpage/pages/inquiry/faq_main1")
-                .addObject("code", "faq_main1")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView faqMain1(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/inquiry/faq_main1")
+                    .addObject("code", "faq_main1")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     @RequestMapping("/admin/faq_main2")
-    public ModelAndView faqMain2() {
-        return new ModelAndView("/adminpage/pages/inquiry/faq_main2")
-                .addObject("code", "faq_main2")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView faqMain2(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/inquiry/faq_main2")
+                    .addObject("code", "faq_main2")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     @RequestMapping("/admin/faq_main3")
-    public ModelAndView faqMain3() {
-        return new ModelAndView("/adminpage/pages/inquiry/faq_main3")
-                .addObject("code", "faq_main3")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView faqMain3(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/inquiry/faq_main3")
+                    .addObject("code", "faq_main3")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     @RequestMapping("/admin/faq_main4")
-    public ModelAndView faqMain4() {
-        return new ModelAndView("/adminpage/pages/inquiry/faq_main4")
-                .addObject("code", "faq_main4")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView faqMain4(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/inquiry/faq_main4")
+                    .addObject("code", "faq_main4")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     @RequestMapping("/admin/faq_main5")
-    public ModelAndView faqMain5() {
-        return new ModelAndView("/adminpage/pages/inquiry/faq_main5")
-                .addObject("code", "faq_main5")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView faqMain5(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/inquiry/faq_main5")
+                    .addObject("code", "faq_main5")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // faq 수정
     @RequestMapping("/admin/faq_edit/{id}")
-    public ModelAndView faqEdit() {
-        return new ModelAndView("/adminpage/pages/inquiry/faq_edit")
-                .addObject("code", "faq_edit")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView faqEdit(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/inquiry/faq_edit")
+                    .addObject("code", "faq_edit")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // faq 작성
     @RequestMapping("/admin/faq_write")
-    public ModelAndView faqWrite() {
-        return new ModelAndView("/adminpage/pages/inquiry/faq_write")
-                .addObject("code", "faq_write")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView faqWrite(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/inquiry/faq_write")
+                    .addObject("code", "faq_write")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
-    // faq 뷰
+    // qna 뷰
     @GetMapping("/admin/faq_view/{id}")
-    public ModelAndView faqView(Model model, @PathVariable(name = "id") Long id) throws Exception{
-        Header<FaqApiResponse> faqApiResponses = faqApiLogicService.read(id);
-        model.addAttribute("faqApiResponses", faqApiResponses.getData());
-        return new ModelAndView("/adminpage/pages/inquiry/faq_view")
-                .addObject("code", "faq_view")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("inquiry", menuService.adminQnaMenu());
+    public ModelAndView faqView(HttpServletRequest request, Model model, @PathVariable(name = "id") Long id) throws Exception{
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            Header<FaqApiResponse> faqApiResponses = faqApiLogicService.read(id);
+            model.addAttribute("faqApiResponses", faqApiResponses.getData());
+            return new ModelAndView("/adminpage/pages/inquiry/faq_view")
+                    .addObject("code", "faq_view")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("inquiry", menuService.adminQnaMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // qna 메인
     @RequestMapping("/admin/qna_main")
-    public ModelAndView qnaMain(Model model) {
-        Header<List<QnaApiResponse>> qnaApiResponsesList = qnaApiLogicService.getQnaList();
-        model.addAttribute("qnaApiResponsesList", qnaApiResponsesList.getData());
-        return new ModelAndView("/adminpage/pages/inquiry/qna_main")
-                .addObject("code", "qna_main")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("inquiry", menuService.adminQnaMenu());
+    public ModelAndView qnaMain(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            Header<List<QnaApiResponse>> qnaApiResponsesList = qnaApiLogicService.getQnaList();
+            model.addAttribute("qnaApiResponsesList", qnaApiResponsesList.getData());
+            return new ModelAndView("/adminpage/pages/inquiry/qna_main")
+                    .addObject("code", "qna_main")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("inquiry", menuService.adminQnaMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // qna 뷰
     @GetMapping("/admin/qna_view/{id}")
-    public ModelAndView qnaView(Model model, @PathVariable(name = "id") Long id) throws Exception{
-        Header<QnaApiResponse> qnaApiResponses = qnaApiLogicService.read(id);
-        model.addAttribute("qnaApiResponses", qnaApiResponses.getData());
-        return new ModelAndView("/adminpage/pages/inquiry/qna_view")
-                .addObject("code", "qna_view")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("inquiry", menuService.adminQnaMenu());
+    public ModelAndView qnaView(HttpServletRequest request, Model model, @PathVariable(name = "id") Long id) throws Exception{
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            Header<QnaApiResponse> qnaApiResponses = qnaApiLogicService.read(id);
+            model.addAttribute("qnaApiResponses", qnaApiResponses.getData());
+            return new ModelAndView("/adminpage/pages/inquiry/qna_view")
+                    .addObject("code", "qna_view")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("inquiry", menuService.adminQnaMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     // qna 댓글
     @GetMapping("/admin/qna_reply/{id}")
-    public ModelAndView qnaReply() throws Exception{
-        return new ModelAndView("/adminpage/pages/inquiry/qna_reply")
-                .addObject("code", "qna_reply")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("inquiry", menuService.adminQnaMenu());
+    public ModelAndView qnaReply(HttpServletRequest request, Model model) throws Exception{
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/inquiry/qna_reply")
+                    .addObject("code", "qna_reply")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("inquiry", menuService.adminQnaMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
 
 
@@ -932,51 +1282,87 @@ public class PageController {
 
     /* 지니 쿠폰 */
     @RequestMapping("/admin/couponadd")
-    public ModelAndView couponAdd() {
-        return new ModelAndView("/adminpage/pages/coupon/couponadd")
-                .addObject("code", "couponAdd")
-                .addObject("coupon", menuService.adminCouponMenu())
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView couponAdd(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/coupon/couponadd")
+                    .addObject("code", "couponAdd")
+                    .addObject("coupon", menuService.adminCouponMenu())
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     @RequestMapping("/admin/usecouponlist")
-    public ModelAndView useCouponList() {
-        return new ModelAndView("/adminpage/pages/coupon/usecouponlist")
-                .addObject("code", "useCouponList")
-                .addObject("menuList", menuService.getadminMenu())
-                .addObject("coupon", menuService.adminCouponMenu());
+    public ModelAndView useCouponList(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/coupon/usecouponlist")
+                    .addObject("code", "useCouponList")
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("coupon", menuService.adminCouponMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
     //-------------------------------------------------------------------------------------------
 
 
     /* 지니 매거진 */
     @RequestMapping("/admin/genielist")
-    public ModelAndView genieList(Model model) {
-        return new ModelAndView("/adminpage/pages/magazine/genieList")
-                .addObject("code", "genieList")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView genieList(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/magazine/genieList")
+                    .addObject("code", "genieList")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
 
     @GetMapping("/admin/genielist_view/{id}")
-    public ModelAndView genieListView(@PathVariable(name = "id") Long id) {
-        return new ModelAndView("/adminpage/pages/magazine/genieList_view")
-                .addObject("code", "genieListView")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView genieListView(HttpServletRequest request, Model model, @PathVariable(name = "id") Long id) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/magazine/genieList_view")
+                    .addObject("code", "genieListView")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
 
     @GetMapping("/admin/genielist_edit/{id}")
-    public ModelAndView genieListEdit(@PathVariable(name = "id") Long id, Model model) {
-        MagazineApiResponse magazineApiResponse = magazineApiLoginService.read(id).getData();
-        model.addAttribute("images", magazineApiResponse);
-        return new ModelAndView("/adminpage/pages/magazine/genieList_edit")
-                .addObject("code", "genieListEdit")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView genieListEdit(HttpServletRequest request, @PathVariable(name = "id") Long id, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            MagazineApiResponse magazineApiResponse = magazineApiLoginService.read(id).getData();
+            model.addAttribute("images", magazineApiResponse);
+            return new ModelAndView("/adminpage/pages/magazine/genieList_edit")
+                    .addObject("code", "genieListEdit")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
 
     @RequestMapping("/admin/genielist_add")
-    public ModelAndView genieListAdd() {
-        return new ModelAndView("/adminpage/pages/magazine/genieList_add")
-                .addObject("code", "genieListAdd")
-                .addObject("menuList", menuService.getadminMenu());
+    public ModelAndView genieListAdd(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if((String) session.getAttribute("name") != null) {
+            model.addAttribute("str", (String) session.getAttribute("name"));
+            return new ModelAndView("/adminpage/pages/magazine/genieList_add")
+                    .addObject("code", "genieListAdd")
+                    .addObject("menuList", menuService.getadminMenu());
+        }else{
+            return new ModelAndView("/adminpage/pages/admin_login");
+        }
     }
 
 
@@ -996,7 +1382,7 @@ public class PageController {
 
         File destinationImg;
         String destinationImgName;
-        String imgUrl = "C:\\github_blog\\JinAir\\src\\main\\resources\\static\\upload\\";
+        String imgUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\";
 
         do{
             destinationImgName = RandomStringUtils.randomAlphabetic(32)+"."+sourceFileNameExtension;
@@ -1017,7 +1403,7 @@ public class PageController {
 
         File destinationAns;
         String destinationAnsName;
-        String ansUrl = "C:\\github_blog\\JinAir\\src\\main\\resources\\static\\upload\\";
+        String ansUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\";
 
         do{
             destinationAnsName = RandomStringUtils.randomAlphabetic(32)+"."+sourceAnsNameExtension;
@@ -1038,7 +1424,7 @@ public class PageController {
 
         File destinationPdf;
         String destinationPdfName;
-        String pdfUrl = "C:\\github_blog\\JinAir\\src\\main\\resources\\static\\upload\\";
+        String pdfUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\";
 
         do{
             destinationPdfName = RandomStringUtils.randomAlphabetic(32)+"."+sourcePdfNameExtension;
@@ -1077,7 +1463,7 @@ public class PageController {
 
         File destinationImg;
         String destinationImgName;
-        String imgUrl = "C:\\github_blog\\JinAir\\src\\main\\resources\\static\\upload\\";
+        String imgUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\";
 
         do{
             destinationImgName = RandomStringUtils.randomAlphabetic(32)+"."+sourceFileNameExtension;
@@ -1098,7 +1484,7 @@ public class PageController {
 
         File destinationAns;
         String destinationAnsName;
-        String ansUrl = "C:\\github_blog\\JinAir\\src\\main\\resources\\static\\upload\\";
+        String ansUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\";
 
         do{
             destinationAnsName = RandomStringUtils.randomAlphabetic(32)+"."+sourceAnsNameExtension;
@@ -1119,7 +1505,7 @@ public class PageController {
 
         File destinationPdf;
         String destinationPdfName;
-        String pdfUrl = "C:\\github_blog\\JinAir\\src\\main\\resources\\static\\upload\\";
+        String pdfUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\";
 
         do{
             destinationPdfName = RandomStringUtils.randomAlphabetic(32)+"."+sourcePdfNameExtension;
