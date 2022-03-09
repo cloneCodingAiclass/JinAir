@@ -15,24 +15,27 @@
         <div id="container">
             <div th:replace="/adminpage/fragment/leftmenu :: leftmenu(${code}, ${menuList})"></div>
             <div class="contents">
+
                 <div class="con_wrap">
                     <div class="search">
                         <p class="title">공지사항 등록</p>
                     </div>
                     <table>
                         <colgroup>
-                            <col width="1000">
+                            <col width="100%">
                         </colgroup>
                         <tr>
                             <th style="text-align: left;"><input name="title" type="text" placeholder="제목을 입력하세요" id="ntTitle"></th>
                         </tr>
                         <tr>
-                            <td colspan="1">
-
-                                    <input type="text" placeholder="파일첨부" class="filetext">
-                                    <label for="ex_file" class="ex_file">찾아보기</label>
-                                    <input name="file" type="file" id="ex_file">
-
+                            <td style="display: flex; justify-content: right; flex-wrap: wrap; padding: 5px 3px">
+                                <input type="text" placeholder="파일첨부" class="filetext">
+                                <label for="ex_file" class="ex_file">찾아보기</label>
+                                <input name="file" type="file" id="ex_file">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <textarea name="content" style="resize: none;" placeholder="내용을 입력하세요." id="ntContent"></textarea>
                             </td>
                         </tr>

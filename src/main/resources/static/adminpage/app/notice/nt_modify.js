@@ -117,10 +117,9 @@ $(function () {
             console.dir(response);
             $("#ntRegdate").text("등록일 " + response.data.noRegdate);
             $("#ntTitle").val(response.data.noTitle);
-            $("#ntFile").val(response.data.noFile);
+            $("#ntfileName").val(response.data.noFileUrl + response.data.noFileOriname);
             $("#ntContent").val(response.data.noContents);
             ntModify.ntModify = response.data;
-
         })
     }
 
@@ -151,3 +150,10 @@ $(function () {
     })
 
 })(jQuery)
+
+
+$(()=> {
+    $('#ex_file').on('change', function(){
+        $('#ntfileName').val($('#ex_file').val());
+    });
+});

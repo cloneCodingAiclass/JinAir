@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="/adminpage/lib/css/style.css">
 <link rel="stylesheet" href="/adminpage/lib/css/notice/nt_modify.css">
 <body>
+<form class="file-upload" method="post" th:action="@{/pages/admin/nt_file/upload}" enctype="multipart/form-data">
     <div id="wrap">
         <div th:replace="/adminpage/fragment/header :: header"></div>
         <div id="container">
@@ -21,13 +22,16 @@
                             <th id="ntRegdate">등록일</th>
                         </tr>
                         <tr>
+                            <td></td>
+                            <td style="float: right; padding: 5px 3px">
+                                <input id="ntfileName" type="text" placeholder="파일첨부">
+                                <label for="ex_file" class="ex_file">찾아보기</label>
+                                <input name="file" type="file" id="ex_file">
+                            </td>
+                        </tr>
+                        <tr>
                             <td colspan="2">
-                                <div class="file-upload">
-                                    <input type="text" placeholder="파일첨부" class="filetext" id="ntFile">
-                                    <label for="ex_file" class="ex_file">찾아보기</label>
-                                    <input type="file" id="ex_file">
-                                </div>
-                                <textarea style="resize: none;" id="ntContent"></textarea>
+                                <textarea name="content" style="resize: none;" placeholder="내용을 입력하세요." id="ntContent"></textarea>
                             </td>
                         </tr>
                     </table>
@@ -40,5 +44,6 @@
         </div>
     </div>
     <script src="/adminpage/app/notice/nt_modify.js"></script>
+</form>
 </body>
 </html>

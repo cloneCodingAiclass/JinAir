@@ -100,6 +100,11 @@
     outline: none;
     padding: 5px;
 }
+#ntImg {
+    height: 80px;
+    background-color: #008ae0;
+}
+
 .footer{
     margin-top: 15px;
     width: 100%;
