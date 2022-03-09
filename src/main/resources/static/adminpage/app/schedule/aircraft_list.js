@@ -1,7 +1,7 @@
 $(function () {
     $('.nav2').find('a').css({"color":"#BDD600"});
     $('.nav2').siblings('li').css({"display":"block"});
-    $('.nav2').siblings('li').eq(0).find('a').css({"color":"#BDD600"});
+    $('.nav2').siblings('li').eq(1).find('a').css({"color":"#BDD600"});
 
     $('.nav1').on('mouseover', function(e){
         e.stopPropagation();
@@ -12,7 +12,7 @@ $(function () {
     });
     $('.nav2').on('mouseover', function(e){
         e.stopPropagation();
-        $(this).parent().siblings().find('a').css({"color":"#adb5bd)"});
+        $(this).parent().siblings().find('span').css({"color":"#adb5bd"});
         $(this).find('a').css({"color":"#BDD600"});
         $(this).siblings('li').css({"display":"block"});
         $(this).parent().siblings().find('li').css({"display":"none"});
