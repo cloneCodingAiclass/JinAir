@@ -22,12 +22,12 @@
                             <th>등록일 {{ notiView.noRegdate }}</th>
                         </tr>
                         <tr>
-                            <td>첨부파일 <a :href=`api/notify/download/${notiView.noIndex}` download="">{{ notiView.noFileOriname }}</a></td>
+                            <td colspan="2" style="text-align: right; padding-right: 20px; padding-top: 0.5%; font-size: 12px">첨부파일 [
+                                <a :href=`/api/notify/download/${notiView.noIndex}` download="">{{ notiView.noFileOriname }}</a>
+                             ]</td>
                         </tr>
                         <tr>
-                            <td colspan="2">
-                                <textarea style="resize: none;" readonly>{{ notiView.noContents }}</textarea>
-                            </td>
+                            <td colspan="2" ><textarea style="resize: none;" readonly>{{ notiView.noContents }}</textarea></td>
                         </tr>
                     </table>
                     <div class="footer">

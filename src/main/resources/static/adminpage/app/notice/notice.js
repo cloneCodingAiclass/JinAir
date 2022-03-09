@@ -158,16 +158,20 @@ $(function () {
             let lastPage = response.pagination.totalPages;
             let str2 = "";
                 str2 += "<td class='firstPage2'><<</td>";
-            for (let i = 0; i < lastPage; i++) {
+            for ( let i = 0; i < lastPage; i++ ) {
                 str2 += "<td class='pagesS' id="+i+">" + (i+1) + "</td>";
             }
                 str2 += "<td class='lastPage2'>>></td>";
             $("#showPage").html(str2);
-            if(page == 0) {
+            if ( page == 0 ) {
                 $(".firstPage2").css("visibility", "hidden");
             }
-            if(page == lastPage-1) {
+            if ( page == lastPage-1 || response.totalElements != 0 ) {
                 $(".lastPage2").css("visibility", "hidden");
+            }
+            if ( response.pagination.totalElements == 0 ) {
+                alert("검색결과가 없습니다.");
+                list(0);
             }
             $(".pagesS").css({
                 "background-color" : "#fff",

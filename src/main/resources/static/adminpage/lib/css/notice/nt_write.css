@@ -38,8 +38,8 @@
 }
 .contents > .con_wrap table tr:nth-child(1) input{
     text-indent: 5px;
-    width: 980px;
-    height: 24px;
+    width: 98%;
+    height: 28px;
     border: 1px solid rgb(199, 199, 199);
     background-color: #fff;
     outline: none;
@@ -87,7 +87,7 @@
     border: 0;
 }
 .contents > .con_wrap table textarea{
-    margin-top: 8px;
+    margin-top: 0px;
     margin-bottom: 10px;
     border: 1px solid rgb(199, 199, 199);
     outline: none;
