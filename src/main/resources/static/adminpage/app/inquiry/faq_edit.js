@@ -192,7 +192,8 @@ $(function () {
                 faqIndex : idx,
                 faqType : $("#faqType").text(),
                 faqTitle : $("#faqTitle").text(),
-                faqContent : $("#faqContent").val()
+                faqContent : $("#faqContent").val(),
+                faqRegdate : $("#faqRegdate").text()
 
             }
         }
