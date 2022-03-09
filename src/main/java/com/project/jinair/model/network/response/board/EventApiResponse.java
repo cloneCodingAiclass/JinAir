@@ -1,5 +1,6 @@
 package com.project.jinair.model.network.response.board;
 
+import com.project.jinair.model.enumclass.EventStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +20,5 @@ public class EventApiResponse {
     private LocalDateTime evStartDay;
     private LocalDateTime evEndDay;
     private LocalDateTime evRegdate;
-    // 이넘클래스 없음
-    private String ev_status;
+    private EventStatus evStatus;
 }

@@ -103,33 +103,118 @@ $(function () {
     })
 });
 
+// (function ($){
+//     // 세부사항 출력
+//     let faqEdit = new Vue({
+//         el : '#faqEdit',
+//         data : {
+//             faqEdit : {}
+//         },
+//     });
+//
+//
+//     let str = $(location).attr('href').split('/');
+//     searchStart(str[6]);
+//
+//     function searchStart(index){
+//         alert(index);
+//         $.get("/api/faq/view/"+index, function(response){
+//             console.dir(response);
+//             faqEdit.faqEdit = response.data;
+//
+//
+//         });
+//     }
+//
+//     // 수정
+//     let jsonData
+//
+//     function updating(){
+//         jsonData = {
+//             data : {
+//                 faqIndex : str[6],
+//                 faqTitle : $("#faqTitle").val(),
+//                 faqContent : $("#faqContent").val()
+//             }
+//         }
+//         $.ajax({
+//             url : "/api/faq",
+//             type : "PUT",
+//             data : JSON.stringify(jsonData),
+//             dataType : "text",
+//             contentType : "application/json"
+//         });
+//     }
+//
+//     $("#update").click( () => {
+//         updating();
+//         location.href = `/pages/admin/faq_view/${str[6]}`;
+//         console.dir(jsonData);
+//     })
+//
+//
+//
+// })(jQuery)
+
 (function ($){
-    // 세부사항 출력
-    let faqEdit = new Vue({
-        el : '#faqEdit',
+
+    console.log("url : "+$(location).attr('href'));
+
+    let idx = $(location).attr('href').split('/')[6];
+
+    let tableBoard = new Vue({
+        el : '#tableBoard',
         data : {
-            faqEdit : {}
-        },
-    });
+            tableBoard : {}
+        }
+    })
 
+    search(idx);
 
-    let str = $(location).attr('href').split('/');
-    searchStart(str[6]);
-
-    function searchStart(index){
-        alert(index);
-        $.get("/api/faq/"+index, function(response){
+    function search(index){
+        console.log("index : " + index);
+        $.get("/api/faq/view/"+index, function (response){
             console.dir(response);
-            faqEdit.faqEdit = response.data;
+            tableBoard.tableBoard = response.data;
 
-
-        });
+        })
     }
 
 
+    let jsonData
+
+    function updating(){
+        let title = $("#faqTitle").text();
+        let content = $("#faqContent").val();
+        let type = $("#faqType").val();
+        jsonData = {
+            data : {
+                faqIndex : idx,
+                faqType : $("#faqType").text(),
+                faqTitle : $("#faqTitle").text(),
+                faqContent : $("#faqContent").val(),
+                faqRegdate : $("#faqRegdate").text()
+
+            }
+        }
+        $.ajax({
+            url : "/api/faq",
+            type : "PUT",
+            data : JSON.stringify(jsonData),
+            dataType : "text",
+            contentType : "application/json"
+        });
+    }
+
+    $("#update").click( () => {
+        updating();
+        location.href = `/pages/admin/faq_view/${idx}`;
+        console.dir(jsonData);
+    })
 
 })(jQuery)
 
-function delBtn(){
+
+function editBtn(){
     $('.edit_container').css("display","flex");
 }

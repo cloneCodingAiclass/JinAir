@@ -112,15 +112,13 @@ $(function () {
         data : {
             tableBoard : {}
         },
-        methods:{
-        }
     });
 
     let str = $(location).attr('href').split('/');
     searchStart(str[6]);
 
     function searchStart(index){
-        $.get("/api/faq/"+index, function(response){
+        $.get("/api/faq/view/"+index, function(response){
             // 검색 데이터
             tableBoard.tableBoard = response.data;
 

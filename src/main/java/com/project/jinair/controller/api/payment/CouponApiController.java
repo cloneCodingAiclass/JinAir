@@ -4,14 +4,20 @@ import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.payment.CouponRegistApiRequest;
 import com.project.jinair.model.network.response.payment.CouponRegistApiResponse;
+import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import com.project.jinair.service.payment.CouponRegistApiService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/coupon")
 @RequiredArgsConstructor
-public class CouponAdd implements CrudInterface<CouponRegistApiRequest, CouponRegistApiResponse> {
+public class CouponApiController implements CrudInterface<CouponRegistApiRequest, CouponRegistApiResponse> {
 
     private final CouponRegistApiService couponRegistApiService;
 
@@ -37,5 +43,9 @@ public class CouponAdd implements CrudInterface<CouponRegistApiRequest, CouponRe
     @DeleteMapping("id")
     public Header<CouponRegistApiResponse> delete(@PathVariable(name = "id") Long id) {
         return couponRegistApiService.delete(id);
+    }
+    @GetMapping("/list") // http://localhost:8080/api/airplane
+    public Header<List<CouponRegistApiResponse>> findAll(@PageableDefault(sort = {"crIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        return couponRegistApiService.search(pageable);
     }
 }

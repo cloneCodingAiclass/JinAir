@@ -34,5 +34,5 @@ public class TbEvent { // 이벤트 테이블
     @CreatedDate
     private LocalDateTime evRegdate;
     @Enumerated(EnumType.STRING)
-    private EventStatus ev_status;
+    private EventStatus evStatus;
 }

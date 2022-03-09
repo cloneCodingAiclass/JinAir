@@ -37,21 +37,22 @@ public class FaqApiController implements CrudInterface<FaqApiRequest, FaqApiResp
 
     // 게시판 글보기
     @Override
-    @GetMapping("{id}")
+    @GetMapping("/view/{id}")
     public Header<FaqApiResponse> read(@PathVariable(name = "id") Long id) {
         return faqApiLogicService.read(id);
     }
 
     // 게시판 글수정
     @Override
-    @PutMapping("/edit/{id}")
+    @PutMapping("")
     public Header<FaqApiResponse> update(@RequestBody Header<FaqApiRequest> request) {
+        System.out.println(request);
         return faqApiLogicService.update(request);
     }
 
     // 게시판 글삭제
     @Override
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public Header<FaqApiResponse> delete(@PathVariable(name = "id") Long id) {
         return faqApiLogicService.delete(id);
     }

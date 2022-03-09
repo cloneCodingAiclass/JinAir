@@ -5,7 +5,8 @@
 <div th:replace="/adminpage/fragment/head :: head"></div>
         <link rel="stylesheet" href="/adminpage/lib/css/coupon/couponadd.css">
         <link rel="stylesheet" href="/adminpage/lib/css/style.css">
-        <script src="/adminpage/app/coupon/couponadd.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <body>
         <div id="wrap">
             <div th:replace="/adminpage/fragment/header :: header"></div>
@@ -18,27 +19,31 @@
                         </div>
                         <div class="contents_main">
                             <div class="contents_sch btn_box">
-                                    <select class="coupon_box">
-                                        <option value="" selected="selected">국내/외 선택</option>
-                                        <option value="국내">국내</option>
-                                        <option value="국내">국외</option>
+                                <input class="coupon_box3" type="text" placeholder="쿠폰 명" id="title">
+                                    <select class="coupon_box" id="nation">
+                                        <optgroup label="국내외 선택">
+                                            <option value="ALL">전체</option>
+                                            <option value="KOR">국내</option>
+                                            <option value="OVERSEAS">국외</option>
+                                        </optgroup>
                                     </select>
-                                    <select class="coupon_box">
-                                        <option value="" selected="selected">노선선택</option>
-                                        <option value="전 노선">전 노선</option>
-                                        <option value="CJU">CJU</option>
-                                        <option value="USN">USN</option>
-                                        <option value="TAE">TAE</option>
+                                    <select class="coupon_box" id="route">
+                                        <optgroup label="노선 선택">
+                                            <option value="ALL">전체 노선</option>
+                                            <option value="GMP">국내/김포(GMP)</option>
+                                            <option value="ICN">국내/인천(ICN)</option>
+                                            <option value="CJU">국내/제주(CJU)</option>
+                                        </optgroup>
                                     </select>
-                                    <input class="coupon_box3" type="text" placeholder="할인률">
+                                    <input class="coupon_box3" type="text" placeholder="할인률" id="discount">
                                     <input type="text" value="%" class="coupon_box1" readonly="readonly">
-                                    <input class="coupon_box4" type="date" placeholder="시작 일자">
+                                    <input class="coupon_box4" type="date" placeholder="시작 일자" id="startDate" v-model="startDate">
                                     <input type="text" value="~" class="coupon_box1" readonly="readonly">
-                                    <input class="coupon_box2" type="date" placeholder="종료 일자">
-                                    <input class="coupon_box3" type="text" placeholder="수량">
-                                    <input type="submit" value="쿠폰발급" class="coupon_btn">
+                                    <input class="coupon_box2" type="date" placeholder="종료 일자" id="endDate" v-model="endDate">
+                                    <input class="coupon_box3" type="text" placeholder="수량" id="totalcoupon" v-model="totalcoupon">
+                                    <input type="button" value="쿠폰발급" class="coupon_btn" id="add_btn">
                             </div>
-                            <table class="coupon_tb">
+                            <table class="coupon_tb" id="itemList">
                                 <colgroup>
                                     <col width="100">
                                     <col width="120">
@@ -47,10 +52,8 @@
                                     <col width="120">
                                     <col width="80">
                                     <col width="100">
-                                    <col width="80">
                                 </colgroup>
                                 <tr>
-                                    <td>쿠폰 번호</td>
                                     <td>발급 일자</td>
                                     <td>쿠폰 명</td>
                                     <td>시작일자</td>
@@ -59,21 +62,21 @@
                                     <td>미등록 쿠폰</td>
                                     <td>상태</td>
                                 </tr>
-                                <tr>
-                                    <td>10010103</td>
-                                    <td>2021-12-30</td>
-                                    <td>선착순 고객 국내여행 전 노선 10%</td>
-                                    <td>2022-01-20</td>
-                                    <td>2022-01-30</td>
-                                    <td>100</td>
-                                    <td>31</td>
-                                    <td>유효</td>
+                                <tr v-for="dto in itemList">
+                                    <td>{{dto.crRegdate.substr(0, 10)}}</td>
+                                    <td>{{dto.crDesc}}</td>
+                                    <td>{{dto.crIssuanceDay.substr(0, 10)}}</td>
+                                    <td>{{dto.crEndDay.substr(0, 10)}}</td>
+                                    <td>{{dto.crTotCoupon}}</td>
+                                    <td>{{dto.crStockCoupon}}</td>
+                                    <td>{{dto.crStatus}}</td>
                                 </tr>
                             </table>
                             <div class="footer">
                                 <div class="center">
                                     <table>
-                                        <tr>
+                                        <tr id="button">
+<!--                                            페이징-->
                                         </tr>
                                     </table>
                                 </div>
@@ -83,9 +86,7 @@
                 </div>
                 <div id="modal_isfind">
                     <div id="modal_isfind_content">
-                        <div id="modal_isfind_title">[선착순 고객 국내여행 전노선
-                            <br>40% 2022-01-15 / 2021-01-30 100매 ]<br><br>
-                            쿠폰발급을 하시겠습니까?
+                        <div id="modal_isfind_title">
                         </div>
                         <div>
                             <button class="modal_isfind_btn uncomplete">취소</button>
@@ -96,4 +97,5 @@
             </div>
         </div>
     </body>
+<script src="/adminpage/app/coupon/couponadd.js"></script>
 </html>

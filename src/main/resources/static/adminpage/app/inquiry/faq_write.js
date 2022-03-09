@@ -101,6 +101,7 @@ $(function () {
     function writing(){
         jsonData = {
             data : {
+                faqRegdate : $("#faqRegdate").val(),
                 faqType : $("#faqType").val(),
                 faqTitle : $("#faqTitle").val(),
                 faqContent : $("#faqContent").val()
