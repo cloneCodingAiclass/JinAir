@@ -39,6 +39,15 @@
 #container > .contents .faq_table table tr:nth-child(2){
     height: 300px;
 }
+#container > .contents .faq_table table .editTitle {
+    width: 98%;
+    height: 30px;
+    margin-top: 4px;
+    border: 1px solid rgb(199, 199, 199);
+    outline: none;
+    padding: 5px;
+    resize: none;
+}
 #container > .contents .faq_table table textarea{
     width: 98%;
     height: 290px;

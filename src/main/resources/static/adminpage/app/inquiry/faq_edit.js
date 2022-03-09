@@ -184,14 +184,11 @@ $(function () {
     let jsonData
 
     function updating(){
-        let title = $("#faqTitle").text();
-        let content = $("#faqContent").val();
-        let type = $("#faqType").val();
         jsonData = {
             data : {
                 faqIndex : idx,
-                faqType : $("#faqType").text(),
-                faqTitle : $("#faqTitle").text(),
+                faqType : $("#faqType").val(),
+                faqTitle : $("#faqTitle").val(),
                 faqContent : $("#faqContent").val(),
                 faqRegdate : $("#faqRegdate").text()
 
