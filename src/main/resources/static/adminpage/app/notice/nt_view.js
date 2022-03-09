@@ -115,7 +115,6 @@ $(function () {
         console.log("index : " + idx);
         $.get("/api/notify/"+idx, function (response){
             console.dir(response);
-
             notiView.notiView = response.data;
         })
     }

@@ -81,7 +81,6 @@ public class NotifiApiController implements CrudInterface<NotifyApiRequest, Noti
         TbNotifi tbNotifi = tbNotifiRepository.findById(id).get();
 
         String path = tbNotifi.getNoFileUrl() + tbNotifi.getNoFileName();
-
         try {
             Path filePath = Paths.get(path);
             Resource resource = new InputStreamResource(Files.newInputStream(filePath)); // 파일 resource 얻기

@@ -33,7 +33,6 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
                 .noIndex(notifyApiRequest.getNoIndex())
                 .noTitle(notifyApiRequest.getNoTitle())
                 .noContents(notifyApiRequest.getNoContents())
-//                .noFileName(notifyApiRequest.getNoFile())
                 .noRegdate(notifyApiRequest.getNoRegdate())
                 .build();
         TbNotifi newNotify = tbNotifiRepository.save(tbNotify);
