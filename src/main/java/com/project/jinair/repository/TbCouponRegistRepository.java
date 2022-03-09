@@ -1,6 +1,9 @@
 package com.project.jinair.repository;
 
+import com.project.jinair.model.entity.board.TbNotifi;
 import com.project.jinair.model.entity.payment.TbCouponRegist;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +18,7 @@ public interface TbCouponRegistRepository extends JpaRepository<TbCouponRegist, 
     // 쿠폰 타입
     Optional<TbCouponRegist> findByCrType(String crType);
 
+
+    Page<TbCouponRegist> findByCrDescContaining(String crDesc, Pageable pageable);
 
 }

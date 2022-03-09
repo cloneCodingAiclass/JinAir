@@ -17,12 +17,12 @@ public class CouponRegistApiRequest {
     private String crType;
     private Long crPrice;
     private String crDesc;
-    private String crCode;
-    private CouponStatus crStatus;
     private Integer crDiscount;
     private LocalDateTime crIssuanceDay;
     private LocalDateTime crEndDay;
     private Integer crTotCoupon;
     private Integer crStockCoupon;
+    private CouponStatus crStatus;
     private LocalDateTime crRegdate;
+    private String crCode;
 }

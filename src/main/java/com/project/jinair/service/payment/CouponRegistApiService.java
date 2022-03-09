@@ -1,6 +1,7 @@
 package com.project.jinair.service.payment;
 
 import com.project.jinair.ifs.CrudInterface;
+import com.project.jinair.model.entity.board.TbNotifi;
 import com.project.jinair.model.entity.info.TbAirplane;
 import com.project.jinair.model.entity.payment.TbCouponRegist;
 import com.project.jinair.model.entity.schedule.TbSchedule;
@@ -8,6 +9,7 @@ import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.info.AirplaneApiRequest;
 import com.project.jinair.model.network.request.payment.CouponRegistApiRequest;
+import com.project.jinair.model.network.response.board.NotifyApiResponse;
 import com.project.jinair.model.network.response.payment.CouponRegistApiResponse;
 import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import com.project.jinair.repository.TbCouponRegistRepository;
@@ -131,6 +133,20 @@ public class CouponRegistApiService implements CrudInterface<CouponRegistApiRequ
                 .map(users -> responseCoupon(users))
                 .collect(Collectors.toList());
 
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbCouponRegists.getTotalPages())
+                .totalElements(tbCouponRegists.getTotalElements())
+                .currentPage(tbCouponRegists.getNumber())
+                .currentElements(tbCouponRegists.getNumberOfElements())
+                .build();
+        return Header.OK(couponRegistApiResponseList, pagination);
+    }
+
+    public Header<List<CouponRegistApiResponse>> searchList(String a, Pageable pageable) {
+        Page<TbCouponRegist> tbCouponRegists = tbCouponRegistRepository.findByCrDescContaining(a, pageable);
+        List<CouponRegistApiResponse> couponRegistApiResponseList = tbCouponRegists.stream()
+                .map(coupon -> responseCoupon(coupon))
+                .collect(Collectors.toList());
         Pagination pagination = Pagination.builder()
                 .totalPages(tbCouponRegists.getTotalPages())
                 .totalElements(tbCouponRegists.getTotalElements())

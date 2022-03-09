@@ -98,79 +98,110 @@ $(function () {
         $('.nav10').siblings('li').eq(0).find('a').css({"color":"#BDD600"});
     })
 
+
     $('#add_btn').on('click', function () {
         let text = "";
         let title = $('#title').val();
-        let nation = $('#nation option:selected').text();
-        let route = $('#route option:selected').text();
         let discount = $('#discount').val();
         let startDate = $('#startDate').val();
         let endDate = $('#endDate').val();
         let totalcoupon = $('#totalcoupon').val();
+        let crprice = $('#crprice').val();
+        let type = $('#type').val();
 
-        text += '<p>' + '타이틀 : ' + title + nation + ' / ' + route + '<br> 할인율 : ' + discount + "%<br> 기간 : " + startDate + " ~ " + endDate + " <br> 총 " + totalcoupon + "매의 쿠폰을 발급하겠습니다." + '</p>'
-
-        if (title == "" || totalcoupon == "" || discount == "" || startDate == "" || endDate == "") {
-            location.reload();
-        } else {
+        text += '<p>' + '타이틀 : ' + title + ' / ' + '<br> 할인율 : ' + discount + "%<br> 기간 : " + startDate + " ~ " + endDate +
+            " <br> 판매 포인트 : " + crprice + "<br> 총 " + totalcoupon + "매의 쿠폰을 발급하겠습니다." + '</p>'
+        //
+        // if (title == "" || totalcoupon == "" || discount == "" || startDate == "" || endDate == "" || crprice == "") {
+        //     alert('미입력 정보가 있습니다.');
+        //     location.reload();
+        // } else {
             document.getElementById("modal_isfind_title").innerHTML = text;
-        }
+        //
+        // let arr = new Array();
+            $('.complete').on('click', function (){
+                // for(let i = 0; i < totalcoupon; i++){
+                //     // register();
+                //     let arrData = new Object();
+                //     arrData.crType = type;
+                //     arrData.crPrice = crprice;
+                //     arrData.crDesc = title;
+                //     arrData.crDiscount = discount;
+                //     arrData.crIssuanceDay = startDate;
+                //     arrData.crEndDay = endDate;
+                //     arrData.crTotCoupon = totalcoupon;
+                //     arrData.crStockCoupon = totalcoupon;
+                //     arrData.crStatus = "Addcoupon";
+                //     arrData.crCode = 0;
+                //     arr.push(arrData);
+                // }
+                // console.dir(arr);
+                register()
+            });
+        // }
     });
 
-    let pagination = {
-        totalPages : 0,
-        totalElements : 0,
-        currentPage : 0,
-        currentElements : 0
-    };
-
-    let showPage = new Vue({
-        el : '#showPage',
+    let airPort = new Vue({
+        el : '#airPortList',
         data : {
-            totalPages : {},
-            currentPage : {}
-        }
-    });
-
-    let itemList = new Vue({
-        el : '#itemList',
-        data : {
-            itemList : {}
+            airPort : {}
         }
     })
 
-    sclist(0);
+    airPortList();
 
-    function sclist(index) {
-        $.get("/api/coupon/list?page=" + index, function (response) {
+    // 공항 정보 옵션용
+    function airPortList() {
+        $.get("/api/airport/list", function (response) {
             console.dir(response);
 
-            pagination = response.pagination;
-
-            showPage.totalPages = pagination.totalPages;
-            showPage.currentPage = pagination.currentPage;
-
-            // 전체 페이지
-            showPage.showPage = pagination.data;
-
-            // 검색 데이터
-            itemList.itemList = response.data;
-
-            let url = "";
-            let NumberPage = 0;
-            let last = showPage.totalPages;
-
-            for (NumberPage; NumberPage < last; NumberPage++) {
-                url += '<td id="' + NumberPage + '" class="pageButton">' + (NumberPage + 1) + '</td>';
-            }
-            document.getElementById("button").innerHTML = url;
-
-            $(".pageButton").on('click', function () {
-                index = $(this).attr("id");
-                sclist(index);
-            })
-        })
+            airPort.airPort = response.data;
+        });
     }
+
+    // 쿠폰 등록
+    function register(){
+
+        type = $('#type').val();
+        crprice = $('#crprice').val();
+        title = $('#title').val();
+        discount = $('#discount').val();
+        startDate = $('#startDate').val() + "T00:00:00";
+        endDate = $('#endDate').val() + "T00:00:00";
+        totalcoupon = $('#totalcoupon').val();
+        crCode = Math.random().toString(36).substr(2,15).toUpperCase();
+
+        let coupon = {
+            data : {
+                crType: type,
+                crPrice: crprice,
+                crDesc: title,
+                crDiscount: discount,
+                crIssuanceDay: startDate,
+                crEndDay: endDate,
+                crTotCoupon: totalcoupon,
+                crStockCoupon : totalcoupon,
+                crStatus : "AddCoupon",
+                crCode : crCode
+            }
+        }
+        $.ajax({
+            url : '/api/coupon',
+            type : 'POST',
+            dataType : 'json',
+            data : JSON.stringify(coupon),
+            dataType:"text",
+            contentType : "application/json",
+            success(coupon){
+                alert("등록이 완료되었습니다.");
+                location.reload()
+            },
+            error(error){
+                alert("등록에 실패했습니다.")
+            }
+        });
+    }
+
 });
 
 $(()=> {

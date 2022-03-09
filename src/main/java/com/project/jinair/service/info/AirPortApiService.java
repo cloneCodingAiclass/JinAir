@@ -3,15 +3,22 @@ package com.project.jinair.service.info;
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.info.TbAirplane;
 import com.project.jinair.model.entity.info.TbAirport;
+import com.project.jinair.model.entity.schedule.TbSchedule;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.info.AirportApiRequest;
 import com.project.jinair.model.network.response.info.AirplaneApiResponse;
 import com.project.jinair.model.network.response.info.AirportApiResponse;
+import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import com.project.jinair.repository.TbAirportRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -78,5 +85,24 @@ public class AirPortApiService implements CrudInterface<AirportApiRequest, Airpo
                 .aptTypedetail(tbAirport.getAptTypedetail())
                 .build();
         return Header.OK(airportApiResponse);
+    }
+    private AirportApiResponse airportApiResponse(TbAirport tbAirport) {
+         AirportApiResponse airportApiResponse = AirportApiResponse.builder()
+                .aptIndex(tbAirport.getAptIndex())
+                .aptAirport(tbAirport.getAptAirport())
+                .aptNation(tbAirport.getAptNation())
+                .aptRevtype(tbAirport.getAptRevtype())
+                .aptTypedetail(tbAirport.getAptTypedetail())
+                .build();
+        return airportApiResponse;
+    }
+
+    public Header<List<AirportApiResponse>> search() {
+        List<TbAirport> tbAirports = tbAirportRepository.findAll();
+        List<AirportApiResponse> airportApiResponseList = tbAirports.stream()
+                .map(users -> airportApiResponse(users))
+                .collect(Collectors.toList());
+
+        return Header.OK(airportApiResponseList);
     }
 }
