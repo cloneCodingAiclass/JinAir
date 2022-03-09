@@ -10,6 +10,8 @@ import com.project.jinair.service.info.AirPortApiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/airport")
 @RequiredArgsConstructor
@@ -39,5 +41,10 @@ public class AirPortApiController implements CrudInterface<AirportApiRequest, Ai
     @DeleteMapping("{id}")
     public Header<AirportApiResponse> delete(@PathVariable("id") Long id) {
         return airPortApiService.delete(id);
+    }
+
+    @GetMapping("/list")
+    public Header<List<AirportApiResponse>> findAll() {
+        return airPortApiService.search();
     }
 }

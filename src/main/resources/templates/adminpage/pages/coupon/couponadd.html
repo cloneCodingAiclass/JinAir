@@ -18,67 +18,44 @@
                             <p class="title">지니 쿠폰 발급</p>
                         </div>
                         <div class="contents_main">
-                            <div class="contents_sch btn_box">
-                                <input class="coupon_box3" type="text" placeholder="쿠폰 명" id="title">
-                                    <select class="coupon_box" id="nation">
-                                        <optgroup label="국내외 선택">
-                                            <option value="ALL">전체</option>
-                                            <option value="KOR">국내</option>
-                                            <option value="OVERSEAS">국외</option>
-                                        </optgroup>
-                                    </select>
-                                    <select class="coupon_box" id="route">
-                                        <optgroup label="노선 선택">
-                                            <option value="ALL">전체 노선</option>
-                                            <option value="GMP">국내/김포(GMP)</option>
-                                            <option value="ICN">국내/인천(ICN)</option>
-                                            <option value="CJU">국내/제주(CJU)</option>
-                                        </optgroup>
-                                    </select>
-                                    <input class="coupon_box3" type="text" placeholder="할인률" id="discount">
-                                    <input type="text" value="%" class="coupon_box1" readonly="readonly">
-                                    <input class="coupon_box4" type="date" placeholder="시작 일자" id="startDate" v-model="startDate">
-                                    <input type="text" value="~" class="coupon_box1" readonly="readonly">
-                                    <input class="coupon_box2" type="date" placeholder="종료 일자" id="endDate" v-model="endDate">
-                                    <input class="coupon_box3" type="text" placeholder="수량" id="totalcoupon" v-model="totalcoupon">
-                                    <input type="button" value="쿠폰발급" class="coupon_btn" id="add_btn">
-                            </div>
-                            <table class="coupon_tb" id="itemList">
+                            <table class="coupon_tb">
                                 <colgroup>
+                                    <col width="200">
                                     <col width="100">
-                                    <col width="120">
-                                    <col width="280">
                                     <col width="120">
                                     <col width="120">
                                     <col width="80">
+                                    <col width="140">
                                     <col width="100">
                                 </colgroup>
                                 <tr>
-                                    <td>발급 일자</td>
                                     <td>쿠폰 명</td>
+                                    <td>할인율</td>
                                     <td>시작일자</td>
                                     <td>종료일자</td>
-                                    <td>쿠폰 수</td>
-                                    <td>미등록 쿠폰</td>
-                                    <td>상태</td>
+                                    <td>발급수량</td>
+                                    <td>판매금액</td>
+                                    <td>쿠폰타입</td>
                                 </tr>
-                                <tr v-for="dto in itemList">
-                                    <td>{{dto.crRegdate.substr(0, 10)}}</td>
-                                    <td>{{dto.crDesc}}</td>
-                                    <td>{{dto.crIssuanceDay.substr(0, 10)}}</td>
-                                    <td>{{dto.crEndDay.substr(0, 10)}}</td>
-                                    <td>{{dto.crTotCoupon}}</td>
-                                    <td>{{dto.crStockCoupon}}</td>
-                                    <td>{{dto.crStatus}}</td>
+                                <tr>
+                                    <td><input class="coupon_box3" type="text" placeholder="쿠폰 명" id="title"></td>
+                                    <td><input class="coupon_box3" type="text" placeholder="할인률" id="discount"></td>
+                                    <td><input class="coupon_box4" type="date" placeholder="시작 일자" id="startDate" v-model="startDate"></td>
+                                    <td><input class="coupon_box2" type="date" placeholder="종료 일자" id="endDate" v-model="endDate"></td>
+                                    <td><input class="coupon_box3" type="text" placeholder="수량" id="totalcoupon" v-model="totalcoupon"></td>
+                                    <td><input class="coupon_box3" type="text" placeholder="판매금액" id="crprice" v-model="crprice"></td>
+                                    <td>
+                                        <select class="coupon_box" id="type">
+                                            <optgroup label="쿠폰 타입">
+                                                <option value="ALL">기본</option>
+                                                <option value="Promotion">프로모션</option>
+                                            </optgroup>
+                                        </select>
+                                    </td>
                                 </tr>
                             </table>
-                            <div class="footer">
-                                <div class="center">
-                                    <table>
-                                        <tr id="button">
-<!--                                            페이징-->
-                                        </tr>
-                                    </table>
+                                <div class="footer">
+                                    <input type="button" value="쿠폰발급" class="coupon_btn" id="add_btn">
                                 </div>
                             </div>
                         </div>

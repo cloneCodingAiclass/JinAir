@@ -60,16 +60,22 @@
     height: 26px;
     margin-left: 10px;
 }
-#container > .contents >.contwrap > .contents_main > .contents_sch .coupon_btn{
-    width: 100px;
-    height: 26px;
+#container > .contents >.contwrap > .contents_main .footer{
+    display: flex;
+    justify-content: right;
+}
+#container > .contents >.contwrap > .contents_main .footer .coupon_btn{
+    width: 150px;
+    height: 35px;
     background-color:#BDD600;
     border-radius: 2px;
-    clear: both;
     border: 0;
+    font-weight: 700;
     font-size: 0.8rem;
-    margin-right: 20px;
+    margin-right: 10px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
 }
 
 .contents_main > .coupon_tb{
@@ -89,7 +95,9 @@
     background-color: #F2F2F2;
     border-bottom: 1px solid #ccc;
 }
-
+.coupon_tb{
+    margin: 20px 0px;
+}
 .footer{
     margin-top: 15px;
     width: 100%;
@@ -194,7 +202,7 @@
      justify-content: center;
  }
 
-#button .pageButton{
+.pageButton{
     display: flex;
     width: 20px;
     height: 20px;
@@ -208,8 +216,14 @@
     font-size: 15px;
     border-collapse: collapse;
 }
-#button .pageButton:hover{
+.pageButton:hover{
     background-color: rgb(124,0,72);
     color: white;
     cursor: pointer;
+}
+#title, #nation, #route, #discount, #startDate, #endDate, #totalcoupon, #type, #totalprice, #crprice{
+    width: 90%;
+    height: 30px;
+    border: 1px solid #888888;
+    text-align: center;
 }
