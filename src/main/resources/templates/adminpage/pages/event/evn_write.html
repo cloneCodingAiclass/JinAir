@@ -3,13 +3,11 @@
       xmlns:th="http://www.thymeleaf.org/">
 <!-- head.html -->
 <head><div th:replace="/adminpage/fragment/head :: head"></div>
-    <link rel="stylesheet" href="/adminpage/lib/css/style.css">
     <link rel="stylesheet" href="/adminpage/lib/css/event/evn_write.css">
-    <script src="/adminpage/app/event/evn_write.js"></script>
     <script src="/adminpage/app/event/evn_write.js"></script>
 </head>
 <body>
-    <form action="../../../../../../../../JinAirCloneCoding/AdminPage/event/evn_ing.html">
+    <form id="uploadFiles" name="uploadFiles" method="post" th:action="@{/pages/admin/evn_write/upload}" encType="multipart/form-data">
     <div id="wrap">
         <div th:replace="/adminpage/fragment/header :: header"></div>
         <div id="container">
@@ -24,38 +22,30 @@
                                 <col width="1000">
                             </colgroup>
                             <tr>
-                                <th style="text-align: left;"><input type="text" placeholder="제목을 입력하세요"></th>
+                                <th style="text-align: left;"><input type="text" placeholder="제목을 입력하세요" name="evTitle" id="evTitle"></th>
                             </tr>
                             <tr>
                                 <td class="calandfile">
                                     <div class="calevndate">
-                                        이벤트 기간<input type="date" name="start_date" id="start_date" class="evndate" required> ~ <input type="date" name="end_date" id="end_date"class="evndate" required/>
+                                        이벤트 기간<input type="date" name="startDate" id="start_date" class="evndate" required> ~
+                                        <input type="date" name="endDate" id="end_date"class="evndate" required/>
                                     </div>
                                     <div class="file_upload">
                                         <input type="text" placeholder="파일첨부" class="filetext">
                                         <label for="ex_file" class="ex_file">찾아보기</label>
-                                        <input type="file" id="ex_file">
+                                        <input type="file" id="ex_file" name="file">
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <textarea style="resize: none;" placeholder="내용을 입력하세요."></textarea>
+                                    <textarea style="resize: none;" placeholder="내용을 입력하세요." name="evContent" id="evContent"></textarea>
                                 </td>
                             </tr>
                         </table>
                         <div class="footer">
-                            <input type="button" value="취소" class="canc_btn btn_notice">
+                            <input type="button" value="뒤로" class="canc_btn btn_notice" onclick="history.back()">
                             <input type="button" value="등록" class="write_btn btn_notice">
-                        </div>
-                    </div>
-                </div>
-                <div id="modal_iscancel">
-                    <div id="modal_iscancel_content">
-                        <div id="modal_iscancel_title"><p class="text">이벤트 등록을 취소하시겠습니까?</p></div>
-                        <div>
-                            <button class="modal_iscancel_btn uncomplete" onclick="location.href='../../../../../../../../JinAirCloneCoding/AdminPage/event/evn_ing.html'">취소</button>
-                            <button class="modal_iscancel_btn complete">계속 작성</button>
                         </div>
                     </div>
                 </div>
@@ -63,7 +53,7 @@
                     <div id="modal_iswrite_content">
                         <div id="modal_iswrite_title"><p class="text">이벤트를 등록하시겠습니까?</p></div>
                         <div>
-                            <input type="button" class="modal_iswrite_btn uncomplete" value="취소">
+                            <input type="button" class="modal_iswrite_btn uncomplete1" value="취소">
                             <input type="submit" class="modal_iswrite_btn complete" value="등록">
                         </div>
                     </div>

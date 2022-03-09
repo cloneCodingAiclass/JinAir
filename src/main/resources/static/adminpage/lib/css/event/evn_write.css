@@ -108,7 +108,7 @@
 .contents > .con_wrap table textarea{
     width: 98%;
     height: 350px;
-    margin-top: 4px;
+    margin: 4px 0;
     border: 1px solid rgb(199, 199, 199);
     outline: none;
     padding: 5px;

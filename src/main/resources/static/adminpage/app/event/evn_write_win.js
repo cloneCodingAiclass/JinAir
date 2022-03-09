@@ -94,30 +94,25 @@ $(function () {
         $('.nav8').parent().siblings().find('li').css({"display":"none"});
     })
 
-
-    let itemList = new Vue({
-        el : '.itemList',
-        data : {
-            itemList : {}
-        },
-        methods:{
+    function updating(){
+        jsonData = {
+            data : {
+                evTitle: $('#evTitle').val(),
+                evContent : $('#evContent').val(),
+            }
         }
-    });
-
-    var str = $(location).attr('href').split('/');
-
-    function searchStart(index){
-        $.get("/api/event/delete/"+index, function(response){
-
-            // 검색 데이터
-            itemList.itemList = response.data;
-
+        $.ajax({
+            url : "/api/eventWin",
+            type : "POST",
+            data : JSON.stringify(jsonData),
+            dataType : "text",
+            contentType : "application/json"
         });
     }
 
-    $(".complete1").click( () => {
-        searchStart(str[6]);
-        location.href=`/pages/admin/evn_ing`;
+    $(".complete").click( () => {
+        updating();
+        location.href = `/pages/admin/evn_win`;
     })
 
 });
@@ -129,11 +124,17 @@ $(() => {
 
 
 $(()=> {
-    $('#modal_isdelete').hide();
-    $(".canc_btn").on('click', () => {
-        $("#modal_isdelete").fadeIn();
+    $('#modal_iswrite').hide();
+    $(".write_btn").on('click', () => {
+        $("#modal_iswrite").fadeIn();
     })
-    $(".uncomplete").on('click', () => {
-        $("#modal_isdelete").fadeOut();
+    $(".uncomplete1").on('click', () => {
+        $("#modal_iswrite").fadeOut();
     })
+})
+
+$(()=> {
+    $('#ex_file').on('change', function(){
+        $('.filetext').val($('#ex_file').val());
+    });
 });

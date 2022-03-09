@@ -144,6 +144,8 @@ $(function () {
 
             itemList.itemList = response.data;
 
+            console.dir(itemList.itemList);
+
         });
     }
 

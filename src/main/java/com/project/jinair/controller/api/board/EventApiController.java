@@ -43,8 +43,9 @@ public class EventApiController implements CrudInterface<EventApiRequest, EventA
     }
 
     @Override
-    public Header<EventApiResponse> read(Long id) {
-        return null;
+    @GetMapping("/view/{id}")
+    public Header<EventApiResponse> read(@PathVariable(name = "id")Long id) {
+        return eventApiLogicService.read(id);
     }
 
     @Override
@@ -53,7 +54,9 @@ public class EventApiController implements CrudInterface<EventApiRequest, EventA
     }
 
     @Override
-    public Header<EventApiResponse> delete(Long id) {
-        return null;
+    @GetMapping("/delete/{id}")
+    public Header<EventApiResponse> delete(@PathVariable(name = "id") Long id) {
+        return eventApiLogicService.delete(id);
     }
+
 }

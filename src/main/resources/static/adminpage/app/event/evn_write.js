@@ -107,20 +107,10 @@ $(()=> {
     $(".write_btn").on('click', () => {
         $("#modal_iswrite").fadeIn();
     })
-    $(".uncomplete").on('click', () => {
+    $(".uncomplete1").on('click', () => {
         $("#modal_iswrite").fadeOut();
     })
 })
-
-$(()=> {
-    $('#modal_iscancel').hide();
-    $(".canc_btn").on('click', () => {
-        $("#modal_iscancel").fadeIn();
-    })
-    $(".complete").on('click', () => {
-        $("#modal_iscancel").fadeOut();
-    })
-});
 
 $(()=> {
     $('#ex_file').on('change', function(){

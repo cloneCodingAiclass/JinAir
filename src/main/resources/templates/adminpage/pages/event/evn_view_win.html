@@ -4,7 +4,7 @@
 <!-- head.html -->
 <head><div th:replace="/adminpage/fragment/head :: head"></div>
     <link rel="stylesheet" href="/adminpage/lib/css/event/evn_view.css">
-    <script src="/adminpage/app/event/evn_view.js"></script>
+    <script src="/adminpage/app/event/evn_view_win.js"></script>
 </head>
 <body>
     <div id="wrap">
@@ -25,24 +25,19 @@
                                         <col style="width:15%;">
                                     </colgroup>
                                     <tr>
-                                        <th class="botbor"><div class="tit" th:text="${eventApiResponse.evIndex}"></div><div class="evndate">
-                                            이벤트 기간 : <p><span th:text="${#strings.substring(eventApiResponse.evStartDay,0, 10)}"></span> ~
-                                            <span th:text="${#strings.substring(eventApiResponse.evEndDay,0, 10)}"></span></p></div></th>
-                                        <th class="right botbor">등록일 <p class="wrdate" th:text="${#strings.substring(eventApiResponse.evRegdate,0,10)}">2022-01-28</p></th>
+                                        <th class="botbor"><div class="tit" th:text="${eventWinApiResponse.evTitle}"></div></th>
+                                        <th class="right botbor">등록일 <p class="wrdate" th:text="${#strings.substring(eventWinApiResponse.evRegdate,0,10)}"></p></th>
                                     </tr>
                                     <tr>
-                                        <td class="file" colspan="2"><img th:src="@{'/upload/' + ${eventApiResponse.evFileName}}" alt="이벤트사진"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="content_txt" colspan="2" ><span th:text="${eventApiResponse.evContent}"></span>
+                                        <td class="content_txt" colspan="2" ><span th:text="${eventWinApiResponse.evContent}"></span>
                                             <p class="bottT">Fly, better fly Jin Air</p>
                                         </td>
                                     </tr>
                                 </table>
                                 <div class="footer">
-                                    <input type="button" value="목록" class="butt list_btn" onclick="history.back()">
+                                    <input type="button" value="목록" class="butt list_btn" onclick="location.href='/pages/admin/evn_win'">
                                     <input type="button" value="삭제" class="butt canc_btn">
-                                    <a th:href="@{'/pages/admin/evn_edit/' + ${eventApiResponse.evIndex}}"><input type="button" value="수정" class="butt write_btn"></a>
+                                    <a th:href="@{'/pages/admin/evn_edit_win/'+${eventWinApiResponse.evIndex}}"><input type="button" value="수정" class="butt write_btn"></a>
                                 </div>
                             </form>
                         </div>

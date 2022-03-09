@@ -94,31 +94,32 @@ $(function () {
         $('.nav8').parent().siblings().find('li').css({"display":"none"});
     })
 
-
-    let itemList = new Vue({
-        el : '.itemList',
-        data : {
-            itemList : {}
-        },
-        methods:{
-        }
-    });
-
     var str = $(location).attr('href').split('/');
 
-    function searchStart(index){
-        $.get("/api/event/delete/"+index, function(response){
-
-            // 검색 데이터
-            itemList.itemList = response.data;
-
+    function updating(){
+        jsonData = {
+            data : {
+                evIndex: str[6],
+                evTitle: $('#title').val(),
+                evContent : $('#event_content').val(),
+                evRegdate : $('#wrdate1').val()
+            }
+        }
+        $.ajax({
+            url : "/api/eventWin/update",
+            type : "PUT",
+            data : JSON.stringify(jsonData),
+            dataType : "text",
+            contentType : "application/json"
         });
     }
 
-    $(".complete1").click( () => {
-        searchStart(str[6]);
-        location.href=`/pages/admin/evn_ing`;
+    $(".complete").click( () => {
+        updating();
+        location.href = `/pages/admin/evn_view_win/${str[6]}`;
     })
+
+
 
 });
 
@@ -129,11 +130,30 @@ $(() => {
 
 
 $(()=> {
-    $('#modal_isdelete').hide();
+    $('#modal_iseditcancel').hide();
     $(".canc_btn").on('click', () => {
-        $("#modal_isdelete").fadeIn();
+        $("#modal_iseditcancel").fadeIn();
+    })
+    $(".cancuncomplete").on('click', () => {
+        location.href='./evn_view.html';
+    })
+    $(".canccomplete").on('click', () => {
+        $("#modal_iseditcancel").fadeOut();
+    })
+});
+
+$(()=> {
+    $('#modal_isedit').hide();
+    $(".edit_btn").on('click', () => {
+        $("#modal_isedit").fadeIn();
     })
     $(".uncomplete").on('click', () => {
-        $("#modal_isdelete").fadeOut();
+        $("#modal_isedit").fadeOut();
     })
+});
+
+$(()=> {
+    $('#ex_file').on('change', function(){
+        $('.filetext').val($('#ex_file').val());
+    });
 });

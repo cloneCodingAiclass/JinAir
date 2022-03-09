@@ -3,7 +3,6 @@
       xmlns:th="http://www.thymeleaf.org/">
 <!-- head.html -->
 <head><div th:replace="/adminpage/fragment/head :: head"></div>
-    <link rel="stylesheet" href="/adminpage/lib/css/style.css">
     <link rel="stylesheet" href="/adminpage/lib/css/event/evn_edit.css">
     <script src="/adminpage/app/event/evn_edit.js"></script>
 </head>
@@ -27,15 +26,15 @@
                                         <col style="width:15%;">
                                     </colgroup>
                                     <tr>
-                                        <th class="botbor"><input type="text" class="tit" value="[이벤트]제주면세점 진에어 회원혜택">
-                                        <th class="right botbor">등록일 <p class="wrdate">2022-01-28</p></th>
+                                        <th class="botbor"><input type="text" class="tit" th:value="${eventApiResponse.evTitle}">
+                                        <th class="right botbor">등록일 <p class="wrdate" th:text="${#strings.substring(eventApiResponse.evRegdate,0,10)}"></p></th>
                                     </tr>
                                     <tr>
                                         <td class="calandfile" colspan="2">
                                             <div class="calevndate">
                                                 이벤트 기간<input type="date" name="start_date" id="start_date" class="evndate" required> ~ <input type="date" name="end_date" id="end_date"class="evndate" required/>
                                             </div>
-                                            <div class="filediv"><input type="text" placeholder="파일첨부" class="filetext">
+                                            <div class="filediv"><input type="text" placeholder="파일첨부" class="filetext" th:value="${eventApiResponse.evFileOriname}">
                                                 <div class="file-upload">
                                                     <label for="ex_file" class="ex_file">찾아보기</label>
                                                     <input type="file" id="ex_file">
@@ -45,13 +44,8 @@
                                     </tr>
                                     <tr>
                                         <td class="content_txt" colspan="2">
-                                            <img src="/adminpage/lib/img/event.jpg" alt="이벤트사진">
-                                            <textarea  name="event_content" class="event_content">유의사항 본 프로모션은 진에어 홈페이지 회원 대상으로 진행됩니다.
-본 프로모션은 당사 또는 제휴사 사정에 의하여 사전 고지 없이 변경 및 조기 종료될 수 있습니다.
-면세할인 쿠폰은 제주관광공사 인터넷면세점 가입 후 '마이페이지 > 쿠폰 > 쿠폰 바로 등록'을 통해 등록할 수 있습니다.
-면세할인 쿠폰은 면세점 회원 기준 1인 1매 사용가능하며 일부 품목 및 브랜드는 쿠폰 사용이 제한될 수 있습니다.
-
-Fly, better fly Jin Air</textarea>
+                                            <textarea  name="event_content" class="event_content" th:text="${eventApiResponse.evContent}"></textarea>
+                                            <p class="bottT">Fly, better fly Jin Air</p>
                                         </td>
                                     </tr>
                                 </table>

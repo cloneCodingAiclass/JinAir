@@ -107,7 +107,7 @@ $(function () {
     var str = $(location).attr('href').split('/');
 
     function searchStart(index){
-        $.get("/api/event/delete/"+index, function(response){
+        $.get("/api/eventWin/delete/"+index, function(response){
 
             // 검색 데이터
             itemList.itemList = response.data;
@@ -117,7 +117,7 @@ $(function () {
 
     $(".complete1").click( () => {
         searchStart(str[6]);
-        location.href=`/pages/admin/evn_ing`;
+        location.href=`/pages/admin/evn_win`;
     })
 
 });

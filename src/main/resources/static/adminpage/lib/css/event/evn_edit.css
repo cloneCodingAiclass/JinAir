@@ -118,19 +118,13 @@
     border-bottom: 1px solid #ccc;
     padding: 5px;
 }
-.contents > .contwrap > .event_wrap > .event_edit td.content_txt img {
-    display: block;
-    margin: auto;
-    width: 330px;
-    height: 300px;
-}
 .contents > .contwrap > .event_wrap > .event_edit .event_content {
     width: 100%;
     resize: none;
-    margin-top: 5px;
+    margin: 5px 0;
     padding: 5px;
     border: 1px solid #ccc;
-    height: 120px;
+    height: 200px;
     outline: none;
 }
 
@@ -163,7 +157,7 @@
     position: absolute;
     background: rgba(0, 0, 0, 0.5);
     left: 0; right: 0; top: 0; bottom: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -206,7 +200,7 @@
     position: absolute;
     background: rgba(0, 0, 0, 0.5);
     left: 0; right: 0; top: 0; bottom: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }

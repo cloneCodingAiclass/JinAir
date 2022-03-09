@@ -45,7 +45,7 @@
                             </tr>
                             <tr v-for="dto in itemList">
                                 <td>{{dto.evIndex}}</td>
-                                <td class="list_tit"><a href="./evn_view.html">{{dto.evContent}}</a></td>
+                                <td class="list_tit"><a :href=`/pages/admin/evn_view/${dto.evIndex}`>{{dto.evContent}}</a></td>
                                 <td>{{dto.evStartDay.substr(0,10)}} ~ {{dto.evEndDay.substr(0,10)}}</td>
                                 <td>{{dto.evRegdate.substr(0,10)}}</td>
                             </tr>
@@ -59,7 +59,7 @@
                                     </tr>
                                 </table>
                             </div>
-                            <a href="evn_write.html" class="notice_write"><input type="button" value="작성하기"></a>
+                            <a href="./evn_write" class="notice_write"><input type="button" value="작성하기"></a>
                         </div>
                     </div>
                 </div>
