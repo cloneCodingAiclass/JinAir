@@ -29,7 +29,9 @@ public class TbLost { // 유실물관리 테이블
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_lost_idx")
     private Long losIndex;
     private String losType;
-    private String losImg;
+    private String losImgName;
+    private String losImgOriName;
+    private String losImgPath;
     private String losAirplane;
     private String losAirportArea;
     private LocalDateTime losArrivedate;

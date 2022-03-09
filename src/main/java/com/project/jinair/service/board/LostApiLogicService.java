@@ -12,10 +12,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,22 +27,12 @@ public class LostApiLogicService implements CrudInterface<LostApiRequest, LostAp
 
     private final TbLostRepository tbLostRepository;
 
+
+
+
     @Override
     public Header<LostApiResponse> create(Header<LostApiRequest> request) {
-        LostApiRequest lostApiRequest = request.getData();
-        System.out.println(lostApiRequest.getLosArrivedate());
-        System.out.println(lostApiRequest.getLosImg());
-        System.out.println(lostApiRequest.getLosAirplane());
-        TbLost tbLost = TbLost.builder()
-                .losType(lostApiRequest.getLosType())
-                .losImg(lostApiRequest.getLosImg())
-                .losAirportArea(lostApiRequest.getLosAirportArea())
-                .losAirplane(lostApiRequest.getLosAirplane())
-                .losArrivedate(LocalDateTime.parse(lostApiRequest.getLosArrivedate()))
-                .losIsfind(LostStatus.NotReceived)
-                .build();
-        TbLost newTbLost = tbLostRepository.save(tbLost);
-        return response(newTbLost);
+        return null;
     }
 
     @Override
@@ -51,6 +44,22 @@ public class LostApiLogicService implements CrudInterface<LostApiRequest, LostAp
 
     @Override
     public Header<LostApiResponse> update(Header<LostApiRequest> request) {
+        return null;
+    }
+
+
+    public Header<LostApiResponse> update(Header<LostApiRequest> request, MultipartFile losImg) throws Exception {
+
+        String Path = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload";
+
+        UUID uuid = UUID.randomUUID();
+
+        String fileName = uuid + "_" + losImg.getOriginalFilename();
+
+        File saveFile = new File(Path, fileName);
+
+        losImg.transferTo(saveFile);
+
         LostApiRequest lostApiRequest = request.getData();
         Optional<TbLost> tbLost = tbLostRepository.findById(lostApiRequest.getLosIndex());
 
@@ -114,7 +123,8 @@ public class LostApiLogicService implements CrudInterface<LostApiRequest, LostAp
         LostApiResponse lostApiResponse = LostApiResponse.builder()
                 .losIndex(tbLost.getLosIndex())
                 .losType(tbLost.getLosType())
-                .losImg(tbLost.getLosImg())
+                .losImgName(tbLost.getLosImgName())
+                .losImgPath(tbLost.getLosImgPath())
                 .losAirportArea(tbLost.getLosAirportArea())
                 .losAirplane(tbLost.getLosAirplane())
                 .losArrivedate(tbLost.getLosArrivedate())
@@ -128,7 +138,8 @@ public class LostApiLogicService implements CrudInterface<LostApiRequest, LostAp
         LostApiResponse lostApiResponse = LostApiResponse.builder()
                 .losIndex(tbLost.getLosIndex())
                 .losType(tbLost.getLosType())
-                .losImg(tbLost.getLosImg())
+                .losImgName(tbLost.getLosImgName())
+                .losImgPath(tbLost.getLosImgPath())
                 .losAirportArea(tbLost.getLosAirportArea())
                 .losAirplane(tbLost.getLosAirplane())
                 .losArrivedate(tbLost.getLosArrivedate())

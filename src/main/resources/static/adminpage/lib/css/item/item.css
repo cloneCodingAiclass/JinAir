@@ -127,6 +127,11 @@
     height: 80px;
     border-bottom: 1px solid rgb(153, 153, 153, 0.5);
 }
+
+#lostList img {
+    width: 60px;
+}
+
 .item_list > table td input {
     border: none;
     width: 60px;

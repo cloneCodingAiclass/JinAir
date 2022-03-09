@@ -74,7 +74,7 @@
                         <tbody id="lostList">
                             <tr role="row" v-for="dto in lostList">
                                 <td scope="row" id="itemIndex"><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losIndex}}</a></td>
-                                <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losImg}}</a></td>
+                                <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`><img :src=`/upload/${dto.losImgName}` alt="이미지"></a></td>
                                 <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losType}}</a></td>
                                 <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losAirplane}}</a></td>
                                 <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losArrivedate}}</a></td>

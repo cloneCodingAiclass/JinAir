@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,9 +23,8 @@ public class LostApiController implements CrudInterface<LostApiRequest, LostApiR
     private final LostApiLogicService lostApiLogicService;
 
     @Override
-    @PostMapping("")
-    public Header<LostApiResponse> create(@RequestBody Header<LostApiRequest> request) {
-        return lostApiLogicService.create(request);
+    public Header<LostApiResponse> create(Header<LostApiRequest> request) {
+        return null;
     }
 
     @Override
@@ -34,9 +34,13 @@ public class LostApiController implements CrudInterface<LostApiRequest, LostApiR
     }
 
     @Override
+    public Header<LostApiResponse> update(Header<LostApiRequest> request) {
+        return null;
+    }
+
     @PutMapping("")
-    public Header<LostApiResponse> update(@RequestBody Header<LostApiRequest> request) {
-        return lostApiLogicService.update(request);
+    public Header<LostApiResponse> update(@RequestBody Header<LostApiRequest> request, MultipartFile file) throws Exception {
+        return lostApiLogicService.update(request, file);
     }
 
     @Override

@@ -152,33 +152,28 @@ $(() => {
 
     $("option[value='필수 선택']").attr('selected', true);
 
-    let jsonData;
-
-    function insert(){
-        jsonData = {
-            data : {
-                losAirplane : $("#airplane_list").find('option:selected').val(),
-                losType : $("#item_list").find('option:selected').val(),
-                losArrivedate : $("#arrival_date").val() + "T00:00:00",
-                losAirportArea : $("#arrival_airport_list").find('option:selected').val(),
-                losImg : $("#item_img").val()
-            }
-        }
-        $.ajax({
-            url : "/api/lost",
-            type : "POST",
-            data : JSON.stringify(jsonData),
-            dataType : "text",
-            contentType : "application/json"
-        });
-    }
-
+    // let jsonData;
+    //
+    // function insert(){
+    //     jsonData = {
+    //         data : {
+    //             losAirplane : $("#airplane_list").find('option:selected').val(),
+    //             losType : $("#item_list").find('option:selected').val(),
+    //             losArrivedate : $("#arrival_date").val() + "T00:00:00",
+    //             losAirportArea : $("#arrival_airport_list").find('option:selected').val(),
+    //             losImg : $("#item_img").val()
+    //         }
+    //     }
+    //     $.ajax({
+    //         url : "/api/lost",
+    //         type : "POST",
+    //         enctype: 'multipart/form-data',
+    //         data : jsonData.data
+    //     });
+    // }
     $("#createBtn").click(() => {
-        insert();
+        //insert();
         alert('등록완료');
-        location.reload();
-        console.dir(jsonData);
-        console.log($("#arrival_date").val());
     })
 
 

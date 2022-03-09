@@ -14,7 +14,7 @@
             <div class="contents_box">
                 <div id="itemadd_title">유실물 등록</div>
                 <div id="itemadd_contents">
-                    <div>
+                    <form th:action="@{/pages/admin/item/itemadd/file}" method="post" enctype="multipart/form-data">
                         <table>
                             <tr>
                                 <td>항공편</td>
@@ -43,7 +43,7 @@
                                     이미지 첨부
                                     <label for="item_img">
                                         첨부파일
-                                        <input type="file" name="losImg" id="item_img" value=""/>
+                                        <input type="file" name="losImg" id="item_img"/>
                                     </label>
                                     <input class="item_img_upload" value="파일이름" readonly/>
                                 </td>
@@ -51,9 +51,9 @@
                         </table>
                         <div id="form_btn">
                             <a href="/pages/admin/item"><input type="button" value="목록" /></a>
-                            <input type="submit" value="등록" id="createBtn"/>
+                            <input type="submit" value="등록"/>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

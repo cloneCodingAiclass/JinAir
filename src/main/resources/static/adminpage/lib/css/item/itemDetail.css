@@ -53,6 +53,10 @@
     height: 80px;
     border-bottom: 1px solid rgb(153, 153, 153, 0.5);
 }
+
+#item_detail img {
+    width: 60px;
+}
 #item_detail > table td input {
     padding: 1px 15px;
     border: none;

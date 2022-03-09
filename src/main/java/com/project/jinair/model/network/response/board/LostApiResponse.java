@@ -17,7 +17,8 @@ import java.util.List;
 public class LostApiResponse {
     private Long losIndex;
     private String losType;
-    private String losImg;
+    private String losImgName;
+    private String losImgPath;
     private String losAirplane;
     private String losAirportArea;
     private LocalDateTime losArrivedate;

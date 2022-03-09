@@ -1,11 +1,14 @@
 package com.project.jinair.controller.page;
 
+import com.project.jinair.model.entity.board.TbLost;
 import com.project.jinair.model.entity.board.TbMagazine;
 import com.project.jinair.model.entity.board.TbNotifi;
+import com.project.jinair.model.enumclass.LostStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.response.board.FaqApiResponse;
 import com.project.jinair.model.network.response.board.MagazineApiResponse;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
+import com.project.jinair.repository.TbLostRepository;
 import com.project.jinair.repository.TbMagazineRepository;
 import com.project.jinair.service.MenuService;
 import com.project.jinair.service.board.*;
@@ -24,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -663,6 +667,49 @@ public class PageController {
                 .addObject("code", "itemadd")
                 .addObject("menuList", menuService.getadminMenu())
                 .addObject("item", menuService.adminItemMenu());
+    }
+
+    @Autowired
+    private TbLostRepository tbLostRepository;
+
+    @RequestMapping("admin/item/itemadd/file")
+    public String itemFile(
+            @RequestPart(value = "losAirplane") String airplane,
+            @RequestPart(value = "losType") String type,
+            @RequestPart(value = "losArrivedate") String date,
+            @RequestPart(value = "losAirportArea") String area,
+            @RequestPart(value = "losImg") MultipartFile img) throws Exception {
+        TbLost tbLost = new TbLost();
+
+        tbLost.setLosAirplane(airplane);
+        tbLost.setLosType(type);
+        tbLost.setLosArrivedate(LocalDateTime.parse(date + "T00:00:00"));
+        tbLost.setLosAirportArea(area);
+        tbLost.setLosIsfind(LostStatus.NotReceived);
+
+        String imgName = img.getOriginalFilename();
+        String imgNameExtension = FilenameUtils.getExtension(imgName).toLowerCase();
+        FilenameUtils.removeExtension(imgName);
+
+        File destinationImg;
+        String destinationImgName;
+        String PATH = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\";
+
+        do{
+            destinationImgName = RandomStringUtils.randomAlphabetic(32)+"."+imgNameExtension;
+            destinationImg = new File(PATH + destinationImgName);
+        }while (destinationImg.exists());
+
+        destinationImg.getParentFile().mkdir();
+
+        img.transferTo(destinationImg);
+
+        tbLost.setLosImgName(destinationImgName);
+        tbLost.setLosImgOriName(imgName);
+        tbLost.setLosImgPath(PATH);
+
+        tbLostRepository.save(tbLost);
+        return "redirect:/pages/admin/item/itemadd";
     }
     //-------------------------------------------------------------------------------------------
 
