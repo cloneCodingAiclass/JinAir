@@ -36,7 +36,7 @@ public class MenuService {
     public List<Menu> adminReservationMenu() {
         return Arrays.asList(
                 Menu.builder().title("운항 별 예약자 조회").url("/pages/admin/rsIndex").code("rs_index").build(),
-                Menu.builder().title("예약자 명 조회").url("/pages/admin/rs_sch_result").code("rs_sch_result").build()
+                Menu.builder().title("예약자 명 조회").url("/pages/admin/rs_sch").code("rs_sch").build()
         );
     }
     public List<Menu> adminItemMenu() {

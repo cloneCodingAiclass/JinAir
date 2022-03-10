@@ -432,3 +432,39 @@ document.getElementById("korea_time").innerHTML = yyyy + "년 " + mo + "월 " + 
 
 const st = window.setInterval(printtime);  // 입장시 시간 출력
 
+$(function (){
+
+    let showList = new Vue({
+        el : '#showList',
+        data : {
+            showList : {}
+        }
+    })
+
+    let scList = new Vue({
+        el : '#scList',
+        data : {
+            scList : {}
+        }
+    })
+
+    sclist(0);
+
+    function sclist(index){
+        $.get("/api/schedule/list?page="+index+"&size=5", function(response){
+            console.dir(response);
+
+            pagination = response.pagination;
+
+            showList.totalPages = pagination.totalPages;
+            showList.currentPage = pagination.currentPage;
+
+            // 전체 페이지
+            showList.showPage = pagination.data;
+
+            // 검색 데이터
+            scList.scList = response.data;
+        })
+    }
+
+})

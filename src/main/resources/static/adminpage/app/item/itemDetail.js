@@ -128,7 +128,7 @@ $(() => {
             type : "DELETE"
         })
         alert("삭제 완료");
-        location.href = 'pages/admin/item';
+        location.href = '/pages/admin/item';
     })
 
     $(document).on("click", '#item_isfind_btn', function (){
@@ -149,6 +149,7 @@ $(() => {
             dataType : "text",
             contentType : "application/json"
         })
+        alert('변경 완료');
         $("#modal_isfind").fadeOut(200);
         location.reload();
     })
@@ -167,6 +168,7 @@ $(() => {
             dataType : "text",
             contentType : "application/json"
         })
+        alert('변경 완료');
         $("#modal_isfind").fadeOut(200);
         location.reload();
     })
