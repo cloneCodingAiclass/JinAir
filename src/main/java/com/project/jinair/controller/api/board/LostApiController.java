@@ -34,13 +34,9 @@ public class LostApiController implements CrudInterface<LostApiRequest, LostApiR
     }
 
     @Override
-    public Header<LostApiResponse> update(Header<LostApiRequest> request) {
-        return null;
-    }
-
     @PutMapping("")
-    public Header<LostApiResponse> update(@RequestBody Header<LostApiRequest> request, MultipartFile file) throws Exception {
-        return lostApiLogicService.update(request, file);
+    public Header<LostApiResponse> update(@RequestBody Header<LostApiRequest> request){
+        return lostApiLogicService.update(request);
     }
 
     @Override

@@ -43,23 +43,7 @@ public class LostApiLogicService implements CrudInterface<LostApiRequest, LostAp
     }
 
     @Override
-    public Header<LostApiResponse> update(Header<LostApiRequest> request) {
-        return null;
-    }
-
-
-    public Header<LostApiResponse> update(Header<LostApiRequest> request, MultipartFile losImg) throws Exception {
-
-        String Path = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload";
-
-        UUID uuid = UUID.randomUUID();
-
-        String fileName = uuid + "_" + losImg.getOriginalFilename();
-
-        File saveFile = new File(Path, fileName);
-
-        losImg.transferTo(saveFile);
-
+    public Header<LostApiResponse> update(Header<LostApiRequest> request){
         LostApiRequest lostApiRequest = request.getData();
         Optional<TbLost> tbLost = tbLostRepository.findById(lostApiRequest.getLosIndex());
 
