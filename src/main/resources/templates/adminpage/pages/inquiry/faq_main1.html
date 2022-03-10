@@ -5,9 +5,10 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/inquiry/faq_main1.css">
-<script src="/adminpage/app/inquiry/faq_main.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+
 <!-- head.html 끝-->
 <body>
     <div id="wrap">
@@ -34,20 +35,21 @@
                         </div>
                     </div>
                     <div class="contents_main">
-                        <table id="tableBoard">
+                        <table class="tableBoard1">
                             <tr>
                                 <td>번호</td>
                                 <td>제목</td>
                                 <td>등록일</td>
                             </tr>
-                            <tr v-for="dto in tableBoard">
-                                <td>{{dto.faqIndex}}</td>
-                                <td><a :href=`/pages/admin/faq_view/${dto.faqIndex}`>{{dto.faqTitle}}</a></td>
-                                <td>{{dto.faqRegdate.substr(0,10)}}</td>
+                            <tr v-for="faq in tableBoard1By('항공권 예매')">
+                                <td>{{faq.faqIndex}}</td>
+                                <td><a :href=`/pages/admin/faq_view/${faq.faqIndex}`>{{faq.faqTitle}}</a></td>
+                                <td>{{faq.faqRegdate.substr}}</td>
                             </tr>
                         </table>
                     </div>
                     <div class="contents_bottom">
+                        <div id="button" class="buttonList"> </div>
                         <div class="faq_btn_write">
                             <a href="/pages/admin/inquiry/faq_write" class="faq_write"><input type="button" value="작성하기"></a>
                         </div>
@@ -57,4 +59,5 @@
         </div>
     </div>
 </body>
+<script src="/adminpage/app/inquiry/faq_main1.js"></script>
 </html>

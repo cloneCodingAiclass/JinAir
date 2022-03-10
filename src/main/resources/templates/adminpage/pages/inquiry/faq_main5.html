@@ -40,10 +40,10 @@
                                 <td>제목</td>
                                 <td>등록일</td>
                             </tr>
-                            <tr v-for="dto in tableBoard">
-                                <td>{{dto.faqIndex}}</td>
-                                <td><a :href=`/pages/admin/faq_view/${dto.faqIndex}`>{{dto.faqTitle}}</a></td>
-                                <td>{{dto.faqRegdate.substr(0,10)}}</td>
+                            <tr v-for="faq in tableBoard">
+                                <td>{{faq.faqIndex}}</td>
+                                <td><a :href=`/pages/admin/faq_view/${faq.faqIndex}`>{{faq.faqTitle}}</a></td>
+                                <td>{{faq.faqRegdate}}</td>
                             </tr>
                         </table>
                     </div>
@@ -57,4 +57,6 @@
         </div>
     </div>
 </body>
+<script src="/adminpage/app/inquiry/faq_main.js"></script>
+
 </html>

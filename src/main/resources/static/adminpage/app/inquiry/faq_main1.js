@@ -97,98 +97,6 @@ $(function () {
         $('.nav7').parent().siblings().find('li').css({"display": "none"});
         $('.nav7').siblings('li').eq(1).find('a').css({"color": "#BDD600"});
     });
-    $('#board').css({"display" : "block"});
-    $('#board1').css({"display" : "none"});
-    $('#board2').css({"display" : "none"});
-    $('#board3').css({"display" : "none"});
-    $('#board4').css({"display" : "none"});
-    $('#board5').css({"display" : "none"});
-    $('.tab').on('click', function (){
-        $('#board').css({"display" : "block"});
-        $('#checkBox').css({"background-color" : "#fff"});
-        $('#board1').css({"display" : "none"});
-        $('#checkBox1').css({"background-color" : "#BDD600"});
-        $('#board2').css({"display" : "none"});
-        $('#checkBox2').css({"background-color" : "#BDD600"});
-        $('#board3').css({"display" : "none"});
-        $('#checkBox3').css({"background-color" : "#BDD600"});
-        $('#board4').css({"display" : "none"});
-        $('#checkBox4').css({"background-color" : "#BDD600"});
-        $('#board5').css({"display" : "none"});
-        $('#checkBox5').css({"background-color" : "#BDD600"});
-    });
-    $('.tab1').on('click', function (){
-        $('#board').css({"display" : "none"});
-        $('#checkBox').css({"background-color" : "#BDD600"});
-        $('#board1').css({"display" : "block"});
-        $('#checkBox1').css({"background-color" : "#fff"});
-        $('#board2').css({"display" : "none"});
-        $('#checkBox2').css({"background-color" : "#BDD600"});
-        $('#board3').css({"display" : "none"});
-        $('#checkBox3').css({"background-color" : "#BDD600"});
-        $('#board4').css({"display" : "none"});
-        $('#checkBox4').css({"background-color" : "#BDD600"});
-        $('#board5').css({"display" : "none"});
-        $('#checkBox5').css({"background-color" : "#BDD600"});
-    });
-    $('.tab2').on('click', function (){
-        $('#board').css({"display" : "none"});
-        $('#checkBox').css({"background-color" : "#BDD600"});
-        $('#board1').css({"display" : "none"});
-        $('#checkBox1').css({"background-color" : "#BDD600"});
-        $('#board2').css({"display" : "block"});
-        $('#checkBox2').css({"background-color" : "#fff"});
-        $('#board3').css({"display" : "none"});
-        $('#checkBox3').css({"background-color" : "#BDD600"});
-        $('#board4').css({"display" : "none"});
-        $('#checkBox4').css({"background-color" : "#BDD600"});
-        $('#board5').css({"display" : "none"});
-        $('#checkBox5').css({"background-color" : "#BDD600"});
-    });
-    $('.tab3').on('click', function (){
-        $('#board').css({"display" : "none"});
-        $('#checkBox').css({"background-color" : "#BDD600"});
-        $('#board1').css({"display" : "none"});
-        $('#checkBox1').css({"background-color" : "#BDD600"});
-        $('#board2').css({"display" : "none"});
-        $('#checkBox2').css({"background-color" : "#BDD600"});
-        $('#board3').css({"display" : "block"});
-        $('#checkBox3').css({"background-color" : "#fff"});
-        $('#board4').css({"display" : "none"});
-        $('#checkBox4').css({"background-color" : "#BDD600"});
-        $('#board5').css({"display" : "none"});
-        $('#checkBox5').css({"background-color" : "#BDD600"});
-    });
-    $('.tab4').on('click', function (){
-        $('#board').css({"display" : "none"});
-        $('#checkBox').css({"background-color" : "#BDD600"});
-        $('#board1').css({"display" : "none"});
-        $('#checkBox1').css({"background-color" : "#BDD600"});
-        $('#board2').css({"display" : "none"});
-        $('#checkBox2').css({"background-color" : "#BDD600"});
-        $('#board3').css({"display" : "none"});
-        $('#checkBox3').css({"background-color" : "#BDD600"});
-        $('#board4').css({"display" : "block"});
-        $('#checkBox4').css({"background-color" : "#fff"});
-        $('#board5').css({"display" : "none"});
-        $('#checkBox5').css({"background-color" : "#BDD600"});
-    });
-    $('.tab5').on('click', function (){
-        $('#board').css({"display" : "none"});
-        $('#checkBox').css({"background-color" : "#BDD600"});
-        $('#board1').css({"display" : "none"});
-        $('#checkBox1').css({"background-color" : "#BDD600"});
-        $('#board2').css({"display" : "none"});
-        $('#checkBox2').css({"background-color" : "#BDD600"});
-        $('#board3').css({"display" : "none"});
-        $('#checkBox3').css({"background-color" : "#BDD600"});
-        $('#board4').css({"display" : "none"});
-        $('#checkBox4').css({"background-color" : "#BDD600"});
-        $('#board5').css({"display" : "block"});
-        $('#checkBox5').css({"background-color" : "#fff"});
-    });
-
-
 });
 
 (function ($) {
@@ -201,15 +109,9 @@ $(function () {
     //     }
     //
     // });
-    let tableBoard = new Vue({
-        el : '#tableBoard',
-        data : {
-            tableBoard : {}
-        }
-    })
 
     let tableBoard1 = new Vue({
-        el : '#tableBoard1',
+        el : '.tableBoard1',
         data : {
             tableBoard1 : {}
         },
@@ -223,68 +125,15 @@ $(function () {
 
     });
 
-    let tableBoard2 = new Vue({
-        el : '#tableBoard2',
-        data : {
-            tableBoard2 : {}
-        },
-        methods: {
-            tableBoard2By: function (faqType){
-                return this.tableBoard2.filter(function (board){
-                    return board.faqType == faqType;
-                });
-            }
-        }
-
-    });
-
-    let tableBoard3 = new Vue({
-        el : '#tableBoard3',
-        data : {
-            tableBoard3 : {}
-        },
-        methods: {
-            tableBoard3By: function (faqType){
-                return this.tableBoard3.filter(function (board){
-                    return board.faqType == faqType;
-                });
-            }
-        }
-
-    });
-
-    let tableBoard4 = new Vue({
-        el : '#tableBoard4',
-        data : {
-            tableBoard4 : {}
-        },
-        methods: {
-            tableBoard4By: function (faqType){
-                return this.tableBoard4.filter(function (board){
-                    return board.faqType == faqType;
-                });
-            }
-        }
-
-    });
-    let tableBoard5 = new Vue({
-        el : '#tableBoard5',
-        data : {
-            tableBoard5 : {}
-        },
-        methods: {
-            tableBoard5By: function (faqType){
-                return this.tableBoard5.filter(function (board){
-                    return board.faqType == faqType;
-                });
-            }
-        }
-
-    });
-
-
-
-
+    // let tableBoard1 = new Vue({
+    //     el : '#tableBoard1',
+    //     data : {
+    //         tableBoard1 : {ta}
+    //     }
+    //
+    //
+    //
+    // });
     let showPage = new Vue({
         el : '#showPage',
         data : {
@@ -307,14 +156,7 @@ $(function () {
 
             // 전체 페이지
             showPage.showPage = pagination.data;
-            tableBoard.tableBoard = response.data;
             tableBoard1.tableBoard1 = response.data;
-            tableBoard2.tableBoard2 = response.data;
-            tableBoard3.tableBoard3 = response.data;
-            tableBoard4.tableBoard4 = response.data;
-            tableBoard5.tableBoard5 = response.data;
-
-
 
             let url = "";
             let NumberPage = 0;
