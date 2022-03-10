@@ -8,6 +8,9 @@ import com.project.jinair.model.network.response.board.FaqApiResponse;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.service.board.FaqApiLogicService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +28,8 @@ public class FaqApiController implements CrudInterface<FaqApiRequest, FaqApiResp
 
     // 게시판 리스트
     @GetMapping("/list")
-    public Header<List<FaqApiResponse>> findAll() {
-        return faqApiLogicService.search();
+    public Header<List<FaqApiResponse>> findAll(@PageableDefault(sort = {"faqIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        return faqApiLogicService.search(pageable);
     }
 
     // 게시판 글작성
