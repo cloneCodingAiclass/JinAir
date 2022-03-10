@@ -139,11 +139,14 @@ $(function () {
 
         })
     }
-
+    $("#adid").change(function (){
+        let seat = $(this).val();
+        $("#resultseat").val(seat);
+    })
 
     function register(){
         let apname = document.getElementById("apname").value;
-        let apid = document.getElementById("adid").value;
+        let apid = document.getElementById("adid").text;
         let startdate = document.getElementById("startdate").value + "T08:00:00";
         let departurepoint = document.getElementById("departurepoint").value;
         let starttime = "2000-01-01T" + document.getElementById("starttime").value;
