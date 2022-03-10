@@ -282,6 +282,12 @@ $(function () {
 
     });
 
+    let pagination = {
+        totalPages : 0,
+        totalElements : 0,
+        currentPage : 0,
+        currentElements : 0
+    };
 
 
 
@@ -300,6 +306,7 @@ $(function () {
     function list(page){
         $.get("/api/faq/list?page="+page, function(response){
             console.dir(response);
+
             pagination = response.pagination;
 
             showPage.totalPages = pagination.totalPages;
@@ -314,6 +321,8 @@ $(function () {
             tableBoard4.tableBoard4 = response.data;
             tableBoard5.tableBoard5 = response.data;
 
+            console.dir(tableBoard);
+            console.dir(pagination);
 
 
             let url = "";
@@ -326,8 +335,8 @@ $(function () {
             document.getElementById("button").innerHTML = url;
 
             $(".pageButton").on('click', function (){
-                index = $(this).attr("id");
-                sclist(index);
+                page = $(this).attr("id");
+                list(page);
             })
         })
     };
