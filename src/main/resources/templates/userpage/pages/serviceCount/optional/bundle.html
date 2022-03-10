@@ -5,8 +5,6 @@
 <div th:replace="/userpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/userpage/lib/css/serviceCount/optional/bundle.css">
 <script src="/userpage/app/serviceCount/optional/bundle.js"></script>
-<script src="/userpage/app/index/quickmenu.js"></script>
-<link rel="stylesheet" href="/userPage/lib/css/index/quickmenu.css">
 <body>
     <ul class="skipnavi"><!--책갈피 역할-->
         <li><a href="#container">본문내용</a></li> 
@@ -16,7 +14,6 @@
         <!--header-->
         <div th:replace="userpage/fragment/menu :: menu"></div>
         <!--header 끝-->
-
         <!--container-->
         <div id="container">
             <div class="contentswrap">
@@ -30,7 +27,7 @@
                     <table>
                         <tr>
                             <th class="dis_bundle cursor">번들 서비스 안내</th>
-                            <th class="dis_lounge cursor" onclick="location.href='./lounge.html'">라운지 이용권 안내</th>
+                            <th class="dis_lounge cursor" onclick="location.href='./lounge'">라운지 이용권 안내</th>
                         </tr>
                     </table>
                 </div>
@@ -232,7 +229,7 @@
                                 좌석배치도
                             </p>
                             <p class="close">
-                                <img src="./img/close.png" alt="닫기" class="cursor" width="35px">
+                                <img src="/userpage/lib/img/close.png" alt="닫기" class="cursor" width="35px">
                             </p>
                         </div>
                         <div class="modal_content_wrap">
@@ -243,15 +240,15 @@
                             </div>
 
                             <div id="modal_content1" class="modal_content">
-                                <img src="./img/seatmap1.png" alt="B777-200ER" class="seatmap_img">
+                                <img src="/userpage/lib/img/seatmap1.png" alt="B777-200ER" class="seatmap_img">
                             </div>
 
                             <div id="modal_content2" class="modal_content">
-                                <img src="./img/seatmap2.png" alt="B737-800" class="seatmap_img">
+                                <img src="/userpage/lib/img/seatmap2.png" alt="B737-800" class="seatmap_img">
                             </div>
 
                             <div id="modal_content3" class="modal_content">
-                                <img src="./img/seatmap3.png" alt="B737-900" class="seatmap_img">
+                                <img src="/userpage/lib/img/seatmap3.png" alt="B737-900" class="seatmap_img">
                             </div>
                         </div>
                     </div>

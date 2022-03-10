@@ -149,7 +149,7 @@ body{
 }
 #header .login > li .lang_img{
     display: inline-block;
-    background: url(./index_img/down.png) no-repeat right;
+    background: url("/userpage/lib/img/down.png") no-repeat right;
     background-size: 13px;
     width: 13px;
     height: 13px;
