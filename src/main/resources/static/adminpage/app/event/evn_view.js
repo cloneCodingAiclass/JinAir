@@ -131,9 +131,9 @@ $(() => {
 $(()=> {
     $('#modal_isdelete').hide();
     $(".canc_btn").on('click', () => {
-        $("#modal_isdelete").fadeIn();
+        $("#modal_isdelete").css("display","flex");
     })
     $(".uncomplete").on('click', () => {
-        $("#modal_isdelete").fadeOut();
+        $("#modal_isdelete").css("display","none");
     })
 });

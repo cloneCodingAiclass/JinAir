@@ -102,46 +102,15 @@ $(function () {
 
     let idx = $(location).attr('href').split('/')[6];
 
-    let ntModify = new Vue({
-        el : '#ntModify',
-        data : {
-            ntModify : {}
-        }
-    })
 
-    search(idx);
-
-    function search(index){
-        console.log("index : " + index);
-        $.get("/api/notify/"+index, function (response){
-            console.dir(response);
-            $("#ntRegdate").text("등록일 " + response.data.noRegdate);
-            $("#ntTitle").val(response.data.noTitle);
-            $("#ntfileName").val(response.data.noFileUrl + response.data.noFileOriname);
-            $("#ntContent").val(response.data.noContents);
-            ntModify.ntModify = response.data;
-        })
-    }
-
-    let jsonData
-
-    function updating(){
-        jsonData = {
-            data : {
-                noIndex : idx,
-                noTitle : $("#ntTitle").val(),
-                noFile : $("#ntFile").val(),
-                noContents : $("#ntContent").val()
-            }
-        }
-        $.ajax({
-            url : "/api/notify",
-            type : "PUT",
-            data : JSON.stringify(jsonData),
-            dataType : "text",
-            contentType : "application/json"
-        });
-    }
+    let update = document.getElementById("update");
+    update.addEventListener("click", function () {
+        let form = document.getElementById("updateNoty");
+        form.action = `/pages/admin/nt_file/upload/${idx}`;
+        form.mothod = "PUT";
+        form.submit();
+        location.href = `/pages/admin/nt_view/${idx}`;
+    });
 
     $("#update").click( () => {
         updating();
@@ -151,9 +120,9 @@ $(function () {
 
 })(jQuery)
 
-
 $(()=> {
     $('#ex_file').on('change', function(){
         $('#ntfileName').val($('#ex_file').val());
+        console.log($('#ntfileName').val());
     });
 });

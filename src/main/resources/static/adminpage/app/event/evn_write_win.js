@@ -127,7 +127,7 @@ $(()=> {
     $('#modal_iswrite').hide();
     $(".write_btn").on('click', () => {
         if($('#evTitle').val().length <= 0 || $('#evContent').val().length <= 0){
-            alert('내용일 정확히 입력되었는지 다시 한번 확인해주세요.')
+            alert('내용을 정확히 입력되었는지 다시 한번 확인해주세요.')
         }else{
                 $("#modal_iswrite").fadeIn();
         }

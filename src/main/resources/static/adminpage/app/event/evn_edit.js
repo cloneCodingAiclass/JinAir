@@ -106,10 +106,10 @@ $(()=> {
         if(strrr > strrr1){
             alert('이벤트 시작일이 종료일을 넘을 수 없습니다.');
         }else{
-            if ($('#ex_file').val().length <= 1){
-                $("#modal_isedit").css("display", "flex");
-            }else{
+            if ($('.filetext').val().length <= 0){
                 alert('파일 첨부를 확인 해주세요.');
+            }else{
+                $("#modal_isedit").css("display", "flex");
             }
         }
     })

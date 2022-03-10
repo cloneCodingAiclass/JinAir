@@ -4,7 +4,8 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/admin_main.css">
-<script src="/adminpage/app/admin_main.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <!-- head.html 끝-->
 <body>
     <div id="wrap">
@@ -116,9 +117,9 @@
                     <div class="chartcontainer">  
                         <canvas id="line-chart"></canvas>
                     </div>
-                    <div class="bottcont" id="itemList">
-                        <div class="QnA">
-                            <p><a href="/AdminPage/inquiry/qna_main.html">Q&A</a></p> 
+                    <div class="bottcont">
+                        <div class="QnA" id="itemList">
+                            <p><a href="/page/admin/faq_main">Q&A</a></p>
                             <p>답변이 필요한 게시글 : ({{itemList.length}})개</p>
                             <table>
                                 <tr v-for="dto in itemList.slice().reverse()">
@@ -126,10 +127,10 @@
                                     <td>NotComplete</td>
                                 </tr>
                             </table>
-                            <p><a href="/AdminPage/inquiry/qna_main">more</a></p>
+                            <p><a href="/page/admin/faq_main">more</a></p>
                         </div>
-                        <div class="notice">
-                            <p><a href="/AdminPage/notice/notice.html">운항 스케줄</a></p>
+                        <div class="notice" id="scList">
+                            <p><a href="/pages/admin/scheduleList">운항 스케줄</a></p>
                             <table>
                                 <tr>
                                     <td>운항편</td>
@@ -140,192 +141,31 @@
                                     <td>도착시간</td>
                                     <td>예약 가능 좌석<br>(수용 좌석)</td>
                                 </tr>
-                                <tr>
+                                <tr v-for="list in scList">
                                     <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
+                                        <a href="/pages/admin/scheduleResultInfo/${list.schIndex}">{{list.schAirplaneId}}</a>
                                     </td>
                                     <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
+                                        <a href="/pages/admin/scheduleResultInfo/${list.schIndex}">{{list.schDepartureDate.substr(0,10)}}</a>
                                     </td>
                                     <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
+                                        <a href="/pages/admin/scheduleResultInfo/${list.schIndex}">{{list.schDeparturePoint}}</a>
                                     </td>
                                     <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
+                                        <a href="/pages/admin/scheduleResultInfo/${list.schIndex}">{{list.schStartTime.substr(11,16)}}</a>
                                     </td>
                                     <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
+                                        <a href="/pages/admin/scheduleResultInfo/${list.schIndex}">{{list.schArrivalPoint}}</a>
                                     </td>
                                     <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
+                                        <a href="/pages/admin/scheduleResultInfo/${list.schIndex}">{{list.schArrivalDate.substr(11,16)}}</a>
                                     </td>
                                     <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">LJ438</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">2022-01-28</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">서울/김포(GMP)</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">08:20</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">제주(CJU)</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">09:10</a>
-                                    </td>
-                                    <td>
-                                        <a href="/AdminPage/schedule/sc_resultinfo.html">278(430)</a>
+                                        <a href="/pages/admin/scheduleResultInfo/${list.schIndex}">278(430)</a>
                                     </td>
                                 </tr>
                             </table>
-                            <p><a href="/AdminPage/schedule/sc_list.html">more</a></p>
+                            <p><a href="/pages/admin/scheduleList">more</a></p>
                         </div>
                     </div>
                 </div>
@@ -333,5 +173,6 @@
         </div>
     </div>
 </body>
+<script src="/adminpage/app/admin_main.js"></script>
 </html>
 <script src="/adminpage/app/chart.js"></script>
