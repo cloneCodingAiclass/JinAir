@@ -5,19 +5,17 @@
 <div th:replace="/userpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/userpage/lib/css/serviceCount/aircraft/cabinShopping.css">
 <script src="/userpage/app/serviceCount/aircraft/cabinShopping.js"></script>
-<script src="/userpage/app/index/quickmenu.js"></script>
-<link rel="stylesheet" href="/userPage/lib/css/index/quickmenu.css">
 <!-- head.html 끝-->
 <body>
-<ul class="skipnavi">
-    <!--책갈피 역할-->
-    <li><a href="#container">본문내용</a></li>
-</ul>
-<!--wrap-->
-<div id="wrap">
-    <!--header-->
-    <div th:replace="userpage/fragment/menu :: menu"></div>
-    <!--header 끝-->
+    <ul class="skipnavi">
+        <!--책갈피 역할-->
+        <li><a href="#container">본문내용</a></li>
+    </ul>
+    <!--wrap-->
+    <div id="wrap">
+        <!--header-->
+        <div th:replace="userpage/fragment/menu :: menu"></div>
+        <!--header 끝-->
             <div id="container">
                 <div class="contentswrap">
                     <div class="discount">
@@ -87,17 +85,15 @@
                     </div>
                 </div>
             </div>
-        </div>
         <!-- container 끝-->
-<!-- 푸터-->
-<div th:replace="userpage/fragment/footer :: footer"></div>
-<!--푸터 끝-->
+        <!-- 푸터-->
+        <div th:replace="userpage/fragment/footer :: footer"></div>
+    <!--푸터 끝-->
     </div>
-    <!--wrap 끝-->
-<!--퀵 메뉴-->
-<div th:replace="userpage/fragment/quickmenu :: quickmenu"></div>
-<!--퀵 메뉴 끝-->
-    <div class="modal">
-    </div>
+        <!--wrap 끝-->
+    <!--퀵 메뉴-->
+    <div th:replace="userpage/fragment/quickmenu :: quickmenu"></div>
+    <!--퀵 메뉴 끝-->
+    <div class="modal"></div>
 </body>
 </html>

@@ -60,8 +60,8 @@ a:visited{color:#444;}
 }
 body{
     color: #444;
-    white-space: normal; 
-    word-wrap: break-word; 
+    white-space: normal;
+    word-wrap: break-word;
     line-height: 1;
 }
 #wrap{
@@ -102,7 +102,7 @@ body{
     right: -5px;
     top: -10px;
 }
-#header .login{ 
+#header .login{
     box-sizing: border-box;
     display: inline;
     position: relative;
@@ -294,7 +294,7 @@ body{
 }
 #container {
     position: relative;
-    top: 50px;
+    top: 100px;
     height: 1800px;
 }
 #container > .contentswrap {
@@ -420,13 +420,13 @@ p.jini_sub{
     background-color: #fff;
 }
 
-.footer{
+.footer1{
     margin: 20px auto;
     height: 30px;
     display: flex;
     justify-content: center;
 }
-.footer > .center > table{
+.footer1 > .center > table{
     display: inline-block;
     text-align: center;
     font-size: 14px;
@@ -435,32 +435,32 @@ p.jini_sub{
     border: none;
     margin: 0 auto;
 }
-.footer > .center > table td{
+.footer1 > .center > table td{
     width: 40px;
     height: 40px;
     border: 1px solid rgb(187, 187, 187);
     padding-top: 3px;
 }
-.footer table td:nth-child(11){
+.footer1 table td:nth-child(11){
     background: url(../img/right.png) center no-repeat;
     background-size: 21px;
     cursor: pointer;
 }
-.footer table td:nth-child(12){
+.footer1 table td:nth-child(12){
     background: url(../img/double_right.png) center no-repeat;
     background-size: 21px;
     cursor: pointer;
 }
-.footer table td:nth-child(1){
+.footer1 table td:nth-child(1){
     background-color: rgb(124,0,72);
 }
-.footer table td:nth-child(1) > a{
+.footer1 table td:nth-child(1) > a{
     color:white
 }
-.footer table td:hover{
+.footer1 table td:hover{
     background-color: #bdd600;
 }
-.footer table td:hover a{
+.footer1 table td:hover a{
     color:white
 }
 
@@ -635,7 +635,7 @@ p.jini_sub{
 .Aicon img:nth-child(2) {
     margin-top: -7px;
     height: 35px;
-}  
+}
 #info {
     padding: 7px;
     width: 65%;

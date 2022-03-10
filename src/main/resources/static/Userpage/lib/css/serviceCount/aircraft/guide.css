@@ -63,6 +63,7 @@ body{
     white-space: normal; 
     word-wrap: break-word; 
     line-height: 1;
+    height: 0;
 }
 #wrap{
     margin: 0;
@@ -295,7 +296,7 @@ body{
 #container {
     position: relative;
     top: 100px;
-    height: 2150px;
+    height: 3400px;
 }
 #container > .contentswrap {
     width: 1180px;
