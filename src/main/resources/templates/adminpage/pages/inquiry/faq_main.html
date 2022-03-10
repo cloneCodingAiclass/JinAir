@@ -22,19 +22,19 @@
                     </div>
                     <div class="contents_top">
                         <div class="faq_check_box">
-                                <li><a href="/pages/admin/faq_main">전체</a></li>
-                                <li><a href="/pages/admin/faq_main1">항공권 예매</a></li>
-                                <li><a href="/pages/admin/faq_main2">할인 제도</a></li>
-                                <li><a href="/pages/admin/faq_main3">수하물</a></li>
-                                <li><a href="/pages/admin/faq_main4">기내 서비스</a></li>
-                                <li><a href="/pages/admin/faq_main5">기타</a></li>
+                                <li id="checkBox"><a href="#" class="tab">전체</a></li>
+                                <li id="checkBox1"><a href="#" class="tab1">항공권 예매</a></li>
+                                <li id="checkBox2"><a href="#" class="tab2">할인 제도</a></li>
+                                <li id="checkBox3"><a href="#" class="tab3">수하물</a></li>
+                                <li id="checkBox4"><a href="#" class="tab4">기내 서비스</a></li>
+                                <li id="checkBox5"><a href="#" class="tab5">기타</a></li>
                         </div>
                         <div class="btn_top">
                             <input type="text" placeholder="검색어를 입력하세요." id="searchText" >
                             <input type="button" value="검색" id="searchFaq">
                         </div>
                     </div>
-                    <div class="contents_main">
+                    <div class="contents_main" id="board">
                         <table id="tableBoard">
                             <tr>
                                 <td>번호</td>
@@ -44,11 +44,83 @@
                             <tr v-for="faq in tableBoard">
                                 <td>{{faq.faqIndex}}</td>
                                 <td><a :href=`/pages/admin/faq_view/${faq.faqIndex}`>{{faq.faqTitle}}</a></td>
-                                <td>{{faq.faqRegdate}}</td>
+                                <td>{{faq.faqRegdate.substr(0,10)}}</td>
                             </tr>
                         </table>
                     </div>
+                    <div class="contents_main" id="board1" >
+                        <table id="tableBoard1">
+                            <tr>
+                                <td>번호</td>
+                                <td>제목</td>
+                                <td>등록일</td>
+                            </tr>
+                            <tr v-for="faq in tableBoard1By('항공권 예매')">
+                                <td>{{faq.faqIndex}}</td>
+                                <td><a :href=`/pages/admin/faq_view/${faq.faqIndex}`>{{faq.faqTitle}}</a></td>
+                                <td>{{faq.faqRegdate.substr(0,10)}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="contents_main" id="board2">
+                        <table id="tableBoard2">
+                            <tr>
+                                <td>번호</td>
+                                <td>제목</td>
+                                <td>등록일</td>
+                            </tr>
+                            <tr v-for="faq in tableBoard2By('할인 제도')">
+                                <td>{{faq.faqIndex}}</td>
+                                <td><a :href=`/pages/admin/faq_view/${faq.faqIndex}`>{{faq.faqTitle}}</a></td>
+                                <td>{{faq.faqRegdate.substr(0,10)}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="contents_main" id="board3">
+                        <table id="tableBoard3">
+                            <tr>
+                                <td>번호</td>
+                                <td>제목</td>
+                                <td>등록일</td>
+                            </tr>
+                            <tr v-for="faq in tableBoard3By('수하물')">
+                                <td>{{faq.faqIndex}}</td>
+                                <td><a :href=`/pages/admin/faq_view/${faq.faqIndex}`>{{faq.faqTitle}}</a></td>
+                                <td>{{faq.faqRegdate.substr(0,10)}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="contents_main" id="board4">
+                        <table id="tableBoard4">
+                            <tr>
+                                <td>번호</td>
+                                <td>제목</td>
+                                <td>등록일</td>
+                            </tr>
+                            <tr v-for="faq in tableBoard4By('기내 서비스')">
+                                <td>{{faq.faqIndex}}</td>
+                                <td><a :href=`/pages/admin/faq_view/${faq.faqIndex}`>{{faq.faqTitle}}</a></td>
+                                <td>{{faq.faqRegdate.substr(0,10)}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="contents_main" id="board5">
+                        <table id="tableBoard5">
+                            <tr>
+                                <td>번호</td>
+                                <td>제목</td>
+                                <td>등록일</td>
+                            </tr>
+                            <tr v-for="faq in tableBoard5By('기타')">
+                                <td>{{faq.faqIndex}}</td>
+                                <td><a :href=`/pages/admin/faq_view/${faq.faqIndex}`>{{faq.faqTitle}}</a></td>
+                                <td>{{faq.faqRegdate.substr(0,10)}}</td>
+                            </tr>
+                        </table>
+                    </div>
+
                     <div class="contents_bottom">
+                        <div id="button"> </div>
                         <div class="faq_btn_write">
                             <a href="/pages/admin/faq_write" class="faq_write"><input type="button" value="작성하기"></a>
                         </div>

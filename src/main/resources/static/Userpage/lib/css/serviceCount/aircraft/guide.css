@@ -63,6 +63,7 @@ body{
     white-space: normal; 
     word-wrap: break-word; 
     line-height: 1;
+    height: 0;
 }
 #wrap{
     margin: 0;
@@ -148,7 +149,7 @@ body{
 }
 #header .login > li .lang_img{
     display: inline-block;
-    background: url(./index_img/down.png) no-repeat right;
+    background: url("/userpage/lib/img/down.png") no-repeat right;
     background-size: 13px;
     width: 13px;
     height: 13px;
@@ -295,7 +296,7 @@ body{
 #container {
     position: relative;
     top: 100px;
-    height: 2150px;
+    height: 3400px;
 }
 #container > .contentswrap {
     width: 1180px;

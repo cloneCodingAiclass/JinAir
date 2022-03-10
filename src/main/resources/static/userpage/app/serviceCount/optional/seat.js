@@ -158,12 +158,11 @@ $(function () {
 
 $(() => {
     $("#modal_seatmap_wrap").hide();
-    $("#modal_seatmap_wrap").hide();
     $(".seatmap_butt").on("click", () => {
-        $("#modal_seatmap_wrap").fadeIn();
+        $("#modal_seatmap_wrap").css("display", "flex");
     })
     $("#modal_seatmap_wrap .close").on("click", () => {
-        $("#modal_seatmap_wrap").fadeOut();
+        $("#modal_seatmap_wrap").css("display", "none");
     })
     
 })
