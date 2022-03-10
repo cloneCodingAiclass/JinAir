@@ -19,7 +19,7 @@
                             <div class="btn_top">
                             </div>
                             <div class="contents_main">
-                                <table>
+                                <table id="apList">
                                     <tr>
                                         <td>항공기 아이디</td>
                                         <td>운항편</td>
@@ -29,7 +29,7 @@
                                         <td>도착지</td>
                                         <td>도착 시간</td>
                                     </tr>
-                                    <tr id="apList">
+                                    <tr>
                                         <td>
                                             <select id="apname">>
                                                 <option v-for="dto in apList" v-bind:value="dto.apName">{{dto.apName}}</option>
@@ -37,7 +37,7 @@
                                         </td>
                                         <td>
                                             <select id="adid">
-                                                <option v-for="dto in apList" v-bind:value="dto.apId">{{dto.apId}}</option>
+                                                <option v-for="dto in apList" v-bind:value="dto.apSeatSum">{{dto.apId}}</option>
                                             </select>
                                         </td>
                                         <td>

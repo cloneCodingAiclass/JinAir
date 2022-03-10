@@ -96,36 +96,30 @@ $(function () {
 
 });
 
-$(() => {
-    document.getElementById('start_date').valueAsDate = new Date();
-    document.getElementById('end_date').valueAsDate = new Date();
-});
-
-
-$(()=> {
-    $('#modal_iseditcancel').hide();
-    $(".canc_btn").on('click', () => {
-        $("#modal_iseditcancel").fadeIn();
-    })
-    $(".cancuncomplete").on('click', () => {
-        location.href='./evn_view.html';
-    })
-    $(".canccomplete").on('click', () => {
-        $("#modal_iseditcancel").fadeOut();
-    })
-});
-
 $(()=> {
     $('#modal_isedit').hide();
     $(".edit_btn").on('click', () => {
-        $("#modal_isedit").fadeIn();
+        let str = $('#start_date').val().split('-');
+        let strrr = str[0] + str[1] + str[2];
+        let str1 = $('#end_date').val().split('-');
+        let strrr1 = str1[0] + str1[1] + str1[2];
+        if(strrr > strrr1){
+            alert('이벤트 시작일이 종료일을 넘을 수 없습니다.');
+        }else{
+            if ($('#ex_file').val().length <= 1){
+                $("#modal_isedit").css("display", "flex");
+            }else{
+                alert('파일 첨부를 확인 해주세요.');
+            }
+        }
     })
     $(".uncomplete").on('click', () => {
-        $("#modal_isedit").fadeOut();
+        $("#modal_isedit").css("display","none");
     })
 });
 
 $(()=> {
+
     $('#ex_file').on('change', function(){
         $('.filetext').val($('#ex_file').val());
     });

@@ -130,25 +130,16 @@ $(() => {
 
 
 $(()=> {
-    $('#modal_iseditcancel').hide();
-    $(".canc_btn").on('click', () => {
-        $("#modal_iseditcancel").fadeIn();
-    })
-    $(".cancuncomplete").on('click', () => {
-        location.href='./evn_view.html';
-    })
-    $(".canccomplete").on('click', () => {
-        $("#modal_iseditcancel").fadeOut();
-    })
-});
-
-$(()=> {
     $('#modal_isedit').hide();
     $(".edit_btn").on('click', () => {
-        $("#modal_isedit").fadeIn();
+        if($('.tit').val().length <= 0 || $('.event_content').val().length <= 0){
+            alert('제목 및 내용일 올바르게 입력 되있는지 확인 해주세요.');
+        }else{
+            $("#modal_isedit").css("display", "flex");
+        }
     })
     $(".uncomplete").on('click', () => {
-        $("#modal_isedit").fadeOut();
+        $("#modal_isedit").css("display","none");
     })
 });
 

@@ -7,6 +7,7 @@ import com.project.jinair.model.entity.board.TbNotifi;
 import com.project.jinair.model.enumclass.LostStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.response.board.*;
+import com.project.jinair.repository.TbEventRepository;
 import com.project.jinair.repository.TbLostRepository;
 import com.project.jinair.repository.TbMagazineRepository;
 import com.project.jinair.service.MenuService;
@@ -1083,6 +1084,52 @@ public class PageController {
         return "redirect:/pages/admin/evn_ing";
     }
 
+    @Autowired
+    TbEventRepository tbEventRepository;
+    // 이벤트 파일 수정
+    @PostMapping("/admin/evn_edit/upload")
+    public String uploadFile_edit(
+                             @RequestPart(value = "evIndex") String evIndex,
+                             @RequestPart(value = "evTitle") String evTitle,
+                             @RequestPart(value = "start_date") String start_date,
+                             @RequestPart(value = "end_date") String end_date,
+                             @RequestPart(value = "ex_file", required = false) MultipartFile ex_file,
+                             @RequestPart(value = "event_content") String event_content
+    ) throws IOException {
+        TbEvent tbEvent = tbEventRepository.findById(Long.valueOf(evIndex)).get();
+// 내용들
+        tbEvent.setEvTitle(evTitle);
+        tbEvent.setEvStartDay(LocalDateTime.parse(start_date + "T00:00:00"));
+        tbEvent.setEvEndDay(LocalDateTime.parse(end_date +"T00:00:00"));
+        tbEvent.setEvContent(event_content);
+        tbEvent.setEvStatus(tbEvent.getEvStatus());
+        tbEvent.setEvRegdate(tbEvent.getEvRegdate());
+        tbEvent.setEvIndex(tbEvent.getEvIndex());
+// 이미지
+        String sourceImgName = ex_file.getOriginalFilename();
+        String sourceFileNameExtension = FilenameUtils.getExtension(sourceImgName).toLowerCase();
+        FilenameUtils.removeExtension(sourceImgName);
+
+        File destinationImg;
+        String destinationImgName;
+        String imgUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\";
+
+        do{
+            destinationImgName = RandomStringUtils.randomAlphabetic(32)+"."+sourceFileNameExtension;
+            destinationImg = new File(imgUrl + destinationImgName);
+        }while(destinationImg.exists());
+
+        destinationImg.getParentFile().mkdir();
+        ex_file.transferTo(destinationImg);
+
+        tbEvent.setEvFileName(destinationImgName);
+        tbEvent.setEvFileOriname(sourceImgName);
+        tbEvent.setEvFileUrl(imgUrl);
+
+        tbEventRepository.save(tbEvent);
+        return "redirect:/pages/admin/evn_ing";
+    }
+
     //-------------------------------------------------------------------------------------------
 
     /* 포인트 */
@@ -1448,13 +1495,13 @@ public class PageController {
 
     // 수정
     @PostMapping("/admin/genielist_edit/update")
-    public String uploadFile(@RequestPart(value = "id") Long id,
+    public String uploadFiles(@RequestPart(value = "id") String id,
                              @RequestPart(value = "imgs") MultipartFile imgs,
                              @RequestPart(value = "answers") MultipartFile answers,
                              @RequestPart(value = "pdfs") MultipartFile pdfs
     ) throws IOException {
 
-        TbMagazine tbMagazine = tbMagazineRepository.findById(id).get();
+        TbMagazine tbMagazine = tbMagazineRepository.findById(Long.parseLong(id)).get();
 
 // 이미지
         String sourceImgName = imgs.getOriginalFilename();
@@ -1518,6 +1565,10 @@ public class PageController {
         tbMagazine.setMzPdfName(destinationPdfName);
         tbMagazine.setMzPdfOriname(sourcePdfName);
         tbMagazine.setMzPdfUrl(pdfUrl);
+
+        tbMagazine.setMzIndex(tbMagazine.getMzIndex());
+        tbMagazine.setMzTitle(tbMagazine.getMzTitle());
+        tbMagazine.setMzRegdate(tbMagazine.getMzRegdate());
 
         tbMagazineRepository.save(tbMagazine);
         return "redirect:/pages/admin/genielist_view/"+id;

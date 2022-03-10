@@ -25,7 +25,7 @@
                                         <col style="width:15%;">
                                     </colgroup>
                                     <tr>
-                                        <th class="botbor"><div class="tit" th:text="${eventApiResponse.evIndex}"></div><div class="evndate">
+                                        <th class="botbor"><div class="tit" th:text="${eventApiResponse.evTitle}"></div><div class="evndate">
                                             이벤트 기간 : <p><span th:text="${#strings.substring(eventApiResponse.evStartDay,0, 10)}"></span> ~
                                             <span th:text="${#strings.substring(eventApiResponse.evEndDay,0, 10)}"></span></p></div></th>
                                         <th class="right botbor">등록일 <p class="wrdate" th:text="${#strings.substring(eventApiResponse.evRegdate,0,10)}">2022-01-28</p></th>
@@ -40,7 +40,7 @@
                                     </tr>
                                 </table>
                                 <div class="footer">
-                                    <input type="button" value="목록" class="butt list_btn" onclick="history.back()">
+                                    <input type="button" value="목록" class="butt list_btn"  onclick="location.href='/pages/admin/evn_ing'">
                                     <input type="button" value="삭제" class="butt canc_btn">
                                     <a th:href="@{'/pages/admin/evn_edit/' + ${eventApiResponse.evIndex}}"><input type="button" value="수정" class="butt write_btn"></a>
                                 </div>

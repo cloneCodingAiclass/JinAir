@@ -4,16 +4,9 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
     <link rel="stylesheet" href="/adminpage/lib/css/magazine/genieList_add.css">
-    <link rel="stylesheet" href="/adminpage/lib/css/style.css">
     <script src="/adminpage/app/magazine/genieList_add.js"></script>
 <body>
     <div id="wrap">
-        <header>
-            <div class="header_inner">
-                <a href="../admin_index.html"><div class="img"></div></a><a href="/AdminPage/admin_index.html"><span>관리자 센터</span></a>
-                <div class="logout"><p class="myname">반하나</p><input type="text" value="님" class="nim"><input type="button" value="Logout" onclick="location.href='../admin_login.html'"></div>
-            </div>
-        </header>
         <div th:replace="/adminpage/fragment/header :: header"></div>
         <div id="container">
             <div th:replace="/adminpage/fragment/leftmenu :: leftmenu(${code}, ${menuList})"></div>
@@ -22,7 +15,7 @@
                     <div class="search">
                         <p class="title">지니매거진 등록</p>
                     </div>
-                    <form id="uploadFiles" name="uploadFiles" method="post" th:action="@{/pages/admin/genielist_add/upload}" encType="multipart/form-data">
+                    <form id="uploadFiles" name="uploadFiles" method="post" th:action="@{/pages/admin/genielist_add/upload}" encType="multipart/form-data" onsubmit="return sendit()">
                         <table>
                             <colgroup>
                                 <col width="150">
@@ -57,7 +50,7 @@
                         </table>
                         <div class="footer">
                             <input type="button" value="취소" onclick="history.back()" class="goback">
-                            <input type="submit" value="등록">
+                            <input type="submit" value="등록" class="edit_btn">
                         </div>
                     </form>
                 </div>  

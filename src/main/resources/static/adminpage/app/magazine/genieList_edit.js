@@ -139,3 +139,18 @@ $(function () {
     }
 
 });
+
+function sendit(){
+    if(!$('#ex_file1').val()){
+        alert('파일 첨부를 확인하세요.')
+        return false;
+    }
+    if(!$('#ex_file2').val()){
+        alert('파일 첨부를 확인하세요.')
+        return false;
+    }
+    if(!$('#ex_file3').val()){
+        alert('파일 첨부를 확인하세요.')
+        return false;
+    }
+}
