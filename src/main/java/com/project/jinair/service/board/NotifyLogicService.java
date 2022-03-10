@@ -26,6 +26,7 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
 
     private final TbNotifiRepository tbNotifiRepository;
 
+    // 게시글 작성
     @Override
     public Header<NotifyApiResponse> create(Header<NotifyApiRequest> request) {
         NotifyApiRequest notifyApiRequest = request.getData();
@@ -39,6 +40,7 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
         return response(newNotify);
     }
 
+    // 게시글 상세보기
     @Override
     public Header<NotifyApiResponse> read(Long id) {
         return tbNotifiRepository.findByNoIndexOrderByNoIndexDesc(id)
@@ -48,6 +50,7 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
             );
     }
 
+    // 게시글 수정
     @Override
     public Header<NotifyApiResponse> update(Header<NotifyApiRequest> request) {
         NotifyApiRequest notifyApiRequest = request.getData();
@@ -64,6 +67,7 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
                 .orElseGet(() -> Header.ERROR("데이터 없음"));
     }
 
+    // 게시글 삭제
     @Override
     public Header delete(Long id) {
         Optional<TbNotifi> notify = tbNotifiRepository.findByNoIndexOrderByNoIndexDesc(id);
@@ -99,7 +103,7 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
         return notifyApiResponse;
     }
 
-    // 리스트
+    // 게시글 리스트
     public Header<List<NotifyApiResponse>> search(Pageable pageable) {
         Page<TbNotifi> tbNotifi = tbNotifiRepository.findAll(pageable);
         List<NotifyApiResponse> notifyApiResponseList = tbNotifi.stream()
@@ -114,7 +118,7 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
         return Header.OK(notifyApiResponseList, pagination);
     }
 
-
+    // 검색 게시글 리스트
     public Header<List<NotifyApiResponse>> searchList(String a, Pageable pageable) {
         Page<TbNotifi> tbNotifi = tbNotifiRepository.findByNoTitleContaining(a, pageable);
         List<NotifyApiResponse> notifyApiResponseList = tbNotifi.stream()
@@ -129,6 +133,7 @@ public class NotifyLogicService implements CrudInterface<NotifyApiRequest, Notif
         return Header.OK(notifyApiResponseList, pagination);
     }
 
+    // 파일저장
     @Transactional
     public void save(TbNotifi tbNotifi){
         TbNotifi i = new TbNotifi();
