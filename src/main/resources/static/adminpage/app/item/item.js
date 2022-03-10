@@ -206,7 +206,6 @@ $(() =>{
     }
 
     $("#btn_search").on('click', function (){
-        console.log($("#airplane_list").find('option:selected').val())
         search($("#airplane_list").find('option:selected').val(), $("#arrival_airport_list").find('option:selected').val(), $("#item_list").find('option:selected').val(), $("#item_start_date").val() + "T00:00:00", $("#item_end_date").val() + "T00:00:00");
     })
 
