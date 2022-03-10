@@ -5,8 +5,6 @@
 <div th:replace="/userpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/userpage/lib/css/serviceCount/airport/checkinfo.css">
 <script src="/userpage/app/serviceCount/airport/checkinfo.js"></script>
-<script src="/userpage/app/index/quickmenu.js"></script>
-<link rel="stylesheet" href="/userPage/lib/css/index/quickmenu.css">
     <body>
         <ul class="skipnavi">
             <!--책갈피 역할-->
@@ -84,7 +82,7 @@
                         <div class="btnArea">
                             <a
                                 class="btnTypeA sizeL"
-                                href="/UserPage/serviceCount/airport/checkinfo/checkinfo_list.html"
+                                href="/pages/index/checkinfo_list"
                                 title="웹/모바일 체크인"
                                 role="link-login-needed"
                                 data-login-uri="/login/quickform"
@@ -403,17 +401,13 @@
         <!--퀵 메뉴-->
         <div th:replace="userpage/fragment/quickmenu :: quickmenu"></div>
         <!--퀵 메뉴 끝-->
-<<<<<<< HEAD
-=======
-
-
         <div id="popWrap" class="wideWrap" style="display: none;">
             <div id="popCont" class="checkin_pop" style="height: auto;">
                 <p>
                     <h1>탑승권 예시 이미지</h1><p class="close"></p>
                 </p>
                 
-                <img src="../../../../../static/userpage/lib/img/example_pc.jpg" style="width: 100%;" alt="탑승권 예시 pc 이미지">
+                <img src="/userpage/lib/img/example_pc.jpg" style="width: 100%;" alt="탑승권 예시 pc 이미지">
             </div>
         </div>
         <div id="popWrap2" class="wideWrap" style="display: none;">
@@ -422,12 +416,10 @@
                     <h1>탑승권 예시 모바일 이미지</h1><p class="close"></p>
                 </p>
                 <p class="img">
-                <img src="../../../../../static/userpage/lib/img/example_mobile.jpg" style="width: 100%;" alt="탑승권 예시 모바일 이미지">
+                <img src="/userpage/lib/img/example_mobile.jpg" style="width: 100%;" alt="탑승권 예시 모바일 이미지">
             </p>
             </div>
         </div>
-
->>>>>>> 193615e4c3c9da3a3a797a5cd1a13c6f0ccfbaa7
 <div class="modal"></div>    
 </body>
 </html>

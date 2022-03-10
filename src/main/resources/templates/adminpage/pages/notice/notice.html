@@ -35,7 +35,7 @@
                         <tr v-for="noti in notiList">
                             <td>{{ noti.noIndex }}</td>
                             <td style="text-align: left"><a :href=`/pages/admin/nt_view/${noti.noIndex}`>{{ noti.noTitle }}</a></td>
-                            <td>{{ noti.noRegdate }}</td>
+                            <td>{{ noti.noRegdate.substr(0, 10) }}</td>
                         </tr>
                     </table>
                     <div class="footer">
@@ -54,5 +54,4 @@
     </div>
 </body>
 <script src="/adminpage/app/notice/notice.js"></script>
-<script src="/lib/plugins/jquery-countto/jquery.countTo.js"></script>
 </html>

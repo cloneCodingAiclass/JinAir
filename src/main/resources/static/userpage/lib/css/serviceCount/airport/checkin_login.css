@@ -170,7 +170,7 @@ a:link {
     display: block;
     width: 22px;
     height: 22px;
-    background: url(../../../img/ico_sns.png) no-repeat 0 -60px;
+    background: url(/userpage/lib/img/ico_sns.png) no-repeat 0 -60px;
 }
 .btnSns .facebook:before {
     background-position-x: -30px;
@@ -180,14 +180,14 @@ a:link {
     display: block;
     width: 22px;
     height: 22px;
-    background: url(../../../img/ico_sns.png) no-repeat 0 -60px;
+    background: url(/userpage/lib/img/ico_sns.png) no-repeat 0 -60px;
 }
 .btnSns a:before, .btnSns span:before {
     content: "";
     display: block;
     width: 22px;
     height: 22px;
-    background: url(../../../img/ico_sns.png) no-repeat 0 -60px;
+    background: url(/userpage/lib/img/ico_sns.png) no-repeat 0 -60px;
 }
 .btnSns .google:before {
     background-position-x: -60px;
@@ -197,7 +197,7 @@ a:link {
     display: block;
     width: 22px;
     height: 22px;
-    background: url(../../../img/ico_sns.png) no-repeat 0 -60px;
+    background: url(/userpage/lib/img/ico_sns.png) no-repeat 0 -60px;
 }
 .btnSns .intra:before {
     background-position-x: -90px;
@@ -207,7 +207,7 @@ a:link {
     display: block;
     width: 22px;
     height: 22px;
-    background: url(../../../img/ico_sns.png) no-repeat 0 -60px;
+    background: url(/userpage/lib/img/ico_sns.png) no-repeat 0 -60px;
 }
 .btnSns .apple:before {
     background-position-x: -480px !important;
@@ -217,7 +217,7 @@ a:link {
     display: block;
     width: 22px;
     height: 22px;
-    background: url(../../../img/ico_sns.png) no-repeat 0 -60px;
+    background: url(/userpage/lib/img/ico_sns.png) no-repeat 0 -60px;
 }
 .loginArea .phone_login {
     text-align: center;

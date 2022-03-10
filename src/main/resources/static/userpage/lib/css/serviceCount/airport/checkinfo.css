@@ -162,7 +162,7 @@ body {
 }
 #header .login > li .lang_img {
     display: inline-block;
-    background: url(./index_img/down.png) no-repeat right;
+    background: url(/userpage/lib/img/down.png) no-repeat right;
     background-size: 13px;
     width: 13px;
     height: 13px;
@@ -480,16 +480,6 @@ tr {
     content: "";
     background-position: -150px -240px;
 }
-.heading:after {
-    display: block;
-    clear: both;
-    position: absolute;
-    right: 75px;
-    top: 150px;
-    width: 150px;
-    height: 120px;
-    background: url(../../../img/icon_top.png) no-repeat 0 0;
-}
 
 /* 웹/모바일 체크인 css */
 .checkinIndex {
@@ -573,7 +563,7 @@ h2.typeA {
     width: 100px;
     height: 100px;
     content: '';
-    background: url(../../../img/ico_checkin.png) no-repeat 0 0;
+    background: url(/userpage/lib/img/ico_checkin.png) no-repeat 0 0;
 }
 .checkinIndex h2 {
     font-size: 34px;
@@ -595,7 +585,7 @@ h2.typeA {
     width: 100px;
     height: 100px;
     content: '';
-    background: url(../../../img/ico_checkin.png) no-repeat -200px 0;
+    background: url(/userpage/lib/img/ico_checkin.png) no-repeat -200px 0;
 }
 .checkinIndex .target_info:before {
     position: absolute;
@@ -613,7 +603,7 @@ h2.typeA {
     padding-left: 25px;
     text-decoration: underline;
     color: #7e0049;
-    background: url(../../../img/ico_import.gif) no-repeat left 3px;
+    background: url(/userpage/lib/img/ico_import.gif) no-repeat left 3px;
 }
 .checkinIndex .import a {
     color: #7e0049;
@@ -653,7 +643,7 @@ h2.typeA {
     width: 100px;
     height: 100px;
     content: '';
-    background: url(../../../img/ico_checkin2.png) no-repeat 0 0;
+    background: url(/userpage/lib/img/ico_checkin2.png) no-repeat 0 0;
 }
 .checkinIndex .boarding_step>li .cont {
     display: table-cell;
@@ -725,7 +715,7 @@ ul.caution li {
     width: 100px;
     height: 100px;
     content: '';
-    background: url(../../../img/ico_checkin2.png) no-repeat 0 0;
+    background: url(/userpage/lib/img/ico_checkin2.png) no-repeat 0 0;
 }
 .checkinIndex .boarding_step>li:before {
     position: absolute;
@@ -746,7 +736,7 @@ ul.caution li {
     width: 100px;
     height: 100px;
     content: '';
-    background: url(../../../img/ico_checkin2.png) no-repeat 0 0;
+    background: url(/userpage/lib/img/ico_checkin2.png) no-repeat 0 0;
 }
 .checkinIndex .boarding_step>li:before {
     position: absolute;
@@ -767,7 +757,7 @@ ul.caution li {
     width: 100px;
     height: 100px;
     content: '';
-    background: url(../../../img/ico_checkin2.png) no-repeat 0 0;
+    background: url(/userpage/lib/img/ico_checkin2.png) no-repeat 0 0;
 }
 
 .checkinIndex .boarding_step+.bbsList {
@@ -841,7 +831,7 @@ ul.caution li {
     height: 100px;
     margin: 0 auto;
     content: '';
-    background: url(../../../img/ico_checkin_step.png) no-repeat left top;
+    background: url(/userpage/lib/img/ico_checkin_step.png) no-repeat left top;
 }
 .checkin_step li:after {
     position: absolute;
@@ -852,7 +842,7 @@ ul.caution li {
     width: 100px;
     height: 100px;
     content: '';
-    background: url(../../../img/ico_checkin_step.png) no-repeat left top;
+    background: url(/userpage/lib/img/ico_checkin_step.png) no-repeat left top;
     background-position: 0 -200px;
 }
 
@@ -872,7 +862,7 @@ ul.caution li {
     height: 100px;
     margin: 0 auto;
     content: '';
-    background: url(../../../img/ico_checkin_step.png) no-repeat left top;
+    background: url(/userpage/lib/img/ico_checkin_step.png) no-repeat left top;
 }
 .checkin_step li:nth-child(4):before {
     background-position: 0 -100px;
@@ -884,7 +874,7 @@ ul.caution li {
     height: 100px;
     margin: 0 auto;
     content: '';
-    background: url(../../../img/ico_checkin_step.png) no-repeat left top;
+    background: url(/userpage/lib/img/ico_checkin_step.png) no-repeat left top;
 }
 .checkin_step li:nth-child(5):before {
     background-position: -100px -100px;
@@ -896,7 +886,7 @@ ul.caution li {
     height: 100px;
     margin: 0 auto;
     content: '';
-    background: url(../../../img/ico_checkin_step.png) no-repeat left top;
+    background: url(/userpage/lib/img/ico_checkin_step.png) no-repeat left top;
 }
 .checkin_step li:last-child:before {
     background-position: -200px -100px;
@@ -908,7 +898,7 @@ ul.caution li {
     height: 100px;
     margin: 0 auto;
     content: '';
-    background: url(../../../img/ico_checkin_step.png) no-repeat left top;
+    background: url(/userpage/lib/img/ico_checkin_step.png) no-repeat left top;
 }
 
 
@@ -999,7 +989,7 @@ table {
     height: 84px;
     margin: 0 auto;
     content: '';
-    background: url(../../../img/ico_backdrop_100x84.png) no-repeat left top;
+    background: url(/userpage/lib/img/ico_backdrop_100x84.png) no-repeat left top;
 }
 .self_backdrop_step li:after {
     position: absolute;
@@ -1011,9 +1001,10 @@ table {
     height: 84px;
     margin-right: -50px;
     content: '';
-    background: url(../../../img/ico_backdrop_100x84.png) no-repeat left top;
+    background: url(/userpage/lib/img/ico_backdrop_100x84.png) no-repeat left top;
     background-position: 0 -84px;
 }
+
 .self_backdrop_step li:nth-child(2):before {
     background-position: -100px 0;
 }
@@ -1025,7 +1016,7 @@ table {
     height: 84px;
     margin: 0 auto;
     content: '';
-    background: url(../../../img/ico_backdrop_100x84.png) no-repeat left top;
+    background: url(/userpage/lib/img/ico_backdrop_100x84.png) no-repeat left top;
 }
 .self_backdrop_step li:last-child:before {
     background-position: -200px 0px;
@@ -1037,7 +1028,7 @@ table {
     height: 84px;
     margin: 0 auto;
     content: '';
-    background: url(../../../img/ico_backdrop_100x84.png) no-repeat left top;
+    background: url(/userpage/lib/img/ico_backdrop_100x84.png) no-repeat left top;
 }
 .fontTypeA {
     color: #661e43 !important;
@@ -1049,6 +1040,7 @@ table {
     box-sizing:border-box;
     line-height:23px;
     cursor:pointer;
+    position: relative;
 }
 #popCont p{
     height: 20px;
@@ -1113,13 +1105,13 @@ table {
 }
 #popCont .close{
     position: absolute;
-    top: 105px;
-    right: 540px;
+    top: 10px;
+    right: 10px;
     width: 26px;
     height: 26px;
     margin-top: 10px;
     margin-right: 10px;
-    background-image: url(../../../img/btn_close3.png);
+    background-image: url(/userpage/lib/img/btn_close3.png);
 }
 #popCont2 p.img {
     overflow-y: scroll;
@@ -1145,7 +1137,7 @@ table {
     height: 26px;
     margin-top: 10px;
     margin-right: 10px;
-    background-image: url(../../../img/btn_close3.png);
+    background-image: url(/userpage/lib/img/btn_close3.png);
 }
 
 
@@ -1270,31 +1262,31 @@ table {
     background-color: rgb(248, 248, 248);
 }
 .Sicon .twit {
-    background-image: url("/index_img/twitter.png");
+    background-image: url("/userpage/lib/img/twitter.png");
     background-size: 70%;
     opacity: 0.7;
     margin-left: 10px !important;
 }
 .Sicon .faceb {
-    background-image: url("/index_img/face.png");
+    background-image: url("/userpage/lib/img/face.png");
     background-size: 50%;
     opacity: 0.8;
     margin-left: 4px;
 }
 .Sicon .youtub {
-    background-image: url("/index_img/youtube.png");
+    background-image: url("/userpage/lib/img/youtube.png");
     background-size: 45%;
     opacity: 0.6;
     margin-left: 4px;
 }
 .Sicon .insta {
-    background-image: url("/index_img/insta.png");
+    background-image: url("/userpage/lib/img/insta.png");
     background-size: 60%;
     opacity: 0.8;
     margin-left: 4px;
 }
 .Sicon .blog {
-    background-image: url("/index_img/blog.PNG");
+    background-image: url("/userpage/lib/img/blog.PNG");
     background-size: 140%;
     margin-left: 4px;
 }
@@ -1314,7 +1306,7 @@ table {
 }
 .sit {
     margin-left: 10px;
-    background-image: url("/index_img/site.PNG");
+    background-image: url("/userpage/lib/img/site.PNG");
     background-size: 140%;
 }
 .Aicon img {
@@ -1399,7 +1391,7 @@ table {
     height: 45px;
     padding: 13px;
     left: -15px;
-    background-image: url("/index_img/btn_srch.gif");
+    background-image: url("/userpage/lib/img/btn_srch.gif");
     background-position: center;
     padding-top: 20px;
     border: none;

@@ -149,7 +149,7 @@ body{
 }
 #header .login > li .lang_img{
     display: inline-block;
-    background: url(./index_img/down.png) no-repeat right;
+    background: url("/userpage/lib/img/down.png") no-repeat right;
     background-size: 13px;
     width: 13px;
     height: 13px;
@@ -323,7 +323,7 @@ body{
     letter-spacing: 1.2px;
 }
 #container > .contentswrap > .discount > .title_img {
-    background: url(../img/icon_top.png) no-repeat center;
+    background: url(/userpage/lib/img/icon_top_seat.png) no-repeat center;
     background-size: 70%;
     display: inline;
     width: 170px;
@@ -810,8 +810,6 @@ table.B737_900price tr:nth-child(1){
     margin-bottom: 0px;
 }
 
-#modal_exit_seat_info .modal_exit_seat_info .modal_contents .content ul li
-
 /*비상구 좌석 지정 시 유의 사항 안내 모달창 끝*/
 
 /*좌석배치도 모달창*/
@@ -821,7 +819,7 @@ table.B737_900price tr:nth-child(1){
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     left: 0; right: 0; top: 0; bottom: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 800;
@@ -1037,28 +1035,28 @@ table.B737_900price tr:nth-child(1){
     background-color: rgb(248, 248, 248);
 }
 .Sicon .twit {
-    background-image: url('../../../../../index_img/twitter.png');
+    background-image: url('/userpage/lib/img/twitter.png');
     background-size: 70%;    opacity: 0.7;
     margin-left: 10px
     !important;
 }
 .Sicon .faceb {
-    background-image: url('../../../../../index_img/face.png');
+    background-image: url('/userpage/lib/img/face.png');
     background-size: 50%;    opacity: 0.8;
     margin-left: 4px
 }
 .Sicon .youtub {
-    background-image: url('../../../../../index_img/youtube.png');
+    background-image: url('/userpage/lib/img/youtube.png');
     background-size: 45%;   opacity: 0.6;
     margin-left: 4px
 }
 .Sicon .insta {
-    background-image: url('../../../../../index_img/insta.png');
+    background-image: url('/userpage/lib/img/insta.png');
     background-size: 60%;    opacity: 0.8;
     margin-left: 4px
 }
 .Sicon .blog {
-    background-image: url('../../../../../index_img/blog.PNG');
+    background-image: url('/userpage/lib/img/blog.PNG');
     background-size: 140%;
     margin-left: 4px
 }
@@ -1078,7 +1076,7 @@ table.B737_900price tr:nth-child(1){
 }
 .sit {
     margin-left: 10px;
-    background-image: url('../../../../../index_img/site.PNG');
+    background-image: url('/userpage/lib/img/site.PNG');
     background-size: 140%;
 }
 .Aicon img {
@@ -1163,7 +1161,7 @@ table.B737_900price tr:nth-child(1){
     height: 45px;
     padding: 13px;
     left: -15px;
-    background-image: url('../../../../../index_img/btn_srch.gif');
+    background-image: url('/userpage/lib/img/btn_srch.gif');
     background-position: center;
     padding-top: 20px;
     border: none;

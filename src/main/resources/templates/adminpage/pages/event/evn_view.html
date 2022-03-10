@@ -31,7 +31,7 @@
                                         <th class="right botbor">등록일 <p class="wrdate" th:text="${#strings.substring(eventApiResponse.evRegdate,0,10)}">2022-01-28</p></th>
                                     </tr>
                                     <tr>
-                                        <td class="file" colspan="2"><img th:src="@{'/upload/' + ${eventApiResponse.evFileName}}" alt="이벤트사진"></td>
+                                        <td class="file" colspan="2"><img th:src="@{'\\upload\\' + ${eventApiResponse.evFileName}}" alt="이벤트사진"></td>
                                     </tr>
                                     <tr>
                                         <td class="content_txt" colspan="2" ><span th:text="${eventApiResponse.evContent}"></span>
