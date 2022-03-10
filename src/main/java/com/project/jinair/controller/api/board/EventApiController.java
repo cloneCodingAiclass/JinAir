@@ -26,8 +26,8 @@ public class EventApiController implements CrudInterface<EventApiRequest, EventA
     private final EventApiLogicService eventApiLogicService;
 
     @GetMapping("/list")
-    public Header<List<EventApiResponse>> findAll() {
-        return eventApiLogicService.search();
+    public void findAll() {
+        eventApiLogicService.search();
     }
 
     @GetMapping("/list/{evStatus}")

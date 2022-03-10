@@ -7,7 +7,7 @@
     <script src="/adminpage/app/event/evn_edit.js"></script>
 </head>
 <body>
-<form action="./evn_view.html">
+<form id="uploadFiles" name="uploadFiles" method="post" th:action="@{/pages/admin/evn_edit/upload}" encType="multipart/form-data">
     <div id="wrap">
         <div th:replace="/adminpage/fragment/header :: header"></div>
         <div id="container">
@@ -26,46 +26,40 @@
                                         <col style="width:15%;">
                                     </colgroup>
                                     <tr>
-                                        <th class="botbor"><input type="text" class="tit" th:value="${eventApiResponse.evTitle}">
-                                        <th class="right botbor">등록일 <p class="wrdate" th:text="${#strings.substring(eventApiResponse.evRegdate,0,10)}"></p></th>
+                                        <th class="botbor"><input type="text" class="tit" th:value="${eventApiResponse.evTitle}" name="evTitle" th:id="evTitle">
+                                            <input type="hidden" name="evIndex" id="evIndex"class="evIndex" th:value="${eventApiResponse.evIndex}"/>
+                                        <th class="right botbor">등록일
+                                            <p class="wrdate" th:text="${#strings.substring(eventApiResponse.evRegdate,0,10)}"></p>
+                                            <input type="hidden" th:value="${eventApiResponse.evRegdate}" th:id="wrdate" name="wrdate">
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td class="calandfile" colspan="2">
                                             <div class="calevndate">
-                                                이벤트 기간<input type="date" name="start_date" id="start_date" class="evndate" required> ~ <input type="date" name="end_date" id="end_date"class="evndate" required/>
+                                                이벤트 기간<input type="date" name="start_date" id="start_date" class="evndate" required th:value="${#strings.substring(eventApiResponse.evStartDay,0,10)}"> ~
+                                                <input type="date" name="end_date" id="end_date"class="evndate" required th:value="${#strings.substring(eventApiResponse.evEndDay,0,10)}"/>
                                             </div>
-                                            <div class="filediv"><input type="text" placeholder="파일첨부" class="filetext" th:value="${eventApiResponse.evFileOriname}">
+                                            <div class="filediv"><input type="text" placeholder="파일첨부" class="filetext">
                                                 <div class="file-upload">
                                                     <label for="ex_file" class="ex_file">찾아보기</label>
-                                                    <input type="file" id="ex_file">
+                                                    <input type="file" id="ex_file" name="ex_file" class="ex_file">
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="content_txt" colspan="2">
-                                            <textarea  name="event_content" class="event_content" th:text="${eventApiResponse.evContent}"></textarea>
+                                            <textarea  name="event_content" class="event_content" th:text="${eventApiResponse.evContent}" th:id="event_content"></textarea>
                                             <p class="bottT">Fly, better fly Jin Air</p>
                                         </td>
                                     </tr>
                                 </table>
                                 <div class="footer">
-                                    <input type="button" value="취소" class="butt canc_btn">
+                                    <input type="button" value="취소" class="butt canc_btn" onclick="history.back()">
                                     <input type="button" value="수정 완료" class="butt edit_btn">
                                 </div>
                             </form>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div id="modal_iseditcancel">
-                <div id="modal_iseditcancel_content">
-                    <div id="modal_iseditcancel_title">
-                        <p class="text">이벤트 수정을 취소하시겠습니까?</p>
-                    </div>
-                    <div>
-                        <button class="modal_iseditcancel_btn canccomplete">취소</button>
-                        <button class="modal_iseditcancel_btn cancuncomplete">진행</button>
                     </div>
                 </div>
             </div>

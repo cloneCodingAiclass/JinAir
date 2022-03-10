@@ -94,6 +94,17 @@ $(function () {
         $('.nav8').parent().siblings().find('li').css({"display":"none"});
     })
 
+    Start();
+    function Start(){
+        $.get("/api/event/list", function(){
+
+        });
+    }
+
+
+
+
+
     let indexBtn = [];  // 인덱스 버튼
     let pagination = {
         total_pages : 0,

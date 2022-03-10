@@ -7,7 +7,7 @@
     <script src="/adminpage/app/magazine/genieList_edit.js"></script>
 <!-- head.html 끝-->
 <body>
-    <form id="uploadFiles" name="uploadFiles" method="post" th:action="@{/pages/admin/genielist_edit/update}" encType="multipart/form-data">
+    <form id="uploadFiles" name="uploadFiles" method="post" th:action="@{/pages/admin/genielist_edit/update}" encType="multipart/form-data" onsubmit="return sendit()">
         <input th:type="hidden" th:value="${images.mzIndex}" name="id">
         <div id="wrap">
             <div th:replace="/adminpage/fragment/header :: header"></div>
@@ -33,19 +33,19 @@
                                 <td  colspan="3" class="file_id">
                                     <div class="file-upload">
                                         메인 페이지 파일 첨부
-                                        <input th:type="text" th:class="filetext1" th:value="${images.mzImgOriname}">
+                                        <input th:type="text" th:class="filetext1" placeholder="첨부파일">
                                         <label th:for="ex_file1" th:class="ex_file">찾아보기</label>
                                         <input th:type="file" th:id="ex_file1" name="imgs">
                                     </div>
                                     <div class="file-upload">
                                         퀴즈 파일 첨부
-                                        <input th:type="text" th:class="filetext2" th:value="${images.mzAnswerOriname}">
+                                        <input th:type="text" th:class="filetext2" placeholder="첨부파일">
                                         <label th:for="ex_file2" th:class="ex_file">찾아보기</label>
                                         <input th:type="file" th:id="ex_file2" name="answers">
                                     </div>
                                     <div class="file-upload">
                                         매거진 파일 첨부
-                                        <input th:type="text" th:class="filetext3" th:value="${images.mzPdfOriname}">
+                                        <input th:type="text" th:class="filetext3" placeholder="첨부파일">
                                         <label th:for="ex_file3" th:class="ex_file">찾아보기</label>
                                         <input th:type="file" th:id="ex_file3" name="pdfs">
                                     </div>
