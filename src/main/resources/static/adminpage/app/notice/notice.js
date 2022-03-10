@@ -150,6 +150,7 @@ $(function () {
 
 
 
+
     // 검색 데이터
     function searchNoti(key, page){
         $.get("/api/notify/searchlist/" + key + "?page=" + page, function(response){

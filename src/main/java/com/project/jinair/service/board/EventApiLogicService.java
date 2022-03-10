@@ -16,6 +16,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,15 +28,32 @@ public class EventApiLogicService implements CrudInterface<EventApiRequest, Even
 
     private final TbEventRepository tbEventRepository;
 
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+
+    Calendar c1 = Calendar.getInstance();
+
+    String strToday = sdf.format(c1.getTime());
 
     // 게시판 리스트
-    public Header<List<EventApiResponse>> search() {
+    public void search() {
         List<TbEvent> tbEvents = tbEventRepository.findAll();
-        List<EventApiResponse> eventApiResponses = tbEvents.stream()
-                .map(users -> responseEvents(users))
-                .collect(Collectors.toList());
-
-        return Header.OK(eventApiResponses);
+        for(TbEvent tbEvent : tbEvents) {
+            String[] str = String.valueOf(tbEvent.getEvEndDay()).split("-");
+            String strrr = str[0] + str[1] + str[2].substring(0,2);
+            if(Integer.parseInt(strrr) < Integer.parseInt(strToday)){
+                tbEvent.setEvIndex(tbEvent.getEvIndex());
+                tbEvent.setEvTitle(tbEvent.getEvTitle());
+                tbEvent.setEvContent(tbEvent.getEvContent());
+                tbEvent.setEvFileName(tbEvent.getEvFileName());
+                tbEvent.setEvFileOriname(tbEvent.getEvFileOriname());
+                tbEvent.setEvFileUrl(tbEvent.getEvFileUrl());
+                tbEvent.setEvStartDay(tbEvent.getEvStartDay());
+                tbEvent.setEvEndDay(tbEvent.getEvEndDay());
+                tbEvent.setEvRegdate(tbEvent.getEvRegdate());
+                tbEvent.setEvStatus(EventStatus.EventEnd);
+                tbEventRepository.save(tbEvent);
+            }
+        }
     }
 
     // 게시판 리스트

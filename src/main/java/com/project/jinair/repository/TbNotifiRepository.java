@@ -14,5 +14,4 @@ public interface TbNotifiRepository extends JpaRepository<TbNotifi, Long> {
     Optional<TbNotifi> findByNoIndex(Long id);
     Optional<TbNotifi> findByNoIndexOrderByNoIndexDesc(Long id);
     Page<TbNotifi> findByNoTitleContaining(String NoTitle, Pageable pageable);
-
 }

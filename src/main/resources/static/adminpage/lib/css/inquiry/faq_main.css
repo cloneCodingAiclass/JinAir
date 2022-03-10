@@ -31,6 +31,7 @@
     font-size: 14px;
     font-weight: 600;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+    border: 3px solid #BDD600;
 }
 #container > .contents .faq_check_box li:nth-child(1){
     background-color: white;
@@ -113,4 +114,35 @@
     cursor: pointer;
     margin-right: 5px;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+}
+
+/* 페이지 버튼 css */
+#button{
+    display: flex;
+    justify-content: center;
+}
+
+#button .pageButton{
+    width: 20px;
+    height: 20px;
+    border: 1px solid #888888;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+    background-color: #F2F2F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    font-weight: 700;
+    font-size: 15px;
+    border-collapse: collapse;
+}
+
+#button .pageButton:hover{
+    background-color: rgb(124,0,72);
+    color: white;
+    cursor: pointer;
+}
+
+.buttonList{
+    width: 100%;
 }

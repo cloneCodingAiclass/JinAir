@@ -4,11 +4,15 @@ import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.board.TbFaq;
 import com.project.jinair.model.entity.board.TbQna;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.board.FaqApiRequest;
 import com.project.jinair.model.network.response.board.FaqApiResponse;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.repository.TbFaqRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,13 +27,20 @@ public class FaqApiLogicService implements CrudInterface<FaqApiRequest, FaqApiRe
 
 
     // 게시판 리스트
-    public Header<List<FaqApiResponse>> search() {
-        List<TbFaq> tbFaq = tbFaqRepository.findAll();
+    public Header<List<FaqApiResponse>> search(Pageable pageable) {
+        Page<TbFaq> tbFaq = tbFaqRepository.findAll(pageable);
         List<FaqApiResponse> faqList = tbFaq.stream()
                 .map(users -> responseFaq(users))
                 .collect(Collectors.toList());
 
-        return Header.OK(faqList);
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbFaq.getTotalPages())
+                .totalElements(tbFaq.getTotalElements())
+                .currentPage(tbFaq.getNumber())
+                .currentElements(tbFaq.getNumberOfElements())
+                .build();
+
+        return Header.OK(faqList, pagination);
     }
 
     // 게시판 글작성
