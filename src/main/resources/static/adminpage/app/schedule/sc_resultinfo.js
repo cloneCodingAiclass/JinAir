@@ -1,12 +1,4 @@
-    $(function () {
-    $('.modal_container').hide();
-    $('.del_modal').on('click', function(){
-        $('.modal_container').fadeIn(200);
-    })
-    $('.del_btn').on('click', function(){
-        $('.modal_container').fadeOut(200);
-    })
-
+$(function () {
     $('.nav2').find('a').css({"color":"#BDD600"});
     $('.nav2').siblings('li').css({"display":"block"});
     $('.nav2').siblings('li').eq(1).find('a').css({"color":"#BDD600"});
@@ -107,6 +99,13 @@
         $('.nav2').siblings('li').eq(1).find('a').css({"color":"#BDD600"});
     })
 
+    $('.modal_container').hide();
+    $('.del_modal').on('click', function(){
+        $('.modal_container').fadeIn(200);
+    })
+    $('.del_btn').on('click', function(){
+        $('.modal_container').fadeOut(200);
+    })
 
     let apList = new Vue({
         el : '#apList',
