@@ -106,7 +106,7 @@ $(()=> {
     $('#modal_iswrite').hide();
     $(".write_btn").on('click', () => {
         if($('#evTitle').val().length <= 0 || $('#ex_file').val().length <= 0 || $('#evContent').val().length <= 0){
-            alert('내용일 정확히 입력되었는지 다시 한번 확인해주세요.')
+            alert('내용을 정확히 입력되었는지 다시 한번 확인해주세요.')
         }else{
             let str = $('#start_date').val().split('-');
             let strrr = str[0] + str[1] + str[2];
@@ -115,12 +115,16 @@ $(()=> {
             if(strrr > strrr1){
                 alert('이벤트 시작일이 종료일을 넘을 수 없습니다.');
             }else{
-                $("#modal_iswrite").fadeIn();
+                if ($('.filetext').val().length <= 0){
+                    alert('파일 첨부를 확인 해주세요.');
+                }else{
+                    $("#modal_iswrite").css("display", "flex");
+                }
             }
         }
     })
     $(".uncomplete1").on('click', () => {
-        $("#modal_iswrite").fadeOut();
+        $("#modal_iswrite").css("display", "none");
     })
 })
 
