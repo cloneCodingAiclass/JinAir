@@ -99,8 +99,6 @@ $(function () {
 });
 
 (function ($) {
-
-
     let notiList = new Vue({
         el : '#notiList',
         data : {
