@@ -32,7 +32,7 @@ public class TbUsercoupon {
     private Long ucPrice;
     private String ucDesc;
     private String ucCode;
-//    private Long ucUserindex;
+    private Long ucUserindex;
     private Integer ucDiscount;
     private LocalDateTime ucStartday;
     private LocalDateTime ucEndday;
@@ -41,6 +41,7 @@ public class TbUsercoupon {
     private String ucTotcoupon;
 
     @ManyToOne
+    @JoinColumn(name= "ucUserindex", referencedColumnName = "memIndex", insertable = false, updatable = false)
     private TbMember tbMember;
 
 }

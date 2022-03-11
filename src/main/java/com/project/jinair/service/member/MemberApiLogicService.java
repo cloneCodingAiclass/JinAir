@@ -131,7 +131,30 @@ public class MemberApiLogicService implements CrudInterface<MemberApiRequest, Me
     }
 
     private Header<MemberApiResponse> response(TbMember member){
-        return Header.OK(responseMember(member));
+        MemberApiResponse memberApiResponse = MemberApiResponse.builder()
+                .memIndex(member.getMemIndex())
+                .memUserid(member.getMemUserid())
+                .memUserpw(member.getMemUserpw())
+                .memKorFirstName(member.getMemKorFirstName())
+                .memKorLastName(member.getMemKorLastName())
+                .memEngFirstName(member.getMemEngFirstName())
+                .memEngLastName(member.getMemEngLastName())
+                .memHpNation(member.getMemHpNation())
+                .memHp(member.getMemHp())
+                .memEmail(member.getMemEmail())
+                .memGender(member.getMemGender())
+                .memBirth(member.getMemBirth())
+                .memPassport(member.getMemPassport())
+                .memNation(member.getMemNation())
+                .memZipcode(member.getMemZipcode())
+                .memAddress1(member.getMemAddress1())
+                .memAddress2(member.getMemAddress2())
+                .memAddress3(member.getMemAddress3())
+                .memEmailIsagree(member.getMemEmailIsagree())
+                .memSnsIsagree(member.getMemSnsIsagree())
+                .memRegdate(member.getMemRegdate())
+                .build();
+        return Header.OK(memberApiResponse);
     }
 
     private MemberApiResponse responseMember(TbMember member){
@@ -160,4 +183,5 @@ public class MemberApiLogicService implements CrudInterface<MemberApiRequest, Me
                 .build();
         return memberApiResponse;
     }
+
 }

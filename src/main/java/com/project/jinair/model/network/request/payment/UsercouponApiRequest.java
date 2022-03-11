@@ -1,13 +1,18 @@
 package com.project.jinair.model.network.request.payment;
 
 import com.project.jinair.model.entity.member.TbMember;
+import com.project.jinair.model.entity.payment.TbPoint;
 import com.project.jinair.model.enumclass.CouponStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,4 +30,9 @@ public class UsercouponApiRequest {
     private CouponStatus ucIsUse;
     private String ucTotcoupon;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbCouponRegist")
+    private List<TbPoint> pointList;
+
+    @ManyToOne
+    private TbMember tbMember;
 }

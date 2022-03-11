@@ -28,7 +28,6 @@ public class CouponApiController implements CrudInterface<CouponRegistApiRequest
         return couponRegistApiService.create(request);
     }
 
-
     // useCouponlist
 
     @Override
@@ -48,6 +47,7 @@ public class CouponApiController implements CrudInterface<CouponRegistApiRequest
     public Header<CouponRegistApiResponse> delete(@PathVariable(name = "id") Long id) {
         return couponRegistApiService.delete(id);
     }
+
     @GetMapping("/list") // http://localhost:8080/api/airplane
     public Header<List<CouponRegistApiResponse>> findAll(@PageableDefault(sort = {"crIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
         return couponRegistApiService.search(pageable);
@@ -57,4 +57,6 @@ public class CouponApiController implements CrudInterface<CouponRegistApiRequest
     public Header<List<CouponRegistApiResponse>> searchTxt(@PathVariable String a, @PageableDefault(size = 10, sort = {"crIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
         return couponRegistApiService.searchList(a, pageable);
     }
+
+
 }

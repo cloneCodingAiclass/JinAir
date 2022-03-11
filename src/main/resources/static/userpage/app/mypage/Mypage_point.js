@@ -409,19 +409,59 @@ $(function () {
             e.stopPropagation()
         }
 
-        console.log(necessary);
-
         if (go_layer == arrive_layer) {
             $('.modal_container').fadeIn(200);
             $('.moditext').html('출발지와 도착지가 같습니다.');
             e.stopPropagation()
         }
+        let day = new Date();
+
+        let ucType = "일반";
+        let ucPrice = 200000;
+        let ucDesc = go_layer + " ~ " + arrive_layer;
+        let ucCode = "21398127409214079";
+        let ucDiscount = 3;
+        let ucStartday = day.getFullYear()+"-"+"0"+(day.getMonth()+1)+"-"+day.getDate()+"T00:00:00";
+        console.log(ucStartday);
+        let ucEndDay = day.getFullYear()+"-"+"0"+(day.getMonth()+2)+"-"+day.getDate()+"T00:00:00";
+        console.log(ucEndDay);
+        let ucIsUse = "Unused";
+
+        let json
+        json = {
+            data : {
+                ucType : ucType,
+                ucPrice : ucPrice,
+                ucDesc : ucDesc,
+                ucCode : ucCode,
+                ucDiscount : ucDiscount,
+                ucStartday : ucStartday,
+                ucEndDay : ucEndDay,
+                ucIsUse : ucIsUse,
+                ucTotcoupon : 1
+            }
+        }
+        $.post({
+            url : "/api/userCoupon",
+            data : JSON.stringify(json),
+            dataType : "text",
+            contentType : "application/json",
+            success(json){
+                if(json == ""){
+                    alert('포인트를 확인하세요.');
+                }else{
+                    alert("쿠폰 등록 완료.");
+                    console.log(json);
+                }
+            },
+            error(error) {
+                alert("등록에 실패했습니다.")
+            }
+        });
         $('.btn_cancel').click(function () {
             $('.modal_container').fadeOut(200);
             $('body').css('overflow', '');
         })
-
-
     });
 });
 
