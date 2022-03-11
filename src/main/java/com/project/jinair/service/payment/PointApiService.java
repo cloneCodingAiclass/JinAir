@@ -35,7 +35,6 @@ public class PointApiService implements CrudInterface<PointApiRequest, PointApiR
         TbMember tbMember = memberRepository.findByMemIndex(43L);
 
         TbPoint tbPoint = TbPoint.builder()
-                .poIndex(pointApiRequest.getPoIndex())
                 .poPoint(pointApiRequest.getPoPoint())
                 .poMemo(pointApiRequest.getPoMemo())
                 .poUserindex(tbMember.getMemIndex())

@@ -2,8 +2,10 @@ package com.project.jinair.service.payment;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.member.TbMember;
+import com.project.jinair.model.entity.payment.TbPoint;
 import com.project.jinair.model.entity.payment.TbUsercoupon;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.request.payment.PointApiRequest;
 import com.project.jinair.model.network.request.payment.UsercouponApiRequest;
 import com.project.jinair.model.network.response.payment.UsercouponApiResponse;
 import com.project.jinair.repository.MemberRepository;
@@ -53,6 +55,7 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
                     .ucTotcoupon(usercouponApiRequest.getUcTotcoupon())
                     .ucUserindex(tbMember.getMemIndex())
                     .build();
+
             TbUsercoupon tbUsercoupon1 = tbUsercouponRepository.save(tbUsercoupon);
 
             return response(tbUsercoupon1);
