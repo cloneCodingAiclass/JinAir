@@ -10,6 +10,7 @@ import com.project.jinair.model.network.response.board.*;
 import com.project.jinair.repository.TbEventRepository;
 import com.project.jinair.repository.TbLostRepository;
 import com.project.jinair.repository.TbMagazineRepository;
+import com.project.jinair.repository.TbNotifiRepository;
 import com.project.jinair.service.MenuService;
 import com.project.jinair.service.board.*;
 import com.project.jinair.service.member.AdminApiLoginService;
@@ -482,10 +483,21 @@ public class PageController {
         return new ModelAndView("/userpage/pages/promotion/jinicoupon/jiniCoupon")
                 .addObject("code", "jinicoupon");
     }
+    //-------------------------------------------------------------------------------------------
+    // 공지사항
+    @RequestMapping("/notice/notice")
+    public ModelAndView notice() {
+        return new ModelAndView("/userpage/pages/notice/notice")
+                .addObject("code", "notice");
+    }
 
-
-
-
+    // 공지사항 상세
+    @RequestMapping("/notice/nt_view/{id}")
+    @Transactional
+    public ModelAndView userNtView(){
+        return new ModelAndView("/userpage/pages/notice/nt_view")
+                .addObject("code", "userNtView");
+    }
     //-------------------------------------------------------------------------------------------
     // admin_login
     @RequestMapping("/admin_login") // pages/admin_login
@@ -842,10 +854,12 @@ public class PageController {
         }
     }
     @RequestMapping("/admin/nt_modify/{id}")
-    public ModelAndView ntModify(HttpServletRequest request, Model model){
+    public ModelAndView ntModify(@PathVariable(name = "id") Long id, HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
         if((String) session.getAttribute("name") != null) {
             model.addAttribute("str", (String) session.getAttribute("name"));
+            NotifyApiResponse notifyApiResponse = notifyLogicService.read(id).getData();
+            model.addAttribute("notifyApiResponse", notifyApiResponse);
             return new ModelAndView("/adminpage/pages/notice/nt_modify")
                     .addObject("code", "ntModify")
                     .addObject("menuList", menuService.getadminMenu());
@@ -915,6 +929,48 @@ public class PageController {
 
         notifyLogicService.save(tbNotifi);
         return "redirect:/pages/admin/notice";
+    }
+
+    @Autowired
+    TbNotifiRepository tbNotifiRepository;
+
+    // 공지 파일 수정
+    @PutMapping("/admin/nt_file/upload/{id}")
+    public String modifyFile(@RequestPart(value = "title") String ntTitle,
+                             @RequestPart(value = "file", required = false) MultipartFile file,
+                             @RequestPart(value = "content") String ntContent,
+                             @RequestPart(value = "idx") String idx
+    ) throws IOException {
+        TbNotifi tbNotifi = tbNotifiRepository.findByNoIndex(Long.valueOf(idx)).get();
+
+        // 제목
+        tbNotifi.setNoIndex(tbNotifi.getNoIndex());
+        tbNotifi.setNoTitle(ntTitle);
+        tbNotifi.setNoContents(ntContent);
+        tbNotifi.setNoRegdate(tbNotifi.getNoRegdate());
+        // 이미지
+        String sourceImgName = file.getOriginalFilename();
+        String sourceFileNameExtension = FilenameUtils.getExtension(sourceImgName).toLowerCase();
+        FilenameUtils.removeExtension(sourceImgName);
+
+        File destinationImg;
+        String destinationImgName;
+        String imgUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\";
+
+        do{
+            destinationImgName = RandomStringUtils.randomAlphabetic(32)+"."+sourceFileNameExtension;
+            destinationImg = new File(imgUrl + destinationImgName);
+        }while(destinationImg.exists());
+
+        destinationImg.getParentFile().mkdir();
+        file.transferTo(destinationImg);
+
+        tbNotifi.setNoFileName(destinationImgName);
+        tbNotifi.setNoFileOriname(sourceImgName);
+        tbNotifi.setNoFileUrl(imgUrl);
+
+        tbNotifiRepository.save(tbNotifi);
+        return "redirect:/pages/admin/nt_view/" + idx;
     }
     //-------------------------------------------------------------------------------------------
 
@@ -1171,66 +1227,6 @@ public class PageController {
                     .addObject("code", "faq_main")
                     .addObject("menuList", menuService.getadminMenu())
                     .addObject("inquiry", menuService.adminQnaMenu());
-        }else{
-            return new ModelAndView("/adminpage/pages/admin_login");
-        }
-    }
-    @RequestMapping("/admin/faq_main1")
-    public ModelAndView faqMain1(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        if((String) session.getAttribute("name") != null) {
-            model.addAttribute("str", (String) session.getAttribute("name"));
-            return new ModelAndView("/adminpage/pages/inquiry/faq_main1")
-                    .addObject("code", "faq_main1")
-                    .addObject("menuList", menuService.getadminMenu());
-        }else{
-            return new ModelAndView("/adminpage/pages/admin_login");
-        }
-    }
-    @RequestMapping("/admin/faq_main2")
-    public ModelAndView faqMain2(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        if((String) session.getAttribute("name") != null) {
-            model.addAttribute("str", (String) session.getAttribute("name"));
-            return new ModelAndView("/adminpage/pages/inquiry/faq_main2")
-                    .addObject("code", "faq_main2")
-                    .addObject("menuList", menuService.getadminMenu());
-        }else{
-            return new ModelAndView("/adminpage/pages/admin_login");
-        }
-    }
-    @RequestMapping("/admin/faq_main3")
-    public ModelAndView faqMain3(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        if((String) session.getAttribute("name") != null) {
-            model.addAttribute("str", (String) session.getAttribute("name"));
-            return new ModelAndView("/adminpage/pages/inquiry/faq_main3")
-                    .addObject("code", "faq_main3")
-                    .addObject("menuList", menuService.getadminMenu());
-        }else{
-            return new ModelAndView("/adminpage/pages/admin_login");
-        }
-    }
-    @RequestMapping("/admin/faq_main4")
-    public ModelAndView faqMain4(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        if((String) session.getAttribute("name") != null) {
-            model.addAttribute("str", (String) session.getAttribute("name"));
-            return new ModelAndView("/adminpage/pages/inquiry/faq_main4")
-                    .addObject("code", "faq_main4")
-                    .addObject("menuList", menuService.getadminMenu());
-        }else{
-            return new ModelAndView("/adminpage/pages/admin_login");
-        }
-    }
-    @RequestMapping("/admin/faq_main5")
-    public ModelAndView faqMain5(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        if((String) session.getAttribute("name") != null) {
-            model.addAttribute("str", (String) session.getAttribute("name"));
-            return new ModelAndView("/adminpage/pages/inquiry/faq_main5")
-                    .addObject("code", "faq_main5")
-                    .addObject("menuList", menuService.getadminMenu());
         }else{
             return new ModelAndView("/adminpage/pages/admin_login");
         }
