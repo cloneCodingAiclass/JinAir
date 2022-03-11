@@ -125,7 +125,7 @@
                         </tr>
                         <tr v-for="dto in itemList2">
                             <td>{{dto.evIndex}}</td>
-                            <td>{{dto.evTitle}}</td>
+                            <td><a :href="'/pages/promotion/event_view/'+dto.evIndex">{{dto.evTitle}}</a></td>
                             <td>{{dto.evRegdate.substr(0,10)}}</td>
                         </tr>
                     </table>

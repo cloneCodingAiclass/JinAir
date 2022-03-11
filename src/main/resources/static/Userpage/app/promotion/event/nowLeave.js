@@ -189,7 +189,7 @@ $(() => {
                 "color" : "#444",
                 "cursor" : "pointer"
             });
-            $("#"+index+"").css({
+            $(".pageNum").parent('#showPage').children("#"+index+"").css({
                 "background-color" : "#661e43",
                 "color" : "white"
             });
@@ -263,7 +263,7 @@ $(() => {
                 "color" : "#444",
                 "cursor" : "pointer"
             });
-            $("#"+index+"").css({
+            $(".pageNum1").parent('#showPage1').children("#"+index+"").css({
                 "background-color" : "#661e43",
                 "color" : "white"
             });
@@ -336,7 +336,7 @@ $(() => {
                 "color" : "#444",
                 "cursor" : "pointer"
             });
-            $("#"+index+"").css({
+            $(".pageNum2").parent('#showPage2').children("#"+index+"").css({
                 "background-color" : "#661e43",
                 "color" : "white"
             });

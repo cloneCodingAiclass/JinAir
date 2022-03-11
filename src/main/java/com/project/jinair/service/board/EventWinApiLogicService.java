@@ -48,6 +48,17 @@ public class EventWinApiLogicService implements CrudInterface<EventWinApiRequest
         return Header.OK(eventWinApiResponses, pagination);
     }
 
+    // 정답자 상세보기
+    public Header<EventWinApiResponse> reads(Long id) {
+        return tbEventWinRepository.findByEvIndexOrderByEvIndexDesc(id)
+                .map(tbEventWin -> response(tbEventWin))
+                .orElseGet(
+                        () -> Header.ERROR("데이터 없음")
+                );
+    }
+
+
+
     @Override
     public Header<EventWinApiResponse> create(Header<EventWinApiRequest> request) {
         EventWinApiRequest eventWinApiRequest = request.getData();
