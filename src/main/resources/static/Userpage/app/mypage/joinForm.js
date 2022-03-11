@@ -94,4 +94,137 @@ $(function () {
         })
     })
 
+
+    // 아이디 대소문자 숫자 제외 전부 막기
+    $('#id').on("keyup", function (){
+        $(this).val($(this).val().replace(/[^A-Za-z0-9]/g,""));
+    })
+    // 생년월일 막아놓기
+    $('#bthDt').on("keyup", function (){
+        $(this).val($(this).val().replace(/[^0-9]/g,""));
+    })
+    // 생년월일 막아놓기
+    $('#mbrLnm').on("keyup", function (){
+        $(this).val($(this).val().replace(/[^ㄱ-힣]/g,""));
+    })
+    $('#mbrFnm').on("keyup", function (){
+        $(this).val($(this).val().replace(/[^ㄱ-힣]/g,""));
+    })
+    $('#engLnm').on("keyup", function (){
+        $(this).val($(this).val().replace(/[^A-Za-z]/g,""));
+    })
+    $('#engFnm').on("keyup", function (){
+        $(this).val($(this).val().replace(/[^A-Za-z]/g,""));
+    })
+
+
 });
+
+function sendit(){
+    const expKorNameText = RegExp(/[가-힣]+$/);
+    const expEngNameText = RegExp(/[A-Za-z]+$/);
+    const expNumText = RegExp(/[0-9]+$/);
+    const expHpText = RegExp(/^\d{3}-\d{3,4}-\d{4}$/);
+    const expEmailText = RegExp(/^[A-Za-z0-9\-\.]+@[A-Za-z0-9\-\.]+\.[A-Za-z0-9]+$/);
+
+    if(!$('#id').val()){
+        alert('아이디를 입력하세요');
+        $('#id').focus();
+        return false;
+    }
+
+    if($('#id').val().length < 4 || $('#id').val().length > 20){
+        alert('아이디는 6자 이상 20자 이하로 입력하세요');
+        $('#id').focus();
+        return false;
+    }
+
+    if(!$('#pw').val()){
+        alert('비밀번호를 입력하세요');
+        $('#pw').focus();
+        return false;
+    }
+
+    if($('#pw').val().length < 4 || $('#pw').val().length > 20){
+        alert('비밀번호는 8자 이상 20자 이하로 입력하세요');
+        $('#pw').val("");
+        $('#pwCheck').val("");
+        $('#pw').focus();
+        return false;
+    }
+
+    if($('#pw').val() != $('#pwCheck').val()){
+        alert('비밀번호와 비밀번호 확인의 값이 다릅니다');
+        $('#pw').val("");
+        $('#pwCheck').val("");
+        $('#pw').focus();
+        return false;
+    }
+
+    if(!$('#mbrLnm').val()){
+        alert('(한글/성)을 입력하세요');
+        $('#mbrLnm').focus();
+        return false;
+    }
+    if(!$('#mbrFnm').val()){
+        alert('(한글/이름)을 입력하세요');
+        $('#mbrFnm').focus();
+        return false;
+    }
+    if(!$('#engLnm').val()){
+        alert('(영문/성)을 입력하세요');
+        $('#engLnm').focus();
+        return false;
+    }
+    if(!$('#engFnm').val()){
+        alert('(영문/이름)을 입력하세요');
+        $('#engFnm').focus();
+        return false;
+    }
+    if(!$('#bthDt').val()){
+        alert('생년월일을 입력하세요');
+        $('#bthDt').focus();
+        return false;
+    }
+    if(!$('#sample6_postcode').val()){
+        alert('우편번호를 입력하세요');
+        $('#sample6_postcode').focus();
+        return false;
+    }
+    if(!$('#sample6_address').val()){
+        alert('주소를 입력하세요');
+        $('#sample6_address').focus();
+        return false;
+    }
+    if(!$('#sample6_detailAddress').val()){
+        alert('상세주소를 입력하세요');
+        $('#sample6_detailAddress').focus();
+        return false;
+    }
+    if(!$('#mblFonNo').val()){
+        alert('휴대폰 번호를 입력하세요');
+        $('#mblFonNo').val("");
+        $('#mblFonNo').focus();
+        return false;
+    }
+    if(!expHpText.test($('#mblFonNo').val())){
+        alert('휴대폰 번호 형식을 확인하세요 \n하이픈(-)을 포함해야합니다');
+        $('#mblFonNo').val("");
+        $('#mblFonNo').focus();
+        return false;
+    }
+    if($('#emAdr').val()){
+        alert('이메일을 입력하세요');
+        $('#emAdr').val("");
+        $('#emAdr').focus();
+        return false;
+    }
+    if(!expEmailText.test($('#emAdr').val())){
+        alert('이메일 형식을 확인하세요');
+        $('#emAdr').val("");
+        $('#emAdr').focus();
+        return false;
+    }
+    return true;
+
+}

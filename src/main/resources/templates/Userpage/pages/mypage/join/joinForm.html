@@ -70,7 +70,7 @@
         <!--header 끝-->
         <!--container-->
         <div id="container">
-            <div class="joinForm_container">
+            <div class="joinForm_container" id="itemList">
                 <div class="joinForm_top">
                     <p>회원가입</p>
                 </div>
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <h2 class="typeA">정보입력 <span class="text fontTypeA">* 표시 항목은 필수 입력사항 입니다.</span></h2>
-                <form id="joinForm" name="joinForm" method="post" autocomplete="off" action="termsAgree.html">
+                <form id="joinForm" name="joinForm" method="post" autocomplete="off" action="#" onsubmit="return sendit()">
                     <table class="fieldForm memberForm">
                         <colgroup>
                             <col width="23%">
@@ -133,9 +133,9 @@
                             <th scope="row"><em>*</em>한글 이름</th>
                             <td>
                                 <p class="nameField">
-                                    <input type="text" id="mbrLnm" name="mbrLnm" value='라' maxlength="30"
-                                        style="ime-mode:active;" placeholder="성(Last Name)" title="영문 성">
-                                    <input type="text" id="mbrFnm" name="mbrFnm" value='승현' maxlength="60"
+                                    <input type="text" id="mbrLnm" name="mbrLnm" maxlength="30"
+                                        style="ime-mode:active;" placeholder="성(Last Name)" title="한글 성">
+                                    <input type="text" id="mbrFnm" name="mbrFnm" maxlength="60"
                                         style="ime-mode:active;" placeholder="이름(First Name)" title="한글 이름">
                                 </p>
                             </td>
@@ -149,7 +149,7 @@
                                         placeholder="성(Last Name)" title="영문 성">
                                     <input type="text" id="engFnm" name="engFnm" class="onlyEngUpp"
                                         style="text-transform:uppercase;" maxlength="60"
-                                        placeholder="이름(First Name)" title="한글 이름">
+                                        placeholder="이름(First Name)" title="영문 이름">
                                 </p>
                                 <p class="text">- 한글과 영문 성명은 여권상(또는 여권에 사용할) 성명과 동일하게 정확히 입력하시기 바랍니다. 회원 가입 후 성명 변경은
                                     증빙자료를 검토하여 제한적으로만 허용됨을 유의하시기 바랍니다.</p>
@@ -157,7 +157,7 @@
                         </tr>
                         <tr>
                             <th scope="row"><em>*</em>생년월일</th>
-                            <td><input type="text" id="bthDt" name="bthDt" maxlength="8" class="onlyNum" value=""
+                            <td><input type="text" id="bthDt" name="bthDt" maxlength="8" class="onlyNum" :value="bthDt"
                                     placeholder="YYYYMMDD (예.19820626)" title="생년월일"></td>
                         </tr>
                         <tr>
@@ -3582,7 +3582,7 @@
                                             </option>
                                         </select>
                                     </span>
-                                    <input type="text" id="mblFonNo" name="mblFonNo" class="onlyNum" maxlength="20"
+                                    <input type="text" id="mblFonNo" name="mblFonNo" class="onlyNum" maxlength="20" placeholder="하이픈(-)을 포함해야합니다"
                                         value="" title="휴대폰번호">
                                 </div>
                             </td>
@@ -3618,7 +3618,7 @@
                     </table>
                     <div class="btn">
                     <!-- 차후 submit으로 변경 필요 -->
-                        <input type="button" class="btn_agree" value="확인" onclick="location.href='join_confirm.html'">
+                        <input type="submit" class="btn_agree" value="확인">
                         <input type="button" class="btn_cancel" value="취소" onclick="history.back()">
                     </div>
                 </form>
