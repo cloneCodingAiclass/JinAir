@@ -23,7 +23,7 @@ public class UsercouponApiResponse {
     private LocalDateTime ucStartday;
     private LocalDateTime ucEndday;
     private CouponStatus ucIsUse;
-    private String ucTotcoupon;
+    private Long ucTotcoupon;
     private Long ucUserindex;
 
 }

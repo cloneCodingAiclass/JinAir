@@ -38,7 +38,7 @@ public class TbUsercoupon {
     private LocalDateTime ucEndday;
     @Enumerated(EnumType.STRING)
     private CouponStatus ucIsUse;
-    private String ucTotcoupon;
+    private Long ucTotcoupon;
 
     @ManyToOne
     @JoinColumn(name= "ucUserindex", referencedColumnName = "memIndex", insertable = false, updatable = false)

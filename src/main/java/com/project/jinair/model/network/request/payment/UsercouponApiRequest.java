@@ -28,10 +28,7 @@ public class UsercouponApiRequest {
     private LocalDateTime ucStartday;
     private LocalDateTime ucEndday;
     private CouponStatus ucIsUse;
-    private String ucTotcoupon;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbCouponRegist")
-    private List<TbPoint> pointList;
+    private Long ucTotcoupon;
 
     @ManyToOne
     private TbMember tbMember;
