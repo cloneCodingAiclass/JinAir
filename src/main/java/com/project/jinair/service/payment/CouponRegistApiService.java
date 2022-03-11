@@ -1,17 +1,11 @@
 package com.project.jinair.service.payment;
 
 import com.project.jinair.ifs.CrudInterface;
-import com.project.jinair.model.entity.board.TbNotifi;
-import com.project.jinair.model.entity.info.TbAirplane;
 import com.project.jinair.model.entity.payment.TbCouponRegist;
-import com.project.jinair.model.entity.schedule.TbSchedule;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.Pagination;
-import com.project.jinair.model.network.request.info.AirplaneApiRequest;
 import com.project.jinair.model.network.request.payment.CouponRegistApiRequest;
-import com.project.jinair.model.network.response.board.NotifyApiResponse;
 import com.project.jinair.model.network.response.payment.CouponRegistApiResponse;
-import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import com.project.jinair.repository.TbCouponRegistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

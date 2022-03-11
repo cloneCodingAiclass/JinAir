@@ -630,7 +630,6 @@ body {
     height: 100%;
     vertical-align: top;
     margin: 0 auto;
-    margin-left: 3px;
 }
 #container #reservation .go_layer div h3,
 #container #reservation .go_layer2 div h3 {
@@ -667,7 +666,6 @@ body {
 #container #reservation .arrive_layerbtn2 span {
     font-weight: bold;
     line-height: 2;
-    line-height: 3;
 }
 #container #reservation .arrive_layer,
 #container #reservation .arrive_layer2 {
@@ -692,7 +690,6 @@ body {
     height: 100%;
     vertical-align: top;
     margin: 0 auto;
-    margin-left: 3px;
 }
 #container #reservation .arrive_layer div h3,
 #container #reservation .arrive_layer2 div h3 {
@@ -729,7 +726,6 @@ body {
 #container #reservation .go_date_layerbtn2 span {
     font-weight: bold;
     line-height: 2;
-    line-height: 3;
 }
 
 /* 오는날 */
@@ -742,7 +738,6 @@ body {
 #container #reservation .come_date_layerbtn span {
     font-weight: bold;
     line-height: 2;
-    line-height: 3;
 }
 
 /* reserve_oneway */

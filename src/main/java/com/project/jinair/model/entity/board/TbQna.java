@@ -41,7 +41,6 @@ public class TbQna {
     private LocalDateTime qnaRegdate;
     private LocalDateTime qnaAnsdate;
 
-
     @ManyToOne
     @JoinColumn(name ="qnaUserindex", referencedColumnName="memIndex")
     private TbMember tbMember;

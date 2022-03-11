@@ -2,11 +2,13 @@ package com.project.jinair.service.member;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.member.TbMember;
+import com.project.jinair.model.entity.payment.TbPoint;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.member.MemberApiRequest;
 import com.project.jinair.model.network.response.member.MemberApiResponse;
 import com.project.jinair.repository.MemberRepository;
+import com.project.jinair.repository.TbPointRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 public class MemberApiLogicService implements CrudInterface<MemberApiRequest, MemberApiResponse> {
 
     private final MemberRepository memberRepository;
+    private final TbPointRepository tbPointRepository;
 
     @Override
     public Header<MemberApiResponse> create(Header<MemberApiRequest> request) {

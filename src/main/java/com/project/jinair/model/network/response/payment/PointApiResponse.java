@@ -1,6 +1,5 @@
 package com.project.jinair.model.network.response.payment;
 
-import com.project.jinair.model.entity.member.TbMember;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class PointApiResponse {
-    private Long pIndex;
-    private Long pPoint;
-    private String pMemo;
-    private String pUserindex;
+    private Long poIndex;
+    private Long poPoint;
+    private String poMemo;
+    private Long poUserindex;
 
 }

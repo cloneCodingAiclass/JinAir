@@ -186,6 +186,5 @@ $(function () {
     $('#regist').click( () =>{
         register();
         location.href='/pages/admin/scheduleList';
-
     })
 });

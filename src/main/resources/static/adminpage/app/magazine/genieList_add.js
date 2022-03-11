@@ -106,8 +106,6 @@ $(function () {
         $('.filetext3').val($('#ex_file3').val());
     });
 
-
-
 });
 
 function sendit(){
