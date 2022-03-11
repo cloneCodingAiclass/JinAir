@@ -85,10 +85,73 @@ $(function () {
     })
 
 
-    // 퀵 메뉴
-    let currentPosition = parseInt($('.quickmanu').css('top'));
-    $(window).scroll(function () {
-        let position = $(window).scrollTop() * 0.023; // 현재 스크롤바의 위치값 반환
-        $('.quickmanu').stop().animate({ 'top': + position + currentPosition + 'px' }, 1000);
+    // list
+    let itemList = new Vue({
+        el : '#itemList',
+        data : {
+            itemList : {}
+        },
+        methods:{
+        }
     });
+
+    list(0);
+
+
+    function list(index){
+        $.get("/api/magazine?page="+index, function(response){
+            itemList.itemList = response.data;
+
+            let lastPage = response.pagination.totalPages;
+            let str = "";
+            str += "<td class='firstPage1'><<</td>";
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
+            }
+            str += "<td class='lastPage1'>>></td>";
+            $("#showPage").html(str);
+            if(index == 0) {
+                $(".firstPage1").css("visibility", "hidden");
+            }
+            if(index == lastPage-1) {
+                $(".lastPage1").css("visibility", "hidden");
+            }
+            $(".pageNum").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+index+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            $(".firstPage1").css({
+                "cursor" : "pointer"
+            });
+            $(".lastPage1").css({
+                "cursor" : "pointer"
+            });
+            $('#showPage').on('click', '.firstPage1', function(){
+                window.scrollTo({
+                    top: $('.jini_magazine').offset().top
+                });
+                list(0);
+            });
+            $('#showPage').on('click', '.lastPage1', function(){
+                window.scrollTo({
+                    top: $('.jini_magazine').offset().top
+                });
+                list(lastPage-1);
+            });
+        });
+    }
+
+    $('#showPage').on('click', '.pageNum', function(){
+        let pageId = this.id;
+        window.scrollTo({
+            top: $('.jini_magazine').offset().top
+        });
+        list(pageId);
+    });
+
 });

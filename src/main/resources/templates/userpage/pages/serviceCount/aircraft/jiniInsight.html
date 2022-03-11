@@ -27,61 +27,15 @@
                     <p class="jini_title">지니 매거진</p>
                     <p class="jini_sub">지니 매거진은 단순 정보전달을 넘어 여행을 보다 기쁘고 뜻 깊게 즐길 수 있도록 소중한 여행길에 함께 합니다.</p>
                     <p class="jini_sub">매 월 테마와 연관되는 새로운 시각의 여행 정보, 걷기 코스, 흥미진진한 지니퀴즈 등 진에어의 다양한 소식들이 준비되어 있습니다.</p>
-                    <div class="jini_magazine_wrap">
-                        <div class="jini_magazine1 jini_magazinebox">
-                            <p class="jini_magazine1_title">VOL.38 매거진<br>(2020년 03월)</p>
-                            <div class="jini_magazine1_file">
-                                <a href="./file/magaJin Quiz VOL.38.pdf" download><button class="jinisolution">지니퀴즈 정답</button></a>
-                                <a href="./file/magaJin VOL.38.pdf" download><button>PDF 다운로드</button></a>
-                            </div>
-                        </div>
-                        <div class="jini_magazine2 jini_magazinebox">
-                            <p class="jini_magazine1_title">VOL.37 (타이베이&조호르바루)<br>(2020년 01월)</p>
-                            <div class="jini_magazine1_file">
-                                <a href="./file/JINI QUIZ VOL.37.pdf" download><button class="jinisolution">지니퀴즈 정답</button></a>
-                                <a href="./file/JINI Magazine VOL.37.pdf" download><button>PDF 다운로드</button></a>
-                            </div>
-                        </div>
-                        <div class="jini_magazine3 jini_magazinebox">
-                            <p class="jini_magazine1_title">VOL.36 (세부&다낭)<br>(2019년 12월)</p>
-                            <div class="jini_magazine1_file">
-                                <a href="./file/JINI QUIZ VOL.36.pdf" download><button class="jinisolution">지니퀴즈 정답</button></a>
-                                <a href="./file/JINI Magazine VOL.36.pdf" download><button>PDF 다운로드</button></a>
-                            </div>
-                        </div>
-                        <div class="jini_magazine4 jini_magazinebox">
-                            <p class="jini_magazine1_title">VOL.35 (방콕&괌)<br>(2019년 11월)</p>
-                            <div class="jini_magazine1_file">
-                                <a href="./file/JINI QUIZ VOL.35.pdf" download><button class="jinisolution">지니퀴즈 정답</button></a>
-                                <a href="./file/JINI Magazine VOL.35.pdf" download><button>PDF 다운로드</button></a>
-                            </div>
-                        </div>
-                        <div class="jini_magazine5 jini_magazinebox">
-                            <p class="jini_magazine1_title">VOL.34 (코타키나발루&보라카이)<br>(2019년 10월)</p>
-                            <div class="jini_magazine1_file">
-                                <a href="./file/JINI QUIZ VOL.34.pdf" download><button class="jinisolution">지니퀴즈 정답</button></a>
-                                <a href="./file/JINI Magazine VOL.34.pdf" download><button>PDF 다운로드</button></a>
-                            </div>
-                        </div>
-                        <div class="jini_magazine6 jini_magazinebox">
-                            <p class="jini_magazine1_title">VOL.33 (하노이)<br>(2019년 09월)</p>
-                            <div class="jini_magazine1_file">
-                                <a href="./file/JINI QUIZ VOL.33.pdf" download><button class="jinisolution">지니퀴즈 정답</button></a>
-                                <a href="./file/JINI Magazine VOL.33.pdf" download><button>PDF 다운로드</button></a>
-                            </div>
-                        </div>
-                        <div class="jini_magazine7 jini_magazinebox">
-                            <p class="jini_magazine1_title">VOL.32 (조호르바루&클락)<br>(2019년 08월)</p>
-                            <div class="jini_magazine1_file">
-                                <a href="./file/JINI QUIZ VOL.32.pdf" download><button class="jinisolution">지니퀴즈 정답</button></a>
-                                <a href="./file/JINI Magazine VOL.32.pdf" download><button>PDF 다운로드</button></a>
-                            </div>
-                        </div>
-                        <div class="jini_magazine8 jini_magazinebox">
-                            <p class="jini_magazine1_title">VOL.31 (푸껫&호놀룰루)<br>(2019년 07월)</p>
-                            <div class="jini_magazine1_file">
-                                <a href="./file/JINI QUIZ VOL.31.pdf" download><button class="jinisolution">지니퀴즈 정답</button></a>
-                                <a href="./file/JINI Magazine VOL.31.pdf" download><button>PDF 다운로드</button></a>
+                    <div class="jini_magazine_wrap" id="itemList">
+                        <div class="jini_magazine1 jini_magazinebox" v-for="dto in itemList">
+                            <img :src=`\\upload\\${dto.mzImgName}`>
+                            <div class="jini_magabox">
+                                <p class="jini_magazine1_title">{{dto.mzTitle.split(')')[0]}})<br>{{dto.mzTitle.substr(-11,11)}}</p>
+                                <div class="jini_magazine1_file">
+                                    <a :href=`/api/magazine/downloadAns/${dto.mzIndex}` download><button class="jinisolution">지니퀴즈 정답</button></a>
+                                    <a :href=`/api/magazine/downloadPdf/${dto.mzIndex}` download><button>PDF 다운로드</button></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -89,19 +43,8 @@
                 <div class="footer1">
                     <div class="center">
                         <table>
-                            <tr>
-                                <td><a href="#">1</a></td>
-                                <td><a href="#">2</a></td>
-                                <td><a href="#">3</a></td>
-                                <td><a href="#">4</a></td>
-                                <td><a href="#">5</a></td>
-                                <td><a href="#">6</a></td>
-                                <td><a href="#">7</a></td>
-                                <td><a href="#">8</a></td>
-                                <td><a href="#">9</a></td>
-                                <td><a href="#">10</a></td>
-                                <td><a href="#"></a></td>
-                                <td><a href="#"></a></td>
+                            <tr id="showPage">
+
                             </tr>
                         </table>
                     </div>

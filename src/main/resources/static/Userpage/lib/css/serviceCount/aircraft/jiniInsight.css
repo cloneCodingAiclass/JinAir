@@ -359,12 +359,19 @@ p.jini_sub{
     height: 500px;
     border: 1px solid #ccc;
     margin: 0px 7px 14px;
-    padding-top: 380px;
     vertical-align: middle;
+    position: relative;
+}
+.jini_magabox{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 .jini_magazine1_title{
     text-align: left;
-    margin-left: 20px;
+    padding-left: 20px;
+    margin-bottom: 30px;
     width: 75%;
     white-space: nowrap;
     overflow: hidden;
@@ -372,38 +379,10 @@ p.jini_sub{
     font-size: 18px;
     font-weight: 900;
 }
-.jini_magazine1{
-    background: url(/userpage/lib/img/magaJin\ VOL.38\ Low.png) no-repeat top;
-    background-size: 100%;
+.jini_magazine1 img{
+    width: 258px;
 }
-.jini_magazine2{
-    background: url(/userpage/lib/img/JINI\ Magazine\ VOL.37.jpg) no-repeat top;
-    background-size: 100%;
-}
-.jini_magazine3{
-    background: url(/userpage/lib/img/JINI\ Magazine\ VOL.36.jpg) no-repeat top;
-    background-size: 100%;
-}
-.jini_magazine4{
-    background: url(/userpage/lib/img/JINI\ Magazine\ VOL.35.jpg) no-repeat top;
-    background-size: 100%;
-}
-.jini_magazine5{
-    background: url(/userpage/lib/img/JINI\ Magazine\ VOL.34.jpg) no-repeat top;
-    background-size: 100%;
-}
-.jini_magazine6{
-    background: url(/userpage/lib/img/JINI\ Magazine\ VOL.33.jpg) no-repeat top;
-    background-size: 100%;
-}
-.jini_magazine7{
-    background: url(/userpage/lib/img/JINI\ Magazine\ VOL.32.jpg) no-repeat top;
-    background-size: 100%;
-}
-.jini_magazine8{
-    background: url(/userpage/lib/img/JINI\ Magazine\ VOL.31.jpg) no-repeat top;
-    background-size: 100%;
-}
+
 .jini_magazine1_file button{
     width: 100px;
     height: 36px;
@@ -413,7 +392,10 @@ p.jini_sub{
     font-size: 13px;
     font-weight: 900;
     cursor: pointer;
-    margin-top: 20px;
+}
+.jini_magazine1_file{
+    position: relative;
+    bottom: 20px;
 }
 .jini_magazine1_file button.jinisolution{
     border: 1px solid #BDD600;
@@ -440,28 +422,6 @@ p.jini_sub{
     height: 40px;
     border: 1px solid rgb(187, 187, 187);
     padding-top: 3px;
-}
-.footer1 table td:nth-child(11){
-    background: url(/userpage/lib/img/right.png) center no-repeat;
-    background-size: 21px;
-    cursor: pointer;
-}
-.footer1 table td:nth-child(12){
-    background: url(/userpage/lib/img/double_right.png) center no-repeat;
-    background-size: 21px;
-    cursor: pointer;
-}
-.footer1 table td:nth-child(1){
-    background-color: rgb(124,0,72);
-}
-.footer1 table td:nth-child(1) > a{
-    color:white
-}
-.footer1 table td:hover{
-    background-color: #bdd600;
-}
-.footer1 table td:hover a{
-    color:white
 }
 
 /*푸터*/

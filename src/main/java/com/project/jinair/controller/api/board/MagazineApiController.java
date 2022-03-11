@@ -138,8 +138,9 @@ public class MagazineApiController implements CrudInterface<MagazineApiRequest, 
 
     // 페이징 처리
     @GetMapping("") // http://localhost:8080/api/magazine
-    public Header<List<MagazineApiResponse>> findAll(@PageableDefault(sort = {"mzIndex"}, direction = Sort.Direction.DESC) Pageable pageable){
+    public Header<List<MagazineApiResponse>> findAll(@PageableDefault(size = 8, sort = {"mzIndex"}, direction = Sort.Direction.DESC) Pageable pageable){
         return magazineApiLoginService.search(pageable);
     }
+
 
 }
