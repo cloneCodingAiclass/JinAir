@@ -37,6 +37,13 @@ public class EventApiController implements CrudInterface<EventApiRequest, EventA
         return eventApiLogicService.searchSelect(pageable, evStatus);
     }
 
+    @GetMapping("/lists/{evStatus}")
+    public Header<List<EventApiResponse>> findSelects(
+            @PageableDefault(size = 6, sort = {"evIndex"}, direction = Sort.Direction.DESC) Pageable pageable,
+            @PathVariable(name = "evStatus") EventStatus evStatus) {
+        return eventApiLogicService.searchSelect(pageable, evStatus);
+    }
+
     @Override
     public Header<EventApiResponse> create(Header<EventApiRequest> request) {
         return null;
