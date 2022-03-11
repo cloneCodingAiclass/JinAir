@@ -417,7 +417,7 @@ $(function () {
         let day = new Date();
 
         let ucType = "일반";
-        let ucPrice = 200000;
+        let ucPrice = 100000;
         let ucDesc = go_layer + " ~ " + arrive_layer;
         let ucCode = "21398127409214079";
         let ucDiscount = 3;
@@ -427,31 +427,53 @@ $(function () {
         console.log(ucEndDay);
         let ucIsUse = "Unused";
 
-        let json
-        json = {
+        let coupon
+        coupon = {
             data : {
-                ucType : ucType,
-                ucPrice : ucPrice,
-                ucDesc : ucDesc,
-                ucCode : ucCode,
-                ucDiscount : ucDiscount,
-                ucStartday : ucStartday,
-                ucEndDay : ucEndDay,
-                ucIsUse : ucIsUse,
-                ucTotcoupon : 1
+                    ucType : ucType,
+                    ucPrice : ucPrice,
+                    ucDesc : ucDesc,
+                    ucCode : ucCode,
+                    ucDiscount : ucDiscount,
+                    ucStartday : ucStartday,
+                    ucEndDay : ucEndDay,
+                    ucIsUse : ucIsUse,
+                    ucTotcoupon : 1,
             }
         }
+        let point
+        point = {
+            data : {
+                poPoint : "-"+ucPrice,
+                poMemo : go_layer + " ~ " + arrive_layer +"쿠폰구매"
+                }
+            }
+
         $.post({
             url : "/api/userCoupon",
-            data : JSON.stringify(json),
+            data : JSON.stringify(coupon),
             dataType : "text",
+            async: false,
             contentType : "application/json",
-            success(json){
-                if(json == ""){
+            success(coupon){
+                if(coupon == ""){
                     alert('포인트를 확인하세요.');
                 }else{
                     alert("쿠폰 등록 완료.");
-                    console.log(json);
+                    $.post({
+                        url : "/api/point",
+                        data : JSON.stringify(point),
+                        dataType: "text",
+                        async: false,
+                        contentType : "application/json",
+                        success(point) {
+                            if (point = ""){
+                                alert("포인트 차감 실패?")
+                            }else{
+                                alert("포인트 차감도 성공?")
+                            }
+                        }
+                    })
                 }
             },
             error(error) {
