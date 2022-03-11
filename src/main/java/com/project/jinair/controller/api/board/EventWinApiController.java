@@ -30,6 +30,12 @@ public class EventWinApiController implements CrudInterface<EventWinApiRequest, 
         return eventWinApiLogicService.searchSelect(pageable);
     }
 
+    @GetMapping("/winView/{id}")
+    public Header<EventWinApiResponse> reads(@PathVariable(name = "id")Long id) {
+        return eventWinApiLogicService.reads(id);
+    }
+
+
     @Override
     @PostMapping("")
     public Header<EventWinApiResponse> create(@RequestBody Header<EventWinApiRequest> request) {

@@ -379,7 +379,6 @@ public class PageController {
     }
 
     // optional
-
     // airlineFood
     @RequestMapping("/index/airlineFood")
     public ModelAndView airlineFood() {
@@ -475,6 +474,14 @@ public class PageController {
     @RequestMapping("/promotion/event")
     public ModelAndView event() {
         return new ModelAndView("/userpage/pages/promotion/event/nowLeave")
+                .addObject("code", "nowLeave");
+    }
+    // 프로모션 이벤트 담첨자 명단
+    @RequestMapping("/promotion/event_view/{id}")
+    public ModelAndView event_view(@PathVariable(name = "id") Long id, Model model) {
+        EventWinApiResponse eventWinApiResponse = eventWinApiLogicService.read(id).getData();
+        model.addAttribute("eventWinApiResponse", eventWinApiResponse);
+        return new ModelAndView("/userpage/pages/promotion/event/winner_view")
                 .addObject("code", "nowLeave");
     }
     // 프로모션 지니쿠폰

@@ -150,3 +150,223 @@ $(() => {
         },    
     });
 });
+
+// 진행중인 이벤트
+$(() => {
+
+    let itemList = new Vue({
+        el : '#itemList',
+        data : {
+            itemList : {}
+        },
+        methods:{
+        }
+    });
+
+    list(0);
+
+
+    function list(index){
+        $.get("/api/event/lists/StartEvent?page="+index, function(response){
+            itemList.itemList = response.data;
+
+            let lastPage = response.pagination.totalPages;
+            let str = "";
+            str += "<td class='firstPage1'><<</td>";
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
+            }
+            str += "<td class='lastPage1'>>></td>";
+            $("#showPage").html(str);
+            if(index == 0) {
+                $(".firstPage1").css("visibility", "hidden");
+            }
+            if(index == lastPage-1) {
+                $(".lastPage1").css("visibility", "hidden");
+            }
+            $(".pageNum").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $(".pageNum").parent('#showPage').children("#"+index+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            $(".firstPage1").css({
+                "cursor" : "pointer"
+            });
+            $(".lastPage1").css({
+                "cursor" : "pointer"
+            });
+            $('#showPage').on('click', '.firstPage1', function(){
+                window.scrollTo({
+                    top: $('.event_kind').offset().top
+                });
+                list(0);
+            });
+            $('#showPage').on('click', '.lastPage1', function(){
+                window.scrollTo({
+                    top: $('.event_kind').offset().top
+                });
+                list(lastPage-1);
+            });
+        });
+    }
+
+    $('#showPage').on('click', '.pageNum', function(){
+        let pageId = this.id;
+        window.scrollTo({
+            top: $('.event_kind').offset().top
+        });
+        list(pageId);
+    });
+
+
+});
+
+// 종료된 이벤트
+$(() => {
+
+    let itemList1 = new Vue({
+        el : '#itemList1',
+        data : {
+            itemList1 : {}
+        },
+        methods:{
+        }
+    });
+
+    list1(0);
+
+
+    function list1(index){
+        $.get("/api/event/lists/EventEnd?page="+index, function(response){
+            itemList1.itemList1 = response.data;
+
+            let lastPage = response.pagination.totalPages;
+            let str = "";
+            str += "<td class='firstPage2'><<</td>";
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pageNum1' id="+i+">" + (i+1) + "</td>";
+            }
+            str += "<td class='lastPage2'>>></td>";
+            $("#showPage1").html(str);
+            if(index == 0) {
+                $(".firstPage2").css("visibility", "hidden");
+            }
+            if(index == lastPage-1) {
+                $(".lastPage2").css("visibility", "hidden");
+            }
+            $(".pageNum1").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $(".pageNum1").parent('#showPage1').children("#"+index+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            $(".firstPage2").css({
+                "cursor" : "pointer"
+            });
+            $(".lastPage2").css({
+                "cursor" : "pointer"
+            });
+            $('#showPage1').on('click', '.firstPage2', function(){
+                window.scrollTo({
+                    top: $('.event_kind').offset().top
+                });
+                list1(0);
+            });
+            $('#showPage1').on('click', '.lastPage2', function(){
+                window.scrollTo({
+                    top: $('.event_kind').offset().top
+                });
+                list1(lastPage-1);
+            });
+        });
+    }
+
+    $('#showPage1').on('click', '.pageNum1', function(){
+        let pageId = this.id;
+        window.scrollTo({
+            top: $('.event_kind').offset().top
+        });
+        list1(pageId);
+    });
+
+});
+
+// 당첨자 명단
+$(() => {
+
+    let itemList2 = new Vue({
+        el : '#itemList2',
+        data : {
+            itemList2 : {}
+        },
+        methods:{
+        }
+    });
+
+    list2(0);
+
+
+    function list2(index){
+        $.get("/api/eventWin/list?page="+index, function(response){
+            itemList2.itemList2 = response.data;
+
+            let lastPage = response.pagination.totalPages;
+            let str = "";
+            str += "<td class='firstPage3'><<</td>";
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pageNum2' id="+i+">" + (i+1) + "</td>";
+            }
+            str += "<td class='lastPage3'>>></td>";
+            $("#showPage2").html(str);
+            if(index == 0) {
+                $(".firstPage3").css("visibility", "hidden");
+            }
+            if(index == lastPage-1) {
+                $(".lastPage3").css("visibility", "hidden");
+            }
+            $(".pageNum2").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $(".pageNum2").parent('#showPage2').children("#"+index+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            $(".firstPage3").css({
+                "cursor" : "pointer"
+            });
+            $(".lastPage3").css({
+                "cursor" : "pointer"
+            });
+            $('#showPage2').on('click', '.firstPage3', function(){
+                window.scrollTo({
+                    top: $('.event_kind').offset().top
+                });
+                list2(0);
+            });
+            $('#showPage2').on('click', '.lastPage3', function(){
+                window.scrollTo({
+                    top: $('.event_kind').offset().top
+                });
+                list2(lastPage-1);
+            });
+        });
+    }
+
+    $('#showPage2').on('click', '.pageNum2', function(){
+        let pageId = this.id;
+        window.scrollTo({
+            top: $('.event_kind').offset().top
+        });
+        list2(pageId);
+    });
+
+});
