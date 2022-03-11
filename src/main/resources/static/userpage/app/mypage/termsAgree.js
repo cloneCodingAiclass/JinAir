@@ -161,7 +161,7 @@ function phonecheck(){
         if(term1 && term2 && term3){
             ischeck.value = 'y' ;
                 //api로 넘기기
-            location.href="./joinForm.html";
+            location.href="/pages/index/joinForm";
         }else{
             $('.false_modal').css('display', 'flex');
             $('.false_modal').fadeIn(200);
@@ -179,7 +179,7 @@ function ipincheck(){
         if(term1 && term2 && term3){
             ischeck.value = 'y' ;
                 //api로 넘기기
-            location.href="./joinForm.html";
+            location.href="/pages/index/joinForm";
         }else{
             ischeck.value = 'n' ;
             $('.false_modal').fadeIn(200);
