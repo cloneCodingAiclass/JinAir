@@ -1,5 +1,6 @@
 package com.project.jinair.model.entity.payment;
 
+import com.project.jinair.model.entity.member.TbMember;
 import com.project.jinair.model.enumclass.CouponStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -41,4 +43,6 @@ public class TbCouponRegist {
     @CreatedDate
     private LocalDateTime crRegdate;
     private String crCode;
+
+
 }

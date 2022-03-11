@@ -9,6 +9,10 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
     compileOnly {
         extendsFrom annotationProcessor
     }
@@ -35,6 +39,9 @@ dependencies {
     // 파일 업/다운로드간 사용할 디펜던시
     implementation 'commons-io:commons-io:2.6'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
+    runtimeOnly('org.springframework.boot:spring-boot-devtools')
+
     // ----------------------------
 
 }

@@ -2,11 +2,13 @@ package com.project.jinair.service.member;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.member.TbMember;
+import com.project.jinair.model.entity.payment.TbPoint;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.member.MemberApiRequest;
 import com.project.jinair.model.network.response.member.MemberApiResponse;
 import com.project.jinair.repository.MemberRepository;
+import com.project.jinair.repository.TbPointRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 public class MemberApiLogicService implements CrudInterface<MemberApiRequest, MemberApiResponse> {
 
     private final MemberRepository memberRepository;
+    private final TbPointRepository tbPointRepository;
 
     @Override
     public Header<MemberApiResponse> create(Header<MemberApiRequest> request) {
@@ -128,7 +131,30 @@ public class MemberApiLogicService implements CrudInterface<MemberApiRequest, Me
     }
 
     private Header<MemberApiResponse> response(TbMember member){
-        return Header.OK(responseMember(member));
+        MemberApiResponse memberApiResponse = MemberApiResponse.builder()
+                .memIndex(member.getMemIndex())
+                .memUserid(member.getMemUserid())
+                .memUserpw(member.getMemUserpw())
+                .memKorFirstName(member.getMemKorFirstName())
+                .memKorLastName(member.getMemKorLastName())
+                .memEngFirstName(member.getMemEngFirstName())
+                .memEngLastName(member.getMemEngLastName())
+                .memHpNation(member.getMemHpNation())
+                .memHp(member.getMemHp())
+                .memEmail(member.getMemEmail())
+                .memGender(member.getMemGender())
+                .memBirth(member.getMemBirth())
+                .memPassport(member.getMemPassport())
+                .memNation(member.getMemNation())
+                .memZipcode(member.getMemZipcode())
+                .memAddress1(member.getMemAddress1())
+                .memAddress2(member.getMemAddress2())
+                .memAddress3(member.getMemAddress3())
+                .memEmailIsagree(member.getMemEmailIsagree())
+                .memSnsIsagree(member.getMemSnsIsagree())
+                .memRegdate(member.getMemRegdate())
+                .build();
+        return Header.OK(memberApiResponse);
     }
 
     private MemberApiResponse responseMember(TbMember member){
@@ -157,4 +183,5 @@ public class MemberApiLogicService implements CrudInterface<MemberApiRequest, Me
                 .build();
         return memberApiResponse;
     }
+
 }

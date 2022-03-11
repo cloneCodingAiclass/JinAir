@@ -4,7 +4,6 @@ import com.project.jinair.model.entity.board.TbQna;
 import com.project.jinair.model.entity.payment.TbPoint;
 import com.project.jinair.model.entity.payment.TbUsercoupon;
 import com.project.jinair.model.entity.schedule.TbReservation;
-import com.project.jinair.model.enumclass.GenderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -52,18 +51,20 @@ public class TbMember { // 회원 테이블
     private String memAddress3;
     private String memEmailIsagree;
     private String memSnsIsagree;
+
     @CreatedDate
     private LocalDateTime memRegdate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember") // 하나의 카테고리에 여러게의 파트너가 연결
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember")
     private List<TbPoint> tbPointList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember") // 하나의 카테고리에 여러게의 파트너가 연결
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember")
     private List<TbReservation> tbReservationsList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember") // 하나의 카테고리에 여러게의 파트너가 연결
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember")
     private List<TbUsercoupon> tbUsercouponList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember") // 하나의 카테고리에 여러게의 파트너가 연결
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember")
     private List<TbQna> tbQnaList;
+
 }

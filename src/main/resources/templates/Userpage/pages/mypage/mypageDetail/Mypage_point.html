@@ -54,10 +54,107 @@
                     <h2>보너스 항공권 설정</h2>
                     <div class="point_box">
                         <form action="#" method="get">
-                            <div class="submit">
-                                <input type="submit" value="보너스 항공권 쿠폰 발행">
+                            <input type="hidden" name="go_select_opt">
+                            <input type="hidden" name="arrive_select_opt">
+                            <input type="hidden" name="go_date">
+                            <input type="hidden" name="come_date">
+                            <div class="in_bl">
+                                <!-- 예약 선택 / 왕복 -->
+                                <div class="reserve_round">
+                                    <div class="go_select in_bl">
+                                        <div class="go_layerbtn">
+                                        <span class="go_select_opt">
+                                            <input type="text" value="출발지" readonly class="go_select_optt">
+                                        </span>
+                                        </div>
+                                        <div class="go_layer">
+                                            <div class="KOR in_bl">
+                                                <h3>한국</h3>
+                                                <ul>
+                                                    <li><a>서울/인천(ICN)</a></li>
+                                                    <li><a>서울/김포(GMP)</a></li>
+                                                    <li><a>부산(PUS)</a></li>
+                                                    <li><a>제주(CJU)</a></li>
+                                                    <li><a>청주(CJJ)</a></li>
+                                                    <li><a>광주(KWJ)</a></li>
+                                                    <li><a>대구(TAE)</a></li>
+                                                    <li><a>여수(RSU)</a></li>
+                                                    <li><a>울산(USN)</a></li>
+                                                    <li><a>포항(KPO)</a></li>
+                                                    <li><a>원주(WJU)</a></li>
+                                                    <li><a>군산(KUV)</a></li>
+                                                    <li><a>사천(HIN)</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="arrive_select in_bl">
+                                        <div class="arrive_layerbtn">
+                                        <span class="arrive_select_opt">
+                                            <input type="text" value="도착지" readonly class="arrive_select_optt"></span>
+                                        </div>
+                                        <div class="arrive_layer">
+                                            <div class="KOR in_bl">
+                                                <h3>한국</h3>
+                                                <ul>
+                                                    <li><a>서울/인천(ICN)</a></li>
+                                                    <li><a>서울/김포(GMP)</a></li>
+                                                    <li><a>부산(PUS)</a></li>
+                                                    <li><a>제주(CJU)</a></li>
+                                                    <li><a>청주(CJJ)</a></li>
+                                                    <li><a>광주(KWJ)</a></li>
+                                                    <li><a>대구(TAE)</a></li>
+                                                    <li><a>여수(RSU)</a></li>
+                                                    <li><a>울산(USN)</a></li>
+                                                    <li><a>포항(KPO)</a></li>
+                                                    <li><a>원주(WJU)</a></li>
+                                                    <li><a>군산(KUV)</a></li>
+                                                    <li><a>사천(HIN)</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="go_date in_bl">
+                                        <div class="go_date_layerbtn">
+                                        <span class="go_date_select_opt">
+                                            <input type="text" value="평일" readonly class="go_date_select_optt">
+                                        </span>
+                                        </div>
+                                        <div class="go_date_select">
+                                            <div class="go in_bl">
+                                                <h3>평일</h3>
+                                                <ul>
+                                                    <li><a>평일</a></li>
+                                                    <li><a>주말</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="come_date in_bl">
+                                        <div class="come_date_layerbtn">
+                                        <span class="come_date_select_opt">
+                                            <input type="text" value="편도" readonly class="come_date_select_optt">
+                                        </span>
+                                        </div>
+                                        <div class="come_date_select">
+                                            <div class="come in_bl">
+                                                <h3>편도</h3>
+                                                <ul>
+                                                    <li><a>편도</a></li>
+                                                    <li><a>왕복</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 예약 선택 / 왕복 끝 -->
                             </div>
                         </form>
+                    </div>
+                    <div class="pointInfo">
+                    </div>
+                    <div class="submit">
+                        <input type="button" value="보너스 항공권 쿠폰 발행" class="coupon_add">
                     </div>
                     <h2>구간 별 필요 포인트</h2>
                     <table class="bbsList">
@@ -167,6 +264,12 @@
     <!--퀵 메뉴 끝-->
     <div class="modal">
     </div>
+    <div class="modal_container">
+        <div class="modals">
+            <p class="moditext"></p>
+            <input type="button" value="확인" class="btn_cancel">
+        </div>
+    </div>
     <div class="pwcheck_modal">
         <form action="#" method="post">
         <div class="pwcheck_title">
@@ -183,6 +286,5 @@
         </form>
     </div>
 </body>
-
 </html>
 

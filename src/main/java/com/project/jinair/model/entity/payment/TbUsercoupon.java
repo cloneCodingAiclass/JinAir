@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ import java.time.LocalDateTime;
 )
 @Entity
 @Builder
+@EntityListeners(AuditingEntityListener.class)
 public class TbUsercoupon {
 
     @Id
@@ -30,7 +32,7 @@ public class TbUsercoupon {
     private Long ucPrice;
     private String ucDesc;
     private String ucCode;
-//    private Long ucUserindex;
+    private Long ucUserindex;
     private Integer ucDiscount;
     private LocalDateTime ucStartday;
     private LocalDateTime ucEndday;
@@ -39,6 +41,7 @@ public class TbUsercoupon {
     private String ucTotcoupon;
 
     @ManyToOne
+    @JoinColumn(name= "ucUserindex", referencedColumnName = "memIndex", insertable = false, updatable = false)
     private TbMember tbMember;
 
 }
