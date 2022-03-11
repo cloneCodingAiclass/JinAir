@@ -124,10 +124,10 @@ $(function () {
                 "background-color" : "#661e43",
                 "color" : "white"
             });
-            $(document).on('click', '.firstPage1', function(){
+            $("#showPage").on('click', '.firstPage1', function(){
                 list(0);
             });
-            $(document).on('click', '.lastPage1', function(){
+            $("#showPage").on('click', '.lastPage1', function(){
                 list(lastPage-1);
             });
         })
@@ -175,7 +175,7 @@ $(function () {
     }
 
 
-    $(document).on('click', '#searchNoti', function(){
+    $('#searchNoti').on('click',function (){
         searchStr = $('#searchBox').val();
         console.log(searchStr);
         searchNoti(searchStr, 0);
@@ -183,17 +183,16 @@ $(function () {
             alert('검색어를 확인해주세요.');
             searchNoti(searchStr, 0);
         }
-    });
+    })
 
-    $(document).on('click', '.pageNum', function(){
+    $("#showPage").on('click', '.pageNum', function(){
         let pageId = this.id;
         console.log(pageId);
-        alert(pageId);
         list(pageId);
     });
 
 
-    $(document).on('click', '.pageNum2', function(){
+    $("#showPage").on('click', '.pageNum2', function(){
         let pageId2 = this.id;
         console.log(pageId2);
         searchNoti(searchStr, pageId2);
