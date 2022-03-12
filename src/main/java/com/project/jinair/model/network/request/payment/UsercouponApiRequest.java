@@ -23,6 +23,7 @@ public class UsercouponApiRequest {
     private String ucType;
     private Long ucPrice;
     private String ucDesc;
+    private Long ucUserindex;
     private String ucCode;
     private Integer ucDiscount;
     private LocalDateTime ucStartday;

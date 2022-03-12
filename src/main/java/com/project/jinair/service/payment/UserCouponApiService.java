@@ -2,21 +2,28 @@ package com.project.jinair.service.payment;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.member.TbMember;
+import com.project.jinair.model.entity.payment.TbCouponRegist;
 import com.project.jinair.model.entity.payment.TbPoint;
 import com.project.jinair.model.entity.payment.TbUsercoupon;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.payment.PointApiRequest;
 import com.project.jinair.model.network.request.payment.UsercouponApiRequest;
+import com.project.jinair.model.network.response.payment.CouponRegistApiResponse;
 import com.project.jinair.model.network.response.payment.UsercouponApiResponse;
 import com.project.jinair.repository.MemberRepository;
 import com.project.jinair.repository.TbPointRepository;
 import com.project.jinair.repository.TbUsercouponRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -65,11 +72,6 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
 
     @Override
     public Header<UsercouponApiResponse> read(Long id) {
-
-        String sumCoupon = "select sum(u.ucTotcoupon) from TbUsercoupon u where u.ucUserindex = 43";
-        Long result = (Long) em.createQuery(sumCoupon).getSingleResult();
-
-        System.out.println(result);
 
         return null;
     }
@@ -136,5 +138,20 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
         return usercouponApiResponse;
     }
 
+    public Header<List<UsercouponApiResponse>> searchList(Long id, Pageable pageable) {
+        System.out.println(id);
+        Page<TbUsercoupon> tbUsercoupons = tbUsercouponRepository.findByUcUserindexContaining(id, pageable);
+        List<UsercouponApiResponse> usercouponApiResponseList = tbUsercoupons.stream()
+                .map(coupon -> responseCoupon(coupon))
+                .collect(Collectors.toList());
+
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbUsercoupons.getTotalPages())
+                .totalElements(tbUsercoupons.getTotalElements())
+                .currentPage(tbUsercoupons.getNumber())
+                .currentElements(tbUsercoupons.getNumberOfElements())
+                .build();
+        return Header.OK(usercouponApiResponseList, pagination);
+    }
 
 }
