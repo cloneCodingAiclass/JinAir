@@ -117,4 +117,98 @@ $(function () {
         $('.modal_main_id').css('display', 'block');
         $('.modal_main_pw').css('display', 'none');
     }
+
+
+    const expHpText = RegExp(/^\d{3}-\d{3,4}-\d{4}$/);
+    const expEmailText = RegExp(/^[A-Za-z0-9\-\.]+@[A-Za-z0-9\-\.]+\.[A-Za-z0-9]+$/);
+
+    // 아이디 찾기
+    let itemList = new Vue({
+        el : '#itemList',
+        data : {
+            itemList : {}
+        },
+        methods:{
+        }
+    });
+
+    $('#btn_ser1').on('click', function (){
+        if(expEmailText.test($('#emAdr').val())){
+            searchs($('#emAdr').val(), $('#bthDt').val(), $('#mbrLnm').val(), $('#mbrFnm').val());
+        }
+        if(expHpText.test($('#emAdr').val())){
+            searchd($('#emAdr').val(), $('#bthDt').val(), $('#mbrLnm').val(), $('#mbrFnm').val());
+        }
+    })
+    // 이메일로 찾기
+    function searchs(a, b, c, d){
+        $.get("/api/user/searchs/"+a+"/"+b+"/"+c+"/"+d, function(response){
+            // 검색 데이터
+            itemList.itemList = response.data;
+            if(itemList.itemList != null){
+                location.href="/pages/mypage/find_id/"+itemList.itemList.memIndex;
+            }else{
+                location.href="/pages/mypage/noResult";
+            }
+        });
+    }
+    // 휴대폰 번호로 찾기
+    function searchd(a, b, c, d){
+        $.get("/api/user/searchd/"+a+"/"+b+"/"+c+"/"+d, function(response){
+            // 검색 데이터
+            itemList.itemList = response.data;
+            if(itemList.itemList != null){
+                location.href="/pages/mypage/find_id/"+itemList.itemList.memIndex;
+            }else{
+                location.href="/pages/mypage/noResult";
+            }
+        });
+    }
+
+
+    // 비밀번호 찾기
+    let itemList1 = new Vue({
+        el : '#itemList1',
+        data : {
+            itemList : {}
+        },
+        methods:{
+        }
+    });
+
+    $('#btn_ser2').on('click', function (){
+        if(expEmailText.test($('#emAdr1').val())){
+            reads($('#emAdr1').val(), $('#bthDt1').val(), $('#mbrLnm1').val(), $('#mbrFnm1').val(), $('#memUserId').val());
+        }
+        if(expHpText.test($('#emAdr1').val())){
+            readd($('#emAdr1').val(), $('#bthDt1').val(), $('#mbrLnm1').val(), $('#mbrFnm1').val(), $('#memUserId').val());
+        }
+    })
+    // 이메일로 찾기
+    function reads(a, b, c, d, e){
+        $.get("/api/user/reads/"+a+"/"+b+"/"+c+"/"+d+"/"+e, function(response){
+            // 검색 데이터
+            itemList.itemList = response.data;
+            if(itemList.itemList != null){
+                location.href="/pages/mypage/find_pw/"+itemList.itemList.memIndex;
+            }else{
+                location.href="/pages/mypage/noResult";
+            }
+        });
+    }
+    // 휴대폰 번호로 찾기
+    function readd(a, b, c, d, e){
+        $.get("/api/user/readd/"+a+"/"+b+"/"+c+"/"+d+"/"+e, function(response){
+            // 검색 데이터
+            itemList.itemList = response.data;
+            if(itemList.itemList != null){
+                location.href="/pages/mypage/find_pw/"+itemList.itemList.memIndex;
+            }else{
+                location.href="/pages/mypage/noResult";
+            }
+        });
+    }
+
+
+
 });

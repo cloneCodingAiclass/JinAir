@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 public class MemberApiLogicService implements CrudInterface<MemberApiRequest, MemberApiResponse> {
 
     private final MemberRepository memberRepository;
-    private final TbPointRepository tbPointRepository;
 
     @Override
     public Header<MemberApiResponse> create(Header<MemberApiRequest> request) {
@@ -188,6 +187,39 @@ public class MemberApiLogicService implements CrudInterface<MemberApiRequest, Me
     public Header<MemberApiResponse> reads(String id) throws InterruptedException {
         Thread.sleep(300);
         return memberRepository.findByMemUserid(id)
+                .map(member -> response(member))
+                .orElseGet(
+                        () -> Header.ERROR("데이터 없음")
+                );
+    }
+
+    public Header<MemberApiResponse> searchs(String emAdr, String bthDt, String mbrLnm, String mbrFnm)
+            throws InterruptedException {
+        return memberRepository.findByMemEmailAndMemBirthAndMemKorFirstNameAndMemKorLastName(emAdr, bthDt, mbrLnm, mbrFnm)
+                .map(member -> response(member))
+                .orElseGet(
+                        () -> Header.ERROR("데이터 없음")
+                );
+    }
+    public Header<MemberApiResponse> searchd(String emAdr, String bthDt, String mbrLnm, String mbrFnm)
+            throws InterruptedException {
+        return memberRepository.findByMemHpAndMemBirthAndMemKorFirstNameAndMemKorLastName(emAdr, bthDt, mbrLnm, mbrFnm)
+                .map(member -> response(member))
+                .orElseGet(
+                        () -> Header.ERROR("데이터 없음")
+                );
+    }
+    public Header<MemberApiResponse> readds(String emAdr, String bthDt, String mbrLnm, String mbrFnm, String memUSerId)
+            throws InterruptedException {
+        return memberRepository.findByMemEmailAndMemBirthAndMemKorFirstNameAndMemKorLastNameAndMemUserid(emAdr, bthDt, mbrLnm, mbrFnm, memUSerId)
+                .map(member -> response(member))
+                .orElseGet(
+                        () -> Header.ERROR("데이터 없음")
+                );
+    }
+    public Header<MemberApiResponse> readd(String emAdr, String bthDt, String mbrLnm, String mbrFnm, String memUSerId)
+            throws InterruptedException {
+        return memberRepository.findByMemHpAndMemBirthAndMemKorFirstNameAndMemKorLastNameAndMemUserid(emAdr, bthDt, mbrLnm, mbrFnm, memUSerId)
                 .map(member -> response(member))
                 .orElseGet(
                         () -> Header.ERROR("데이터 없음")

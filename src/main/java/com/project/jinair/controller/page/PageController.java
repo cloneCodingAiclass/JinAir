@@ -143,15 +143,19 @@ public class PageController {
     }
 
     // 아이디 찾기
-    @RequestMapping("/mypage/find_id")
-    public ModelAndView findId(HttpServletRequest request, Model model) {
+    @RequestMapping("/mypage/find_id/{id}")
+    public ModelAndView findId(HttpServletRequest request, Model model, @PathVariable(name = "id") Long id) {
+        MemberApiResponse member = memberApiLogicService.read(id).getData();
+        model.addAttribute("member", member);
         model.addAttribute("loginURL", "/userpage/fragment/menu");
         return new ModelAndView("/userpage/pages/mypage/login/findId")
                 .addObject("code", "findId");
     }
     // 비밀번호 찾기
-    @RequestMapping("/mypage/find_pw")
-    public ModelAndView findPw(HttpServletRequest request, Model model) {
+    @RequestMapping("/mypage/find_pw/{id}")
+    public ModelAndView findPw(HttpServletRequest request, Model model, @PathVariable(name = "id") Long id) {
+        MemberApiResponse member = memberApiLogicService.read(id).getData();
+        model.addAttribute("member", member);
         model.addAttribute("loginURL", "/userpage/fragment/menu");
         return new ModelAndView("/userpage/pages/mypage/login/findPw")
                 .addObject("code", "findPw");
