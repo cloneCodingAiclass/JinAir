@@ -417,7 +417,7 @@ $(function () {
         let day = new Date();
 
         let ucType = "일반";
-        let ucPrice = 100000;
+        let ucPrice = 3000;
         let ucDesc = go_layer + " ~ " + arrive_layer;
         let ucCode = "21398127409214079";
         let ucDiscount = 3;

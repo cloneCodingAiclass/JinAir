@@ -11,13 +11,11 @@ import com.project.jinair.model.network.response.payment.UsercouponApiResponse;
 import com.project.jinair.repository.MemberRepository;
 import com.project.jinair.repository.TbPointRepository;
 import com.project.jinair.repository.TbUsercouponRepository;
-import com.project.jinair.service.member.MemberApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -67,6 +65,11 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
 
     @Override
     public Header<UsercouponApiResponse> read(Long id) {
+
+        String sumCoupon = "select sum(u.ucTotcoupon) from TbUsercoupon u where u.ucUserindex = 43";
+        Long result = (Long) em.createQuery(sumCoupon).getSingleResult();
+
+        System.out.println(result);
 
         return null;
     }
