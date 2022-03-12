@@ -137,7 +137,50 @@ $(function () {
             document.getElementById("coupon").innerHTML = response;
         });
     }
+
+    let pagination = {
+        totalPages : 0,
+        totalElements : 0,
+        currentPage : 0,
+        currentElements : 0
+    };
+
+    let showPage = new Vue({
+        el : '#showPage',
+        data : {
+            totalPages : {},
+            currentPage : {}
+        }
+    });
+
+    let itemList = new Vue({
+        el : '#itemList',
+        data : {
+            itemList : {}
+        }
+    })
+
+    couponList(0);
+
+    function couponList(index) {
+        $.get("/api/userCoupon/" + index, function (response) {
+            console.dir(response);
+
+            pagination = response.pagination;
+
+            showPage.totalPages = pagination.totalPages;
+            showPage.currentPage = pagination.currentPage;
+
+            // 전체 페이지
+            showPage.showPage = pagination.data;
+
+            // 검색 데이터
+            itemList.itemList = response.data;
+
+        });
+    }
 });
+
 
 function hidePopupLayer(){
     $('.confirm_modal1', parent.document).fadeOut(200);

@@ -3,90 +3,88 @@
       xmlns:th="http://www.thymeleaf.org/">
 <!-- head.html -->
 <div th:replace="userpage/fragment/head :: head"></div>
-    <link rel="stylesheet" href="/userpage/lib/css/mypage/Mypage_qna.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+<link rel="stylesheet" href="/userpage/lib/css/mypage/Mypage_qna.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="/userpage/app/mypage/Mypage_qna.js"></script>
+<script src="/userpage/app/mypage/Mypage_qna.js"></script>
 <body>
-    <ul class="skipnavi">
-        <!--책갈피 역할-->
-        <li><a href="#container">본문내용</a></li>
-    </ul>
-    <!--wrap-->
-    <div id="wrap">
-        <!--header-->
-        <div th:replace="userpage/fragment/menu :: menu"></div>
-        <!--header 끝-->
-        <!--container-->
-        <div id="container">
-            <div class="mypage_main">
-                <div class="mypage_menu">
-                    <p>마이<br>페이지</p>
-                    <ul>
-                        <li class="booking"><a href="/pages/index/mypageMain">예약조회/변경/취소</a></li>
-                        <li class="mypoint"><a href="/pages/index/mypagePoint">나의 나비포인트</a><div class="mypoint_sum"><span>0p</span></div></li>
-                        <li class="coupon">
-                            <a href="/pages/index/mypageCoupons">나의 할인쿠폰</a>
-                            <div class="mycoupon_sum">
-                                <span id="coupon"></span>
-                            </div>
-                        </li>
-                        <li class="qna"><a href="/pages/index/mypageQna">나의 Q&A</a></li>
-                        <li class="edit"><a href="#">회원정보 수정</a></li>
-                    </ul>
-                </div>
-                <div class="menu_title">
-                    <p>나의 Q&A</p>
-                </div>
-                <div class="qna_main">                    
-				<table class="bbsList">
+<ul class="skipnavi">
+    <!--책갈피 역할-->
+    <li><a href="#container">본문내용</a></li>
+</ul>
+<!--wrap-->
+<div id="wrap">
+    <!--header-->
+    <div th:replace="userpage/fragment/menu :: menu"></div>
+    <!--header 끝-->
+    <!--container-->
+    <div id="container">
+        <div class="mypage_main">
+            <div class="mypage_menu">
+                <p>마이<br>페이지</p>
+                <ul>
+                    <li class="booking"><a href="/pages/index/mypageMain">예약조회/변경/취소</a></li>
+                    <li class="mypoint"><a href="/pages/index/mypagePoint">나의 나비포인트</a><div class="mypoint_sum"><span>0p</span></div></li>
+                    <li class="coupon"><a href="/pages/index/mypageCoupons">나의 할인쿠폰</a><div class="mycoupon_sum"><span>0</span></div></li>
+                    <li class="qna"><a href="/pages/index/mypageQna">나의 Q&A</a></li>
+                    <li class="edit"><a href="#">회원정보 수정</a></li>
+                </ul>
+            </div>
+            <div class="menu_title">
+                <p>나의 Q&A</p>
+            </div>
+            <div class="qna_main">
+                <table class="bbsList" id="myQnaList">
                     <colgroup>
-                        <col width="10%"><col width="8.5%"><col width=""><col width="14%"><col width="10%"><col width="14%">
+                        <col width="15%"><col width="40%"><col width="18%"><col width="14%"><col width="18%">
                     </colgroup>
                     <thead>
-                        <tr>
-                            <th scope="col">유형</th>
-                            <th scope="col">구분</th>
-                            <th scope="col">제목</th>
-                            <th scope="col">등록일</th>
-                            <th scope="col">답변</th>
-                            <th scope="col">답변일</th>
-                        </tr>
+                    <tr>
+                        <th scope="col">구분</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">등록일</th>
+                        <th scope="col">답변</th>
+                        <th scope="col">답변일</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td colspan="6">+++ 문의 내역이 없습니다. +++</td>
-                        </tr>
+                    <tr v-for="list in myQnaList">
+                        <th scope="col">{{list.qnaType}}</th>
+                        <th scope="col">{{list.qnaTitle}}</th>
+                        <th scope="col">{{list.qnaRegdate.substr(0, 10)}}</th>
+                        <th scope="col">{{list.qnaIsans}}</th>
+                        <th scope="col">{{list.qnaAnsdate.substr(0, 10)}}</th>
+                    </tr>
                     </tbody>
                 </table>
                 <ul class="paging">
                     <li></li>
                 </ul>
+            </div>
+            <div class="footer_info">
+                <div class="footer_text">
+                    <p>문의하기</p>
+                    <p class="subtext">- 진에어에 궁금한 점이 있으신가요?</p>
                 </div>
-                <div class="footer_info">
-                    <div class="footer_text">
-                        <p>문의하기</p>
-                        <p class="subtext">- 진에어에 궁금한 점이 있으신가요?</p>
-                    </div>
-                    <div class="btn">
-                        <a href="add_qna.html">고객의 말씀(Q&A)</a>
-                        <a href="faq_list.html">FAQ 바로가기</a>
-                    </div>
+                <div class="btn">
+                    <a href="add_qna.html">고객의 말씀(Q&A)</a>
+                    <a href="faq_list.html">FAQ 바로가기</a>
                 </div>
             </div>
         </div>
-        <!--container 끝-->
-        <!-- 푸터-->
-        <div th:replace="userpage/fragment/footer :: footer"></div>
-        <!--푸터 끝-->
     </div>
-    <!--wrap 끝-->
-    <!--퀵 메뉴-->
-    <!--퀵 메뉴 끝-->
-    <div class="modal">
-    </div>
-    <div class="pwcheck_modal">
-        <form action="#" method="post">
+    <!--container 끝-->
+    <!-- 푸터-->
+    <div th:replace="userpage/fragment/footer :: footer"></div>
+    <!--푸터 끝-->
+</div>
+<!--wrap 끝-->
+<!--퀵 메뉴-->
+<!--퀵 메뉴 끝-->
+<div class="modal">
+</div>
+<div class="pwcheck_modal">
+    <form action="#" method="post">
         <div class="pwcheck_title">
             <p>비밀번호 확인</p>
         </div>
@@ -98,7 +96,8 @@
                 <input type="button" class="btn_cancel" value="취소">
             </div>
         </div>
-        </form>
-    </div>
+    </form>
+</div>
 </body>
+<script src="/userpage/app/mypage/Mypage_qna.js"></script>
 </html>
