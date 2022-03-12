@@ -7,6 +7,7 @@ import com.project.jinair.model.entity.board.TbNotifi;
 import com.project.jinair.model.enumclass.LostStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.response.board.*;
+import com.project.jinair.model.network.response.member.MemberApiResponse;
 import com.project.jinair.repository.TbEventRepository;
 import com.project.jinair.repository.TbLostRepository;
 import com.project.jinair.repository.TbMagazineRepository;
@@ -14,6 +15,7 @@ import com.project.jinair.repository.TbNotifiRepository;
 import com.project.jinair.service.MenuService;
 import com.project.jinair.service.board.*;
 import com.project.jinair.service.member.AdminApiLoginService;
+import com.project.jinair.service.member.MemberApiLogicService;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +63,9 @@ public class PageController {
 
     @Autowired
     EventWinApiLogicService eventWinApiLogicService;
+
+    @Autowired
+    MemberApiLogicService memberApiLogicService;
 
     // 사용자 인덱스
     @RequestMapping("/index")
@@ -182,8 +187,10 @@ public class PageController {
     }
 
     // 조인
-    @RequestMapping("/index/joinConfirm")
-    public ModelAndView joinConfirm() {
+    @RequestMapping("/index/joinConfirm/{id}")
+    public ModelAndView joinConfirm(@PathVariable(name = "id") String id, Model model) throws InterruptedException {
+        MemberApiResponse memberApiResponse = memberApiLogicService.reads(id).getData();
+        model.addAttribute("memberApiResponse", memberApiResponse);
         return new ModelAndView("/userpage/pages/mypage/join/join_confirm")
                 .addObject("code", "join_confirm");
     }
