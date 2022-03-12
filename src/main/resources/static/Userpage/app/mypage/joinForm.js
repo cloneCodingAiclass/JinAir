@@ -189,7 +189,7 @@ $(function () {
     $("#btn_regist").click( () => {
         if(sendit()) {
             creating();
-            location.href = "/pages/index/joinConfirm/"+$('#id').val().toLowerCase();
+            location.href = "/pages/index/"+$('#id').val().toLowerCase();
         }
     })
 
