@@ -253,6 +253,7 @@ public class PageController {
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
             return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_main")
                     .addObject("code", "Mypage_main");
         }else{

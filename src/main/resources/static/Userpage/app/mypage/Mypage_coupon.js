@@ -186,7 +186,7 @@ $(function () {
 
             if(showPage.totalPages != 0){
                 itemList.itemList = response.data;
-            }else {
+            }else{
                 itemList.itemList = null;
             }
         });

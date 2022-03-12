@@ -101,12 +101,20 @@
                             </div>
                         </div>
                 </div>
-                <div class="resultCoupon" id="itemList" v-if="itemList.pagination.totalElements > 0">
+                <div class="resultCoupon" id="itemList" v-if="itemList != ``">
                     <tr>
-                        <td>asdasdsaadssdaassadsa</td>
+                        <td>NO</td>
+                        <td>구간</td>
+                        <td>할인율</td>
+                        <td>사용 만료일</td>
+                        <td>사용 여부</td>
                     </tr>
                     <tr v-for="dto in itemList">
+                        <td> {{dto.ucIndex}} </td>
                         <td> {{dto.ucDesc}} </td>
+                        <td> {{dto.ucDiscount}} </td>
+                        <td> {{dto.ucEndday}} </td>
+                        <td> {{dto.ucIsUse}} </td>
                     </tr>
                 </div>
                 <div class="none_point" v-else>
