@@ -129,10 +129,13 @@ $(function () {
         }
     });
 
-    couponResult(0);
+    let memIndex = $('#memid').val();
 
-    function couponResult(index) {
-        $.get("/api/userCoupon/list/" + index, function (response) {
+    couponResult(memIndex);
+
+    function couponResult(memIndex) {
+        console.log(memIndex)
+        $.get("/api/userCoupon/list/" + memIndex, function (response) {
             console.dir(response);
             document.getElementById("coupon").innerHTML = response;
         });
@@ -160,8 +163,8 @@ $(function () {
         }
     })
 
-    function couponList(index) {
-        $.get("/api/userCoupon/couponList/" + index, function (response) {
+    function couponList(memIndex) {
+        $.get("/api/userCoupon/couponList/" + memIndex, function (response) {
             console.dir(response)
 
             pagination = response.pagination;
