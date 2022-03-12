@@ -83,7 +83,6 @@
                     </div>
                 </div>
                 <div class="srh_container">
-                    <form action="#">
                     <div class="srh_box">
                             <p>구분
                                 <select name="사용가능" id="">
@@ -96,15 +95,14 @@
                             <p>기간<input type="date" class="item_start_date"><input type="date" class="item_start_date">
                             </p>
                             <div class="btn">
-                                <input type="submit" value="조회">
+                                <input type="button" value="조회">
                                 <input type="button" value="초기화" class="btn_cancel" onclick="history.back()">
                             </div>
                         </div>
-                    </form>
                 </div>
-                <div class="none_point" id="itemList" v-if="itemList != ''">
+                <div class="resultCoupon" id="itemList" v-if="itemList.pagination.totalElements > 0">
                     <tr>
-                        <td></td>
+                        <td>asdasdsaadssdaassadsa</td>
                     </tr>
                     <tr v-for="dto in itemList">
                         <td> {{dto.ucDesc}} </td>

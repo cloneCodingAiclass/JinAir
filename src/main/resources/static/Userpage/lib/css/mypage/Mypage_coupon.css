@@ -841,7 +841,7 @@ body{
     font-weight: 600;
     margin-left: 20px;
 }
-.srh_container .srh_box .btn input[type="submit"]{
+.srh_container .srh_box .btn input[type="button"]{
     width: 150px;
     height: 50px;
     background-color:#BDD600;
