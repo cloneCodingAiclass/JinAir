@@ -15,7 +15,7 @@
     <!--wrap-->
     <div id="wrap">
         <!--header-->
-        <div th:replace="userpage/fragment/menu :: menu"></div>
+        <div th:replace="${loginURL} :: menu"></div>
         <!--header 끝-->
         <!--container-->
         <div id="container">
@@ -58,8 +58,8 @@
                     </table>
                 </div>
                 <div class="btn">
-                    <input type="button" value="로그인" onclick="location.href='login.html'">
-                    <input type="button" value="메인" onclick="location.href='../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/index.html'">
+                    <input type="button" value="로그인" onclick="location.href='/pages/login'">
+                    <input type="button" value="메인" onclick="location.href='/pages/index'">
                 </div>
                 <div class="confirm_footer">
                     <div class="img_box">

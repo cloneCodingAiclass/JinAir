@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org/">
 <!-- head -->
 <div th:replace="userpage/fragment/head :: head"></div>
-<script src="/userpage/app/index/index.js"></script>
+<script src="/userpage/app/mypage/index.js"></script>
 <link rel="stylesheet" href="/userpage/lib/css/mypage/login.css"/>
 <link rel="stylesheet" href="/userpage/lib/css/index/index.css"/>   // 메뉴
 <!-- head 끝 -->
@@ -14,7 +14,7 @@
 <!--wrap-->
 <div id="wrap">
     <!--header-->
-    <div th:replace="userpage/fragment/menu :: menu"></div>
+    <div th:replace="${loginURL} :: menu"></div>
     <!--header 끝-->
     <!--container-->
     <div id="container">
@@ -23,12 +23,12 @@
                 <p>로그인</p>
             </div>
             <div class="login_main">
-                <form action="./login_ok.html" method="post">
-                <input type="text" placeholder="아이디" id="mem_userid" class="mem_userid">
-                <input type="text" placeholder="비밀번호" id="mem_userpw" class="mem_userpw">
-                <input type="submit" value="확인">
-                <p class="find"><a href="/pages/index/joinGate">회원가입</a> | <a href="find_info.html?page=findid">아이디 찾기</a> | <a href="find_info.html?page=findpw">비밀번호 찾기</a></p>
-                <p class="find"><a href="../../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/AdminPage/admin_login.html">(관리자 페이지 바로가기)</a></p>
+                <form>
+                <input type="text" placeholder="아이디" id="mem_userid" class="mem_userid" style="ime-mode:disabled;text-transform:uppercase;">
+                <input type="password" placeholder="비밀번호" id="mem_userpw" class="mem_userpw">
+                <input type="button" value="확인" id="duplication">
+                <p class="find"><a href="/pages/index/joinGate">회원가입</a> | <a href="/pages/mypage/find_id">아이디 찾기</a> | <a href="/pages/mypage/find_pw">비밀번호 찾기</a></p>
+                <p class="find"><a href="/pages/admin_login">(관리자 페이지 바로가기)</a></p>
                 <div class="btn_sns">
                     <a href="#" class="kakao"><img src="/userpage/lib/img/ico_sns_kakao.png" alt="카카오"></a>
                     <a href="#" class="facebook"><img src="/userpage/lib/img/ico_sns_facebook.png" alt="페이스북"></a>
@@ -45,16 +45,16 @@
                 <div class="list_wrap">
                     <ul class="login_fad_list">
                         <li>
-                            <a href="https://www.jinair.com/travel/hotel?snsLang=ko_KR&ctrCd=KOR" target="_blank">
+                            <a href="/pages/optional/hotel" target="_blank">
                                 <label for="slide03" class="left"></label><img src="/userpage/lib/img/img_login_bn_01.jpg" alt="1" >
                                 <label for="slide02" class="right"></label></a>
                         </li>
                         <li>
-                            <a href="https://www.jinair.com/promotion/eventView?evntSeq=11337&snsLang=ko_KR&ctrCd=KOR" target="_blank">
+                            <a href="/pages/optional/insurance" target="_blank">
                                 <label for="slide01" class="left"></label><img src="/userpage/lib/img/img_login_bn_2105_02.jpg" alt="2"><label for="slide03" class="right"></label></a>
                         </li>
                         <li>
-                            <a href="https://www.jinair.com/travel/rentcar?snsLang=ko_KR&ctrCd=KOR" target="_blank">
+                            <a href="/pages/optional/rentcar" target="_blank">
                                 <label for="slide02" class="left"></label><img src="/userpage/lib/img/img_login_bn_03.jpg" alt="3"><label for="slide01" class="right"></label></a>
                         </li>
                     </ul>

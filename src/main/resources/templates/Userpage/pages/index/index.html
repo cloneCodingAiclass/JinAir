@@ -17,7 +17,7 @@
 <!--wrap-->
 <div id="wrap">
     <!--header-->
-    <div th:replace="userpage/fragment/menu :: menu"></div>
+    <div th:replace="${loginURL} :: menu"></div>
     <!--header 끝-->
     <!--container-->
     <div id="container">
@@ -888,7 +888,7 @@
         </div>
         <div class="w_1160">
             <div class="covid_alert">
-                <a href="/covid19Info.html">
+                <a href="/pages/index/covid19Info">
                     <img src="/userpage/lib/img/img_covid19_ko_KR.jpg" alt="코로나 참고사항">
                 </a>
             </div>
