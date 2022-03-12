@@ -189,7 +189,7 @@ $(function () {
     $("#btn_regist").click( () => {
         if(sendit()) {
             creating();
-            location.href = "/pages/index/"+$('#id').val().toLowerCase();
+            location.href = "/pages/index/joinConfirm/"+$('#id').val().toLowerCase();
         }
     })
 
@@ -298,11 +298,6 @@ function sendit(){
     if(!$('#sample6_address').val()){
         alert('주소를 입력하세요');
         $('#sample6_address').focus();
-        return false;
-    }
-    if(!$('#sample6_detailAddress').val()){
-        alert('상세주소를 입력하세요');
-        $('#sample6_detailAddress').focus();
         return false;
     }
     if(!$('#mblFonNo').val()){
