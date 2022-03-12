@@ -1,5 +1,6 @@
 package com.project.jinair.model.network.request.payment;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.project.jinair.model.entity.member.TbMember;
 import com.project.jinair.model.entity.payment.TbPoint;
 import com.project.jinair.model.enumclass.CouponStatus;

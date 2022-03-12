@@ -1,5 +1,6 @@
 package com.project.jinair.model.entity.payment;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.project.jinair.model.entity.board.TbQna;
 import com.project.jinair.model.entity.member.TbMember;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ import java.util.List;
         allocationSize = 1
 )
 @Entity
+@JsonAutoDetect
 @Builder
 @EntityListeners(AuditingEntityListener.class)
 public class TbPoint {
@@ -35,5 +37,6 @@ public class TbPoint {
     @ManyToOne
     @JoinColumn(name = "poUserindex", referencedColumnName="memIndex", insertable = false, updatable = false)         // 추가나 수정이 불가능함
     private TbMember tbMember;
+
 
 }

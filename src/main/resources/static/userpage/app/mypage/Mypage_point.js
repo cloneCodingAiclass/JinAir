@@ -1,9 +1,6 @@
 'use strict';
 
 $(function () {
-    let memIndex = $('#memid').val();
-
-
     $('.open1').on('click', function (e) {
         e.stopPropagation();
         $('.service').slideUp(50);
@@ -322,7 +319,7 @@ $(function () {
         $(".come_date_select_opt").removeClass('on');
         $('.come_date_select').slideUp(50);
     })
-
+    // 세션 인덱스
     let bbb = 'n';
     let ccc = 'n';
     let ddd = 'n';
@@ -396,6 +393,7 @@ $(function () {
         })
     }
 
+    let memIndex = $('#memid').val();
     // 포인트 차감 로직
     let necessary = '';
     $('.coupon_add').on('click', function (e){
@@ -420,7 +418,7 @@ $(function () {
         let day = new Date();
 
         let ucType = "일반";
-        let ucPrice = 3000;
+        let ucPrice = 400000;
         let ucDesc = go_layer + " ~ " + arrive_layer;
         let ucCode = "21398127409214079";
         let ucDiscount = 3;
@@ -433,23 +431,24 @@ $(function () {
         let coupon
         coupon = {
             data : {
-                    memIndex : memIndex,
                     ucType : ucType,
                     ucPrice : ucPrice,
                     ucDesc : ucDesc,
                     ucCode : ucCode,
                     ucDiscount : ucDiscount,
                     ucStartday : ucStartday,
-                    ucEndDay : ucEndDay,
+                    ucEndday : ucEndDay,
                     ucIsUse : ucIsUse,
-                    ucTotcoupon : 1
+                    ucTotcoupon : 1,
+                    ucUserindex : memIndex
             }
         }
         let point
         point = {
             data : {
                 poPoint : "-"+ucPrice,
-                poMemo : go_layer + " ~ " + arrive_layer +"쿠폰구매"
+                poMemo : go_layer + " ~ " + arrive_layer +"쿠폰구매",
+                poUserindex : memIndex
                 }
             }
 
@@ -489,10 +488,11 @@ $(function () {
             $('body').css('overflow', '');
         })
     });
+
     couponResult(memIndex);
 
-    function couponResult(index) {
-        $.get("/api/userCoupon/list/" + index, function (response) {
+    function couponResult(memIndex) {
+        $.get("/api/userCoupon/list/" + memIndex, function (response) {
             console.dir(response);
             document.getElementById("coupon").innerHTML = response;
         });
