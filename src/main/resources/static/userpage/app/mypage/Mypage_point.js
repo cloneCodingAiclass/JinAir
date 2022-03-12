@@ -492,12 +492,18 @@ $(function () {
     couponResult(memIndex);
 
     function couponResult(memIndex) {
+        console.log(memIndex);
         $.get("/api/userCoupon/list/" + memIndex, function (response) {
             console.dir(response);
-            document.getElementById("coupon").innerHTML = response;
+            let coupon;
+            if (response == ""){
+                coupon = 0;
+            }
+
+            document.getElementById("coupon").innerHTML = coupon;
+            document.getElementById("resultCoupon").innerHTML = coupon + "개";
         });
     }
-
 });
 
 function hidePopupLayer(){

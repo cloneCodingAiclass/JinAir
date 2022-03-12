@@ -2,14 +2,10 @@ package com.project.jinair.service.payment;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.member.TbMember;
-import com.project.jinair.model.entity.payment.TbCouponRegist;
-import com.project.jinair.model.entity.payment.TbPoint;
 import com.project.jinair.model.entity.payment.TbUsercoupon;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.Pagination;
-import com.project.jinair.model.network.request.payment.PointApiRequest;
 import com.project.jinair.model.network.request.payment.UsercouponApiRequest;
-import com.project.jinair.model.network.response.payment.CouponRegistApiResponse;
 import com.project.jinair.model.network.response.payment.UsercouponApiResponse;
 import com.project.jinair.repository.MemberRepository;
 import com.project.jinair.repository.TbPointRepository;

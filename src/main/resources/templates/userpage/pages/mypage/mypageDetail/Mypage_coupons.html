@@ -50,7 +50,7 @@
                 <div class="coupon_main">
                     <div class="my_coupon">
                         <p>나의 지니 쿠폰</p>
-                        <p>개</p>
+                        <p id="resultCoupon"></p>
                     </div>
                     <div class="add_coupon">
                         <p>쿠폰등록</p>
@@ -96,7 +96,7 @@
                             <p>기간<input type="date" class="item_start_date"><input type="date" class="item_start_date">
                             </p>
                             <div class="btn">
-                                <input type="button" value="조회" onclick="couponList()">
+                                <input type="button" value="조회" id="searchbtn">
                                 <input type="button" value="초기화" class="btn_cancel" onclick="history.back()">
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                         <p>쿠폰 사용 안내</p>
                         <p class="subtext">- 지니쿠폰 사용 방법 및 유의사항을 확인하세요.</p>
                     </div>
-                    <input type="button" value="지니쿠폰 안내" onclick="location.href='../../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/promotion/jinicoupon/jiniCoupon.html'">
+                    <input type="button" value="지니쿠폰 안내" onclick="location.href='/pages/index/jiniCoupon'">
                 </div>
             </div>
         </div>
