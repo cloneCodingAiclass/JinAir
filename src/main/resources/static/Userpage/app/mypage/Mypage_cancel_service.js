@@ -121,6 +121,7 @@ $(function () {
             e.stopPropagation();
         })
     });
+
 });
 
 function hidePopupLayer(){
