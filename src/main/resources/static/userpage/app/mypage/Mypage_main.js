@@ -207,6 +207,15 @@ $(function () {
     })
     /*부가서비스 끝 */
 
+    // 쿠폰 수
+    couponResult(0);
+
+    function couponResult(index) {
+        $.get("/api/userCoupon/list/" + index, function (response) {
+            console.dir(response);
+            document.getElementById("coupon").innerHTML = response;
+        });
+    }
 });
 
 function hidePopupLayer(){

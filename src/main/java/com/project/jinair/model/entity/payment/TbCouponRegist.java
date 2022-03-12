@@ -44,5 +44,4 @@ public class TbCouponRegist {
     private LocalDateTime crRegdate;
     private String crCode;
 
-
 }

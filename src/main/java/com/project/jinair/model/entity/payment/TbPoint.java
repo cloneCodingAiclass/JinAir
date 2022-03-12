@@ -33,7 +33,7 @@ public class TbPoint {
     private Long poUserindex;
 
     @ManyToOne
-    @JoinColumn(name ="poUserindex", referencedColumnName="memIndex", insertable = false, updatable = false)         // 추가나 수정이 불가능함
+    @JoinColumn(name = "poUserindex", referencedColumnName="memIndex", insertable = false, updatable = false)         // 추가나 수정이 불가능함
     private TbMember tbMember;
 
 }
