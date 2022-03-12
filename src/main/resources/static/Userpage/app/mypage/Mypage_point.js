@@ -1,6 +1,9 @@
 'use strict';
 
 $(function () {
+    let memIndex = $('#memid').val();
+
+
     $('.open1').on('click', function (e) {
         e.stopPropagation();
         $('.service').slideUp(50);
@@ -430,6 +433,7 @@ $(function () {
         let coupon
         coupon = {
             data : {
+                    memIndex : memIndex,
                     ucType : ucType,
                     ucPrice : ucPrice,
                     ucDesc : ucDesc,
@@ -438,7 +442,7 @@ $(function () {
                     ucStartday : ucStartday,
                     ucEndDay : ucEndDay,
                     ucIsUse : ucIsUse,
-                    ucTotcoupon : 1,
+                    ucTotcoupon : 1
             }
         }
         let point
@@ -485,7 +489,7 @@ $(function () {
             $('body').css('overflow', '');
         })
     });
-    couponResult(0);
+    couponResult(memIndex);
 
     function couponResult(index) {
         $.get("/api/userCoupon/list/" + index, function (response) {
