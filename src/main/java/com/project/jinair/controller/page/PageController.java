@@ -210,6 +210,7 @@ public class PageController {
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
             return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_coupons")
                     .addObject("code", "Mypage_coupons");
         }else{
@@ -260,6 +261,7 @@ public class PageController {
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
             return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_point")
                     .addObject("code", "Mypage_point");
         }else{
@@ -1732,6 +1734,7 @@ public class PageController {
     public ModelAndView useCouponList(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         if((String) session.getAttribute("name") != null) {
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
             model.addAttribute("str", (String) session.getAttribute("name"));
             return new ModelAndView("/adminpage/pages/coupon/usecouponlist")
                     .addObject("code", "useCouponList")
