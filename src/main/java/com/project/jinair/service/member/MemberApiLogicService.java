@@ -184,4 +184,13 @@ public class MemberApiLogicService implements CrudInterface<MemberApiRequest, Me
         return memberApiResponse;
     }
 
+
+    public Header<MemberApiResponse> reads(String id) throws InterruptedException {
+        Thread.sleep(300);
+        return memberRepository.findByMemUserid(id)
+                .map(member -> response(member))
+                .orElseGet(
+                        () -> Header.ERROR("데이터 없음")
+                );
+    }
 }

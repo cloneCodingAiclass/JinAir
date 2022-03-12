@@ -56,4 +56,10 @@ public class MemberApiController implements CrudInterface<MemberApiRequest, Memb
         return memberApiLogicService.search(userid);
     }
 
+    // 단일 회원 찾기
+    @GetMapping("/read/{id}")
+    public Header<MemberApiResponse> reads(@PathVariable(name = "id") String id) throws InterruptedException {
+        return memberApiLogicService.reads(id);
+    }
+
 }

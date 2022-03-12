@@ -49,11 +49,11 @@
                     <table>
                         <tr class="bb">
                             <th>이름</th>
-                            <td>라승현</td>
+                            <td th:text="${memberApiResponse.memKorFirstName}+${memberApiResponse.memKorLastName}">라승현</td>
                         </tr>
                         <tr>
                             <th>아이디</th>
-                            <td>SEUNGHYUN89</td>
+                            <td th:text="${memberApiResponse.memUserid}"></td>
                         </tr>
                     </table>
                 </div>

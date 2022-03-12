@@ -1,5 +1,7 @@
 'use strict';
 
+let idDupl = 'n';
+
 $(function () {
     $('.open1').on('click', function (e) {
         e.stopPropagation();
@@ -117,8 +119,82 @@ $(function () {
         $(this).val($(this).val().replace(/[^A-Za-z]/g,""));
     })
 
+    // 아이디 키 다운시 중복확인 필요
+    $('#id').on('keydown', function (){
+        idDupl = 'n';
+    })
+
+    // 아이디 중복 확인
+    $('#duplication').on('click', function (){
+        if(!$('#id').val()) {
+            alert('아이디를 입력하세요');
+        }else if($('#id').val().length < 4 || $('#id').val().length > 20){
+            alert('아이디는 6자 이상 20자 이하로 입력하세요');
+            $('#id').val('');
+            $('#id').focus();
+        }else {
+            list($('#id').val());
+        }
+    })
+    function list(index){
+        $.get("/api/user/read/"+index, function(response){
+            let itemList = response.data;
+            if (!itemList){
+                alert('사용 가능한 아이디 입니다.');
+                idDupl = 'y'
+            }else{
+                alert('중복된 아이디가 있습니다.');
+                $('#id').val('');
+                idDupl = 'n'
+            }
+        });
+    }
+
+
+    // 회원가입 데이터 보내기
+    let jsonData;
+    function creating(){
+        jsonData = {
+            data : {
+                memUserid: $('#id').val(),
+                memUserpw: $('#pw').val(),
+                memKorFirstName : $('#mbrLnm').val(),
+                memKorLastName : $('#mbrFnm').val(),
+                memEngFirstName : $('#engLnm').val(),
+                memEngLastName : $('#engFnm').val(),
+                memHpNation : $('#mblFonCtrCd').val(),
+                memHp : $('#mblFonNo').val(),
+                memEmail : $('#emAdr').val(),
+                memGender : $('input:radio[name="gndrCd"]:checked').val(),
+                memBirth : $('#bthDt').val(),
+                memPassport : $('#ntnltyCd').val(),
+                memNation : $('#residenceIataCountryCode').val(),
+                memZipcode : $('#sample6_postcode').val(),
+                memAddress1 : $('#sample6_address').val(),
+                memAddress2 : $('#sample6_extraAddress').val(),
+                memAddress3 : $('#sample6_detailAddress').val(),
+                memEmailIsagree : $('input:radio[name="emRcvYn"]:checked').val(),
+                memSnsIsagree : $('input:radio[name="smsRcvYn"]:checked').val()
+            }
+        }
+        $.ajax({
+            url : "/api/user",
+            type : "POST",
+            data : JSON.stringify(jsonData),
+            dataType : "text",
+            contentType : "application/json"
+        });
+    }
+
+    $("#btn_regist").click( () => {
+        if(sendit()) {
+            creating();
+            location.href = "/pages/index/joinConfirm/"+$('#id').val().toLowerCase();
+        }
+    })
 
 });
+
 
 function sendit(){
     const expKorNameText = RegExp(/[가-힣]+$/);
@@ -126,6 +202,11 @@ function sendit(){
     const expNumText = RegExp(/[0-9]+$/);
     const expHpText = RegExp(/^\d{3}-\d{3,4}-\d{4}$/);
     const expEmailText = RegExp(/^[A-Za-z0-9\-\.]+@[A-Za-z0-9\-\.]+\.[A-Za-z0-9]+$/);
+
+    var pw = $("#pw").val();
+    var id = $("#id").val();
+    var checkNumber = pw.search(/[0-9]/g);
+    var checkEnglish = pw.search(/[a-z]/ig);
 
     if(!$('#id').val()){
         alert('아이디를 입력하세요');
@@ -138,6 +219,11 @@ function sendit(){
         $('#id').focus();
         return false;
     }
+    if(idDupl == 'n'){
+        alert('아이디 중복 확인을 진행해주세요');
+        $('#id').focus();
+        return false;
+    }
 
     if(!$('#pw').val()){
         alert('비밀번호를 입력하세요');
@@ -145,8 +231,26 @@ function sendit(){
         return false;
     }
 
-    if($('#pw').val().length < 4 || $('#pw').val().length > 20){
-        alert('비밀번호는 8자 이상 20자 이하로 입력하세요');
+    if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test(pw)){
+        alert('숫자+영문자+특수문자 조합으로 8자리 이상 사용해야 합니다.');
+        $('#pw').val("");
+        $('#pwCheck').val("");
+        $('#pw').focus();
+        return false;
+    }else if(checkNumber <0 || checkEnglish <0){
+        alert("숫자와 영문자를 혼용하여야 합니다.");
+        $('#pw').val("");
+        $('#pwCheck').val("");
+        $('#pw').focus();
+        return false;
+    }else if(/(\w)\1\1\1/.test(pw)){
+        alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
+        $('#pw').val("");
+        $('#pwCheck').val("");
+        $('#pw').focus();
+        return false;
+    }else if(pw.search(id) > -1){
+        alert("비밀번호에 아이디가 포함되었습니다.");
         $('#pw').val("");
         $('#pwCheck').val("");
         $('#pw').focus();
@@ -213,7 +317,7 @@ function sendit(){
         $('#mblFonNo').focus();
         return false;
     }
-    if($('#emAdr').val()){
+    if(!$('#emAdr').val()){
         alert('이메일을 입력하세요');
         $('#emAdr').val("");
         $('#emAdr').focus();

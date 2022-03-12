@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <h2 class="typeA">정보입력 <span class="text fontTypeA">* 표시 항목은 필수 입력사항 입니다.</span></h2>
-                <form id="joinForm" name="joinForm" method="post" autocomplete="off" action="#" onsubmit="return sendit()">
+                <form id="joinForm" name="joinForm" method="post" autocomplete="off" action="#">
                     <table class="fieldForm memberForm">
                         <colgroup>
                             <col width="23%">
@@ -98,11 +98,11 @@
                         <tr>
                             <th scope="row"><em>*</em>아이디</th>
                             <td>
-                                <p class="idField">
+                                <p class="idField" >
                                     <input type="text" id="id" name="id" maxlength="20"
                                         style="ime-mode:disabled;text-transform:uppercase;" class="onlyEngUppNum"
                                         title="아이디">
-                                    <a href="javascript://" role="btn-check-id-duplication"
+                                    <a href="javascript://" role="btn-check-id-duplication" id="duplication"
                                         class="btnTypeA sizeL">중복확인</a>
                                 </p>
                                 <p class="text">- 영문 또는 숫자 6 ~ 20자로 혼합 가능하며 대소문자 구별 없음</p>
@@ -166,11 +166,11 @@
                                 <div class="fieldArea chkArea">
                                     <div class="field_gender">
                                         <span class="field">
-                                            <input type="radio" id="male1" name="gndrCd" value="M" checked="checked">
+                                            <input type="radio" id="male1" name="gndrCd" value="Male" checked="checked">
                                             <label for="male1">남자</label>
                                         </span>
                                         <span class="field">
-                                            <input type="radio" id="female1" name="gndrCd" value="F">
+                                            <input type="radio" id="female1" name="gndrCd" value="Female">
                                             <label for="female1">여자</label>
                                         </span>
                                     </div>
@@ -3618,7 +3618,7 @@
                     </table>
                     <div class="btn">
                     <!-- 차후 submit으로 변경 필요 -->
-                        <input type="submit" class="btn_agree" value="확인">
+                        <input type="button" id="btn_regist" class="btn_agree" value="확인">
                         <input type="button" class="btn_cancel" value="취소" onclick="history.back()">
                     </div>
                 </form>
