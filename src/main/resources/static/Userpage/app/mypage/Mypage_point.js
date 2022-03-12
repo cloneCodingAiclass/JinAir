@@ -485,6 +485,15 @@ $(function () {
             $('body').css('overflow', '');
         })
     });
+    couponResult(0);
+
+    function couponResult(index) {
+        $.get("/api/userCoupon/list/" + index, function (response) {
+            console.dir(response);
+            document.getElementById("coupon").innerHTML = response;
+        });
+    }
+
 });
 
 function hidePopupLayer(){

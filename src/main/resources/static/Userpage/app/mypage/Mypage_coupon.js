@@ -8,8 +8,8 @@ $(function () {
         $('.point').slideUp(50);
         $('.optional').slideUp(50);
         $('.reservation').slideDown("fast");
-        $(this).siblings().css({"border-bottom":"none"});
-        $(this).css({"border-bottom":"3px solid #652043"});
+        $(this).siblings().css({"border-bottom": "none"});
+        $(this).css({"border-bottom": "3px solid #652043"});
     })
     $('.open2').on('click', function (e) {
         e.stopPropagation();
@@ -18,8 +18,8 @@ $(function () {
         $('.point').slideUp(50);
         $('.optional').slideUp(50);
         $('.service').slideDown("fast");
-        $(this).siblings().css({"border-bottom":"none"});
-        $(this).css({"border-bottom":"3px solid #652043"});
+        $(this).siblings().css({"border-bottom": "none"});
+        $(this).css({"border-bottom": "3px solid #652043"});
     })
     $('.open3').on('click', function (e) {
         e.stopPropagation();
@@ -28,8 +28,8 @@ $(function () {
         $('.point').slideUp(50);
         $('.optional').slideUp(50);
         $('.benefit').slideDown("fast");
-        $(this).siblings().css({"border-bottom":"none"});
-        $(this).css({"border-bottom":"3px solid #652043"});
+        $(this).siblings().css({"border-bottom": "none"});
+        $(this).css({"border-bottom": "3px solid #652043"});
     })
     $('.open4').on('click', function (e) {
         e.stopPropagation();
@@ -38,8 +38,8 @@ $(function () {
         $('.benefit').slideUp(50);
         $('.optional').slideUp(50);
         $('.point').slideDown("fast");
-        $(this).siblings().css({"border-bottom":"none"});
-        $(this).css({"border-bottom":"3px solid #652043"});
+        $(this).siblings().css({"border-bottom": "none"});
+        $(this).css({"border-bottom": "3px solid #652043"});
     })
     $('.open5').on('click', function (e) {
         e.stopPropagation();
@@ -48,8 +48,8 @@ $(function () {
         $('.benefit').slideUp(50);
         $('.point').slideUp(50);
         $('.optional').slideDown("fast");
-        $(this).siblings().css({"border-bottom":"none"});
-        $(this).css({"border-bottom":"3px solid #652043"});
+        $(this).siblings().css({"border-bottom": "none"});
+        $(this).css({"border-bottom": "3px solid #652043"});
     })
     $('.nav_all').on('click', function (e) {
         e.stopPropagation();
@@ -58,7 +58,7 @@ $(function () {
         $('.benefit').slideUp(50);
         $('.point').slideUp(50);
         $('.optional').slideUp(50);
-        $("li[class *= 'open']").css({"border-bottom":"none"});
+        $("li[class *= 'open']").css({"border-bottom": "none"});
     })
     $('body').on('click', function (e) {
         e.stopPropagation();
@@ -67,7 +67,7 @@ $(function () {
         $('.benefit').slideUp(50);
         $('.point').slideUp(50);
         $('.optional').slideUp(50);
-        $("li[class *= 'open']").css({"border-bottom":"none"});
+        $("li[class *= 'open']").css({"border-bottom": "none"});
     })
 
     $('.modal').hide();
@@ -87,38 +87,38 @@ $(function () {
     $('.bonus_ticket_main').hide();
     $(".coupons").on('click', function () {
         $('.coupon_main').show();
-        $(".bonus_ticket_main").css("display","none");
+        $(".bonus_ticket_main").css("display", "none");
         $(".bonus_ticket").css("background-color", "white");
         $(".bonus_ticket").css("color", "#444");
         $(".coupons").css({
-            "background-color" : "rgb(102, 30, 67)",
-            "color" : "white"
+            "background-color": "rgb(102, 30, 67)",
+            "color": "white"
         });
-        $(".coupons_main").css("display","block");
+        $(".coupons_main").css("display", "block");
     });
     $(".bonus_ticket").on('click', function () {
         $('.coupon_main').hide();
         $(".coupons").css("background-color", "white");
         $(".coupons").css("color", "#444");
         $(".bonus_ticket").css({
-            "background-color" : "rgb(102, 30, 67)",
-            "color" : "white"
+            "background-color": "rgb(102, 30, 67)",
+            "color": "white"
         });
-        $(".bonus_ticket_main").css("display","flex");
+        $(".bonus_ticket_main").css("display", "flex");
     })
-    $('.edit').click(function(){
+    $('.edit').click(function () {
         $('.pwcheck_modal').css('display', 'flex');
         $('.pwcheck_modal').fadeIn(200);
         $('body').css('overflow', 'hidden');
-        
-        $('.btn_cancel').click(function(e){
+
+        $('.btn_cancel').click(function (e) {
             $('.pwcheck_modal').fadeOut(200);
             $('body').css('overflow', '');
             e.stopPropagation();
         });
     });
-    $(window).scroll(function() {
-        if($(this).scrollTop() > 90) {
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 90) {
             $(".mypage_menu").css("position", "fixed");
             $(".mypage_menu").css("top", "0px");
             $("#header").css("position", "relative");
@@ -128,6 +128,15 @@ $(function () {
             $("#header").css("position", "absolute");
         }
     });
+
+    couponResult(0);
+
+    function couponResult(index) {
+        $.get("/api/userCoupon/list/" + index, function (response) {
+            console.dir(response);
+            document.getElementById("coupon").innerHTML = response;
+        });
+    }
 });
 
 function hidePopupLayer(){
