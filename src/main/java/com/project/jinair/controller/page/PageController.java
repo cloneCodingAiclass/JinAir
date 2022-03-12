@@ -1,17 +1,11 @@
 package com.project.jinair.controller.page;
 
-import com.project.jinair.model.entity.board.TbEvent;
-import com.project.jinair.model.entity.board.TbLost;
-import com.project.jinair.model.entity.board.TbMagazine;
-import com.project.jinair.model.entity.board.TbNotifi;
+import com.project.jinair.model.entity.board.*;
 import com.project.jinair.model.enumclass.LostStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.response.board.*;
 import com.project.jinair.model.network.response.member.MemberApiResponse;
-import com.project.jinair.repository.TbEventRepository;
-import com.project.jinair.repository.TbLostRepository;
-import com.project.jinair.repository.TbMagazineRepository;
-import com.project.jinair.repository.TbNotifiRepository;
+import com.project.jinair.repository.*;
 import com.project.jinair.service.MenuService;
 import com.project.jinair.service.board.*;
 import com.project.jinair.service.member.AdminApiLoginService;
@@ -69,7 +63,13 @@ public class PageController {
 
     // 사용자 인덱스
     @RequestMapping("/index")
-    public ModelAndView index() {
+    public ModelAndView index(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+        model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/index/index")
                 .addObject("code", "index");
     }
@@ -93,7 +93,13 @@ public class PageController {
     }
     // 코로나
     @RequestMapping("/index/covid19Info")
-    public ModelAndView covid19Info() {
+    public ModelAndView covid19Info(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/index/covid19Info")
                 .addObject("code", "covid19Info");
     }
@@ -101,33 +107,59 @@ public class PageController {
 
     // 로그인
     @RequestMapping("/login")
-    public ModelAndView login() {
+    public ModelAndView login(Model model) {
+        model.addAttribute("loginURL", "/userpage/fragment/menu");
         return new ModelAndView("/userpage/pages/mypage/login/login")
                 .addObject("code", "login");
     }
+    // 로그아웃, 세션 종료
+    @RequestMapping("/booking/index")
+    public ModelAndView logout(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        session.invalidate(); // 세션 삭제
+        model.addAttribute("loginURL", "/userpage/fragment/menu");
+        return new ModelAndView("/userpage/pages/index/index")
+                .addObject("code", "index");
+    }
 
-    // 아이디/비밀번호 찾기
+    // 로그인 완료 및 세션 추가
+    @RequestMapping("/index/{id}")
+    public ModelAndView login_ok(HttpServletRequest request, @PathVariable(name = "id") String id, Model model) throws InterruptedException {
+        HttpSession session = request.getSession();
+        MemberApiResponse memberApiResponse = memberApiLogicService.reads(id).getData();
+        session.setAttribute("memberApiResponse", memberApiResponse);
+        model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
+        model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        return new ModelAndView("/userpage/pages/index/index")
+                .addObject("code", "index");
+    }
+
+   // 아이디/비밀번호 찾기
     @RequestMapping("/mypage/find_info")
-    public ModelAndView findInfo() {
+    public ModelAndView findInfo(HttpServletRequest request, Model model) {
+        model.addAttribute("loginURL", "/userpage/fragment/menu");
         return new ModelAndView("/userpage/pages/mypage/login/find_info")
                 .addObject("code", "findInfo");
     }
 
     // 아이디 찾기
     @RequestMapping("/mypage/find_id")
-    public ModelAndView findId() {
+    public ModelAndView findId(HttpServletRequest request, Model model) {
+        model.addAttribute("loginURL", "/userpage/fragment/menu");
         return new ModelAndView("/userpage/pages/mypage/login/findId")
                 .addObject("code", "findId");
     }
     // 비밀번호 찾기
     @RequestMapping("/mypage/find_pw")
-    public ModelAndView findPw() {
+    public ModelAndView findPw(HttpServletRequest request, Model model) {
+        model.addAttribute("loginURL", "/userpage/fragment/menu");
         return new ModelAndView("/userpage/pages/mypage/login/findPw")
                 .addObject("code", "findPw");
     }
     // 일치하는 회원정보 없음
     @RequestMapping("/mypage/noResult")
-    public ModelAndView noResult() {
+    public ModelAndView noResult(HttpServletRequest request, Model model) {
+        model.addAttribute("loginURL", "/userpage/fragment/menu");
         return new ModelAndView("/userpage/pages/mypage/login/noResult")
                 .addObject("code", "noResult");
     }
@@ -136,76 +168,157 @@ public class PageController {
 
     // 마이페이지
     @RequestMapping("/index/addQna")
-    public ModelAndView addQna() {
-        return new ModelAndView("/userpage/pages/mypage/mypageDetail/add_qna")
-                .addObject("code", "add_qna");
+    public ModelAndView addQna(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/add_qna")
+                    .addObject("code", "add_qna");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
     }
+
     @RequestMapping("/index/faqList")
-    public ModelAndView faqList() {
-        return new ModelAndView("/userpage/pages/mypage/mypageDetail/faq_list")
-                .addObject("code", "faq_list");
+    public ModelAndView faqList(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/faq_list")
+                    .addObject("code", "faq_list");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
+
     }
     @RequestMapping("/index/mypageCancelService")
-    public ModelAndView mypageCancelService() {
-        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_cancel_service")
-                .addObject("code", "Mypage_cancel_service");
+    public ModelAndView mypageCancelService(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/faq_list")
+                    .addObject("code", "faq_list");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
     }
     @RequestMapping("/index/mypageCoupons")
-    public ModelAndView mypageCoupons() {
-        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_coupons")
-                .addObject("code", "Mypage_coupons");
+    public ModelAndView mypageCoupons(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_coupons")
+                    .addObject("code", "Mypage_coupons");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
+
     }
     @RequestMapping("/index/mypageEdit")
-    public ModelAndView mypageEdit() {
-        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_edit")
-                .addObject("code", "Mypage_edit");
+    public ModelAndView mypageEdit(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_edit")
+                    .addObject("code", "Mypage_edit");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
+
     }
     @RequestMapping("/index/mypageGetReservationDetail")
-    public ModelAndView mypageGetReservationDetail() {
-        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_getReservationDetail")
-                .addObject("code", "Mypage_getReservationDetail");
+    public ModelAndView mypageGetReservationDetail(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_getReservationDetail")
+                    .addObject("code", "Mypage_getReservationDetail");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
     }
     @RequestMapping("/index/mypageMain")
-    public ModelAndView mypageMain() {
-        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_main")
-                .addObject("code", "Mypage_main");
+    public ModelAndView mypageMain(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_main")
+                    .addObject("code", "Mypage_main");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
     }
     @RequestMapping("/index/mypagePoint")
-    public ModelAndView mypagePoint() {
-        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_point")
-                .addObject("code", "Mypage_point");
+    public ModelAndView mypagePoint(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_point")
+                    .addObject("code", "Mypage_point");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
+
     }
     @RequestMapping("/index/mypageQna")
-    public ModelAndView mypageQna() {
-        return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_qna")
-                .addObject("code", "Mypage_qna");
+    public ModelAndView mypageQna(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_qna")
+                    .addObject("code", "Mypage_qna");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
+
     }
     @RequestMapping("/index/passwordEdit")
-    public ModelAndView passwordEdit() {
-        return new ModelAndView("/userpage/pages/mypage/mypageDetail/password_edit")
-                .addObject("code", "password_edit");
+    public ModelAndView passwordEdit(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/password_edit")
+                    .addObject("code", "password_edit");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
     }
 
     // 조인
     @RequestMapping("/index/joinConfirm/{id}")
-    public ModelAndView joinConfirm(@PathVariable(name = "id") String id, Model model) throws InterruptedException {
+    public ModelAndView joinConfirm(@PathVariable(name = "id") String id, Model model, HttpServletRequest request) throws InterruptedException {
+        HttpSession session = request.getSession();
+        model.addAttribute("loginURL", "/userpage/fragment/menu");
         MemberApiResponse memberApiResponse = memberApiLogicService.reads(id).getData();
         model.addAttribute("memberApiResponse", memberApiResponse);
         return new ModelAndView("/userpage/pages/mypage/join/join_confirm")
                 .addObject("code", "join_confirm");
     }
     @RequestMapping("/index/joinForm")
-    public ModelAndView joinForm() {
+    public ModelAndView joinForm(HttpServletRequest request, Model model) {
+        model.addAttribute("loginURL", "/userpage/fragment/menu");
         return new ModelAndView("/userpage/pages/mypage/join/joinForm")
                 .addObject("code", "joinForm");
     }
     @RequestMapping("/index/joinGate")
-    public ModelAndView joinGate() {
+    public ModelAndView joinGate(HttpServletRequest request, Model model) {
+        model.addAttribute("loginURL", "/userpage/fragment/menu");
         return new ModelAndView("/userpage/pages/mypage/join/joinGate")
                 .addObject("code", "joinGate");
     }
     @RequestMapping("/index/termsAgree")
-    public ModelAndView termsAgree() {
+    public ModelAndView termsAgree(HttpServletRequest request, Model model) {
+        model.addAttribute("loginURL", "/userpage/fragment/menu");
         return new ModelAndView("/userpage/pages/mypage/join/termsAgree")
                 .addObject("code", "termsAgree");
     }
@@ -229,80 +342,158 @@ public class PageController {
     // 예약
     // 사용자 항공권 예약 getAvailabilityList
     @RequestMapping("/getAvailabilityList")
-    public ModelAndView getAvailabilityList(){
+    public ModelAndView getAvailabilityList(HttpServletRequest request, Model model){
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/payment/getAvailabilityList")
                 .addObject("code", "getAvailabilityList");
     }
     // 사용자 항공권 예약 registerPassenger
     @RequestMapping("/registerPassenger")
-    public ModelAndView registerPassenger(){
+    public ModelAndView registerPassenger(HttpServletRequest request, Model model){
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/payment/registerPassenger")
                 .addObject("code", "registerPassenger");
     }
     // 사용자 엑스트라 페이지
     @RequestMapping("/extras")
-    public ModelAndView extra() {
+    public ModelAndView extra(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/payment/extras")
                 .addObject("code", "extra");
     }
     // 엑스트라 보험 인수 제한 국가
     @RequestMapping("/extras/restricted")
-    public ModelAndView restrictedCountry() {
+    public ModelAndView restrictedCountry(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/payment/restrictedCountry")
                 .addObject("code", "restrictedCountry");
     }
     // 사용자 예약 취소
     @RequestMapping("/cancel")
-    public ModelAndView cancel(){
+    public ModelAndView cancel(HttpServletRequest request, Model model){
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/payment/cancel_booking")
                 .addObject("code", "cancel_booking");
     }
     // 사용자 예약 취소 완료
     @RequestMapping("/cancel/complete")
-    public ModelAndView cancelComplete() {
+    public ModelAndView cancelComplete(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/payment/completePayment")
                 .addObject("code", "completePayment");
     }
     // 사용자 결제 완료
     @RequestMapping("/complete")
-    public ModelAndView complete() {
+    public ModelAndView complete(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/payment/complete")
                 .addObject("code", "complete");
     }
 
     // 최저가 항공권
     @RequestMapping("/reservation/lcc")
-    public ModelAndView nowMoment() {
+    public ModelAndView nowMoment(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/reservation/lccpage/lcc")
                 .addObject("code", "pointList");
     }
     // 운항정보
     @RequestMapping("/reservation/flight")
-    public ModelAndView flight() {
+    public ModelAndView flight(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/reservation/flight_info/flight")
                 .addObject("code", "flight");
     }
     // 운항정보 결과
     @RequestMapping("/reservation/iframe")
-    public ModelAndView iframe() {
+    public ModelAndView iframe(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/reservation/flight_info/iframe")
                 .addObject("code", "iframe");
     }
     // 운임안내
     @RequestMapping("/reservation/fareRule")
-    public ModelAndView fareRule() {
+    public ModelAndView fareRule(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/reservation/freight_info/fareRule")
                 .addObject("code", "fareRule");
     }
     // 운임안내 -> 법적고지문
     @RequestMapping("/reservation/fareRule/eTicket")
-    public ModelAndView eTicket() {
+    public ModelAndView eTicket(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/reservation/freight_info/eTicket")
                 .addObject("code", "eTicket");
     }
     // 할인안내
     @RequestMapping("/reservation/discount")
-    public ModelAndView discount() {
+    public ModelAndView discount(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/reservation/discount_info/discount")
                 .addObject("code", "discount");
     }
@@ -312,108 +503,210 @@ public class PageController {
     // aircraft
     // cabinShopping
     @RequestMapping("/index/cabinShopping")
-    public ModelAndView cabinShopping() {
-        return new ModelAndView("/Userpage/pages/serviceCount/aircraft/cabinShopping")
+    public ModelAndView cabinShopping(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/aircraft/cabinShopping")
                 .addObject("code", "cabinShopping");
     }
     // eventflight
     @RequestMapping("/index/eventflight")
-    public ModelAndView eventflight() {
-        return new ModelAndView("/Userpage/pages/serviceCount/aircraft/eventflight")
+    public ModelAndView eventflight(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/aircraft/eventflight")
                 .addObject("code", "eventflight");
     }
     // guide
     @RequestMapping("/index/guide")
-    public ModelAndView guide() {
-        return new ModelAndView("/Userpage/pages/serviceCount/aircraft/guide")
+    public ModelAndView guide(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/aircraft/guide")
                 .addObject("code", "guide");
     }
     // jiniInsight
     @RequestMapping("/index/jiniInsight")
-    public ModelAndView jiniInsight() {
-        return new ModelAndView("/Userpage/pages/serviceCount/aircraft/jiniInsight")
+    public ModelAndView jiniInsight(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/aircraft/jiniInsight")
                 .addObject("code", "jiniInsight");
     }
     // taxFree
     @RequestMapping("/index/taxFree")
-    public ModelAndView taxFree() {
-        return new ModelAndView("/Userpage/pages/serviceCount/aircraft/taxFree")
+    public ModelAndView taxFree(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/aircraft/taxFree")
                 .addObject("code", "taxFree");
     }
 
     // airport
     // arrivalcard
     @RequestMapping("/index/arrivalcard")
-    public ModelAndView arrivalcard() {
-        return new ModelAndView("/Userpage/pages/serviceCount/airport/arrivalcard")
+    public ModelAndView arrivalcard(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/airport/arrivalcard")
                 .addObject("code", "arrivalcard");
     }
     // baggage
     @RequestMapping("/index/baggage")
-    public ModelAndView baggage() {
-        return new ModelAndView("/Userpage/pages/serviceCount/airport/baggage")
+    public ModelAndView baggage(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/airport/baggage")
                 .addObject("code", "baggage");
     }
     // checkin_login
     @RequestMapping("/index/checkin_login")
-    public ModelAndView checkin_login() {
-        return new ModelAndView("/Userpage/pages/serviceCount/airport/checkin_login")
+    public ModelAndView checkin_login(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/airport/checkin_login")
                 .addObject("code", "checkin_login");
     }
     // checkinfo
     @RequestMapping("/index/checkinfo")
-    public ModelAndView checkinfo() {
-        return new ModelAndView("/Userpage/pages/serviceCount/airport/checkinfo")
+    public ModelAndView checkinfo(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/airport/checkinfo")
                 .addObject("code", "checkinfo");
     }
     // checkinfo_list
     @RequestMapping("/index/checkinfo_list")
-    public ModelAndView checkinfo_list() {
-        return new ModelAndView("/Userpage/pages/serviceCount/airport/checkinfo_list")
+    public ModelAndView checkinfo_list(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/airport/checkinfo_list")
                 .addObject("code", "checkinfo_list");
     }
     // counter
     @RequestMapping("/index/counter")
-    public ModelAndView counter() {
-        return new ModelAndView("/Userpage/pages/serviceCount/airport/counter")
+    public ModelAndView counter(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/airport/counter")
                 .addObject("code", "counter");
     }
     // help
     @RequestMapping("/index/help")
-    public ModelAndView help() {
-        return new ModelAndView("/Userpage/pages/serviceCount/airport/help")
+    public ModelAndView help(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/airport/help")
                 .addObject("code", "help");
     }
 
     // optional
     // airlineFood
     @RequestMapping("/index/airlineFood")
-    public ModelAndView airlineFood() {
-        return new ModelAndView("/Userpage/pages/serviceCount/optional/airlineFood")
+    public ModelAndView airlineFood(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/optional/airlineFood")
                 .addObject("code", "airlineFood");
     }
     // bundle
     @RequestMapping("/index/bundle")
-    public ModelAndView bundle() {
-        return new ModelAndView("/Userpage/pages/serviceCount/optional/bundle")
+    public ModelAndView bundle(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/optional/bundle")
                 .addObject("code", "bundle");
     }
     // jiniPlay
     @RequestMapping("/index/jiniPlay")
-    public ModelAndView jiniPlay() {
-        return new ModelAndView("/Userpage/pages/serviceCount/optional/jiniPlay")
+    public ModelAndView jiniPlay(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/optional/jiniPlay")
                 .addObject("code", "jiniPlay");
     }
     // lounge
     @RequestMapping("/index/lounge")
-    public ModelAndView lounge() {
-        return new ModelAndView("/Userpage/pages/serviceCount/optional/lounge")
+    public ModelAndView lounge(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/optional/lounge")
                 .addObject("code", "lounge");
     }
     // lounge
     @RequestMapping("/index/seat")
-    public ModelAndView seat() {
-        return new ModelAndView("/Userpage/pages/serviceCount/optional/seat")
+    public ModelAndView seat(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/serviceCount/optional/seat")
                 .addObject("code", "seat");
     }
     /* 서비스 카운트 끝 */
@@ -423,7 +716,13 @@ public class PageController {
 
     // 나비포인트
     @RequestMapping("/point")
-    public ModelAndView point() {
+    public ModelAndView point(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/nabipoint/pointList")
                 .addObject("code", "pointList");
     }
@@ -431,61 +730,121 @@ public class PageController {
 
     // 부가서비스 액티비티
     @RequestMapping("/optional/activity")
-    public ModelAndView optional() {
+    public ModelAndView optional(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/optional/activity/activity")
                 .addObject("code", "activity");
     }
     // 부가서비스 호텔
     @RequestMapping("/optional/hotel")
-    public ModelAndView hotel() {
+    public ModelAndView hotel(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/optional/hotel/hotel")
                 .addObject("code", "hotel");
     }
     // 부가서비스 여행안심서비스
     @RequestMapping("/optional/insurance")
-    public ModelAndView insurance() {
+    public ModelAndView insurance(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/optional/insurance/insurance")
                 .addObject("code", "insurance");
     }
     // 부가서비스 cubb 해외여행보험
     @RequestMapping("/optional/insurance2")
-    public ModelAndView insurance2() {
-        return new ModelAndView("/userpage/pages/optional/insurance/chubb")
+    public ModelAndView insurance2(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/optional/insurance/Chubb")
                 .addObject("code", "chubb");
     }
     // 부가서비스 Assistcard여행토탈케어
     @RequestMapping("/optional/insurance3")
-    public ModelAndView insurance3() {
+    public ModelAndView insurance3(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/optional/insurance/insurance3")
                 .addObject("code", "insurance3");
     }
     // 부가서비스 jinipass
     @RequestMapping("/optional/jinipass")
-    public ModelAndView jinipass() {
+    public ModelAndView jinipass(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/optional/jinipass/jinipass")
                 .addObject("code", "jinipass");
     }
     // 부가서비스 차량서비스
     @RequestMapping("/optional/rentcar")
-    public ModelAndView rentcar() {
+    public ModelAndView rentcar(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/optional/rentcar/rentcar")
                 .addObject("code", "rentcar");
     }
     // 프로모션 카드
     @RequestMapping("/promotion/card_exchange")
-    public ModelAndView card() {
+    public ModelAndView card(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/promotion/card_exchange/associatedCard")
                 .addObject("code", "associatedCard");
     }
     // 프로모션 이벤트
     @RequestMapping("/promotion/event")
-    public ModelAndView event() {
+    public ModelAndView event(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/promotion/event/nowLeave")
                 .addObject("code", "nowLeave");
     }
     // 프로모션 이벤트 담첨자 명단
     @RequestMapping("/promotion/event_view/{id}")
-    public ModelAndView event_view(@PathVariable(name = "id") Long id, Model model) {
+    public ModelAndView event_view(@PathVariable(name = "id") Long id, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         EventWinApiResponse eventWinApiResponse = eventWinApiLogicService.read(id).getData();
         model.addAttribute("eventWinApiResponse", eventWinApiResponse);
         return new ModelAndView("/userpage/pages/promotion/event/winner_view")
@@ -493,14 +852,26 @@ public class PageController {
     }
     // 프로모션 지니쿠폰
     @RequestMapping("/promotion/coupon")
-    public ModelAndView jinicoupon() {
+    public ModelAndView jinicoupon(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/promotion/jinicoupon/jiniCoupon")
                 .addObject("code", "jinicoupon");
     }
     //-------------------------------------------------------------------------------------------
     // 공지사항
     @RequestMapping("/notice/notice")
-    public ModelAndView notice() {
+    public ModelAndView notice1(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/notice/notice")
                 .addObject("code", "notice");
     }
@@ -508,7 +879,13 @@ public class PageController {
     // 공지사항 상세
     @RequestMapping("/notice/nt_view/{id}")
     @Transactional
-    public ModelAndView userNtView(){
+    public ModelAndView userNtView(HttpServletRequest request, Model model){
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
         return new ModelAndView("/userpage/pages/notice/nt_view")
                 .addObject("code", "userNtView");
     }
