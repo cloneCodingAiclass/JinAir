@@ -111,6 +111,7 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
 
     private Header<UsercouponApiResponse> response(TbUsercoupon tbUsercoupon){
         UsercouponApiResponse usercouponApiResponse = UsercouponApiResponse.builder()
+                .ucIndex(tbUsercoupon.getUcIndex())
                 .ucType(tbUsercoupon.getUcType())
                 .ucPrice(tbUsercoupon.getUcPrice())
                 .ucDesc(tbUsercoupon.getUcDesc())
@@ -125,6 +126,7 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
     }
     private UsercouponApiResponse responseCoupon(TbUsercoupon tbUsercoupon) {
         UsercouponApiResponse usercouponApiResponse = UsercouponApiResponse.builder()
+                .ucIndex(tbUsercoupon.getUcIndex())
                 .ucType(tbUsercoupon.getUcType())
                 .ucPrice(tbUsercoupon.getUcPrice())
                 .ucDesc(tbUsercoupon.getUcDesc())
@@ -139,8 +141,7 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
     }
 
     public Header<List<UsercouponApiResponse>> searchList(Long id, Pageable pageable) {
-        System.out.println(id);
-        Page<TbUsercoupon> tbUsercoupons = tbUsercouponRepository.findByUcUserindexContaining(id, pageable);
+        Page<TbUsercoupon> tbUsercoupons = tbUsercouponRepository.findByUcUserindex(id, pageable);
         List<UsercouponApiResponse> usercouponApiResponseList = tbUsercoupons.stream()
                 .map(coupon -> responseCoupon(coupon))
                 .collect(Collectors.toList());

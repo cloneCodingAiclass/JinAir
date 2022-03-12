@@ -7,6 +7,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/userpage/app/mypage/Mypage_coupon.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <body>
     <ul class="skipnavi">
         <!--책갈피 역할-->
@@ -100,7 +102,15 @@
                         </div>
                     </form>
                 </div>
-                <div class="none_point">
+                <div class="none_point" id="itemList" v-if="itemList != ''">
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr v-for="dto in itemList">
+                        <td> {{dto.ucDesc}} </td>
+                    </tr>
+                </div>
+                <div class="none_point" v-else>
                     <p>+++ 지니쿠폰 내역이 없습니다. +++</p>
                 </div>
                 <div class="footer_info">
