@@ -32,7 +32,7 @@ public class TbQna {
     private Long qnaIndex;
     @Enumerated(EnumType.STRING)
     private QnaType qnaType;
-//    private Long qnaUserindex;
+    private Long qnaUserindex;
     private String qnaTitle;
     private String qnaContent;
     @Enumerated(EnumType.STRING)
@@ -42,7 +42,7 @@ public class TbQna {
     private LocalDateTime qnaAnsdate;
 
     @ManyToOne
-    @JoinColumn(name ="qnaUserindex", referencedColumnName="memIndex")
+    @JoinColumn(name ="qnaUserindex", referencedColumnName="memIndex", insertable = false, updatable = false)
     private TbMember tbMember;
 
 }

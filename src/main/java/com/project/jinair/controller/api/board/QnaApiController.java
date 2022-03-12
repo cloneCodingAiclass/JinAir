@@ -1,11 +1,12 @@
 package com.project.jinair.controller.api.board;
 
 import com.project.jinair.ifs.CrudInterface;
-import com.project.jinair.model.enumclass.QnaStatus;
+import com.project.jinair.model.entity.member.TbMember;
 import com.project.jinair.model.enumclass.QnaType;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.board.QnaApiRequest;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
+import com.project.jinair.model.network.response.payment.PointApiResponse;
 import com.project.jinair.service.board.QnaApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -41,10 +42,14 @@ public class QnaApiController implements CrudInterface<QnaApiRequest, QnaApiResp
     public Header<List<QnaApiResponse>> List() {
         return qnaApiLogicService.getQnaList();
     }
-
     @GetMapping("/listdetail/{a}")
     public Header<List<QnaApiResponse>> List(@PathVariable QnaType a) {
         return qnaApiLogicService.getQnaList(a);
+    }
+
+    @GetMapping("myqnalist/{id}")
+    public Header<List<QnaApiResponse>> myQnaList(@PathVariable Long id) {
+        return qnaApiLogicService.myQnaList(id);
     }
 
     @GetMapping("/list/NotComplete")
@@ -56,7 +61,6 @@ public class QnaApiController implements CrudInterface<QnaApiRequest, QnaApiResp
     public Header<List<QnaApiResponse>> Listsearch(@PathVariable String a) {
         return qnaApiLogicService.getQnaList(a);
     }
-
 
     @Override
     @PostMapping("")

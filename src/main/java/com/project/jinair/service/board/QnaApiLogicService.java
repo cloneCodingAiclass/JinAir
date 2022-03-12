@@ -2,11 +2,14 @@ package com.project.jinair.service.board;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.board.TbQna;
+import com.project.jinair.model.entity.member.TbMember;
 import com.project.jinair.model.enumclass.QnaStatus;
 import com.project.jinair.model.enumclass.QnaType;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.board.QnaApiRequest;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
+//import com.project.jinair.repository.MemJoinQnaRepository;
+import com.project.jinair.repository.MemberRepository;
 import com.project.jinair.repository.TbQnaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -21,6 +24,9 @@ import java.util.stream.Collectors;
 public class QnaApiLogicService implements CrudInterface<QnaApiRequest, QnaApiResponse> {
 
     private final TbQnaRepository tbQnaRepository;
+//    private final MemJoinQnaRepository memJoinQnaRepository;
+
+    private final MemberRepository memberRepository;
 
     // 게시판 리스트
     public Header<List<QnaApiResponse>> getQnaList() {
@@ -55,14 +61,25 @@ public class QnaApiLogicService implements CrudInterface<QnaApiRequest, QnaApiRe
         return Header.OK(qnaApiResponseList);
     }
 
+    public Header<List<QnaApiResponse>> myQnaList(Long id) {
+        List<TbQna> tbQna = tbQnaRepository.findByQnaUserindex(id);
+        List<QnaApiResponse> qnaApiResponseList = tbQna.stream()
+                .map(user -> responseQna(user))
+                .collect(Collectors.toList());
+        return Header.OK(qnaApiResponseList);
+    }
+
+
     @Override
     public Header<QnaApiResponse> create(Header<QnaApiRequest> request) {
         QnaApiRequest qnaApiRequest = request.getData();
+        TbMember tbMember = memberRepository.findByMemIndex(1L);
         TbQna tbQna = TbQna.builder()
                 .qnaType(qnaApiRequest.getQnaType())
                 .qnaTitle(qnaApiRequest.getQnaTitle())
                 .qnaContent(qnaApiRequest.getQnaContent())
                 .qnaIsans(QnaStatus.NotComplete)
+                .qnaUserindex(tbMember.getMemIndex())
                 .build();
         TbQna newTbQna = tbQnaRepository.save(tbQna);
         return response(newTbQna);

@@ -44,14 +44,14 @@
                             <th style="text-align: left">{{ notiView.noTitle }}</th>
                             <th style="text-align: right">등록일 {{ notiView.noRegdate.substr(0, 10) }}</th>
                         </tr>
-                            <tr>
-                                <td colspan="2" class="content">
-                                    <p>
-                                        {{ notiView.noContents }}
-                                    </p>
-                                    <span class="jinTxt">Fly, better fly Jin Air</span>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td colspan="2" class="content">
+                                <p>
+                                    {{ notiView.noContents }}
+                                </p>
+                                <span class="jinTxt">Fly, better fly Jin Air</span>
+                            </td>
+                        </tr>
                     </table>
                     <table id="notiPriv">
                         <colgroup><col width = 20%><col width = 80%></colgroup>
@@ -60,14 +60,14 @@
                         </tr>
                         <tr>
                             <th>이전 글</th>
-                            <td><a :href=`/pages/notice/nt_view/${notiPriv.noIndex}`>{{ notiPriv.noTitle }}</a></td>
+                            <td class="prevP"><a :href=`/pages/notice/nt_view/${notiPriv.noIndex}`>{{ notiPriv.noTitle }}</a></td>
                         </tr>
                     </table>
                     <table id="notiNext">
                         <colgroup><col width = 20%><col width = 80%></colgroup>
                         <tr>
                             <th>다음 글</th>
-                            <td><a :href=`/pages/notice/nt_view/${notiNext.noIndex}`>{{ notiNext.noTitle }}</a></td>
+                            <td class="nextP"><a :href=`/pages/notice/nt_view/${notiNext.noIndex}`>{{ notiNext.noTitle }}</a></td>
                         </tr>
                     </table>
                     <div class="listWrap">
@@ -85,4 +85,5 @@
     <!--wrap 끝-->
 </body>
 <script src="/userpage/app/notice/nt_view.js"></script>
+
 </html>
