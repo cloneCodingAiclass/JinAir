@@ -160,11 +160,11 @@ $(function () {
         }
     })
 
-    couponList(0);
+    couponList(43);
 
     function couponList(index) {
-        $.get("/api/userCoupon/" + index, function (response) {
-            console.dir(response);
+        $.get("/api/userCoupon/couponList/" + index, function (response) {
+            console.dir(response)
 
             pagination = response.pagination;
 
