@@ -160,8 +160,6 @@ $(function () {
         }
     })
 
-    couponList(45);
-
     function couponList(index) {
         $.get("/api/userCoupon/couponList/" + index, function (response) {
             console.dir(response)
@@ -179,6 +177,9 @@ $(function () {
 
         });
     }
+
+
+
 });
 
 
