@@ -116,6 +116,29 @@ $(function () {
     }
 });
 
+(function ($){
+
+    let myQnaList = new Vue({
+        el : '#myQnaList',
+        data : {
+            myQnaList : {}
+        }
+    })
+
+    // 세션 받아와서 넣기.
+    searchUser(1);
+    // 회원 리스트
+    function searchUser(idx) {
+        $.get("/api/qna/myqnalist/"+idx, function(response){
+            console.dir(response);
+            myQnaList.myQnaList = response.data;
+        })
+    }
+
+
+
+})(jQuery)
+
 function hidePopupLayer(){
     $('.confirm_modal1', parent.document).fadeOut(200);
     $('body', parent.document).css('overflow', '');
