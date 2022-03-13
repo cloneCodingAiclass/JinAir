@@ -106,17 +106,25 @@ $(function () {
         }
     });
 
-    couponResult(0);
-
-    function couponResult(index) {
-        $.get("/api/userCoupon/list/" + index, function (response) {
-            console.dir(response);
-            document.getElementById("coupon").innerHTML = response;
-        });
+    if($("#qnaAnsdate").text() != null) {
+        let str = $("#qnaAnsdate").text().substring(0, 10);
+        console.log(str);
+        $("#qnaAnsdate").html(str);
     }
 });
 
 (function ($){
+    // 세션 받아와서 넣기.
+    let idx = $("#memid").val();
+    searchUser(idx);
+
+    // 회원 qna 리스트
+    function searchUser(idx) {
+        $.get("/api/qna/myqnalist/"+idx, function(response){
+            console.dir(response);
+            myQnaList.myQnaList = response.data;
+        })
+    }
 
     let myQnaList = new Vue({
         el : '#myQnaList',
@@ -125,17 +133,22 @@ $(function () {
         }
     })
 
-    // 세션 받아와서 넣기.
-    searchUser(1);
-    // 회원 리스트
-    function searchUser(idx) {
-        $.get("/api/qna/myqnalist/"+idx, function(response){
-            console.dir(response);
-            myQnaList.myQnaList = response.data;
-        })
-    }
 
 
+    // couponResult(idx);
+    //
+    // function couponResult(idx) {
+    //     console.log(idx);
+    //     $.get("/api/userCoupon/list/" + idx, function (response) {
+    //         let coupon;
+    //         if (response == ""){
+    //             coupon = 0;
+    //         }
+    //
+    //         document.getElementById("coupon").innerHTML = coupon;
+    //         document.getElementById("resultCoupon").innerHTML = coupon + "개";
+    //     });
+    // }
 
 })(jQuery)
 

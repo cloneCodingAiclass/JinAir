@@ -35,6 +35,15 @@ public class TbQna {
     private Long qnaUserindex;
     private String qnaTitle;
     private String qnaContent;
+    private String qnaFileName;
+    private String qnaResNum;
+    private String qnaFileOriname;
+    private String qnaFileUrl;
+    private String qnaNeedAnswer;
+    private String qnaStarting;
+    private String qnaDestination;
+    private LocalDateTime qnaStartDate;
+
     @Enumerated(EnumType.STRING)
     private QnaStatus qnaIsans;
     @CreatedDate

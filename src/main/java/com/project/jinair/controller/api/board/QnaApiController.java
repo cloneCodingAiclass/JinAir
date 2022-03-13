@@ -47,7 +47,7 @@ public class QnaApiController implements CrudInterface<QnaApiRequest, QnaApiResp
         return qnaApiLogicService.getQnaList(a);
     }
 
-    @GetMapping("myqnalist/{id}")
+    @GetMapping("/myqnalist/{id}")
     public Header<List<QnaApiResponse>> myQnaList(@PathVariable Long id) {
         return qnaApiLogicService.myQnaList(id);
     }
