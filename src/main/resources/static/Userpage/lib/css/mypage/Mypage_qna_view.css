@@ -59,10 +59,10 @@ a:visited{color:#444;}
     background-color: #BDD600;
 }
 body{
-    height: 1; 
+    height: 1;
     color: #444;
-    white-space: normal; 
-    word-wrap: break-word; 
+    white-space: normal;
+    word-wrap: break-word;
     line-height: 1;
 }
 #wrap{
@@ -74,9 +74,9 @@ body{
     margin: 0 auto;
     padding: 0;
     width: 100%;
-    position: relative;
     left: 0;
     top: 0;
+    position: absolute;
     z-index: 100;
 }
 #header .header_sub{
@@ -102,7 +102,7 @@ body{
     right: -5px;
     top: -10px;
 }
-#header .login{ 
+#header .login{
     box-sizing: border-box;
     display: inline;
     position: relative;
@@ -288,10 +288,9 @@ body{
 /* 서브 네비 끝 */
 /* contents */
 #container{
-    display: flex;
-    flex-direction: column;
     height: auto;
 }
+
 /*푸터*/
 #footerCont {
     width: 100%;
@@ -328,7 +327,7 @@ body{
     justify-content: space-between;
     align-items: flex-start;
     word-break: keep-all;
-    white-space: wrap;
+    white-space: nowrap;
 }
 .men_tit {
     font-size: 16px;
@@ -464,7 +463,7 @@ body{
 .Aicon img:nth-child(2) {
     margin-top: -7px;
     height: 35px;
-}  
+}
 #info {
     padding: 7px;
     width: 65%;
@@ -560,18 +559,18 @@ body{
     align-items: center;
 }
 
-.covid_info{
+.pwcheck_modal{
     position: fixed;
     background: rgba(0, 0, 0, 0.5);
     left: 0; right: 0; top: 0; bottom: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    z-index: 9999;
+    z-index: 101;
 }
-.covid_info .info_title{
-    width: 700px;
+.pwcheck_modal .pwcheck_title{
+    width: 500px;
     height: 70px;
     background-color: #661E43;
     text-indent: 20px;
@@ -581,92 +580,208 @@ body{
     font-size: 1.5rem;
     font-weight: 700;
 }
-.covid_info .info_title .close{
-    position: relative;
-    left: 600px;
-    top: -10px;
-    width: 26px;
-    height: 26px;
-    margin-top: 10px;
-    margin-right: 10px;
-    background-image: url(/userpage/lib/img/btn_close3.png);
-}
-.covid_info .info_box{
+.pwcheck_modal .pwcheck_box{
     background-color: white;
-    width: 700px;
-    height: 300px;
-    text-align: left;
+    width: 500px;
+    height: 250px;
+    text-align: center;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
+    border: 2px solid #BDD600;
     font-weight: 600;
-    padding: 50px 50px 10px 50px;
 }
-.covid_info .info_box p{
-    margin-bottom: 10px;
+.pwcheck_modal .pwcheck_box p:nth-child(2){
+    width: 80%;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 15px 0;
+    margin: 15px 0;
+
+    text-align: left;
+    text-indent: 20px;
+}
+.pwcheck_modal .pwcheck_box input[type="password"]{
+    width: 250px;
+    height: 50px;
+    text-indent: 20px;
+    font-size: 1rem;
+    border: 1px solid #EDEDED;
+    background-color: #F7F7F7;
+    font-weight: 600;
+    margin-left: 20px;
+}
+.pwcheck_modal .pwcheck_box .btn input[type="submit"]{
+    width: 150px;
+    height: 50px;
+    background-color:#BDD600;
+    border: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+.pwcheck_modal .pwcheck_box .btn input[type="button"]{
+    width: 150px;
+    height: 50px;
+    background-color:white;
+    border: 2px solid #BDD600;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
 }
 
-/* qna 메인 */
+/* 마이페이지 메인 */
+
+/* 서브타이틀 시작 */
 .mypage_main{
     width: 1160px;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
 }
+.mypage_main .mypage_menu{
+    width: 1200px;
+    height: 120px;
+    margin: 0 auto;
+    background-color: #f2f2f2;
+    display: flex;
+    position: fixed;
+    top: 91px;
+    align-items: center;
+    text-align: center;
+}
+.mypage_main .mypage_menu p{
+    width: 100px;
+    border-right: 1px solid #5f5f5f65;
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding: 25px 0;
+}
+.mypage_main .mypage_menu ul{
+    display: flex;
+}
+.mypage_main .mypage_menu ul li{
+    width: 200px;
+    font-size: 0.9rem;
+    color: #661E43;
+    font-weight: 600;
+    border-right: 1px solid #5f5f5f65;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mypage_main .mypage_menu ul li a:before{
+    content: "";
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    background:url(/userpage/lib/img/ico_subNav.png) no-repeat 0 -40px;
+}
+.mypage_main .mypage_menu ul li.booking a:before{
+    background-position-x: 0;
+}
+.mypage_main .mypage_menu ul li.mypoint a:before{
+    background-position-x:-40px;
+}
+.mypage_main .mypage_menu ul li.coupon a:before{
+    background-position-x:-80px;
+}
+.mypage_main .mypage_menu ul li.qna a:before{
+    background-position-x:-160px;
+}
+.mypage_main .mypage_menu ul li.edit a:before{
+    background-position-x:-200px;
+}
+/* 서브타이틀 끝 */
 .menu_title{
+    margin: 140px 0 50px 0;
     font-size: 3rem;
     color: #661E43;
-    margin: 140px 0 50px 0;
     font-weight: 600;
     text-indent: 30px;
 }
-.btn input[class="btn_agree"]{
-    width: 150px;
-    height: 50px;
-    background-color:#BDD600;
-    border: 0;
+
+table.bbsList {
+    width: 100%;
+    border-top: 1px solid black;
+    border-collapse: collapse;
+    font-weight: 600;
+    background-color: #fff;
+    text-align: left;
+}
+
+table.bbsList th {
+    line-height: 40px;
+    padding: 10px 30px;
+}
+
+table.bbsList td {
+    padding: 20px 30px;
+}
+
+table#aView {
+    border-top: none;
+    border-bottom: 1px solid black;
+}
+
+table#aView th {
+    background-color: #EBEBEB;
+}
+
+table#aView td {
+    background-color: #F7F7F6;
+    margin-bottom: 50px;
+    line-height: 40px;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+.jinTxt {
+    display: inline-block;
+    background-color: #BDD600;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 20px;
+    line-height: normal;
+}
+
+
+.none_point{
+    margin: 30px 0;
+    padding: 60px 0;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: center;
     font-size: 1.1rem;
     font-weight: 700;
-    margin-right: 20px;
-    cursor: pointer;
 }
-.btn input[class="btn_cancel"]{
-    width: 150px;
-    height: 50px;
-    border: 2px solid #BDD600;
-    background-color: white;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-right: 20px;
-    cursor: pointer;
-}
-.menu_title p:last-child{
-    color: #444;
-    font-size: 1.6rem;
-    padding-top: 20px;
-}
-.info_main{
+.footer_info{
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 150px;
     background-color: #F7F7F7;
     padding: 0 40px;
+    margin: 40px 0;
 }
-.info_main{
-    margin-bottom: 30px;
+
+.footer_info .btn{
+    display: flex;
 }
-.info_main p:first-child{
+.footer_info p:first-child{
     margin-bottom: 13px;
     font-size: 1.4rem;
     font-weight: 700;
 }
-.info_main .footer_text .subtext{
+.footer_info .footer_text .subtext{
     font-size: 1rem;
     line-height: 25px;
     font-weight: 600;
 }
-.info_main .point_info{
+.footer_info a{
     width: 150px;
     height: 40px;
     background-color:#BDD600;
@@ -678,416 +793,39 @@ body{
     font-weight: 700;
     margin-right: 10px;
     cursor: pointer;
-}
-.info_main .mkt_info{
-    width: 150px;
-    height: 40px;
-    background-color:#BDD600;
-    border: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-    font-weight: 700;
-    margin-right: 10px;
-    cursor: pointer;
-}
-.info_main .qna_info{
-    display: flex;
-    align-items: center;
-}
-.info_main .qna_info a{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 180px;
-    height: 40px;
-    margin-right: 30px;
-    background-color:#BDD600;
-    font-size: 0.9rem;
-    font-weight: 700;
-}
-.info_text p, .info_text > ul li{
-    font-weight: 600;
-    font-size: 1rem;
-    margin: 10px;
-    line-height: 20px;
-}
-.info_text ul li span{
-    margin-left: 15px;
-}
-.info_text{
-    border-top: 1px solid #F7F7F7;
-    padding-top: 40px;
-    margin-bottom: 40px;
-}
-.qna_date{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 30px 0;
-}
-.qna_date table {
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-}
-.qna_date table th{
-    width: 160px;
-    height: 80px;
-    text-align: left;
-    padding-left: 20px;
-    border-bottom: 1px solid #F7F7F7;
-}
-.qna_date table tr:last-child th, tr:last-child td{
-    border-bottom: 0 !important;
-}
-.qna_date table td{
-    width: 1000px;
-    border-bottom: 1px solid #F7F7F7;
 }
 
-.qna_date input[type="text"], input[type="email"], input[type="date"], select{
-    width: 470px;
-    height: 50px;
-    text-indent: 20px;
-    font-size: 1rem;
-    border: 1px solid #EDEDED;
-    background-color: #F7F7F7;
-    font-weight: 600;
-}
-.qna_date textarea{
-    width: 100%;
-    height: 200px;
-    border: 1px solid #EDEDED;
-    background-color: #F7F7F7;
-    line-height: 20px;
-    padding-top: 10px;
-    padding-left: 20px;
-    margin: 15px 0;
-    font-size: 1rem;
-    font-weight: 600;
-    vertical-align: top;
-}
-.btn{
-    text-align: center;
-    margin: 30px 0;
-}
-input[type="file"]{
-    display: none;
-}
-.qna_date table tr td p.file_box{
-    height: 60px;
+/* 포인트 */
+
+.mypoint{
     display: flex;
-    align-items: center;
-    padding-left: 40px;
-    border: 2px dotted slateblue;
+    flex-direction: column;
+}
+.mypoint_sum{
     margin-top: 10px;
-}
-.qna_date table tr td p.file_box label{
-    display: inline-block;
-    box-sizing: border-box;
-    min-width: 80px;
-    height: 30px;
-    border: 1px solid #009fda;
-    line-height: 27px;
-    padding: 0 12px;
-    text-align: center;
-    color: #009fda;
-    white-space: no-wrap;
-    background: #fff;
-    margin-right: 20px;
-    cursor: pointer;    
-}
-.qna_date .addfilecontent{
-    width: 100%;
-    height: 40px;
-    border: 1px solid rgb(0, 124, 128);
-    border-radius: 4px;
-    margin-top: 8px;
-    vertical-align: middle;
-    padding-top: 7px;
-    display: none;
-}
-.addfilecontenttext{
-    display: inline-block;
-    vertical-align: middle;
-    height: 25px;
-    margin: 0 15px 0 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 14px;
-    font-weight: 600;
-    padding-top: 5px;
-    text-indent: 5px;
-}
-.addfilecontentbtn{
-    display: inline-block;
-    vertical-align: middle;
-    width: 60px;
-    height: 25px;
-    background-color: rgba(255, 51, 0, 0.753);
-    border: none;
-    border-radius: 3px;
-    color: white;
-    cursor: pointer;
-}
-.qna_date table tr td p.file_box span{
-    font-weight: 700;
-}
-.qna_date table tr td ul{
-    margin-top: 20px;
-    border-top: 1px solid #F7F7F7;
-}
-.qna_date input[type="checkbox"]{
-    display: none;
-}
-.qna_date input[type="checkbox"] + label{
-    display: inline-block;
-    height: 20px;
-    background: url(/userpage/lib/img/ico_check.png) no-repeat 0 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding-left: 30px;
-    font-weight: 600;
-}
-.qna_date input[type="checkbox"]:checked + label{
-    background-position: 0 -20px;
-}
-.qna_date table .last_text{
-    border: 1px solid gray;
-    margin: 20px 0;
-    padding: 10px;
-    font-weight: 600;
-    font-size: 1rem;
-    line-height: 25px;
-}
-
-/* pointInfo_modal */
-
-.pointInfo_modal{
-    position: fixed;
-    background: rgba(0, 0, 0, 0.5);
-    left: 0; right: 0; top: 0; bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 101;
-    display: none;
-    padding-left: 35%;
-    padding-top: 5%;
-}
-.pointInfo_modal > .modal_content{
-    width:600px; height:700px;
-    background:#fff;
-    position: relative;
-    box-sizing:border-box; 
-    line-height:23px; cursor:pointer;
-    overflow-y: auto;
-}
-.pointInfo_modal > .title {
-    width: 600px;
-    height: 60px;
+    min-width: 48px;
+    height: 18px;
     background-color: #661E43;
-    text-indent: 20px;
+    color: white;
+    border-radius: 20px;
+    font-size: 0.8rem;
     display: flex;
     align-items: center;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 700;
-    text-align: left;
-    padding-top: 30px
-}
-.pointInfo_modal > .title .close{
-    position: relative;
-    top: -30px;
-    left: 550px;
-    width: 26px;
-    height: 26px;
-    background-image: url(/userpage/lib/img/btn_close3.png);
-}
-.modal_content > .title > h2 {
-    color: #f7f7f6;
-    line-height: 100px;
-    margin-left: 30px;
-}
-.modal_content > table{
-    margin: 30px 10px 10px 10px;
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
-    font-weight: bold;
-    border-collapse: collapse;
-}
-.modal_content > table th{
-    border: 1px solid black;
-    background-color: #f2f2f2;
-    line-height: 40px;
-    padding: 5px;
-}
-.modal_content > table td{
-    border: 1px solid #000;
-    text-align: center;
-    padding: 5px;
-}
-
-/* pointInfo_modal 끝 */
-/* mkt_modal */
-.mkt_modal{
-    position: fixed;
-    background: rgba(0, 0, 0, 0.5);
-    left: 0; right: 0; top: 0; bottom: 0;
-    display: flex;
     justify-content: center;
-    align-items: center;
+}
+.coupon{
+    display: flex;
     flex-direction: column;
-    z-index: 101;
-    display: none;
-    padding-left: 35%;
-    padding-top: 5%;
 }
-.mkt_modal > form{
-    width:600px; height:700px;
-    background:#fff;
-    position: relative;
-    box-sizing:border-box; 
-    line-height:23px; cursor:pointer;
-    overflow-y: auto;
-}
-.mkt_modal > .title {
-    width: 600px;
-    height: 60px;
+.mycoupon_sum{
+    margin-top: 10px;
+    min-width: 48px;
+    height: 18px;
     background-color: #661E43;
-    text-indent: 20px;
+    color: white;
+    border-radius: 20px;
+    font-size: 0.8rem;
     display: flex;
     align-items: center;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 700;
-    text-align: left;
-    padding-top: 30px
-}
-.mkt_modal > .title .close{
-    position: relative;
-    top: -30px;
-    left: 550px;
-    width: 26px;
-    height: 26px;
-    background-image: url(/userpage/lib/img/btn_close3.png);
-}
-.modal_content > .title > h2 {
-    color: #f7f7f6;
-    line-height: 100px;
-    margin-left: 30px;
-}
-.fieldForm {
-    overflow: hidden;
-    padding: 30px 30px 0;
-    width: 100%;
-    table-layout: fixed;
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
-}
-caption {
-    width: 0;
-    height: 0;
-    padding: 0;
-    margin: 0;
-    font-size: 0;
-    line-height: 0;
-}
-.ajax-file-upload {
-    display: inline-block;
-    box-sizing: border-box;
-    min-width: 70px;
-    height: 29px;
-    border: 1px solid #009fda;
-    line-height: 27px;
-    padding: 0 12px;
-    text-align: center;
-    color: #009fda;
-    white-space: nowrap;
-    cursor: pointer;
-    background: #fff;
-    margin: 0 10px 10px 0;
-    vertical-align: middle;
-}
-.ajax-upload-dragdrop {
-    border: 2px dotted #A5A5C7;
-    width: 420px;
-    color: #333333;
-    text-align: left;
-    vertical-align: middle;
-    padding: 10px 10px 0px 10px;
-}
-.fieldForm tr {
-    border-top: 1px solid #e8e8e8;
-}
-.fieldForm td input[type=text], .fieldForm td input[type=password], .fieldForm td select {
-    width: 100%;
-    height: 62px;
-    padding: 0 20px;
-    color: #000;
-    text-align: left;
-}
-
-.fieldForm th, .fieldForm td, .fieldForm input[type=text], .fieldForm select, .fieldForm textarea, .fieldForm .chkArea label {
-    font-size: 16px;
-}
-input.placeholder {
-    color: #777 !important;
-}
-.fieldForm th, .fieldForm td {
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-.fieldForm td {
-    height: 62px;
-    padding: 10px;
-    color: #000;
-    font-size: 18px;
-    word-wrap: break-word;
-}
-.btnArea {
-    margin-top: 50px;
-    text-align: center;
-}
-.btnTypeA {
-    display: inline-block;
-    box-sizing: border-box;
-    min-width: 135px;
-    height: 42px;
-    line-height: 42px;
-    padding: 0 30px;
-    border: 0;
-    text-align: center;
-    font-size: 14px;
-    color: #000 !important;
-    white-space: nowrap;
-    cursor: pointer;
-    background: #bdd600;
-}
-.btnTypeB {
-    display: inline-block;
-    box-sizing: border-box;
-    min-width: 135px;
-    height: 42px;
-    line-height: 40px;
-    padding: 0 29px;
-    border: 1px solid #bdd600;
-    text-align: center;
-    font-size: 14px;
-    color: #000 !important;
-    white-space: nowrap;
-    cursor: pointer;
-    background: #fff;
-}
-.btnArea:after {
-    content: "";
-    display: block;
-    height: 30px;
+    justify-content: center;
 }

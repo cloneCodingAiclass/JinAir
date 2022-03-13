@@ -19,6 +19,13 @@ public class QnaApiRequest {
     private QnaType qnaType;
     private String qnaTitle;
     private String qnaContent;
+    private String qnaFileName;
+    private String qnaFileOriname;
+    private String qnaFileUrl;
+    private String qnaResNum;
+    private String qnaNeedAnswer;
+    private String qnaStarting;
+    private String qnaDestination;
     private QnaStatus qnaIsans;
     private LocalDateTime qnaRegdate;
     private LocalDateTime qnaAnsdate;

@@ -62,8 +62,8 @@ public class UserCouponApiController implements CrudInterface<UsercouponApiReque
 
     // 쿠폰 합계 전달
     private Long sumCoupon(Long id) {
-        String sumCoupon = "select sum(u.ucTotcoupon) from TbUsercoupon u where u.ucUserindex = 43";
-        Long result = (Long) em.createQuery(sumCoupon).getSingleResult();
+        String sumCoupon = "select sum(u.ucTotcoupon) from TbUsercoupon u where u.ucUserindex = :id";
+        Long result = (Long) em.createQuery(sumCoupon).setParameter("id", id).getSingleResult();
         return result;
     }
 }

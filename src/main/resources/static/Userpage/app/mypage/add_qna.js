@@ -143,6 +143,72 @@ $(function () {
     })
 });
 
+(function ($){
+
+    let userInfo = new Vue({
+        el : '#userInfo',
+        data : {
+            userInfo : {}
+        }
+    })
+
+    let idx = $("#memid").val();
+    // 세션 받아와서 넣기.
+    searchUser(idx);
+    // 회원 정보
+    function searchUser(idx) {
+        $.get("/api/user/"+idx, function(response){
+            console.dir(response);
+            userInfo.userInfo = response.data;
+            $("#email").val(response.data.memEmail);
+        })
+    }
+
+    // 게시글 작성
+    function send() {
+        let qna = document.getElementById("qnaForm");
+
+        qna.action = "/pages/qna_file/upload";
+        qna.mothod = "POST";
+        qna.submit();
+    }
+
+    // qna등록
+    $("#addQna").on("click", function() {
+        if(check()) {
+            send();
+        }
+    })
+
+    function check() {
+        if($("#qnaType").val().length == 0) {
+            alert("질문구분을 선택해주세요.");
+            $("#qnaType").focus();
+            return false;
+        }
+        if($("#title").val().length == 0) {
+            alert("제목을 입력해주세요.");
+            $("#title").focus();
+            return false;
+        }
+        if($("#content").val().length == 0) {
+            alert("내용을 입력해주세요.");
+            $("#content").focus();
+            return false;
+        }
+        if($("#agree").is(":checked") == false) {
+            alert("개인정보 수집에 동의하셔야 진행가능합니다.");
+            $("#agree").focus();
+            return false;
+        }
+        return true;
+    }
+
+
+
+})(jQuery)
+
+
 $(function() {
     $(".point_info").click(function(){
         $('.pointInfo_modal').fadeIn();
@@ -173,5 +239,17 @@ $(function() {
     $(".btnTypeB").click(function(){
         $('.mkt_modal').fadeOut();
         $('body').css('overflow', '');
+    });
+});
+
+$(() => {
+    document.getElementById('start_date').valueAsDate = new Date();
+});
+
+$(()=> {
+    $('#no_answer').on('change', function(){
+        if($('#no_answer').is(":checked")){
+            $("#hiddenTrue").remove();
+        }
     });
 });

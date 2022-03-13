@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org/">
 <!-- head.html -->
 <div th:replace="userpage/fragment/head :: head"></div>
-<link rel="stylesheet" href="/userpage/lib/css/mypage/Mypage_qna.css">
+<link rel="stylesheet" href="/userpage/lib/css/mypage/Mypage_qna_view.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <body>
@@ -34,28 +34,32 @@
                 <p>나의 Q&A</p>
             </div>
             <div class="qna_main">
-                <table id="myQnaList" class="bbsList">
+                <table id="qView" class="bbsList">
                     <colgroup>
-                        <col width="15%"><col width="40%"><col width="18%"><col width="14%"><col width="18%">
+                        <col width="1%"><col width="69%"><col width="30%">
                     </colgroup>
-                    <thead>
                     <tr>
-                        <th scope="col">구분</th>
-                        <th scope="col">제목</th>
-                        <th scope="col">등록일</th>
-                        <th scope="col">답변</th>
-                        <th scope="col">답변일</th>
+                        <th><img src="/userpage/lib/img/Q.png" alt="Q"></th>
+                        <th>{{ qView.qnaTitle }}</th>
+                        <th style="text-align: right">{{ qView.qnaRegdate.substr(0, 10) }}</th>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="list in myQnaList">
-                        <th scope="col">{{ list.qnaType }}</th>
-                        <th scope="col"><a :href=`/pages/myQna/view/${list.qnaIndex}`>{{ list.qnaTitle }}</a></th>
-                        <th scope="col">{{ list.qnaRegdate.substr(0, 10) }}</th>
-                        <th scope="col">{{ list.qnaIsans }}</th>
-                        <th scope="col" id="qnaAnsdate">{{ list.qnaAnsdate }}</th>
+                    <tr>
+                        <th colspan="2">{{ qView.qnaContent }}</th>
                     </tr>
                     </tbody>
+                </table>
+                <table id="aView" class="bbsList">
+                    <colgroup>
+                        <col width="1%"> <col width="69%"><col width="30%">
+                    </colgroup>
+                    <tr>
+                        <th><img src="/userpage/lib/img/A.png" alt="A"></th>
+                        <th>{{ aView.qaTitle }}</th>
+                        <th style="text-align: right;"><span style="color: #661e43">답변완료</span> {{ aView.qaRegdate.substr(0, 10) }}</th>
+                    </tr>
+                    <tr>
+                        <td colspan="3">{{ aView.qaContent }} <br><span class="jinTxt">Fly, better fly Jin Air </span></td>
+                    </tr>
                 </table>
                 <ul class="paging">
                     <li></li>
@@ -98,6 +102,6 @@
         </div>
     </form>
 </div>
-<script src="/userpage/app/mypage/Mypage_qna.js"></script>
+<script src="/userpage/app/mypage/Mypage_qna_view.js"></script>
 </body>
 </html>

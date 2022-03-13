@@ -5,7 +5,7 @@
 <head><div th:replace="/adminpage/fragment/head :: head"></div>
     <link rel="stylesheet" href="/adminpage/lib/css/style.css">
     <link rel="stylesheet" href="/adminpage/lib/css/point/pointadd.css">
-    <script src="/adminpage/app/point/pointadd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
     <div id="wrap">
@@ -22,7 +22,7 @@
                                     <p>구분</p>
                                     <select class="point_box" id="select_box" name="selectbox">
                                         <option value="" selected="selected">선택</option>
-                                        <option value="이륙 지원 보상">이륙 지원 보상</option>
+                                        <option value="이륙 지원 보상">이륙 지연 보상</option>
                                         <option value="이벤트 당첨">이벤트 당첨</option>
                                         <option value="우수 회원">우수 회원</option>
                                         <option value="공모전 수상">공모전 수상</option>
@@ -33,17 +33,17 @@
                                     <p>예약자 조회</p>
                                     <div>
                                         <p>구분</p>
-                                        <select class="country_box" id="" name="selectbox">
+                                        <select class="country_box" name="selectbox">
                                             <option value="local" selected>국내</option>
                                             <option value="foreign">국외</option>
                                         </select>
                                     </div>
                                     <div>
                                         <p>출발일</p>
-                                        <input type="date">
+                                        <input type="date" id="start">
                                     </div>
                                     <div>
-                                        <select class="airport_box" id="" name="selectbox">
+                                        <select class="airport_box" name="selectbox">
                                             <option value="" selected="selected">운항 일정 선택</option>
                                             <option value="">PUS -> ICN 08:20</option>
                                             <option value="">PUS -> CJU 08:40</option>
@@ -60,7 +60,7 @@
                                     <p>고객 조회</p>
                                     <div>
                                         <p>아이디</p>
-                                        <input type="text" placeholder="아이디를 입력하세요">
+                                        <input type="text" id="userid" placeholder="아이디를 입력하세요">
                                     </div>
                                     <div>
                                         <input type="submit" value="조회" class="btn_usersearch">
@@ -68,7 +68,8 @@
                                 </div>
                             </div>
                             <div class="table_area">
-                                <form action="#" class="select_rs">
+                                <!--  이륙 지연 보상  -->
+                                <div class="select_rs">
                                     <table>
                                         <colgroup>
                                             <col width="50">
@@ -98,103 +99,24 @@
                                                 <col width="150">
                                             </colgroup>
                                             <tr>
-                                                <td><input type="checkbox" name="" id=""></td>
+                                                <td><input type="checkbox" name=""></td>
                                                 <td>11Q32D</td>
                                                 <td>홍길동(HONG GILDONG)</td>
                                                 <td>dongdong@naver.com</td>
                                                 <td>19961022</td>
-                                                <td>010-0000-0000</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" name="" id=""></td>
-                                                <td>11Q33D</td>
-                                                <td>한효주(HAN HYOJU)</td>
-                                                <td>hansworld@naver.com</td>
-                                                <td>20010915</td>
-                                                <td>010-0000-0000</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" name="" id=""></td>
-                                                <td>11Q34D</td>
-                                                <td>배애리(BAE AEIL)</td>
-                                                <td>baefarmer@gmain.com</td>
-                                                <td>19740327</td>
-                                                <td>010-0000-0000</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" name="" id=""></td>
-                                                <td>11Q35D</td>
-                                                <td>손흥민(SON HEUNGMIN)</td>
-                                                <td>superstar@gmail.com</td>
-                                                <td>19950121</td>
-                                                <td>010-0000-0000</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" name="" id=""></td>
-                                                <td>11Q35D</td>
-                                                <td>김연아(KIM YEONA)</td>
-                                                <td>icequeen@naver.com</td>
-                                                <td>19880807</td>
-                                                <td>010-0000-0000</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" name="" id=""></td>
-                                                <td>11Q32D</td>
-                                                <td>홍길동(HONG GILDONG)</td>
-                                                <td>dongdong@naver.com</td>
-                                                <td>19961022</td>
-                                                <td>010-0000-0000</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" name="" id=""></td>
-                                                <td>11Q33D</td>
-                                                <td>한효주(HAN HYOJU)</td>
-                                                <td>hansworld@naver.com</td>
-                                                <td>20010915</td>
-                                                <td>010-0000-0000</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" name="" id=""></td>
-                                                <td>11Q34D</td>
-                                                <td>배애리(BAE AEIL)</td>
-                                                <td>baefarmer@gmain.com</td>
-                                                <td>19740327</td>
-                                                <td>010-0000-0000</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" name="" id=""></td>
-                                                <td>11Q35D</td>
-                                                <td>손흥민(SON HEUNGMIN)</td>
-                                                <td>superstar@gmail.com</td>
-                                                <td>19950121</td>
-                                                <td>010-0000-0000</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" name="" id=""></td>
-                                                <td>11Q35D</td>
-                                                <td>김연아(KIM YEONA)</td>
-                                                <td>icequeen@naver.com</td>
-                                                <td>19880807</td>
-                                                <td>010-0000-0000</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" name="" id=""></td>
-                                                <td>11Q35D</td>
-                                                <td>김연아(KIM YEONA)</td>
-                                                <td>icequeen@naver.com</td>
-                                                <td>19880807</td>
                                                 <td>010-0000-0000</td>
                                             </tr>
                                         </table>
                                     </div>
                                     <div class="point_footer">
-                                        <form action="./pointadd.html"></form>
+                                        <div>
                                             <input type="text" class="pointnumber"><input type="text" value="%" readonly class="readonly">
                                             <input type="submit" value="적립">
-                                        </form>
+                                        </div>
                                     </div>
-                                </form>
-                                <form action="#" class="select_user">
+                                </div>
+                                <!--  유저 아이디 검색  -->
+                                <div class="select_user" id="memList">
                                     <table>
                                         <colgroup>
                                             <col width="50">
@@ -223,24 +145,24 @@
                                                 <col width="100">
                                                 <col width="150">
                                             </colgroup>
-                                            <tr>
-                                                <td><input type="checkbox" name="" id=""></td>
-                                                <td>XLTHSLRLS</td>
-                                                <td>홍길동(HONG GILDONG)</td>
-                                                <td>dongdong@naver.com</td>
-                                                <td>19961022</td>
-                                                <td>010-0000-0000</td>
+                                            <tr v-for="dto in memList">
+                                                <td><input type="checkbox" name=""><input type="hidden" id="memIndex"></td>
+                                                <td>{{dto.memUserid}}</td>
+                                                <td>{{dto.memKorFirstName}}{{dto.memKorLastName}}</td>
+                                                <td>{{dto.memEmail}}</td>
+                                                <td>{{dto.memBirth}}</td>
+                                                <td>{{dto.memHp}}</td>
                                             </tr>
                                         </table>
                                     </div>
                                     <div class="point_footer">
-                                        <form action="./pointadd.html">
+                                        <div class="select_user">
                                             <input type="text" class="pointnumber">
-                                            <input type="text" value="%" readonly class="readonly">
-                                            <input type="submit" value="적립">
-                                        </form>
+                                            <input type="text" value="Point" readonly class="readonly">
+                                            <input type="button" id="updatePoint" value="적립">
+                                        </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -248,5 +170,6 @@
             </div>
         </div>
     </div>
+    <script src="/adminpage/app/point/pointadd.js"></script>
 </body>
 </html>

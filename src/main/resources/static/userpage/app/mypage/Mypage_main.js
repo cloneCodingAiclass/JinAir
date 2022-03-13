@@ -208,12 +208,22 @@ $(function () {
     /*부가서비스 끝 */
 
     // 쿠폰 수
-    couponResult(0);
 
-    function couponResult(index) {
-        $.get("/api/userCoupon/list/" + index, function (response) {
+    let memIndex = $('#memid').val();
+
+    couponResult(memIndex);
+
+    function couponResult(memIndex) {
+        console.log(memIndex);
+        $.get("/api/userCoupon/list/" + memIndex, function (response) {
             console.dir(response);
-            document.getElementById("coupon").innerHTML = response;
+            let coupon;
+            if (response == ""){
+                coupon = 0;
+            }
+
+            document.getElementById("coupon").innerHTML = coupon;
+            document.getElementById("resultCoupon").innerHTML = coupon + "개";
         });
     }
 });

@@ -87,7 +87,7 @@ $(function () {
         $('.pwcheck_modal').css('display', 'flex');
         $('.pwcheck_modal').fadeIn(200);
         $('body').css('overflow', 'hidden');
-        
+
         $('.btn_cancel').click(function(e){
             $('.pwcheck_modal').fadeOut(200);
             $('body').css('overflow', '');
@@ -114,45 +114,42 @@ $(function () {
 });
 
 (function ($){
-    // 세션 받아와서 넣기.
-    let idx = $("#memid").val();
-    searchUser(idx);
+    let idx = $(location).attr('href').split('/')[6];
 
-    // 회원 qna 리스트
-    function searchUser(idx) {
-        $.get("/api/qna/myqnalist/"+idx, function(response){
-            console.dir(response);
-            myQnaList.myQnaList = response.data;
-        })
-    }
-
-    let myQnaList = new Vue({
-        el : '#myQnaList',
+    console.log(idx);
+    let qView = new Vue({
+        el : '#qView',
         data : {
-            myQnaList : {}
+            qView : {}
         }
     })
 
+    let aView = new Vue({
+        el : '#aView',
+        data : {
+            aView : {}
+        }
+    })
 
+    searchQ(idx);
+    searchA(idx);
 
-    // couponResult(idx);
-    //
-    // function couponResult(idx) {
-    //     console.log(idx);
-    //     $.get("/api/userCoupon/list/" + idx, function (response) {
-    //         let coupon;
-    //         if (response == ""){
-    //             coupon = 0;
-    //         }
-    //
-    //         document.getElementById("coupon").innerHTML = coupon;
-    //         document.getElementById("resultCoupon").innerHTML = coupon + "개";
-    //     });
-    // }
+    function searchQ(idx){
+        $.get("/api/qna/list/"+idx, function (response){
+            console.dir(response);
+            qView.qView = response.data;
+        })
+    }
+
+    function searchA(idx){
+        $.get("/api/qnaAns/list/"+idx, function (response){
+            console.dir(response);
+            if(response.data == null) {
+                $("#aView").remove();
+            }
+            aView.aView = response.data;
+        })
+    }
+
 
 })(jQuery)
-
-function hidePopupLayer(){
-    $('.confirm_modal1', parent.document).fadeOut(200);
-    $('body', parent.document).css('overflow', '');
-}
