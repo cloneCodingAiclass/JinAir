@@ -39,8 +39,8 @@
                             <td>발급일자</td>
                             <td>사용일자</td>
                             <td>Status</td>
-                            <td>발급수량</td>
-                            <td>잔여수량</td>
+                            <td>시작 코드</td>
+                            <td>종료 코드</td>
                         </tr>
                         <tr v-for="dto in itemList">
                             <td>{{dto.crIndex}}</td>
@@ -49,8 +49,8 @@
                             <td>{{dto.crIssuanceDay.substr(0,10)}}</td>
                             <td>{{dto.crEndDay.substr(0,10)}}</td>
                             <td>{{dto.crStatus}}</td>
-                            <td>{{dto.crTotCoupon}}</td>
-                            <td>{{dto.crStockCoupon}}</td>
+                            <td>{{dto.crStartCode}}</td>
+                            <td>{{dto.crLastCode}}</td>
                         </tr>
                     </table>
                     <div id="footer_box">

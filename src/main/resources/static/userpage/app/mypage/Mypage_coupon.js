@@ -242,6 +242,30 @@ $(function () {
             }
         })
     }
+
+    // 이벤트 쿠폰 발급
+    $('.coupon_submit').on('click', function (){
+        let codeNum = $('#codeNum').val();
+        let codeStr = codeNum.replace(/[0-9]/g, "");
+        $.get("/api/coupon/searchStr/" + codeStr, function(response){
+            console.dir(response);
+
+            let code = response.data;
+            console.log(code);
+            
+            let max = code.replace(/^0-9/g, "");
+            console.log(max);
+
+            // response의 종료일자, 마지막 코드넘버를 가져와 넘어가지 않았으면 couponadd 메서드 실행
+
+        })
+
+    })
+    function couponAdd(codeNum){
+
+    }
+
+
 });
 
 

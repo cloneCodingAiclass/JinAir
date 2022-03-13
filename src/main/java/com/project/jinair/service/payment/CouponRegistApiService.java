@@ -1,24 +1,17 @@
 package com.project.jinair.service.payment;
 
 import com.project.jinair.ifs.CrudInterface;
-import com.project.jinair.model.entity.member.TbMember;
 import com.project.jinair.model.entity.payment.TbCouponRegist;
-import com.project.jinair.model.entity.payment.TbPoint;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.payment.CouponRegistApiRequest;
-import com.project.jinair.model.network.response.member.MemberApiResponse;
 import com.project.jinair.model.network.response.payment.CouponRegistApiResponse;
-import com.project.jinair.repository.MemberRepository;
 import com.project.jinair.repository.TbCouponRegistRepository;
-import com.project.jinair.repository.TbPointRepository;
-import com.project.jinair.service.member.MemberApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,16 +29,13 @@ public class CouponRegistApiService implements CrudInterface<CouponRegistApiRequ
 
         TbCouponRegist tbCouponRegist = TbCouponRegist.builder()
                 .crType(couponRegistApiRequest.getCrType())
-                .crPrice(couponRegistApiRequest.getCrPrice())
                 .crDesc(couponRegistApiRequest.getCrDesc())
-                .crStatus(couponRegistApiRequest.getCrStatus())
                 .crDiscount(couponRegistApiRequest.getCrDiscount())
                 .crIssuanceDay(couponRegistApiRequest.getCrIssuanceDay())
                 .crEndDay(couponRegistApiRequest.getCrEndDay())
-                .crTotCoupon(couponRegistApiRequest.getCrTotCoupon())
-                .crStockCoupon(couponRegistApiRequest.getCrStockCoupon())
-                .crStockCoupon(couponRegistApiRequest.getCrStockCoupon())
-                .crRegdate(couponRegistApiRequest.getCrRegdate())
+                .crStartCode(couponRegistApiRequest.getCrStartCode())
+                .crLastCode(couponRegistApiRequest.getCrLastCode())
+                .crStatus(couponRegistApiRequest.getCrStatus())
                 .build();
         TbCouponRegist newCouponRegist = tbCouponRegistRepository.save(tbCouponRegist);
         return response(newCouponRegist);
@@ -66,24 +56,22 @@ public class CouponRegistApiService implements CrudInterface<CouponRegistApiRequ
         Optional<TbCouponRegist> tbCouponRegist = tbCouponRegistRepository.findById(couponRegistApiRequest.getCrIndex());
 
         return tbCouponRegist.map(coupon -> {
-                    coupon.setCrType(couponRegistApiRequest.getCrType());
-                    coupon.setCrPrice(couponRegistApiRequest.getCrPrice());
-                    coupon.setCrDesc(couponRegistApiRequest.getCrDesc());
-                    coupon.setCrCode(couponRegistApiRequest.getCrCode());
-                    coupon.setCrStatus(couponRegistApiRequest.getCrStatus());
-                    coupon.setCrDiscount(couponRegistApiRequest.getCrDiscount());
-                    coupon.setCrIssuanceDay(couponRegistApiRequest.getCrIssuanceDay());
-                    coupon.setCrEndDay(couponRegistApiRequest.getCrEndDay());
-                    coupon.setCrTotCoupon(couponRegistApiRequest.getCrTotCoupon());
-                    coupon.setCrStockCoupon(couponRegistApiRequest.getCrStockCoupon());
-                    coupon.setCrRegdate(couponRegistApiRequest.getCrRegdate());
+            coupon.setCrDesc(couponRegistApiRequest.getCrDesc());
+            coupon.setCrDiscount(couponRegistApiRequest.getCrDiscount());
+            coupon.setCrIssuanceDay(couponRegistApiRequest.getCrIssuanceDay());
+            coupon.setCrEndDay(couponRegistApiRequest.getCrEndDay());
+            coupon.setCrStartCode(couponRegistApiRequest.getCrStartCode());
+            coupon.setCrEndDay(couponRegistApiRequest.getCrEndDay());
+            coupon.setCrType(couponRegistApiRequest.getCrType());
+            coupon.setCrStatus(couponRegistApiRequest.getCrStatus());
+            coupon.setCrRegdate(couponRegistApiRequest.getCrRegdate());
 
-                    return coupon;
-                }).map(coupon -> tbCouponRegistRepository.save(coupon))
-                .map(coupon -> response(coupon))
-                .orElseGet(
-                        () -> Header.ERROR("NO DATA")
-                );
+            return coupon;
+        }).map(coupon -> tbCouponRegistRepository.save(coupon))
+        .map(coupon -> response(coupon))
+        .orElseGet(
+            () -> Header.ERROR("NO DATA")
+        );
     }
 
     @Override
@@ -98,15 +86,14 @@ public class CouponRegistApiService implements CrudInterface<CouponRegistApiRequ
     private Header<CouponRegistApiResponse> response(TbCouponRegist tbCouponRegist){
         CouponRegistApiResponse couponRegistApiResponse = CouponRegistApiResponse.builder()
                 .crIndex(tbCouponRegist.getCrIndex())
-                .crType(tbCouponRegist.getCrType())
-                .crPrice(tbCouponRegist.getCrPrice())
                 .crDesc(tbCouponRegist.getCrDesc())
-                .crStatus(tbCouponRegist.getCrStatus())
                 .crDiscount(tbCouponRegist.getCrDiscount())
                 .crIssuanceDay(tbCouponRegist.getCrIssuanceDay())
                 .crEndDay(tbCouponRegist.getCrEndDay())
-                .crTotCoupon(tbCouponRegist.getCrTotCoupon())
-                .crStockCoupon(tbCouponRegist.getCrStockCoupon())
+                .crStartCode(tbCouponRegist.getCrStartCode())
+                .crLastCode(tbCouponRegist.getCrLastCode())
+                .crType(tbCouponRegist.getCrType())
+                .crStatus(tbCouponRegist.getCrStatus())
                 .crRegdate(tbCouponRegist.getCrRegdate())
                 .build();
         return Header.OK(couponRegistApiResponse);
@@ -114,15 +101,14 @@ public class CouponRegistApiService implements CrudInterface<CouponRegistApiRequ
     private CouponRegistApiResponse responseCoupon(TbCouponRegist tbCouponRegist) {
         CouponRegistApiResponse couponRegistApiResponse = CouponRegistApiResponse.builder()
                 .crIndex(tbCouponRegist.getCrIndex())
-                .crType(tbCouponRegist.getCrType())
-                .crPrice(tbCouponRegist.getCrPrice())
                 .crDesc(tbCouponRegist.getCrDesc())
-                .crStatus(tbCouponRegist.getCrStatus())
                 .crDiscount(tbCouponRegist.getCrDiscount())
                 .crIssuanceDay(tbCouponRegist.getCrIssuanceDay())
                 .crEndDay(tbCouponRegist.getCrEndDay())
-                .crTotCoupon(tbCouponRegist.getCrTotCoupon())
-                .crStockCoupon(tbCouponRegist.getCrStockCoupon())
+                .crStartCode(tbCouponRegist.getCrStartCode())
+                .crLastCode(tbCouponRegist.getCrLastCode())
+                .crType(tbCouponRegist.getCrType())
+                .crStatus(tbCouponRegist.getCrStatus())
                 .crRegdate(tbCouponRegist.getCrRegdate())
                 .build();
         return couponRegistApiResponse;
@@ -158,4 +144,12 @@ public class CouponRegistApiService implements CrudInterface<CouponRegistApiRequ
         return Header.OK(couponRegistApiResponseList, pagination);
     }
 
+    public Header<List<CouponRegistApiResponse>> searchStr(String str) {
+        List<TbCouponRegist> tbCouponRegists = tbCouponRegistRepository.findFirstByCrStartCodeStartingWith(str);
+        List<CouponRegistApiResponse> couponRegistApiResponseList = tbCouponRegists.stream()
+                .map(users -> responseCoupon(users))
+                .collect(Collectors.toList());
+
+        return Header.OK(couponRegistApiResponseList);
+    }
 }

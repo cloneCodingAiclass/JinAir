@@ -105,12 +105,12 @@ $(function () {
         let discount = $('#discount').val();
         let startDate = $('#startDate').val();
         let endDate = $('#endDate').val();
-        let totalcoupon = $('#totalcoupon').val();
-        let crprice = $('#crprice').val();
+        let startCode = $('#startCode').val();
+        let endCode = $('#endCode').val();
         let type = $('#type').val();
 
         text += '<p>' + '타이틀 : ' + title + ' / ' + '<br> 할인율 : ' + discount + "%<br> 기간 : " + startDate + " ~ " + endDate +
-            " <br> 판매 포인트 : " + crprice + "<br> 총 " + totalcoupon + "매의 쿠폰을 발급하겠습니다." + '</p>'
+            " <br> 시작 코드 : " + startCode + "<br> 종료 코드 : " + endCode + "로 쿠폰을 발급하겠습니다." + '</p>'
         //
         // if (title == "" || totalcoupon == "" || discount == "" || startDate == "" || endDate == "" || crprice == "") {
         //     alert('미입력 정보가 있습니다.');
@@ -120,6 +120,7 @@ $(function () {
         //
         // let arr = new Array();
             $('.complete').on('click', function (){
+                // saveAll 용
                 // for(let i = 0; i < totalcoupon; i++){
                 //     // register();
                 //     let arrData = new Object();
@@ -136,6 +137,7 @@ $(function () {
                 //     arr.push(arrData);
                 // }
                 // console.dir(arr);
+
                 register()
             });
         // }
@@ -162,27 +164,24 @@ $(function () {
     // 쿠폰 등록
     function register(){
 
-        type = $('#type').val();
-        crprice = $('#crprice').val();
-        title = $('#title').val();
-        discount = $('#discount').val();
-        startDate = $('#startDate').val() + "T00:00:00";
-        endDate = $('#endDate').val() + "T00:00:00";
-        totalcoupon = $('#totalcoupon').val();
-        crCode = Math.random().toString(36).substr(2,15).toUpperCase();
+        let type = $('#type').val();
+        let title = $('#title').val();
+        let discount = $('#discount').val();
+        let startDate = $('#startDate').val() + "T00:00:00";
+        let endDate = $('#endDate').val() + "T00:00:00";
+        let startCode = $('#startCode').val();
+        let endCode = $('#endCode').val();
 
         let coupon = {
             data : {
                 crType: type,
-                crPrice: crprice,
                 crDesc: title,
                 crDiscount: discount,
                 crIssuanceDay: startDate,
                 crEndDay: endDate,
-                crTotCoupon: totalcoupon,
-                crStockCoupon : totalcoupon,
-                crStatus : "AddCoupon",
-                crCode : crCode
+                crStartCode: startCode,
+                crLastCode : endCode,
+                crStatus : "AddCoupon"
             }
         }
         $.ajax({
