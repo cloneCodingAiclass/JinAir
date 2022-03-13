@@ -417,10 +417,16 @@ $(function () {
         }
         let day = new Date();
 
+        // 코드발급용 nation(출발지) + random
+        let random = Math.floor(Math.random()*100000);
+        let layer = go_layer.split('(');
+        let layer2 = layer[1].split(')');
+        let nation = layer2[0];
+
         let ucType = "일반";
         let ucPrice = necessary;
         let ucDesc = go_layer + " ~ " + arrive_layer;
-        let ucCode = "";
+        let ucCode = nation + random;
         let ucDiscount = 3;
         let ucStartday = day.getFullYear()+"-"+"0"+(day.getMonth()+1)+"-"+day.getDate()+"T00:00:00";
         console.log(ucStartday);
@@ -496,14 +502,17 @@ $(function () {
         $.get("/api/userCoupon/list/" + memIndex, function (response) {
             console.dir(response);
             let coupon;
-            if (response == ""){
+            if (response == "") {
                 coupon = 0;
+            } else {
+                coupon = response + "장";
             }
 
             document.getElementById("coupon").innerHTML = coupon;
-            document.getElementById("resultCoupon").innerHTML = coupon + "개";
+            document.getElementById("resultCoupon").innerHTML = coupon;
         });
     }
+
 });
 
 function hidePopupLayer(){
