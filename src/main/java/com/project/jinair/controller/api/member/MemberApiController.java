@@ -62,4 +62,48 @@ public class MemberApiController implements CrudInterface<MemberApiRequest, Memb
         return memberApiLogicService.reads(id);
     }
 
+    // 이메일로 아이디 찾기
+    @GetMapping("/searchs/{emAdr}/{bthDt}/{mbrLnm}/{mbrFnm}")
+    public Header<MemberApiResponse> searchs(
+            @PathVariable(name = "emAdr") String emAdr,
+            @PathVariable(name = "bthDt") String bthDt,
+            @PathVariable(name = "mbrLnm") String mbrLnm,
+            @PathVariable(name = "mbrFnm") String mbrFnm
+    ) throws InterruptedException {
+        return memberApiLogicService.searchs(emAdr, bthDt, mbrLnm, mbrFnm);
+    }
+    // 휴대폰번호로 아이디 찾기
+    @GetMapping("/searchd/{emAdr}/{bthDt}/{mbrLnm}/{mbrFnm}")
+    public Header<MemberApiResponse> searchd(
+            @PathVariable(name = "emAdr") String emAdr,
+            @PathVariable(name = "bthDt") String bthDt,
+            @PathVariable(name = "mbrLnm") String mbrLnm,
+            @PathVariable(name = "mbrFnm") String mbrFnm
+    ) throws InterruptedException {
+        return memberApiLogicService.searchd(emAdr, bthDt, mbrLnm, mbrFnm);
+    }
+
+    // 이메일로 아이디 찾기
+    @GetMapping("/reads/{emAdr}/{bthDt}/{mbrLnm}/{mbrFnm}/{memUserId}")
+    public Header<MemberApiResponse> reads(
+            @PathVariable(name = "emAdr") String emAdr,
+            @PathVariable(name = "bthDt") String bthDt,
+            @PathVariable(name = "mbrLnm") String mbrLnm,
+            @PathVariable(name = "mbrFnm") String mbrFnm,
+            @PathVariable(name = "memUserId") String memUserId
+    ) throws InterruptedException {
+        return memberApiLogicService.readds(emAdr, bthDt, mbrLnm, mbrFnm,memUserId);
+    }
+    // 휴대폰번호로 아이디 찾기
+    @GetMapping("/readd/{emAdr}/{bthDt}/{mbrLnm}/{mbrFnm}/{memUserId}")
+    public Header<MemberApiResponse> readd(
+            @PathVariable(name = "emAdr") String emAdr,
+            @PathVariable(name = "bthDt") String bthDt,
+            @PathVariable(name = "mbrLnm") String mbrLnm,
+            @PathVariable(name = "mbrFnm") String mbrFnm,
+            @PathVariable(name = "memUserId") String memUserId
+    ) throws InterruptedException {
+        return memberApiLogicService.readd(emAdr, bthDt, mbrLnm, mbrFnm,memUserId);
+    }
+
 }

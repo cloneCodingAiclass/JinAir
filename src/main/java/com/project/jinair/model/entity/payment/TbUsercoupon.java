@@ -1,5 +1,6 @@
 package com.project.jinair.model.entity.payment;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.project.jinair.model.entity.member.TbMember;
 import com.project.jinair.model.enumclass.CouponStatus;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor

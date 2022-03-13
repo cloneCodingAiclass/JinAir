@@ -146,7 +146,7 @@ $(function () {
 
     function register(){
         let apname = document.getElementById("apname").value;
-        let apid = document.getElementById("adid").text;
+        let apid = $("#adid option:checked").text();
         let startdate = document.getElementById("startdate").value + "T08:00:00";
         let departurepoint = document.getElementById("departurepoint").value;
         let starttime = "2000-01-01T" + document.getElementById("starttime").value;

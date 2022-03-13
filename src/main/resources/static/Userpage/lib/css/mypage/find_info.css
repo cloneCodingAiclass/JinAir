@@ -21,6 +21,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    z-index: 9999;
 }
 .modal_title{
     width: 645px;

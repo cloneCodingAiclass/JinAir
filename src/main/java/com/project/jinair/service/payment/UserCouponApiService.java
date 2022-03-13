@@ -2,14 +2,10 @@ package com.project.jinair.service.payment;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.member.TbMember;
-import com.project.jinair.model.entity.payment.TbCouponRegist;
-import com.project.jinair.model.entity.payment.TbPoint;
 import com.project.jinair.model.entity.payment.TbUsercoupon;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.Pagination;
-import com.project.jinair.model.network.request.payment.PointApiRequest;
 import com.project.jinair.model.network.request.payment.UsercouponApiRequest;
-import com.project.jinair.model.network.response.payment.CouponRegistApiResponse;
 import com.project.jinair.model.network.response.payment.UsercouponApiResponse;
 import com.project.jinair.repository.MemberRepository;
 import com.project.jinair.repository.TbPointRepository;
@@ -40,12 +36,10 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
     public Header<UsercouponApiResponse> create(Header<UsercouponApiRequest> request) {
 
         UsercouponApiRequest usercouponApiRequest = request.getData();
-        TbMember tbMember = memberRepository.findByMemIndex(43L);
-
-        String sumPoint = "select sum(p.poPoint) from TbPoint p where p.poUserindex = 43";
-        Long result = (Long) em.createQuery(sumPoint).getSingleResult();
-
+        TbMember tbMember = memberRepository.findByMemIndex(usercouponApiRequest.getUcUserindex());
         Long price = usercouponApiRequest.getUcPrice();
+
+        Long result = (Long) em.createQuery("select sum(p.poPoint) from TbPoint p where p.poUserindex = p.tbMember.memIndex").getSingleResult();
 
         if (result > price){
             TbUsercoupon tbUsercoupon = TbUsercoupon.builder()

@@ -129,12 +129,23 @@ $(function () {
         }
     });
 
-    couponResult(0);
+    let memIndex = $('#memid').val();
 
-    function couponResult(index) {
-        $.get("/api/userCoupon/list/" + index, function (response) {
+    couponResult(memIndex);
+
+    function couponResult(memIndex) {
+        console.log(memIndex);
+        $.get("/api/userCoupon/list/" + memIndex, function (response) {
             console.dir(response);
-            document.getElementById("coupon").innerHTML = response;
+            let coupon;
+            if (response == ""){
+                coupon = 0;
+            }else{
+                coupon = response + "장";
+            }
+
+            document.getElementById("coupon").innerHTML = coupon;
+            document.getElementById("resultCoupon").innerHTML = coupon;
         });
     }
 
@@ -160,9 +171,12 @@ $(function () {
         }
     })
 
-    function couponList(index) {
-        $.get("/api/userCoupon/couponList/" + index, function (response) {
-            console.dir(response)
+    $('#searchbtn').on('click', function (){
+        couponList(memIndex);
+    });
+    function couponList(memIndex) {
+        $.get("/api/userCoupon/couponList/" + memIndex, function (response) {
+            console.dir(response);
 
             pagination = response.pagination;
 
@@ -172,13 +186,15 @@ $(function () {
             // 전체 페이지
             showPage.showPage = pagination.data;
 
-            // 검색 데이터
-            itemList.itemList = response.data;
-
+            if(showPage.totalPages != 0){
+                itemList.itemList = response.data;
+                $('.couponY').css('display', 'flex');
+            }else{
+                itemList.itemList = null;
+                $('.couponN').css('display', 'block');
+            }
         });
     }
-
-
 
 });
 

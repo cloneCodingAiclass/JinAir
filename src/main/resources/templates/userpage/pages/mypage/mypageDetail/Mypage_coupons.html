@@ -17,7 +17,7 @@
     <!--wrap-->
     <div id="wrap">
         <!--header-->
-        <div th:replace="userpage/fragment/menu :: menu"></div>
+        <div th:replace="${loginURL} :: menu"></div>
         <!--header 끝-->
         <!--container-->
         <div id="container">
@@ -50,7 +50,7 @@
                 <div class="coupon_main">
                     <div class="my_coupon">
                         <p>나의 지니 쿠폰</p>
-                        <p>개</p>
+                        <p id="resultCoupon"></p>
                     </div>
                     <div class="add_coupon">
                         <p>쿠폰등록</p>
@@ -95,21 +95,31 @@
                             </p>
                             <p>기간<input type="date" class="item_start_date"><input type="date" class="item_start_date">
                             </p>
-                            <div class="btn">
-                                <input type="button" value="조회" onclick="couponList()">
+                        <div class="btn">
+                                <input type="button" value="조회" id="searchbtn">
                                 <input type="button" value="초기화" class="btn_cancel" onclick="history.back()">
-                            </div>
                         </div>
+                    </div>
                 </div>
-                <div class="resultCoupon" id="itemList" v-if="itemList.pagination.totalElements > 0">
+                <div class="couponY" id="itemList">
                     <tr>
-                        <td>asdasdsaadssdaassadsa</td>
+                        <td>NO</td>
+                        <td>구간</td>
+                        <td>할인율</td>
+                        <td>사용 만료일</td>
+                        <td>사용 여부</td>
                     </tr>
-                    <tr v-for="dto in itemList">
-                        <td> {{dto.ucDesc}} </td>
+                    <template v-for="dto in itemList">
+                    <tr>
+                        <td>{{dto.ucIndex}}</td>
+                        <td>{{dto.ucDesc}}</td>
+                        <td>{{dto.ucDiscount}}</td>
+                        <td>{{dto.ucEndday.substr(0,10)}}</td>
+                        <td>{{dto.ucIsUse}}</td>
                     </tr>
+                    </template>
                 </div>
-                <div class="none_point" v-else>
+                <div class="couponN">
                     <p>+++ 지니쿠폰 내역이 없습니다. +++</p>
                 </div>
                 <div class="footer_info">
@@ -117,7 +127,7 @@
                         <p>쿠폰 사용 안내</p>
                         <p class="subtext">- 지니쿠폰 사용 방법 및 유의사항을 확인하세요.</p>
                     </div>
-                    <input type="button" value="지니쿠폰 안내" onclick="location.href='../../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/promotion/jinicoupon/jiniCoupon.html'">
+                    <input type="button" value="지니쿠폰 안내" onclick="location.href='/pages/index/jiniCoupon'">
                 </div>
             </div>
         </div>

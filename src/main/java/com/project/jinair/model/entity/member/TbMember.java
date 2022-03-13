@@ -1,5 +1,6 @@
 package com.project.jinair.model.entity.member;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.project.jinair.model.entity.board.TbQna;
 import com.project.jinair.model.entity.payment.TbPoint;
 import com.project.jinair.model.entity.payment.TbUsercoupon;
@@ -57,9 +58,9 @@ public class TbMember { // 회원 테이블
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember")
     private List<TbPoint> tbPointList;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember")
-    private List<TbReservation> tbReservationsList;
+//
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember")
+//    private List<TbReservation> tbReservationsList;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember")
     private List<TbUsercoupon> tbUsercouponList;

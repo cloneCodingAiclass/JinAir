@@ -32,7 +32,7 @@ public class PointApiService implements CrudInterface<PointApiRequest, PointApiR
     public Header<PointApiResponse> create(Header<PointApiRequest> request) {
 
         PointApiRequest pointApiRequest = request.getData();
-        TbMember tbMember = memberRepository.findByMemIndex(43L);
+        TbMember tbMember = memberRepository.findByMemIndex(pointApiRequest.getPoUserindex());
 
         TbPoint tbPoint = TbPoint.builder()
                 .poPoint(pointApiRequest.getPoPoint())

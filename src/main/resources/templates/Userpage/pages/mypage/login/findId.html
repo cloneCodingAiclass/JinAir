@@ -30,17 +30,17 @@
                     <table>
                         <tr class="bb">
                             <th>이름</th>
-                            <td>라승*</td>
+                            <td><span th:text="${member.memKorFirstName}+${#strings.substring(member.memKorLastName, 0, #strings.length(member.memKorLastName)-1)}"></span>*</td>
                         </tr>
                         <tr>
                             <th>아이디</th>
-                            <td>SEUNGHYUN**</td>
+                            <td><span th:text="${#strings.toUpperCase(#strings.substring(member.memUserid, 0 , #strings.length(member.memUserid)-2))}"></span>**</td>
                         </tr>
                     </table>
                 </div>
                 <div class="btn">
-                    <input type="button" value="로그인" onclick="location.href='login.html'">
-                    <input type="button" value="메인" onclick="location.href='../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/index.html'">
+                    <input type="button" value="로그인" onclick="location.href='/pages/login'">
+                    <input type="button" value="메인" onclick="location.href='/pages/index'">
                 </div>
             </div>
         </div>

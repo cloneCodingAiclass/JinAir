@@ -1,5 +1,6 @@
 package com.project.jinair.model.network.request.member;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.project.jinair.model.enumclass.GenderStatus;
 import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
 import lombok.AllArgsConstructor;
