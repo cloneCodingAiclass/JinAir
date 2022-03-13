@@ -17,6 +17,7 @@ import java.util.List;
 @Builder
 public class ScheduleApiResponse {
     private Long schIndex;
+    private String schNationType;
     private String schAirplaneId;
     private String schAirplaneName;
     private LocalDateTime schDepartureDate;

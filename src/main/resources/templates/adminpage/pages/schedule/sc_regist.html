@@ -61,13 +61,20 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2">수용 좌석수</td>
+                                        <td>국내/국외</td>
+                                        <td>수용 좌석수</td>
                                         <td colspan="2">비행시간</td>
                                         <td colspan="2">가격</td>
                                         <td>나비포인트</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2"><input type="text" id="resultseat"><input type="text" class="percent" readonly="readonly" value="석"></td>
+                                        <td>
+                                            <select id="nationType">
+                                                <option value="국내" selected>국내</option>
+                                                <option value="국외">국외</option>
+                                            </select>
+                                        </td>
+                                        <td><input type="text" id="resultseat"><input type="text" class="percent" readonly="readonly" value="석"></td>
                                         <td colspan="2"><input type="text" class="timepicker" id="flyingtime"></td>
                                         <td colspan="2"><input type="text" id="price"></td>
                                         <td><input type="text" class="jinipoint" id="point"><input type="text" class="percent" readonly="readonly" value="%"></td>

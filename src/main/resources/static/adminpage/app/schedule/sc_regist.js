@@ -145,6 +145,7 @@ $(function () {
     })
 
     function register(){
+        let nationType = $('#nationType').find('option:selected').val();
         let apname = document.getElementById("apname").value;
         let apid = $("#adid option:checked").text();
         let startdate = document.getElementById("startdate").value + "T08:00:00";
@@ -159,6 +160,7 @@ $(function () {
 
         let schedule = {
             data: {
+                schNationType : nationType,
                 schAirplaneName: apname,
                 schAirplaneId: apid,
                 schDepartureDate: startdate,

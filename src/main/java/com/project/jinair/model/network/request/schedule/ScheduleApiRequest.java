@@ -16,6 +16,7 @@ import java.util.Date;
 @Builder
 public class ScheduleApiRequest {
     private Long schIndex;
+    private String schNationType;
     private String schAirplaneId;
     private String schAirplaneName;
     private String schDepartureDate;

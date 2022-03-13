@@ -27,6 +27,7 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
     public Header<ScheduleApiResponse> create(Header<ScheduleApiRequest> request) {
         ScheduleApiRequest scheduleApiRequest = request.getData();
         TbSchedule tbSchedule = TbSchedule.builder()
+                .schNationType(scheduleApiRequest.getSchNationType())
                 .schAirplaneId(scheduleApiRequest.getSchAirplaneId())
                 .schAirplaneName(scheduleApiRequest.getSchAirplaneName())
                 .schDepartureDate(LocalDateTime.parse(scheduleApiRequest.getSchDepartureDate()))
@@ -70,6 +71,7 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
     private Header<ScheduleApiResponse> response(TbSchedule tbSchedule){
         ScheduleApiResponse scheduleApiResponse = ScheduleApiResponse.builder()
                 .schIndex(tbSchedule.getSchIndex())
+                .schNationType(tbSchedule.getSchNationType())
                 .schAirplaneId(tbSchedule.getSchAirplaneId())
                 .schAirplaneName(tbSchedule.getSchAirplaneName())
                 .schDepartureDate(tbSchedule.getSchDepartureDate())
@@ -87,6 +89,7 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
     private ScheduleApiResponse responseSchedule(TbSchedule tbSchedule) {
         ScheduleApiResponse scheduleApiResponse = ScheduleApiResponse.builder()
                 .schIndex(tbSchedule.getSchIndex())
+                .schNationType(tbSchedule.getSchNationType())
                 .schAirplaneId(tbSchedule.getSchAirplaneId())
                 .schAirplaneName(tbSchedule.getSchAirplaneName())
                 .schDepartureDate(tbSchedule.getSchDepartureDate())
