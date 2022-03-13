@@ -128,6 +128,7 @@
                                         </colgroup>
                                         <tr>
                                             <td>선택</td>
+                                            <td>고객번호</td>
                                             <td>아이디</td>
                                             <td>성명</td>
                                             <td>이메일</td>
@@ -139,14 +140,16 @@
                                         <table>
                                             <colgroup>
                                                 <col width="50">
+                                                <col width="40">
                                                 <col width="100">
-                                                <col width="170">
-                                                <col width="170">
+                                                <col width="150">
+                                                <col width="150">
                                                 <col width="100">
                                                 <col width="150">
                                             </colgroup>
                                             <tr v-for="dto in memList">
-                                                <td><input type="checkbox" name=""><input type="hidden" id="memIndex"></td>
+                                                <td><input type="checkbox" name=""></td>
+                                                <td id="memIndex">{{dto.memIndex}}</td>
                                                 <td>{{dto.memUserid}}</td>
                                                 <td>{{dto.memKorFirstName}}{{dto.memKorLastName}}</td>
                                                 <td>{{dto.memEmail}}</td>
