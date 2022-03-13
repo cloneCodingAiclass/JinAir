@@ -3,8 +3,6 @@
       xmlns:th="http://www.thymeleaf.org/">
 <div th:replace="userpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/userpage/lib/css/reservation/lccpage/lcc.css" />
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="/userpage/app/reservation/lccpage/lcc.js"></script>
 <script src="/userpage/app/reservation/lccpage/lcc_layer.js"></script>
 
@@ -162,15 +160,6 @@
                                                         <a href="javascript://" onclick="submit()">확인</a>
                                                     </div>
                                                 </li>
-                                                <!-- <li>
-                                                    <div class="cnt_age">
-                                                        <a href="#">
-                                                            유/소아 나이
-                                                            계산기
-                                                            <img src="./img/double_right.png" alt="이동" />
-                                                        </a>
-                                                    </div>
-                                                </li> -->
                                             </ul>
                                         </div>
                                     </div>
@@ -185,7 +174,7 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div class="go_layer">
+                                            <div class="go_layer" id="go_layer1">
                                                 <div class="KOR in_bl">
                                                     <h3>한국</h3>
                                                     <ul>
@@ -253,7 +242,7 @@
                                             </div>
                                         </div>
                                         <!-- 도착지 -->
-                                        <div class="arrive_select in_bl">
+                                        <div class="arrive_select in_bl" id="itemList">
                                             <div>
                                                 <p>도착지</p>
                                                 <div class="arrive_layerbtn">
@@ -262,7 +251,7 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div class="arrive_layer">
+                                            <div class="arrive_layer" id="arrive_layer1">
                                                 <div class="KOR in_bl">
                                                     <h3>한국</h3>
                                                     <ul>
@@ -332,22 +321,22 @@
                                     </div>
                                 </div>
                                 <div class="submit_btn">
-                                    <input type="submit" value="조회"/>
+                                    <input type="button" value="조회" id="searchBtn1"/>
                                 </div>
                             </form>
                         </div>
                         <!-- 기본 default 화면 -->
                         <div class="default_box"></div>
                         <!-- 조회 결과 있는 화면 -->
-                        <div class="search_list">
+                        <div class="search_list" id="itemList1">
                             <div class="search_title">
                                 <h3 class="in_bl">가는 여정</h3>
-                                    <span class="subtitle" name="go_select_opt">서울/인천(ICN)</span>
+                                    <span class="subtitle" name="go_select_opt">{{itemList1[0].schDeparturePoint}}</span>
                                     <span class="subtitle to_img"><img src="/userpage/lib/img/right_arrow_icon.png" alt="에서"></span>
-                                    <span class="subtitle" name="go_select_opt">제주(CJU)</span>
+                                    <span class="subtitle" name="go_select_opt">{{itemList1[0].schArrivalPoint}}</span>
                             </div>
-                            <div class="list_table">
-                                <h3>XXXX년 XX월 XX일 스케줄</h3>
+                            <div class="list_table" v-for="dto in itemList1">
+                                <h3>{{dto.schDepartureDate.substr(0,4)}}년 {{dto.schDepartureDate.substr(5,2)}}월 {{dto.schDepartureDate.substr(8,2)}}일 스케줄</h3>
                                 <table>
                                     <thead>
                                         <tr>
@@ -365,41 +354,38 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <span>LJ325 | 직항</span>
+                                                <span>{{dto.schAirplaneId}} | 직항</span>
                                                 <p class="airport_text">
-                                                    <span>서울/김포(GMP)</span>
+                                                    <span>{{dto.schDeparturePoint}}</span>
                                                     <img src="/userpage/lib/img/right_arrow_icon.png" alt="에서">
-                                                    <span>제주(CJU)</span>
+                                                    <span>{{dto.schArrivalPoint}}</span>
                                                 </p>
-                                                <span class="small_font">비행시간 02:00</span>
+                                                <span class="small_font">비행시간 {{dto.schFlyingTime.substr(11,5)}}</span>
                                             </td>
                                             <td>
-                                                <span class="time_span">17:35</span>
-                                                <p class="small_font">(GMP)</p>
+                                                <span class="time_span">{{dto.schStartTime.substr(11,5)}}</span>
+                                                <p class="small_font">{{dto.schDeparturePoint.substr(-5,5)}}</p>
                                             </td>
                                             <td>
-                                                <span class="time_span">19:35</span>
-                                                <p class="small_font">(CJU)</p>
+                                                <span class="time_span">{{dto.schArrivalDate.substr(11,5)}}</span>
+                                                <p class="small_font">{{dto.schArrivalPoint.substr(-5,5)}}</p>
                                             </td>
                                             <td>
                                                 <button>
                                                     <p class="small_font">KRW</p>
-                                                    <strong>14900</strong>
-                                                    <p class="seat_p">잔여석 6석!</p>
+                                                    <strong>{{(dto.schBasicPrice+"").substr(0,((dto.schBasicPrice+"").length-3))}},{{(dto.schBasicPrice+"").substr(-3,3)}}</strong>
                                                 </button>
                                             </td>
                                             <td>
                                                 <button>
                                                     <p class="small_font">KRW</p>
-                                                    <strong>26900</strong>
-                                                    <p class="seat_p">잔여석 2석!</p>
+                                                    <strong>{{((dto.schBasicPrice+12000)+"").substr(0,(((dto.schBasicPrice+12000)+"").length-3))}},{{((dto.schBasicPrice+12000)+"").substr(-3,3)}}</strong>
                                                 </button>
                                             </td>
                                             <td>
                                                 <button>
                                                     <p class="small_font">KRW</p>
-                                                    <strong>65900</strong>
-                                                    <p class="seat_p">잔여석 9석!</p>
+                                                    <strong>{{((dto.schBasicPrice+51000)+"").substr(0,(((dto.schBasicPrice+51000)+"").length-3))}},{{((dto.schBasicPrice+51000)+"").substr(-3,3)}}</strong>
                                                 </button>
                                             </td>
                                         </tr>
@@ -521,14 +507,14 @@
                                 </div>
                             </div>
                         <div class="submit_btn">
-                            <input type="submit" value="조회" />
+                            <input type="submit" value="조회" id="searchBtn2"/>
                         </div>
                         </form>
                     </div>
                     <!-- 기본 default 화면 -->
                     <div class="default_box"></div>
                     <!-- 조회 결과 있는 화면 -->
-                    <div class="search_list">
+                    <div class="search_list" id="itemList2">
                         <div class="search_title">
                             <h3 class="in_bl">가는 여정</h3>
                             <span class="subtitle" name="go_select_opt">서울/인천(ICN)</span>

@@ -16,5 +16,7 @@ public interface TbScheduleRepository extends JpaRepository<TbSchedule, Long> {
     List<TbSchedule> findBySchAirplaneIdAndSchDepartureDate(String schAirplaneId, LocalDateTime schDepartureDate);
     List<TbSchedule> findBySchAirplaneId(String schAirplaneId);
     List<TbSchedule> findBySchAirplaneIdAndSchDeparturePointAndSchArrivalPoint(String schAirplaneId, String schDeparturePoint, String schArrivalPoint);
+    List<TbSchedule> findBySchDeparturePoint(String schDeparturePoint);
+    List<TbSchedule> findFirstBySchDeparturePointAndSchArrivalPointAndSchDepartureDateGreaterThanOrderBySchBasicPriceAsc(String schDeparturePoint, String schArrivalPoint, LocalDateTime schStartTime);
 
 }

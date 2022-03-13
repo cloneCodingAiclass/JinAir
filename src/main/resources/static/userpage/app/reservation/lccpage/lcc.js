@@ -102,8 +102,8 @@ $(() => {
         $('.search_list').css('display','none');
     })
     // 최저가 조회
-    $('.submit_btn').on('click', function () {
-        $('.search_list').css('display','block');
+    $('#searchBtn1').on('click', function () {
+        $('#itemList1').css('display','block');
     })
 
     //맞춤
@@ -122,8 +122,8 @@ $(() => {
         $('.search_list').css('display','none');
     })
     //맞춤
-    $('.submit_btn').on('click', function () {
-        $('.search_list').css('display','block');
+    $('#searchBtn2').on('click', function () {
+        $('#itemList2').css('display','block');
     })
 
     //지금 이순간
@@ -143,3 +143,58 @@ $(() => {
     })
 })
 
+
+$(() => {
+
+    let itemList = new Vue({
+        el : '#itemList',
+        data : {
+            itemList : {}
+        },
+        methods:{
+        }
+    });
+
+    $('#go_layer1').children().find('a').on('click', function (){
+        searchStart($(this).html());
+    })
+    function searchStart(schDeparturePoint){
+        $.post({
+            url: "/api/schedule/Departure",
+            data: "schDeparturePoint=" + schDeparturePoint,
+            dataType: "text",
+            success: function (response) {
+                let dataJson = JSON.parse(response)
+                itemList.itemList = dataJson.data;
+            }
+        })
+    }
+
+    let itemList1 = new Vue({
+        el : '#itemList1',
+        data : {
+            itemList1 : {}
+        },
+        methods:{
+        }
+    });
+
+    $('#searchBtn1').on('click', function (){
+        search($('.go_select_optt').val(), $('.arrive_select_optt').val());
+    })
+    function search(schDeparturePoint, schArrivalPoint){
+        $.post({
+            url: "/api/schedule/DepAri",
+            data: "schDeparturePoint=" + schDeparturePoint + "&schArrivalPoint=" + schArrivalPoint,
+            dataType: "text",
+            success: function (response) {
+                let dataJson = JSON.parse(response)
+                itemList1.itemList1 = dataJson.data;
+                console.log(itemList1.itemList1);
+            }
+        })
+    }
+
+
+
+})

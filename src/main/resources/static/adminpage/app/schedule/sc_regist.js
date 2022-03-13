@@ -139,7 +139,7 @@ $(function () {
 
         })
     }
-    $("#adid").change(function (){
+    $("#apname").change(function (){
         let seat = $(this).val();
         $("#resultseat").val(seat);
     })
@@ -189,4 +189,6 @@ $(function () {
         register();
         location.href='/pages/admin/scheduleList';
     })
+
+
 });

@@ -231,6 +231,18 @@ $(function() {
     });
 });
 
+$(() => {
+    document.getElementById('start_date').valueAsDate = new Date();
+});
+
+$(()=> {
+    $('#no_answer').on('change', function(){
+        if($('#no_answer').is(":checked")){
+            $("#hiddenTrue").remove();
+        }
+    });
+});
+
 $(function() {
     $(".btnTypeA").click(function(){
         $('.mkt_modal').fadeOut();
