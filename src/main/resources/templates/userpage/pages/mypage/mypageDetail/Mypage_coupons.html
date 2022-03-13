@@ -95,13 +95,13 @@
                             </p>
                             <p>기간<input type="date" class="item_start_date"><input type="date" class="item_start_date">
                             </p>
-                            <div class="btn">
+                        <div class="btn">
                                 <input type="button" value="조회" id="searchbtn">
                                 <input type="button" value="초기화" class="btn_cancel" onclick="history.back()">
-                            </div>
                         </div>
+                    </div>
                 </div>
-                <div class="resultCoupon" id="itemList" v-if="itemList != ``">
+                <div class="couponY" id="itemList">
                     <tr>
                         <td>NO</td>
                         <td>구간</td>
@@ -109,15 +109,17 @@
                         <td>사용 만료일</td>
                         <td>사용 여부</td>
                     </tr>
-                    <tr v-for="dto in itemList">
-                        <td> {{dto.ucIndex}} </td>
-                        <td> {{dto.ucDesc}} </td>
-                        <td> {{dto.ucDiscount}} </td>
-                        <td> {{dto.ucEndday}} </td>
-                        <td> {{dto.ucIsUse}} </td>
+                    <template v-for="dto in itemList">
+                    <tr>
+                        <td>{{dto.ucIndex}}</td>
+                        <td>{{dto.ucDesc}}</td>
+                        <td>{{dto.ucDiscount}}</td>
+                        <td>{{dto.ucEndday.substr(0,10)}}</td>
+                        <td>{{dto.ucIsUse}}</td>
                     </tr>
+                    </template>
                 </div>
-                <div class="none_point" v-else>
+                <div class="couponN">
                     <p>+++ 지니쿠폰 내역이 없습니다. +++</p>
                 </div>
                 <div class="footer_info">

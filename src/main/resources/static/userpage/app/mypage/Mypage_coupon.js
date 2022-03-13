@@ -140,10 +140,12 @@ $(function () {
             let coupon;
             if (response == ""){
                 coupon = 0;
+            }else{
+                coupon = response + "장";
             }
 
             document.getElementById("coupon").innerHTML = coupon;
-            document.getElementById("resultCoupon").innerHTML = coupon + "개";
+            document.getElementById("resultCoupon").innerHTML = coupon;
         });
     }
 
@@ -186,8 +188,10 @@ $(function () {
 
             if(showPage.totalPages != 0){
                 itemList.itemList = response.data;
+                $('.couponY').css('display', 'flex');
             }else{
                 itemList.itemList = null;
+                $('.couponN').css('display', 'block');
             }
         });
     }

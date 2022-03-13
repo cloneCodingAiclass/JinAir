@@ -418,7 +418,7 @@ body{
     !important;
 }
 .Sicon .faceb {
-    background-image: url('/userpage/lib/imgg/face.png');
+    background-image: url('/userpage/lib/img/face.png');
     background-size: 50%;    opacity: 0.8;
     margin-left: 4px
 }
@@ -861,7 +861,25 @@ body{
     cursor: pointer;
 }
 /* 쿠폰 사용 안내 */
-.none_point{
+.couponY{
+    display: none;
+    margin: 30px 0;
+    padding: 60px 0;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.couponY tr{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.couponN{
+    display: none;
     margin: 30px 0;
     padding: 60px 0;
     border-top: 1px solid black;
@@ -903,7 +921,6 @@ body{
     cursor: pointer;
 }
 /* 포인트 */
-
 .mypoint{
     display: flex;
     flex-direction: column;
