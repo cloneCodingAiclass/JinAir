@@ -207,6 +207,7 @@ $(function () {
         searchUserid($('#userid').val());
     })
 
+    // 인덱스 값을 못 뽑아옴
     $('#updatePoint').on('click', function (){
         console.log($('#memIndex').val())
     })
