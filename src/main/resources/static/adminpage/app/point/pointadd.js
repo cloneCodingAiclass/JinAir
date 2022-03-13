@@ -182,8 +182,7 @@ $(function () {
             dataType : 'text',
             success : function (response){
                 console.dir(response)
-                let dataJson = JSON.parse(response)
-                memList.memList = dataJson.data;
+                memList.memList = response.data;
             }
         })
     }

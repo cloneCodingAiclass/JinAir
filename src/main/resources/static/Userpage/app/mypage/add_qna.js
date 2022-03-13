@@ -85,16 +85,16 @@ $(function () {
     })
 
     $('.btn_agree').click(function(e){
-        $('.covid_info').fadeOut(200);  
-        $('body').css('overflow', '');        
-        e.stopPropagation();  
+        $('.covid_info').fadeOut(200);
+        $('body').css('overflow', '');
+        e.stopPropagation();
     });
     $('.close').click(function(e){
-        $('.covid_info').fadeOut(200);  
-        $('body').css('overflow', '');        
-        e.stopPropagation();  
+        $('.covid_info').fadeOut(200);
+        $('body').css('overflow', '');
+        e.stopPropagation();
     });
-    
+
     $(window).scroll(function() {
         if($(this).scrollTop() > 90) {
             $(".mypage_menu").css("position", "fixed");
@@ -113,7 +113,7 @@ $(function () {
     filebox.addEventListener('dragover', function(e){
         e.preventDefault;
         let vaild = e.dataTransfer.types.indexOf('Files') >= 0;
-        if(!vaild){        
+        if(!vaild){
             this.style.backgroundColor = 'lightred';
         }else{
             this.style.backgroundColor = 'lightgray';
@@ -129,7 +129,7 @@ $(function () {
         console.dir(e.dataTransfer);
 
         let data = e.dataTransfer.files[0];
-        console.dir(data);        
+        console.dir(data);
     })
 
     $('#file_add').on('change', function(){

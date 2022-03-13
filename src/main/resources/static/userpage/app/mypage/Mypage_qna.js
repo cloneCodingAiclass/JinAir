@@ -87,7 +87,7 @@ $(function () {
         $('.pwcheck_modal').css('display', 'flex');
         $('.pwcheck_modal').fadeIn(200);
         $('body').css('overflow', 'hidden');
-        
+
         $('.btn_cancel').click(function(e){
             $('.pwcheck_modal').fadeOut(200);
             $('body').css('overflow', '');
