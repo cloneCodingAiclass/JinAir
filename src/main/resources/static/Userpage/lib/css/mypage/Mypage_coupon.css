@@ -971,3 +971,6 @@ body{
     align-items: center;
     justify-content: center;
 }
+#codeNum{
+    text-transform: uppercase;
+}

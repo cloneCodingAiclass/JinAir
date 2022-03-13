@@ -1,6 +1,7 @@
 <html lang="ko"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org/">
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-vind="http://www.w3.org/1999/xhtml">
 <!-- head.html -->
 <div th:replace="userpage/fragment/head :: head"></div>
     <link rel="stylesheet" href="/userpage/lib/css/mypage/faq_list.css">
@@ -56,19 +57,19 @@
                                 <th scope="col">제목</th>
                             </tr>
                         </thead>
-                        <tbody v-for="(faq, index) in listFaq" :key="index">
+                        <tbody v-for="(faq, i) in listFaq" :key="i">
                             <tr >
                                 <td>{{faq.faqIndex}}</td>
                                 <td>{{faq.faqType}}</td>
                                 <td class="al">
                                     <p class="question">
-                                        <a onclick="showFaq(this);" :index="index">{{faq.faqTitle}}</a>
+                                        <a href="#faq1" onclick="showFaq(this);" >{{faq.faqTitle}}</a>
 
                                     </p>
                                 </td>
                             </tr>
-                            <tr class="tr_answer">
-                                <td colspan="3" class="td_answer" :index="index">{{faq.faqContent}}<button onclick="closeFaq(this);">닫기</button>
+                            <tr class="tr_answer" >
+                                <td colspan="3" class="td_answer" v-vind:id="'faq'+i">{{faq.faqContent}}
                                 </td>
 
                             </tr>

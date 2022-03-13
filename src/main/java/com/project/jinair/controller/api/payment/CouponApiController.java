@@ -58,5 +58,8 @@ public class CouponApiController implements CrudInterface<CouponRegistApiRequest
         return couponRegistApiService.searchList(a, pageable);
     }
 
-
+    @GetMapping("/searchStr/{str}")
+    public Header<List<CouponRegistApiResponse>> searchStr(@PathVariable String str){
+        return couponRegistApiService.searchStr(str);
+    }
 }

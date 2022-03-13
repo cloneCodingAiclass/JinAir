@@ -2,6 +2,7 @@ package com.project.jinair.service.payment;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.member.TbMember;
+import com.project.jinair.model.entity.payment.TbCouponRegist;
 import com.project.jinair.model.entity.payment.TbUsercoupon;
 import com.project.jinair.model.enumclass.CouponStatus;
 import com.project.jinair.model.network.Header;
@@ -9,7 +10,7 @@ import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.payment.UsercouponApiRequest;
 import com.project.jinair.model.network.response.payment.UsercouponApiResponse;
 import com.project.jinair.repository.MemberRepository;
-import com.project.jinair.repository.TbPointRepository;
+import com.project.jinair.repository.TbCouponRegistRepository;
 import com.project.jinair.repository.TbUsercouponRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -28,9 +29,8 @@ import java.util.stream.Collectors;
 public class UserCouponApiService implements CrudInterface<UsercouponApiRequest, UsercouponApiResponse> {
 
     private final TbUsercouponRepository tbUsercouponRepository;
-    private final TbPointRepository tbPointRepository;
-    private final PointApiService pointApiService;
     private final MemberRepository memberRepository;
+    private final TbCouponRegistRepository tbCouponRegistRepository;
     @PersistenceContext
     private EntityManager em;
 
@@ -50,7 +50,7 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
                     .ucType(usercouponApiRequest.getUcType())
                     .ucPrice(usercouponApiRequest.getUcPrice())
                     .ucDesc(usercouponApiRequest.getUcDesc())
-                    .ucCode(usercouponApiRequest.getUcCode() + usercouponApiRequest.getUcIndex())
+                    .ucCode(usercouponApiRequest.getUcCode())
                     .ucDiscount(usercouponApiRequest.getUcDiscount())
                     .ucStartday(LocalDateTime.parse(usercouponApiRequest.getUcStartday()))
                     .ucEndday(LocalDateTime.parse(usercouponApiRequest.getUcEndday()))
@@ -113,7 +113,7 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
                 .ucType(tbUsercoupon.getUcType())
                 .ucPrice(tbUsercoupon.getUcPrice())
                 .ucDesc(tbUsercoupon.getUcDesc())
-                .ucCode(tbUsercoupon.getUcCode() + tbUsercoupon.getUcIndex())
+                .ucCode(tbUsercoupon.getUcCode())
                 .ucDiscount(tbUsercoupon.getUcDiscount())
                 .ucStartday(tbUsercoupon.getUcStartday())
                 .ucEndday(tbUsercoupon.getUcEndday())
@@ -153,5 +153,24 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
                 .build();
         return Header.OK(usercouponApiResponseList, pagination);
     }
+
+    public List<UsercouponApiResponse> promotionCoupon(Header<UsercouponApiRequest> request){
+        UsercouponApiRequest usercouponApiRequest = request.getData();
+        String code = usercouponApiRequest.getUcCode();
+        String str = code.replaceAll("[^0-9]", "");
+
+        List<TbUsercoupon> usercouponApiResponseList = tbUsercouponRepository.findFirstByUcCode(usercouponApiRequest.getUcCode());
+
+
+
+
+
+//        if(usercouponApiResponseList == null){
+//            TbUsercoupon tbUsercoupon = TbUsercoupon.builder()
+//
+//        }
+        return null;
+    }
+
 
 }
