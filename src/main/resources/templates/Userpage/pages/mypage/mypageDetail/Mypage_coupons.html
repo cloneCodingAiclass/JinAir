@@ -22,7 +22,7 @@
         <!--container-->
         <div id="container">
             <input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
-            <div class="mypage_main">
+            <div class="mypage_main" id="itemList">
                 <div class="mypage_menu">
                     <p>마이<br>페이지</p>
                     <ul>
@@ -86,14 +86,12 @@
                 <div class="srh_container">
                     <div class="srh_box">
                             <p>구분
-                                <select name="사용가능" id="">
-                                    <option value="전체">전체</option>
-                                    <option value="사용가능">사용가능</option>
-                                    <option value="사용완료">사용완료</option>
-                                    <option value="사용만료">사용만료</option>
+                                <select name="사용가능" id="enumid">
+                                    <option>Unused</option>
+                                    <option>Used</option>
                                 </select>
                             </p>
-                            <p>기간<input type="date" class="item_start_date"><input type="date" class="item_start_date">
+                            <p>기간<input type="date" class="item_date" id="startDate"><input type="date" class="item_start_date" id="endDate">
                             </p>
                         <div class="btn">
                                 <input type="button" value="조회" id="searchbtn">
@@ -101,23 +99,37 @@
                         </div>
                     </div>
                 </div>
-                <div class="couponY" id="itemList">
+                <div class="couponY">
+                    <table>
+                        <colgroup>
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
+                        </colgroup>
+                        <thead>
                     <tr>
-                        <td>NO</td>
-                        <td>구간</td>
-                        <td>할인율</td>
-                        <td>사용 만료일</td>
-                        <td>사용 여부</td>
+                        <td scope="col">NO</td>
+                        <td scope="col">구간</td>
+                        <td scope="col">할인율</td>
+                        <td scope="col">사용 만료일</td>
+                        <td scope="col">사용 여부</td>
                     </tr>
-                    <template v-for="dto in itemList">
-                    <tr>
+                        </thead>
+                        <tbody>
+                    <tr v-for="dto in itemList">
                         <td>{{dto.ucIndex}}</td>
                         <td>{{dto.ucDesc}}</td>
-                        <td>{{dto.ucDiscount}}</td>
+                        <td>{{dto.ucDiscount}}%</td>
                         <td>{{dto.ucEndday.substr(0,10)}}</td>
                         <td>{{dto.ucIsUse}}</td>
                     </tr>
-                    </template>
+                        </tbody>
+                    </table>
+                    <div id="showPage">
+
+                    </div>
                 </div>
                 <div class="couponN">
                     <p>+++ 지니쿠폰 내역이 없습니다. +++</p>
