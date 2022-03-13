@@ -83,7 +83,7 @@ $(function () {
         e.stopPropagation();
         $('.modal').fadeOut(200);
     })
-    
+
     $(document).ready(function(){
         // 퀵 faq 선택시 색 변환
         $('.quick_faq > ul > li').click(function(e){
@@ -91,11 +91,177 @@ $(function () {
             $('.quick_faq > ul > li').not(this).removeClass('check');
         });
     });
-    
+
 });
 
 function showFaq(obj){
-    $('.tr_answer').css("display", "");
+    $(".td_answer").css("display", "table-cell");
     let target = $(obj).attr("href");
-    $(target).add($(target).find("td")).toggle();
+    $(target).add($(target).find("index")).toggle();
 }
+function closeFaq(obj){
+    $(".td_answer").css("display", "none");
+    let target = $(obj).attr("href");
+    $(target).add($(target).find("index")).toggle();
+}
+
+    // $("#faq1").click(function (){
+    //     if($(".tr_answer").css("display")== "none")
+    //     {
+    //         $(this).next(".tr_answer").toggle();
+    //     }else {
+    //         $(this).next(".tr_answer").toggle();
+    //     }
+    // });
+
+
+
+(function ($){
+    // 리스트 출력
+    let listFaq = new Vue({
+        el : '#listFaq',
+        data : {
+            listFaq : {}
+        }
+    })
+
+    let faqSet1 = new Vue({
+        el : '#faqSet1',
+        data : {
+            faqSet1 : {}
+        },
+        methods: {
+            faqSet1: function (faqType){
+                return this.faqSet1.filter(function (board){
+                    return board.faqType == faqType;
+                });
+            }
+        }
+
+    });
+    let faqSet2 = new Vue({
+        el : '#faqSet2',
+        data : {
+            faqSet2 : {}
+        },
+        methods: {
+            faqSet2: function (faqType){
+                return this.faqSet2.filter(function (board){
+                    return board.faqType == faqType;
+                });
+            }
+        }
+
+    });
+    let faqSet3 = new Vue({
+        el : '#faqSet3',
+        data : {
+            faqSet3 : {}
+        },
+        methods: {
+            faqSet3: function (faqType){
+                return this.faqSet3.filter(function (board){
+                    return board.faqType == faqType;
+                });
+            }
+        }
+    });
+    let faqSet4 = new Vue({
+        el : '#faqSet4',
+        data : {
+            faqSet4 : {}
+        },
+        methods: {
+            faqSet4: function (faqType){
+                return this.faqSet4.filter(function (board){
+                    return board.faqType == faqType;
+                });
+            }
+        }
+    });
+    let faqSet5 = new Vue({
+        el : '#faqSet5',
+        data : {
+            faqSet5 : {}
+        },
+        methods: {
+            faqSet5: function (faqType){
+                return this.faqSet5.filter(function (board){
+                    return board.faqType == faqType;
+                });
+            }
+        }
+    });
+
+
+    let pagination = {
+        totalPages : 0,
+        totalElements : 0,
+        currentPage : 0,
+        currentElements : 0
+    };
+
+
+
+    let showPage = new Vue({
+        el : '#showPage',
+        data : {
+            totalPages : {},
+            currentPage : {}
+        }
+    })
+
+    list(0);
+
+    function list(page){
+        $.get("/api/faq/list?page="+page, function(response){
+
+            pagination = response.pagination;
+
+            showPage.totalPages = pagination.totalPages;
+            showPage.currentPage = pagination.currentPage;
+
+            // 전체 페이지
+            showPage.showPage = pagination.data;
+            listFaq.listFaq = response.data;
+            faqSet1.faqSet1 = response.data;
+            faqSet2.faqSet2 = response.data;
+            faqSet3.faqSet3 = response.data;
+            faqSet4.faqSet4 = response.data;
+            faqSet5.faqSet5 = response.data;
+
+            console.dir(listFaq);
+            console.dir(pagination);
+
+
+            let url = "";
+            let NumberPage = 0;
+            let last = showPage.totalPages;
+
+            for (NumberPage; NumberPage < last; NumberPage++){
+                url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
+            }
+            document.getElementById("button").innerHTML = url;
+
+            $(".pageButton").on('click', function (){
+                page = $(this).attr("id");
+                list(page);
+            })
+        })
+    };
+
+    $('#searchFaq').on('click', function (){
+        searchFaq($('#searchText').val());
+        if ( $('#searchText').val().length == 0){
+            alert('검색어를 확인해주세요.');
+        }
+    });
+
+    console.dir(faqSet1);
+
+
+
+
+
+})(jQuery);
+

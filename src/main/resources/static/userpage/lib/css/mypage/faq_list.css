@@ -148,7 +148,7 @@ body{
 }
 #header .login > li .lang_img{
     display: inline-block;
-    background: url('/userpage/lib/img/down.png') no-repeat right;
+    background: url('/Userpage/lib/img/down.png') no-repeat right;
     background-size: 13px;
     width: 13px;
     height: 13px;
@@ -614,7 +614,7 @@ body{
     font-weight: 600;
     font-size: 1rem;
 }
-.srh_faq input[type="submit"]{
+.srh_faq input[type="button"]{
     width: 150px;
     height: 40px;
     background-color:#BDD600;
@@ -652,17 +652,19 @@ table .question{
 table .question a{
     padding-left: 60px;
 }
-table .tr_answer{
+table .td_answer{
+    width: 100%;
     display: none;
     height: auto;
     vertical-align: inherit;
     border-color: inherit;
+    text-align: left;
+    background: #f7f7f6;
+    padding: 50px 40px 50px 40px;
+    color: #555;
 }
-textarea{
-    width: 100%;
-    height: 100%;
-    padding: 20px 20px;
-}
+
+
 
 .info_main{
     width: 100%;
@@ -737,4 +739,37 @@ textarea{
     font-weight: 700;
     text-align: center;
     line-height: 1.2rem;
+}
+
+
+/* 페이지 버튼 css */
+#button{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#button .pageButton{
+    width: 20px;
+    height: 20px;
+    border: 1px solid #888888;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+    background-color: #F2F2F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    font-weight: 700;
+    font-size: 15px;
+    border-collapse: collapse;
+}
+
+#button .pageButton:hover{
+    background-color: rgb(124,0,72);
+    color: white;
+    cursor: pointer;
+}
+
+.buttonList{
+    width: 100%;
 }

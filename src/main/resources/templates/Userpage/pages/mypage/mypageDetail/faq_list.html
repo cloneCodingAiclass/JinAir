@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="/userpage/lib/css/mypage/faq_list.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="/userpage/app/mypage/faq_list.js"></script>
-    <link rel="stylesheet" href="/UserPage/quickmenu/quickmenu.css">    
+    <link rel="stylesheet" href="/UserPage/quickmenu/quickmenu.css">
     <script src="/UserPage/quickmenu/quickmenu.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <body>
     <ul class=" skipnavi">
         <!--책갈피 역할-->
@@ -17,7 +17,7 @@
     <!--wrap-->
     <div id="wrap">
         <!--header-->
-        <div th:replace="userpage/fragment/menu :: menu"></div>
+        <div th:replace="${loginURL} :: menu"></div>
         <!--header 끝-->
         <!--container-->
         <div id="container">
@@ -38,58 +38,45 @@
                 </div>
                 <div class="srh_faq">
                     <form action="#" method="get">
-                        <input type="text" placeholder="전체 FAQ에서 검색합니다.">
-                        <input type="submit" value="검색">
+                        <input type="text" placeholder="전체 FAQ에서 검색합니다." id="searchText">
+                        <input type="button" value="검색" id="searchFaq">
                     </form>
                 </div>
-                <table class="faqlist">
-                    <colgroup>
-                        <col width="10%">
-                        <col width="18%">
-                        <col width="">
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th scope="col">번호</th>
-                            <th scope="col">상세분류</th>
-                            <th scope="col">제목</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>2</td>
-                            <td>항공권 예매</td>
-                            <td class="al">
-                                <p class="question">
-                                    <a href="#faq1" onclick="showFaq(this);">코로나지만 해외로 출국하려고 하는데 국가별 출입국 제한사항을 알고
-                                        싶어요.</a>
-                                </p>
-                            </td>
-                        </tr>
-                        <tr id="faq1" class="tr_answer">
-                            <td colspan="3">
-                                <textarea name="td_anwser" class="td_anwser"
-                                    disabled>asdasdasdasd</textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>항공권 예매</td>
-                            <td class="al">
-                                <p class="question">
-                                    <a href="#faq2" onclick="showFaq(this);">코로나지만 해외로 출국하려고 하는데 국가별 출입국 제한사항을 알고
-                                        싶어요.</a>
-                                </p>
-                            </td>
-                        </tr>
-                        <tr id="faq2" class="tr_answer">
-                            <td colspan="3">
-                                <textarea name="td_anwser" class="td_anwser"
-                                    disabled>aehrhaerthre</textarea>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div id="board">
+                    <table class="faqlist" id="listFaq">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="18%">
+                            <col width="">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th scope="col">번호</th>
+                                <th scope="col">상세분류</th>
+                                <th scope="col">제목</th>
+                            </tr>
+                        </thead>
+                        <tbody v-for="(faq, index) in listFaq" :key="index">
+                            <tr >
+                                <td>{{faq.faqIndex}}</td>
+                                <td>{{faq.faqType}}</td>
+                                <td class="al">
+                                    <p class="question">
+                                        <a onclick="showFaq(this);" :index="index">{{faq.faqTitle}}</a>
+
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr class="tr_answer">
+                                <td colspan="3" class="td_answer" :index="index">{{faq.faqContent}}<button onclick="closeFaq(this);">닫기</button>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div id="button"> </div>
                 <div class="info_main">
                     <div class="footer_text">
                         <p>더 궁금한 사항이 있으신가요?</p>
@@ -133,6 +120,7 @@
                 </div>
             </div>
         </div>
+    </div>
     <!--container 끝-->
     <!-- 푸터-->
     <div th:replace="userpage/fragment/footer :: footer"></div>
@@ -140,37 +128,12 @@
     </div>
     <!--wrap 끝-->
     <!--퀵 메뉴-->
-    <div class="quickmanu">
-        <div class="quickmanuwrapper">
-            <a href="/index.html">
-                <div class="quick1 quickbox">예약하기</div>
-            </a>
-            <a href="/UserPage/index/mypage/Mypage_main.html">
-                <div class="quick2 quickbox">예약조회</div>
-            </a>
-            <a href="/UserPage/reservation/flight_info/flight.html">
-                <div class="quick3 quickbox">출도작 조회</div>
-            </a>
-            <a href="/UserPage/reservation/LCCpage/lcc.html">
-                <div class="quick4 quickbox">최저가 조회</div>
-            </a>
-            <a href="/UserPage/index/mypage/Mypage_point.html">
-                <div class="quick5 quickbox">마이포인트</div>
-            </a>
-            <a href="/UserPage/index/mypage/faq_list.html">
-                <div class="quick6 quickbox">FAQ</div>
-            </a>
-            <a href="/UserPage/index/mypage/add_qna.html">
-                <div class="quick7 quickbox">고객의 말씀</div>
-            </a>
-            <a href="#" class="quick_topback">
-                <div class="quicktop">TOP</div>
-            </a>
-        </div>
-    </div>
+    <div th:replace="userpage/fragment/quickmenu :: quickmenu"></div>
     <!--퀵 메뉴 끝-->
     <div class="modal">
     </div>
-    </body>
+</body>
+<script src="/Userpage/app/mypage/faq_list.js"></script>
+
 
 </html>
