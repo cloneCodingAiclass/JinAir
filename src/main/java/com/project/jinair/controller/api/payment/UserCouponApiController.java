@@ -1,6 +1,7 @@
 package com.project.jinair.controller.api.payment;
 
 import com.project.jinair.ifs.CrudInterface;
+import com.project.jinair.model.enumclass.CouponStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.payment.UsercouponApiRequest;
 import com.project.jinair.model.network.response.payment.CouponRegistApiResponse;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -55,9 +57,10 @@ public class UserCouponApiController implements CrudInterface<UsercouponApiReque
     }
 
 
-    @GetMapping("/couponList/{id}")
-    public Header<List<UsercouponApiResponse>> searchList(@PathVariable(name = "id") Long id, @PageableDefault(size = 5, sort = {"ucUserindex"}, direction = Sort.Direction.DESC) Pageable pageable) {
-        return userCouponApiService.searchList(id, pageable);
+    @GetMapping("/couponList/{id}/{enumid}/{startDate}/{endDate}")
+    public Header<List<UsercouponApiResponse>> searchList(@PathVariable(name = "id") Long id, @PathVariable(name = "enumid") CouponStatus enumid, @PathVariable(name = "startDate") String startDate, @PathVariable(name = "endDate") String endDate, @PageableDefault(size = 5, sort = {"ucUserindex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+
+        return userCouponApiService.searchList(id, enumid, startDate, endDate, pageable);
     }
 
     // 쿠폰 합계 전달

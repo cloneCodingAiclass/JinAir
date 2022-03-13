@@ -138,9 +138,9 @@ $(function () {
         $.get("/api/userCoupon/list/" + memIndex, function (response) {
             console.dir(response);
             let coupon;
-            if (response == ""){
+            if (response == "") {
                 coupon = 0;
-            }else{
+            } else {
                 coupon = response + "장";
             }
 
@@ -150,32 +150,42 @@ $(function () {
     }
 
     let pagination = {
-        totalPages : 0,
-        totalElements : 0,
-        currentPage : 0,
-        currentElements : 0
+        totalPages: 0,
+        totalElements: 0,
+        currentPage: 0,
+        currentElements: 0
     };
 
     let showPage = new Vue({
-        el : '#showPage',
-        data : {
-            totalPages : {},
-            currentPage : {}
+        el: '#showPage',
+        data: {
+            totalPages: {},
+            currentPage: {}
         }
     });
 
     let itemList = new Vue({
-        el : '#itemList',
-        data : {
-            itemList : {}
+        el: '#itemList',
+        data: {
+            itemList: {}
         }
     })
 
-    $('#searchbtn').on('click', function (){
-        couponList(memIndex);
+    $('#searchbtn').on('click', function (e) {
+        let startDate = $('#startDate').val() + "T00:00:00";
+        let endDate = $('#endDate').val() + "T00:00:00";
+        let enumid = $('#enumid option:selected').val();
+
+        if ($('#startDate').val() == "" || $('#endDate').val() == ""){
+            alert("기간 입력하세융ㅋ")
+            e.stopPropagation();
+        }else{
+            couponList(memIndex, enumid, startDate, endDate, 0);
+        }
     });
-    function couponList(memIndex) {
-        $.get("/api/userCoupon/couponList/" + memIndex, function (response) {
+
+    function couponList(memIndex, enumid, startDate, endDate, page) {
+        $.get("/api/userCoupon/couponList/" + memIndex + "/" + enumid + "/" + startDate + "/" + endDate + "?page=" + page, function (response) {
             console.dir(response);
 
             pagination = response.pagination;
@@ -186,16 +196,47 @@ $(function () {
             // 전체 페이지
             showPage.showPage = pagination.data;
 
-            if(showPage.totalPages != 0){
+            if (pagination.totalPages.totalElements != 0) {
                 itemList.itemList = response.data;
-                $('.couponY').css('display', 'flex');
-            }else{
+                $('.couponY').css('display', 'block');
+                $('.couponN').css('display', 'none');
+                let lastPage = showPage.totalPages;
+                let str2 = "";
+                str2 += "<td class='firstPage2 cursor'><<</td>";
+                for (let i = 0; i < lastPage; i++) {
+                    str2 += "<td class='pageNum2' id=" + i + ">" + (i + 1) + "</td>";
+                }
+                str2 += "<td class='lastPage2 cursor'>>></td>";
+                $("#showPage").html(str2);
+                if (page == 0) {
+                    $(".firstPage2").css("visibility", "hidden");
+                }
+                if (page == lastPage - 1 || showPage.totalElements != 0) {
+                    $(".lastPage2").css("visibility", "hidden");
+                }
+                $(".pageNum2").css({
+                    "background-color": "#fff",
+                    "color": "#444",
+                    "cursor": "pointer"
+                });
+                $("#" + page + "").css({
+                    "background-color": "#661e43",
+                    "color": "white"
+                });
+                $(document).on('click', '.firstPage2', function () {
+                    couponList(memIndex, 0);
+                });
+                $(document).on('click', '.lastPage2', function () {
+                    couponList(memIndex, lastPage - 1);
+                });
+
+            } else {
                 itemList.itemList = null;
+                $('.couponY').css('display', 'none');
                 $('.couponN').css('display', 'block');
             }
-        });
+        })
     }
-
 });
 
 

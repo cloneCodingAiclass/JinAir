@@ -3,6 +3,7 @@ package com.project.jinair.service.payment;
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.member.TbMember;
 import com.project.jinair.model.entity.payment.TbUsercoupon;
+import com.project.jinair.model.enumclass.CouponStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.payment.UsercouponApiRequest;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -48,8 +50,8 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
                     .ucDesc(usercouponApiRequest.getUcDesc())
                     .ucCode(usercouponApiRequest.getUcCode())
                     .ucDiscount(usercouponApiRequest.getUcDiscount())
-                    .ucStartday(usercouponApiRequest.getUcStartday())
-                    .ucEndday(usercouponApiRequest.getUcEndday())
+                    .ucStartday(LocalDateTime.parse(usercouponApiRequest.getUcStartday()))
+                    .ucEndday(LocalDateTime.parse(usercouponApiRequest.getUcEndday()))
                     .ucIsUse(usercouponApiRequest.getUcIsUse())
                     .ucTotcoupon(usercouponApiRequest.getUcTotcoupon())
                     .ucUserindex(tbMember.getMemIndex())
@@ -80,8 +82,8 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
                     coupon.setUcDesc(usercouponApiRequest.getUcDesc());
                     coupon.setUcCode(usercouponApiRequest.getUcCode());
                     coupon.setUcDiscount(usercouponApiRequest.getUcDiscount());
-                    coupon.setUcStartday(usercouponApiRequest.getUcStartday());
-                coupon.setUcEndday(usercouponApiRequest.getUcEndday());
+                    coupon.setUcStartday(LocalDateTime.parse(usercouponApiRequest.getUcStartday()));
+                coupon.setUcEndday(LocalDateTime.parse(usercouponApiRequest.getUcEndday()));
                 coupon.setUcIsUse(usercouponApiRequest.getUcIsUse());
                     coupon.setUcTotcoupon(usercouponApiRequest.getUcTotcoupon());
 
@@ -133,12 +135,13 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
                 .build();
         return usercouponApiResponse;
     }
-
-    public Header<List<UsercouponApiResponse>> searchList(Long id, Pageable pageable) {
-        Page<TbUsercoupon> tbUsercoupons = tbUsercouponRepository.findByUcUserindex(id, pageable);
+    public Header<List<UsercouponApiResponse>> searchList(Long id, CouponStatus enumid, String startDate, String endDate, Pageable pageable) {
+        Page<TbUsercoupon> tbUsercoupons = tbUsercouponRepository.findByUcUserindexAndUcIsUseAndUcEnddayBetween(id, enumid, LocalDateTime.parse(startDate), LocalDateTime.parse(endDate), pageable);
         List<UsercouponApiResponse> usercouponApiResponseList = tbUsercoupons.stream()
                 .map(coupon -> responseCoupon(coupon))
                 .collect(Collectors.toList());
+
+        System.out.println(usercouponApiResponseList);
 
         Pagination pagination = Pagination.builder()
                 .totalPages(tbUsercoupons.getTotalPages())

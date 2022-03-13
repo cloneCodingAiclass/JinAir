@@ -27,8 +27,8 @@ public class UsercouponApiRequest {
     private Long ucUserindex;
     private String ucCode;
     private Integer ucDiscount;
-    private LocalDateTime ucStartday;
-    private LocalDateTime ucEndday;
+    private String ucStartday;
+    private String ucEndday;
     private CouponStatus ucIsUse;
     private Long ucTotcoupon;
 
