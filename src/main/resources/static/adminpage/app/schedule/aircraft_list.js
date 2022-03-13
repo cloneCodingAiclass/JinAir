@@ -121,16 +121,12 @@ $(function () {
         let apname = document.getElementById("apName").value;
         let apid = document.getElementById("apId").value;
         let apseatsum = document.getElementById("apSeatSum").value;
-        let apseatbiz = document.getElementById("apSeatBiz").value;
-        let apseatplus = document.getElementById("apSeatPlus").value;
 
         let airplaneData = {
             data: {
                 apName: apname,
                 apId: apid,
-                apSeatSum: apseatsum,
-                apSeatBiz: apseatbiz,
-                apSeatPlus: apseatplus
+                apSeatSum: apseatsum
             }
         }
 

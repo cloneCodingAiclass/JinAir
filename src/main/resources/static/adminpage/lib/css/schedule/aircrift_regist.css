@@ -16,6 +16,7 @@
     font-weight: bold;
 }
 #container > .contents > .contwrap .contents_main table{
+    width: 100%;
     border-collapse: collapse;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;

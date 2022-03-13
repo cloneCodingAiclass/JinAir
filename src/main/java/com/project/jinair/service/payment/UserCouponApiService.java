@@ -34,6 +34,8 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
     @PersistenceContext
     private EntityManager em;
 
+
+    //일반 쿠폰 생성
     @Override
     public Header<UsercouponApiResponse> create(Header<UsercouponApiRequest> request) {
 
@@ -48,7 +50,7 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
                     .ucType(usercouponApiRequest.getUcType())
                     .ucPrice(usercouponApiRequest.getUcPrice())
                     .ucDesc(usercouponApiRequest.getUcDesc())
-                    .ucCode(usercouponApiRequest.getUcCode())
+                    .ucCode(usercouponApiRequest.getUcCode() + usercouponApiRequest.getUcIndex())
                     .ucDiscount(usercouponApiRequest.getUcDiscount())
                     .ucStartday(LocalDateTime.parse(usercouponApiRequest.getUcStartday()))
                     .ucEndday(LocalDateTime.parse(usercouponApiRequest.getUcEndday()))
@@ -111,7 +113,7 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
                 .ucType(tbUsercoupon.getUcType())
                 .ucPrice(tbUsercoupon.getUcPrice())
                 .ucDesc(tbUsercoupon.getUcDesc())
-                .ucCode(tbUsercoupon.getUcCode())
+                .ucCode(tbUsercoupon.getUcCode() + tbUsercoupon.getUcIndex())
                 .ucDiscount(tbUsercoupon.getUcDiscount())
                 .ucStartday(tbUsercoupon.getUcStartday())
                 .ucEndday(tbUsercoupon.getUcEndday())

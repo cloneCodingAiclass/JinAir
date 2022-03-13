@@ -418,9 +418,9 @@ $(function () {
         let day = new Date();
 
         let ucType = "일반";
-        let ucPrice = 400000;
+        let ucPrice = necessary;
         let ucDesc = go_layer + " ~ " + arrive_layer;
-        let ucCode = "21398127409214079";
+        let ucCode = "";
         let ucDiscount = 3;
         let ucStartday = day.getFullYear()+"-"+"0"+(day.getMonth()+1)+"-"+day.getDate()+"T00:00:00";
         console.log(ucStartday);

@@ -177,13 +177,15 @@ $(function () {
         let enumid = $('#enumid option:selected').val();
 
         if ($('#startDate').val() == "" || $('#endDate').val() == ""){
-            alert("기간 입력하세융ㅋ")
+            alert("기간을 입력하세요.")
             e.stopPropagation();
         }else{
             couponList(memIndex, enumid, startDate, endDate, 0);
         }
     });
 
+    $('.couponN').hide();
+    $('.couponY').hide();
     function couponList(memIndex, enumid, startDate, endDate, page) {
         $.get("/api/userCoupon/couponList/" + memIndex + "/" + enumid + "/" + startDate + "/" + endDate + "?page=" + page, function (response) {
             console.dir(response);
@@ -196,10 +198,10 @@ $(function () {
             // 전체 페이지
             showPage.showPage = pagination.data;
 
-            if (pagination.totalPages.totalElements != 0) {
+            if (pagination.totalPages != 0) {
                 itemList.itemList = response.data;
-                $('.couponY').css('display', 'block');
-                $('.couponN').css('display', 'none');
+                $('.couponY').show();
+                $('.couponN').hide();
                 let lastPage = showPage.totalPages;
                 let str2 = "";
                 str2 += "<td class='firstPage2 cursor'><<</td>";
@@ -223,17 +225,20 @@ $(function () {
                     "background-color": "#661e43",
                     "color": "white"
                 });
+
+                $(".pageNum2").on('click', function (){
+                    page = $(this).attr("id");
+                    couponList(memIndex, enumid, startDate, endDate, page);
+                })
                 $(document).on('click', '.firstPage2', function () {
-                    couponList(memIndex, 0);
+                    couponList(memIndex, enumid, startDate, endDate, 0);
                 });
                 $(document).on('click', '.lastPage2', function () {
-                    couponList(memIndex, lastPage - 1);
+                    couponList(memIndex, enumid, startDate, endDate, lastPage - 1);
                 });
-
             } else {
-                itemList.itemList = null;
-                $('.couponY').css('display', 'none');
-                $('.couponN').css('display', 'block');
+                $('.couponN').show();
+                $('.couponY').hide();
             }
         })
     }

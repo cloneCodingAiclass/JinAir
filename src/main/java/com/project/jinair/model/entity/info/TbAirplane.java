@@ -31,8 +31,6 @@ public class TbAirplane {   // 비행기 정보
     private String apName;
     private String apId;
     private Long apSeatSum;
-    private Long apSeatBiz;
-    private Long apSeatPlus;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbAirplane") // 하나의 카테고리에 여러게의 파트너가 연결
     private List<TbAirplaneSeat> tbAirplaneSeatList;
