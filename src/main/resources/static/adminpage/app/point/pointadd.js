@@ -128,3 +128,92 @@ $(function () {
         $('.select_user').show();
     });
 });
+
+(function ($){
+    let pagination = {
+        total_page : 0,
+        total_element : 0,
+        current_page : 0,
+        curren_elements : 0
+    }
+
+    let memList = new Vue({
+        el : '#memList',
+        data : {
+            memList : {}
+        }
+    })
+
+    // 스케줄 목록
+    let schList = new Vue({
+        el : '#schList',
+        data : {
+            schList : {}
+        }
+    })
+
+    let memIndex;
+
+    // 스케줄 목록
+    function searchSch(type, start){
+        $.post({
+            url : '',
+            data : 'type=' + type + '&start=' + start,
+            dataType: 'text',
+            success : function (response){
+                let dataJson = JSON.parse(response);
+                schList.scList = dataJson.data;
+                for(let i = 0; i < dataJson.data.length; i++){
+                    let option = document.createElement('option');
+                    option.innerText = dataJson.data[i].schDeparturePoint + '->' + dataJson.data[i].schArrivalPoint + ' ' + dataJson.data[i].schStartTime;
+                    option.value = dataJson.data[i].schDeparturePoint + '->' + dataJson.data[i].schArrivalPoint + ' ' + dataJson.data[i].schStartTime;
+                    $('.airport_box').append(option);
+                }
+
+            }
+        })
+    }
+
+    // 스케줄을 통한 유저 검색
+    function searchSchofUser(type, start, schDate){
+        $.post({
+            url : "",
+            data : "type=" + type + "&start=" + start + "&schDate=" + schDate,
+            dataType : 'text',
+            success : function (response){
+                console.dir(response)
+                let dataJson = JSON.parse(response)
+                memList.memList = dataJson.data;
+            }
+        })
+    }
+
+    // 유저 아이디 검색
+    function searchUserid(userid){
+        $.get("/api/user/search/"+userid, function (response){
+            console.dir(response)
+            memList.memList = response.data;
+
+            memIndex = response.data[0].memIndex;
+            $('#memIndex').val(memIndex)
+        })
+    }
+
+    $('.btn_search').on('click', function (){
+        searchSchofUser($('.country_box').find('option:selected').val(), $('#start').val(), $('.airport_box').find('option:selected').val());
+    })
+
+    $('.btn_usersearch').on('click', function (){
+        searchUserid($('#userid').val());
+    })
+
+    $('#updatePoint').on('click', function (){
+        console.log($('#memIndex').val())
+    })
+
+    /*
+    function searchSch(){
+        $.get("")
+    }
+     */
+})(jQuery)

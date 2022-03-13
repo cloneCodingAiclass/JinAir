@@ -6,11 +6,8 @@
     <link rel="stylesheet" href="/userpage/lib/css/mypage/add_qna.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="/userpage/app/mypage/add_qna.js"></script>
     <link rel="stylesheet" href="/UserPage/quickmenu/quickmenu.css">    
     <script src="/UserPage/quickmenu/quickmenu.js"></script>
-</head>
-
 <body>
     <ul class="skipnavi">
         <!--책갈피 역할-->
@@ -23,6 +20,8 @@
         <!--header 끝-->
         <!--container-->
         <div id="container">
+        <form class="file-upload" id="qnaForm" method="post" th:action="@{/pages/qna_file/upload}" enctype="multipart/form-data">
+            <input type="hidden" id="memid" name="qnaUserindex" th:value="${memberApiResponse.memIndex}">
             <div class="mypage_main">
                 <div class="menu_title">
                     <p>고객의 말씀(Q&A)</p>
@@ -46,76 +45,153 @@
                         <p class="subtext">기내 유실물 관련 문의는'기내 유실물 찾기' 메뉴에서 가능합니다.</p>
                     </div>
                     <div class="qna_info">
-                        <a href="../../../../../../../../../../Downloads/JinAirCloneCoding-main/JinAirCloneCoding-main/UserPage/nabipoint/pointList.html">나비포인트 안내</a>
-                        <a href="/UserPage/serviceCount/airport/baggage/baggage.html?directId=findbaggage">기내 유실물 찾기</a>
-                        <a href="Mypage_qna.html">나의 Q&A 조회하기</a>
+                        <a href="/pages/point">나비포인트 안내</a>
+                        <a href="/pages/index/baggage?directId=findbaggage">기내 유실물 찾기</a>
+                        <a href="/pages/index/mypageQna">나의 Q&A 조회하기</a>
                     </div>
                 </div>
                 <div class="qna_date">
                     <form accept="#" method="post">
-                    <table>
+                    <table id="userInfo">
                     <tr>
                         <th>이름</th>
-                        <td>라승현</td>
+                        <td id="name">{{userInfo.memKorFirstName}}{{userInfo.memKorLastName}}</td>
                     </tr>
                     <tr>
                         <th>연락처</th>
-                        <td>010-6624-2118</td>
+                        <td id="phone">{{userInfo.memHp}}</td>
                     </tr>
                     <tr>
                         <th>이메일</th>
-                        <td><input type="email"></td>
+                        <td><input type="email" readonly id="email"></td>
                     </tr>
                     <tr>
                         <th>예약번호</th>
-                        <td><input type="text" id="res_num"></td>
+                        <td><input type="text" id="res_num" name="qnaResNum"></td>
                     </tr>
                     <tr>
                         <th>출발일</th>
-                        <td><input type="date"></td>
+                        <td><input type="date" id="start_date" name="qnaStartDate"></td>
                     </tr>
                     <tr>
                         <th>출발지</th>
                         <td>
-                            <select>
-                                <option>출발지를 선택하세요.</option>
+                            <select name="qnaStarting" id="qnaStarting">
+                                <option value="">출발지를 선택하세요.</option>
+                                <option data-value="1" value="ICN">서울/인천(ICN)</option>
+                                <option data-value="2" value="GMP">서울/김포(GMP)</option>
+                                <option data-value="4" value="PUS">부산(PUS)</option>
+                                <option data-value="3" value="CJU">제주(CJU)</option>
+                                <option data-value="5" value="CJJ">청주(CJJ)</option>
+                                <option data-value="154" value="KWJ">광주(KWJ)</option>
+                                <option data-value="167" value="TAE">대구(TAE)</option>
+                                <option data-value="168" value="RSU">여수(RSU)</option>
+                                <option data-value="169" value="USN">울산(USN)</option>
+                                <option data-value="170" value="KPO">포항(KPO)</option>
+                                <option data-value="171" value="WJU">원주(WJU)</option>
+                                <option data-value="172" value="KUV">군산(KUV)</option>
+                                <option data-value="176" value="HIN">사천(HIN)</option>
+                                <option data-value="8" value="NRT">도쿄/나리타(NRT)</option>
+                                <option data-value="161" value="KIX">오사카/간사이(KIX)</option>
+                                <option data-value="9" value="FUK">후쿠오카(FUK)</option>
+                                <option data-value="10" value="CTS">삿포로(CTS)</option>
+                                <option data-value="11" value="OKA">오키나와(OKA)</option>
+                                <option data-value="12" value="KKJ">기타큐슈(KKJ)</option>
+                                <option data-value="13" value="PVG">상하이/푸동(PVG)</option>
+                                <option data-value="16" value="XIY">시안(XIY)</option>
+                                <option data-value="14" value="HKG">홍콩(HKG)</option>
+                                <option data-value="15" value="MFM">마카오(MFM)</option>
+                                <option data-value="26" value="TPE">타이베이/타오위안(TPE)</option>
+                                <option data-value="173" value="TAO">칭다오(TAO)</option>
+                                <option data-value="165" value="BKK">방콕(BKK)</option>
+                                <option data-value="19" value="HKT">푸껫(HKT)</option>
+                                <option data-value="175" value="CNX">치앙마이(CNX)</option>
+                                <option data-value="20" value="CEB">세부(CEB)</option>
+                                <option data-value="21" value="CRK">클락(CRK)</option>
+                                <option data-value="157" value="KLO">보라카이/칼리보(KLO)</option>
+                                <option data-value="24" value="DAD">다낭(DAD)</option>
+                                <option data-value="25" value="HAN">하노이(HAN)</option>
+                                <option data-value="22" value="VTE">비엔티안(VTE)</option>
+                                <option data-value="23" value="BKI">코타 키나발루(BKI)</option>
+                                <option data-value="164" value="JHB">조호르바루(JHB)</option>
+                                <option data-value="174" value="DAC">다카(DAC)</option>
+                                <option data-value="27" value="GUM">괌(GUM)</option>
+                                <option data-value="29" value="HNL">하와이, 호놀룰루(HNL)</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <th>도착지</th>
                         <td>
-                            <select>
-                                <option>도착지를 선택하세요.</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>질문유형</th>
-                        <td>
-                            <select>
-                                <option>질문 유형을 선택하세요.</option>
+                            <select name="qnaDestination" id="qnaDestination">
+                                <option value="">도착지를 선택하세요.</option>
+                                <option data-value="1" value="ICN">서울/인천(ICN)</option>
+                                <option data-value="2" value="GMP">서울/김포(GMP)</option>
+                                <option data-value="4" value="PUS">부산(PUS)</option>
+                                <option data-value="3" value="CJU">제주(CJU)</option>
+                                <option data-value="5" value="CJJ">청주(CJJ)</option>
+                                <option data-value="154" value="KWJ">광주(KWJ)</option>
+                                <option data-value="167" value="TAE">대구(TAE)</option>
+                                <option data-value="168" value="RSU">여수(RSU)</option>
+                                <option data-value="169" value="USN">울산(USN)</option>
+                                <option data-value="170" value="KPO">포항(KPO)</option>
+                                <option data-value="171" value="WJU">원주(WJU)</option>
+                                <option data-value="172" value="KUV">군산(KUV)</option>
+                                <option data-value="176" value="HIN">사천(HIN)</option>
+                                <option data-value="8" value="NRT">도쿄/나리타(NRT)</option>
+                                <option data-value="161" value="KIX">오사카/간사이(KIX)</option>
+                                <option data-value="9" value="FUK">후쿠오카(FUK)</option>
+                                <option data-value="10" value="CTS">삿포로(CTS)</option>
+                                <option data-value="11" value="OKA">오키나와(OKA)</option>
+                                <option data-value="12" value="KKJ">기타큐슈(KKJ)</option>
+                                <option data-value="13" value="PVG">상하이/푸동(PVG)</option>
+                                <option data-value="16" value="XIY">시안(XIY)</option>
+                                <option data-value="14" value="HKG">홍콩(HKG)</option>
+                                <option data-value="15" value="MFM">마카오(MFM)</option>
+                                <option data-value="26" value="TPE">타이베이/타오위안(TPE)</option>
+                                <option data-value="173" value="TAO">칭다오(TAO)</option>
+                                <option data-value="165" value="BKK">방콕(BKK)</option>
+                                <option data-value="19" value="HKT">푸껫(HKT)</option>
+                                <option data-value="175" value="CNX">치앙마이(CNX)</option>
+                                <option data-value="20" value="CEB">세부(CEB)</option>
+                                <option data-value="21" value="CRK">클락(CRK)</option>
+                                <option data-value="157" value="KLO">보라카이/칼리보(KLO)</option>
+                                <option data-value="24" value="DAD">다낭(DAD)</option>
+                                <option data-value="25" value="HAN">하노이(HAN)</option>
+                                <option data-value="22" value="VTE">비엔티안(VTE)</option>
+                                <option data-value="23" value="BKI">코타 키나발루(BKI)</option>
+                                <option data-value="164" value="JHB">조호르바루(JHB)</option>
+                                <option data-value="174" value="DAC">다카(DAC)</option>
+                                <option data-value="27" value="GUM">괌(GUM)</option>
+                                <option data-value="29" value="HNL">하와이, 호놀룰루(HNL)</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <th>질문구분</th>
                         <td>
-                            <select>
-                                <option>질문 구분을 선택하세요.</option>
+                            <select name="qnaType" id="qnaType">
+                                <option value="">질문 구분을 선택하세요.</option>
+                                <option value="HomeShopping">기내홈쇼핑</option>
+                                <option value="Praise">칭송</option>
+                                <option value="Complaint">불만</option>
+                                <option value="Inquiry">문의요청</option>
+                                <option value="Proposal">제언</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <th>제목</th>
-                        <td><input type="text" id="title"></td>
+                        <td><input type="text" id="title" name="qnaTitle"></td>
                     </tr>
                     <tr>
                         <th>회신 불요 여부 문의</th>
-                        <td>                                <input type="checkbox" value="no_answer" name="no_answer" id="no_answer">
+                        <td>
+                            <input type="checkbox" value="false" name="qnaNeedAnswer" id="no_answer">
                             <label for="no_answer">
                                 답변을 원치 않을 경우 체크해 주세요.
                             </label>
+                            <input type="hidden" value="true" name="qnaNeedAnswer" id="hiddenTrue">
                         </td>
                     </tr>
                     <tr>
@@ -125,7 +201,7 @@
                                 <label for="file_add">
                                     파일첨부
                                 </label>
-                                    <input type="file" id="file_add"><span>
+                                    <input name="file" type="file" id="file_add"><span>
                                     여기에 파일을 드래그 & 드롭하세요.(최대 파일: 1개)</span>
                                 <div class="addfilecontent">
                                     <p class="addfilecontenttext"></p>
@@ -141,7 +217,7 @@
                     </tr>
                     <tr>
                         <th>내용</th>
-                        <td><textarea></textarea></td>
+                        <td><textarea name="qnaContent" id="content"></textarea></td>
                     </tr>
                     <tr>
                         <th>개인정보 수집동의</th>
@@ -155,7 +231,7 @@
                     </tr>
                 </table>
                 <div class="btn">
-                    <input type="submit" class="btn_agree" value="저장" onclick="location.href=''">
+                    <input type="button" class="btn_agree" id="addQna" value="저장">
                     <input type="button" class="btn_cancel" value="취소" onclick="location.href='Mypage_qna.html'">
                 </div>
                 </form>
@@ -186,6 +262,7 @@
                     </div>
                 </div>
             </div>
+        </form>
         </div>
     </div>
         <!--container 끝-->
@@ -511,7 +588,7 @@
         </div>
         </div>
     </div>
-    
 </body>
+<script src="/userpage/app/mypage/add_qna.js"></script>
 </html>
 
