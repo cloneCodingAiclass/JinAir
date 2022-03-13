@@ -95,15 +95,15 @@ $(function () {
 });
 
 function showFaq(obj){
-    $(".td_answer").css("display", "table-cell");
+    $('faq'+ i).css("display", "table-cell");
     let target = $(obj).attr("href");
-    $(target).add($(target).find("index")).toggle();
+    $(target).add($(target).find('faq'+ i)).toggle();
 }
-function closeFaq(obj){
-    $(".td_answer").css("display", "none");
-    let target = $(obj).attr("href");
-    $(target).add($(target).find("index")).toggle();
-}
+// function closeFaq(obj){
+//     $("index").css("display", "none");
+//     let target = $(obj).attr("href");
+//     $(target).add($(target).find("index")).toggle();
+// }
 
     // $("#faq1").click(function (){
     //     if($(".tr_answer").css("display")== "none")
@@ -121,8 +121,15 @@ function closeFaq(obj){
     let listFaq = new Vue({
         el : '#listFaq',
         data : {
+            // isActive: true,
             listFaq : {}
-        }
+
+        },
+        // methods:{
+        //     toggleClass: function (){
+        //         this.isActive = !this.isActive;
+        //     }
+        // }
     })
 
     let faqSet1 = new Vue({
