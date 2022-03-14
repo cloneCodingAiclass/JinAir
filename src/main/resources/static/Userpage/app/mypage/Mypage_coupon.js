@@ -252,29 +252,26 @@ $(function () {
             let code = response.data[0];
             console.log(code);
 
-            // 쿠폰 최대값 체크
-            let max = code.crLastCode.replace(/[^0-9]/g, "");
-            console.log(max);
-
             if(typeof code == "undefined"){
                 alert("올바른 쿠폰 정보가 아닙니다.")
+                e.stopPropagation();
             }
+            let max = code.crLastCode.replace(/[^0-9]/g, "");
             if(codeNum > max){
-                alert("올바른 쿠폰 번호가 아닙니다.")
+                // 쿠폰 최대값 체크
+                console.log(max);
+                alert("올바른 쿠폰 정보가 아닙니다.")
                 e.stopPropagation();
             }else{
                 let day = new Date().toISOString();
                 let toDay = day.split('.');
                 let discount = code.crDiscount;
                 let startDay = toDay[0];
-                console.log(startDay)
                 let endDay = code.crEndDay;
                 let title = code.crDesc;
                 couponAdd(couponCode, discount, startDay, endDay, title);
             }
-
             // response의 종료일자, 마지막 코드넘버를 가져와 넘어가지 않았으면 couponadd 메서드 실행
-
         })
 
     })
@@ -302,7 +299,7 @@ $(function () {
             contentType : "application/json",
             success(coupon){
                 if(coupon == ""){
-                    alert("쿠폰 번호를 확인해주세요.");
+                    alert("쿠폰 번호가 중복되었습니다.");
                 }else{
                     alert("등록이 완료되었습니다.");
                 }
