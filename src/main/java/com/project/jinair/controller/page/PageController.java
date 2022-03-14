@@ -258,15 +258,15 @@ public class PageController {
 
     @RequestMapping("/index/faqList")
     public ModelAndView faqList(HttpServletRequest request, Model model) {
-//        HttpSession session = request.getSession();
-//        if(session.getAttribute("memberApiResponse") != null){
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
             return new ModelAndView("/userpage/pages/mypage/mypageDetail/faq_list")
                     .addObject("code", "faq_list");
-//        }else{
-//            return new ModelAndView("/userpage/pages/index/error")
-//                    .addObject("code", "add_qna");
-//        }
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
 
     }
     @RequestMapping("/index/mypageCancelService")
@@ -361,6 +361,7 @@ public class PageController {
         }
 
     }
+
     @RequestMapping("/index/passwordEdit")
     public ModelAndView passwordEdit(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();

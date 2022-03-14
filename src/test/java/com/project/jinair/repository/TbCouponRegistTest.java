@@ -1,19 +1,19 @@
-package com.project.jinair.repository;
-
-import com.project.jinair.JinAirApplicationTests;
-import com.project.jinair.model.entity.payment.TbCouponRegist;
-import com.project.jinair.model.enumclass.CouponStatus;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
-
-public class TbCouponRegistTest extends JinAirApplicationTests {
-
-    @Autowired
-    private TbCouponRegistRepository tbCouponRegistRepository;
+//package com.project.jinair.repository;
+//
+//import com.project.jinair.JinAirApplicationTests;
+//import com.project.jinair.model.entity.payment.TbCouponRegist;
+//import com.project.jinair.model.enumclass.CouponStatus;
+//import org.junit.jupiter.api.Test;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.transaction.annotation.Transactional;
+//
+//import java.time.LocalDateTime;
+//import java.util.Optional;
+//
+//public class TbCouponRegistTest extends JinAirApplicationTests {
+//
+//    @Autowired
+//    private TbCouponRegistRepository tbCouponRegistRepository;
 //
 //    @Test
 //    public void create() {
@@ -71,4 +71,4 @@ public class TbCouponRegistTest extends JinAirApplicationTests {
 //            }
 //        );
 //    }
-}
+//}
