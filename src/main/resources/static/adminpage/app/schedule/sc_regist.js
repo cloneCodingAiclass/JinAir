@@ -120,7 +120,6 @@ $(function () {
         })
     })
 
-
     let apList = new Vue({
         el : '#aplist',
         data : {
@@ -144,15 +143,44 @@ $(function () {
         $("#resultseat").val(seat);
     })
 
+    $('#departurepoint').on('select', function (){
+        console.log( $('#departurepoint').val());
+    })
+
+
     function register(){
+        let arrivaldate;
+
+        let date = new Date($('#startdate').val().substring(0,4), $('#startdate').val().substring(5,7)-1, $('#startdate').val().substring(8,10));
+        date.setDate(date.getDate()+1);
+        let str = date.getMonth()+1;
+        if(str<10){
+            str = "0" + str;
+        }
+        let strrr = date.getFullYear()+"-"+str+"-"+date.getDate();
+
+
+        if($('#arrivaldate').val().substring(0,2) > $('#starttime').val().substring(0,2)){
+            arrivaldate = document.getElementById("startdate").value+ "T" + document.getElementById("arrivaldate").value ;
+        }else if($('#arrivaldate').val().substring(0,2) == $('#starttime').val().substring(0,2)){
+            if($('#arrivaldate').val().substring(3,5) > $('#starttime').val().substring(3,5)){
+                arrivaldate = document.getElementById("startdate").value+ "T" + document.getElementById("arrivaldate").value ;
+            }else if($('#arrivaldate').val().substring(3,5) == $('#starttime').val().substring(3,5)){
+                arrivaldate = document.getElementById("startdate").value+ "T" + document.getElementById("arrivaldate").value ;
+            }else{
+                arrivaldate = strrr + "T" + document.getElementById("arrivaldate").value ;
+            }
+        }else{
+            arrivaldate = strrr + "T" + document.getElementById("arrivaldate").value ;
+        }
+
         let nationType = $('#nationType').find('option:selected').val();
         let apname = document.getElementById("apname").value;
         let apid = $("#adid option:checked").text();
         let startdate = document.getElementById("startdate").value + "T08:00:00";
         let departurepoint = document.getElementById("departurepoint").value;
-        let starttime = "2000-01-01T" + document.getElementById("starttime").value;
+        let starttime = document.getElementById("startdate").value+ "T" + document.getElementById("starttime").value;
         let arrivalpoint = document.getElementById("arrivalpoint").value;
-        let arrivaldate = "2000-01-01T" + document.getElementById("arrivaldate").value ;
         let resultseat = document.getElementById("resultseat").value;
         let flyingtime = "2000-01-01T" + document.getElementById("flyingtime").value;
         let price = document.getElementById("price").value;
@@ -184,6 +212,7 @@ $(function () {
             contentType : "application/json"
         });
     }
+
 
     $('#regist').click( () =>{
         register();

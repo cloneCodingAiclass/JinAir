@@ -143,7 +143,6 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
 
     public Header<List<ScheduleApiResponse>> DepAri(String schDeparturePoint, String schArrivalPoint){
         LocalDateTime now = LocalDateTime.now();
-
         List<TbSchedule> tbSchedule = tbScheduleRepository.findFirstBySchDeparturePointAndSchArrivalPointAndSchDepartureDateGreaterThanOrderBySchBasicPriceAsc(schDeparturePoint, schArrivalPoint, LocalDateTime.parse(String.valueOf(now).substring(0,19)));
         List<ScheduleApiResponse> scheduleApiResponseList = tbSchedule.stream()
                 .map(user -> responseSchedule(user))
