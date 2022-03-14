@@ -163,11 +163,51 @@ $(function () {
         })
     }
 
+    areaList();
+
+    // 출발지 도착지 데이터 목록
+    function areaList(){
+        $.get("/api/airport/list", function (response){
+            // 출발지 셀렉트
+            for(let i = 0; i < response.data.length; i++){
+                let a = response.data[i].aptAirport;
+                let option = document.createElement('option');
+                option.innerText = a;
+                option.value = a;
+                $('#schDeparturePoint').append(option);
+            }
+            // 도착지 셀렉트
+            for(let i = 0; i < response.data.length; i++){
+                let a = response.data[i].aptAirport;
+                let option = document.createElement('option');
+                option.innerText = a;
+                option.value = a;
+                $('#schArrivalPoint').append(option);
+            }
+        })
+    }
+
+    airplane();
+
+    // 항공기 종류 데이터 목록
+    function airplane(){
+        $.get("/api/airplane/list", function (response){
+            console.dir(response)
+            for (let i = 0; i < response.data.length; i++){
+                let a = response.data[i].apName;
+                let option = document.createElement('option');
+                option.innerText = a;
+                option.value = a;
+                $('#schAirplaneName').append(option);
+            }
+        })
+    }
+
     // 조건으로 찾기
-    function findByDate(schAirplaneId, schDepartureDate, schDeparturePoint, schArrivalPoint){
+    function findByDate(schAirplaneName, schDepartureDate, schDeparturePoint, schArrivalPoint){
         $.post({
             url: "/api/schedule/list/find",
-            data: "schAirplaneId=" + schAirplaneId + "&schDepartureDate=" + schDepartureDate + "&schDeparturePoint=" + schDeparturePoint + "&schArrivalPoint=" + schArrivalPoint,
+            data: "schAirplaneName=" + schAirplaneName + "&schDepartureDate=" + schDepartureDate + "&schDeparturePoint=" + schDeparturePoint + "&schArrivalPoint=" + schArrivalPoint,
             dateType: 'text',
             success : function(response){
                 console.dir(response);
@@ -178,15 +218,15 @@ $(function () {
     }
 
     $('.modal_search').on('click', function (){
-        let schAirplaneId = $('#schAirplaneId').val();
+        let schAirplaneName = $('#schAirplaneName').find('option:selected').val();
         let schDepartureDate = $('#schDepartureDate').val() + "T08:00:00";
         let schDeparturePoint = $('#schDeparturePoint').val();
         let schArrivalPoint = $('#schArrivalPoint').val();
-        console.log(schAirplaneId)
+        console.log(schAirplaneName)
         console.log(schDepartureDate)
         console.log(schDeparturePoint)
         console.log(schArrivalPoint)
-        findByDate(schAirplaneId, schDepartureDate, schDeparturePoint, schArrivalPoint);
+        findByDate(schAirplaneName, schDepartureDate, schDeparturePoint, schArrivalPoint);
 
         $('.modal_container').fadeOut(200);
     });

@@ -29,7 +29,6 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
         ScheduleApiRequest scheduleApiRequest = request.getData();
         TbSchedule tbSchedule = TbSchedule.builder()
                 .schNationType(scheduleApiRequest.getSchNationType())
-                .schAirplaneId(scheduleApiRequest.getSchAirplaneId())
                 .schAirplaneName(scheduleApiRequest.getSchAirplaneName())
                 .schDepartureDate(LocalDateTime.parse(scheduleApiRequest.getSchDepartureDate()))
                 .schDeparturePoint(scheduleApiRequest.getSchDeparturePoint())
@@ -73,7 +72,6 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
         ScheduleApiResponse scheduleApiResponse = ScheduleApiResponse.builder()
                 .schIndex(tbSchedule.getSchIndex())
                 .schNationType(tbSchedule.getSchNationType())
-                .schAirplaneId(tbSchedule.getSchAirplaneId())
                 .schAirplaneName(tbSchedule.getSchAirplaneName())
                 .schDepartureDate(tbSchedule.getSchDepartureDate())
                 .schDeparturePoint(tbSchedule.getSchDeparturePoint())
@@ -91,7 +89,6 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
         ScheduleApiResponse scheduleApiResponse = ScheduleApiResponse.builder()
                 .schIndex(tbSchedule.getSchIndex())
                 .schNationType(tbSchedule.getSchNationType())
-                .schAirplaneId(tbSchedule.getSchAirplaneId())
                 .schAirplaneName(tbSchedule.getSchAirplaneName())
                 .schDepartureDate(tbSchedule.getSchDepartureDate())
                 .schDeparturePoint(tbSchedule.getSchDeparturePoint())
@@ -122,7 +119,7 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
     }
 
     public Header<List<ScheduleApiResponse>> find(String schAirplaneName, String schDepartureDate, String schDeparturePoint, String schArrivalPoint){
-        List<TbSchedule> tbSchedule = tbScheduleRepository.findBySchAirplaneIdAndSchDepartureDateAndSchDeparturePointAndSchArrivalPoint(schAirplaneName, LocalDateTime.parse(schDepartureDate), schDeparturePoint, schArrivalPoint);
+        List<TbSchedule> tbSchedule = tbScheduleRepository.findBySchAirplaneNameAndSchDepartureDateAndSchDeparturePointAndSchArrivalPoint(schAirplaneName, LocalDateTime.parse(schDepartureDate), schDeparturePoint, schArrivalPoint);
         List<ScheduleApiResponse> scheduleApiResponseList = tbSchedule.stream()
                 .map(user -> responseSchedule(user))
                 .collect(Collectors.toList());

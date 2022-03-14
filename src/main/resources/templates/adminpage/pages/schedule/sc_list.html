@@ -23,7 +23,7 @@
                         <div class="contents_main">
                             <table id="itemList">
                                 <tr>
-                                    <td>운항편</td>
+                                    <td>항공편명</td>
                                     <td>출발 일자</td>
                                     <td>출발지</td>
                                     <td>출발시간</td>
@@ -33,7 +33,7 @@
                                 </tr>
                                 <tr v-for="dto in itemList">
                                     <td>
-                                        <a :href=`/pages/admin/scheduleResultInfo/${dto.schIndex}`>{{dto.schAirplaneId}}</a>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${dto.schIndex}`>{{dto.schAirplaneName}}</a>
                                     </td>
                                     <td>
                                         <a :href=`/pages/admin/scheduleResultInfo/${dto.schIndex}` id="startDay">{{dto.schDepartureDate.substr(0,10)}}</a>
@@ -68,25 +68,15 @@
         <div class="modal_container">
             <div class="modal">
                 <p>항공편명
-                    <input type="text" placeholder="(예) 001, 세자리" id="schAirplaneId">
-                    검색기간 <input type="date" id="schDepartureDate">
+                    <select id="schAirplaneName">
+                    </select>
+                    출발날짜 <input type="date" id="schDepartureDate">
                 </p>
                 <p> 출발지
                     <select id="schDeparturePoint">
-                        <optgroup label="출발지">
-                           <option>국내/김포(GMP)</option>
-                           <option>국내인천(ICN)</option>
-                           <option>국내/인천(ICN)</option>
-                        </optgroup>
                     </select>
                         도착지
                     <select id="schArrivalPoint">
-                        <optgroup label="도착지">
-                            <option>국내/김포(GMP)</option>
-                            <option>국내/인천(ICH)</option>
-                            <option>국내제주(CJU)</option>
-                            <option>국내/제주(CJU)</option>
-                        </optgroup>
                     </select>
                 </p>
                 <div class="btn_modal">

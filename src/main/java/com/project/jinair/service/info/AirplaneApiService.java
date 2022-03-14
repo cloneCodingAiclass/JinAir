@@ -23,11 +23,9 @@ public class AirplaneApiService implements CrudInterface<AirplaneApiRequest, Air
     public Header<AirplaneApiResponse> create(Header<AirplaneApiRequest> request) {
         AirplaneApiRequest airplaneApiRequest = request.getData();
         TbAirplane tbAirplane = TbAirplane.builder()
-                .apIndex(airplaneApiRequest.getApIndex())
-                .apName(airplaneApiRequest.getApName())
-                .apId(airplaneApiRequest.getApId())
-                .apSeatSum(airplaneApiRequest.getApSeatSum())
-                .build();
+                .apIndex(airplaneApiRequest.getApIndex()).apName(airplaneApiRequest.getApName())
+                .apSeatSum(airplaneApiRequest.getApSeatSum()).apSeatBiz(airplaneApiRequest.getApSeatBiz())
+                .apSeatPlus(airplaneApiRequest.getApSeatPlus()).build();
         TbAirplane newAirplane = tbAirplaneRepository.save(tbAirplane);
         return response(newAirplane);
     }
@@ -48,8 +46,10 @@ public class AirplaneApiService implements CrudInterface<AirplaneApiRequest, Air
 
         return tbAirplane.map(airplane -> {
             airplane.setApName(airplaneApiRequest.getApName());
-            airplane.setApId(airplaneApiRequest.getApId());
+            airplane.setApName(airplaneApiRequest.getApName());
             airplane.setApSeatSum(airplaneApiRequest.getApSeatSum());
+            airplane.setApSeatBiz(airplaneApiRequest.getApSeatBiz());
+            airplane.setApSeatPlus(airplaneApiRequest.getApSeatPlus());
 
             return airplane;
         }).map(airplane -> tbAirplaneRepository.save(airplane))
@@ -73,18 +73,18 @@ public class AirplaneApiService implements CrudInterface<AirplaneApiRequest, Air
         AirplaneApiResponse airplaneApiResponse = AirplaneApiResponse.builder()
                 .apIndex(tbAirplane.getApIndex())
                 .apName(tbAirplane.getApName())
-                .apId(tbAirplane.getApId())
                 .apSeatSum(tbAirplane.getApSeatSum())
-                .build();
+                .apSeatBiz(tbAirplane.getApSeatBiz())
+                .apSeatPlus(tbAirplane.getApSeatPlus()).build();
         return Header.OK(airplaneApiResponse);
     }
     private AirplaneApiResponse responseAirplane(TbAirplane tbAirplane){
         AirplaneApiResponse airplaneApiResponse = AirplaneApiResponse.builder()
                 .apIndex(tbAirplane.getApIndex())
                 .apName(tbAirplane.getApName())
-                .apId(tbAirplane.getApId())
                 .apSeatSum(tbAirplane.getApSeatSum())
-                .build();
+                .apSeatBiz(tbAirplane.getApSeatBiz())
+                .apSeatPlus(tbAirplane.getApSeatPlus()).build();
         return airplaneApiResponse;
     }
 
