@@ -144,14 +144,37 @@ $(function () {
         $("#resultseat").val(seat);
     })
 
+    areaList();
+
+    // 출발지 도착지 데이터 목록
+    function areaList(){
+        $.get("/api/airport/list", function (response){
+            // 출발지 셀렉트
+            for(let i = 0; i < response.data.length; i++){
+                let a = response.data[i].aptAirport;
+                let option = document.createElement('option');
+                option.innerText = a;
+                option.value = a;
+                $('#departure_point').append(option);
+            }
+            // 도착지 셀렉트
+            for(let i = 0; i < response.data.length; i++){
+                let a = response.data[i].aptAirport;
+                let option = document.createElement('option');
+                option.innerText = a;
+                option.value = a;
+                $('#arrive_point').append(option);
+            }
+        })
+    }
+
     function register(){
         let nationType = $('#nationType').find('option:selected').val();
         let apname = document.getElementById("apname").value;
-        let apid = $("#adid option:checked").text();
         let startdate = document.getElementById("startdate").value + "T08:00:00";
-        let departurepoint = document.getElementById("departurepoint").value;
+        let departurepoint = $('#departure_point').find('option:selected').val();
         let starttime = "2000-01-01T" + document.getElementById("starttime").value;
-        let arrivalpoint = document.getElementById("arrivalpoint").value;
+        let arrivalpoint = $('#arrive_point').find('option:selected').val();
         let arrivaldate = "2000-01-01T" + document.getElementById("arrivaldate").value ;
         let resultseat = document.getElementById("resultseat").value;
         let flyingtime = "2000-01-01T" + document.getElementById("flyingtime").value;
@@ -162,7 +185,6 @@ $(function () {
             data: {
                 schNationType : nationType,
                 schAirplaneName: apname,
-                schAirplaneId: apid,
                 schDepartureDate: startdate,
                 schDeparturePoint: departurepoint,
                 schStartTime: starttime,

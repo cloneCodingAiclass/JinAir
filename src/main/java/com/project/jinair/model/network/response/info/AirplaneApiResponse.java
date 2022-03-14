@@ -17,7 +17,6 @@ import java.util.List;
 public class AirplaneApiResponse {
     private Long apIndex;
     private String apName;
-    private String apId;
     // 좌석수
     private Long apSeatSum;
     private Long apSeatBiz;

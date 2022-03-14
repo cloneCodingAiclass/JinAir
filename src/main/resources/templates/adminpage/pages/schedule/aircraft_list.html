@@ -18,14 +18,12 @@
                             <table id="itemList">
                                 <tr>
                                     <td>항공기명</td>
-                                    <td>항공기아이디</td>
                                     <td>좌석수</td>
                                     <td>추가 차지<br>(퍼스트클래스)</td>
                                     <td>추가 차지<br>(비즈니스)</td>
                                 </tr>
                                 <tr v-for="dto in itemList">
                                     <td>{{dto.apName}}</td>
-                                    <td>{{dto.apId}}</td>
                                     <td>{{dto.apSeatSum}}</td>
                                     <td>{{dto.apSeatBiz}}</td>
                                     <td>{{dto.apSeatPlus}}</td>

@@ -66,11 +66,11 @@ public class ScListApiController implements CrudInterface<ScheduleApiRequest, Sc
 //        return scListApiService.find(schAirplaneId, schDepartureDate, schDeparturePoint, schArrivalPoint);
 //    }
     @PostMapping("/list/find")
-    public Header<List<ScheduleApiResponse>> find(@RequestParam(value = "schAirplaneId", required=false) String schAirplaneId,
+    public Header<List<ScheduleApiResponse>> find(@RequestParam(value = "schAirplaneName", required=false) String schAirplaneId,
                                                   @RequestParam(value = "schDepartureDate", required=false) String schDepartureDate,
                                                   @RequestParam(value = "schDeparturePoint", required=false) String schDeparturePoint,
                                                   @RequestParam(value = "schArrivalPoint", required=false) String schArrivalPoint) {
-
+        System.out.println(schAirplaneId + schDepartureDate + schArrivalPoint);
         return scListApiService.find(schAirplaneId, schDepartureDate, schDeparturePoint, schArrivalPoint);
     }
 }

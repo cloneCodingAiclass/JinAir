@@ -32,28 +32,25 @@
                                 <div class="point_category">
                                     <p>예약자 조회</p>
                                     <div>
-                                        <p>구분</p>
-                                        <select class="country_box" name="selectbox">
-                                            <option value="local" selected>국내</option>
-                                            <option value="foreign">국외</option>
+                                        <span>항공기</span>
+                                        <select id="airplaneId" class="selectbox"></select>
+                                        <span>출발지</span>
+                                        <select id="departure_point" class="selectbox">
                                         </select>
+                                        <br>
+                                        <span>도착지</span>
+                                        <select id="arrive_point" class="selectbox"></select>
+                                        <span>출발일</span>
+                                        <input type="date" name="start" id="start">
+                                        <input type="button" value="운항일정 조회" id="searchSch" class="btn_search">
                                     </div>
                                     <div>
-                                        <p>출발일</p>
-                                        <input type="date" id="start">
-                                    </div>
-                                    <div>
-                                        <select class="airport_box" name="selectbox">
+                                        <select class="airport_box selectbox" id="schList">
                                             <option value="" selected="selected">운항 일정 선택</option>
-                                            <option value="">PUS -> ICN 08:20</option>
-                                            <option value="">PUS -> CJU 08:40</option>
-                                            <option value="">ICN -> CJU 09:00</option>
-                                            <option value="">GMP -> PUS 09:20</option>
-                                            <option value="">CJU -> ICN 09:40</option>
                                         </select>
                                     </div>
                                     <div>
-                                        <input type="submit" value="조회" class="btn_search">
+                                        <input type="button" id="reserveUserBtn" value="조회" class="btn_search">
                                     </div>
                                 </div>
                                 <div class="user_category">

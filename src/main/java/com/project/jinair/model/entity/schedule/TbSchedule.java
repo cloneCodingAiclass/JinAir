@@ -32,7 +32,6 @@ public class TbSchedule {   // 스케줄 테이블
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_schedule_idx")
     private Long schIndex;
     private String schNationType;
-    private String schAirplaneId;
     private String schAirplaneName;
     private LocalDateTime schDepartureDate;
     private String schDeparturePoint;
