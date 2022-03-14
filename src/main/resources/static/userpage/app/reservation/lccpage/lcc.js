@@ -101,10 +101,7 @@ $(() => {
         $(".lcc_search").css("display", "block");
         $('.search_list').css('display','none');
     })
-    // 최저가 조회
-    $('#searchBtn1').on('click', function () {
-        $('#itemList1').css('display','block');
-    })
+
 
     //맞춤
     $(".custom_search_btn").on('click', function () {
@@ -189,12 +186,15 @@ $(() => {
             dataType: "text",
             success: function (response) {
                 let dataJson = JSON.parse(response)
-                itemList1.itemList1 = dataJson.data;
-                console.log(itemList1.itemList1);
+                if(dataJson.data == 0){
+                    $('#itemList1').css('display','none');
+                    $('#search_null1').css('display','block');
+                }else{
+                    itemList1.itemList1 = dataJson.data;
+                    $('#search_null1').css('display','none');
+                    $('#itemList1').css('display','block');
+                }
             }
         })
     }
-
-
-
 })
