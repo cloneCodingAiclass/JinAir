@@ -156,9 +156,9 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
 
     public Header<UsercouponApiResponse> promotionCoupon(Header<UsercouponApiRequest> request){
         UsercouponApiRequest usercouponApiRequest = request.getData();
-        Boolean isNull = tbUsercouponRepository.findByUcCodeIsNull(usercouponApiRequest.getUcCode());
+        List<TbUsercoupon> tbUsercoupons = tbUsercouponRepository.findByUcCode(usercouponApiRequest.getUcCode());
 
-        if(isNull == true){
+        if(tbUsercoupons.isEmpty()){
             TbMember tbMember = memberRepository.findByMemIndex(usercouponApiRequest.getUcUserindex());
 
             TbUsercoupon tbUsercoupon = TbUsercoupon.builder()
@@ -175,8 +175,9 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
                     .build();
             TbUsercoupon tbUsercoupon1 = tbUsercouponRepository.save(tbUsercoupon);
             return response(tbUsercoupon1);
+        }else{
+            return null;
         }
-        return null;
     }
 
 

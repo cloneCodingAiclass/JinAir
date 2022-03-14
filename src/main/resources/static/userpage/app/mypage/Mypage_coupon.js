@@ -245,7 +245,7 @@ $(function () {
 
     // 이벤트 쿠폰 발급
     $('.coupon_submit').on('click', function (e){
-        let couponCode = $('#codeNum').val();
+        let couponCode = $('#codeNum').val().toUpperCase();
         let codeStr = couponCode.replace(/[0-9]/g, "");
         let codeNum = couponCode.replace(/[^0-9]/g, "");
         $.get("/api/coupon/searchStr/" + codeStr, function(response){
@@ -256,15 +256,18 @@ $(function () {
             let max = code.crLastCode.replace(/[^0-9]/g, "");
             console.log(max);
 
-            if(!code){
+            if(typeof code == "undefined"){
                 alert("올바른 쿠폰 정보가 아닙니다.")
             }
             if(codeNum > max){
                 alert("올바른 쿠폰 번호가 아닙니다.")
                 e.stopPropagation();
             }else{
+                let day = new Date().toISOString();
+                let toDay = day.split('.');
                 let discount = code.crDiscount;
-                let startDay = new Date();
+                let startDay = toDay[0];
+                console.log(startDay)
                 let endDay = code.crEndDay;
                 let title = code.crDesc;
                 couponAdd(couponCode, discount, startDay, endDay, title);
@@ -279,7 +282,7 @@ $(function () {
         let couponAdd;
         couponAdd = {
             data : {
-                ucType : "promotion",
+                ucType : "프로모션",
                 ucPrice : 0,
                 ucDesc : title,
                 ucCode : couponCode,
@@ -298,10 +301,14 @@ $(function () {
             async: false,
             contentType : "application/json",
             success(coupon){
-                alert('쿠폰 등록 완료');
+                if(coupon == ""){
+                    alert("쿠폰 번호를 확인해주세요.");
+                }else{
+                    alert("등록이 완료되었습니다.");
+                }
             },
             error(error){
-                alert("쿠폰 등록에 실패했습니다.")
+                alert("쿠폰 등록에 실패했습니다.");
             }
         })
 
