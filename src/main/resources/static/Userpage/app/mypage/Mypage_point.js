@@ -477,9 +477,9 @@ $(function () {
                         contentType : "application/json",
                         success(point) {
                             if (point = ""){
-                                alert("포인트 차감 실패?")
+                                console.log("포인트 차감 실패")
                             }else{
-                                alert("포인트 차감도 성공?")
+                                console.log("포인트 차감 완료")
                             }
                         }
                     })

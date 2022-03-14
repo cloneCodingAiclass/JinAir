@@ -154,22 +154,30 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
         return Header.OK(usercouponApiResponseList, pagination);
     }
 
-    public List<UsercouponApiResponse> promotionCoupon(Header<UsercouponApiRequest> request){
+    public Header<UsercouponApiResponse> promotionCoupon(Header<UsercouponApiRequest> request){
         UsercouponApiRequest usercouponApiRequest = request.getData();
-        String code = usercouponApiRequest.getUcCode();
-        String str = code.replaceAll("[^0-9]", "");
+        List<TbUsercoupon> tbUsercoupons = tbUsercouponRepository.findByUcCode(usercouponApiRequest.getUcCode());
 
-        List<TbUsercoupon> usercouponApiResponseList = tbUsercouponRepository.findFirstByUcCode(usercouponApiRequest.getUcCode());
+        if(tbUsercoupons.isEmpty()){
+            TbMember tbMember = memberRepository.findByMemIndex(usercouponApiRequest.getUcUserindex());
 
-
-
-
-
-//        if(usercouponApiResponseList == null){
-//            TbUsercoupon tbUsercoupon = TbUsercoupon.builder()
-//
-//        }
-        return null;
+            TbUsercoupon tbUsercoupon = TbUsercoupon.builder()
+                    .ucType(usercouponApiRequest.getUcType())
+                    .ucPrice(usercouponApiRequest.getUcPrice())
+                    .ucDesc(usercouponApiRequest.getUcDesc())
+                    .ucCode(usercouponApiRequest.getUcCode())
+                    .ucDiscount(usercouponApiRequest.getUcDiscount())
+                    .ucStartday(LocalDateTime.parse(usercouponApiRequest.getUcStartday()))
+                    .ucEndday(LocalDateTime.parse(usercouponApiRequest.getUcEndday()))
+                    .ucIsUse(usercouponApiRequest.getUcIsUse())
+                    .ucTotcoupon(usercouponApiRequest.getUcTotcoupon())
+                    .ucUserindex(tbMember.getMemIndex())
+                    .build();
+            TbUsercoupon tbUsercoupon1 = tbUsercouponRepository.save(tbUsercoupon);
+            return response(tbUsercoupon1);
+        }else{
+            return null;
+        }
     }
 
 

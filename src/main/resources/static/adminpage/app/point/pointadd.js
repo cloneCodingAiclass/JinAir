@@ -119,7 +119,7 @@ $(function () {
         }
     });
     $('.select_rs').hide();
-    $('.btn_search').on('click', function() {
+    $('#reserveUserBtn').on('click', function() {
         $('.select_rs').show();
     });
 
@@ -130,6 +130,8 @@ $(function () {
 });
 
 (function ($){
+    let memIndex;
+
     let pagination = {
         total_page : 0,
         total_element : 0,
@@ -137,51 +139,87 @@ $(function () {
         curren_elements : 0
     }
 
+    // 유저 목록
     let memList = new Vue({
-        el : '#memList',
+        el : '.memList',
         data : {
             memList : {}
         }
     })
 
-    // 스케줄 목록
-    let schList = new Vue({
-        el : '#schList',
-        data : {
-            schList : {}
-        }
-    })
+    area();
+    airplane();
 
-    let memIndex;
-
-    // 스케줄 목록
-    function searchSch(type, start){
-        $.post({
-            url : '',
-            data : 'type=' + type + '&start=' + start,
-            dataType: 'text',
-            success : function (response){
-                let dataJson = JSON.parse(response);
-                schList.scList = dataJson.data;
-                for(let i = 0; i < dataJson.data.length; i++){
-                    let option = document.createElement('option');
-                    option.innerText = dataJson.data[i].schDeparturePoint + '->' + dataJson.data[i].schArrivalPoint + ' ' + dataJson.data[i].schStartTime;
-                    option.value = dataJson.data[i].schDeparturePoint + '->' + dataJson.data[i].schArrivalPoint + ' ' + dataJson.data[i].schStartTime;
-                    $('.airport_box').append(option);
-                }
-
+    // 항공기 종류 데이터 목록
+    function airplane(){
+        $.get("/api/airplane/list", function (response){
+            console.dir(response)
+            for (let i = 0; i < response.data.length; i++){
+                let a = response.data[i].apName;
+                let option = document.createElement('option');
+                option.innerText = a;
+                option.value = a;
+                $('#airplaneId').append(option);
             }
         })
     }
 
+    // 출발지 도착지 데이터 목록
+    function area(){
+        $.get("/api/airport/list", function (response){
+            // 출발지 셀렉트
+            for(let i = 0; i < response.data.length; i++){
+                let a = response.data[i].aptAirport;
+                let option = document.createElement('option');
+                option.innerText = a;
+                option.value = a;
+                $('#departure_point').append(option);
+            }
+            // 도착지 셀렉트
+            for(let i = 0; i < response.data.length; i++){
+                let a = response.data[i].aptAirport;
+                let option = document.createElement('option');
+                option.innerText = a;
+                option.value = a;
+                $('#arrive_point').append(option);
+            }
+        })
+    }
+
+
+    $('#searchSch').on('click', function (){
+        console.log($('#airplaneId').find('option:selected').val(), $('#departure_point').find('option:selected').val(), $('#arrive_point').find('option:selected').val(), $('#start').val() + 'T08:00:00')
+        searchSch($('#airplaneId').find('option:selected').val(), $('#departure_point').find('option:selected').val(), $('#arrive_point').find('option:selected').val(), $('#start').val() + 'T08:00:00')
+    })
+
+    // 스케줄 목록
+    function searchSch(schAirplaneName, schDeparturePoint, schArrivalPoint, schDepartureDate){
+        $.post({
+            url : '/api/schedule/list/find',
+            data : "schAirplaneName=" + schAirplaneName + "&schDepartureDate=" + schDepartureDate + "&schDeparturePoint=" + schDeparturePoint + "&schArrivalPoint=" + schArrivalPoint,
+            dataType: 'text',
+            success : function (response){
+                let dataJson = JSON.parse(response);
+                console.dir(dataJson);
+                for(let i = 0; i < dataJson.data.length; i++){
+                    let option = document.createElement('option');
+                    option.innerText = dataJson.data[i].schDeparturePoint + '->' + dataJson.data[i].schArrivalPoint + ' ' + dataJson.data[i].schStartTime;
+                    option.value = dataJson.data[i].schDeparturePoint + '->' + dataJson.data[i].schArrivalPoint + ' ' + dataJson.data[i].schStartTime;
+                    $('#schList').append(option);
+                }
+            }
+        })
+    }
+
+    // 예약 로직 필요
     // 스케줄을 통한 유저 검색
-    function searchSchofUser(type, start, schDate){
+    function searchSchofUser(data){
+        let time;
         $.post({
             url : "",
-            data : "type=" + type + "&start=" + start + "&schDate=" + schDate,
+            data : "time=" + time,
             dataType : 'text',
             success : function (response){
-                console.dir(response)
                 memList.memList = response.data;
             }
         })
@@ -190,7 +228,6 @@ $(function () {
     // 유저 아이디 검색
     function searchUserid(userid){
         $.get("/api/user/search/"+userid, function (response){
-            console.dir(response)
             memList.memList = response.data;
 
             memIndex = response.data[0].memIndex;
@@ -198,19 +235,18 @@ $(function () {
         })
     }
 
-    $('.btn_search').on('click', function (){
+    $('#reserveUserBtn').on('click', function (){
         searchSchofUser($('.country_box').find('option:selected').val(), $('#start').val(), $('.airport_box').find('option:selected').val());
     })
 
     $('.btn_usersearch').on('click', function (){
         searchUserid($('#userid').val());
     })
-
+/*
     // 인덱스 값을 못 뽑아옴
     $('#updatePoint').on('click', function (){
-        console.log($('#memIndex').val())
     })
-
+ */
     /*
     function searchSch(){
         $.get("")

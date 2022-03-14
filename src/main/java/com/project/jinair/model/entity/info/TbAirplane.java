@@ -29,7 +29,6 @@ public class TbAirplane {   // 비행기 정보
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_airplane_idx")
     private Long apIndex;
     private String apName;
-    private String apId;
     private Long apSeatSum;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbAirplane") // 하나의 카테고리에 여러게의 파트너가 연결

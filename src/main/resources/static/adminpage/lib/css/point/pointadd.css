@@ -58,50 +58,35 @@
     border: 1px solid #ccc;
     padding-top: 35px;
 }
-#container > .contents .point_category p{
+#container > .contents .point_category p {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+}
+#container > .contents .point_category span{
     font-size: 16px;
     font-weight: bolder;
-}
-#container > .contents .point_category > p{
-    text-align: center;
-    margin-bottom: 35px;
 }
 #container > .contents .point_category > div{
-    width: 100%;
-    height: 50px;
     padding: 0 20px;
-    margin-bottom: 6px;
-}
-#container > .contents .point_category > div p{
-    display: inline-block;
-}
-#container > .contents .point_category > div input, select{
-    text-align: center;
-    height: 30px;
-    border-radius: 2px;
-    outline: none;
-    font-size: 14px;
-    font-weight: bolder;
-}
-#container > .contents .point_category > div input{
-    width: 73%;
-}
-#container > .contents .point_category > div select:nth-child(1){
-    width: 90%;
-    display: block;
-    margin: 0 auto;
-}
-#container > .contents .point_category > div select:nth-child(2){
+    margin-bottom: 15px;
     margin-left: 13px;
-    width: 73%;
 }
-#container > .contents .point_category p{
-    font-size: 16px;
-    font-weight: bolder;
+#container > .contents .point_category > div input,
+#container > .contents .point_category > div select,
+.selectbox {
+    display: inline-block;
+    margin: 0 auto;
+    width: 190px;
+    margin-bottom: 5px;
+}
+.airport_box {
+    margin-left: 45px !important;
 }
 #container > .contents .point_category .btn_search{
     display: block;
     margin: 0 auto;
+    margin-top: 5px;
     outline: none;
     background-color: #BDD600;
     border: none;

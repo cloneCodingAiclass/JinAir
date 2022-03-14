@@ -63,6 +63,11 @@ public class UserCouponApiController implements CrudInterface<UsercouponApiReque
         return userCouponApiService.searchList(id, enumid, startDate, endDate, pageable);
     }
 
+    @PostMapping("/promotion")
+    public Header<UsercouponApiResponse> promotionCoupon(@RequestBody Header<UsercouponApiRequest> request){
+        return userCouponApiService.promotionCoupon(request);
+    }
+
     // 쿠폰 합계 전달
     private Long sumCoupon(Long id) {
         String sumCoupon = "select sum(u.ucTotcoupon) from TbUsercoupon u where u.ucUserindex = :id";

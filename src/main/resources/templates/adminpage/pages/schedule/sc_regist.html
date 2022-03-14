@@ -21,8 +21,7 @@
                             <div class="contents_main">
                                 <table id="apList">
                                     <tr>
-                                        <td>항공기 아이디</td>
-                                        <td>운항편</td>
+                                        <td>항공기 이름</td>
                                         <td>출발 일자</td>
                                         <td>출발지</td>
                                         <td>출발 시간</td>
@@ -36,24 +35,17 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <select id="adid">
-                                                <option v-for="dto in apList" v-bind:value="dto.apSeatSum">{{dto.apId}}</option>
-                                            </select>
-                                        </td>
-                                        <td>
                                             <input type="date" id="startdate">
                                         </td>
                                         <td>
-                                            <select id="departurepoint">
-                                                <option>국내/김포(GMP)</option>
+                                            <select id="departure_point">
                                             </select>
                                         </td>
                                         <td>
                                             <input type="text" class="timepicker" id="starttime">
                                         </td>
                                         <td>
-                                            <select id="arrivalpoint">
-                                                <option>국내/제주(CJU)</option>
+                                            <select id="arrive_point">
                                             </select>
                                         </td>
                                         <td>
