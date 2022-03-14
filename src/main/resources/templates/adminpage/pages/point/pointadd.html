@@ -66,7 +66,7 @@
                             </div>
                             <div class="table_area">
                                 <!--  이륙 지연 보상  -->
-                                <div class="select_rs">
+                                <div class="select_rs memList">
                                     <table>
                                         <colgroup>
                                             <col width="50">
@@ -79,6 +79,7 @@
                                         <tr>
                                             <td>선택</td>
                                             <td>예약번호</td>
+                                            <td>아이디</td>
                                             <td>성명</td>
                                             <td>이메일</td>
                                             <td>생년월일</td>
@@ -95,13 +96,14 @@
                                                 <col width="100">
                                                 <col width="150">
                                             </colgroup>
-                                            <tr>
+                                            <tr v-for="dto in memList">
                                                 <td><input type="checkbox" name=""></td>
-                                                <td>11Q32D</td>
-                                                <td>홍길동(HONG GILDONG)</td>
-                                                <td>dongdong@naver.com</td>
-                                                <td>19961022</td>
-                                                <td>010-0000-0000</td>
+                                                <td>{{}}</td>
+                                                <td>{{}}</td>
+                                                <td>{{}}{{}}</td>
+                                                <td>{{}}</td>
+                                                <td>{{}}</td>
+                                                <td>{{}}</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -113,7 +115,7 @@
                                     </div>
                                 </div>
                                 <!--  유저 아이디 검색  -->
-                                <div class="select_user" id="memList">
+                                <div class="select_user memList" >
                                     <table>
                                         <colgroup>
                                             <col width="50">

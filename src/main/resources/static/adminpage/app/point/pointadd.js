@@ -141,7 +141,7 @@ $(function () {
 
     // 유저 목록
     let memList = new Vue({
-        el : '#memList',
+        el : '.memList',
         data : {
             memList : {}
         }
@@ -211,6 +211,7 @@ $(function () {
         })
     }
 
+    // 예약 로직 필요
     // 스케줄을 통한 유저 검색
     function searchSchofUser(data){
         let time;
