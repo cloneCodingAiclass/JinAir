@@ -141,11 +141,12 @@ $(function () {
             if (response == "") {
                 coupon = 0;
             } else {
-                coupon = response + "장";
+                coupon = '<span>'+ response + '</span>' + "장";
             }
 
             document.getElementById("coupon").innerHTML = coupon;
-            document.getElementById("resultCoupon").innerHTML = coupon;
+            document.getElementById("resultCoupon1").innerHTML = coupon;
+            document.getElementById("resultCoupon2").innerHTML = coupon;
         });
     }
 
@@ -245,7 +246,13 @@ $(function () {
 
     // 이벤트 쿠폰 발급
     $('.coupon_submit').on('click', function (e){
-        let couponCode = $('#codeNum').val().toUpperCase();
+        let couponCode;
+        if($('#codeNum1').val().toUpperCase() == ""){
+            couponCode = $('#codeNum2').val().toUpperCase();
+        }else if($('#codeNum2').val().toUpperCase() == ""){
+            couponCode = $('#codeNum1').val().toUpperCase();
+        }
+        console.log(couponCode);
         let codeStr = couponCode.replace(/[0-9]/g, "");
         let codeNum = couponCode.replace(/[^0-9]/g, "");
         $.get("/api/coupon/searchStr/" + codeStr, function(response){

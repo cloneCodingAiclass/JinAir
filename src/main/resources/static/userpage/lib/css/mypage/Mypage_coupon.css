@@ -731,7 +731,8 @@ body{
     text-align: right;
     margin-top: 50px;
 }
-.bonus_ticket_main .my_coupon p:last-child span{
+.bonus_ticket_main .my_coupon span,
+.coupon_main .my_coupon span{
     font-size: 5rem;
     font-weight: 700;
     color: #661e43;
@@ -771,13 +772,10 @@ body{
     border-right: 4px solid #EDEDED;
     border-top: 4px solid #EDEDED;
     border-bottom: 4px solid #EDEDED;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     padding: 40px;
     line-height: 25px;
 }
-.add_coupon form{
+.add_coupon div{
     margin: 20px 0;
 }
 .add_coupon input[type="text"]{
@@ -970,7 +968,4 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-}
-#codeNum{
-    text-transform: uppercase;
 }
