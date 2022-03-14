@@ -19,8 +19,8 @@
                         <div class="contents_main" id="apList">
                             <table>
                                 <tr>
-                                    <td>항공기 아이디</td>
-                                    <td>운항편</td>
+                                    <td>항공기타입</td>
+                                    <td>항공기이름</td>
                                     <td>출발 일자</td>
                                     <td>출발지</td>
                                     <td>출발 시간</td>
@@ -28,8 +28,8 @@
                                     <td>도착 시간</td>
                                 </tr>
                                 <tr>
+                                    <td>{{apList.schAirplaneType}}</td>
                                     <td>{{apList.schAirplaneName}}</td>
-                                    <td>{{apList.schAirplaneId}}</td>
                                     <td>{{apList.schDepartureDate.substr(0,10)}}</td>
                                     <td>{{apList.schDeparturePoint}}</td>
                                     <td>{{apList.schStartTime.substr(11,16)}}</td>

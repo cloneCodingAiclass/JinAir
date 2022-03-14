@@ -88,9 +88,6 @@
     font-size: 14px;
     font-weight: 600;
 }
-.modal_container .modal p{
-    margin-bottom: 20px;
-}
 .modal_container .modal input[type="text"]{
     margin-left: 20px;
     width: 140px;
@@ -109,10 +106,21 @@
     justify-content: center;
     align-items: center;
 }
+.modal_container .modal table tr {
+    height: 60px;
+}
+.modal_container .modal table th {
+    text-align: left;
+    width: 72px;
+    margin: 5px;
+}
+.modal_container .modal table td {
+    text-align: center;
+    margin: 5px;
+}
 .modal_container .modal input{
     width: 140px;
     height: 30px;
-    margin-left: 20px;
     font-weight: 600;
     border: 2px solid gray;
     border-radius: 4px;

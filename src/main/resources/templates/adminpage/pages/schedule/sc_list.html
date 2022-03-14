@@ -67,18 +67,25 @@
             <!-- 모달 창-->
         <div class="modal_container">
             <div class="modal">
-                <p>항공편명
-                    <select id="schAirplaneName">
-                    </select>
-                    출발날짜 <input type="date" id="schDepartureDate">
-                </p>
-                <p> 출발지
-                    <select id="schDeparturePoint">
-                    </select>
-                        도착지
-                    <select id="schArrivalPoint">
-                    </select>
-                </p>
+                <table>
+                    <tr>
+                        <th>항공타입</th>
+                        <td><select id="schAirplaneType"></select></td>
+                        <td colspan="2"><input type="button" id="findName" value="조회"></td>
+                    </tr>
+                    <tr>
+                        <th>항공기명</th>
+                        <td><select id="schAirplaneName"></select></td>
+                        <th>출발날짜</th>
+                        <td><input type="date" id="schDepartureDate"></td>
+                    </tr>
+                    <tr>
+                        <th>출발지</th>
+                        <td><select id="schDeparturePoint"></select></td>
+                        <th>도착지</th>
+                        <td><select id="schArrivalPoint"></select></td>
+                    </tr>
+                </table>
                 <div class="btn_modal">
                     <input type="button" value="취소" class="modal_cancel">
                     <input type="button" value="검색" class="modal_search" >

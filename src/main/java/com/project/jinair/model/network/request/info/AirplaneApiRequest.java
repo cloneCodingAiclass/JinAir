@@ -18,6 +18,7 @@ import java.util.List;
 @Builder
 public class AirplaneApiRequest {
     private Long apIndex;
+    private String apType;
     private String apName;
     private Long apSeatSum;
 

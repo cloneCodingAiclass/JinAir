@@ -120,24 +120,81 @@ $(function () {
         })
     })
 
-    let apList = new Vue({
-        el : '#aplist',
-        data : {
-            apList : {}
-        }
-    })
+    airplaneType();
 
-    sclist();
+    // 항공기 타입 데이터 목록
+    function airplaneType(){
+        $.get("/api/airplane/list", function (response){
+            console.dir(response)
+            let arr = response.data.map(function (val, index){
+                return val['apType']
+            }).filter(function (val, index, arr2){
+                return arr2.indexOf(val) === index;
+            })
 
-    function sclist(){
-        $.get("/api/airplane/list", function(response){
-            console.dir(response);
+            console.log(arr);
 
-            // 검색 데이터
-            apList.apList = response.data;
+            for (let i = 0; i < arr.length; i++){
+                let a = arr[i];
+                let option = document.createElement('option');
+                option.innerText = a;
+                option.value = a;
+                $('#aptype').append(option);
+            }
 
         })
     }
+
+    $(document).on('click', '#findApName', function (){
+        console.log('작동?');
+        airplaneName($('#aptype').find('option:selected').val());
+    })
+
+    // 항공기 타입에 따른 이름 검색
+    function airplaneName(type) {
+        $('#apname').find('option').remove();
+        $.get("/api/airplane/list/" + type, function (response){
+            let arr = response.data.map(function (val, index){
+                return val['apName']
+            }).filter(function (val, index, arr2){
+                return arr2.indexOf(val) === index;
+            })
+
+            console.log(arr);
+            for(let i = 0; i < arr.length; i++){
+                let a = arr[i];
+                let option = document.createElement('option');
+                option.innerText = a;
+                option.value = a;
+                $('#apname').append(option);
+            }
+        })
+    }
+
+    areaList();
+
+    // 출발지 도착지 데이터 목록
+    function areaList(){
+        $.get("/api/airport/list", function (response){
+            // 출발지 셀렉트
+            for(let i = 0; i < response.data.length; i++){
+                let a = response.data[i].aptAirport;
+                let option = document.createElement('option');
+                option.innerText = a;
+                option.value = a;
+                $('#departure_point').append(option);
+            }
+            // 도착지 셀렉트
+            for(let i = 0; i < response.data.length; i++){
+                let a = response.data[i].aptAirport;
+                let option = document.createElement('option');
+                option.innerText = a;
+                option.value = a;
+                $('#arrive_point').append(option);
+            }
+        })
+    }
+
     $("#apname").change(function (){
         let seat = $(this).val();
         $("#resultseat").val(seat);
@@ -175,12 +232,12 @@ $(function () {
         }
 
         let nationType = $('#nationType').find('option:selected').val();
-        let apname = document.getElementById("apname").value;
-        let apid = $("#adid option:checked").text();
+        let aptype = $('#aptype').find('option:selected').val();
+        let apname = $('#apname').find('option:selected').val();
         let startdate = document.getElementById("startdate").value + "T08:00:00";
-        let departurepoint = document.getElementById("departurepoint").value;
+        let departurepoint = $('#departure_point').find('option:selected').val();
         let starttime = document.getElementById("startdate").value+ "T" + document.getElementById("starttime").value;
-        let arrivalpoint = document.getElementById("arrivalpoint").value;
+        let arrivalpoint = $('#arrive_point').find('option:selected').val();
         let resultseat = document.getElementById("resultseat").value;
         let flyingtime = "2000-01-01T" + document.getElementById("flyingtime").value;
         let price = document.getElementById("price").value;
@@ -189,8 +246,8 @@ $(function () {
         let schedule = {
             data: {
                 schNationType : nationType,
+                schAirplaneType: aptype,
                 schAirplaneName: apname,
-                schAirplaneId: apid,
                 schDepartureDate: startdate,
                 schDeparturePoint: departurepoint,
                 schStartTime: starttime,

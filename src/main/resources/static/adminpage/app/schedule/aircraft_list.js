@@ -118,17 +118,15 @@ $(function () {
     };
 
     function register(){
+        let aptype = document.getElementById("apType").value;
         let apname = document.getElementById("apName").value;
         let apseatsum = document.getElementById("apSeatSum").value;
-        let apseatbiz = document.getElementById("apSeatBiz").value;
-        let apseatplus = document.getElementById("apSeatPlus").value;
 
         let airplaneData = {
             data: {
+                apType : aptype,
                 apName: apname,
-                apSeatSum: apseatsum,
-                apSeatBiz: apseatbiz,
-                apSeatPlus: apseatplus
+                apSeatSum: apseatsum
             }
         }
 
