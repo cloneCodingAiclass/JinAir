@@ -14,15 +14,13 @@ import java.time.LocalDateTime;
 @Builder
 public class CouponRegistApiRequest {
     private Long crIndex;
-    private String crType;
-    private Long crPrice;
     private String crDesc;
     private Integer crDiscount;
     private LocalDateTime crIssuanceDay;
     private LocalDateTime crEndDay;
-    private Integer crTotCoupon;
-    private Integer crStockCoupon;
+    private String crStartCode;
+    private String crLastCode;
+    private String crType;
     private CouponStatus crStatus;
     private LocalDateTime crRegdate;
-    private String crCode;
 }

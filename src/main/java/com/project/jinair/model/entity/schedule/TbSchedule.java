@@ -33,11 +33,11 @@ public class TbSchedule {   // 스케줄 테이블
     private Long schIndex;
     private String schNationType;
     private String schAirplaneName;
-    private LocalDateTime schDepartureDate;
+    private LocalDateTime schDepartureDate; // 출발 날짜
     private String schDeparturePoint;
-    private LocalDateTime schStartTime;
+    private LocalDateTime schStartTime;  // 출발 시간
     private String schArrivalPoint;
-    private LocalDateTime schArrivalDate;
+    private LocalDateTime schArrivalDate;  // 도착 시간
     private Long schAirplaneSeat;
     private LocalDateTime schFlyingTime;
     private Long schBasicPrice;

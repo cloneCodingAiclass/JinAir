@@ -30,18 +30,16 @@ public class TbCouponRegist {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_couponregist_idx")
     private Long crIndex;
-    private String crType;
-    private Long crPrice;
     private String crDesc;
     private Integer crDiscount;
     private LocalDateTime crIssuanceDay;
     private LocalDateTime crEndDay;
-    private Integer crTotCoupon;
-    private Integer crStockCoupon;
+    private String crStartCode;
+    private String crLastCode;
+    private String crType;
     @Enumerated(EnumType.STRING)
     private CouponStatus crStatus;
     @CreatedDate
     private LocalDateTime crRegdate;
-    private String crCode;
 
 }

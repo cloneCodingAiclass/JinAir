@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -125,29 +126,26 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
 
         return Header.OK(scheduleApiResponseList);
     }
-//    public Header<List<ScheduleApiResponse>> find(String schAirplaneName, LocalDateTime schDepartureDate){
-//        List<TbSchedule> tbSchedule = tbScheduleRepository.findBySchAirplaneIdAndSchDepartureDate(schAirplaneName, schDepartureDate);
-//        List<ScheduleApiResponse> scheduleApiResponseList = tbSchedule.stream()
-//                .map(user -> responseSchedule(user))
-//                .collect(Collectors.toList());
-//
-//        return Header.OK(scheduleApiResponseList);
-//    }
-//    public Header<List<ScheduleApiResponse>> find(String schAirplaneId){
-//        List<TbSchedule> tbSchedule = tbScheduleRepository.findBySchAirplaneId(schAirplaneId);
-//        List<ScheduleApiResponse> scheduleApiResponseList = tbSchedule.stream()
-//                .map(user -> responseSchedule(user))
-//                .collect(Collectors.toList());
-//
-//        return Header.OK(scheduleApiResponseList);
-//    }
-//      public Header<List<ScheduleApiResponse>> find(String schAirplaneName, String schDeparturePoint, String schArrivalPoint){
-//        List<TbSchedule> tbSchedule = tbScheduleRepository.findBySchAirplaneIdAndSchDeparturePointAndSchArrivalPoint(schAirplaneName, schDeparturePoint, schArrivalPoint);
-//        List<ScheduleApiResponse> scheduleApiResponseList = tbSchedule.stream()
-//                .map(user -> responseSchedule(user))
-//                .collect(Collectors.toList());
-//
-//          System.out.println(scheduleApiResponseList);
-//        return Header.OK(scheduleApiResponseList);
-//    }
+
+
+
+    public Header<List<ScheduleApiResponse>> Departure(String schDeparturePoint){
+        List<TbSchedule> tbSchedule = tbScheduleRepository.findBySchDeparturePoint(schDeparturePoint);
+        List<ScheduleApiResponse> scheduleApiResponseList = tbSchedule.stream()
+                .map(user -> responseSchedule(user))
+                .collect(Collectors.toList());
+
+        return Header.OK(scheduleApiResponseList);
+    }
+
+    public Header<List<ScheduleApiResponse>> DepAri(String schDeparturePoint, String schArrivalPoint){
+        LocalDateTime now = LocalDateTime.now();
+
+        List<TbSchedule> tbSchedule = tbScheduleRepository.findFirstBySchDeparturePointAndSchArrivalPointAndSchDepartureDateGreaterThanOrderBySchBasicPriceAsc(schDeparturePoint, schArrivalPoint, LocalDateTime.parse(String.valueOf(now).substring(0,19)));
+        List<ScheduleApiResponse> scheduleApiResponseList = tbSchedule.stream()
+                .map(user -> responseSchedule(user))
+                .collect(Collectors.toList());
+        return Header.OK(scheduleApiResponseList);
+    }
+
 }

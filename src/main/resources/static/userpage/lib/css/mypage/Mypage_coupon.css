@@ -532,7 +532,7 @@ body{
     font-size: 20px;
     color: rgb(170, 179, 194);
 }
-.mail_box input[type="submit"] {
+.mail_box input[type="button"] {
     position: relative;
     width: 50px;
     height: 45px;
@@ -789,7 +789,7 @@ body{
     background-color: #F7F7F7;
     font-weight: 600;
 }
-.add_coupon input[type="submit"]{
+.add_coupon input[type="button"]{
     width: 130px;
     height: 50px;
     border: 2px solid #BDD600;
@@ -862,7 +862,7 @@ body{
 }
 /* 쿠폰 사용 안내 */
 .couponY{
-    display: none;
+    display: block;
     width: 100%;
     margin: 30px auto;
 }
@@ -880,17 +880,8 @@ body{
 .couponY table tr{
     height: 60px;
 }
-#showPage{
-    margin: 30px auto;
-    display: flex;
-    justify-content: center;
-}
-#showPage > td:hover {
-    background-color: #BDD600;
-    color: white;
-}
 .couponN{
-    display: none;
+    display: block;
     margin: 30px 0;
     padding: 60px 0;
     border-top: 1px solid black;
@@ -898,6 +889,22 @@ body{
     text-align: center;
     font-size: 1.1rem;
     font-weight: 700;
+}
+.pages {
+    background-color : #fff;
+    color : #444;
+    cursor : pointer;
+    display: flex;
+    justify-content: center;
+}
+
+#showPage > td:hover {
+    background-color: #BDD600;
+    color: white;
+}
+
+.firstPage1, .firstPage2, .lastPage1, .lastPage2 {
+    cursor: pointer;
 }
 .footer_info{
     display: flex;
@@ -963,4 +970,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+#codeNum{
+    text-transform: uppercase;
 }

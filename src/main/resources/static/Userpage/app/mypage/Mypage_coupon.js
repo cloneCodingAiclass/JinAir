@@ -177,13 +177,15 @@ $(function () {
         let enumid = $('#enumid option:selected').val();
 
         if ($('#startDate').val() == "" || $('#endDate').val() == ""){
-            alert("기간 입력하세융ㅋ")
+            alert("기간을 입력하세요.")
             e.stopPropagation();
         }else{
             couponList(memIndex, enumid, startDate, endDate, 0);
         }
     });
 
+    $('.couponN').hide();
+    $('.couponY').hide();
     function couponList(memIndex, enumid, startDate, endDate, page) {
         $.get("/api/userCoupon/couponList/" + memIndex + "/" + enumid + "/" + startDate + "/" + endDate + "?page=" + page, function (response) {
             console.dir(response);
@@ -196,10 +198,10 @@ $(function () {
             // 전체 페이지
             showPage.showPage = pagination.data;
 
-            if (pagination.totalPages.totalElements != 0) {
+            if (pagination.totalPages != 0) {
                 itemList.itemList = response.data;
-                $('.couponY').css('display', 'block');
-                $('.couponN').css('display', 'none');
+                $('.couponY').show();
+                $('.couponN').hide();
                 let lastPage = showPage.totalPages;
                 let str2 = "";
                 str2 += "<td class='firstPage2 cursor'><<</td>";
@@ -223,20 +225,95 @@ $(function () {
                     "background-color": "#661e43",
                     "color": "white"
                 });
+
+                $(".pageNum2").on('click', function (){
+                    page = $(this).attr("id");
+                    couponList(memIndex, enumid, startDate, endDate, page);
+                })
                 $(document).on('click', '.firstPage2', function () {
-                    couponList(memIndex, 0);
+                    couponList(memIndex, enumid, startDate, endDate, 0);
                 });
                 $(document).on('click', '.lastPage2', function () {
-                    couponList(memIndex, lastPage - 1);
+                    couponList(memIndex, enumid, startDate, endDate, lastPage - 1);
                 });
-
             } else {
-                itemList.itemList = null;
-                $('.couponY').css('display', 'none');
-                $('.couponN').css('display', 'block');
+                $('.couponN').show();
+                $('.couponY').hide();
             }
         })
     }
+
+    // 이벤트 쿠폰 발급
+    $('.coupon_submit').on('click', function (e){
+        let couponCode = $('#codeNum').val().toUpperCase();
+        let codeStr = couponCode.replace(/[0-9]/g, "");
+        let codeNum = couponCode.replace(/[^0-9]/g, "");
+        $.get("/api/coupon/searchStr/" + codeStr, function(response){
+            let code = response.data[0];
+            console.log(code);
+
+            if(typeof code == "undefined"){
+                alert("올바른 쿠폰 정보가 아닙니다.")
+                e.stopPropagation();
+            }
+            let max = code.crLastCode.replace(/[^0-9]/g, "");
+            if(codeNum > max){
+                // 쿠폰 최대값 체크
+                console.log(max);
+                alert("올바른 쿠폰 정보가 아닙니다.")
+                e.stopPropagation();
+            }else{
+                let day = new Date().toISOString();
+                let toDay = day.split('.');
+                let discount = code.crDiscount;
+                let startDay = toDay[0];
+                let endDay = code.crEndDay;
+                let title = code.crDesc;
+                couponAdd(couponCode, discount, startDay, endDay, title);
+            }
+            // response의 종료일자, 마지막 코드넘버를 가져와 넘어가지 않았으면 couponadd 메서드 실행
+        })
+
+    })
+    function couponAdd(couponCode, discount, startDay, endDay, title){
+        let couponAdd;
+        couponAdd = {
+            data : {
+                ucType : "프로모션",
+                ucPrice : 0,
+                ucDesc : title,
+                ucCode : couponCode,
+                ucUserindex : memIndex,
+                ucDiscount : discount,
+                ucStartday: startDay,
+                ucEndday: endDay,
+                ucIsUse: "Unused",
+                ucTotcoupon: 1
+            }
+        }
+        $.post({
+            url : "/api/userCoupon/promotion",
+            data : JSON.stringify(couponAdd),
+            dataType : "text",
+            async: false,
+            contentType : "application/json",
+            success(coupon){
+                if(coupon == ""){
+                    alert("쿠폰 번호가 중복되었습니다.");
+                }else{
+                    alert("등록이 완료되었습니다.");
+                }
+            },
+            error(error){
+                alert("쿠폰 등록에 실패했습니다.");
+            }
+        })
+
+    }
+
+
+
+
 });
 
 

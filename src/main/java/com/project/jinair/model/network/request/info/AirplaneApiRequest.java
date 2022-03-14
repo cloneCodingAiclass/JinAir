@@ -20,7 +20,5 @@ public class AirplaneApiRequest {
     private Long apIndex;
     private String apName;
     private Long apSeatSum;
-    private Long apSeatBiz;
-    private Long apSeatPlus;
 
 }

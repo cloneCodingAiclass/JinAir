@@ -2,6 +2,8 @@ package com.project.jinair.controller.page;
 
 import com.project.jinair.model.entity.board.*;
 import com.project.jinair.model.enumclass.LostStatus;
+import com.project.jinair.model.enumclass.QnaStatus;
+import com.project.jinair.model.enumclass.QnaType;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.response.board.*;
 import com.project.jinair.model.network.response.member.MemberApiResponse;
@@ -25,6 +27,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -184,17 +187,86 @@ public class PageController {
         }
     }
 
-    @RequestMapping("/index/faqList")
-    public ModelAndView faqList(HttpServletRequest request, Model model) {
+    @Autowired
+    TbQnaRepository tbQnaRepository;
+
+    // Qna 파일
+    @PostMapping("/qna_file/upload")
+    public String uploadQnaFile(@RequestPart(value = "qnaTitle") String qnaTitle,
+                                @RequestPart(value = "file", required = false) MultipartFile file,
+                                @RequestPart(value = "qnaContent") String qnaContent,
+                                @RequestPart(value = "qnaStartDate") String qnaStartDate,
+                                @RequestPart(value = "qnaStarting", required = false) String qnaStarting,
+                                @RequestPart(value = "qnaDestination", required = false) String qnaDestination,
+                                @RequestPart(value = "qnaResNum", required = false) String qnaResNum,
+                                @RequestPart(value = "qnaType") String qnaType,
+                                @RequestPart(value = "qnaUserindex") String qnaUserindex,
+                                @RequestPart(value = "qnaNeedAnswer", required = false) String qnaNeedAnswer
+    ) throws IOException {
+        TbQna tbQna = new TbQna();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        // 제목
+        tbQna.setQnaTitle(qnaTitle);
+        tbQna.setQnaContent(qnaContent);
+        tbQna.setQnaStartDate(LocalDateTime.parse((qnaStartDate+="T00:00:00"), format));
+        tbQna.setQnaStarting(qnaStarting);
+        tbQna.setQnaResNum(qnaResNum);
+        tbQna.setQnaDestination(qnaDestination);
+        tbQna.setQnaType(QnaType.valueOf(qnaType));
+        tbQna.setQnaUserindex(Long.valueOf(qnaUserindex));
+        tbQna.setQnaNeedAnswer(qnaNeedAnswer);
+        tbQna.setQnaIsans(QnaStatus.NotComplete);
+        // 이미지
+        String sourceImgName = file.getOriginalFilename();
+        String sourceFileNameExtension = FilenameUtils.getExtension(sourceImgName).toLowerCase();
+        FilenameUtils.removeExtension(sourceImgName);
+
+        File destinationImg;
+        String destinationImgName;
+        String imgUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\";
+
+        do{
+            destinationImgName = RandomStringUtils.randomAlphabetic(32)+"."+sourceFileNameExtension;
+            destinationImg = new File(imgUrl + destinationImgName);
+        }while(destinationImg.exists());
+
+        destinationImg.getParentFile().mkdir();
+        file.transferTo(destinationImg);
+
+        tbQna.setQnaFileName(destinationImgName);
+        tbQna.setQnaFileOriname(sourceImgName);
+        tbQna.setQnaFileUrl(imgUrl);
+
+        tbQnaRepository.save(tbQna);
+        return "redirect:/pages/index/mypageQna";
+    }
+
+    // qna 상세
+    @RequestMapping("/myQna/view/{id}")
+    public ModelAndView myQna(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-            return new ModelAndView("/userpage/pages/mypage/mypageDetail/faq_list")
-                    .addObject("code", "faq_list");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_qna_view")
+                    .addObject("code", "add_qna");
         }else{
             return new ModelAndView("/userpage/pages/index/error")
                     .addObject("code", "add_qna");
         }
+    }
+
+    @RequestMapping("/index/faqList")
+    public ModelAndView faqList(HttpServletRequest request, Model model) {
+//        HttpSession session = request.getSession();
+//        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/faq_list")
+                    .addObject("code", "faq_list");
+//        }else{
+//            return new ModelAndView("/userpage/pages/index/error")
+//                    .addObject("code", "add_qna");
+//        }
 
     }
     @RequestMapping("/index/mypageCancelService")
@@ -280,6 +352,7 @@ public class PageController {
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
             return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_qna")
                     .addObject("code", "Mypage_qna");
         }else{

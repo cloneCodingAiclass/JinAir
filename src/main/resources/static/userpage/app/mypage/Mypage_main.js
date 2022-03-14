@@ -218,14 +218,17 @@ $(function () {
         $.get("/api/userCoupon/list/" + memIndex, function (response) {
             console.dir(response);
             let coupon;
-            if (response == ""){
+            if (response == "") {
                 coupon = 0;
+            } else {
+                coupon = response + "장";
             }
 
             document.getElementById("coupon").innerHTML = coupon;
-            document.getElementById("resultCoupon").innerHTML = coupon + "개";
+            document.getElementById("resultCoupon").innerHTML = coupon;
         });
     }
+
 });
 
 function hidePopupLayer(){
