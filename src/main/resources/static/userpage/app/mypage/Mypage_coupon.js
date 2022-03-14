@@ -244,26 +244,70 @@ $(function () {
     }
 
     // 이벤트 쿠폰 발급
-    $('.coupon_submit').on('click', function (){
-        let codeNum = $('#codeNum').val();
-        let codeStr = codeNum.replace(/[0-9]/g, "");
+    $('.coupon_submit').on('click', function (e){
+        let couponCode = $('#codeNum').val();
+        let codeStr = couponCode.replace(/[0-9]/g, "");
+        let codeNum = couponCode.replace(/[^0-9]/g, "");
         $.get("/api/coupon/searchStr/" + codeStr, function(response){
-            console.dir(response);
-
-            let code = response.data;
+            let code = response.data[0];
             console.log(code);
-            
-            let max = code.replace(/^0-9/g, "");
+
+            // 쿠폰 최대값 체크
+            let max = code.crLastCode.replace(/[^0-9]/g, "");
             console.log(max);
+
+            if(!code){
+                alert("올바른 쿠폰 정보가 아닙니다.")
+            }
+            if(codeNum > max){
+                alert("올바른 쿠폰 번호가 아닙니다.")
+                e.stopPropagation();
+            }else{
+                let discount = code.crDiscount;
+                let startDay = new Date();
+                let endDay = code.crEndDay;
+                let title = code.crDesc;
+                couponAdd(couponCode, discount, startDay, endDay, title);
+            }
 
             // response의 종료일자, 마지막 코드넘버를 가져와 넘어가지 않았으면 couponadd 메서드 실행
 
         })
 
     })
-    function couponAdd(codeNum){
+    function couponAdd(couponCode, discount, startDay, endDay, title){
+        let couponAdd;
+        couponAdd = {
+            data : {
+                ucType : "promotion",
+                ucPrice : 0,
+                ucDesc : title,
+                ucCode : couponCode,
+                ucUserindex : memIndex,
+                ucDiscount : discount,
+                ucStartday: startDay,
+                ucEndday: endDay,
+                ucIsUse: "Unused",
+                ucTotcoupon: 1
+            }
+        }
+        $.post({
+            url : "/api/userCoupon/promotion",
+            data : JSON.stringify(couponAdd),
+            dataType : "text",
+            async: false,
+            contentType : "application/json",
+            success(coupon){
+                alert('쿠폰 등록 완료');
+            },
+            error(error){
+                alert("쿠폰 등록에 실패했습니다.")
+            }
+        })
 
     }
+
+
 
 
 });
