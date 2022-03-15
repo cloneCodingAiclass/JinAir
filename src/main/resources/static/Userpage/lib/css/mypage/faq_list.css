@@ -652,9 +652,12 @@ table .question{
 table .question a{
     padding-left: 60px;
 }
+table .tr_answer{
+    display: none;
+}
 table .td_answer{
     width: 100%;
-    display: none;
+    display: table-cell;
     height: auto;
     vertical-align: inherit;
     border-color: inherit;
