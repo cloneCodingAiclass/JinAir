@@ -651,6 +651,7 @@ $(function () {
     };
   });
 
+  // 좌석별 가격
   let price1 = '9,000';
   let price2 = '5,000';
   let price3 = '9,000';
