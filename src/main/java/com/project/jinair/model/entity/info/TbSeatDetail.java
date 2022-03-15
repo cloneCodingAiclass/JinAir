@@ -28,7 +28,7 @@ public class TbSeatDetail { // 비행기 좌석 디테일
     private String sdId;
     @Enumerated(EnumType.STRING)
     private AirplaneSeatStatus sdStatus;
-    private Long sdSeatcnt;
     private Long sdPrice;
+    private String sdNation;
 //    private Long as_index;
 }

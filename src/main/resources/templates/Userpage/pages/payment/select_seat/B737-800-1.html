@@ -1,8 +1,25 @@
 <html lang="ko"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/adminpage/app/seatadd.js"></script>
+</head>
 <!--좌석 선택 랩-->
 <div class="select_seat_wrap select_seat_wrap1" th:fragment="B737-800-1" id="8B737-800-1">
+    <input type="checkbox" class="nation" value="국내선">국내선
+    <input type="checkbox" class="nation" value="일본/중국본토">일본/중국본토
+    <input type="checkbox" class="nation" value="홍콩/마카오/대만/러시아">홍콩/마카오/대만/러시아
+    <input type="checkbox" class="nation" value="동남아/대양주">동남아/대양주
+    <input type="checkbox" class="nation" value="호주/미주">호주/미주
+    <select>
+        <option value="JiniPl">지니 플러스</option>
+        <option value="JiniSt">지니 스트레치</option>
+        <option value="JiniFs">지니 패스트</option>
+        <option value="JiniEE">비상구열</option>
+        <option value="JiniSA">스탠다드A</option>
+        <option value="JiniSB">스탠다드B</option>
+    </select>
     <div class="select_seat select_seat1 B737_800">
         <div class="top_toilet_area toilet_area">
             <img src="/userpage/lib/img/toilet.png" alt="" height="60px">
@@ -26,12 +43,12 @@
         <div class="top_seats seats">
             <div class="seat">
                 <div class="left_seat">
-                    <input type="checkbox" id="8A28" value="8A28" class="SSC exit_seat">
-                    <label for="8A28" class="seat_sel box3"></label>
-                    <input type="checkbox" id="8B28" value="8B28" class="SSC exit_seat">
-                    <label for="8B28" class="seat_sel box3"></label>
-                    <input type="checkbox" id="8C28" value="8C28" class="SSC exit_seat">
-                    <label for="8C28" class="seat_sel box3"></label>
+                    <input type="checkbox" id="8A28" value="8A28" class="SSC">
+                    <label for="8A28" class="seat_sel box3">A28</label>
+                    <input type="checkbox" id="8B28" value="8B28" class="SSC">
+                    <label for="8B28" class="seat_sel box3">B28</label>
+                    <input type="checkbox" id="8C28" value="8C28" class="SSC">
+                    <label for="8C28" class="seat_sel box3">C28</label>
                 </div>
                 <div class="row">28</div>
                 <div class="right_seat">
@@ -42,12 +59,12 @@
             </div>
             <div class="seat">
                 <div class="left_seat">
-                    <input type="checkbox" id="87A29" value="87A29" class="SSC">
-                    <label for="87A29" class="seat_sel box2"></label>
-                    <input type="checkbox" id="87B29" value="87B29" class="SSC">
-                    <label for="87B29" class="seat_sel box2"></label>
-                    <input type="checkbox" id="87C29" value="87C29" class="SSC">
-                    <label for="87C29" class="seat_sel box2"></label>
+                    <input type="checkbox" id="8A29" value="8A29" class="SSC">
+                    <label for="8A29" class="seat_sel box2">A29</label>
+                    <input type="checkbox" id="8B29" value="8B29" class="SSC">
+                    <label for="8B29" class="seat_sel box2">B29</label>
+                    <input type="checkbox" id="8C29" value="8C29" class="SSC">
+                    <label for="8C29" class="seat_sel box2">C29</label>
                 </div>
                 <div class="row">29</div>
                 <div class="right_seat">
@@ -323,20 +340,20 @@
         <div class="top_seats seats">
             <div class="seat">
                 <div class="left_seat">
-                    <input type="checkbox" id="8A43" value="8A43" class="SSC exit_seat">
+                    <input type="checkbox" id="8A43" value="8A43" class="SSC">
                     <label for="8A43" class="seat_sel box3">A43</label>
-                    <input type="checkbox" id="8B43" value="8B43" class="SSC exit_seat">
+                    <input type="checkbox" id="8B43" value="8B43" class="SSC">
                     <label for="8B43" class="seat_sel box3">B43</label>
-                    <input type="checkbox" id="8C43" value="8C43" class="SSC exit_seat">
+                    <input type="checkbox" id="8C43" value="8C43" class="SSC">
                     <label for="8C43" class="seat_sel box3">C43</label>
                 </div>
                 <div class="row">43</div>
                 <div class="right_seat">
-                    <input type="checkbox" id="8D43" value="8D43" class="SSC exit_seat">
+                    <input type="checkbox" id="8D43" value="8D43" class="SSC">
                     <label for="8D43" class="seat_sel box3">D43</label>
-                    <input type="checkbox" id="8E43" value="8E43" class="SSC exit_seat">
+                    <input type="checkbox" id="8E43" value="8E43" class="SSC">
                     <label for="8E43" class="seat_sel box3">E43</label>
-                    <input type="checkbox" id="8F43" value="8F43" class="SSC exit_seat">
+                    <input type="checkbox" id="8F43" value="8F43" class="SSC">
                     <label for="8F43" class="seat_sel box3">F43</label>
                 </div>
             </div>

@@ -421,10 +421,20 @@ public class PageController {
                 .addObject("code", "joinForm_popup3");
     }
     //-------------------------------------------------------------------------------------------
-    // 좌석 등록 테스트용
-    @RequestMapping("/test")
-    public ModelAndView test(Model model) {
+    // 좌석 등록용
+    @RequestMapping("/test/800")
+    public ModelAndView test1(Model model) {
         return new ModelAndView("/userpage/pages/payment/select_seat/B737-800-1")
+                .addObject("code", "test");
+    }
+    @RequestMapping("/test/900")
+    public ModelAndView test2(Model model) {
+        return new ModelAndView("/userpage/pages/payment/select_seat/B737-900-1")
+                .addObject("code", "test");
+    }
+    @RequestMapping("/test/200ER")
+    public ModelAndView test3(Model model) {
+        return new ModelAndView("/userpage/pages/payment/select_seat/B777-200ER-1")
                 .addObject("code", "test");
     }
     // 예약

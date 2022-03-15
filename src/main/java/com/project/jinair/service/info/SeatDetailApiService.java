@@ -39,6 +39,7 @@ public class SeatDetailApiService implements CrudInterface<SeatDetailApiRequest,
         }
 
     public Header<SeatDetailApiResponse> saveAll (List<SeatDetailApiRequest> request){
+        System.out.println(request);
 
         int size = request.size();
         List<TbSeatDetail> tbSeatDetailList = new ArrayList<>();
@@ -48,6 +49,7 @@ public class SeatDetailApiService implements CrudInterface<SeatDetailApiRequest,
                     .sdId(request.get(i).getSdId())
                     .sdPrice(request.get(i).getSdPrice())
                     .sdStatus(request.get(i).getSdStatus())
+                    .sdNation(request.get(i).getSdNation())
                     .build();
             tbSeatDetailList.add(tbSeatDetail);
         }

@@ -83,7 +83,7 @@ $(function () {
                     }
                     nation = "호주/미주";
                 }
-                $('input:checkbox[class="SSC"]:checked').each(function () {
+                $('input:checkbox[class="SSC2"]:checked').each(function () {
                     let arrData = new Object();
                     arrData.sdId = $(this).val();
                     console.log($(this).val());

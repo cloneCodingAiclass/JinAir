@@ -15,6 +15,5 @@ public class SeatDetailApiRequest {
     private String sdId;
     private AirplaneSeatStatus sdStatus;
     private Long sdPrice;
-    private Long sdSeatcnt;
-
+    private String sdNation;
 }
