@@ -43,6 +43,7 @@ public class TbSchedule {   // 스케줄 테이블
     private LocalDateTime schFlyingTime;
     private Long schBasicPrice;
     private Long schPoint;
+    private String schAirportType; // 여행지 구분
 
 
 }

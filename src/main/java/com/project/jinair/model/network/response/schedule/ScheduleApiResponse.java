@@ -29,6 +29,7 @@ public class ScheduleApiResponse {
     private LocalDateTime schFlyingTime;
     private Long schBasicPrice;
     private Long schPoint;
+    private String schAirportType;
 
     // 공항 리스트
     private List<AirportApiResponse> airportApiResponseList;
