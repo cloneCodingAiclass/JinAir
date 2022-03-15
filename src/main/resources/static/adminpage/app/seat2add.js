@@ -7,7 +7,7 @@ $(function () {
             $('input:checkbox[class="nation"]:checked').each(function (){
                 let price = "";
                 let nation = "";
-                if($(this).val() == "국내선"){
+                if($(this).val() == "국내"){
                     if(status == "JiniPl"){
                         price = 9000;
                     }else if(status == "JiniSt"){
@@ -22,7 +22,7 @@ $(function () {
                         price = 1000;
                     }
                     nation = "국내선";
-                }else if($(this).val() == "일본/중국본토"){
+                }else if($(this).val() == "일본/중국 본토"){
                     if(status == "JiniPl"){
                         price = 19000;
                     }else if(status == "JiniSt"){
