@@ -85,8 +85,8 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
                     coupon.setUcCode(usercouponApiRequest.getUcCode());
                     coupon.setUcDiscount(usercouponApiRequest.getUcDiscount());
                     coupon.setUcStartday(LocalDateTime.parse(usercouponApiRequest.getUcStartday()));
-                coupon.setUcEndday(LocalDateTime.parse(usercouponApiRequest.getUcEndday()));
-                coupon.setUcIsUse(usercouponApiRequest.getUcIsUse());
+                    coupon.setUcEndday(LocalDateTime.parse(usercouponApiRequest.getUcEndday()));
+                    coupon.setUcIsUse(usercouponApiRequest.getUcIsUse());
                     coupon.setUcTotcoupon(usercouponApiRequest.getUcTotcoupon());
 
                     return coupon;
@@ -179,6 +179,5 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
             return null;
         }
     }
-
 
 }
