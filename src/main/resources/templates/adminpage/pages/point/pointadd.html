@@ -81,7 +81,7 @@
                             </div>
                             <div class="table_area">
                                 <!--  이륙 지연 보상  -->
-                                <div class="select_rs memList">
+                                <div class="select_rs">
                                     <table>
                                         <colgroup>
                                             <col width="50">
@@ -112,13 +112,15 @@
                                                 <col width="150">
                                             </colgroup>
                                             <tr v-for="dto in memList">
-                                                <td><input type="checkbox" name=""></td>
-                                                <td>{{}}</td>
-                                                <td>{{}}</td>
-                                                <td>{{}}{{}}</td>
-                                                <td>{{}}</td>
-                                                <td>{{}}</td>
-                                                <td>{{}}</td>
+                                                    <td>
+                                                        <input type="checkbox" id="schUser" name="schUser">
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -130,7 +132,7 @@
                                     </div>
                                 </div>
                                 <!--  유저 아이디 검색  -->
-                                <div class="select_user memList" >
+                                <div class="select_user" id="memList" >
                                     <table>
                                         <colgroup>
                                             <col width="50">
@@ -162,7 +164,10 @@
                                                 <col width="150">
                                             </colgroup>
                                             <tr v-for="dto in memList">
-                                                <td><input type="checkbox" name=""></td>
+                                                <td>
+                                                    <input type="checkbox" id="searched" :value=`${dto.memIndex}`>
+                                                    <label for="searched"></label>
+                                                </td>
                                                 <td id="memIndex">{{dto.memIndex}}</td>
                                                 <td>{{dto.memUserid}}</td>
                                                 <td>{{dto.memKorFirstName}}{{dto.memKorLastName}}</td>
@@ -174,9 +179,9 @@
                                     </div>
                                     <div class="point_footer">
                                         <div class="select_user">
-                                            <input type="text" class="pointnumber">
-                                            <input type="text" value="Point" readonly class="readonly">
-                                            <input type="button" id="updatePoint" value="적립">
+                                            <span>Point : </span><input type="text" id="pointNumber">
+                                            <span>Memo : </span><input type="text" id="pointMemo">
+                                            <input type="button" id="updatePoint" value="지급">
                                         </div>
                                     </div>
                                 </div>

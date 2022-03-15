@@ -141,7 +141,7 @@ $(function () {
 
     // 유저 목록
     let memList = new Vue({
-        el : '.memList',
+        el : '#memList',
         data : {
             memList : {}
         }
@@ -263,8 +263,9 @@ $(function () {
         $.get("/api/user/search/"+userid, function (response){
             memList.memList = response.data;
 
-            memIndex = response.data[0].memIndex;
-            $('#memIndex').val(memIndex)
+            for(let i = 0; i < response.data.length; i++){
+                console.log(response.data[i].memIndex)
+            }
         })
     }
 
@@ -274,6 +275,23 @@ $(function () {
 
     $('.btn_usersearch').on('click', function (){
         searchUserid($('#userid').val());
+    })
+
+    $(document).on('click', '#updatePoint', function (){
+        console.log($('#searched:checked').val());
+        let jsonData = {
+            data : {
+                poPoint : $('#pointNumber').val(),
+                poMemo : $('#pointMemo').val(),
+                poUserindex: $('#searched:checked').val()
+            }
+        }
+        $.post({
+            url : '/api/point',
+            data : JSON.stringify(jsonData),
+            dataType : 'text',
+            contentType : 'application/json'
+        })
     })
 /*
     // 인덱스 값을 못 뽑아옴
