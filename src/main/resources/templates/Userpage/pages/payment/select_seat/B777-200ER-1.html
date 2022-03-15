@@ -2,7 +2,26 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org/">
 <!--좌석 선택 랩-->
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/adminpage/app/seatadd.js"></script>
+    <link rel="stylesheet" href="/userpage/lib/css/payment/extras_test.css">
+</head>
 <div class="select_seat_wrap select_seat_wrap1" th:fragment="B777-200ER-1" id="B737-800-1">
+    <input type="checkbox" class="nation" value="국내" checked>국내
+    <input type="checkbox" class="nation" value="일본/중국 본토" checked>일본/중국본토
+    <input type="checkbox" class="nation" value="홍콩/마카오/대만/러시아" checked>홍콩/마카오/대만/러시아
+    <input type="checkbox" class="nation" value="동남아/대양주" checked>동남아/대양주
+    <input type="checkbox" class="nation" value="호주/미주" checked>호주/미주
+    <input type="checkbox" class="apid" value="B777200ER" checked>B777200ER
+    <select>
+        <option value="JiniPl">지니 플러스</option>
+        <option value="JiniSt">지니 스트레치</option>
+        <option value="JiniFs">지니 패스트</option>
+        <option value="JiniEE">비상구열</option>
+        <option value="JiniSA">스탠다드A</option>
+        <option value="JiniSB">스탠다드B</option>
+    </select>
     <div class="select_seat select_seat1 B777_200ER">
         <div class="top_toilet_area toilet_area">
             <img src="/userpage/lib/img/toilet.png" alt="" height="60px">
@@ -32,217 +51,217 @@
         <div class="top_seats seats">
             <div class="seat B777_seat">
                 <div class="left_seat">
-                    <input type="checkbox" id="2A01" value="2A01" class="SSC ">
+                    <input type="checkbox" id="2A01" value="2A01" class="SSC">
                     <label for="2A01" class="seat_sel b777 boxPlus"></label>
-                    <input type="checkbox" id="2B01" value="2B01" class="SSC ">
+                    <input type="checkbox" id="2B01" value="2B01" class="SSC">
                     <label for="2B01" class="seat_sel b777 boxPlus">B01</label>
                     <input type="checkbox" id="2C01" class="SSC" disabled="disabled">
                     <label for="2C01" class="seat_sel b777"></label>
                 </div>
                 <div class="row">01</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D01" value="2D01" class="SSC ">
+                    <input type="checkbox" id="2D01" value="2D01" class="SSC">
                     <label for="2D01" class="seat_sel b777 boxPlus">D01</label>
-                    <input type="checkbox" id="2E01" value="2E01" class="SSC ">
+                    <input type="checkbox" id="2E01" value="2E01" class="SSC">
                     <label for="2E01" class="seat_sel b777 boxPlus">E01</label>
-                    <input type="checkbox" id="2F01" value="2F01" class="SSC ">
+                    <input type="checkbox" id="2F01" value="2F01" class="SSC">
                     <label for="2F01" class="seat_sel b777 boxPlus">F01</label>
-                    <input type="checkbox" id="2G01" value="2G01" class="SSC ">
+                    <input type="checkbox" id="2G01" value="2G01" class="SSC">
                     <label for="2G01" class="seat_sel b777 boxPlus">G01</label>
                 </div>
                 <div class="row">01</div>
                 <div class="right_seat">
                     <input type="checkbox" id="2H01" class="SSC " disabled="disabled">
                     <label for="2H01" class="seat_sel b777"></label>
-                    <input type="checkbox" id="2J01" value="2J01" class="SSC ">
+                    <input type="checkbox" id="2J01" value="2J01" class="SSC">
                     <label for="2J01" class="seat_sel b777 boxPlus">J01</label>
-                    <input type="checkbox" id="2K01" value="2K01" class="SSC ">
+                    <input type="checkbox" id="2K01" value="2K01" class="SSC">
                     <label for="2K01" class="seat_sel b777 boxPlus">K01</label>
                 </div>
             </div>
 
             <div class="seat B777_seat">
                 <div class="left_seat">
-                    <input type="checkbox" id="2A02" value="2A02" class="SSC ">
+                    <input type="checkbox" id="2A02" value="2A02" class="SSC">
                     <label for="2A02" class="seat_sel b777 boxPlus">A02</label>
-                    <input type="checkbox" id="2B02" value="2B02" class="SSC ">
+                    <input type="checkbox" id="2B02" value="2B02" class="SSC">
                     <label for="2B02" class="seat_sel b777 boxPlus">B02</label>
-                    <input type="checkbox" id="2C02" value="2C02" class="SSC ">
+                    <input type="checkbox" id="2C02" value="2C02" class="SSC">
                     <label for="2C02" class="seat_sel b777 boxPlus">C02</label>
                 </div>
                 <div class="row">02</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D02" value="2D02" class="SSC ">
+                    <input type="checkbox" id="2D02" value="2D02" class="SSC">
                     <label for="2D02" class="seat_sel b777 boxPlus">D02</label>
-                    <input type="checkbox" id="2E02" value="2E02" class="SSC ">
+                    <input type="checkbox" id="2E02" value="2E02" class="SSC">
                     <label for="2E02" class="seat_sel b777 boxPlus">E02</label>
-                    <input type="checkbox" id="2F02" value="2F02" class="SSC ">
+                    <input type="checkbox" id="2F02" value="2F02" class="SSC">
                     <label for="2F02" class="seat_sel b777 boxPlus">F02</label>
-                    <input type="checkbox" id="2G02" value="2G02" class="SSC ">
+                    <input type="checkbox" id="2G02" value="2G02" class="SSC">
                     <label for="2G02" class="seat_sel b777 boxPlus">G02</label>
                 </div>
                 <div class="row">02</div>
                 <div class="right_seat">
-                    <input type="checkbox" id="2H02" value="2H02" class="SSC ">
+                    <input type="checkbox" id="2H02" value="2H02" class="SSC">
                     <label for="2H02" class="seat_sel b777 boxPlus">H02</label>
-                    <input type="checkbox" id="2J02" value="2J02" class="SSC ">
+                    <input type="checkbox" id="2J02" value="2J02" class="SSC">
                     <label for="2J02" class="seat_sel b777 boxPlus">J02</label>
-                    <input type="checkbox" id="2K02" value="2K02" class="SSC ">
+                    <input type="checkbox" id="2K02" value="2K02" class="SSC">
                     <label for="2K02" class="seat_sel b777 boxPlus">K02</label>
                 </div>
             </div>
 
             <div class="seat B777_seat">
                 <div class="left_seat">
-                    <input type="checkbox" id="2A03" value="2A03" class="SSC ">
+                    <input type="checkbox" id="2A03" value="2A03" class="SSC">
                     <label for="2A03" class="seat_sel b777 boxPlus">A03</label>
-                    <input type="checkbox" id="2B03" value="2B03" class="SSC ">
+                    <input type="checkbox" id="2B03" value="2B03" class="SSC">
                     <label for="2B03" class="seat_sel b777 boxPlus">B03</label>
-                    <input type="checkbox" id="2C03" value="2C03" class="SSC ">
+                    <input type="checkbox" id="2C03" value="2C03" class="SSC">
                     <label for="2C03" class="seat_sel b777 boxPlus">C03</label>
                 </div>
                 <div class="row">03</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D03" value="2D03" class="SSC ">
+                    <input type="checkbox" id="2D03" value="2D03" class="SSC">
                     <label for="2D03" class="seat_sel b777 boxPlus">D03</label>
-                    <input type="checkbox" id="2E03" value="2E03" class="SSC ">
+                    <input type="checkbox" id="2E03" value="2E03" class="SSC">
                     <label for="2E03" class="seat_sel b777 boxPlus">E03</label>
-                    <input type="checkbox" id="2F03" value="2F03" class="SSC ">
+                    <input type="checkbox" id="2F03" value="2F03" class="SSC">
                     <label for="2F03" class="seat_sel b777 boxPlus">F03</label>
-                    <input type="checkbox" id="2G03" value="2G03" class="SSC ">
+                    <input type="checkbox" id="2G03" value="2G03" class="SSC">
                     <label for="2G03" class="seat_sel b777 boxPlus">G03</label>
                 </div>
                 <div class="row">03</div>
                 <div class="right_seat">
-                    <input type="checkbox" id="2H03" value="2H03" class="SSC ">
+                    <input type="checkbox" id="2H03" value="2H03" class="SSC">
                     <label for="2H03" class="seat_sel b777 boxPlus">H03</label>
-                    <input type="checkbox" id="2J03" value="2J03" class="SSC ">
+                    <input type="checkbox" id="2J03" value="2J03" class="SSC">
                     <label for="2J03" class="seat_sel b777 boxPlus">J03</label>
-                    <input type="checkbox" id="2K03" value="2K03" class="SSC ">
+                    <input type="checkbox" id="2K03" value="2K03" class="SSC">
                     <label for="2K03" class="seat_sel b777 boxPlus">K03</label>
                 </div>
             </div>
 
             <div class="seat B777_seat">
                 <div class="left_seat">
-                    <input type="checkbox" id="2A04" value="2A04" class="SSC ">
+                    <input type="checkbox" id="2A04" value="2A04" class="SSC">
                     <label for="2A04" class="seat_sel b777 boxPlus">A04</label>
-                    <input type="checkbox" id="2B04" value="2B04" class="SSC ">
+                    <input type="checkbox" id="2B04" value="2B04" class="SSC">
                     <label for="2B04" class="seat_sel b777 boxPlus">B04</label>
-                    <input type="checkbox" id="2C04" value="2C04" class="SSC ">
+                    <input type="checkbox" id="2C04" value="2C04" class="SSC">
                     <label for="2C04" class="seat_sel b777 boxPlus">C04</label>
                 </div>
                 <div class="row">04</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D04" value="2D04" class="SSC ">
+                    <input type="checkbox" id="2D04" value="2D04" class="SSC">
                     <label for="2D04" class="seat_sel b777 boxPlus">D04</label>
-                    <input type="checkbox" id="2E04" value="2E04" class="SSC ">
+                    <input type="checkbox" id="2E04" value="2E04" class="SSC">
                     <label for="2E04" class="seat_sel b777 boxPlus">E04</label>
-                    <input type="checkbox" id="2F04" value="2F04" class="SSC ">
+                    <input type="checkbox" id="2F04" value="2F04" class="SSC">
                     <label for="2F04" class="seat_sel b777 boxPlus">F04</label>
-                    <input type="checkbox" id="2G04" value="2G04" class="SSC ">
+                    <input type="checkbox" id="2G04" value="2G04" class="SSC">
                     <label for="2G04" class="seat_sel b777 boxPlus">G04</label>
                 </div>
                 <div class="row">04</div>
                 <div class="right_seat">
-                    <input type="checkbox" id="2H04" value="2H04" class="SSC ">
+                    <input type="checkbox" id="2H04" value="2H04" class="SSC">
                     <label for="2H04" class="seat_sel b777 boxPlus">H04</label>
-                    <input type="checkbox" id="2J04" value="2J04" class="SSC ">
+                    <input type="checkbox" id="2J04" value="2J04" class="SSC">
                     <label for="2J04" class="seat_sel b777 boxPlus">J04</label>
-                    <input type="checkbox" id="2K04" value="2K04" class="SSC ">
+                    <input type="checkbox" id="2K04" value="2K04" class="SSC">
                     <label for="2K04" class="seat_sel b777 boxPlus">K04</label>
                 </div>
             </div>
 
             <div class="seat B777_seat">
                 <div class="left_seat">
-                    <input type="checkbox" id="2A05" value="2A05" class="SSC ">
+                    <input type="checkbox" id="2A05" value="2A05" class="SSC">
                     <label for="2A05" class="seat_sel b777 boxPlus">A05</label>
-                    <input type="checkbox" id="2B05" value="2B05" class="SSC ">
+                    <input type="checkbox" id="2B05" value="2B05" class="SSC">
                     <label for="2B05" class="seat_sel b777 boxPlus">B05</label>
-                    <input type="checkbox" id="2C05" value="2C05" class="SSC ">
+                    <input type="checkbox" id="2C05" value="2C05" class="SSC">
                     <label for="2C05" class="seat_sel b777 boxPlus">C05</label>
                 </div>
                 <div class="row">05</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D05" value="2D05" class="SSC ">
+                    <input type="checkbox" id="2D05" value="2D05" class="SSC">
                     <label for="2D05" class="seat_sel b777 boxPlus">D05</label>
-                    <input type="checkbox" id="2E05" value="2E05" class="SSC ">
+                    <input type="checkbox" id="2E05" value="2E05" class="SSC">
                     <label for="2E05" class="seat_sel b777 boxPlus">E05</label>
-                    <input type="checkbox" id="2F05" value="2F05" class="SSC ">
+                    <input type="checkbox" id="2F05" value="2F05" class="SSC">
                     <label for="2F05" class="seat_sel b777 boxPlus">F05</label>
-                    <input type="checkbox" id="2G05" value="2G05" class="SSC ">
+                    <input type="checkbox" id="2G05" value="2G05" class="SSC">
                     <label for="2G05" class="seat_sel b777 boxPlus">G05</label>
                 </div>
                 <div class="row">05</div>
                 <div class="right_seat">
-                    <input type="checkbox" id="2H05" value="2H05" class="SSC ">
+                    <input type="checkbox" id="2H05" value="2H05" class="SSC">
                     <label for="2H05" class="seat_sel b777 boxPlus">H05</label>
-                    <input type="checkbox" id="2J05" value="2J05" class="SSC ">
+                    <input type="checkbox" id="2J05" value="2J05" class="SSC">
                     <label for="2J05" class="seat_sel b777 boxPlus">J05</label>
-                    <input type="checkbox" id="2K05" value="2K05" class="SSC ">
+                    <input type="checkbox" id="2K05" value="2K05" class="SSC">
                     <label for="2K05" class="seat_sel b777 boxPlus">K05</label>
                 </div>
             </div>
 
             <div class="seat B777_seat">
                 <div class="left_seat">
-                    <input type="checkbox" id="2A06" value="2A06" class="SSC ">
+                    <input type="checkbox" id="2A06" value="2A06" class="SSC">
                     <label for="2A06" class="seat_sel b777 boxPlus">A06</label>
-                    <input type="checkbox" id="2B06" value="2B06" class="SSC ">
+                    <input type="checkbox" id="2B06" value="2B06" class="SSC">
                     <label for="2B06" class="seat_sel b777 boxPlus">B06</label>
-                    <input type="checkbox" id="2C06" value="2C06" class="SSC ">
+                    <input type="checkbox" id="2C06" value="2C06" class="SSC">
                     <label for="2C06" class="seat_sel b777 boxPlus">C06</label>
                 </div>
                 <div class="row">06</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D06" value="2D06" class="SSC ">
+                    <input type="checkbox" id="2D06" value="2D06" class="SSC">
                     <label for="2D06" class="seat_sel b777 boxPlus">D06</label>
-                    <input type="checkbox" id="2E06" value="2E06" class="SSC ">
+                    <input type="checkbox" id="2E06" value="2E06" class="SSC">
                     <label for="2E06" class="seat_sel b777 boxPlus">E06</label>
-                    <input type="checkbox" id="2F06" value="2F06" class="SSC ">
+                    <input type="checkbox" id="2F06" value="2F06" class="SSC">
                     <label for="2F06" class="seat_sel b777 boxPlus">F06</label>
-                    <input type="checkbox" id="2G06" value="2G06" class="SSC ">
+                    <input type="checkbox" id="2G06" value="2G06" class="SSC">
                     <label for="2G06" class="seat_sel b777 boxPlus">G06</label>
                 </div>
                 <div class="row">06</div>
                 <div class="right_seat">
-                    <input type="checkbox" id="2H06" value="2H06" class="SSC ">
+                    <input type="checkbox" id="2H06" value="2H06" class="SSC">
                     <label for="2H06" class="seat_sel b777 boxPlus">H06</label>
-                    <input type="checkbox" id="2J06" value="2J06" class="SSC ">
+                    <input type="checkbox" id="2J06" value="2J06" class="SSC">
                     <label for="2J06" class="seat_sel b777 boxPlus">J06</label>
-                    <input type="checkbox" id="2K06" value="2K06" class="SSC ">
+                    <input type="checkbox" id="2K06" value="2K06" class="SSC">
                     <label for="2K06" class="seat_sel b777 boxPlus">K06</label>
                 </div>
             </div>
 
             <div class="seat B777_seat">
                 <div class="left_seat">
-                    <input type="checkbox" id="2A28" value="2A28" class="SSC ">
+                    <input type="checkbox" id="2A28" value="2A28" class="SSC">
                     <label for="2A28" class="seat_sel b777 box2">A28</label>
-                    <input type="checkbox" id="2B28" value="2B28" class="SSC ">
+                    <input type="checkbox" id="2B28" value="2B28" class="SSC">
                     <label for="2B28" class="seat_sel b777 box2">B28</label>
-                    <input type="checkbox" id="2C28" value="2C28" class="SSC ">
+                    <input type="checkbox" id="2C28" value="2C28" class="SSC">
                     <label for="2C28" class="seat_sel b777 box2">C28</label>
                 </div>
                 <div class="row">28</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D28" value="2D28" class="SSC ">
+                    <input type="checkbox" id="2D28" value="2D28" class="SSC">
                     <label for="2D28" class="seat_sel b777 box2">D28</label>
-                    <input type="checkbox" id="2E28" value="2E28" class="SSC ">
+                    <input type="checkbox" id="2E28" value="2E28" class="SSC">
                     <label for="2E28" class="seat_sel b777 box2">E28</label>
-                    <input type="checkbox" id="2F28" value="2F28" class="SSC ">
+                    <input type="checkbox" id="2F28" value="2F28" class="SSC">
                     <label for="2F28" class="seat_sel b777 box2">F28</label>
-                    <input type="checkbox" id="2G28" value="2G28" class="SSC ">
+                    <input type="checkbox" id="2G28" value="2G28" class="SSC">
                     <label for="2G28" class="seat_sel b777 box2">G28</label>
                 </div>
                 <div class="row">28</div>
                 <div class="right_seat">
-                    <input type="checkbox" id="2H28" value="2H28" class="SSC ">
+                    <input type="checkbox" id="2H28" value="2H28" class="SSC">
                     <label for="2H28" class="seat_sel b777 box2">H28</label>
-                    <input type="checkbox" id="2J28" value="2J28" class="SSC ">
+                    <input type="checkbox" id="2J28" value="2J28" class="SSC">
                     <label for="2J28" class="seat_sel b777 box2">J28</label>
-                    <input type="checkbox" id="2K28" value="2K28" class="SSC ">
+                    <input type="checkbox" id="2K28" value="2K28" class="SSC">
                     <label for="2K28" class="seat_sel b777 box2">K28</label>
                 </div>
             </div>
@@ -257,13 +276,13 @@
                 </div>
                 <div class="row">29</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D29" value="2D29" class="SSC ">
+                    <input type="checkbox" id="2D29" value="2D29" class="SSC">
                     <label for="2D29" class="seat_sel b777 box2">D29</label>
-                    <input type="checkbox" id="2E29" value="2E29" class="SSC ">
+                    <input type="checkbox" id="2E29" value="2E29" class="SSC">
                     <label for="2E29" class="seat_sel b777 box2">E29</label>
-                    <input type="checkbox" id="2F29" value="2F29" class="SSC ">
+                    <input type="checkbox" id="2F29" value="2F29" class="SSC">
                     <label for="2F29" class="seat_sel b777 box2">F29</label>
-                    <input type="checkbox" id="2G29" value="2G29" class="SSC ">
+                    <input type="checkbox" id="2G29" value="2G29" class="SSC">
                     <label for="2G29" class="seat_sel b777 box2">G29</label>
                 </div>
                 <div class="row">29</div>
@@ -289,13 +308,13 @@
                 </div>
                 <div class="row">30</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D30" value="2D30" class="SSC ">
+                    <input type="checkbox" id="2D30" value="2D30" class="SSC">
                     <label for="2D30" class="seat_sel b777 box2">D30</label>
-                    <input type="checkbox" id="2E30" value="2E30" class="SSC ">
+                    <input type="checkbox" id="2E30" value="2E30" class="SSC">
                     <label for="2E30" class="seat_sel b777 box2">E30</label>
-                    <input type="checkbox" id="2F30" value="2F30" class="SSC ">
+                    <input type="checkbox" id="2F30" value="2F30" class="SSC">
                     <label for="2F30" class="seat_sel b777 box2">F30</label>
-                    <input type="checkbox" id="2G30" value="2G30" class="SSC ">
+                    <input type="checkbox" id="2G30" value="2G30" class="SSC">
                     <label for="2G30" class="seat_sel b777 box2">G30</label>
                 </div>
                 <div class="row">30</div>
@@ -327,13 +346,13 @@
                 </div>
                 <div class="row">31</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D31" value="2D31" class="SSC ">
+                    <input type="checkbox" id="2D31" value="2D31" class="SSC">
                     <label for="2D31" class="seat_sel b777 box1">D31</label>
-                    <input type="checkbox" id="2E31" value="2E31" class="SSC ">
+                    <input type="checkbox" id="2E31" value="2E31" class="SSC">
                     <label for="2E31" class="seat_sel b777 box1">E31</label>
-                    <input type="checkbox" id="2F31" value="2F31" class="SSC ">
+                    <input type="checkbox" id="2F31" value="2F31" class="SSC">
                     <label for="2F31" class="seat_sel b777 box1">F31</label>
-                    <input type="checkbox" id="2G31" value="2G31" class="SSC ">
+                    <input type="checkbox" id="2G31" value="2G31" class="SSC">
                     <label for="2G31" class="seat_sel b777 box1">G31</label>
                 </div>
                 <div class="row">31</div>
@@ -357,13 +376,13 @@
                 </div>
                 <div class="row">32</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D32" value="2D32" class="SSC ">
+                    <input type="checkbox" id="2D32" value="2D32" class="SSC">
                     <label for="2D32" class="seat_sel b777 box2">D32</label>
-                    <input type="checkbox" id="2E32" value="2E32" class="SSC ">
+                    <input type="checkbox" id="2E32" value="2E32" class="SSC">
                     <label for="2E32" class="seat_sel b777 box2">E32</label>
-                    <input type="checkbox" id="2F32" value="2F32" class="SSC ">
+                    <input type="checkbox" id="2F32" value="2F32" class="SSC">
                     <label for="2F32" class="seat_sel b777 box2">F32</label>
-                    <input type="checkbox" id="2G32" value="2G32" class="SSC ">
+                    <input type="checkbox" id="2G32" value="2G32" class="SSC">
                     <label for="2G32" class="seat_sel b777 box2">G32</label>
                 </div>
                 <div class="row">32</div>
@@ -387,13 +406,13 @@
                 </div>
                 <div class="row">33</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D33" value="2D33" class="SSC ">
+                    <input type="checkbox" id="2D33" value="2D33" class="SSC">
                     <label for="2D33" class="seat_sel b777 box2">D33</label>
-                    <input type="checkbox" id="2E33" value="2E33" class="SSC ">
+                    <input type="checkbox" id="2E33" value="2E33" class="SSC">
                     <label for="2E33" class="seat_sel b777 box2">E33</label>
-                    <input type="checkbox" id="2F33" value="2F33" class="SSC ">
+                    <input type="checkbox" id="2F33" value="2F33" class="SSC">
                     <label for="2F33" class="seat_sel b777 box2">F33</label>
-                    <input type="checkbox" id="2G33" value="2G33" class="SSC ">
+                    <input type="checkbox" id="2G33" value="2G33" class="SSC">
                     <label for="2G33" class="seat_sel b777 box2">G33</label>
                 </div>
                 <div class="row">33</div>
@@ -417,13 +436,13 @@
                 </div>
                 <div class="row">34</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D34" value="2D34" class="SSC ">
+                    <input type="checkbox" id="2D34" value="2D34" class="SSC">
                     <label for="2D34" class="seat_sel b777 box5">D34</label>
-                    <input type="checkbox" id="2E34" value="2E34" class="SSC ">
+                    <input type="checkbox" id="2E34" value="2E34" class="SSC">
                     <label for="2E34" class="seat_sel b777 box5">E34</label>
-                    <input type="checkbox" id="2F34" value="2F34" class="SSC ">
+                    <input type="checkbox" id="2F34" value="2F34" class="SSC">
                     <label for="2F34" class="seat_sel b777 box5">F34</label>
-                    <input type="checkbox" id="2G34" value="2G34" class="SSC ">
+                    <input type="checkbox" id="2G34" value="2G34" class="SSC">
                     <label for="2G34" class="seat_sel b777 box5">G34</label>
                 </div>
                 <div class="row">34</div>
@@ -447,13 +466,13 @@
                 </div>
                 <div class="row">35</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D35" value="2D35" class="SSC ">
+                    <input type="checkbox" id="2D35" value="2D35" class="SSC">
                     <label for="2D35" class="seat_sel b777 box5">D35</label>
-                    <input type="checkbox" id="2E35" value="2E35" class="SSC ">
+                    <input type="checkbox" id="2E35" value="2E35" class="SSC">
                     <label for="2E35" class="seat_sel b777 box5">E35</label>
-                    <input type="checkbox" id="2F35" value="2F35" class="SSC ">
+                    <input type="checkbox" id="2F35" value="2F35" class="SSC">
                     <label for="2F35" class="seat_sel b777 box5">F35</label>
-                    <input type="checkbox" id="2G35" value="2G35" class="SSC ">
+                    <input type="checkbox" id="2G35" value="2G35" class="SSC">
                     <label for="2G35" class="seat_sel b777 box5">G35</label>
                 </div>
                 <div class="row">35</div>
@@ -477,13 +496,13 @@
                 </div>
                 <div class="row">36</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D36" value="2D36" class="SSC ">
+                    <input type="checkbox" id="2D36" value="2D36" class="SSC">
                     <label for="2D36" class="seat_sel b777 box5">D36</label>
-                    <input type="checkbox" id="2E36" value="2E36" class="SSC ">
+                    <input type="checkbox" id="2E36" value="2E36" class="SSC">
                     <label for="2E36" class="seat_sel b777 box5">E36</label>
-                    <input type="checkbox" id="2F36" value="2F36" class="SSC ">
+                    <input type="checkbox" id="2F36" value="2F36" class="SSC">
                     <label for="2F36" class="seat_sel b777 box5">F36</label>
-                    <input type="checkbox" id="2G36" value="2G36" class="SSC ">
+                    <input type="checkbox" id="2G36" value="2G36" class="SSC">
                     <label for="2G36" class="seat_sel b777 box5">G36</label>
                 </div>
                 <div class="row">36</div>
@@ -507,13 +526,13 @@
                 </div>
                 <div class="row">37</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D37" value="2D37" class="SSC ">
+                    <input type="checkbox" id="2D37" value="2D37" class="SSC">
                     <label for="2D37" class="seat_sel b777 box5">D37</label>
-                    <input type="checkbox" id="2E37" value="2E37" class="SSC ">
+                    <input type="checkbox" id="2E37" value="2E37" class="SSC">
                     <label for="2E37" class="seat_sel b777 box5">E37</label>
-                    <input type="checkbox" id="2F37" value="2F37" class="SSC ">
+                    <input type="checkbox" id="2F37" value="2F37" class="SSC">
                     <label for="2F37" class="seat_sel b777 box5">F37</label>
-                    <input type="checkbox" id="2G37" value="2G37" class="SSC ">
+                    <input type="checkbox" id="2G37" value="2G37" class="SSC">
                     <label for="2G37" class="seat_sel b777 box5">G37</label>
                 </div>
                 <div class="row">37</div>
@@ -537,13 +556,13 @@
                 </div>
                 <div class="row">38</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D38" value="2D38" class="SSC ">
+                    <input type="checkbox" id="2D38" value="2D38" class="SSC">
                     <label for="2D38" class="seat_sel b777 box5">D38</label>
-                    <input type="checkbox" id="2E38" value="2E38" class="SSC ">
+                    <input type="checkbox" id="2E38" value="2E38" class="SSC">
                     <label for="2E38" class="seat_sel b777 box5">E38</label>
-                    <input type="checkbox" id="2F38" value="2F38" class="SSC ">
+                    <input type="checkbox" id="2F38" value="2F38" class="SSC">
                     <label for="2F38" class="seat_sel b777 box5">F38</label>
-                    <input type="checkbox" id="2G38" value="2G38" class="SSC ">
+                    <input type="checkbox" id="2G38" value="2G38" class="SSC">
                     <label for="2G38" class="seat_sel b777 box5">G38</label>
                 </div>
                 <div class="row">38</div>
@@ -567,13 +586,13 @@
                 </div>
                 <div class="row">39</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D39" value="2D39" class="SSC ">
+                    <input type="checkbox" id="2D39" value="2D39" class="SSC">
                     <label for="2D39" class="seat_sel b777 box5">D39</label>
-                    <input type="checkbox" id="2E39" value="2E39" class="SSC ">
+                    <input type="checkbox" id="2E39" value="2E39" class="SSC">
                     <label for="2E39" class="seat_sel b777 box5">E39</label>
-                    <input type="checkbox" id="2F39" value="2F39" class="SSC ">
+                    <input type="checkbox" id="2F39" value="2F39" class="SSC">
                     <label for="2F39" class="seat_sel b777 box5">F39</label>
-                    <input type="checkbox" id="2G39" value="2G39" class="SSC ">
+                    <input type="checkbox" id="2G39" value="2G39" class="SSC">
                     <label for="2G39" class="seat_sel b777 box5">G39</label>
                 </div>
                 <div class="row">39</div>
@@ -597,13 +616,13 @@
                 </div>
                 <div class="row">40</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D40" value="2D40" class="SSC ">
+                    <input type="checkbox" id="2D40" value="2D40" class="SSC">
                     <label for="2D40" class="seat_sel b777 box5">D40</label>
-                    <input type="checkbox" id="2E40" value="2E40" class="SSC ">
+                    <input type="checkbox" id="2E40" value="2E40" class="SSC">
                     <label for="2E40" class="seat_sel b777 box5">E40</label>
-                    <input type="checkbox" id="2F40" value="2F40" class="SSC ">
+                    <input type="checkbox" id="2F40" value="2F40" class="SSC">
                     <label for="2F40" class="seat_sel b777 box5">F40</label>
-                    <input type="checkbox" id="2G40" value="2G40" class="SSC ">
+                    <input type="checkbox" id="2G40" value="2G40" class="SSC">
                     <label for="2G40" class="seat_sel b777 box5">G40</label>
                 </div>
                 <div class="row">40</div>
@@ -627,13 +646,13 @@
                 </div>
                 <div class="row">41</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D41" value="2D41" class="SSC ">
+                    <input type="checkbox" id="2D41" value="2D41" class="SSC">
                     <label for="2D41" class="seat_sel b777 box5">D41</label>
-                    <input type="checkbox" id="2E41" value="2E41" class="SSC ">
+                    <input type="checkbox" id="2E41" value="2E41" class="SSC">
                     <label for="2E41" class="seat_sel b777 box5">E41</label>
-                    <input type="checkbox" id="2F41" value="2F41" class="SSC ">
+                    <input type="checkbox" id="2F41" value="2F41" class="SSC">
                     <label for="2F41" class="seat_sel b777 box5">F41</label>
-                    <input type="checkbox" id="2G41" value="2G41" class="SSC ">
+                    <input type="checkbox" id="2G41" value="2G41" class="SSC">
                     <label for="2G41" class="seat_sel b777 box5">G41</label>
                 </div>
                 <div class="row">41</div>
@@ -660,13 +679,13 @@
                 </div>
                 <div class="row">42</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D42" value="2D42" class="SSC ">
+                    <input type="checkbox" id="2D42" value="2D42" class="SSC">
                     <label for="2D42" class="seat_sel b777 box6">D42</label>
-                    <input type="checkbox" id="2E42" value="2E42" class="SSC ">
+                    <input type="checkbox" id="2E42" value="2E42" class="SSC">
                     <label for="2E42" class="seat_sel b777 box6">E42</label>
-                    <input type="checkbox" id="2F42" value="2F42" class="SSC ">
+                    <input type="checkbox" id="2F42" value="2F42" class="SSC">
                     <label for="2F42" class="seat_sel b777 box6">F42</label>
-                    <input type="checkbox" id="2G42" value="2G42" class="SSC ">
+                    <input type="checkbox" id="2G42" value="2G42" class="SSC">
                     <label for="2G42" class="seat_sel b777 box6">G42</label>
                 </div>
                 <div class="row">42</div>
@@ -683,31 +702,31 @@
         <div class="top_seats seats">
             <div class="seat B777_seat">
                 <div class="left_seat">
-                    <input type="checkbox" id="2A43" value="2A43" class="SSC ">
+                    <input type="checkbox" id="2A43" value="2A43" class="SSC">
                     <label for="2A43" class="seat_sel b777 box6">A43</label>
-                    <input type="checkbox" id="2B43" value="2B43" class="SSC ">
+                    <input type="checkbox" id="2B43" value="2B43" class="SSC">
                     <label for="2B43" class="seat_sel b777 box6">B43</label>
-                    <input type="checkbox" id="2C43" value="2C43" class="SSC ">
+                    <input type="checkbox" id="2C43" value="2C43" class="SSC">
                     <label for="2C43" class="seat_sel b777 box6">C43</label>
                 </div>
                 <div class="row">43</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D43" value="2D43" class="SSC ">
+                    <input type="checkbox" id="2D43" value="2D43" class="SSC">
                     <label for="2D43" class="seat_sel b777 box6">D43</label>
-                    <input type="checkbox" id="2E43" value="2E43" class="SSC ">
+                    <input type="checkbox" id="2E43" value="2E43" class="SSC">
                     <label for="2E43" class="seat_sel b777 box6">E43</label>
-                    <input type="checkbox" id="2F43" value="2F43" class="SSC ">
+                    <input type="checkbox" id="2F43" value="2F43" class="SSC">
                     <label for="2F43" class="seat_sel b777 box6">F43</label>
-                    <input type="checkbox" id="2G43" value="2G43" class="SSC ">
+                    <input type="checkbox" id="2G43" value="2G43" class="SSC">
                     <label for="2G43" class="seat_sel b777 box6">G43</label>
                 </div>
                 <div class="row">43</div>
                 <div class="right_seat">
-                    <input type="checkbox" id="2H43" value="2H43" class="SSC ">
+                    <input type="checkbox" id="2H43" value="2H43" class="SSC">
                     <label for="2H43" class="seat_sel b777 box6">H43</label>
-                    <input type="checkbox" id="2J43" value="2J43" class="SSC ">
+                    <input type="checkbox" id="2J43" value="2J43" class="SSC">
                     <label for="2J43" class="seat_sel b777 box6">J43</label>
-                    <input type="checkbox" id="2K43" value="2K43" class="SSC ">
+                    <input type="checkbox" id="2K43" value="2K43" class="SSC">
                     <label for="2K43" class="seat_sel b777 box6">K43</label>
                 </div>
             </div>
@@ -927,11 +946,11 @@
             </div>
             <div class="seat B777_seat">
                 <div class="left_seat">
-                    <input type="checkbox" id="2A51" value="2A51" class="SSC exit_seat">
+                    <input type="checkbox" id="2A51" value="2A51" class="SSC">
                     <label for="2A51" class=" seat_sel b777 box3">A51</label>
-                    <input type="checkbox" id="2B51" value="2B51" class="SSC exit_seat">
+                    <input type="checkbox" id="2B51" value="2B51" class="SSC">
                     <label for="2B51" class=" seat_sel b777 box3">B51</label>
-                    <input type="checkbox" id="2C51" value="2C51" class="SSC exit_seat">
+                    <input type="checkbox" id="2C51" value="2C51" class="SSC">
                     <label for="2C51" class=" seat_sel b777 box3">C51</label>
                 </div>
                 <div class="row">51</div>
@@ -940,11 +959,11 @@
                 </div>
                 <div class="row">51</div>
                 <div class="right_seat">
-                    <input type="checkbox" id="2H51" value="2H51" class="SSC exit_seat">
+                    <input type="checkbox" id="2H51" value="2H51" class="SSC">
                     <label for="2H51" class="seat_sel b777 box3">H51</label>
-                    <input type="checkbox" id="2J51" value="2J51" class="SSC exit_seat">
+                    <input type="checkbox" id="2J51" value="2J51" class="SSC">
                     <label for="2J51" class="seat_sel b777 box3">J51</label>
-                    <input type="checkbox" id="2K51" value="2K51" class="SSC exit_seat">
+                    <input type="checkbox" id="2K51" value="2K51" class="SSC">
                     <label for="2K51" class="seat_sel b777 box3">K51</label>
                 </div>
             </div>
@@ -959,13 +978,13 @@
                 </div>
                 <div class="row">52</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D52" value="2D52" class="SSC exit_seat">
+                    <input type="checkbox" id="2D52" value="2D52" class="SSC">
                     <label for="2D52" class="seat_sel b777 box3">D52</label>
-                    <input type="checkbox" id="2E52" value="2E52" class="SSC exit_seat">
+                    <input type="checkbox" id="2E52" value="2E52" class="SSC">
                     <label for="2E52" class="seat_sel b777 box3">E52</label>
-                    <input type="checkbox" id="2F52" value="2F52" class="SSC exit_seat">
+                    <input type="checkbox" id="2F52" value="2F52" class="SSC">
                     <label for="2F52" class="seat_sel b777 box3">F52</label>
-                    <input type="checkbox" id="2G52" value="2G52" class="SSC exit_seat">
+                    <input type="checkbox" id="2G52" value="2G52" class="SSC">
                     <label for="2G52" class="seat_sel b777 box3">G52</label>
                 </div>
                 <div class="row">52</div>
@@ -1150,12 +1169,12 @@
                 </div>
                 <div class="row">58</div>
                 <div class="right_seat">
-                    <input type="checkbox" id="2H58" value="2D58" class="SSC">
-                    <label for="2D58" class="seat_sel b777 box6">H58</label>
-                    <input type="checkbox" id="2J58" value="2E58" class="SSC">
-                    <label for="2E58" class="seat_sel b777 box6">J58</label>
-                    <input type="checkbox" id="2K58" value="2F58" class="SSC">
-                    <label for="2F58" class="seat_sel b777 box6">K58</label>
+                    <input type="checkbox" id="2H58" value="2H58" class="SSC">
+                    <label for="2H58" class="seat_sel b777 box6">H58</label>
+                    <input type="checkbox" id="2J58" value="2J58" class="SSC">
+                    <label for="2J58" class="seat_sel b777 box6">J58</label>
+                    <input type="checkbox" id="2K58" value="2K58" class="SSC">
+                    <label for="2K58" class="seat_sel b777 box6">K58</label>
                 </div>
             </div>
             <div class="seat B777_seat">
@@ -1253,20 +1272,20 @@
                     <input type="checkbox" id="2A62" value="2A62" class="SSC">
                     <label for="2A62" class="seat_sel b777 box5">A62</label>
                     <input type="checkbox" id="2B62" value="2B62" class="SSC">
-                    <label for="2B59" class="seat_sel b777 box5">B62</label>
+                    <label for="2B62" class="seat_sel b777 box5">B62</label>
                     <input type="checkbox" id="2C62" class="SSC" disabled="disabled">
                     <label for="2C62" class="seat_sel b777">C62</label>
                 </div>
                 <div class="row">62</div>
                 <div class="center_seat">
-                    <input type="checkbox" id="2D62" value="2D59" class="SSC">
-                    <label for="2D59" class="seat_sel b777 box5">E62</label>
-                    <input type="checkbox" id="2E62" value="2E59" class="SSC">
-                    <label for="2E59" class="seat_sel b777 box5">F62</label>
-                    <input type="checkbox" id="2F62" value="2F59" class="SSC">
-                    <label for="2F59" class="seat_sel b777 box5">F62</label>
+                    <input type="checkbox" id="2D62" value="2D62" class="SSC">
+                    <label for="2D62" class="seat_sel b777 box5">D62</label>
+                    <input type="checkbox" id="2E62" value="2E62" class="SSC">
+                    <label for="2E62" class="seat_sel b777 box5">E62</label>
+                    <input type="checkbox" id="2F62" value="2F62" class="SSC">
+                    <label for="2F62" class="seat_sel b777 box5">F62</label>
                     <input type="checkbox" id="2G62" value="2G62" class="SSC">
-                    <label for="2G59" class="seat_sel b777 box5">G62</label>
+                    <label for="2G62" class="seat_sel b777 box5">G62</label>
                 </div>
                 <div class="row">62</div>
                 <div class="right_seat">

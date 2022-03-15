@@ -20,6 +20,8 @@ $(function () {
                         price = 3000;
                     }else if(status == "JiniSB"){
                         price = 1000;
+                    }else if(status == "JiniBz"){
+                        price = 15000;
                     }
                     nation = "국내";
                 }else if($(this).val() == "일본/중국 본토"){
@@ -35,6 +37,8 @@ $(function () {
                         price = 4000;
                     }else if(status == "JiniSB"){
                         price = 2000;
+                    }else if(status == "JiniBz"){
+                        price = 35000;
                     }
                     nation = "일본/중국 본토";
                 }else if($(this).val() == "홍콩/마카오/대만/러시아"){
@@ -50,6 +54,8 @@ $(function () {
                         price = 6000;
                     }else if(status == "JiniSB"){
                         price = 3000;
+                    }else if(status == "JiniBz"){
+                        price = 50000;
                     }
                     nation = "홍콩/마카오/대만/러시아";
                 }else if($(this).val() == "동남아/대양주"){
@@ -65,6 +71,8 @@ $(function () {
                         price = 9000;
                     }else if(status == "JiniSB"){
                         price = 4000;
+                    }else if(status == "JiniBz"){
+                        price = 80000;
                     }
                     nation = "동남아/대양주";
                 }else if($(this).val() == "호주/미주"){
@@ -80,10 +88,12 @@ $(function () {
                         price = 12000;
                     }else if(status == "JiniSB"){
                         price = 5000;
+                    }else if(status == "JiniBz"){
+                        price = 150000;
                     }
                     nation = "호주/미주";
                 }
-                $('input:checkbox[class="SSC"]:checked').each(function () {
+                $('input:checkbox[class="SSC2"]:checked').each(function () {
                     let arrData = new Object();
                     arrData.sdId = $(this).val();
                     console.log($(this).val());

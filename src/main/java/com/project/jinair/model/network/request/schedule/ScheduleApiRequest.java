@@ -28,5 +28,6 @@ public class ScheduleApiRequest {
     private LocalDateTime schFlyingTime;
     private Long schBasicPrice;
     private Long schPoint;
+    private String schAirportType;
 
 }
