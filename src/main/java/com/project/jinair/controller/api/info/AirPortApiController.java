@@ -47,4 +47,9 @@ public class AirPortApiController implements CrudInterface<AirportApiRequest, Ai
     public Header<List<AirportApiResponse>> findAll() {
         return airPortApiService.search();
     }
+
+    @PostMapping("/list")
+    public Header<List<AirportApiResponse>> findPoint(@RequestParam(name = "findPoint") String findPoint) {
+        return airPortApiService.searchs(findPoint);
+    }
 }

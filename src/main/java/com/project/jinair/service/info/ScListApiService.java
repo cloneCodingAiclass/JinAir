@@ -40,6 +40,7 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
                 .schFlyingTime(scheduleApiRequest.getSchFlyingTime())
                 .schBasicPrice(scheduleApiRequest.getSchBasicPrice())
                 .schPoint(scheduleApiRequest.getSchPoint())
+                .schAirportType(scheduleApiRequest.getSchAirportType())
                 .build();
         TbSchedule newSchedule = tbScheduleRepository.save(tbSchedule);
         return response(newSchedule);
@@ -84,6 +85,7 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
                 .schFlyingTime(tbSchedule.getSchFlyingTime())
                 .schBasicPrice(tbSchedule.getSchBasicPrice())
                 .schPoint(tbSchedule.getSchPoint())
+                .schAirportType(tbSchedule.getSchAirportType())
                 .build();
         return Header.OK(scheduleApiResponse);
     }
@@ -102,6 +104,7 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
                 .schFlyingTime(tbSchedule.getSchFlyingTime())
                 .schBasicPrice(tbSchedule.getSchBasicPrice())
                 .schPoint(tbSchedule.getSchPoint())
+                .schAirportType(tbSchedule.getSchAirportType())
                 .build();
         return scheduleApiResponse;
     }

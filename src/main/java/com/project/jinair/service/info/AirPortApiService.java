@@ -105,4 +105,13 @@ public class AirPortApiService implements CrudInterface<AirportApiRequest, Airpo
 
         return Header.OK(airportApiResponseList);
     }
+
+    public Header<List<AirportApiResponse>> searchs(String findPoint) {
+        List<TbAirport> tbAirports = tbAirportRepository.findByAptAirport(findPoint);
+        List<AirportApiResponse> airportApiResponseList = tbAirports.stream()
+                .map(users -> airportApiResponse(users))
+                .collect(Collectors.toList());
+
+        return Header.OK(airportApiResponseList);
+    }
 }
