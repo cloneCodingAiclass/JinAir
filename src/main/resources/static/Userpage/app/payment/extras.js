@@ -669,14 +669,24 @@ $(function () {
   $(".select_seat_wrap .boxPlus").siblings().text(price7);
 
 
+  let arr = [];
+  let i = 0;
+  let s = "";
+
   $('.SSC').click(function () {
     if ($(this).is(':checked')) {
+      arr[i] = "#" + $(this).attr("id");
+      i++;
+      console.log(arr);
+      console.log(i);
       $(".passenger_info_wrap1 .select_seat_num1 .seat_num1").html($(this).val());
       // $(".passenger_info_wrap1 .select_seat_num1 .seat_num1").html(seat_number);
       $(".passenger_info_wrap1 .select_seat_price .price").html($(this).next().text());
       $(".passenger_info_wrap1 .seat_P1").css("display", "block");
       $('.passenger_info_wrap1 .seat_sel').css('pointer-events', 'auto');
-      $('.SSC').not(this).attr("disabled", true);
+
+
+      // $('.SSC').not(this).attr("disabled", true);
       $(".seat_P1").css("visibility", "visible");
       console.log($(".seat_P1").text());
 
@@ -687,13 +697,26 @@ $(function () {
         $(this).css("disabled", false);
       }
     } else {
+      for(let i = 0; i < arr.length; i++) {
+        if(arr[i] === ("#" + $(this).attr("id")))  {
+          arr.splice(i, 1);
+          arr[i] = null;
+          i--;
+          console.log(i);
+          arr.filter(
+              (element, i) => element == null
+          );
+        }
+      }
+      console.log(arr);
       $(".passenger_info_wrap1 .select_seat_num1 .seat_num1").html("");
       $(".passenger_info_wrap1 .select_seat_price .price").html("");
       $(".seat_P1").css("visibility", "hidden");
 
-      $('.SSC').not(this).attr("disabled", false);
+      // $('.SSC').not(this).attr("disabled", false);
     }
   });
+
 
 
   $('.SSC2').click(function () {
