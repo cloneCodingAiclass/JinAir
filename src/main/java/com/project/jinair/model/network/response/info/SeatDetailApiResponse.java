@@ -16,4 +16,5 @@ public class SeatDetailApiResponse {
     private AirplaneSeatStatus sdStatus;
     private Long sdPrice;
     private String sdNation;
+    private String sdApid;
 }

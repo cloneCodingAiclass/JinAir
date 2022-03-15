@@ -30,5 +30,5 @@ public class TbSeatDetail { // 비행기 좌석 디테일
     private AirplaneSeatStatus sdStatus;
     private Long sdPrice;
     private String sdNation;
-//    private Long as_index;
+    private String sdApid;
 }
