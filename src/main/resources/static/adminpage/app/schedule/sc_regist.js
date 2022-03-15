@@ -200,12 +200,117 @@ $(function () {
         $("#resultseat").val(seat);
     })
 
-    $('#departurepoint').on('select', function (){
-        console.log( $('#departurepoint').val());
+
+
+    let itemList = new Vue({
+        el : '#itemList',
+        data : {
+            itemList : {}
+        },
+        methods:{
+        }
+    });
+    $('#arrive_point').on('change', function (){
+        $.post({
+            url: "/api/airport/list",
+            data: "findPoint=" + $('#arrive_point').val(),
+            dataType: "text",
+            success: function (response) {
+                let dataJson = JSON.parse(response)
+                itemList.itemList = dataJson.data;
+                console.log(itemList.itemList[0].aptTypedetail);
+            }
+        })
+    })
+    let itemList1 = new Vue({
+        el : '#itemList1',
+        data : {
+            itemList1 : {}
+        },
+        methods:{
+        }
+    });
+    $('#departure_point').on('change', function (){
+        $.post({
+            url: "/api/airport/list",
+            data: "findPoint=" + $('#departure_point').val(),
+            dataType: "text",
+            success: function (response) {
+                let dataJson = JSON.parse(response)
+                itemList1.itemList1 = dataJson.data;
+                console.log(itemList1.itemList1[0].aptTypedetail);
+            }
+        })
     })
 
 
+
+
     function register(){
+        let airportType;
+
+        if(itemList.itemList[0].aptTypedetail == '국내') {
+            if(itemList1.itemList1[0].aptTypedetail == '국내'){
+                airportType = '국내';
+            }else if(itemList1.itemList1[0].aptTypedetail == '일본/중국 본토'){
+                airportType = '일본/중국 본토';
+            }else if(itemList1.itemList1[0].aptTypedetail == '홍콩/마카오/대만/러시아'){
+                airportType = '홍콩/마카오/대만/러시아';
+            }else if(itemList1.itemList1[0].aptTypedetail == '동남아/대양주'){
+                airportType = '동남아/대양주';
+            }else if(itemList1.itemList1[0].aptTypedetail == '호주/미주'){
+                airportType = '호주/미주';
+            }
+        }else if(itemList.itemList[0].aptTypedetail == '일본/중국 본토'){
+            if(itemList1.itemList1[0].aptTypedetail == '국내'){
+                airportType = '일본/중국 본토';
+            }else if(itemList1.itemList1[0].aptTypedetail == '일본/중국 본토'){
+                airportType = '일본/중국 본토';
+            }else if(itemList1.itemList1[0].aptTypedetail == '홍콩/마카오/대만/러시아'){
+                airportType = '홍콩/마카오/대만/러시아';
+            }else if(itemList1.itemList1[0].aptTypedetail == '동남아/대양주'){
+                airportType = '동남아/대양주';
+            }else if(itemList1.itemList1[0].aptTypedetail == '호주/미주'){
+                airportType = '호주/미주';
+            }
+        }else if(itemList.itemList[0].aptTypedetail == '홍콩/마카오/대만/러시아'){
+            if(itemList1.itemList1[0].aptTypedetail == '국내'){
+                airportType = '홍콩/마카오/대만/러시아';
+            }else if(itemList1.itemList1[0].aptTypedetail == '일본/중국 본토'){
+                airportType = '홍콩/마카오/대만/러시아';
+            }else if(itemList1.itemList1[0].aptTypedetail == '홍콩/마카오/대만/러시아'){
+                airportType = '홍콩/마카오/대만/러시아';
+            }else if(itemList1.itemList1[0].aptTypedetail == '동남아/대양주'){
+                airportType = '동남아/대양주';
+            }else if(itemList1.itemList1[0].aptTypedetail == '호주/미주'){
+                airportType = '호주/미주';
+            }
+        }else if(itemList.itemList[0].aptTypedetail == '동남아/대양주'){
+            if(itemList1.itemList1[0].aptTypedetail == '국내'){
+                airportType = '동남아/대양주';
+            }else if(itemList1.itemList1[0].aptTypedetail == '일본/중국 본토'){
+                airportType = '동남아/대양주';
+            }else if(itemList1.itemList1[0].aptTypedetail == '홍콩/마카오/대만/러시아'){
+                airportType = '동남아/대양주';
+            }else if(itemList1.itemList1[0].aptTypedetail == '동남아/대양주'){
+                airportType = '동남아/대양주';
+            }else if(itemList1.itemList1[0].aptTypedetail == '호주/미주'){
+                airportType = '호주/미주';
+            }
+        }else if(itemList.itemList[0].aptTypedetail == '호주/미주'){
+            if(itemList1.itemList1[0].aptTypedetail == '국내'){
+                airportType = '호주/미주';
+            }else if(itemList1.itemList1[0].aptTypedetail == '일본/중국 본토'){
+                airportType = '호주/미주';
+            }else if(itemList1.itemList1[0].aptTypedetail == '홍콩/마카오/대만/러시아'){
+                airportType = '호주/미주';
+            }else if(itemList1.itemList1[0].aptTypedetail == '동남아/대양주'){
+                airportType = '호주/미주';
+            }else if(itemList1.itemList1[0].aptTypedetail == '호주/미주'){
+                airportType = '호주/미주';
+            }
+        }
+
         let arrivaldate;
 
         let date = new Date($('#startdate').val().substring(0,4), $('#startdate').val().substring(5,7)-1, $('#startdate').val().substring(8,10));
@@ -256,7 +361,8 @@ $(function () {
                 schAirplaneSeat: resultseat,
                 schFlyingTime: flyingtime,
                 schBasicPrice: price,
-                schPoint: point
+                schPoint: point,
+                schAirportType: airportType
             }
         }
 
