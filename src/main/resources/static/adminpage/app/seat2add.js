@@ -4,6 +4,7 @@ $(function () {
         let arr = new Array();
         let status = $('select option:selected').val();
         console.log("실행됌")
+        let apid = $('input:checkbox[class="apid"]:checked').val();
             $('input:checkbox[class="nation"]:checked').each(function (){
                 let price = "";
                 let nation = "";
@@ -100,6 +101,7 @@ $(function () {
                     arrData.sdPrice = price;
                     arrData.sdStatus = status;
                     arrData.sdNation = nation;
+                    arrData.sdApid = apid;
                     arr.push(arrData);
                     $('input:checkbox[class="SSC"]:checked').attr('checked', false);
                 });

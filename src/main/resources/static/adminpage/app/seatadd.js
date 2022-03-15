@@ -86,13 +86,13 @@ $(function () {
                 }
                 $('input:checkbox[class="SSC"]:checked').each(function () {
                     let arrData = new Object();
-                    arrData.sdId = $(this).val();
-                    console.log($(this).val());
-                    arrData.sdPrice = price;
-                    arrData.sdStatus = status;
-                    arrData.sdNation = nation;
-                    arrData.sdApid = apid;
-                    arr.push(arrData);
+                        arrData.sdId = $(this).val();
+                        console.log($(this).val());
+                        arrData.sdPrice = price;
+                        arrData.sdStatus = status;
+                        arrData.sdNation = nation;
+                        arrData.sdApid = apid;
+                        arr.push(arrData);
                     $('input:checkbox[class="SSC"]:checked').attr('checked', false);
                 });
             });
