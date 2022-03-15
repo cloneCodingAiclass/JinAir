@@ -78,4 +78,24 @@ public class ScListApiController implements CrudInterface<ScheduleApiRequest, Sc
         return scListApiService.DepAri(schDeparturePoint, schArrivalPoint);
     }
 
+    // 도착지, 예산, 오는날, 가는날 조회
+    @PostMapping("/collaboration") // http://localhost:8080/api/schedule/collaboration
+    public Header<List<ScheduleApiResponse>> collaboration (
+            @RequestParam(value = "schDeparturePoint") String schDeparturePoint,
+            @RequestParam(value = "wishPrice") Long wishPrice,
+            @RequestParam(value = "goDay") String goDay,
+            @RequestParam(value = "comeDay") String comeDay
+    ) {
+        return scListApiService.collaborate(schDeparturePoint, wishPrice, goDay, comeDay);
+    }
+
+    // 국내, 국외 구분, 가격 최저가 조회(5개)
+    @GetMapping("/Lcc/{schNationType}") // http://localhost:8080/api/schedule/Lcc
+    public Header<List<ScheduleApiResponse>> Lcc (
+            @PathVariable(name = "schNationType") String schNationType,
+            @PageableDefault(sort = {"schIndex"}, size = 8, direction = Sort.Direction.DESC) Pageable pageable
+    ) {
+        return scListApiService.Lcc(schNationType, pageable);
+    }
+
 }
