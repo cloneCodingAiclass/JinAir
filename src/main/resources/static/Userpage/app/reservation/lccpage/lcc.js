@@ -118,10 +118,6 @@ $(() => {
         });
         $('.search_list').css('display','none');
     })
-    //맞춤
-    $('#searchBtn2').on('click', function () {
-        $('#itemList2').css('display','block');
-    })
 
     //지금 이순간
     $(".now_lcc_btn").on('click', function () {
@@ -142,7 +138,7 @@ $(() => {
 
 
 $(() => {
-
+    // 출발지 스케줄 검색에 따른 도착지 막기(실패)
     let itemList = new Vue({
         el : '#itemList',
         data : {
@@ -167,6 +163,7 @@ $(() => {
         })
     }
 
+    // 최저가 항공권 검색
     let itemList1 = new Vue({
         el : '#itemList1',
         data : {
@@ -191,17 +188,14 @@ $(() => {
                     $('#search_null1').css('display','block');
                 }else{
                     itemList1.itemList1 = dataJson.data;
-                    $('#search_null1').css('display','none');
                     $('#itemList1').css('display','block');
+                    $('#search_null1').css('display','none');
                 }
             }
         })
     }
 
-
-
-
-
+    // 맞춤 항공권 검색
     let itemList2 = new Vue({
         el : '#itemList2',
         data : {
@@ -242,6 +236,8 @@ $(() => {
         })
     }
 
+
+    // 지금 이순간 최저가 항공권 국내
     let itemList3 = new Vue({
         el : '#itemList3',
         data : {
@@ -250,6 +246,19 @@ $(() => {
         methods:{
         }
     });
+    LccDomeSearch();
+    function LccDomeSearch(){
+        $.get({
+            url: "/api/schedule/Lcc/국내",
+            dataType: "text",
+            success: function (response) {
+                let dataJson = JSON.parse(response)
+                itemList3.itemList3 = dataJson.data;
+            }
+        })
+    }
+
+    // 지금 이순간 최저가 항공권 국내
     let itemList4 = new Vue({
         el : '#itemList4',
         data : {
@@ -258,24 +267,7 @@ $(() => {
         methods:{
         }
     });
-
-
-    LccDomeSearch();
-
-    function LccDomeSearch(){
-        $.get({
-            url: "/api/schedule/Lcc/국내",
-            dataType: "text",
-            success: function (response) {
-                let dataJson = JSON.parse(response)
-                itemList3.itemList3 = dataJson.data;
-                console.log(itemList3.itemList3)
-            }
-        })
-    }
-
     LccForiSearch();
-
     function LccForiSearch(){
         $.get({
             url: "/api/schedule/Lcc/국외",
@@ -283,7 +275,6 @@ $(() => {
             success: function (response) {
                 let dataJson = JSON.parse(response)
                 itemList4.itemList4 = dataJson.data;
-                console.log(itemList4.itemList4)
             }
         })
     }
