@@ -421,6 +421,12 @@ public class PageController {
                 .addObject("code", "joinForm_popup3");
     }
     //-------------------------------------------------------------------------------------------
+    // 좌석 등록 테스트용
+    @RequestMapping("/test")
+    public ModelAndView test(Model model) {
+        return new ModelAndView("/userpage/pages/payment/select_seat/B737-800-1")
+                .addObject("code", "test");
+    }
     // 예약
     // 사용자 항공권 예약 getAvailabilityList
     @RequestMapping("/getAvailabilityList")
