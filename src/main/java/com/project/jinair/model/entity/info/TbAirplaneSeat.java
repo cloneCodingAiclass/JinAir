@@ -33,6 +33,4 @@ public class TbAirplaneSeat {   // 비행기 좌석 정보
     @ManyToOne
     private TbAirplane tbAirplane;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbAirplaneSeat")
-    private List<TbSeatDetail> tbSeatDetailList;
 }

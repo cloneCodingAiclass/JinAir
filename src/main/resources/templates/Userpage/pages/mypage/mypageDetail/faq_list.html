@@ -1,7 +1,7 @@
 <html lang="ko"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org/" xmlns:v-bind="http://www.w3.org/1999/xhtml"
-      xmlns:v-vind="http://www.w3.org/1999/xhtml">
+      xmlns:v-vind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <!-- head.html -->
 <div th:replace="userpage/fragment/head :: head"></div>
     <link rel="stylesheet" href="/userpage/lib/css/mypage/faq_list.css">
@@ -57,22 +57,21 @@
                                 <th scope="col">제목</th>
                             </tr>
                         </thead>
-                        <tbody v-for="(faq, i) in listFaq" :key="i">
-                            <tr >
-                                <td>{{faq.faqIndex}}</td>
-                                <td>{{faq.faqType}}</td>
-                                <td class="al">
-                                    <p class="question">
-                                        <a href="#faq1" onclick="showFaq(this);" >{{faq.faqTitle}}</a>
+                        <tbody v-for="faq in listFaq" id="tgFaq">
+                        <td>{{faq.faqIndex}}</td>
+                        <td>{{faq.faqType}}</td>
+                        <td class="al">
+                            <p class="question">
+                            <a v-on:click="toggle()" id="toggle" value="toggle">{{faq.faqTitle}}</a>
 
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr class="tr_answer" >
-                                <td colspan="3" class="td_answer" v-vind:id="'faq'+i">{{faq.faqContent}}
-                                </td>
+                            </p>
+                        </td>
+                        <tr class="tr_answer" v-show="key">
+                            <h4>key 값 {{key}}</h4>
+                            <td colspan="3" class="td_answer">{{faq.faqContent}}
+                            </td>
 
-                            </tr>
+                        </tr>
 
                         </tbody>
                     </table>

@@ -1,6 +1,5 @@
 package com.project.jinair.model.entity.info;
 
-import com.project.jinair.model.entity.member.TbMember;
 import com.project.jinair.model.enumclass.AirplaneSeatStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,8 +14,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @SequenceGenerator(
-        name ="seq_airport_idx",
-        sequenceName = "seq_airport_idx",
+        name ="seq_seatdetail_idx",
+        sequenceName = "seq_seatdetail_idx",
         initialValue = 1,
         allocationSize = 1
 )
@@ -24,7 +23,7 @@ import javax.persistence.*;
 @Builder
 public class TbSeatDetail { // 비행기 좌석 디테일
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_airport_idx")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_seatdetail_idx")
     private Long sdIndex;
     private String sdId;
     @Enumerated(EnumType.STRING)
@@ -32,8 +31,4 @@ public class TbSeatDetail { // 비행기 좌석 디테일
     private Long sdSeatcnt;
     private Long sdPrice;
 //    private Long as_index;
-
-
-    @ManyToOne
-    private TbAirplaneSeat tbAirplaneSeat;
 }
