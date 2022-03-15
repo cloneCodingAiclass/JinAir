@@ -50,6 +50,7 @@ public class SeatDetailApiService implements CrudInterface<SeatDetailApiRequest,
                     .sdPrice(request.get(i).getSdPrice())
                     .sdStatus(request.get(i).getSdStatus())
                     .sdNation(request.get(i).getSdNation())
+                    .sdApid(request.get(i).getSdApid())
                     .build();
             tbSeatDetailList.add(tbSeatDetail);
         }
