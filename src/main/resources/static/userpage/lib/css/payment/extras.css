@@ -60,8 +60,8 @@ a:visited{color:#444;}
 }
 body{
     color: #444;
-    white-space: normal; 
-    word-wrap: break-word; 
+    white-space: normal;
+    word-wrap: break-word;
     line-height: 1;
 }
 #wrap{
@@ -101,7 +101,7 @@ body{
     right: -5px;
     top: -10px;
 }
-#header .login{ 
+#header .login{
     box-sizing: border-box;
     display: inline;
     position: relative;
@@ -687,7 +687,7 @@ body{
 
 .service_content .passenger_info_wrap .passenger_info p {
     display: flex;
-    margin-top: 25px;    
+    margin-top: 25px;
     margin-left: 15px;
     align-items: flex-end;
 }
@@ -727,7 +727,7 @@ body{
     font-size: 25px;
     top: 5px;
     right: 0px;
-    border: 0.5px solid rgba(168, 168, 168, 0.5);
+    border: none;
     color: rgba(168, 165, 165, 0.5);
     font-weight: 400;
     z-index: 1;
@@ -809,13 +809,15 @@ body{
     content: " > ";
 }
 
+/*좌석 선택랩*/
+
 .service_content .seat_info_wrap .seat_info .seat_box {
     width: 100%;
     height: 40px;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
     font-size: 14px;
 }
 
@@ -829,32 +831,37 @@ body{
 
 .seat_sel {
     display: inline-block;
-    width: 45px;
-    height: 45px;
+    width: 44px;
+    height: 44px;
     /* border: 3px solid red; */
     text-indent: -9999px;
 }
-/* 
-.chk_box { display: block; position: relative; padding-left: 25px; margin-bottom: 10px; cursor: pointer; font-size: 14px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } 
-/* 기본 체크박스 숨기기 */ 
+
+.B777_seat .b777 {
+    width: 26px;
+    height: 26px;
+}
+/*
+.chk_box { display: block; position: relative; padding-left: 25px; margin-bottom: 10px; cursor: pointer; font-size: 14px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+/* 기본 체크박스 숨기기 */
 
 .chk_box input[type="checkbox"] { display: none; }
 
-/* 선택되지 않은 체크박스 스타일 꾸미기 */ 
-/* .on { width: 20px; 
-    height: 20px; 
-    background: #ddd; 
-    position: absolute; 
-    top: 0; left: 0; 
+/* 선택되지 않은 체크박스 스타일 꾸미기 */
+/* .on { width: 20px;
+    height: 20px;
+    background: #ddd;
+    position: absolute;
+    top: 0; left: 0;
 }  */
 
 /* .box {
     background-color: #636363;;
 } */
 
-/* 선택된 체크박스 스타일 꾸미기 */ 
+/* 선택된 체크박스 스타일 꾸미기 */
 /* .SSC:checked + .box1 {
-    background: #f86480; 
+    background: #f86480;
 } */
 .SSC:checked + .seat_sel {
     background: url("/userpage/lib/img/check.png");
@@ -881,6 +888,10 @@ body{
 }
 .SSC:checked + .box6 {
     background-color: #737373;
+}
+
+.SSC:checked + .boxPlus {
+    background-color: #B28913;
 }
 
 .SSC:checked + .box7 {
@@ -920,6 +931,10 @@ body{
     background-color: #737373;
 }
 
+.SSC2:checked + .boxPlus {
+    background-color: #B28913;
+}
+
 .SSC2:checked + .box7 {
     padding: 0px;
     font-size: 40px;
@@ -934,27 +949,27 @@ body{
     background-color: #fff;
 }
 
-.on:after { 
-    content: ""; 
-    position: absolute; 
-    display: none; 
-} 
+.on:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
 
 .chk_box input[type="checkbox"]:checked + .on:after {
-    display: block; 
-    } 
+    display: block;
+}
 
-.on:after { 
-    width: 6px; 
-    height: 10px; 
-    border: solid #fff; 
+.on:after {
+    width: 6px;
+    height: 10px;
+    border: solid #fff;
     border-width: 0 2px 2px 0;
-    -webkit-transform: rotate(45deg); 
-    -ms-transform: rotate(45deg); 
-    transform: rotate(45deg); 
-    position: absolute; 
-    left: 6px; 
-    top: 2px; 
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    left: 6px;
+    top: 2px;
 }
 
 
@@ -982,59 +997,11 @@ body{
     border: 3px solid #737373;
     cursor: pointer;
 }
+.service_content .boxPlus {
+    border: 3px solid #B28913;
+    cursor: pointer;
+}
 
-/* 
-.background {
-    background-color: #636363;;   
-}
-.background1 {
-    background: url("../img/check.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-    filter: blur();
-    background-color: #518BBB;
-}
-.background2 {
-    background: url("../img/check.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-    background-image: url("../img/check.png");
-    background-color: #72008E;
-}
-.background3 {
-    background: url("../img/check.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-    background-image: url("../img/check.png");
-    background-color: #A82628
-}
-.background4 {
-    background: url("../img/check.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-    background-image: url("../img/check.png");
-    background-color: #00103F;
-}
-.background5 {
-    background: url("../img/check.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-    background-image: url("../img/check.png");
-    background-color: #007074;
-}
-.background6 {
-    background: url("../img/check.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-    background-image: url("../img/check.png");
-    background-color: #737373;
-} */
 .passenger_info_wrap2 {
     display: none;
 }
@@ -1063,12 +1030,12 @@ body{
 
 .service_content .seat_info_wrap .seat_info .seat_box .txt .cur {
     display: inline-block !important;
-} 
+}
 
 .service_content .seat_info_wrap .seat_info .seat_box .txt .seat_name {
     display: inline-block !important;
     /* background-color: red; */
-} 
+}
 
 .service_content .seat_info_wrap .seat_info .seat_box .box1+.txt {
     color: #518BBB;
@@ -1090,6 +1057,10 @@ body{
     color: #737373;
 }
 
+.service_content .seat_info_wrap .seat_info .seat_box .boxPlus+.txt {
+    color: #B28913;
+}
+
 .service_content .seat_info_wrap .seat_info .seat_box .cur {
     font-size: 12px;
 }
@@ -1102,11 +1073,11 @@ body{
     display: none;
 }
 
-.seat_column .left_seat p, .seat_column .right_seat .seat_sel {
+.seat_column .left_seat .seat_sel, .seat_column .right_seat .seat_sel {
     text-indent: 0px;
 }
 
-/*좌석정보 랩 끝*/
+/*좌석 선택랩*/
 
 
 /*좌석 선택 랩2*/
@@ -1116,6 +1087,8 @@ body{
     width: 575px;
     background-color: #fff;
 }
+
+/*좌석정보 랩 끝*/
 
 
 
@@ -1131,17 +1104,38 @@ body{
 .select_seat_wrap .select_seat {
     width: 470px;
     height: 100%;
-    background: url('/userpage/lib/img/select_seat_back.png');
+    background: url(/userpage/lib/img/B737-800.png);
+    background-size: 102%;
+    padding: 40px;
+    padding-top: 30px;
+    background-repeat: no-repeat;
+}
+
+.select_seat_wrap .B737-900 {
+    width: 470px;
+    height: 100%;
+    background: url(/userpage/lib/img/B737-900.png);
     background-size: 100%;
     padding: 40px;
     padding-top: 30px;
     background-repeat: no-repeat;
 }
 
+.select_seat_wrap .B777_200ER {
+    width: 470px;
+    height: 100%;
+    background: url(/userpage/lib/img/B777-200ER.png);
+    background-size: 102%;
+    padding: 40px;
+    padding-top: 30px;
+    background-repeat: no-repeat;
+}
+
+
 .select_seat_wrap .select_seat .top_toilet_area {
-    display: block;
+    display: flex;
     margin-bottom: 30px;
-    float: left;
+    justify-content: center;
 }
 
 .select_seat_wrap .select_seat .bottom_toilet_area {
@@ -1149,6 +1143,27 @@ body{
     justify-content: space-between;
     height: 60px;
     margin-top: 20px;
+}
+
+.select_seat_wrap .select_seat .middle_toilet_area {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    margin-top: 15px;
+}
+
+.select_seat_wrap .select_seat .middle_toilet_area2 {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: flex-end;
+}
+
+.bottom_toilet_area2 {
+    margin-top: 5px !important;
+    margin-bottom: 10px;
 }
 
 .select_seat_wrap .select_seat .exit_area {
@@ -1169,38 +1184,106 @@ body{
     font-weight: bold;
 }
 
+
 .select_seat_wrap .select_seat .seat .left_seat, .right_seat {
     width: 43%;
     display: flex;
     justify-content: space-around;
 }
 
+.boxPlus {
+    height: 54px;
+}
 
-.select_seat_wrap .select_seat .seat p {
-    display: inline-block;
-    width: 45px;
-    height: 45px;
-    text-align: center;
+.select_seat_wrap .select_seat .B777_seat {
+    margin-bottom: 12px;
+}
+
+.select_seat_wrap .select_seat .B777_seat .left_seat, .B777_seat .right_seat {
+    width: 22%;
+}
+
+.select_seat_wrap .select_seat .B777_seat .center_seat {
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.B777_seat .center_seat .seat_sel {
+    width: 26px;
+    height: 26px;
+}
+
+.B777_seat .boxPlus {
+    width: 26px;
+    height: 35px;
+}
+
+.B777_seat .center_seat .boxPlus {
+    width: 26px;
+    height: 33px;
 }
 
 .select_seat_wrap .select_seat .seat_column {
     margin-top: 50px;
 }
 
-
-.select_seat_wrap .select_seat .seat_column p {
+.select_seat_wrap .select_seat .seat_column .left_seat, .select_seat_wrap .select_seat  .seat_column .right_seat {
     border: none;
-    height: 5px;
+    height: 5px !important;
     font-weight: bold;
-    color: black;
+    text-indent: 0;
+}
+
+.select_seat_wrap .select_seat .seat_column > .left_seat p, .select_seat_wrap .select_seat .seat_column .right_seat p {
+    text-indent: 0 !important;
+    color: black !important;
+    display: inline-block;
+}
+
+.seat_columnB777 {
+    margin-top: 20px;
+    display: flex;
+}
+
+.seat_columnB777 > div {
+    display: flex;
+    height: 5px;
+    justify-content: space-around;
+    text-indent: 0;
+}
+
+.seat_columnB777 > div.B777left, .seat_columnB777 > div.B777right {
+    width: 22% !important;
+}
+
+.seat_columnB777 > div.B777center {
+    width: 30% !important;
+}
+
+.seat_columnB777 .B777left p, .seat_columnB777 .B777center p, .seat_columnB777 .B777right p {
+    text-indent: 0px;
+    border: none;
+    font-weight: bold;
+    color: black !important;
+}
+
+.seat_columnB777 .B777left p {
+    display: inline-block;
 }
 
 .bottom_exit_area {
     margin-top: 25px;
 }
 
-/* .select_seat_wrap .select_seat .box7 {
-} */
+.seat_column2 {
+    margin-top: 70px !important;
+}
+
+
+
+    /* .select_seat_wrap .select_seat .box7 {
+    } */
 
 .select_seat_wrap .select_comp {
     position: fixed;
@@ -1416,7 +1499,7 @@ body{
 /*서비스 컨텐츠 랩2 끝*/
 
 /*서비스 컨텐츠 랩3*/
-.service_content_wrap3 
+.service_content_wrap3
 
 .service_content_wrap3 .section2 .checkBox_1 {
     display: block;
@@ -1491,7 +1574,7 @@ body{
 .service_content_wrap3 .service_content .join_insurance_wrap .insurance_content .insurance_menu_wrap .ins_menu2 {
     background-color: #fff;
     color: #444;
-} 
+}
 
 .service_content_wrap3 .service_content .join_insurance_wrap .insurance_content .insContent {
     width: 100%;
@@ -1692,7 +1775,7 @@ body{
     border: none;
     font-weight: bold;
 }
-.service_content_wrap2 .select_comp {    
+.service_content_wrap2 .select_comp {
     position: fixed;
     display: flex;
     bottom: 100px;
@@ -1929,7 +2012,7 @@ body{
 
 .modal_free_wrap .modal_content_wrap .modal_menu_wrap > div {
     width: 50%;
-    text-align: center;    
+    text-align: center;
     display: flex;
     align-items: center;
     text-align: center;
@@ -2996,15 +3079,15 @@ label.checkbox_wrap {
 .fix_bott .seat_img {
     background: url('/userpage/lib/img/menu1.png');
     background-size: 80%;
-} 
+}
 .fix_bott .baggage_img {
     background: url('/userpage/lib/img/menu2.png');
     background-size: 80%;
-} 
+}
 .fix_bott .insurance_img {
     background: url('/userpage/lib/img/menu3.png');
     background-size: 70%;
-} 
+}
 
 .fix_bott .fix_img {
     width: 65px;
@@ -3589,7 +3672,7 @@ td.cur::before {
 .Aicon img:nth-child(2) {
     margin-top: -7px;
     height: 35px;
-}  
+}
 #info {
     padding: 7px;
     width: 65%;
@@ -3721,7 +3804,7 @@ td.cur::before {
 .edit_jour_wrap .radio_wrap label {
     margin-right: 25px;
     margin-left: 10px;
-} 
+}
 .edit_jour_wrap .radio_wrap input[type="radio"] {
     width: 17px;
     height: 17px;
@@ -3736,7 +3819,7 @@ td.cur::before {
 }
 .edit_jour_wrap .radio_wrap input[type="radio"]:checked {
     background-position-y: 100%;
-} 
+}
 .in_bl {
     display: inline-block;
 }
@@ -3757,7 +3840,7 @@ td.cur::before {
 .multi_wrap {
     display: none;
 }
-  /* 사람 수 */
+/* 사람 수 */
 .person_layerbtn {
     margin-right: 2px;
     margin-left: 2px;
@@ -3771,7 +3854,7 @@ td.cur::before {
     text-align: center;
     cursor: pointer;
     justify-content: space-around;
-} 
+}
 .person_layerbtn .person_num {
     vertical-align: middle;
     font-size: 17.5px;
@@ -3895,8 +3978,8 @@ td.cur::before {
     width: 15px;
     vertical-align: middle;
 }
-  
-  /* 출발지, 도착지, 가는날, 오는날 */
+
+/* 출발지, 도착지, 가는날, 오는날 */
 .round_wrap table.modal_table,
 .oneway_wrap table.modal_table,
 .multi_wrap table.modal_table {
@@ -3977,8 +4060,8 @@ td.cur::before {
     border: 1px solid rgb(0, 0, 0, 0.2);
     z-index: 10;
     text-align: left;
-  }
-  .multi_wrap .go_layer{
+}
+.multi_wrap .go_layer{
     width: 880px;
     padding: 40px 20px;
     position: absolute;
@@ -3990,8 +4073,8 @@ td.cur::before {
     border: 1px solid rgb(0, 0, 0, 0.2);
     z-index: 10;
     text-align: left;
-  }
-  .multi_wrap .go_layer2 {
+}
+.multi_wrap .go_layer2 {
     width: 880px;
     padding: 40px 20px;
     position: absolute;
@@ -4003,7 +4086,7 @@ td.cur::before {
     border: 1px solid rgb(0, 0, 0, 0.2);
     z-index: 10;
     text-align: left;
-  }
+}
 .go_layer div,
 .go_layer2 div {
     width: 160px;
@@ -4060,8 +4143,8 @@ td.cur::before {
     border: 1px solid rgb(0, 0, 0, 0.2);
     z-index: 10;
     text-align: left;
-  }
-  .multi_wrap .arrive_layer{
+}
+.multi_wrap .arrive_layer{
     width: 880px;
     padding: 40px 20px;
     position: absolute;
@@ -4073,8 +4156,8 @@ td.cur::before {
     border: 1px solid rgb(0, 0, 0, 0.2);
     z-index: 10;
     text-align: left;
-  }
-  .multi_wrap .arrive_layer2 {
+}
+.multi_wrap .arrive_layer2 {
     width: 880px;
     padding: 40px 20px;
     position: absolute;
@@ -4086,7 +4169,7 @@ td.cur::before {
     border: 1px solid rgb(0, 0, 0, 0.2);
     z-index: 10;
     text-align: left;
-  }
+}
 .arrive_layer div,
 .arrive_layer2 div {
     width: 160px;

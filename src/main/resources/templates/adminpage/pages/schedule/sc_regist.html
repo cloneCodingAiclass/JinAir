@@ -21,6 +21,7 @@
                             <div class="contents_main">
                                 <table id="apList">
                                     <tr>
+                                        <td>항공기 타입</td>
                                         <td>항공기 이름</td>
                                         <td>출발 일자</td>
                                         <td>출발지</td>
@@ -30,8 +31,12 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <select id="apname">>
-                                                <option v-for="dto in apList" v-bind:value="dto.apSeatSum">{{dto.apName}}</option>
+                                            <select id="aptype"></select>
+                                            <input type="button" value="조회" id="findApName">
+                                        </td>
+                                        <td>
+                                            <select id="apname">
+                                                <option selected disabled>필수 선택</option>
                                             </select>
                                         </td>
                                         <td>

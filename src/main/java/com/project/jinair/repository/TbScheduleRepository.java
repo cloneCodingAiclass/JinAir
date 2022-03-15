@@ -12,10 +12,10 @@ import java.util.List;
 public interface TbScheduleRepository extends JpaRepository<TbSchedule, Long> {
 
 
-    List<TbSchedule> findBySchAirplaneNameAndSchDepartureDateAndSchDeparturePointAndSchArrivalPoint(String schAirplaneName, LocalDateTime schDepartureDate, String schDeparturePoint, String schArrivalPoint);
+    List<TbSchedule> findBySchAirplaneTypeAndSchAirplaneNameAndSchDepartureDateAndSchDeparturePointAndSchArrivalPoint(String schAirplaneType, String schAirplaneName, LocalDateTime schDepartureDate, String schDeparturePoint, String schArrivalPoint);
     List<TbSchedule> findBySchAirplaneNameAndSchDepartureDate(String schAirplaneName, LocalDateTime schDepartureDate);
     List<TbSchedule> findBySchAirplaneName(String schAirplaneName);
     List<TbSchedule> findBySchAirplaneNameAndSchDeparturePointAndSchArrivalPoint(String schAirplaneNAme, String schDeparturePoint, String schArrivalPoint);
     List<TbSchedule> findBySchDeparturePoint(String schDeparturePoint);
-    List<TbSchedule> findFirstBySchDeparturePointAndSchArrivalPointAndSchDepartureDateGreaterThanOrderBySchBasicPriceAsc(String schDeparturePoint, String schArrivalPoint, LocalDateTime time);
+    List<TbSchedule> findFirstBySchDeparturePointAndSchArrivalPointAndSchStartTimeGreaterThanOrderBySchBasicPriceAsc(String schDeparturePoint, String schArrivalPoint, LocalDateTime time);
 }

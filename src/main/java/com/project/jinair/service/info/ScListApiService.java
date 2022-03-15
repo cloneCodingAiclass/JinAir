@@ -29,6 +29,7 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
         ScheduleApiRequest scheduleApiRequest = request.getData();
         TbSchedule tbSchedule = TbSchedule.builder()
                 .schNationType(scheduleApiRequest.getSchNationType())
+                .schAirplaneType(scheduleApiRequest.getSchAirplaneType())
                 .schAirplaneName(scheduleApiRequest.getSchAirplaneName())
                 .schDepartureDate(LocalDateTime.parse(scheduleApiRequest.getSchDepartureDate()))
                 .schDeparturePoint(scheduleApiRequest.getSchDeparturePoint())
@@ -72,6 +73,7 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
         ScheduleApiResponse scheduleApiResponse = ScheduleApiResponse.builder()
                 .schIndex(tbSchedule.getSchIndex())
                 .schNationType(tbSchedule.getSchNationType())
+                .schAirplaneType(tbSchedule.getSchAirplaneType())
                 .schAirplaneName(tbSchedule.getSchAirplaneName())
                 .schDepartureDate(tbSchedule.getSchDepartureDate())
                 .schDeparturePoint(tbSchedule.getSchDeparturePoint())
@@ -89,6 +91,7 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
         ScheduleApiResponse scheduleApiResponse = ScheduleApiResponse.builder()
                 .schIndex(tbSchedule.getSchIndex())
                 .schNationType(tbSchedule.getSchNationType())
+                .schAirplaneType(tbSchedule.getSchAirplaneType())
                 .schAirplaneName(tbSchedule.getSchAirplaneName())
                 .schDepartureDate(tbSchedule.getSchDepartureDate())
                 .schDeparturePoint(tbSchedule.getSchDeparturePoint())
@@ -118,8 +121,8 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
         return Header.OK(scheduleApiResponseList, pagination);
     }
 
-    public Header<List<ScheduleApiResponse>> find(String schAirplaneName, String schDepartureDate, String schDeparturePoint, String schArrivalPoint){
-        List<TbSchedule> tbSchedule = tbScheduleRepository.findBySchAirplaneNameAndSchDepartureDateAndSchDeparturePointAndSchArrivalPoint(schAirplaneName, LocalDateTime.parse(schDepartureDate), schDeparturePoint, schArrivalPoint);
+    public Header<List<ScheduleApiResponse>> find(String schAirplaneType, String schAirplaneName, String schDepartureDate, String schDeparturePoint, String schArrivalPoint){
+        List<TbSchedule> tbSchedule = tbScheduleRepository.findBySchAirplaneTypeAndSchAirplaneNameAndSchDepartureDateAndSchDeparturePointAndSchArrivalPoint(schAirplaneType, schAirplaneName, LocalDateTime.parse(schDepartureDate), schDeparturePoint, schArrivalPoint);
         List<ScheduleApiResponse> scheduleApiResponseList = tbSchedule.stream()
                 .map(user -> responseSchedule(user))
                 .collect(Collectors.toList());
@@ -140,7 +143,7 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
 
     public Header<List<ScheduleApiResponse>> DepAri(String schDeparturePoint, String schArrivalPoint){
         LocalDateTime now = LocalDateTime.now();
-        List<TbSchedule> tbSchedule = tbScheduleRepository.findFirstBySchDeparturePointAndSchArrivalPointAndSchDepartureDateGreaterThanOrderBySchBasicPriceAsc(schDeparturePoint, schArrivalPoint, LocalDateTime.parse(String.valueOf(now).substring(0,19)));
+        List<TbSchedule> tbSchedule = tbScheduleRepository.findFirstBySchDeparturePointAndSchArrivalPointAndSchStartTimeGreaterThanOrderBySchBasicPriceAsc(schDeparturePoint, schArrivalPoint, LocalDateTime.parse(String.valueOf(now).substring(0,20)));
         List<ScheduleApiResponse> scheduleApiResponseList = tbSchedule.stream()
                 .map(user -> responseSchedule(user))
                 .collect(Collectors.toList());

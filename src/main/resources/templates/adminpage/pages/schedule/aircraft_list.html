@@ -17,10 +17,12 @@
                         <div class="contents_main">
                             <table id="itemList">
                                 <tr>
+                                    <td>항공기타입</td>
                                     <td>항공기명</td>
                                     <td>좌석수</td>
                                 </tr>
                                 <tr v-for="dto in itemList">
+                                    <td>{{dto.apType}}</td>
                                     <td>{{dto.apName}}</td>
                                     <td>{{dto.apSeatSum}}</td>
                                 </tr>

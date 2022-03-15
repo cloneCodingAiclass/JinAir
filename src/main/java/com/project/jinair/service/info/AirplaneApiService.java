@@ -24,6 +24,7 @@ public class AirplaneApiService implements CrudInterface<AirplaneApiRequest, Air
         AirplaneApiRequest airplaneApiRequest = request.getData();
         TbAirplane tbAirplane = TbAirplane.builder()
                 .apIndex(airplaneApiRequest.getApIndex())
+                .apType(airplaneApiRequest.getApType())
                 .apName(airplaneApiRequest.getApName())
                 .apSeatSum(airplaneApiRequest.getApSeatSum())
                 .build();
@@ -46,7 +47,7 @@ public class AirplaneApiService implements CrudInterface<AirplaneApiRequest, Air
         Optional<TbAirplane> tbAirplane = tbAirplaneRepository.findById(airplaneApiRequest.getApIndex());
 
         return tbAirplane.map(airplane -> {
-            airplane.setApName(airplaneApiRequest.getApName());
+            airplane.setApType(airplaneApiRequest.getApType());
             airplane.setApName(airplaneApiRequest.getApName());
             airplane.setApSeatSum(airplaneApiRequest.getApSeatSum());
 
@@ -71,6 +72,7 @@ public class AirplaneApiService implements CrudInterface<AirplaneApiRequest, Air
     private Header<AirplaneApiResponse> response(TbAirplane tbAirplane){
         AirplaneApiResponse airplaneApiResponse = AirplaneApiResponse.builder()
                 .apIndex(tbAirplane.getApIndex())
+                .apType(tbAirplane.getApType())
                 .apName(tbAirplane.getApName())
                 .apSeatSum(tbAirplane.getApSeatSum())
                 .build();
@@ -79,6 +81,7 @@ public class AirplaneApiService implements CrudInterface<AirplaneApiRequest, Air
     private AirplaneApiResponse responseAirplane(TbAirplane tbAirplane){
         AirplaneApiResponse airplaneApiResponse = AirplaneApiResponse.builder()
                 .apIndex(tbAirplane.getApIndex())
+                .apType(tbAirplane.getApType())
                 .apName(tbAirplane.getApName())
                 .apSeatSum(tbAirplane.getApSeatSum())
                 .build();
@@ -92,6 +95,15 @@ public class AirplaneApiService implements CrudInterface<AirplaneApiRequest, Air
                 .collect(Collectors.toList());
 
         return Header.OK(airplaneApiResponseList);
+    }
+
+    public Header<List<AirplaneApiResponse>> typeList(String type) {
+        List<TbAirplane> tbAirplanes = tbAirplaneRepository.findByApType(type);
+        List<AirplaneApiResponse> airplaneApiResponses = tbAirplanes.stream()
+                .map(air -> responseAirplane(air))
+                .collect(Collectors.toList());
+
+        return Header.OK(airplaneApiResponses);
     }
 
 }
