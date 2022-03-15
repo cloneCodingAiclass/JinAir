@@ -1,6 +1,7 @@
 package com.project.jinair.repository;
 
 import com.project.jinair.model.entity.schedule.TbSchedule;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -18,4 +19,6 @@ public interface TbScheduleRepository extends JpaRepository<TbSchedule, Long> {
     List<TbSchedule> findBySchAirplaneNameAndSchDeparturePointAndSchArrivalPoint(String schAirplaneNAme, String schDeparturePoint, String schArrivalPoint);
     List<TbSchedule> findBySchDeparturePoint(String schDeparturePoint);
     List<TbSchedule> findFirstBySchDeparturePointAndSchArrivalPointAndSchStartTimeGreaterThanOrderBySchBasicPriceAsc(String schDeparturePoint, String schArrivalPoint, LocalDateTime time);
+    List<TbSchedule> findBySchDeparturePointAndSchBasicPriceLessThanEqualAndSchStartTimeBetweenOrderBySchStartTimeAsc(String schDeparturePoint, Long wishPrice, LocalDateTime goDay, LocalDateTime comeDay);
+    List<TbSchedule> findBySchNationTypeAndSchStartTimeGreaterThanOrderBySchBasicPriceAsc(String schNationType, LocalDateTime time, Pageable pageable);
 }

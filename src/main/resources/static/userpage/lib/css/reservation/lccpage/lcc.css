@@ -337,9 +337,8 @@ body {
 
 #container > .contentswrap {
     width: 1180px;
-    padding: 30px;
+    padding: 30px 30px 150px;
     margin: 0 auto;
-    height: 1500px;
     box-sizing: border-box;
     position: relative;
 }
@@ -405,7 +404,7 @@ body {
 }
 #container > .contentswrap .lcc_contents .search_list{
     margin: 0 50px;
-    padding-bottom: 5px;
+    padding-bottom: 100px;
 }
 #container > .contentswrap .lcc_contents .search_list .to_img {
     vertical-align: middle;
@@ -771,6 +770,9 @@ h3.in_bl{
     /* 결과 있을시 display : block */
     display: none;
 }
+.lcc_contents #itemList2 .search_list_box{
+    margin-bottom: 70px;
+}
 .lcc_contents .search_list .list_table {
     text-align: center;
     border-top: 2px solid #7e0049;
@@ -986,15 +988,15 @@ h3.in_bl{
 .domestic ul,
 .oversea ul {
     margin-top: 50px;
-    height: 120px;
 }
 .domestic li,
 .oversea li{
     display: table;
     width: 100%;
-    height: 100%;
-    border-top: 0.5px solid rgb(153, 153, 153, 0.2);
-    border-bottom: 0.5px solid rgb(153, 153, 153, 0.2);
+    height: 120px;
+    border-top: 0.5px solid rgb(153, 153, 153, 0.15);
+    border-bottom: 0.5px solid rgb(153, 153, 153, 0.15);
+    margin: -1px auto;
 }
 .domestic .label_info,
 .oversea .label_info{
@@ -1013,10 +1015,11 @@ h3.in_bl{
     vertical-align: middle;
 }
 .domestic .route_info span.isfree_bag,
-.oversea .route_info, span.isfree_bag {
+.oversea .route_info span.isfree_bag {
     font-size: 16px;
     font-weight: bold;
     color: #7e0049;
+    margin-bottom: 7px;
 }
 .domestic .route_info p span,
 .oversea .route_info p span {
@@ -1029,10 +1032,14 @@ h3.in_bl{
     width: 35%;
     vertical-align: middle;
 }
+.forMargin{
+    margin-top: 6px;
+}
 .domestic .detail_info span,
 .oversea .detail_info span,
 .domestic .detail_info p,
 .oversea .detail_info p {
+    margin-top: 6px;
     margin-right: 20px;
 }
 .domestic .detail_info .date,

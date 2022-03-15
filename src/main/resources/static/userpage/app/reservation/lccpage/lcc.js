@@ -197,4 +197,94 @@ $(() => {
             }
         })
     }
+
+
+
+
+
+    let itemList2 = new Vue({
+        el : '#itemList2',
+        data : {
+            itemList2 : {}
+        },
+        methods:{
+        }
+    });
+
+    $('#searchBtn2').on('click', function (){
+        if($('#go_select').val()=="출발지" || $('.go_date_select_optt').val() == "가는날"|| $('.come_date_select_optt').val() == "오는날"){
+            $('#itemList2').css('display','none');
+            $('#search_null2').css('display','block');
+        }else if($('#go_select').val() !="출발지" && $('.go_date_select_optt').val() != "가는날"
+            &&  $('.come_date_select_optt').val() != "오는날" && $('#budge_cnt').val() == "100,000"){
+            searchss($('#go_select').val(), 100000, $('.go_date_select_optt').val(), $('.come_date_select_optt').val());
+        }else{
+            searchss($('#go_select').val(), $('#budge_cnt').val(), $('.go_date_select_optt').val(), $('.come_date_select_optt').val());
+        }
+    })
+    function searchss(schDeparturePoint, wishPrice, goDay, comeDay){
+        $.post({
+            url: "/api/schedule/collaboration",
+            data: "schDeparturePoint=" + schDeparturePoint + "&wishPrice=" + wishPrice + "&goDay=" + goDay + "&comeDay=" + comeDay,
+            dataType: "text",
+            success: function (response) {
+                let dataJson = JSON.parse(response)
+                console.log(dataJson.data);
+                if(dataJson.data == 0){
+                    $('#itemList2').css('display','none');
+                    $('#search_null2').css('display','block');
+                }else{
+                    itemList2.itemList2 = dataJson.data;
+                    $('#search_null2').css('display','none');
+                    $('#itemList2').css('display','block');
+                }
+            }
+        })
+    }
+
+    let itemList3 = new Vue({
+        el : '#itemList3',
+        data : {
+            itemList3 : {}
+        },
+        methods:{
+        }
+    });
+    let itemList4 = new Vue({
+        el : '#itemList4',
+        data : {
+            itemList4 : {}
+        },
+        methods:{
+        }
+    });
+
+
+    LccDomeSearch();
+
+    function LccDomeSearch(){
+        $.get({
+            url: "/api/schedule/Lcc/국내",
+            dataType: "text",
+            success: function (response) {
+                let dataJson = JSON.parse(response)
+                itemList3.itemList3 = dataJson.data;
+                console.log(itemList3.itemList3)
+            }
+        })
+    }
+
+    LccForiSearch();
+
+    function LccForiSearch(){
+        $.get({
+            url: "/api/schedule/Lcc/국외",
+            dataType: "text",
+            success: function (response) {
+                let dataJson = JSON.parse(response)
+                itemList4.itemList4 = dataJson.data;
+                console.log(itemList4.itemList4)
+            }
+        })
+    }
 })
