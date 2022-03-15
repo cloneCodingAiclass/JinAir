@@ -14,7 +14,7 @@ public class SeatDetailApiRequest {
     private Long sdIndex;
     private String sdId;
     private AirplaneSeatStatus sdStatus;
-    private Long sdSeatcnt;
     private Long sdPrice;
+    private Long sdSeatcnt;
 
 }

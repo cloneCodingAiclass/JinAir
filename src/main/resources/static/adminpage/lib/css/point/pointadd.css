@@ -51,12 +51,15 @@
     width: 60%;
 }
 #container > .contents .point_category{
-    text-align: left;
+    text-align: center;
     width: 100%;
     height: 330px;
     background-color: white;
     border: 1px solid #ccc;
-    padding-top: 35px;
+    padding-top: 15px;
+}
+#container > .contents .point_category table {
+    margin: 0 auto;
 }
 #container > .contents .point_category p {
     font-weight: bold;
@@ -81,7 +84,7 @@
     margin-bottom: 5px;
 }
 .airport_box {
-    margin-left: 45px !important;
+    margin: 0 auto;
 }
 #container > .contents .point_category .btn_search{
     display: block;
