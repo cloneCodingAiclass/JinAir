@@ -148,18 +148,52 @@ $(function () {
     })
 
     area();
-    airplane();
+    airplaneType();
 
-    // 항공기 종류 데이터 목록
-    function airplane(){
+    // 항공기 타입 데이터 목록
+    function airplaneType(){
         $.get("/api/airplane/list", function (response){
             console.dir(response)
-            for (let i = 0; i < response.data.length; i++){
-                let a = response.data[i].apName;
+            let arr = response.data.map(function (val, index){
+                return val['apType']
+            }).filter(function (val, index, arr2){
+                return arr2.indexOf(val) === index;
+            })
+
+            for (let i = 0; i < arr.length; i++){
+                let a = arr[i];
                 let option = document.createElement('option');
                 option.innerText = a;
                 option.value = a;
-                $('#airplaneId').append(option);
+                $('#schAirplaneType').append(option);
+            }
+
+        })
+    }
+
+    $(document).on('click', '#findName', function (){
+        console.log('작동?');
+        airplaneName($('#schAirplaneType').find('option:selected').val());
+    })
+
+    // 항공기 타입에 따른 이름 검색
+    function airplaneName(type) {
+        $('#schAirplaneName').find('option').remove();
+        $.get("/api/airplane/list/" + type, function (response){
+
+            let arr = response.data.map(function (val, index){
+                return val['apName']
+            }).filter(function (val, index, arr2){
+                return arr2.indexOf(val) === index;
+            })
+
+            console.log(arr);
+            for(let i = 0; i < arr.length; i++){
+                let a = arr[i];
+                let option = document.createElement('option');
+                option.innerText = a;
+                option.value = a;
+                $('#airplaneName').append(option);
             }
         })
     }
@@ -188,15 +222,14 @@ $(function () {
 
 
     $('#searchSch').on('click', function (){
-        console.log($('#airplaneId').find('option:selected').val(), $('#departure_point').find('option:selected').val(), $('#arrive_point').find('option:selected').val(), $('#start').val() + 'T08:00:00')
-        searchSch($('#airplaneId').find('option:selected').val(), $('#departure_point').find('option:selected').val(), $('#arrive_point').find('option:selected').val(), $('#start').val() + 'T08:00:00')
+        searchSch($('#schAirplaneType').find('option:selected').val(), $('#airplaneName').find('option:selected').val(), $('#departure_point').find('option:selected').val(), $('#arrive_point').find('option:selected').val(), $('#start').val() + 'T08:00:00')
     })
 
     // 스케줄 목록
-    function searchSch(schAirplaneName, schDeparturePoint, schArrivalPoint, schDepartureDate){
+    function searchSch(schAirplaneType, schAirplaneName, schDeparturePoint, schArrivalPoint, schDepartureDate){
         $.post({
             url : '/api/schedule/list/find',
-            data : "schAirplaneName=" + schAirplaneName + "&schDepartureDate=" + schDepartureDate + "&schDeparturePoint=" + schDeparturePoint + "&schArrivalPoint=" + schArrivalPoint,
+            data : "schAirplaneType=" + schAirplaneType + "&schAirplaneName=" + schAirplaneName + "&schDepartureDate=" + schDepartureDate + "&schDeparturePoint=" + schDeparturePoint + "&schArrivalPoint=" + schArrivalPoint,
             dataType: 'text',
             success : function (response){
                 let dataJson = JSON.parse(response);

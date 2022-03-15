@@ -31,17 +31,32 @@
                                 </div>
                                 <div class="point_category">
                                     <p>예약자 조회</p>
+                                    <table>
+                                        <tr>
+                                            <td><span>항공기타입</span></td>
+                                            <td>
+                                                <select id="schAirplaneType"></select>
+                                                <input type="button" id="findName" value="조회">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>항공기이름</span></td>
+                                            <td><select id="airplaneName" class="selectbox"></select></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>출발지</span></td>
+                                            <td><select id="departure_point" class="selectbox"></select></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>도착지</span></td>
+                                            <td><select id="arrive_point" class="selectbox"></select></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>출발일</span></td>
+                                            <td><input type="date" name="start" id="start"></td>
+                                        </tr>
+                                    </table>
                                     <div>
-                                        <span>항공기</span>
-                                        <select id="airplaneId" class="selectbox"></select>
-                                        <span>출발지</span>
-                                        <select id="departure_point" class="selectbox">
-                                        </select>
-                                        <br>
-                                        <span>도착지</span>
-                                        <select id="arrive_point" class="selectbox"></select>
-                                        <span>출발일</span>
-                                        <input type="date" name="start" id="start">
                                         <input type="button" value="운항일정 조회" id="searchSch" class="btn_search">
                                     </div>
                                     <div>
