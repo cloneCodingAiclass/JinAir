@@ -21,7 +21,7 @@ $(function () {
                     }else if(status == "JiniSB"){
                         price = 1000;
                     }
-                    nation = "국내선";
+                    nation = "국내";
                 }else if($(this).val() == "일본/중국 본토"){
                     if(status == "JiniPl"){
                         price = 19000;
@@ -36,7 +36,7 @@ $(function () {
                     }else if(status == "JiniSB"){
                         price = 2000;
                     }
-                    nation = "일본/중국본토";
+                    nation = "일본/중국 본토";
                 }else if($(this).val() == "홍콩/마카오/대만/러시아"){
                     if(status == "JiniPl"){
                         price = 29000;
