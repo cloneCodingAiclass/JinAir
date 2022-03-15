@@ -13,7 +13,8 @@ public enum AirplaneSeatStatus {
     JiniFs(2,"지니 패스트", "Fast"),
     JiniEE(3,"비상구열", "Emergency Exit"),
     JiniSA(4,"스탠다드 A", "Standard A"),
-    JiniSB(5,"스탠다드 B", "Standard B");
+    JiniSB(5,"스탠다드 B", "Standard B"),
+    JiniBz(6,"지니 비즈", "Jini");
 
 
     private Integer id;
