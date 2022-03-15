@@ -92,18 +92,43 @@ $(function () {
         });
     });
 
+    // $('.showQ').on('click', function (){
+    //     alert('dfsdfsdf')
+    //     let showA = $(this).attr('id');
+    //     console.log(showA);
+    //     // $(showA).addClass('showA');
+    //     // $('.showA').css({"display" : "table-cell"});
+    // })
+    // $(document).load('.showQ','click', function (){
+    //     alert('dfsdfsdf')
+    //     let showA = $(this).attr('id');
+    //     console.log(showA);
+    //     // $(showA).addClass('showA');
+    //     // $('.showA').css({"display" : "table-cell"});
+    // })
+
+
 });
 
-function showFaq(obj){
-    $('faq'+ i).css("display", "table-cell");
-    let target = $(obj).attr("href");
-    $(target).add($(target).find('faq'+ i)).toggle();
-}
-// function closeFaq(obj){
-//     $("index").css("display", "none");
-//     let target = $(obj).attr("href");
-//     $(target).add($(target).find("index")).toggle();
+// function showFaq(){
+//     let showA = $(this).attr('id');
+//     // $(this).attr('#que + i');
+//     $(this).attr('id').css({"display": "table-cell"});
+//     // $(this).attr('.tb_answer').css({"display": "table-cell"});
+//     ($.not(this)).$('.tb_answer').css({"display" : "none"});
+//
 // }
+
+// function showFaq(faqA){
+//     $('faq'+ i).css("display", "table-cell");
+//     let target = $(obj).attr("href");
+//     $(target).add($(target).find('faq'+ i)).toggle();
+// }function showFaq(){
+// //     $(".").css("display", "none");
+// //     let target = $(obj).attr("href");
+// //     $(target).add($(target).find("index")).toggle();
+// // }
+//
 
     // $("#faq1").click(function (){
     //     if($(".tr_answer").css("display")== "none")
@@ -117,7 +142,7 @@ function showFaq(obj){
 
 
 (function ($){
-    // 리스트 출력
+    리스트 출력 원본
     let listFaq = new Vue({
         el : '#listFaq',
         data : {
@@ -125,13 +150,74 @@ function showFaq(obj){
             listFaq : {}
 
         },
+
+    // 사본
+    // let listFaq = new Vue({
+    //     el : '#listFaq',
+    //     data :
+    //         function() {
+    //             return {
+    //                 key: true,
+    //                 listFaq: {},
+    //             }
+    //         }, methods: {
+    //             toggle: function() {
+    //                 this.key = !this.key
+    //             }
+    //         }
+
+    // 사본 2
+    // let listFaq = new Vue({
+    //     el : '#listFaq',
+    //     data : {
+    //         show: true,
+    //         // isActive: true,
+    //         listFaq : {}
+    //
+    //     },
+
+    // 사본 3
+    // let listFaq = new Vue({
+    //     el : '#listFaq',
+    //     data : {
+    //         listFaq : {}
+    //
+    //     },
+
+        // methods: {
+        //     showFaq() {
+        //         (this).attr("ques");
+        //         (this).attr("anss");
+        //         this.$('.anss').css({"display":"table-cell"});
+        //         this.$('anss').css({"display":"none"});
+        //
+        //     }
+        // }
+
+
+        // showA: "i",
         // methods:{
-        //     toggleClass: function (){
-        //         this.isActive = !this.isActive;
+        //     showFaq(){
+        //         this.showA = true;
+        //
         //     }
         // }
     })
 
+    // let tgFaq = new Vue({
+    //     el: '#tgFaq',
+    //     data: function(){
+    //         return {
+    //             key: false
+    //         }
+    //     },methods:{
+    //         toggle: function(){
+    //             this.key  = !this.key
+    //         }
+    //     }
+    // })
+
+    /* 카테고리 주석 시작
     let faqSet1 = new Vue({
         el : '#faqSet1',
         data : {
@@ -199,6 +285,7 @@ function showFaq(obj){
             }
         }
     });
+    카테고리 주석 끝 */
 
 
     let pagination = {
@@ -231,11 +318,12 @@ function showFaq(obj){
             // 전체 페이지
             showPage.showPage = pagination.data;
             listFaq.listFaq = response.data;
-            faqSet1.faqSet1 = response.data;
-            faqSet2.faqSet2 = response.data;
-            faqSet3.faqSet3 = response.data;
-            faqSet4.faqSet4 = response.data;
-            faqSet5.faqSet5 = response.data;
+            // faqSet1.faqSet1 = response.data;
+            // faqSet2.faqSet2 = response.data;
+            // faqSet3.faqSet3 = response.data;
+            // faqSet4.faqSet4 = response.data;
+            // faqSet5.faqSet5 = response.data;
+
 
             console.dir(listFaq);
             console.dir(pagination);
@@ -264,7 +352,7 @@ function showFaq(obj){
         }
     });
 
-    console.dir(faqSet1);
+    // console.dir(faqSet1);
 
 
 
