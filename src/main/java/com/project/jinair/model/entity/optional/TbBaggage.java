@@ -28,6 +28,8 @@ public class TbBaggage {
     private Long bgIndex;
     private String bgType;
     private BigDecimal bgPrice;
-    @Enumerated(EnumType.STRING)
-    private ApplyStatus bgStatus;
+    private String bgNation;
+    private String bgStandard;
+//    @Enumerated(EnumType.STRING)
+//    private ApplyStatus bgStatus;
 }

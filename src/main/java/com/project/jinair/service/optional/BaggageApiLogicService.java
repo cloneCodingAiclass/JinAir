@@ -23,7 +23,8 @@ public class BaggageApiLogicService implements CrudInterface<BaggageApiRequest, 
         TbBaggage tbBaggage = TbBaggage.builder()
                 .bgType(baggageApiRequest.getBgType())
                 .bgPrice(baggageApiRequest.getBgPrice())
-                .bgStatus(baggageApiRequest.getBgStatus())
+                .bgNation(baggageApiRequest.getBgNation())
+                .bgStandard(baggageApiRequest.getBgStandard())
                 .build();
         TbBaggage newTbBaggage = tbBaggageRepository.save(tbBaggage);
         return Header.OK(response(newTbBaggage));
@@ -48,7 +49,8 @@ public class BaggageApiLogicService implements CrudInterface<BaggageApiRequest, 
         return tbBaggage.map(Baggage -> {
                     Baggage.setBgType(baggageApiRequest.getBgType());
                     Baggage.setBgPrice(baggageApiRequest.getBgPrice());
-                    Baggage.setBgStatus(baggageApiRequest.getBgStatus());
+                    Baggage.setBgNation(baggageApiRequest.getBgNation());
+                    Baggage.setBgStandard(baggageApiRequest.getBgStandard());
 
                     return Baggage;
                 }).map(Baggage -> tbBaggageRepository.save(Baggage))
@@ -72,7 +74,8 @@ public class BaggageApiLogicService implements CrudInterface<BaggageApiRequest, 
                 .bgIndex(tbBaggage.getBgIndex())
                 .bgType(tbBaggage.getBgType())
                 .bgPrice(tbBaggage.getBgPrice())
-                .bgStatus(tbBaggage.getBgStatus())
+                .bgNation(tbBaggage.getBgNation())
+                .bgStandard(tbBaggage.getBgStandard())
                 .build();
         return baggageApiResponse;
     }
