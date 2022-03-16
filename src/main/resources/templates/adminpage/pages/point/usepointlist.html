@@ -5,7 +5,7 @@
 <head><div th:replace="/adminpage/fragment/head :: head"></div>
     <link rel="stylesheet" href="/adminpage/lib/css/style.css">
     <link rel="stylesheet" href="/adminpage/lib/css/point/usepointlist.css">
-    <script src="/adminpage/app/point/usepointlist.js"></script>
+
 </head>
 <body>
     <div id="wrap">
@@ -27,50 +27,35 @@
                             <col width="120">
                             <col width="250">
                             <col width="120">
+                            <col width="120">
                             <col width="140">
-                            <col width="150">
-                            <col width="100">
                         </colgroup>
-                        <tr>
-                            <td>적립포인트</td>
-                            <td>사용 포인트</td>
-                            <td>구간</td>
-                            <td>보유포인트</td>
-                            <td>적립내역</td>
-                            <td>사용내역</td>
-                            <td>일자</td> 
-                        </tr>
-                        <tr>
-                            <td>30,000</td>
-                            <td>-</td>
-                            <td>서울/인천(ICN)-방콕(BKK)</td>
-                            <td>42,660</td>
-                            <td>운행 지연 보상</td>
-                            <td>-</td>
-                            <td>2020-08-28</td>
-                        </tr>
-                        <tr>
-                            <td>30,000</td>
-                            <td>-</td>
-                            <td>서울/인천(ICN)-방콕(BKK)</td>
-                            <td>42,660</td>
-                            <td>운행 지연 보상</td>
-                            <td>-</td>
-                            <td>2020-08-28</td>
-                        </tr>
-                        <tr>
-                            <td>30,000</td>
-                            <td>-</td>
-                            <td>서울/인천(ICN)-방콕(BKK)</td>
-                            <td>42,660</td>
-                            <td>운행 지연 보상</td>
-                            <td>-</td>
-                            <td>2020-08-28</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <td>적립내역</td>
+                                <td>사용내역</td>
+                                <td>메모</td>
+                                <td>사용자</td>
+                                <td>총 포인트</td>
+                                <td>일자</td>
+                            </tr>
+                        </thead>
+                        <tbody id="pointList">
+                            <tr v-for="(dto, i) in pointList">
+                                <td></td>
+                                <td></td>
+                                <td>{{dto.poMemo}}</td>
+                                <td :id=`userid${i}`></td>
+                                <td :id=`totalPoint${i}`></td>
+                                <td>{{dto.poRegdate}}</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
+                <div id="footer"></div>
             </div>
         </div>
     </div>
+    <script src="/adminpage/app/point/usepointlist.js"></script>
 </body>
 </html>

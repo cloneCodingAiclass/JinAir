@@ -64,3 +64,31 @@
     background-color: #F2F2F2;
     border-bottom: 1px solid #ccc;
 }
+#footer {
+    margin: 50px 0;
+    width: 100%;
+    text-align: center;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#footer .pageButton{
+    display: flex;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #888888;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+    background-color: #F2F2F2;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    font-weight: 700;
+    font-size: 15px;
+    border-collapse: collapse;
+}
+#footer .pageButton:hover{
+    background-color: rgb(124,0,72);
+    color: white;
+    cursor: pointer;
+}

@@ -11,5 +11,5 @@ import java.util.Optional;
 
 @Repository
 public interface TbPointRepository extends JpaRepository<TbPoint, Long> {
-
+    List<TbPoint> findByPoUserindex(Long id);
 }
