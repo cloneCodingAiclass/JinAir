@@ -7,7 +7,12 @@ import com.project.jinair.model.network.response.payment.PointApiResponse;
 import com.project.jinair.repository.TbPointRepository;
 import com.project.jinair.service.payment.PointApiService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/point")
@@ -41,4 +46,14 @@ public class PointApiController implements CrudInterface<PointApiRequest, PointA
         return pointApiService.delete(id);
     }
 
+    @GetMapping("")
+    public Header<List<PointApiResponse>> list(@PageableDefault(sort = {"poIndex"}, direction = Sort.Direction.DESC)Pageable pageable){
+        return pointApiService.list(pageable);
+    }
+
+    // 사용자에 따른 포인트
+    @GetMapping("/user/{id}")
+    public Header<List<PointApiResponse>> userPoint(@PathVariable(name = "id")Long id){
+        return pointApiService.userPoint(id);
+    }
 }

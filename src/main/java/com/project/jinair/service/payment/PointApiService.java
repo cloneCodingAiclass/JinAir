@@ -84,6 +84,7 @@ public class PointApiService implements CrudInterface<PointApiRequest, PointApiR
                 .poPoint(tbPoint.getPoPoint())
                 .poMemo(tbPoint.getPoMemo())
                 .poUserindex(tbPoint.getPoUserindex())
+                .poRegdate(tbPoint.getPoRegdate())
                 .build();
         return Header.OK(pointApiResponse);
     }
@@ -93,10 +94,13 @@ public class PointApiService implements CrudInterface<PointApiRequest, PointApiR
                 .poPoint(tbPoint.getPoPoint())
                 .poMemo(tbPoint.getPoMemo())
                 .poUserindex(tbPoint.getPoUserindex())
+                .poRegdate(tbPoint.getPoRegdate())
                 .build();
         return pointApiResponse;
     }
-    public Header<List<PointApiResponse>> search(Pageable pageable) {
+
+    // 포인트 리스트
+    public Header<List<PointApiResponse>> list(Pageable pageable) {
         Page<TbPoint> tbPoints = tbPointRepository.findAll(pageable);
         List<PointApiResponse> pointApiResponses = tbPoints.stream()
                 .map(users -> responsePoint(users))
@@ -109,5 +113,14 @@ public class PointApiService implements CrudInterface<PointApiRequest, PointApiR
                 .currentElements(tbPoints.getNumberOfElements())
                 .build();
         return Header.OK(pointApiResponses, pagination);
+    }
+
+    // 유저 포인트
+    public Header<List<PointApiResponse>> userPoint(Long id) {
+        List<TbPoint> tbPoint = tbPointRepository.findByPoUserindex(id);
+        List<PointApiResponse> pointApiResponseList = tbPoint.stream()
+                .map(point -> responsePoint(point))
+                .collect(Collectors.toList());
+        return Header.OK(pointApiResponseList);
     }
 }

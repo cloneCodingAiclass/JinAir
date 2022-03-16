@@ -97,5 +97,93 @@ $(function () {
         $('.nav9').parent().siblings().find('li').css({"display":"none"});
         $('.nav9').siblings('li').eq(0).find('a').css({"color":"#BDD600"});
     })
-
 });
+(function ($) {
+    let indexBtn = [];
+
+    let pagination = {
+        total_page : 0,
+        total_element : 0,
+        current_page : 0,
+        curren_elements : 0
+    }
+
+    // 페이지 정보
+    let showPage = new Vue({
+        el : '#showPage',
+        data : {
+            totalElements : {},
+            currentPage : {}
+        }
+    })
+
+    let pointList = new Vue({
+        el : '#pointList',
+        data : {
+            pointList : {}
+        }
+    })
+
+
+    list(0);
+
+    function list(page){
+        // 포인트 리스트
+        $.get('/api/point?page='+page, function (response){
+            console.dir(response)
+            indexBtn = [];
+            pagination = response.pagination;
+
+            showPage.totalElements = pagination.currentPage;
+            showPage.currentPage = pagination.currentPage;
+
+            pointList.pointList = response.data;
+
+            // 사용내용
+            for(let i = 0; i < response.data.length; i++){
+                if(response.data[i].poPoint > 0){
+                    // 적립 내역
+                    
+                }else{
+                    // 사용 내역
+                }
+            }
+
+            // 유저
+            for(let i = 0; i < response.data.length; i++){
+                $.get('/api/user/'+ response.data[i].poUserindex, function (response2){
+                    $(`#userid${i}`).text(response2.data.memUserid)
+                })
+            }
+
+            // 유저의 총 포인트
+            for(let i = 0; i < response.data.length; i++){
+                let sum = 0;
+                console.log(response.data[i].poUserindex)
+                $.get("/api/point/user/"+response.data[i].poUserindex, function (response3){
+                    for(let j = 0; j < response3.data.length; j++){
+                        let point = response3.data[j].poPoint;
+                        sum += point;
+                    }
+                    console.log(sum);
+                    $(`#totalPoint${i}`).text(sum);
+                })
+            }
+
+            let url = "";
+            let NumberPage = 0;
+            let last = pagination.totalPages;
+
+            for(NumberPage; NumberPage < last; NumberPage++){
+                url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
+            }
+            document.getElementById("footer").innerHTML = url;
+
+            $(".pageButton").on('click', function (){
+                page = $(this).attr('id');
+                list(page);
+            })
+        })
+    }
+
+})(jQuery)
