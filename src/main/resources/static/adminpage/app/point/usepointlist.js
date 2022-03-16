@@ -139,15 +139,21 @@ $(function () {
 
             pointList.pointList = response.data;
 
-            // 사용내용
+            /*
             for(let i = 0; i < response.data.length; i++){
                 if(response.data[i].poPoint > 0){
                     // 적립 내역
-                    
+                    console.log('적립')
+                    console.log(response.data[i].poPoint)
+                    $(`#add${i}`).text(response.data[i].poPoint)
                 }else{
                     // 사용 내역
+                    console.log('사용')
+                    console.log(response.data[i].poPoint)
+                    $(`#use${i}`).text(response.data[i].poPoint)
                 }
             }
+             */
 
             // 유저
             for(let i = 0; i < response.data.length; i++){
@@ -159,13 +165,11 @@ $(function () {
             // 유저의 총 포인트
             for(let i = 0; i < response.data.length; i++){
                 let sum = 0;
-                console.log(response.data[i].poUserindex)
                 $.get("/api/point/user/"+response.data[i].poUserindex, function (response3){
                     for(let j = 0; j < response3.data.length; j++){
                         let point = response3.data[j].poPoint;
                         sum += point;
                     }
-                    console.log(sum);
                     $(`#totalPoint${i}`).text(sum);
                 })
             }

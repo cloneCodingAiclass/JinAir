@@ -24,7 +24,6 @@
                     <table>
                         <colgroup>
                             <col width="120">
-                            <col width="120">
                             <col width="250">
                             <col width="120">
                             <col width="120">
@@ -32,8 +31,8 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <td>적립내역</td>
-                                <td>사용내역</td>
+                                <td>내역</td>
+                                <!-- <td>사용내역</td>-->
                                 <td>메모</td>
                                 <td>사용자</td>
                                 <td>총 포인트</td>
@@ -42,8 +41,8 @@
                         </thead>
                         <tbody id="pointList">
                             <tr v-for="(dto, i) in pointList">
-                                <td></td>
-                                <td></td>
+                                <td>{{dto.poPoint}}</td>
+                                <!-- <td :id=`use${i}`></td>-->
                                 <td>{{dto.poMemo}}</td>
                                 <td :id=`userid${i}`></td>
                                 <td :id=`totalPoint${i}`></td>
