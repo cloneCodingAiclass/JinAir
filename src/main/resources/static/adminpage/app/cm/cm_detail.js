@@ -106,6 +106,7 @@ $(function () {
 
     let idx = $(location).attr('href').split('/')[7];
 
+
     let memberDetail = new Vue({
         el : '#memberDetail',
         data : {
@@ -114,13 +115,30 @@ $(function () {
     })
 
     search(idx);
+    point(idx);
 
     function search(index){
         console.log("index : " + index);
         $.get("/api/user/"+index, function (response){
             console.dir(response);
-
             memberDetail.memberDetail = response.data;
+        })
+    }
+
+    // 유저에 따른 포인트
+    function point(index){
+        let sum = 0;
+        $.get("/api/point/user/"+index, function (response){
+            for(let i = 0; i < response.data.length; i++){
+                console.log(response.data[i].poPoint);
+                let point = response.data[i].poPoint;
+                console.log(point)
+                console.log(typeof point)
+                sum += point;
+                console.log(typeof sum)
+                console.log(sum);
+            }
+            $('#point').val(sum);
         })
     }
 

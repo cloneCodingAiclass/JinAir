@@ -1,7 +1,8 @@
 <html lang="ko"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org/" xmlns:v-bind="http://www.w3.org/1999/xhtml"
-      xmlns:v-vind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+      xmlns:v-vind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-if="http://www.w3.org/1999/xhtml">
 <!-- head.html -->
 <div th:replace="userpage/fragment/head :: head"></div>
     <link rel="stylesheet" href="/userpage/lib/css/mypage/faq_list.css">
@@ -57,22 +58,163 @@
                                 <th scope="col">제목</th>
                             </tr>
                         </thead>
-                        <tbody v-for="faq in listFaq" id="tgFaq">
+                        <tbody v-for="(faq, index) in listFaq" :key="index">
                         <td>{{faq.faqIndex}}</td>
                         <td>{{faq.faqType}}</td>
                         <td class="al">
                             <p class="question">
-                            <a v-on:click="toggle()" id="toggle" value="toggle">{{faq.faqTitle}}</a>
-
+                            <a href="#" v-on:click="toggle">{{faq.faqTitle}}</a>
                             </p>
                         </td>
-                        <tr class="tr_answer" v-show="key">
-                            <h4>key 값 {{key}}</h4>
+                        <tr class="tr_answer" v-show="visible" :index="index">
                             <td colspan="3" class="td_answer">{{faq.faqContent}}
                             </td>
-
                         </tr>
-
+                        </tbody>
+                    </table>
+                </div>
+                <div id="board1">
+                    <table class="faqlist" id="listFaq1">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="18%">
+                            <col width="">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th scope="col">번호</th>
+                            <th scope="col">상세분류</th>
+                            <th scope="col">제목</th>
+                        </tr>
+                        </thead>
+                        <tbody v-for="faq in listFaq1By('항공권 예매')">
+                        <td>{{faq.faqIndex}}</td>
+                        <td>{{faq.faqType}}</td>
+                        <td class="al">
+                            <p class="question">
+                                <a href="#" v-on:click="toggle">{{faq.faqTitle}}</a>
+                            </p>
+                        </td>
+                        <tr class="tr_answer" v-if="visible">
+                            <td colspan="3" class="td_answer">{{faq.faqContent}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="board2">
+                    <table class="faqlist" id="listFaq2">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="18%">
+                            <col width="">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th scope="col">번호</th>
+                            <th scope="col">상세분류</th>
+                            <th scope="col">제목</th>
+                        </tr>
+                        </thead>
+                        <tbody v-for="faq in listFaq2By('할인 제도')">
+                        <td>{{faq.faqIndex}}</td>
+                        <td>{{faq.faqType}}</td>
+                        <td class="al">
+                            <p class="question">
+                                <a href="#" v-on:click="toggle">{{faq.faqTitle}}</a>
+                            </p>
+                        </td>
+                        <tr class="tr_answer" v-if="visible">
+                            <td colspan="3" class="td_answer">{{faq.faqContent}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="board3">
+                    <table class="faqlist" id="listFaq3">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="18%">
+                            <col width="">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th scope="col">번호</th>
+                            <th scope="col">상세분류</th>
+                            <th scope="col">제목</th>
+                        </tr>
+                        </thead>
+                        <tbody v-for="faq in listFaq3By('수하물')">
+                        <td>{{faq.faqIndex}}</td>
+                        <td>{{faq.faqType}}</td>
+                        <td class="al">
+                            <p class="question">
+                                <a href="#" v-on:click="toggle">{{faq.faqTitle}}</a>
+                            </p>
+                        </td>
+                        <tr class="tr_answer" v-if="visible">
+                            <td colspan="3" class="td_answer">{{faq.faqContent}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="board4">
+                    <table class="faqlist" id="listFaq4">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="18%">
+                            <col width="">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th scope="col">번호</th>
+                            <th scope="col">상세분류</th>
+                            <th scope="col">제목</th>
+                        </tr>
+                        </thead>
+                        <tbody v-for="faq in listFaq4By('기내 서비스')">
+                        <td>{{faq.faqIndex}}</td>
+                        <td>{{faq.faqType}}</td>
+                        <td class="al">
+                            <p class="question">
+                                <a href="#" v-on:click="toggle">{{faq.faqTitle}}</a>
+                            </p>
+                        </td>
+                        <tr class="tr_answer" v-if="visible">
+                            <td colspan="3" class="td_answer">{{faq.faqContent}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="board5">
+                    <table class="faqlist" id="listFaq5">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="18%">
+                            <col width="">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th scope="col">번호</th>
+                            <th scope="col">상세분류</th>
+                            <th scope="col">제목</th>
+                        </tr>
+                        </thead>
+                        <tbody v-for="faq in listFaq5By('기타')">
+                        <td>{{faq.faqIndex}}</td>
+                        <td>{{faq.faqType}}</td>
+                        <td class="al">
+                            <p class="question">
+                                <a href="#" v-on:click="toggle">{{faq.faqTitle}}</a>
+                            </p>
+                        </td>
+                        <tr class="tr_answer" v-if="visible">
+                            <td colspan="3" class="td_answer">{{faq.faqContent}}
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

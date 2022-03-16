@@ -172,13 +172,12 @@ $(function () {
     }
 
     $(document).on('click', '#findName', function (){
-        console.log('작동?');
         airplaneName($('#schAirplaneType').find('option:selected').val());
     })
 
     // 항공기 타입에 따른 이름 검색
     function airplaneName(type) {
-        $('#schAirplaneName').find('option').remove();
+        $('#airplaneName').find('option').remove();
         $.get("/api/airplane/list/" + type, function (response){
 
             let arr = response.data.map(function (val, index){
