@@ -289,7 +289,15 @@ $(function () {
             url : '/api/point',
             data : JSON.stringify(jsonData),
             dataType : 'text',
-            contentType : 'application/json'
+            contentType : 'application/json',
+            success : function (){
+                alert('등록완료');
+                location.reload();
+            },
+            error : function (){
+                alert('등록 실패 \n 입력을 확인해주세요')
+                location.reload();
+            }
         })
     })
 /*
