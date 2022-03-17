@@ -10,6 +10,9 @@
 </head>
 
 <body>
+    <div th:each="dto : ${reIndex}">
+        <input type="hidden" name="" id="" th:value="${dto}">
+    </div>
     <ul class="skipnavi">
         <!--책갈피 역할-->
         <li><a href="#container">본문내용</a></li>

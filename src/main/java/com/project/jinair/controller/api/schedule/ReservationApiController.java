@@ -59,4 +59,9 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     public Header<ReserveApiResponse> delete(@PathVariable(name = "id") Long id) {
         return reservationApiLogicService.delete(id);
     }
+
+    @PostMapping("/creating")
+    public Long creating() {
+        return reservationApiLogicService.creating();
+    }
 }

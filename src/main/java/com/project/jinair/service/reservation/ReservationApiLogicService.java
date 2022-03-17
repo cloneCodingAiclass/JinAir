@@ -101,4 +101,13 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .build();
         return Header.OK(reserveApiResponse);
     }
+
+    public Long creating() {
+        TbReservation tbReservation = TbReservation.builder()
+                .build();
+        TbReservation newTbReservation = tbReservationRepository.save(tbReservation);
+        return newTbReservation.getReIndex();
+    }
+
+
 }
