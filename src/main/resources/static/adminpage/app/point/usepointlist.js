@@ -127,6 +127,8 @@ $(function () {
 
     list(0);
 
+    let point = 0;
+
     function list(page){
         // 포인트 리스트
         $.get('/api/point?page='+page, function (response){
@@ -139,22 +141,6 @@ $(function () {
 
             pointList.pointList = response.data;
 
-            /*
-            for(let i = 0; i < response.data.length; i++){
-                if(response.data[i].poPoint > 0){
-                    // 적립 내역
-                    console.log('적립')
-                    console.log(response.data[i].poPoint)
-                    $(`#add${i}`).text(response.data[i].poPoint)
-                }else{
-                    // 사용 내역
-                    console.log('사용')
-                    console.log(response.data[i].poPoint)
-                    $(`#use${i}`).text(response.data[i].poPoint)
-                }
-            }
-             */
-
             // 유저
             for(let i = 0; i < response.data.length; i++){
                 $.get('/api/user/'+ response.data[i].poUserindex, function (response2){
@@ -165,12 +151,30 @@ $(function () {
             // 유저의 총 포인트
             for(let i = 0; i < response.data.length; i++){
                 let sum = 0;
-                $.get("/api/point/user/"+response.data[i].poUserindex, function (response3){
+                $.get(`/api/point/user/${response.data[i].poUserindex}?page=` + page, function (response3){
                     for(let j = 0; j < response3.data.length; j++){
                         let point = response3.data[j].poPoint;
                         sum += point;
                     }
                     $(`#totalPoint${i}`).text(sum);
+                })
+            }
+
+            for(let i = 0; i < response.data.length; i++){
+                $.get('/api/point', function (response4){
+                    if(response4.data[i].poPoint > 0){
+                        // 적립 내역
+                        console.log('적립')
+                        console.log(response4.data[i].poPoint)
+                        $(`#addPoint${i}`).text(response4.data[i].poPoint)
+                        $(`#usePoint${i}`).text('-')
+                    }else{
+                        // 사용 내역
+                        console.log('사용')
+                        console.log(response4.data[i].poPoint)
+                        $(`#addPoint${i}`).text('-')
+                        $(`#usePoint${i}`).text(response4.data[i].poPoint)
+                    }
                 })
             }
 
@@ -186,6 +190,79 @@ $(function () {
             $(".pageButton").on('click', function (){
                 page = $(this).attr('id');
                 list(page);
+            })
+        })
+    }
+
+    $('#searchUser').on('click', function (){
+        searchList($('#userid').val(), 0)
+    })
+
+    // 사용자 아이디로 검색
+    function searchList(userid, page){
+        $.get("/api/user/search/" + userid, function (response){
+            let idx = response.data[0].memIndex;
+            // 사용자 포인트 리스트
+            $.get(`/api/point/user/${idx}?page=`+ page, function (response){
+                console.dir(response)
+                indexBtn = [];
+                pagination = response.pagination;
+
+                showPage.totalElements = pagination.currentPage;
+                showPage.currentPage = pagination.currentPage;
+
+                pointList.pointList = response.data;
+
+                // 유저
+                for(let i = 0; i < response.data.length; i++){
+                    $.get('/api/user/'+ response.data[i].poUserindex, function (response2){
+                        $(`#userid${i}`).text(response2.data.memUserid)
+                    })
+                }
+
+                // 유저의 총 포인트
+                for(let i = 0; i < response.data.length; i++){
+                    let sum = 0;
+                    $.get(`/api/point/user/${idx}?page=` + page, function (response3){
+                        for(let j = 0; j < response3.data.length; j++){
+                            let point = response3.data[j].poPoint;
+                            sum += point;
+                        }
+                        $(`#totalPoint${i}`).text(sum);
+                    })
+                }
+
+                for(let i = 0; i < response.data.length; i++){
+                    $.get(`/api/point/user/${idx}?page=` + page, function (response4){
+                        if(response4.data[i].poPoint > 0){
+                            // 적립 내역
+                            console.log('적립')
+                            console.log(response4.data[i].poPoint)
+                            $(`#addPoint${i}`).text(response4.data[i].poPoint)
+                            $(`#usePoint${i}`).text('-')
+                        }else{
+                            // 사용 내역
+                            console.log('사용')
+                            console.log(response4.data[i].poPoint)
+                            $(`#addPoint${i}`).text('-')
+                            $(`#usePoint${i}`).text(response4.data[i].poPoint)
+                        }
+                    })
+                }
+
+                let url = "";
+                let NumberPage = 0;
+                let last = pagination.totalPages;
+
+                for(NumberPage; NumberPage < last; NumberPage++){
+                    url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
+                }
+                document.getElementById("footer").innerHTML = url;
+
+                $(".pageButton").on('click', function (){
+                    page = $(this).attr('id');
+                    list(page);
+                })
             })
         })
     }

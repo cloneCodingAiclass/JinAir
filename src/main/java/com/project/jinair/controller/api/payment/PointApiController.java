@@ -53,7 +53,7 @@ public class PointApiController implements CrudInterface<PointApiRequest, PointA
 
     // 사용자에 따른 포인트
     @GetMapping("/user/{id}")
-    public Header<List<PointApiResponse>> userPoint(@PathVariable(name = "id")Long id){
-        return pointApiService.userPoint(id);
+    public Header<List<PointApiResponse>> userPoint(@PathVariable(name = "id")Long id, @PageableDefault(sort = {"poIndex"}, direction = Sort.Direction.DESC, size = 1000000)Pageable pageable){
+        return pointApiService.userPoint(id, pageable);
     }
 }

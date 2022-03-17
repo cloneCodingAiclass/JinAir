@@ -116,11 +116,18 @@ public class PointApiService implements CrudInterface<PointApiRequest, PointApiR
     }
 
     // 유저 포인트
-    public Header<List<PointApiResponse>> userPoint(Long id) {
-        List<TbPoint> tbPoint = tbPointRepository.findByPoUserindex(id);
+    public Header<List<PointApiResponse>> userPoint(Long id, Pageable pagable) {
+        Page<TbPoint> tbPoint = tbPointRepository.findByPoUserindex(id, pagable);
         List<PointApiResponse> pointApiResponseList = tbPoint.stream()
                 .map(point -> responsePoint(point))
                 .collect(Collectors.toList());
-        return Header.OK(pointApiResponseList);
+
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbPoint.getTotalPages())
+                .totalElements(tbPoint.getTotalElements())
+                .currentPage(tbPoint.getNumber())
+                .currentElements(tbPoint.getNumberOfElements())
+                .build();
+        return Header.OK(pointApiResponseList, pagination);
     }
 }

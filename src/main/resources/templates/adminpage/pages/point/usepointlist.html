@@ -16,13 +16,14 @@
                 <div class="con_wrap">
                     <div class="search">
                         <p class="title">포인트 사용 내역 조회</p>
-                        <form method="get" action="#">
-                            <input type="text" placeholder="아이디를 입력하세요">
-                            <input type="submit" value="검색">
-                        </form>
+                        <div>
+                            <input type="text" id="userid" placeholder="아이디를 입력하세요">
+                            <input type="button" id="searchUser" value="검색">
+                        </div>
                     </div>  
                     <table>
                         <colgroup>
+                            <col width="120">
                             <col width="120">
                             <col width="250">
                             <col width="120">
@@ -31,8 +32,8 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <td>내역</td>
-                                <!-- <td>사용내역</td>-->
+                                <td>적립내역</td>
+                                <td>사용내역</td>
                                 <td>메모</td>
                                 <td>사용자</td>
                                 <td>총 포인트</td>
@@ -41,8 +42,8 @@
                         </thead>
                         <tbody id="pointList">
                             <tr v-for="(dto, i) in pointList">
-                                <td>{{dto.poPoint}}</td>
-                                <!-- <td :id=`use${i}`></td>-->
+                                <td :id=`addPoint${i}`></td>
+                                <td :id=`usePoint${i}`></td>
                                 <td>{{dto.poMemo}}</td>
                                 <td :id=`userid${i}`></td>
                                 <td :id=`totalPoint${i}`></td>
