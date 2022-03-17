@@ -4,8 +4,10 @@ import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.enumclass.CouponStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.payment.UsercouponApiRequest;
+import com.project.jinair.model.network.request.schedule.ReserveApiRequest;
 import com.project.jinair.model.network.response.payment.CouponRegistApiResponse;
 import com.project.jinair.model.network.response.payment.UsercouponApiResponse;
+import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
 import com.project.jinair.service.payment.UserCouponApiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/userCoupon")
@@ -73,5 +76,10 @@ public class UserCouponApiController implements CrudInterface<UsercouponApiReque
         String sumCoupon = "select sum(u.ucTotcoupon) from TbUsercoupon u where u.ucUserindex = :id";
         Long result = (Long) em.createQuery(sumCoupon).setParameter("id", id).getSingleResult();
         return result;
+    }
+
+    @PostMapping("/kakao")
+    public String buy(@RequestParam Map<String, String> request) {
+        return userCouponApiService.buy(request);
     }
 }

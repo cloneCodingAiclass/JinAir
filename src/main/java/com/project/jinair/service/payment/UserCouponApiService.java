@@ -2,28 +2,39 @@ package com.project.jinair.service.payment;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.member.TbMember;
-import com.project.jinair.model.entity.payment.TbCouponRegist;
 import com.project.jinair.model.entity.payment.TbUsercoupon;
 import com.project.jinair.model.enumclass.CouponStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.payment.UsercouponApiRequest;
+import com.project.jinair.model.network.response.payment.KakaoPayReadyVO;
 import com.project.jinair.model.network.response.payment.UsercouponApiResponse;
 import com.project.jinair.repository.MemberRepository;
 import com.project.jinair.repository.TbCouponRegistRepository;
 import com.project.jinair.repository.TbUsercouponRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.net.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Log
 @Service
 @RequiredArgsConstructor
 public class UserCouponApiService implements CrudInterface<UsercouponApiRequest, UsercouponApiResponse> {
@@ -31,6 +42,8 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
     private final TbUsercouponRepository tbUsercouponRepository;
     private final MemberRepository memberRepository;
     private final TbCouponRegistRepository tbCouponRegistRepository;
+    private static final String HOST = "https://kapi.kakao.com/";
+    private KakaoPayReadyVO kakaoPayReadyVO;
     @PersistenceContext
     private EntityManager em;
 
@@ -180,4 +193,45 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
         }
     }
 
-}
+    public String buy(Map<String, String> request) {
+
+        RestTemplate restTemplate = new RestTemplate();
+        // 서버로 요청할 Header
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "KakaoAK " + "aee851af0c31999dd6849384e906bb0d");
+        headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
+        // 서버로 요청할 Body
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+        params.add("cid", "TC0ONETIME");
+        params.add("partner_order_id", "partner_order_id");
+        params.add("partner_user_id", "partner_user_id");
+        params.add("item_name", "갤럭시S9");
+        params.add("quantity", "1");
+        params.add("total_amount", "2100");
+        params.add("vat_amount", "100");
+        params.add("tax_free_amount", "100");
+        params.add("approval_url", "http://localhost:8080/pages/complete");
+        params.add("cancel_url", "http://localhost:8080/pages/cancel/complete");
+        params.add("fail_url", "http://localhost:8080/pages/index");
+        System.out.println(params);
+
+        HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
+        System.out.println(headers);
+
+        try {
+                kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
+                log.info("" + kakaoPayReadyVO);
+
+                return kakaoPayReadyVO.getNext_redirect_pc_url();
+
+            } catch (RestClientException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+
+            return "/pay";
+
+        }
+
+    }
