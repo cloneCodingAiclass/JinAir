@@ -19,15 +19,15 @@ public class KakaoPayController {
     @PostMapping("/create")
     public String buy(@RequestParam Map<String, String> request) {
         return kakaoPayMentService.buy(request);
+
     }
 
-    @GetMapping("/kakaoPaySuccess")
+    @GetMapping("/complete")
     public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
         log.info("kakaoPaySuccess get............................................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
-        System.out.println(pg_token);
+
+        model.addAttribute("info", kakaoPayMentService.kakaoPayInfo(pg_token));
 
     }
-
-
 }
