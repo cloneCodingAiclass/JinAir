@@ -18,6 +18,7 @@ $(function () {
             let data = new Object();
             data.reTotal = 100000;
             arr.push(data);
+
         }
                 // cid : cid,
                 // partner_order_id : partner_order_id,
@@ -32,7 +33,7 @@ $(function () {
                 // cancel_url : cancel_url
         console.dir(arr);
         $.post({
-            url: "/api/userCoupon/kakao",
+            url: "/api/kakao/create",
             // data : JSON.stringify(arr),
             // async: false,
             dataType : 'json',
