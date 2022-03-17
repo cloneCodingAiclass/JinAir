@@ -210,7 +210,8 @@ $(function () {
         methods:{
         }
     });
-    $('#arrive_point').on('change', function (){
+    arrive_point();
+    function arrive_point(){
         $.post({
             url: "/api/airport/list",
             data: "findPoint=" + $('#arrive_point').val(),
@@ -221,7 +222,11 @@ $(function () {
                 console.log(itemList.itemList[0].aptTypedetail);
             }
         })
+    }
+    $('#arrive_point').on('change', function (){
+        arrive_point();
     })
+
     let itemList1 = new Vue({
         el : '#itemList1',
         data : {

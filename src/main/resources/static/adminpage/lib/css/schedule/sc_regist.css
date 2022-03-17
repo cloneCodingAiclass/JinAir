@@ -98,11 +98,13 @@
     outline: none;
     font-size: 13px;
     font-weight: 900;
+    text-align: center;
 }
 #container > .contents  >.contwrap select{
     outline: none;
     font-size: 14px;
     font-weight: 900;
+    text-align: center;
 }
 #container > .contents >.contwrap input[type="text"].jinipoint{
     width: 70px;
