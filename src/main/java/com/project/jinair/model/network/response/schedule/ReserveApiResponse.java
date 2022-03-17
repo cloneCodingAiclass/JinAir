@@ -17,19 +17,19 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class ReserveApiResponse {
-    private Long rIndex;
-    private Long rPercentpoint;
-    private PaymentStatus rStatus;
+    private Long reIndex;
+    private Long reUserindex;
+    private Long rePercentpoint;
+    private PaymentStatus reStatus;
     // 회원 여부 이넘 클래스 없음
-    private String rUserStatus;
-    private String rReserNum;
-    private String rPayment;
-    private Long rPetsidx;
-    private Long rBaggageidx;
-    private Long rInsuranceidx;
-    private Long rScheduleidx;
-    private Long rTotal;
-    private Long rUserindex;
+    private String reUserStatus;
+    private String reReserNum;
+    private String rePayment;
+    private Long rePetsidx;
+    private Long reBaggageidx;
+    private Long reInsuranceidx;
+    private Long reScheduleidx;
+    private Long reTotal;
 
     // 여러 좌석을 예매시
     private List<ScheduleApiResponse> scheduleApiResponseList;
@@ -39,7 +39,6 @@ public class ReserveApiResponse {
     private List<BaggageApiResponse> baggageApiResponseList;
     // 애완동물
     private List<PetsApiResponse> petsApiResponseList;
-
     //비회원 정보
     private List<VisitApiResponse> visitApiResponseList;
 }

@@ -10,6 +10,9 @@
 </head>
 
 <body>
+    <div th:each="dto : ${reIndex}">
+        <input type="hidden" name="" id="" th:value="${dto}">
+    </div>
     <ul class="skipnavi">
         <!--책갈피 역할-->
         <li><a href="#container">본문내용</a></li>
@@ -52,7 +55,7 @@
                         <!--탑승객 수-->
                         <div class="nop">
                             <p>탑승객수</p>
-                            <p id="person_cnt" class="fs20">성인 1</p>
+                            <p id="person_cnt" class="fs20"><span th:text="${people}"></span></p>
                         </div>
                         <!--탑승객 수 끝-->
                         <!--수정버튼-->
