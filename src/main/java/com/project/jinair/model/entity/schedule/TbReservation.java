@@ -27,21 +27,22 @@ public class TbReservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_reservation_idx")
-    private Long rIndex;
-//    private Long rUserindex;
-    private Long rPercentpoint;
+    private Long reIndex;
+    private Long reUserindex;
+    private Long rePercentpoint;
     @Enumerated(EnumType.STRING)
-    private PaymentStatus rStatus;
+    private PaymentStatus reStatus;
     // 이넘 클래스 없음
-    private String rUserStatus;
-    private String rReserNum;
-    private String rPayment;
-    private Long rPetsidx;
-    private Long rBaggageidx;
-    private Long rInsuranceidx;
-    private Long rScheduleidx;
-    private Long rTotal;
+    private String reUserStatus;
+    private String reReserNum;
+    private String rePayment;
+    private Long rePetsidx;
+    private Long reBaggageidx;
+    private Long reInsuranceidx;
+    private Long reScheduleidx;
+    private Long reTotal;
 
     @ManyToOne
+    @JoinColumn(name= "reUserindex", referencedColumnName = "memIndex", insertable = false, updatable = false)
     private TbMember tbMember;
 }

@@ -73,7 +73,7 @@ $(() => {
         $(".reserve_round").css({ "display": "block" });
         $(".reserve_oneway").css({ "display": "none" });
         $(".reserve_multi").css({ "display": "none" });
-
+        $("#hidden_trip_type").val("왕복");
 
         // 예약 관련 레이어 닫기
         e.stopPropagation();
@@ -116,6 +116,7 @@ $(() => {
         $(".reserve_round").css({ "display": "none" });
         $(".reserve_oneway").css({ "display": "block" });
         $(".reserve_multi").css({ "display": "none" });
+        $("#hidden_trip_type").val("편도");
 
         // 예약 관련 레이어 닫기
         e.stopPropagation();
@@ -158,6 +159,7 @@ $(() => {
         $(".reserve_round").css({ "display": "none" });
         $(".reserve_oneway").css({ "display": "none" });
         $(".reserve_multi").css({ "display": "block" });
+        $("#hidden_trip_type").val("다구간");
 
         // 예약 관련 레이어 닫기
         e.stopPropagation();
@@ -801,3 +803,202 @@ $(() => {
 
 
 })
+
+// 예약 버튼
+$(() => {
+    $('#reservateBTN').on('click', function(){
+        if($('#hidden_trip_type').val() == "왕복") {
+
+            if($('.go_select_optt').val()=="출발일" || $('.arrive_select_optt').val()=="도착일" ||
+                $('.go_date_select_optt').val()=="가는날" || $('.come_date_select_optt').val()=="오는날"){
+                alert('입력하신 내용을 확인해주세요');
+            }else{
+                let f = document.createElement('form');
+
+                let obj1;
+                obj1 = document.createElement('input');
+                obj1.setAttribute('type', 'hidden');
+                obj1.setAttribute('name', 'schDeparturePoint');
+                obj1.setAttribute('value', $('.go_select_optt').val());
+                f.appendChild(obj1);
+
+                let obj2;
+                obj2 = document.createElement('input');
+                obj2.setAttribute('type', 'hidden');
+                obj2.setAttribute('name', 'schArrivalPoint');
+                obj2.setAttribute('value', $('.arrive_select_optt').val());
+                f.appendChild(obj2);
+
+                let obj3;
+                obj3 = document.createElement('input');
+                obj3.setAttribute('type', 'hidden');
+                obj3.setAttribute('name', 'goDateSelectOptt');
+                obj3.setAttribute('value', $('.go_date_select_optt').val());
+                f.appendChild(obj3);
+
+                let obj4;
+                obj4 = document.createElement('input');
+                obj4.setAttribute('type', 'hidden');
+                obj4.setAttribute('name', 'comeDateSelectOptt');
+                obj4.setAttribute('value', $('.come_date_select_optt').val());
+                f.appendChild(obj4);
+
+                let obj5;
+                obj5 = document.createElement('input');
+                obj5.setAttribute('type', 'hidden');
+                obj5.setAttribute('name', 'AdultNumber');
+                obj5.setAttribute('value', $('.adultPaxCnt').val());
+                f.appendChild(obj5);
+
+                let obj6;
+                obj6 = document.createElement('input');
+                obj6.setAttribute('type', 'hidden');
+                obj6.setAttribute('name', 'ChildNumber');
+                obj6.setAttribute('value', $('.childPaxCnt').val());
+                f.appendChild(obj6);
+
+                let obj7;
+                obj7 = document.createElement('input');
+                obj7.setAttribute('type', 'hidden');
+                obj7.setAttribute('name', 'InfantNumber');
+                obj7.setAttribute('value', $('.infantPaxCnt').val());
+                f.appendChild(obj7);
+
+                f.setAttribute('method', 'post');
+                f.setAttribute('action', '/pages/getAvailabilityList');
+                document.body.appendChild(f);
+                f.submit();
+            }
+        }else if($('#hidden_trip_type').val() == "편도") {
+            if($('.go_select_optt').val()=="출발일" || $('.arrive_select_optt').val()=="도착일" ||
+                $('.go_date_select_optt').val()=="가는날"){
+                alert('입력하신 내용을 확인해주세요');
+            }else{
+                let f = document.createElement('form');
+
+                let obj1;
+                obj1 = document.createElement('input');
+                obj1.setAttribute('type', 'hidden');
+                obj1.setAttribute('name', 'schDeparturePoint');
+                obj1.setAttribute('value', $('.go_select_optt').val());
+                f.appendChild(obj1);
+
+                let obj2;
+                obj2 = document.createElement('input');
+                obj2.setAttribute('type', 'hidden');
+                obj2.setAttribute('name', 'schArrivalPoint');
+                obj2.setAttribute('value', $('.arrive_select_optt').val());
+                f.appendChild(obj2);
+
+                let obj3;
+                obj3 = document.createElement('input');
+                obj3.setAttribute('type', 'hidden');
+                obj3.setAttribute('name', 'goDateSelectOptt');
+                obj3.setAttribute('value', $('.go_date_select_optt').val());
+                f.appendChild(obj3);
+
+                let obj4;
+                obj4 = document.createElement('input');
+                obj4.setAttribute('type', 'hidden');
+                obj4.setAttribute('name', 'AdultNumber');
+                obj4.setAttribute('value', $('.adultPaxCnt').val());
+                f.appendChild(obj4);
+
+                let obj5;
+                obj5 = document.createElement('input');
+                obj5.setAttribute('type', 'hidden');
+                obj5.setAttribute('name', 'ChildNumber');
+                obj5.setAttribute('value', $('.childPaxCnt').val());
+                f.appendChild(obj5);
+
+                let obj6;
+                obj6 = document.createElement('input');
+                obj6.setAttribute('type', 'hidden');
+                obj6.setAttribute('name', 'InfantNumber');
+                obj6.setAttribute('value', $('.infantPaxCnt').val());
+                f.appendChild(obj6);
+
+                f.setAttribute('method', 'post');
+                f.setAttribute('action', '/pages/getAvailabilityList/oneway');
+                document.body.appendChild(f);
+                f.submit();
+            }
+        }else if($('#hidden_trip_type').val() == "다구간") {
+            if($('.go_select_optt').val()=="출발일" || $('.arrive_select_optt').val()=="도착일" ||
+                $('.go_date_select_optt').val()=="가는날" || $('.go_select_optt2').val()=="출발일" ||
+                $('.arrive_select_optt2').val()=="도착일" || $('.go_date_select_optt2').val()=="가는날"){
+                alert('입력하신 내용을 확인해주세요');
+            }else{
+                let f = document.createElement('form');
+
+                let obj1;
+                obj1 = document.createElement('input');
+                obj1.setAttribute('type', 'hidden');
+                obj1.setAttribute('name', 'schDeparturePoint');
+                obj1.setAttribute('value', $('.go_select_optt').val());
+                f.appendChild(obj1);
+
+                let obj2;
+                obj2 = document.createElement('input');
+                obj2.setAttribute('type', 'hidden');
+                obj2.setAttribute('name', 'schArrivalPoint');
+                obj2.setAttribute('value', $('.arrive_select_optt').val());
+                f.appendChild(obj2);
+
+                let obj3;
+                obj3 = document.createElement('input');
+                obj3.setAttribute('type', 'hidden');
+                obj3.setAttribute('name', 'goDateSelectOptt');
+                obj3.setAttribute('value', $('.go_date_select_optt').val());
+                f.appendChild(obj3);
+
+                let obj4;
+                obj4 = document.createElement('input');
+                obj4.setAttribute('type', 'hidden');
+                obj4.setAttribute('name', 'schDeparturePoint1');
+                obj4.setAttribute('value', $('.go_select_optt').val());
+                f.appendChild(obj4);
+
+                let obj5;
+                obj5 = document.createElement('input');
+                obj5.setAttribute('type', 'hidden');
+                obj5.setAttribute('name', 'schArrivalPoint1');
+                obj5.setAttribute('value', $('.arrive_select_optt').val());
+                f.appendChild(obj5);
+
+                let obj6;
+                obj6 = document.createElement('input');
+                obj6.setAttribute('type', 'hidden');
+                obj6.setAttribute('name', 'goDateSelectOptt1');
+                obj6.setAttribute('value', $('.go_date_select_optt').val());
+                f.appendChild(obj6);
+
+                let obj7;
+                obj7 = document.createElement('input');
+                obj7.setAttribute('type', 'hidden');
+                obj7.setAttribute('name', 'AdultNumber');
+                obj7.setAttribute('value', $('.adultPaxCnt').val());
+                f.appendChild(obj7);
+
+                let obj8;
+                obj8 = document.createElement('input');
+                obj8.setAttribute('type', 'hidden');
+                obj8.setAttribute('name', 'ChildNumber');
+                obj8.setAttribute('value', $('.childPaxCnt').val());
+                f.appendChild(obj8);
+
+                let obj9;
+                obj9 = document.createElement('input');
+                obj9.setAttribute('type', 'hidden');
+                obj9.setAttribute('name', 'InfantNumber');
+                obj9.setAttribute('value', $('.infantPaxCnt').val());
+                f.appendChild(obj9);
+
+                f.setAttribute('method', 'post');
+                f.setAttribute('action', '/pages/getAvailabilityList/multiway');
+                document.body.appendChild(f);
+                f.submit();
+            }
+        }
+    })
+});
