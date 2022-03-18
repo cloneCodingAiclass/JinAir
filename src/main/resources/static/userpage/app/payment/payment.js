@@ -82,7 +82,27 @@ $(function () {
         })
     }
 
+    // 운임료 구하기
+    let resPrice = $('#resPrice').text();
+    let optPrice = $('#optPrice').text();
 
+    // 총 운임료
+    let price = Number(resPrice) + Number(optPrice);
+
+    $('#pPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
+    $('#totalPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
+
+    // 쿠폰 디스카운트 요금 더하기기
+    $('#checkbut').on('click', function (){
+        let optval = $('#sel_coupon option:selected').val();            // 디스카운트율
+        console.log(optval);
+
+        let dis = price * (optval*0.01);
+        $('#disC').text(Math.ceil(dis).toLocaleString('ko-KR'));
+        let tot = price-dis;
+
+        $('#totalPrice').text(Math.ceil(tot).toLocaleString('ko-KR'));
+    });
 });
 
     /*운임 규정 안내 모달창 끝 */

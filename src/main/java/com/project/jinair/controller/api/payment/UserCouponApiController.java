@@ -54,7 +54,6 @@ public class UserCouponApiController implements CrudInterface<UsercouponApiReque
         return sumCoupon(id);
     }
 
-
     @GetMapping("/couponList/{id}/{enumid}/{startDate}/{endDate}")
     public Header<List<UsercouponApiResponse>> searchList(@PathVariable(name = "id") Long id, @PathVariable(name = "enumid") CouponStatus enumid, @PathVariable(name = "startDate") String startDate, @PathVariable(name = "endDate") String endDate, @PageableDefault(size = 5, sort = {"ucUserindex"}, direction = Sort.Direction.DESC) Pageable pageable) {
         return userCouponApiService.searchList(id, enumid, startDate, endDate, pageable);

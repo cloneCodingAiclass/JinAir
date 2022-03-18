@@ -158,8 +158,6 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
                 .map(coupon -> responseCoupon(coupon))
                 .collect(Collectors.toList());
 
-        System.out.println(usercouponApiResponseList);
-
         return Header.OK(usercouponApiResponseList);
     }
 

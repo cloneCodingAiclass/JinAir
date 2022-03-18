@@ -1,5 +1,6 @@
 package com.project.jinair.controller.api.payment;
 
+import com.project.jinair.model.network.response.payment.KakaoPayApprovalVO;
 import com.project.jinair.service.payment.KakaoPayMentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -28,6 +29,5 @@ public class KakaoPayController {
         log.info("kakaoPaySuccess pg_token : " + pg_token);
 
         model.addAttribute("info", kakaoPayMentService.kakaoPayInfo(pg_token));
-
     }
 }
