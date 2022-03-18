@@ -1,5 +1,6 @@
 package com.project.jinair.controller.page;
 
+import com.project.jinair.controller.api.info.ScListApiController;
 import com.project.jinair.model.entity.board.*;
 import com.project.jinair.model.enumclass.LostStatus;
 import com.project.jinair.model.enumclass.QnaStatus;
@@ -8,6 +9,7 @@ import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.response.board.*;
 import com.project.jinair.model.network.response.member.MemberApiResponse;
 import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
+import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import com.project.jinair.repository.*;
 import com.project.jinair.service.MenuService;
 import com.project.jinair.service.board.*;
@@ -71,6 +73,9 @@ public class PageController {
 
     @Autowired
     ReservationApiLogicService reservationApiLogicService;
+
+    @Autowired
+    ScListApiController scListApiService;
 
     // 사용자 인덱스
     @RequestMapping("/index")
@@ -629,7 +634,7 @@ public class PageController {
         response.addCookie(myCookie);
     }
     // 사용자 항공권 예약 getAvailabilityList 왕복
-    @PostMapping("/getAvailabilityList")
+    @PostMapping("/getAvailabilityList/twoway")
     public ModelAndView getAvailabilityList(
             HttpServletRequest request, Model model, HttpServletResponse response,
             @RequestParam(value = "schDeparturePoint", required=false) String schDeparturePoint,
@@ -640,8 +645,13 @@ public class PageController {
             @RequestParam(value = "ChildNumber", required=false) Long ChildNumber,
             @RequestParam(value = "InfantNumber", required=false) Long InfantNumber
     ){
+        model.addAttribute("schDeparturePoint", schDeparturePoint);
+        model.addAttribute("schArrivalPoint", schArrivalPoint);
+        model.addAttribute("goDateSelectOptt", goDateSelectOptt);
+        model.addAttribute("comeDateSelectOptt", comeDateSelectOptt);
         Long peopleNum = AdultNumber+ChildNumber+InfantNumber;
         String reIndex = null;
+        List Cook = new ArrayList<>();
         // 인원수에 만큼 테이블 생성
         // 인당 예약 테이블 index로 쿠키 생성
         for(int i = 0 ; i < peopleNum ; i ++){
@@ -650,17 +660,10 @@ public class PageController {
             myCookie.setMaxAge(1200);
             myCookie.setPath("/");
             response.addCookie(myCookie);
-        }
-
-        // 쿠키 받아오기
-        Cookie[] myCookies = request.getCookies();
-        List Cook = new ArrayList<>();
-        for(int i = 0; i < myCookies.length; i++) {
-            if(myCookies[i].getValue().equals("reIndex")){
-                Cook.add(myCookies[i].getName());
-            }
+            Cook.add(myCookie.getName());
         }
         model.addAttribute("reIndex", Cook);
+
 
         if(ChildNumber == 0){
             if(InfantNumber == 0){
@@ -690,7 +693,7 @@ public class PageController {
     // 사용자 항공권 예약 getAvailabilityList 편도
     @PostMapping("/getAvailabilityList/oneway")
     public ModelAndView getAvailabilityList(
-            HttpServletRequest request, Model model,
+            HttpServletRequest request, Model model, HttpServletResponse response,
             @RequestParam(value = "schDeparturePoint", required=false) String schDeparturePoint,
             @RequestParam(value = "schArrivalPoint", required=false) String schArrivalPoint,
             @RequestParam(value = "goDateSelectOptt", required=false) String goDateSelectOptt,
@@ -698,6 +701,23 @@ public class PageController {
             @RequestParam(value = "ChildNumber", required=false) Long ChildNumber,
             @RequestParam(value = "InfantNumber", required=false) Long InfantNumber
     ){
+        model.addAttribute("schDeparturePoint", schDeparturePoint);
+        model.addAttribute("schArrivalPoint", schArrivalPoint);
+        model.addAttribute("goDateSelectOptt", goDateSelectOptt);
+        Long peopleNum = AdultNumber+ChildNumber+InfantNumber;
+        String reIndex = null;
+        List Cook = new ArrayList<>();
+        // 인원수에 만큼 테이블 생성
+        // 인당 예약 테이블 index로 쿠키 생성
+        for(int i = 0 ; i < peopleNum ; i ++){
+            reIndex = String.valueOf(reservationApiLogicService.creating());
+            Cookie myCookie = new Cookie(reIndex, "reIndex");
+            myCookie.setMaxAge(1200);
+            myCookie.setPath("/");
+            response.addCookie(myCookie);
+            Cook.add(myCookie.getName());
+        }
+        model.addAttribute("reIndex", Cook);
         if(ChildNumber == 0){
             if(InfantNumber == 0){
                 model.addAttribute("people", "성인 " + AdultNumber);
@@ -725,7 +745,7 @@ public class PageController {
     // 사용자 항공권 예약 getAvailabilityList 다구간
     @PostMapping("/getAvailabilityList/multiway")
     public ModelAndView getAvailabilityList(
-            HttpServletRequest request, Model model,
+            HttpServletRequest request, Model model, HttpServletResponse response,
             @RequestParam(value = "schDeparturePoint", required=false) String schDeparturePoint,
             @RequestParam(value = "schArrivalPoint", required=false) String schArrivalPoint,
             @RequestParam(value = "goDateSelectOptt", required=false) String goDateSelectOptt,
@@ -736,6 +756,28 @@ public class PageController {
             @RequestParam(value = "ChildNumber", required=false) Long ChildNumber,
             @RequestParam(value = "InfantNumber", required=false) Long InfantNumber
     ){
+        model.addAttribute("schDeparturePoint", schDeparturePoint);
+        model.addAttribute("schArrivalPoint", schArrivalPoint);
+        model.addAttribute("goDateSelectOptt", goDateSelectOptt);
+        model.addAttribute("schDeparturePoint1", schDeparturePoint1);
+        model.addAttribute("schArrivalPoint1", schArrivalPoint1);
+        model.addAttribute("goDateSelectOptt1", goDateSelectOptt1);
+
+
+        Long peopleNum = AdultNumber+ChildNumber+InfantNumber;
+        String reIndex = null;
+        List Cook = new ArrayList<>();
+        // 인원수에 만큼 테이블 생성
+        // 인당 예약 테이블 index로 쿠키 생성
+        for(int i = 0 ; i < peopleNum ; i ++){
+            reIndex = String.valueOf(reservationApiLogicService.creating());
+            Cookie myCookie = new Cookie(reIndex, "reIndex");
+            myCookie.setMaxAge(1200);
+            myCookie.setPath("/");
+            response.addCookie(myCookie);
+            Cook.add(myCookie.getName());
+        }
+        model.addAttribute("reIndex", Cook);
         if(ChildNumber == 0){
             if(InfantNumber == 0){
                 model.addAttribute("people", "성인 " + AdultNumber);
@@ -760,8 +802,6 @@ public class PageController {
         return new ModelAndView("/userpage/pages/payment/getAvailabilityList")
                 .addObject("code", "getAvailabilityList");
     }
-
-
 
 
     // 사용자 항공권 예약 registerPassenger
@@ -800,9 +840,21 @@ public class PageController {
         return new ModelAndView("/userpage/pages/payment/restrictedCountry")
                 .addObject("code", "restrictedCountry");
     }
+    // 최종 결제
+    @RequestMapping("/payment")
+    public ModelAndView payment(HttpServletRequest request, HttpServletResponse response, Model model){
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        }else{
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/payment/payReservation")
+                .addObject("code", "payReservation");
+    }
     // 사용자 예약 취소
     @RequestMapping("/cancel")
-    public ModelAndView cancel(HttpServletRequest request, Model model){
+    public ModelAndView cancel(HttpServletRequest request, HttpServletResponse response, Model model){
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
@@ -814,7 +866,7 @@ public class PageController {
     }
     // 사용자 예약 취소 완료
     @RequestMapping("/cancel/complete")
-    public ModelAndView cancelComplete(HttpServletRequest request, Model model) {
+    public ModelAndView cancelComplete(HttpServletRequest request, HttpServletResponse response, Model model) {
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
@@ -826,7 +878,7 @@ public class PageController {
     }
     // 사용자 결제 완료
     @RequestMapping("/complete")
-    public ModelAndView complete(HttpServletRequest request, Model model) {
+    public ModelAndView complete(HttpServletRequest request, HttpServletResponse response, Model model) {
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
