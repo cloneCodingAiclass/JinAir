@@ -152,6 +152,17 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
         return Header.OK(usercouponApiResponseList, pagination);
     }
 
+    public Header<List<UsercouponApiResponse>> enumList(Long id, CouponStatus enumid) {
+        List<TbUsercoupon> tbUsercoupons = tbUsercouponRepository.findByUcUserindexAndUcIsUse(id, enumid);
+        List<UsercouponApiResponse> usercouponApiResponseList = tbUsercoupons.stream()
+                .map(coupon -> responseCoupon(coupon))
+                .collect(Collectors.toList());
+
+        System.out.println(usercouponApiResponseList);
+
+        return Header.OK(usercouponApiResponseList);
+    }
+
     public Header<UsercouponApiResponse> promotionCoupon(Header<UsercouponApiRequest> request){
         UsercouponApiRequest usercouponApiRequest = request.getData();
         List<TbUsercoupon> tbUsercoupons = tbUsercouponRepository.findByUcCode(usercouponApiRequest.getUcCode());
