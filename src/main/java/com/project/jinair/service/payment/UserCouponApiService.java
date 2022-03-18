@@ -2,7 +2,6 @@ package com.project.jinair.service.payment;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.member.TbMember;
-import com.project.jinair.model.entity.payment.TbCouponRegist;
 import com.project.jinair.model.entity.payment.TbUsercoupon;
 import com.project.jinair.model.enumclass.CouponStatus;
 import com.project.jinair.model.network.Header;
@@ -10,9 +9,9 @@ import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.payment.UsercouponApiRequest;
 import com.project.jinair.model.network.response.payment.UsercouponApiResponse;
 import com.project.jinair.repository.MemberRepository;
-import com.project.jinair.repository.TbCouponRegistRepository;
 import com.project.jinair.repository.TbUsercouponRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,6 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
 
     private final TbUsercouponRepository tbUsercouponRepository;
     private final MemberRepository memberRepository;
-    private final TbCouponRegistRepository tbCouponRegistRepository;
     @PersistenceContext
     private EntityManager em;
 
@@ -179,5 +177,4 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
             return null;
         }
     }
-
 }

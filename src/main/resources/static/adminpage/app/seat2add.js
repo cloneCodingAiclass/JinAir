@@ -1,17 +1,5 @@
 $(function () {
-    $("#kakaopay").on("click", function (){
-        alert('클릭됐음')
-        $.ajax({
-            url : '/kakao/kakaopay',
-            dataType : 'json',
-            success:function (data){
-                alert(data.tid);
-            },
-            error:function (error){
-                alert(error);
-            }
-        })
-    });
+
     // saveAll 용
     $('.select_comp').on('click', function () {
         let arr = new Array();

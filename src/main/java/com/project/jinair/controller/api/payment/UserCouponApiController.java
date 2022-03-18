@@ -4,7 +4,6 @@ import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.enumclass.CouponStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.payment.UsercouponApiRequest;
-import com.project.jinair.model.network.response.payment.CouponRegistApiResponse;
 import com.project.jinair.model.network.response.payment.UsercouponApiResponse;
 import com.project.jinair.service.payment.UserCouponApiService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -74,4 +72,5 @@ public class UserCouponApiController implements CrudInterface<UsercouponApiReque
         Long result = (Long) em.createQuery(sumCoupon).setParameter("id", id).getSingleResult();
         return result;
     }
+
 }
