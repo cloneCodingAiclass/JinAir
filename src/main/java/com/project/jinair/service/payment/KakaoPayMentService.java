@@ -31,18 +31,19 @@ public class KakaoPayMentService {
         // 서버로 요청할 Header
         HttpHeaders headers = new HttpHeaders();
             headers.add("Authorization", "KakaoAK " + "aee851af0c31999dd6849384e906bb0d");
+            headers.add("Accept", MediaType.APPLICATION_JSON_UTF8_VALUE);
             headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
         // 서버로 요청할 Body
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
             params.add("cid", "TC0ONETIME");
             params.add("partner_order_id", "partner_order_id");
             params.add("partner_user_id", "partner_user_id");
-            params.add("item_name", "갤럭시S9");
+            params.add("item_name", "항공권");
             params.add("quantity", "1");
-            params.add("total_amount", "2100");
-            params.add("vat_amount", "100");
-            params.add("tax_free_amount", "100");
-            params.add("approval_url", "http://localhost:8080/pages/complete");
+            params.add("total_amount", "3000000");
+            params.add("vat_amount", "10000");
+            params.add("tax_free_amount", "10000");
+            params.add("approval_url", "http://localhost:8080/api/kakao/complete");
             params.add("cancel_url", "http://localhost:8080/pages/cancel");
             params.add("fail_url", "http://localhost:8080/kakao/kakaoPaySuccessFail");
 
@@ -65,21 +66,25 @@ public class KakaoPayMentService {
 
     public KakaoPayApprovalVO kakaoPayInfo(String pg_token) {
 
+        log.info("KakaoPayInfoVO............................................");
+        log.info("-----------------------------");
+
         RestTemplate restTemplate = new RestTemplate();
 
         // 서버로 요청할 Header
         HttpHeaders headers = new HttpHeaders();
             headers.add("Authorization", "KakaoAK " + "aee851af0c31999dd6849384e906bb0d");
+            headers.add("Accept", MediaType.APPLICATION_JSON_UTF8_VALUE);
             headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
 
         // 서버로 요청할 Body
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
             params.add("cid", "TC0ONETIME");
             params.add("tid", kakaoPayReadyVO.getTid());
-            params.add("partner_order_id", "1001");
-            params.add("partner_user_id", "gorany");
+            params.add("partner_order_id", "partner_order_id");
+            params.add("partner_user_id", "partner_user_id");
             params.add("pg_token", pg_token);
-            params.add("total_amount", "2100");
+            params.add("total_amount", "3000000");
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 

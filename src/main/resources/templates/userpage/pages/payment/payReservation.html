@@ -4,11 +4,11 @@
 <!-- head -->
     <div th:replace="userpage/fragment/head :: head"></div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="/userpage/app/index/index_reserve.js"></script>
     <link rel="stylesheet" href="/userpage/lib/css/payment/payReservation.css"/>
     <link rel="stylesheet" href="/userpage/lib/css/index/index.css"/>
     <script src="/userpage/app/payment/payReservation.js"></script>
-    <script src="/userpage/app/payment/kakaopay.js"></script>
-    <script src="/userpage/app/index/index_reserve.js"></script>
+    <script src="/userpage/app/payment/payment.js"></script>
 <!-- head 끝 -->
 <body>
     <ul class="skipnavi">
@@ -24,6 +24,7 @@
         <form action="#">
             <!--container-->
             <div id="container">
+                <input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
                 <!--contentswrap-->
                 <div class="contentswrap">
                     <!--여정선택-->
@@ -147,7 +148,7 @@
                                     <div class="tot">
                                         <p class="txt">총 운임</p>
                                         <p class="price_wrap"><span class="cul">KRW</span><span
-                                                class="price">203,900</span></p>
+                                                class="price" id="resPrice">203900</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -316,7 +317,7 @@
                                     <td class="borderT">총 운임</td>
                                     <td class="borderT">
                                         <div class="td_wrap">
-                                            <span class="cul">KRW</span><span class="price">55,610</span>
+                                            <span class="cul">KRW</span><span class="price" id="optPrice">55610</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -469,10 +470,11 @@
                             <table class="discount_T discount_coup">
                                 <tr>
                                     <td>
-                                        <select name="sel_coupone" id="sel_coupone" placeholder="선택">
-                                            <option value="">선택</option>
+                                        <select name="sel_coupon" id="sel_coupon" placeholder="선택">
+                                            <option value="undefined">선택</option>
+                                            <option v-for="dto in sel_coupon" :value="dto.ucDiscount">{{dto.ucDesc}}</option>
                                         </select>
-                                        <input type="button" value="적용" class="butt_apply cursor">
+                                        <input type="button" value="적용" class="butt_apply cursor" id="checkbut">
                                     </td>
                                 </tr>
                                 <tr>
@@ -569,18 +571,18 @@
                                 <tr>
                                     <td>
                                         <p class="tit">총 운임</p>
-                                        <p class="price_wrap"><span class="cul">KRW</span><span
-                                                class="price">259,510</span></p>
+                                        <p class="price_wrap"><span class="cul">KRW</span>
+                                            <span class="price" id="pPrice">259510</span></p>
                                     </td>
                                     <td>
                                         <p class="tit">할인금액</p>
-                                        <p class="price_wrap"><span class="cul">KRW</span><span class="price">0</span>
+                                        <p class="price_wrap"><span class="cul">KRW</span><span class="price" id="disC">0</span>
                                         </p>
                                     </td>
                                     <td>
                                         <p class="tit">최종 결제금액</p>
                                         <p class="price_wrap"><span class="cul">KRW</span><span
-                                                class="price tot">259,510</span></p>
+                                                class="price tot" id="totalPrice"></span></p>
                                     </td>
                                 </tr>
                             </table>
@@ -2294,7 +2296,7 @@
             </table>
             <div class="calinner">
                 <div class="calscroll">
-                    <iframe src="/index/cal" frameborder="0" id="ifm"></iframe>
+                    <iframe src="/pages/index/cal" frameborder="0" id="ifm2"></iframe>
                 </div>
             </div>
         </div>
@@ -2319,7 +2321,7 @@
             </table>
             <div class="calinner">
                 <div class="calscroll">
-                    <iframe src="/index/onewaycal" frameborder="0" id="ifm"></iframe>
+                    <iframe src="/pages/index/onewaycal" frameborder="0" id="ifm"></iframe>
                 </div>
             </div>
         </div>
@@ -2344,7 +2346,7 @@
             </table>
             <div class="calinner">
                 <div class="calscroll">
-                    <iframe src="/index/multical" frameborder="0" id="ifm"></iframe>
+                    <iframe src="/pages/index/multical" frameborder="0" id="ifm1"></iframe>
                 </div>
             </div>
         </div>

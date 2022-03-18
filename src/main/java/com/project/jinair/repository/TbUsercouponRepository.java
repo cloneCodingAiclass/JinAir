@@ -17,6 +17,7 @@ public interface TbUsercouponRepository extends JpaRepository<TbUsercoupon, Long
     Page<TbUsercoupon> findByUcUserindex(Long id, Pageable pageable);
     Page<TbUsercoupon> findByUcUserindexAndUcIsUseAndUcEnddayBetween(Long id, CouponStatus enumid, LocalDateTime startDate, LocalDateTime endDate, Pageable pageable);
 
+    List<TbUsercoupon> findByUcUserindexAndUcIsUse(Long id, CouponStatus enumid);
     List<TbUsercoupon> findByUcCode(String code);
 
 
