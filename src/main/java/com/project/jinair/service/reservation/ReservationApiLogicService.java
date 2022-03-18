@@ -1,11 +1,8 @@
 package com.project.jinair.service.reservation;
 
 import com.project.jinair.ifs.CrudInterface;
-import com.project.jinair.model.entity.member.TbMember;
 import com.project.jinair.model.entity.schedule.TbReservation;
-import com.project.jinair.model.entity.schedule.TbSchedule;
 import com.project.jinair.model.network.Header;
-import com.project.jinair.model.network.request.member.MemberApiRequest;
 import com.project.jinair.model.network.request.schedule.ReserveApiRequest;
 import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
 import com.project.jinair.repository.TbReservationRepository;
@@ -35,6 +32,13 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .reInsuranceidx(reserveApiRequest.getReInsuranceidx())
                 .reScheduleidx(reserveApiRequest.getReScheduleidx())
                 .reTotal(reserveApiRequest.getReTotal())
+                .reSchBasicPrice(reserveApiRequest.getReSchBasicPrice())
+                .reSchDepPoint(reserveApiRequest.getReSchDepPoint())
+                .reSchArrPoint(reserveApiRequest.getReSchArrPoint())
+                .reSchStartTime(reserveApiRequest.getReSchStartTime())
+                .reSchEndTime(reserveApiRequest.getReSchEndTime())
+                .reAirplainType(reserveApiRequest.getReAirplainType())
+                .reSchName(reserveApiRequest.getReSchName())
                 .build();
         TbReservation newTbReservation = tbReservationRepository.save(tbReservation);
         return response(newTbReservation);
@@ -66,6 +70,13 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                     reserve.setReInsuranceidx(reserveApiRequest.getReInsuranceidx());
                     reserve.setReScheduleidx(reserveApiRequest.getReScheduleidx());
                     reserve.setReTotal(reserveApiRequest.getReTotal());
+                    reserve.setReSchBasicPrice(reserveApiRequest.getReSchBasicPrice());
+                    reserve.setReSchDepPoint(reserveApiRequest.getReSchDepPoint());
+                    reserve.setReSchArrPoint(reserveApiRequest.getReSchArrPoint());
+                    reserve.setReSchStartTime(reserveApiRequest.getReSchStartTime());
+                    reserve.setReSchEndTime(reserveApiRequest.getReSchEndTime());
+                    reserve.setReAirplainType(reserveApiRequest.getReAirplainType());
+                    reserve.setReSchName(reserveApiRequest.getReSchName());
 
                     return reserve;
                 })
@@ -98,6 +109,13 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .reInsuranceidx(tbReservation.getReInsuranceidx())
                 .reScheduleidx(tbReservation.getReScheduleidx())
                 .reTotal(tbReservation.getReTotal())
+                .reSchBasicPrice(tbReservation.getReSchBasicPrice())
+                .reSchDepPoint(tbReservation.getReSchDepPoint())
+                .reSchArrPoint(tbReservation.getReSchArrPoint())
+                .reSchStartTime(tbReservation.getReSchStartTime())
+                .reSchEndTime(tbReservation.getReSchEndTime())
+                .reAirplainType(tbReservation.getReAirplainType())
+                .reSchName(tbReservation.getReSchName())
                 .build();
         return Header.OK(reserveApiResponse);
     }

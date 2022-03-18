@@ -22,5 +22,6 @@ public interface TbScheduleRepository extends JpaRepository<TbSchedule, Long> {
     List<TbSchedule> findBySchDeparturePointAndSchBasicPriceLessThanEqualAndSchStartTimeBetweenOrderBySchStartTimeAsc(String schDeparturePoint, Long wishPrice, LocalDateTime goDay, LocalDateTime comeDay);
     List<TbSchedule> findBySchNationTypeAndSchStartTimeGreaterThanOrderBySchBasicPriceAsc(String schNationType, LocalDateTime time, Pageable pageable);
     List<TbSchedule> findBySchDeparturePointAndSchArrivalPointAndSchStartTimeBetweenOrderBySchStartTimeAsc(String schDeparturePoint, String schArrivalPoint, LocalDateTime searchDaystr1, LocalDateTime searchDaystr2);
+    List<TbSchedule> findFirstBySchDeparturePointAndSchArrivalPointAndSchStartTimeBetweenOrderBySchBasicPriceAsc(String schDeparturePoint, String schArrivalPoint, LocalDateTime searchDaystr1, LocalDateTime searchDaystr2);
 
 }

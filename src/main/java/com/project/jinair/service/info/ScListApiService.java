@@ -192,4 +192,15 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
         return Header.OK(scheduleApiResponseList);
     }
 
+
+    public Header<List<ScheduleApiResponse>> price(String schDeparturePoint, String schArrivalPoint, String goDateSelectOptt){
+        LocalDateTime searchDaystr1 = LocalDateTime.parse((goDateSelectOptt + "T00:00:00"));
+        LocalDateTime searchDaystr2 = LocalDateTime.parse((goDateSelectOptt + "T23:59:59"));
+        List<TbSchedule> tbSchedule =  tbScheduleRepository.findFirstBySchDeparturePointAndSchArrivalPointAndSchStartTimeBetweenOrderBySchBasicPriceAsc(schDeparturePoint, schArrivalPoint, searchDaystr1, searchDaystr2);
+        List<ScheduleApiResponse> scheduleApiResponseList = tbSchedule.stream()
+                .map(user -> responseSchedule(user))
+                .collect(Collectors.toList());
+        return Header.OK(scheduleApiResponseList);
+    }
+
 }

@@ -21,15 +21,21 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     "data": {
         "rUserindex":1,
         "rPercentpoint": 10000,
-        "rStatus": "PaymentFinished",
-        "rUserStatus": "test",
+        "rStatus": "Progress",
+        "rUserStatus": "Member",
         "rReserNum": "test",
         "rPayment": "test",
         "rPetsidx": 1,
         "rBaggageidx": 1,
         "rInsuranceidx": 1,
         "rScheduleidx": 1,
-        "rTotal": 10000
+        "rTotal": 10000,
+        "reSchBasicPrice" : 10000,
+        "reSchDepPoint" : "test",
+        "reSchArrPoint" : "test",
+        "reSchStartTime" : "2022-04-12T00:00:00",
+        "reAirplainType" : "test",
+        "reSchName" : "test"
     }
 }
 */
@@ -39,6 +45,7 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     @Override
     @PostMapping("")
     public Header<ReserveApiResponse> create(@RequestBody Header<ReserveApiRequest> request) {
+        System.out.println(request);
         return reservationApiLogicService.create(request);
     }
 

@@ -21,7 +21,8 @@ $(function () {
 
         });
     }
-    let jsonData;
+
+
     function updating(){
         jsonData = {
             data : {

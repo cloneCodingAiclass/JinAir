@@ -6,7 +6,6 @@
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/userpage/lib/css/payment/getAvailabilityList.css">
-<script src="/userpage/app/payment/getAvailabilityList.js"></script>
 </head>
 
 <body>
@@ -36,7 +35,6 @@
         <div th:replace="${loginURL} :: menu"></div>
         <!--header 끝-->
         <!--container-->
-        <form action="/UserPage/payment/registerPassenger.html">
             <div id="container">
                 <div class="contentswrap">
                     <!--여정선택-->
@@ -127,49 +125,49 @@
                                         <p class="date0 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
-                                            <p class="date_price">29,900</p>
+                                            <p class="date_price" id="date0"></p>
                                         </div>
                                     </div>
                                     <div>
                                         <p class="date1 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
-                                            <p class="date_price">41,900</p>
+                                            <p class="date_price" id="date1"></p>
                                         </div>
                                     </div>
                                     <div>
                                         <p class="date2 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
-                                            <p class="date_price">21,900</p>
+                                            <p class="date_price" id="date2"></p>
                                         </div>
                                     </div>
                                     <div class="sel_date day">
                                         <p id="godate" class="date3 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
-                                            <p class="date_price">9,900</p>
+                                            <p class="date_price" id="date3"></p>
                                         </div>
                                     </div>
                                     <div>
                                         <p class="date4 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
-                                            <p class="date_price">19,900</p>
+                                            <p class="date_price" id="date4"></p>
                                         </div>
                                     </div>
                                     <div>
                                         <p class="date5 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
-                                            <p class="date_price">11,900</p>
+                                            <p class="date_price" id="date5"></p>
                                         </div>
                                     </div>
                                     <div>
                                         <p class="date6 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
-                                            <p class="date_price">15,900</p>
+                                            <p class="date_price" id="date6"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -196,7 +194,7 @@
                                             <th>플렉스</th>
                                             <th>지니</th>
                                         </tr>
-                                        <tr v-for="dto in itemList1">
+                                        <tr v-for="(dto, index) in itemList1">
                                             <td class="airplanename">{{dto.schAirplaneName}}</td>
                                             <td>
                                                 <p class="start_hour">{{dto.schStartTime.substr(11,5)}}</p>
@@ -217,21 +215,21 @@
                                                 <p class="crr_open cursor" @click="crr_open"><img src="/userpage/lib/img/curr1.PNG" alt="운임규정버튼"></p>
                                             </td>
                                             <td>
-                                                <div class="price_wrap">
+                                                <div class="price_wrap" :class=`price_wrap1${index}` @click="price_wrap1(index)">
                                                     <p class="curr">KRW</p>
                                                     <p class="date_price">{{(dto.schBasicPrice+"").substr(0,((dto.schBasicPrice+"").length-3))}},{{(dto.schBasicPrice+"").substr(-3,3)}}</p>
                                                     <p class="seats">잔여 9석!</p>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="price_wrap">
+                                                <div class="price_wrap" :class=`price_wrap2${index}` @click="price_wrap2(index)">
                                                     <p class="curr">KRW</p>
                                                     <p class="date_price">{{((dto.schBasicPrice*1.6)+"").substr(0,(((dto.schBasicPrice*1.6)+"").length-3))}},{{((dto.schBasicPrice*1.6)+"").substr(-3,3)}}</p>
                                                     <p class="seats">잔여 9석!</p>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="price_wrap">
+                                                <div class="price_wrap" :class=`price_wrap3${index}` @click="price_wrap3(index)">
                                                     <p class="curr">KRW</p>
                                                     <p class="date_price">{{((dto.schBasicPrice*2.6)+"").substr(0,(((dto.schBasicPrice*2.6)+"").length-3))}},{{((dto.schBasicPrice*2.6)+"").substr(-3,3)}}</p>
                                                     <p class="seats">잔여 9석!</p>
@@ -268,49 +266,49 @@
                                         <p class="dating0 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
-                                            <p class="date_price">11,900</p>
+                                            <p class="date_price" id="dating0"></p>
                                         </div>
                                     </div>
                                     <div>
                                         <p class="dating1 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
-                                            <p class="date_price">19,900</p>
+                                            <p class="date_price" id="dating1"></p>
                                         </div>
                                     </div>
                                     <div>
                                         <p class="dating2 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
-                                            <p class="date_price">15,900</p>
+                                            <p class="date_price" id="dating2"></p>
                                         </div>
                                     </div>
                                     <div class="sel_date day">
                                         <p class="dating3 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
-                                            <p class="date_price">21,900</p>
+                                            <p class="date_price" id="dating3"></p>
                                         </div>
                                     </div>
                                     <div>
                                         <p class="dating4 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
-                                            <p class="date_price">41,900</p>
+                                            <p class="date_price" id="dating4"></p>
                                         </div>
                                     </div>
                                     <div>
                                         <p class="dating5 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
-                                            <p class="date_price">32,900</p>
+                                            <p class="date_price" id="dating5"></p>
                                         </div>
                                     </div>
                                     <div>
                                         <p class="dating6 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
-                                            <p class="date_price">29,900</p>
+                                            <p class="date_price" id="dating6"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -337,7 +335,7 @@
                                             <th>플렉스</th>
                                             <th>지니</th>
                                         </tr>
-                                        <tr v-for="dto in itemList2">
+                                        <tr v-for="(dto, index) in itemList2">
                                             <td class="airplanename">{{dto.schAirplaneName}}</td>
                                             <td>
                                                 <p class="start_hour">{{dto.schStartTime.substr(11,5)}}</p>
@@ -358,21 +356,21 @@
                                                 <p class="crr_open cursor" @click="crr_open"><img src="/userpage/lib/img/curr1.PNG" alt="운임규정버튼"></p>
                                             </td>
                                             <td>
-                                                <div class="price_wrap1">
+                                                <div class="price_wrap1" :class=`price_wrap4${index}` @click="price_wrap4(index)">
                                                     <p class="curr">KRW</p>
                                                     <p class="date_price">{{(dto.schBasicPrice+"").substr(0,((dto.schBasicPrice+"").length-3))}},{{(dto.schBasicPrice+"").substr(-3,3)}}</p>
                                                     <p class="seats">잔여 9석!</p>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="price_wrap1">
+                                                <div class="price_wrap1" :class=`price_wrap5${index}` @click="price_wrap5(index)">
                                                     <p class="curr">KRW</p>
                                                     <p class="date_price">{{((dto.schBasicPrice*1.6)+"").substr(0,(((dto.schBasicPrice*1.6)+"").length-3))}},{{((dto.schBasicPrice*1.6)+"").substr(-3,3)}}</p>
                                                     <p class="seats">잔여 9석!</p>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="price_wrap1">
+                                                <div class="price_wrap1" :class=`price_wrap6${index}` @click="price_wrap6(index)">
                                                     <p class="curr">KRW</p>
                                                     <p class="date_price">{{((dto.schBasicPrice*2.6)+"").substr(0,(((dto.schBasicPrice*2.6)+"").length-3))}},{{((dto.schBasicPrice*2.6)+"").substr(-3,3)}}</p>
                                                     <p class="seats">잔여 9석!</p>
@@ -412,6 +410,12 @@
                     </ul>
                 </div>
                 <!--유의사항 끝-->
+                <input type="hidden" name="" class="itemList5_price" value="0">
+                <input type="hidden" name="" class="itemList6_price" value="0">
+                <input type="hidden" name="" class="price_tit1" value="0">
+                <input type="hidden" name="" class="price_tit2" value="0">
+                <input type="hidden" name="" class="price_tax1" value="0">
+                <input type="hidden" name="" class="price_tax2" value="0">
                 <!--운임확인-->
                 <div class="fare_wrap">
                     <div class="tit">
@@ -433,7 +437,7 @@
                             <td>유류할증료</td>
                             <td class="tot_price_wrap">
                                 <p class="curr">KRW</p>
-                                <p class="tot_price2">10,000</p>
+                                <p class="tot_price2">0</p>
                             </td>
                         </tr>
                         <tr>
@@ -462,7 +466,7 @@
                         국제선 한국 출발 세금(BP)에는 국제 여행공항이용료(인천/김포공항 17,000원, 기타 12,000원), 출국납부금10,000원, 국제 빈곤퇴치기여금 1,000원이
                         포함되어 있습니다.
                     </p>
-                    <input type="submit" value="다음" class="next_butt">
+                    <input type="button" value="다음" class="next_butt">
                 </div>
                 <!--운임확인 끝-->
                 <!--총액 모달창-->
@@ -472,37 +476,37 @@
                         <div class="jour_wrap">
                             <div class="jour1">
                                 <h2>여정1</h2>
-                                <p class="flight">LJ411</p>
+                                <p class="flight" id="flight1"></p>
                                 <table class="jour_info_wrap">
                                     <colgroup>
                                         <col width="40%">
                                         <col width="60%">
                                     </colgroup>
                                     <tr>
-                                        <td class="dep_area area">[출발]서울/김포(GMP)</td>
-                                        <td class="dep_date date">2022-02-09(수) 20:20</td>
+                                        <td class="dep_area area" id="dep_area1"></td>
+                                        <td class="dep_date date" id="dep_date1"></td>
                                     </tr>
                                     <tr>
-                                        <td class="arr_area area">[도착]제주(CJU)</td>
-                                        <td class="arr_date date">2022-02-09(수) 21:30</td>
+                                        <td class="arr_area area" id="arr_are1"></td>
+                                        <td class="arr_date date" id="arr_date1"></td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="jour2">
                                 <h2>여정2</h2>
-                                <p class="flight">LJ411</p>
+                                <p class="flight" id="flight2"></p>
                                 <table class="jour_info_wrap">
                                     <colgroup>
                                         <col width="40%">
                                         <col width="60%">
                                     </colgroup>
                                     <tr>
-                                        <td class="dep_area area">[출발]제주(CJU)</td>
-                                        <td class="dep_date date">2022-02-12(토) 16:00</td>
+                                        <td class="dep_area area" id="dep_area2"></td>
+                                        <td class="dep_date date" id="dep_date2"></td>
                                     </tr>
                                     <tr>
-                                        <td class="arr_area area">[도착]서울/김포(GMP)</td>
-                                        <td class="arr_date date">2022-02-12(토) 17:10</td>
+                                        <td class="arr_area area" id="arr_are2"></td>
+                                        <td class="arr_date date" id="arr_date2"></td>
                                     </tr>
                                 </table>
                             </div>
@@ -534,7 +538,7 @@
                                         </tr>
                                         <tr>
                                             <td class="mark price_tit">유류할증료</td>
-                                            <td class="price">10,000</td>
+                                            <td class="price tot_price22">0</td>
                                         </tr>
                                         <tr>
                                             <td class="mark price_tit">세금</td>
@@ -566,40 +570,44 @@
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <td colspan="2">구간 1 : GMP-CJU</td>
+                                                <td colspan="2">구간 1 : <span th:text="${#strings.substring(schDeparturePoint, schDeparturePoint.length()-4, schDeparturePoint.length()-1)}"></span>-
+                                                    <span th:text="${#strings.substring(schArrivalPoint, schArrivalPoint.length()-4, schArrivalPoint.length()-1)}"></span></td>
                                                 <td></td>
                                             </tr>
-                                            <tr>
-                                                <td class="per">성인 1</td>
+                                            <tr class="onewaywww">
+                                                <td class="per" th:text="${people}"></td>
                                                 <td class="strrr1">0</td>
                                             </tr>
-                                            <tr>
-                                                <td colspan="2">구간 2 : CJU-GMP</td>
+                                            <tr class="onewaywww">
+                                                <td colspan="2">구간 2 : <span th:text="${#strings.substring(schArrivalPoint, schArrivalPoint.length()-4, schArrivalPoint.length()-1)}"></span>-
+                                                    <span th:text="${#strings.substring(schDeparturePoint, schDeparturePoint.length()-4, schDeparturePoint.length()-1)}"></span></td>
                                             </tr>
                                             <tr>
-                                                <td class="per">성인 1</td>
+                                                <td class="per" th:text="${people}"></td>
                                                 <td class="strrr2">0</td>
                                             </tr>
                                             <tr>
                                                 <th colspan="2">
                                                     <p class="title">유류할증료</p>
-                                                    <p><span>KRW</span><span>10,000</span></p>
+                                                    <p><span>KRW</span><span class="final_tit">0</span></p>
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <td colspan="2">구간 1 : GMP-CJU</td>
+                                                <td colspan="2">구간 1 : <span th:text="${#strings.substring(schDeparturePoint, schDeparturePoint.length()-4, schDeparturePoint.length()-1)}"></span>-
+                                                    <span th:text="${#strings.substring(schArrivalPoint, schArrivalPoint.length()-4, schArrivalPoint.length()-1)}"></span></td>
                                                 <td></td>
                                             </tr>
-                                            <tr>
-                                                <td class="per">성인 1</td>
-                                                <td>5,000</td>
+                                            <tr class="onewaywww">
+                                                <td class="per" th:text="${people}"></td>
+                                                <td class="way1_tit">0</td>
+                                            </tr>
+                                            <tr class="onewaywww">
+                                                <td colspan="2">구간 2 : <span th:text="${#strings.substring(schArrivalPoint, schArrivalPoint.length()-4, schArrivalPoint.length()-1)}"></span>-
+                                                    <span th:text="${#strings.substring(schDeparturePoint, schDeparturePoint.length()-4, schDeparturePoint.length()-1)}"></span></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2">구간 2 : CJU-GMP</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="per">성인 1</td>
-                                                <td>5,000</td>
+                                                <td class="per" th:text="${people}"></td>
+                                                <td class="way2_tit">0</td>
                                             </tr>
                                             <tr>
                                                 <th colspan="2">
@@ -608,26 +616,28 @@
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <td colspan="2">구간 1 : GMP-CJU</td>
+                                                <td colspan="2">구간 1 : <span th:text="${#strings.substring(schDeparturePoint, schDeparturePoint.length()-4, schDeparturePoint.length()-1)}"></span>-
+                                                    <span th:text="${#strings.substring(schArrivalPoint, schArrivalPoint.length()-4, schArrivalPoint.length()-1)}"></span></td>
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td class="per">성인 1<span class="cursor det det1">자세히 보기<span
+                                                <td class="per"><span th:text="${people}"></span><span class="cursor det det1">자세히 보기<span
                                                             class="ar"></span></span></td>
-                                                <td class="seb"><span class="strrr1">0</span> X 0.01</td>
+                                                <td class="seb"> X 4,000</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
                                                     <div class="detD detD1"></div>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td colspan="2">구간 2 : CJU-GMP</td>
+                                            <tr class="onewaywww">
+                                                <td colspan="2">구간 2 : <span th:text="${#strings.substring(schArrivalPoint, schArrivalPoint.length()-4, schArrivalPoint.length()-1)}"></span>-
+                                                    <span th:text="${#strings.substring(schDeparturePoint, schDeparturePoint.length()-4, schDeparturePoint.length()-1)}"></span></td>
                                             </tr>
-                                            <tr>
-                                                <td class="per">성인 1<span class="cursor det det2">자세히 보기<span
+                                            <tr class="onewaywww">
+                                                <td class="per"><span th:text="${people}"></span><span class="cursor det det2">자세히 보기<span
                                                             class="ar"></span></span></td>
-                                                <td class="seb"><span class="strrr2">0</span> X 0.01</td>
+                                                <td class="seb"> X 4,000</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
@@ -710,13 +720,12 @@
                                 </td>
                             </tr>
                         </table>
-                        <input type="submit" value="바로결제" class="fix_next_butt">
+                        <input type="button" value="바로결제" class="fix_next_butt">
                     </div>
                 </div>
                 <!--fix_bott 총액 확인 끝-->
                 <!--contents 끝-->
             </div>
-        </form>
     <!--container 끝-->
     </div>
 
@@ -2107,5 +2116,5 @@
         <div class="x_box"><img src="/userpage/lib/img/image-removebg-preview.png" alt=""></div>
     </div>
 </body>
-
+<script src="/userpage/app/payment/getAvailabilityList.js"></script>
 </html>
