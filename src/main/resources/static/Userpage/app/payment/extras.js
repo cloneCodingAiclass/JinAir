@@ -106,6 +106,7 @@ $(function () {
     $(".list2_wrap").focus();
   })
 
+
   /*화면 구성 */
 
   $(".service_menu .menu1img").css("display", "none");
@@ -622,42 +623,79 @@ $(function () {
 
   /*보험가입 페이지 끝 */
 
+  // 탑승객 수
+  let personNumber = 3;
+  let str = "";
+  let str2 = "";
+
+  $("#person_cnt").html("성인 " + personNumber);
+
+  for (let i = 0; i < personNumber; i++) {
+    str += "<div class='passenger_info passenger_info1'>"
+    str += "<h3>탑승객 " +  Number(i+1) + "</h3>";
+    str += "<label for='person_" + i + "' ><img src='/userpage/lib/img/ico-person.png' alt='탑승객'><span class='cursor'>" + '유/영은' + "</span></label>"
+    str += "<label for='person_" + i + "'  class='label'><p class='select_seat_num select_seat_num1'>"
+    str += "<input type='text' class='seat_num seat_num1 cursor' id='seat_num1_" + i + "' readonly>"
+    str += "<span class='close cursor'>x</span>"
+    str += "</p>"
+    str += "<p class='select_seat_price' id='seat_price1_" + i + "'>"
+    str += "<span class='seat_P seat_P1'>KRW</span>"
+    str += "<span class='price price1' id='price1_" + i + "'></span>"
+    str += "</p>"
+    str += "<input type='radio' name='selectPerson' class='checkPerson' id='person_" + i + "'></label>"
+    str += "</div>"
+  }
+  $("#passenger_info_1").html(str);
+  for (let i = 0; i < personNumber; i++) {
+    str2 += "<div class='passenger_info passenger_info2'>"
+    str2 += "<h3>탑승객 " + Number(i+1) + "</h3>";
+    str2 += "<label for='person2_" + i + "'><img src='/userpage/lib/img/ico-person.png' alt='탑승객'><span class='cursor'>" + '유/영은' + "</span></label>"
+    str2 += "<label for='person2_" + i + "'  class='label'><p class='select_seat_num select_seat_num2'>"
+    str2 += "<input type='text' class='seat_num seat_num2' id='seat_num2_" + i + "' readonly>"
+    str2 += "<span class='close cursor'>x</span>"
+    str2 += "</p>"
+    str2 += "<p class='select_seat_price select_seat_price2' id='seat_price2_" + i + "'>"
+    str2 += "<span class='seat_P seat_P2'>KRW</span>"
+    str2 += "<span class='price price2' id='price2_'" + i + "'></span>"
+    str2 += "</p>"
+    str2 += "<input type='radio' name='selectPerson2' class='checkPerson2' id='person2_" + i + "'>"
+    str2 += "</div>"
+  }
+  $("#passenger_info_2").html(str2);
+
+
   /*좌석 선택 */
 
   $(".seat_P1, .seat_P2").css("visibility", "hidden");
 
   $(".passenger_info_wrap1 p.select_seat_num1 span.close").on('click', function () {
-    $(".passenger_info_wrap1 .seat_num").text("");
-    $(".passenger_info_wrap1 .seat_number").text("");
-    $(".passenger_info_wrap1 .price").text("");
-    $(".seat_P1").css("visibility", "hidden");
-    $('.seat_sel').css('pointer-events', 'auto');
-    if ($('.SSC').is(':checked')) {
-      $('.SSC').prop("checked", false);
-      $('.SSC').attr("disabled", false);
-    };
+    radio = $(this).parents(".passenger_info1");
+    let i = radio.val();
+    console.log(radio);
+    $('input:checkbox[value="' + i + '"]').prop("checked", false);
+    radio.find(".seat_num1").val("");
+    radio.find(".price1").text("");
+    radio.find(".seat_P1").css("visibility", "hidden");
+    radio.find(".checkPerson").val("");
+    radio.val("");
+    totalChecked--;
 
   });
   $(".passenger_info_wrap2 p.select_seat_num2 span.close").on('click', function () {
-    $(".passenger_info_wrap2 .seat_num").text("");
-    $(".passenger_info_wrap2 .seat_number").text("");
-    $(".passenger_info_wrap2 .price").text("");
-    $(".passenger_info_wrap2 .price").text("");
-    $(".seat_P2").css("visibility", "hidden");
-    $('.seat_sel').css('pointer-events', 'auto');
-    if ($('.SSC2').is(':checked')) {
-      $('.SSC2').prop("checked", false);
-      $('.SSC2').attr("disabled", false);
-    };
+    radio2 = $(this).parents(".passenger_info2");
+    let i = radio2.val();
+    console.log(radio2);
+    $('input:checkbox[value="' + i + '"]').prop("checked", false);
+    radio2.find(".seat_num2").val("");
+    radio2.find(".price2").text("");
+    radio2.find(".seat_P2").css("visibility", "hidden");
+    radio2.find(".checkPerson2").val("");
+    radio2.val("");
+    totalChecked--;
   });
 
-  let price1 = '9,000';
-  let price2 = '5,000';
-  let price3 = '9,000';
-  let price4 = '7,000';
-  let price5 = '3,000';
-  let price6 = '1,000';
-  let price7 = "7,000";
+  let price1 = '9,000';let price2 = '5,000';let price3 = '9,000';let price4 = '7,000';let price5 = '3,000';
+  let price6 = '1,000';let price7 = "7,000";
 
   $(".select_seat_wrap .box1").siblings().text(price1);
   $(".select_seat_wrap .box2").siblings().text(price2);
@@ -668,97 +706,253 @@ $(function () {
   $(".select_seat_wrap .box7").siblings().text("");
   $(".select_seat_wrap .boxPlus").siblings().text(price7);
 
-  let maxChecked = 3;   // 선택가능한 체크박스 갯수
-  let totalChecked = 0; // 선택한 체크박스 수
 
-  function countChecked1(check1) {
-    if (check1.checked){
-      totalChecked += 1;
-      console.log(totalChecked);
+  let radio;
+  let radio2;
+
+  $(".checkPerson").change(function() {
+    if($(".checkPerson").is(":checked")) {
+      radio = $(this).parents(".passenger_info1");
+      borderChange(radio)
     }
-    else {
-      totalChecked -= 1;
-      console.log(totalChecked);
+  })
+
+  $(".checkPerson2").change(function() {
+    if($(".checkPerson2").is(":checked")) {
+      radio2 = $(this).parents(".passenger_info2");
+      borderChange2(radio2)
     }
-    if (totalChecked > maxChecked) {
-      totalChecked -= 1;
-      check1.checked = false;
-      check1.click = false;
+  })
+
+  function borderChange(radio) {
+    let c = radio.find(".select_seat_num");
+    $(".select_seat_num").not(c).css("border", "none");
+    c.css("border", "3px solid #661e43");
+  }
+
+  function borderChange2(radio2) {
+    let c = radio2.find(".select_seat_num2");
+    $(".select_seat_num2").not(c).css("border", "none");
+    c.css("border", "3px solid #661e43");
+  }
+
+  if ($(".checkPerson").is(":checked") == false ) {
+    $("#person_0").prop("checked", true)
+    radio = $("#person_0").parents(".passenger_info1");
+    borderChange(radio)
+  }
+
+  if ($(".checkPerson2").is(":checked") == false ) {
+    $("#person2_0").prop("checked", true)
+    radio2 = $("#person2_0").parents(".passenger_info2");
+    borderChange2(radio2)
+  }
+
+  if($(".checkPerson").val().length != 0) {
+    $("input:radio[name ='selectPerson']:input[value='']").prop("checked", true);
+  }
+
+  if($(".checkPerson2").val().length != 0) {
+    $("input:radio[name ='selectPerson2']:input[value='']").prop("checked", true);
+  }
+
+  for(let i = 0; i < $(".checkPerson").length; i++) {
+      console.log("#person_"+i + "");
+  }
+
+  for(let i = 0; i < $(".checkPerson2").length; i++) {
+      console.log("#person2_"+i + "");
+  }
+
+  function changeRadio() {
+    console.log("실행됨")
+    for(let i = 0; i < $(".checkPerson").length; i++) {
+      if ($("#person_" + i + "").val() == 'on' || $("#person_" + i + "").val().length == 0) {
+        $("#person_" + i + "").prop("checked", true);
+        radio = $("#person_" + i + "").parents(".passenger_info1");
+        borderChange(radio);
+        break;
+      }
     }
   }
 
-
-  function countChecked2(check2) {
-    if (check2.checked){
-      totalChecked += 1;
-      console.log(totalChecked);
-    }
-    else {
-      totalChecked -= 1;
-      console.log(totalChecked);
-    }
-    if (totalChecked > maxChecked) {
-      totalChecked -= 1;
-      check2.checked = false;
-      check2.click = false;
+  function changeRadio2() {
+    console.log("실행됨")
+    for(let i = 0; i < $(".checkPerson2").length; i++) {
+      if ($("#person2_" + i + "").val() == 'on' || $("#person2_" + i + "").val().length == 0) {
+        $("#person2_" + i + "").prop("checked", true);
+        radio2 = $("#person2_" + i + "").parents(".passenger_info2");
+        borderChange2(radio2);
+        break;
+      }
     }
   }
-
-  $('.SSC').click(function () {
-    countChecked1(this)
-    if ($(this).is(':checked')) {
-      $(".passenger_info_wrap1 .select_seat_num1 .seat_num1").html($(this).val());
-      // $(".passenger_info_wrap1 .select_seat_num1 .seat_num1").html(seat_number);
-      $(".passenger_info_wrap1 .select_seat_price .price").html($(this).next().text());
-      $(".passenger_info_wrap1 .seat_P1").css("display", "block");
-      $('.passenger_info_wrap1 .seat_sel').css('pointer-events', 'auto');
-
-      // $('.SSC').not(this).attr("disabled", true);
-      $(".seat_P1").css("visibility", "visible");
-      console.log($(".seat_P1").text());
-
-      if ($(this).next().hasClass("box7") === true) {
-        // $(".passenger_info_wrap1 .select_seat_num1 .seat_num1").html("");
-        $(".passenger_info_wrap1 .select_seat_price .price").html($(this).next().text());
-        $(".seat_P1").css("visibility", "hidden");
-        $(this).css("disabled", false);
-      }
-    } else {
-      $(".passenger_info_wrap1 .select_seat_num1 .seat_num1").html("");
-      $(".passenger_info_wrap1 .select_seat_price .price").html("");
-      $(".seat_P1").css("visibility", "hidden");
-      // $('.SSC').not(this).attr("disabled", false);
+  $(".SSC").on("click", function() {
+    let num = $(this).val();
+    let price = $(this).next().text();
+    if (radio.val().length == 0 && $(this).hasClass('prop') == false) { // radio값이 없고, 체크박스가 미체크 시
+      $(this).prop("checked", true);
+      $(this).addClass('prop'); // 체크값 구별하기 위한 클래스 추가
+      radio.find(".seat_num1").val(num);
+      radio.find(".price").html(price);
+      radio.find(".seat_P1").css("visibility", "visible")
+      radio.val(num);
+      radio.find(".checkPerson").val(num);
+      radio.addClass('check');
+      radio.prop("checked", false);
+      changeRadio(radio);
     }
-  });
-
-
-
-  $('.SSC2').click(function () {
-    countChecked2(this)
-    if ($('.SSC2').is(':checked')) {
-      $(".passenger_info_wrap2 .select_seat_num2 span.seat_num2").html($(this).val());
-      $(".seat_P2").css("display", "block");
-
-      console.log($(".seat_P2").text());
-      $(".passenger_info_wrap2 .price").html($(this).next().text());
-      // $('.SSC2').not(this).attr("disabled", true);
-      $(".seat_P2").css("visibility", "visible");
-
-      if ($('.SSC2').next().hasClass("box7") === true) {
-        $(".passenger_info_wrap2 .select_seat_price .price").html($(this).next().text());
-        $(".passenger_info_wrap2 .select_seat_price .seat_P2").css("display", "none");
-        $(this).css("disabled", false);
-        // $(".seat_P2").css("visibility", "hidden");
-      }
-    } else {
-      $(".passenger_info_wrap2 .select_seat_num2 span.seat_num2").html("");
-
-      $(".passenger_info_wrap2 .select_seat_price .price").html("");
-      $(".passenger_info_wrap2 .select_seat_price .seat_P2").css("display", "none");
-      $(".seat_P2").css("visibility", "hidden");
-      // $('.SSC2').not(this).attr("disabled", false);
+    else if(radio.val().length != 0 && $(this).hasClass('prop') == false) { // radio 에 값이 있고 체크박스가 미체크 일 시
+      $(this).prop("checked", false); // 여러개 중복 방지.
+      $(this).click(false);
     }
-  });
+    else if ((radio.val().length == 0 && $(this).hasClass('prop')) || (radio.val().length != 0 && $(this).hasClass('prop'))){ // 이미 체크되어 있을 시 체크된 체크박스 체크해제, 라디오 초기화
+      let thisVal = $(this).val();
+      $(this).removeClass('prop')
+      let a = $("input:radio[name ='selectPerson']:input[value='" + thisVal + "']");
+      if (a.val() == thisVal) {
+        a.prop("checked", true);
+        a.val("");
+        radio = a.parents(".passenger_info1");
+        radio.find(".seat_num1").val("");
+        radio.find(".price").html("");
+        radio.find(".seat_P1").css("visibility", "hidden")
+        radio.val("");
+        borderChange(radio);
+      }
+    }
+    else if(radio.val() == $(this).val() && $(this).hasClass('prop')) { // radio의 값이 체크박스의 밸류값과 일치 시 체크박스 체크 해제
+      $(this).attr("disabled", false);
+      $(this).removeClass('prop')
+      $(this).prop("checked", false);
+      radio.find(".seat_num1").val("");
+      radio.find(".price").html("");
+      radio.find(".seat_P1").css("visibility", "hidden")
+      radio.val("");
+      radio.find(".checkPerson").val("");
+      radio.removeClass('check');
+      borderChange(radio);
+    }
+    else if(radio.val() != $(this).val() && $(this).hasClass('prop')) { // radio 값과 체크박스의 값이 같지 않고, 체크박스가 선택되어있을 때
+      let thisVal2 = $(this).val();
+      let a = $("input:radio[name ='selectPerson']:input[value='" + thisVal2 + "']");
+      console.log($(i));
+      if (a.val() == $(this).val()) {
+        $(this).attr("disabled", false);
+        $(this).removeClass('prop')
+        $(this).prop("checked", false);
+        radio = a.find('.passenger_info1');
+        radio.find(".seat_num1").val("");
+        radio.find(".price").html("");
+        radio.find(".checkPerson").val("");
+        radio.find(".seat_P1").css("visibility", "hidden")
+        radio.val("");
+        radio.removeClass('check');
+      }
+    }
+  })
+
+
+
+  $(".SSC2").on("click", function() {
+    let num2 = $(this).val();
+    let price2 = $(this).next().text();
+    if (radio2.val().length == 0 && $(this).hasClass('prop') == false) { // radio값이 없고, 체크박스가 미체크 시
+      $(this).prop("checked", true);
+      $(this).addClass('prop'); // 체크값 구별하기 위한 클래스 추가
+      radio2.find(".seat_num2").val(num2);
+      radio2.find(".price2").html(price2);
+      radio2.find(".seat_P2").css("visibility", "visible")
+      radio2.val(num2);
+      radio2.find(".checkPerson2").val(num2);
+      radio2.addClass('check');
+      radio2.prop("checked", false);
+      changeRadio2(radio2);
+    }
+    else if(radio2.val().length != 0 && $(this).hasClass('prop') == false) { // radio 에 값이 있고 체크박스가 미체크 일 시
+      $(this).prop("checked", false); // 여러개 중복 방지.
+      $(this).click(false);
+    }
+    else if ((radio2.val().length == 0 && $(this).hasClass('prop')) || (radio2.val().length != 0 && $(this).hasClass('prop'))){ // 이미 체크되어 있을 시 체크된 체크박스 체크해제, 라디오 초기화
+      let thisVal = $(this).val();
+      $(this).removeClass('prop')
+      let a2 = $("input:radio[name ='selectPerson2']:input[value='" + thisVal + "']");
+      if (a2.val() == thisVal) {
+        a2.prop("checked", true);
+        a2.val("");
+        radio2 = a2.parents(".passenger_info2");
+        radio2.find(".seat_num2").val("");
+        radio2.find(".price2").html("");
+        radio2.find(".seat_P2").css("visibility", "hidden")
+        radio2.val("");
+        borderChange2(radio2);
+      }
+    }
+    else if(radio2.val() == $(this).val() && $(this).hasClass('prop')) { // radio의 값이 체크박스의 밸류값과 일치 시 체크박스 체크 해제
+      $(this).attr("disabled", false);
+      $(this).removeClass('prop');
+      $(this).prop("checked", false);
+      radio2.find(".seat_num2").val("");
+      radio2.find(".price2").html("");
+      radio2.find(".seat_P2").css("visibility", "hidden")
+      radio2.val("");
+      radio2.find(".checkPerson2").val("");
+      radio2.removeClass('check');
+      borderChange2(radio2);
+    }
+    else if(radio2.val() != $(this).val() && $(this).hasClass('prop')) { // radio 값과 체크박스의 값이 같지 않고, 체크박스가 선택되어있을 때
+      let thisVal = $(this).val();
+      let a2 = $("input:radio[name ='selectPerson2']:input[value='" + thisVal + "']");
+      console.log($(i));
+      if (a2.val() == $(this).val()) {
+        $(this).attr("disabled", false);
+        $(this).removeClass('prop')
+        $(this).prop("checked", false);
+        radio2 = a2.find('.passenger_info2');
+        radio2.find(".seat_num2").val("");
+        radio2.find(".price").html("");
+        radio2.find(".checkPerson2").val("");
+        radio2.find(".seat_P2").css("visibility", "hidden")
+        radio2.val("");
+        radio2.removeClass('check');
+      }
+    }
+  })
+
+
+
+
+
+  //
+  // $('.SSC2').click(function () {
+  //   let i = 0;
+  //   countChecked2(this)
+  //   if ($('.SSC2').is(':checked')) {
+  //     $(".passenger_info_wrap2 .select_seat_num2 span.seat_num2").val($(this).val());
+  //     $(".seat_P2").css("display", "block");
+  //     $(".passenger_info_wrap2 .price").html($(this).next().text());
+  //     // $('.SSC2').not(this).attr("disabled", true);
+  //     // $(this).attr("disabled", true);
+  //     i++;
+  //
+  //     $(".seat_P2").css("visibility", "visible");
+  //
+  //     if ($('.SSC2').next().hasClass("box7") === true) {
+  //       $(".passenger_info_wrap2 .select_seat_price .price").html($(this).next().text());
+  //       $(".passenger_info_wrap2 .select_seat_price .seat_P2").css("display", "none");
+  //       $(this).css("disabled", false);
+  //       // $(".seat_P2").css("visibility", "hidden");
+  //     }
+  //   } else {
+  //     $(".passenger_info_wrap2 .select_seat_num2 span.seat_num2").val("");
+  //
+  //     $(".passenger_info_wrap2 .select_seat_price .price").html("");
+  //     $(".passenger_info_wrap2 .select_seat_price .seat_P2").css("display", "none");
+  //     $(".seat_P2").css("visibility", "hidden");
+  //     // $('.SSC2').not(this).attr("disabled", false);
+  //     i--;
+  //   }
+  // });
 
   /*좌석 선택 끝 */
 
@@ -852,10 +1046,18 @@ $(() => {
 
 /* 비상구 좌석 유의사항안내 모달창 */
 $(() => {
+  let block;
+  if ($("passenger_info_wrap1").css("display", "block")) {
+    block = $(".checkPerson").is("b").parents(".passenger_info1");
+  } else if($("passenger_info_wrap1").css("display", "block")) {
+    block = $(".checkPerson2").is(":checked").parents(".passenger_info2");
+  }
+
   $('#modal_notice_wrap').hide();
-  $(".select_seat .exit_seat").on('click', () => {
+  $(".select_seat .exit_seat, box3").on('click', () => {
     if ($(".exit_seat").is(":checked")) {
       $("#modal_notice_wrap").fadeIn();
+      $("#modal_notice_wrap").css("display", "flex")
       $("body").css("overflow", "hidden");
       $("#checkbox_m").prop("checked", false);
       $('#modal_notice_wrap .modal_content_wrap').animate({//모달띄울 때 스크롤위치 위로 고정
@@ -863,16 +1065,15 @@ $(() => {
       }, 50);
     }
   })
+
   $(".modal_notice_wrap .close").on('click', () => {
+    console.log(block)
+    block.find(".seat_P").css("display", "none");
+    block.find(".seat_num").html("");
     $("#modal_notice_wrap").fadeOut();
     $("body").css("overflow", "scroll");
-    $(".SSC, .SSC2").prop("checked", false);
-
-    $(".passenger_info_wrap .select_seat_num .seat_num").html("");
-    $(".passenger_info_wrap .select_seat_price .price").html("");
-    $(".seat_P").css("display", "none");
-    $('.SSC, .SSC2').attr("disabled", false);
-
+    $('.box3').prop("checked", false);
+    $('.box3').attr("disabled", false);
   })
 
   $("#modal_notice_wrap .butt_ok").on('click', () => {
@@ -1681,3 +1882,7 @@ function updateTrip() {
   $(".arrive_default").attr("value", arr1);
   $(".go_date_default").attr("value", godate);
 }
+
+
+
+
