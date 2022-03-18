@@ -77,16 +77,7 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
         Optional<TbUsercoupon> tbUsercoupon = tbUsercouponRepository.findById(usercouponApiRequest.getUcIndex());
 
         return tbUsercoupon.map(coupon -> {
-                    coupon.setUcType(usercouponApiRequest.getUcType());
-                    coupon.setUcPrice(usercouponApiRequest.getUcPrice());
-                    coupon.setUcDesc(usercouponApiRequest.getUcDesc());
-                    coupon.setUcCode(usercouponApiRequest.getUcCode());
-                    coupon.setUcDiscount(usercouponApiRequest.getUcDiscount());
-                    coupon.setUcStartday(LocalDateTime.parse(usercouponApiRequest.getUcStartday()));
-                    coupon.setUcEndday(LocalDateTime.parse(usercouponApiRequest.getUcEndday()));
                     coupon.setUcIsUse(usercouponApiRequest.getUcIsUse());
-                    coupon.setUcTotcoupon(usercouponApiRequest.getUcTotcoupon());
-
                     return coupon;
                 }).map(coupon -> tbUsercouponRepository.save(coupon))
                 .map(coupon -> response(coupon))

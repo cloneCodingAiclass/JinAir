@@ -148,7 +148,7 @@
                                     <div class="tot">
                                         <p class="txt">총 운임</p>
                                         <p class="price_wrap"><span class="cul">KRW</span><span
-                                                class="price">203,900</span></p>
+                                                class="price" id="resPrice">203900</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -302,7 +302,6 @@
                                     </td>
                                 </tr>
                             </table>
-
                         </div>
                         <!--운임규정 끝-->
                         <!--부가서비스 확인-->
@@ -317,7 +316,7 @@
                                     <td class="borderT">총 운임</td>
                                     <td class="borderT">
                                         <div class="td_wrap">
-                                            <span class="cul">KRW</span><span class="price">55,610</span>
+                                            <span class="cul">KRW</span><span class="price" id="optPrice">55610</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -472,9 +471,9 @@
                                     <td>
                                         <select name="sel_coupon" id="sel_coupon" placeholder="선택">
                                             <option value="undefined">선택</option>
-                                            <option v-for="dto in sel_coupon" value="${dto.ucDiscount}">{{dto.ucDesc}}</option>
+                                            <option v-for="dto in sel_coupon" :value="dto.ucDiscount">{{dto.ucDesc}}</option>
                                         </select>
-                                        <input type="button" value="적용" class="butt_apply cursor">
+                                        <input type="button" value="적용" class="butt_apply cursor" id="checkbut">
                                     </td>
                                 </tr>
                                 <tr>
@@ -571,18 +570,18 @@
                                 <tr>
                                     <td>
                                         <p class="tit">총 운임</p>
-                                        <p class="price_wrap"><span class="cul">KRW</span><span
-                                                class="price">259,510</span></p>
+                                        <p class="price_wrap"><span class="cul">KRW</span>
+                                            <span class="price" id="pPrice">259510</span></p>
                                     </td>
                                     <td>
                                         <p class="tit">할인금액</p>
-                                        <p class="price_wrap"><span class="cul">KRW</span><span class="price">0</span>
+                                        <p class="price_wrap"><span class="cul">KRW</span><span class="price" id="disC">0</span>
                                         </p>
                                     </td>
                                     <td>
                                         <p class="tit">최종 결제금액</p>
                                         <p class="price_wrap"><span class="cul">KRW</span><span
-                                                class="price tot">259,510</span></p>
+                                                class="price tot" id="totalPrice"></span></p>
                                     </td>
                                 </tr>
                             </table>
@@ -750,6 +749,7 @@
                             </table>
                         </div>
                         <!--결제 끝-->
+                    </div>
                         <div id="modal_restricted_items_wrap">
                             <div class="modal_restricted_items_wrap">
                                 <div class="modal_title">
@@ -1952,8 +1952,7 @@
                         <td>
                             <div class="go_select in_bl">
                                 <div class="go_layerbtn">
-                                    <span class="go_select_opt"><input type="text" value="출발지" readonly
-                                                                       class="go_select_optt"></span>
+                                    <span class="go_select_opt"><input type="text" value="출발지" class="go_select_optt" readonly></span>
                                 </div>
                                 <div class="go_layer">
                                     <div class="KOR in_bl">
