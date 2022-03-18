@@ -717,7 +717,7 @@ public class PageController {
         List Cook = new ArrayList<>();
         // 인원수에 만큼 테이블 생성
         // 인당 예약 테이블 index로 쿠키 생성
-        for(int i = 0 ; i < peopleNum ; i ++){
+        for(int i = 0 ; i < peopleNum*2 ; i ++){
             reIndex = String.valueOf(reservationApiLogicService.creating());
             Cookie myCookie = new Cookie(reIndex, "reIndex");
             myCookie.setMaxAge(1200);
@@ -815,6 +815,7 @@ public class PageController {
     // 사용자 항공권 예약 registerPassenger
     @RequestMapping("/registerPassenger")
     public ModelAndView registerPassenger(HttpServletRequest request, Model model){
+
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
@@ -854,6 +855,7 @@ public class PageController {
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
         }else{
             model.addAttribute("loginURL", "/userpage/fragment/menu");
         }
