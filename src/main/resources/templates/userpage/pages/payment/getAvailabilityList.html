@@ -5,13 +5,26 @@
 <div th:replace="userpage/fragment/head :: head"></div>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/userpage/lib/css/payment/getAvailabilityList.css">
-    <script src="/userpage/app/payment/getAvailabilityList.js"></script>
+<link rel="stylesheet" href="/userpage/lib/css/payment/getAvailabilityList.css">
+<script src="/userpage/app/payment/getAvailabilityList.js"></script>
 </head>
 
 <body>
-    <div th:each="dto : ${reIndex}">
-        <input type="hidden" name="" id="" th:value="${dto}">
+    <div>
+        <input type="hidden" name=""
+               th:each="dto, i : ${reIndex}"
+               class="cookies"
+               th:id="${i.index}"
+               th:value="${dto}">
+    </div>
+    <div>
+        <input type="hidden" name="" id="schDeparturePoint" th:value="${schDeparturePoint}">
+        <input type="hidden" name="" id="schArrivalPoint" th:value="${schArrivalPoint}">
+        <input type="hidden" name="" id="goDateSelectOptt" th:value="${goDateSelectOptt}">
+        <input type="hidden" name="" id="comeDateSelectOptt" th:value="${comeDateSelectOptt}">
+        <input type="hidden" name="" id="schDeparturePoint1" th:value="${schDeparturePoint1}">
+        <input type="hidden" name="" id="schArrivalPoint1" th:value="${schArrivalPoint1}">
+        <input type="hidden" name="" id="goDateSelectOptt1" th:value="${goDateSelectOptt1}">
     </div>
     <ul class="skipnavi">
         <!--책갈피 역할-->
@@ -31,24 +44,24 @@
                         <!--여정1-->
                         <div class="trip_info">
                             <div class="schedule">
-                                <p><span>왕복</span> 여정1</p>
+                                <p><span class="text_way"></span> 여정1</p>
                                 <p class="cursor arrow_img"></p>
                                 <p class="cursor arrow_img arrow_up_img"></p>
                             </div>
                             <div class="trip_area fs20">
-                                <p id="go_area1" class="dep_area">서울/김포(GMP)<span>[출발]</span></p>
-                                <p id="arr_area1" class="arr_area">제주(CJU)<span>[도착]</span></p>
+                                <p id="go_area1" class="dep_area"><span>[출발]</span></p>
+                                <p id="arr_area1" class="arr_area"><span>[도착]</span></p>
                             </div>
                         </div>
                         <!--여정1 끝-->
                         <!--여정2-->
                         <div class="trip_info2">
                             <div class="schedule">
-                                <p><span>왕복</span> 여정2</p>
+                                <p><span class="text_way"></span> 여정2</p>
                             </div>
                             <div class="trip_area fs20">
-                                <p id="go_area2" class="dep_area">제주(CJU)<span>[출발]</span></p>
-                                <p id="arr_area2" class="arr_area">서울/김포(GMP)<span>[도착]</span></p>
+                                <p id="go_area2" class="dep_area"><span>[출발]</span></p>
+                                <p id="arr_area2" class="arr_area"><span>[도착]</span></p>
                             </div>
                         </div>
                         <!--여정2 끝-->
@@ -98,8 +111,8 @@
                                     <div class="jour1 list_tit">
                                         <img src="/userpage/lib/img/airplane.PNG" alt="비행기">
                                         <p class="fcpup">여정1 : </p>
-                                        <p class="dep_area area">서울/김포(GMP)</p>
-                                        <p class="arr_area area">제주(CJU)</p>
+                                        <p class="dep_area area"></p>
+                                        <p class="arr_area area"></p>
                                     </div>
                                 </div>
                                 <!--날짜 선택-->
@@ -132,7 +145,7 @@
                                         </div>
                                     </div>
                                     <div class="sel_date day">
-                                        <p id="godate" class="date3 day">2022-02-21(월)</p>
+                                        <p id="godate" class="date3 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
                                             <p class="date_price">9,900</p>
@@ -161,7 +174,7 @@
                                     </div>
                                 </div>
                                 <!--날짜 선택 끝-->
-                                <div class="list1_wrap list_wrap">
+                                <div class="list1_wrap list_wrap" id="itemList1">
                                     <table class="list1_table">
                                         <colgroup>
                                             <col width="10%">
@@ -173,7 +186,7 @@
                                             <col width="6%">
                                             <col width="6%">
                                         </colgroup>
-                                        <tr class="list_table_tit">
+                                        <tr class="list_table_tit" >
                                             <th>편명</th>
                                             <th>출발시간</th>
                                             <th></th>
@@ -183,170 +196,44 @@
                                             <th>플렉스</th>
                                             <th>지니</th>
                                         </tr>
-                                        <tr>
-                                            <td>LJ302</td>
+                                        <tr v-for="dto in itemList1">
+                                            <td class="airplanename">{{dto.schAirplaneName}}</td>
                                             <td>
-                                                <p class="start_hour">06:15</p>
-                                                <p class="start_area">(GMP))</p>
+                                                <p class="start_hour">{{dto.schStartTime.substr(11,5)}}</p>
+                                                <p class="start_area">{{dto.schDeparturePoint.substr(dto.schDeparturePoint.length-5,5)}}</p>
                                             </td>
                                             <td>
-                                                <p class="time">01h 10m</p>
+                                                <p class="time">{{dto.schFlyingTime.substr(11,2)}}h {{dto.schFlyingTime.substr(14,2)}}m</p>
                                                 <p class="type_wrap">
-                                                <p class="type">B737-800</p>
+                                                <p class="type">{{dto.schAirplaneType}}</p>
                                                 <p class="type_butt"><img src="/userpage/lib/img/type.PNG" alt="타입버튼"></p>
                                                 </p>
                                             </td>
                                             <td>
-                                                <p class="start_hour">07:25</p>
-                                                <p class="start_area">(CJU)</p>
+                                                <p class="start_hour">{{dto.schArrivalDate.substr(11,5)}}</p>
+                                                <p class="start_area">{{dto.schArrivalPoint.substr(dto.schArrivalPoint.length-5,5)}}</p>
                                             </td>
                                             <td>
-                                                <p class="crr_open cursor"><img src="/userpage/lib/img/curr1.PNG" alt="운임규정버튼"></p>
+                                                <p class="crr_open cursor" @click="crr_open"><img src="/userpage/lib/img/curr1.PNG" alt="운임규정버튼"></p>
                                             </td>
                                             <td>
                                                 <div class="price_wrap">
                                                     <p class="curr">KRW</p>
-                                                    <p class="date_price">21,900</p>
+                                                    <p class="date_price">{{(dto.schBasicPrice+"").substr(0,((dto.schBasicPrice+"").length-3))}},{{(dto.schBasicPrice+"").substr(-3,3)}}</p>
                                                     <p class="seats">잔여 9석!</p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="price_wrap">
                                                     <p class="curr">KRW</p>
-                                                    <p class="date_price">29,900</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap none_seat">
-                                                    <p class="curr"></p>
-                                                    <p class="date_price">예약마감</p>
-                                                    <p class="seats"></p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>LJ302</td>
-                                            <td>
-                                                <p class="start_hour">07:05</p>
-                                                <p class="start_area">(GMP)</p>
-                                            </td>
-                                            <td>
-                                                <p class="time">01h 10m</p>
-                                                <p class="type_wrap">
-                                                <p class="type">B737-800</p>
-                                                <p class="type_butt"><img src="/userpage/lib/img/type.PNG" alt="타입버튼"></p>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="start_hour">08:15</p>
-                                                <p class="start_area">(CJU)</p>
-                                            </td>
-                                            <td>
-                                                <p class="crr_open cursor"><img src="/userpage/lib/img/curr1.PNG" alt="운임규정버튼"></p>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap none_seat">
-                                                    <p class="curr"></p>
-                                                    <p class="date_price">예약마감</p>
-                                                    <p class="seats"></p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">29,900</p>
+                                                    <p class="date_price">{{((dto.schBasicPrice*1.6)+"").substr(0,(((dto.schBasicPrice*1.6)+"").length-3))}},{{((dto.schBasicPrice*1.6)+"").substr(-3,3)}}</p>
                                                     <p class="seats">잔여 9석!</p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="price_wrap">
                                                     <p class="curr">KRW</p>
-                                                    <p class="date_price">80,000</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>LJ302</td>
-                                            <td>
-                                                <p class="start_hour">07:05</p>
-                                                <p class="start_area">(GMP)</p>
-                                            </td>
-                                            <td>
-                                                <p class="time">01h 10m</p>
-                                                <p class="type_wrap">
-                                                <p class="type">B737-800</p>
-                                                <p class="type_butt"><img src="/userpage/lib/img/type.PNG" alt="타입버튼"></p>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="start_hour">08:15</p>
-                                                <p class="start_area">(CJU)</p>
-                                            </td>
-                                            <td>
-                                                <p class="crr_open cursor"><img src="/userpage/lib/img/curr1.PNG" alt="운임규정버튼"></p>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">21,900</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap none_seat">
-                                                    <p class="curr"></p>
-                                                    <p class="date_price">예약마감</p>
-                                                    <p class="seats"></p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">80,000</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>LJ302</td>
-                                            <td>
-                                                <p class="start_hour">07:05</p>
-                                                <p class="start_area">(GMP)</p>
-                                            </td>
-                                            <td>
-                                                <p class="time">01h 10m</p>
-                                                <p class="type_wrap">
-                                                <p class="type">B737-800</p>
-                                                <p class="type_butt"><img src="/userpage/lib/img/type.PNG" alt="타입버튼"></p>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="start_hour">08:15</p>
-                                                <p class="start_area">(CJU)</p>
-                                            </td>
-                                            <td>
-                                                <p class="crr_open cursor"><img src="/userpage/lib/img/curr1.PNG" alt="운임규정버튼"></p>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">21,900</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">29,900</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">80,000</p>
+                                                    <p class="date_price">{{((dto.schBasicPrice*2.6)+"").substr(0,(((dto.schBasicPrice*2.6)+"").length-3))}},{{((dto.schBasicPrice*2.6)+"").substr(-3,3)}}</p>
                                                     <p class="seats">잔여 9석!</p>
                                                 </div>
                                             </td>
@@ -358,15 +245,15 @@
                         </div>
                         <!--항공편 리스트 wrap1 끝-->
                         <!--항공편 리스트 2 wrap-->
-                        <div class="air_list_wrap">
+                        <div class="air_list_wrap air_list_wrap2">
                             <!--항공편 리스트 2-->
                             <div class="air_list2_wrap">
                                 <div class="air_list1">
                                     <div class="jour1 list_tit">
                                         <img src="/userpage/lib/img/airplane.PNG" alt="비행기">
                                         <p class="fcpup">여정2 : </p>
-                                        <p class="dep_area area">제주(CJU)</p>
-                                        <p class="arr_area area">서울/김포(GMP)</p>
+                                        <p class="dep_area1 area"></p>
+                                        <p class="arr_area1 area"></p>
                                     </div>
                                 </div>
                                 <!--날짜 선택-->
@@ -378,49 +265,49 @@
                                         <img src="/userpage/lib/img/sel_right_arrow.PNG" alt="오른쪽화살표">
                                     </p>
                                     <div>
-                                        <p class="date0 day"></p>
+                                        <p class="dating0 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
                                             <p class="date_price">11,900</p>
                                         </div>
                                     </div>
                                     <div>
-                                        <p class="date1 day"></p>
+                                        <p class="dating1 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
                                             <p class="date_price">19,900</p>
                                         </div>
                                     </div>
                                     <div>
-                                        <p class="date2 day"></p>
+                                        <p class="dating2 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
                                             <p class="date_price">15,900</p>
                                         </div>
                                     </div>
                                     <div class="sel_date day">
-                                        <p class="date3 day">2022-02-21(월)</p>
+                                        <p class="dating3 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
                                             <p class="date_price">21,900</p>
                                         </div>
                                     </div>
                                     <div>
-                                        <p class="date4 day"></p>
+                                        <p class="dating4 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
                                             <p class="date_price">41,900</p>
                                         </div>
                                     </div>
                                     <div>
-                                        <p class="date5 day"></p>
+                                        <p class="dating5 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
                                             <p class="date_price">32,900</p>
                                         </div>
                                     </div>
                                     <div>
-                                        <p class="date6 day"></p>
+                                        <p class="dating6 day"></p>
                                         <div class="price">
                                             <p class="curr">KRW</p>
                                             <p class="date_price">29,900</p>
@@ -428,20 +315,19 @@
                                     </div>
                                 </div>
                                 <!--날짜 선택 끝-->
-                                <div class="list2_wrap list_wrap">
+                                <div class="list2_wrap list_wrap" id="itemList2">
                                     <table class="list2_table">
                                         <colgroup>
                                             <col width="10%">
-                                            <col width="12%">
+                                            <col width="14%">
                                             <col width="28%">
-                                            <col width="12%">
-                                            <col width="16%">
-                                            <col width="8%">
-                                            <col width="8%">
-                                            <col width="8%">
-                                            <col width="8%">
+                                            <col width="18%">
+                                            <col width="22%">
+                                            <col width="6%">
+                                            <col width="6%">
+                                            <col width="6%">
                                         </colgroup>
-                                        <tr class="list_table_tit">
+                                        <tr class="list_table_tit" >
                                             <th>편명</th>
                                             <th>출발시간</th>
                                             <th></th>
@@ -450,329 +336,46 @@
                                             <th>슈퍼로우</th>
                                             <th>플렉스</th>
                                             <th>지니</th>
-                                            <th>지니비즈</th>
                                         </tr>
-                                        <tr>
-                                            <td>LJ302</td>
+                                        <tr v-for="dto in itemList2">
+                                            <td class="airplanename">{{dto.schAirplaneName}}</td>
                                             <td>
-                                                <p class="start_hour">06:15</p>
-                                                <p class="start_area">(GMP))</p>
+                                                <p class="start_hour">{{dto.schStartTime.substr(11,5)}}</p>
+                                                <p class="start_area">{{dto.schDeparturePoint.substr(dto.schDeparturePoint.length-5,5)}}</p>
                                             </td>
                                             <td>
-                                                <p class="time">01h 10m</p>
+                                                <p class="time">{{dto.schFlyingTime.substr(11,2)}}h {{dto.schFlyingTime.substr(14,2)}}m</p>
                                                 <p class="type_wrap">
-                                                <p class="type">B737-800</p>
+                                                <p class="type">{{dto.schAirplaneType}}</p>
                                                 <p class="type_butt"><img src="/userpage/lib/img/type.PNG" alt="타입버튼"></p>
                                                 </p>
                                             </td>
                                             <td>
-                                                <p class="start_hour">07:25</p>
-                                                <p class="start_area">(CJU)</p>
+                                                <p class="start_hour">{{dto.schArrivalDate.substr(11,5)}}</p>
+                                                <p class="start_area">{{dto.schArrivalPoint.substr(dto.schArrivalPoint.length-5,5)}}</p>
                                             </td>
                                             <td>
-                                                <p class="crr_open cursor"><img src="/userpage/lib/img/curr1.PNG" alt="운임규정버튼"></p>
+                                                <p class="crr_open cursor" @click="crr_open"><img src="/userpage/lib/img/curr1.PNG" alt="운임규정버튼"></p>
                                             </td>
                                             <td>
                                                 <div class="price_wrap1">
                                                     <p class="curr">KRW</p>
-                                                    <p class="date_price">21,900</p>
+                                                    <p class="date_price">{{(dto.schBasicPrice+"").substr(0,((dto.schBasicPrice+"").length-3))}},{{(dto.schBasicPrice+"").substr(-3,3)}}</p>
                                                     <p class="seats">잔여 9석!</p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="price_wrap1">
                                                     <p class="curr">KRW</p>
-                                                    <p class="date_price">29,900</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1 none_seat">
-                                                    <p class="curr"></p>
-                                                    <p class="date_price">예약마감</p>
-                                                    <p class="seats"></p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1 primium_seat">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price .null_flight">109,000</p>
-                                                    <p class="seats">잔여 4석!</p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>LJ302</td>
-                                            <td>
-                                                <p class="start_hour">07:50</p>
-                                                <p class="start_area">(GMP)</p>
-                                            </td>
-                                            <td>
-                                                <p class="time">01h 15m</p>
-                                                <p class="type_wrap">
-                                                <p class="type">B737-900</p>
-                                                <p class="type_butt"><img src="/userpage/lib/img/type.PNG" alt="타입버튼"></p>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="start_hour">09:05</p>
-                                                <p class="start_area">(CJU)</p>
-                                            </td>
-                                            <td>
-                                                <p class="crr_open cursor"><img src="/userpage/lib/img/curr1.PNG" alt="운임규정버튼"></p>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">21,900</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1 none_seat">
-                                                    <p class="curr"></p>
-                                                    <p class="date_price">예약마감</p>
-                                                    <p class="seats"></p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">80,000</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1 none_seat">
-                                                    <p class="curr"></p>
-                                                    <p class="date_price">예약마감</p>
-                                                    <p class="seats"></p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>LJ302</td>
-                                            <td>
-                                                <p class="start_hour">07:05</p>
-                                                <p class="start_area">(GMP)</p>
-                                            </td>
-                                            <td>
-                                                <p class="time">01h 10m</p>
-                                                <p class="type_wrap">
-                                                <p class="type">B737-800</p>
-                                                <p class="type_butt"><img src="/userpage/lib/img/type.PNG" alt="타입버튼"></p>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="start_hour">08:15</p>
-                                                <p class="start_area">(CJU)</p>
-                                            </td>
-                                            <td>
-                                                <p class="crr_open cursor"><img src="/userpage/lib/img/curr1.PNG" alt="운임규정버튼"></p>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">21,900</p>
+                                                    <p class="date_price">{{((dto.schBasicPrice*1.6)+"").substr(0,(((dto.schBasicPrice*1.6)+"").length-3))}},{{((dto.schBasicPrice*1.6)+"").substr(-3,3)}}</p>
                                                     <p class="seats">잔여 9석!</p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="price_wrap1">
                                                     <p class="curr">KRW</p>
-                                                    <p class="date_price">29,900</p>
+                                                    <p class="date_price">{{((dto.schBasicPrice*2.6)+"").substr(0,(((dto.schBasicPrice*2.6)+"").length-3))}},{{((dto.schBasicPrice*2.6)+"").substr(-3,3)}}</p>
                                                     <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">80,000</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1 none_seat">
-                                                    <p class="curr"></p>
-                                                    <p class="date_price">예약마감</p>
-                                                    <p class="seats"></p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <!-- <tr>
-                                        <td colspan="7" class="add_row">
-                                            <div class="normal">
-                                                <p class="newtr_tit_top">기본 운임</p>
-                                                <p class="newtr_tit_top">무료 제공</p>
-                                                <hr>
-                                                <div class="sel_seat_wrap">
-                                                    <img src="./img/sel_seat.PNG" alt="좌석선택">
-                                                    <p class="sel_seat1">유료 사전 좌석 지정<br/>(단, 비즈니스 좌석 선택 불가)</p>
-                                                </div>
-                                                <div class="bagg1_wrap">
-                                                    <img src="./img/bagg.PNG" alt="좌석선택">
-                                                    <p class="bagg1">유료 사전 좌석 지정<br/>(단, 비즈니스 좌석 선택 불가)</p>
-                                                </div>
-                                            </div>
-                                            <div class="premium">
-                                                <p class="newtr_tit_top">기본 운임</p>
-                                                <p class="newtr_tit_top">무료 제공</p>
-                                                <hr>
-                                                <div class="sel_seat_wrap">
-                                                    <img src="./img/sel_seat2.PNG" alt="좌석선택">
-                                                    <p class="sel_seat2">유료 사전 좌석 지정<br/>(단, 비즈니스 좌석 선택 불가)</p>
-                                                </div>
-                                                <div class="bagg1_wrap">
-                                                    <img src="./img/bagg.PNG" alt="좌석선택">
-                                                    <p class="bagg2">유료 사전 좌석 지정<br/>(단, 비즈니스 좌석 선택 불가)</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr> -->
-                                        <tr>
-                                            <td>LJ302</td>
-                                            <td>
-                                                <p class="start_hour">07:05</p>
-                                                <p class="start_area">(GMP)</p>
-                                            </td>
-                                            <td>
-                                                <p class="time">01h 10m</p>
-                                                <p class="type_wrap">
-                                                <p class="type">B737-800</p>
-                                                <p class="type_butt"><img src="/userpage/lib/img/type.PNG" alt="타입버튼"></p>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="start_hour">08:15</p>
-                                                <p class="start_area">(CJU)</p>
-                                            </td>
-                                            <td>
-                                                <p class="crr_open cursor"><img src="/userpage/lib/img/curr1.PNG" alt="운임규정버튼"></p>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1 none_seat">
-                                                    <p class="curr"></p>
-                                                    <p class="date_price">예약마감</p>
-                                                    <p class="seats"></p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">29,900</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">80,000</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1 none_seat">
-                                                    <p class="curr"></p>
-                                                    <p class="date_price">예약마감</p>
-                                                    <p class="seats"></p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>LJ302</td>
-                                            <td>
-                                                <p class="start_hour">07:05</p>
-                                                <p class="start_area">(GMP)</p>
-                                            </td>
-                                            <td>
-                                                <p class="time">01h 10m</p>
-                                                <p class="type_wrap">
-                                                <p class="type">B737-800</p>
-                                                <p class="type_butt"><img src="/userpage/lib/img/type.PNG" alt="타입버튼"></p>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="start_hour">08:15</p>
-                                                <p class="start_area">(CJU)</p>
-                                            </td>
-                                            <td>
-                                                <p class="crr_open cursor"><img src="/userpage/lib/img/curr1.PNG" alt="운임규정버튼"></p>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">21,900</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">29,900</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">80,000</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1 primium_seat">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">145,000</p>
-                                                    <p class="seats">잔여 2석!</p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>LJ302</td>
-                                            <td>
-                                                <p class="start_hour">07:05</p>
-                                                <p class="start_area">(GMP)</p>
-                                            </td>
-                                            <td>
-                                                <p class="time">01h 10m</p>
-                                                <p class="type_wrap">
-                                                <p class="type">B737-800</p>
-                                                <p class="type_butt"><img src="/userpage/lib/img/type.PNG" alt="타입버튼"></p>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="start_hour">08:15</p>
-                                                <p class="start_area">(CJU)</p>
-                                            </td>
-                                            <td>
-                                                <p class="crr_open cursor"><img src="/userpage/lib/img/curr1.PNG" alt="운임규정버튼"></p>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">21,900</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">29,900</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">80,000</p>
-                                                    <p class="seats">잔여 9석!</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="price_wrap1 none_seat">
-                                                    <p class="curr"></p>
-                                                    <p class="date_price">예약마감</p>
-                                                    <p class="seats"></p>
                                                 </div>
                                             </td>
                                         </tr>

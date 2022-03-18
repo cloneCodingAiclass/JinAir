@@ -302,7 +302,7 @@ body {
 /* container */
 #container {
   width: 100%;
-  height: 4200px;
+  height: 3000px;
 }
 
 .cursor {
@@ -549,7 +549,7 @@ body {
   padding: 20px;
 }
 
-.air_list_wrap .arr_area::before {
+.air_list_wrap .arr_area::before, .air_list_wrap .arr_area1::before {
   content: " ";
   background-image: url("/userpage/lib/img/right_arrow.PNG");
   background-size: 40px 16px;
@@ -630,10 +630,36 @@ body {
 }
 
 /*날짜선택 끝*/
+.airplanename{
+  font-size: 18px;
+  font-weight: 900;
+}
+.start_hour{
+  font-size: 26px;
+  font-weight: 900;
+}
+.start_area{
+  font-size: 15px;
+  font-weight: 900;
+}
+.time, .type{
+  font-size: 13px;
+  font-weight: 900;
+}
+.curr, .seats{
+  font-size: 14px;
+  font-weight: 900;
+}
+.date_price{
+  font-size: 23px;
+  font-weight: 900;
+}
+
 
 .list_wrap {
   margin-top: 30px;
 }
+
 
 .list_wrap table {
   width: 100%;
@@ -658,6 +684,11 @@ body {
   padding: 5px;
   border-bottom: 0.5px solid black;
 }
+.list_wrap table.list2_table td {
+  height: 150px;
+  padding: 5px;
+  border-bottom: 0.5px solid black;
+}
 
 .list_wrap table td .type_wrap {
   display: flex;
@@ -673,8 +704,8 @@ body {
   cursor: pointer;
 }
 /* 경로2 */
-.list_wrap .price_wrap1 { 
-  width: 120px;
+.list_wrap table.list2_table .price_wrap1 {
+  width: 150px;
   height: 110px;
   border: 1px solid #f2f2f2;
   padding-top: 30px;
@@ -980,7 +1011,8 @@ div.none_seat p {
   display: flex;
   width: 100%;
   height: 90px;
-  justify-content: center
+  justify-content: center;
+  font-weight: 900;
 }
 
 .modal_con_wrap hr {
@@ -989,13 +1021,14 @@ div.none_seat p {
 
 .jour_wrap h2, .jour_wrap .flight{
   display: inline;
-  font-weight: 400;
+  font-weight: 900;
 }
 
 .jour_wrap .jour_info_wrap{
   margin-top: 8px;
   font-size: 16px;
   width: 500px;
+  font-weight: 900;
   height: 20px !important;
 }
 
@@ -1378,6 +1411,7 @@ td.cur::before {
 }
 .crr_modal .crr_box button.close_img {
   margin-left: 390px;
+  margin-bottom: 20px;
   vertical-align: middle;
   background-color: transparent;
   border: none;
@@ -1481,6 +1515,7 @@ td.cur::before {
 .crr_modal .crr_box .crr_index .crr_table table td {
   font-weight: bold;
   height: 50px;
+  text-align: center;
 }
 .crr_modal .crr_box .crr_index .crr_table table td.sub_tit {
   font-size: 14px;

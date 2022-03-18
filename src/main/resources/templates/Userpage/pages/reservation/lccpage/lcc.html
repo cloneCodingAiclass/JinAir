@@ -514,7 +514,7 @@
                                 <span class="subtitle" name="go_select_opt">{{dto.schArrivalPoint}}</span>
                             </div>
                             <div class="list_table">
-                                <h3>{{dto.schDepartureDate.substr(0,4)}}년 {{dto.schDepartureDate.substr(5,2)}}월 {{dto.schDepartureDate.substr(8,2)}}일 스케줄</h3>
+                                <h3>{{dto.schDepartureDate.substr(0,4)}}년 월 {{dto.schDepartureDate.substr(8,2)}}일 스케줄</h3>
                                 <table>
                                     <thead>
                                         <tr>
@@ -557,13 +557,13 @@
                                             <td>
                                                 <button>
                                                     <p class="small_font">KRW</p>
-                                                    <strong>{{((dto.schBasicPrice+12000)+"").substr(0,(((dto.schBasicPrice+12000)+"").length-3))}},{{((dto.schBasicPrice+12000)+"").substr(-3,3)}}</strong>
+                                                    <strong>{{((dto.schBasicPrice*1.6)+"").substr(0,(((dto.schBasicPrice*1.6)+"").length-3))}},{{((dto.schBasicPrice*1.6)+"").substr(-3,3)}}</strong>
                                                 </button>
                                             </td>
                                             <td>
                                                 <button>
                                                     <p class="small_font">KRW</p>
-                                                    <strong>{{((dto.schBasicPrice+51000)+"").substr(0,(((dto.schBasicPrice+51000)+"").length-3))}},{{((dto.schBasicPrice+51000)+"").substr(-3,3)}}</strong>
+                                                    <strong>{{((dto.schBasicPrice*2.6)+"").substr(0,(((dto.schBasicPrice*2.6)+"").length-3))}},{{((dto.schBasicPrice*2.6)+"").substr(-3,3)}}</strong>
                                                 </button>
                                             </td>
                                         </tr>

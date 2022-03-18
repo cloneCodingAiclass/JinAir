@@ -1,5 +1,791 @@
 "use strict";
+let str = $(location).attr('href').split('/');
+$(() => {
+  let cookie = [];
+  for( let i = 0 ; i < 20; i++){
+    if(document.getElementById(`${i}`)){
+      cookie[i] = $(`#${i}`).val();
+      console.log( $(`#${i}`).val())
+    }
+  }
+  // 구간1
+  let itemList1 = new Vue({
+    el : '#itemList1',
+    data : {
+      itemList1 : {}
+    },
+    methods:{
+      crr_open : function (){
+        $(".crr_modal").fadeIn(200);
+        $("body").css("overflow", "hidden");
+      }
+    }
+  });
+  // 구간2
+  let itemList2 = new Vue({
+    el : '#itemList2',
+    data : {
+      itemList2 : {}
+    },
+    methods:{
+      crr_open : function (){
+        $(".crr_modal").fadeIn(200);
+        $("body").css("overflow", "hidden");
+      }
+    }
+  });
 
+  // 구간1
+  function goSearch(schDeparturePoint, schArrivalPoint, goDateSelectOptt){
+    $.post({
+      url: "/api/schedule/go",
+      data: "schDeparturePoint=" + schDeparturePoint + "&schArrivalPoint=" + schArrivalPoint + "&goDateSelectOptt=" + goDateSelectOptt,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        itemList1.itemList1 = dataJson.data;
+      }
+    })
+  }
+  // 구간2
+  function comeSearch(schDeparturePoint, schArrivalPoint, comeDateSelectOptt){
+    $.post({
+      url: "/api/schedule/come",
+      data: "schDeparturePoint=" + schDeparturePoint + "&schArrivalPoint=" + schArrivalPoint + "&comeDateSelectOptt=" + comeDateSelectOptt,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        itemList2.itemList2 = dataJson.data;
+      }
+    })
+  }
+
+  if(str[5] == 'twoway'){
+      $('.date3').html($('#goDateSelectOptt').val());
+      $('.dating3').html($('#comeDateSelectOptt').val());
+      $('.dep_area').html($('#schDeparturePoint').val());
+      $('.arr_area').html($('#schArrivalPoint').val());
+      $('.dep_area1').html($('#schArrivalPoint').val());
+      $('.arr_area1').html($('#schDeparturePoint').val());
+      $('.text_way').html('왕복');
+      $('#go_area2').html($('#schArrivalPoint').val());
+      $('#arr_area2').html($('#schDeparturePoint').val());
+
+      // 처음 받아온 기본 데이터 넣기
+      goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(),$('#goDateSelectOptt').val());
+      comeSearch($('#schArrivalPoint').val(),$('#schDeparturePoint').val(),$('#comeDateSelectOptt').val());
+
+      // 날짜 눌렀을때 데이터
+      $(".date0").on("click", function () {
+        str = $(".date0").html().split('-');
+        if(str[1].length == 1){
+          str[1] = "0" + str[1].substr(0,1)
+          if(str[2].length == 4){
+            str[2] = "0" + str[2].substr(0,1)
+          }else if(str[2].length == 5){
+            str[2] = str[2].substr(0,2)
+          }
+        }else{
+          if(str[2].length == 4){
+            str[2] = "0" + str[2].substr(0,1)
+          }else if(str[2].length == 5){
+            str[2] = str[2].substr(0,2)
+          }
+        }
+        let strrr = `${str[0]}-${str[1]}-${str[2]}`
+        goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+      });
+
+      $(".date1").on("click", function () {
+        str = $(".date1").html().split('-');
+        if(str[1].length == 1){
+          str[1] = "0" + str[1].substr(0,1)
+          if(str[2].length == 4){
+            str[2] = "0" + str[2].substr(0,1)
+          }else if(str[2].length == 5){
+            str[2] = str[2].substr(0,2)
+          }
+        }else{
+          if(str[2].length == 4){
+            str[2] = "0" + str[2].substr(0,1)
+          }else if(str[2].length == 5){
+            str[2] = str[2].substr(0,2)
+          }
+        }
+        let strrr = `${str[0]}-${str[1]}-${str[2]}`
+        goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+      });
+      $(".date2").on("click", function () {
+        str = $(".date2").html().split('-');
+        if(str[1].length == 1){
+          str[1] = "0" + str[1].substr(0,1)
+          if(str[2].length == 4){
+            str[2] = "0" + str[2].substr(0,1)
+          }else if(str[2].length == 5){
+            str[2] = str[2].substr(0,2)
+          }
+        }else{
+          if(str[2].length == 4){
+            str[2] = "0" + str[2].substr(0,1)
+          }else if(str[2].length == 5){
+            str[2] = str[2].substr(0,2)
+          }
+        }
+        let strrr = `${str[0]}-${str[1]}-${str[2]}`
+        goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+      });
+      $(".date3").on("click", function () {
+        str = $(".date3").html().split('-');
+        if(str[1].length == 1){
+          str[1] = "0" + str[1].substr(0,1)
+          if(str[2].length == 4){
+            str[2] = "0" + str[2].substr(0,1)
+          }else if(str[2].length == 5){
+            str[2] = str[2].substr(0,2)
+          }
+        }else{
+          if(str[2].length == 4){
+            str[2] = "0" + str[2].substr(0,1)
+          }else if(str[2].length == 5){
+            str[2] = str[2].substr(0,2)
+          }
+        }
+        let strrr = `${str[0]}-${str[1]}-${str[2]}`
+        goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+      });
+      $(".date4").on("click", function () {
+        str = $(".date4").html().split('-');
+        if(str[1].length == 1){
+          str[1] = "0" + str[1].substr(0,1)
+          if(str[2].length == 4){
+            str[2] = "0" + str[2].substr(0,1)
+          }else if(str[2].length == 5){
+            str[2] = str[2].substr(0,2)
+          }
+        }else{
+          if(str[2].length == 4){
+            str[2] = "0" + str[2].substr(0,1)
+          }else if(str[2].length == 5){
+            str[2] = str[2].substr(0,2)
+          }
+        }
+        let strrr = `${str[0]}-${str[1]}-${str[2]}`
+        goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+      });
+      $(".date5").on("click", function () {
+        str = $(".date5").html().split('-');
+        if(str[1].length == 1){
+          str[1] = "0" + str[1].substr(0,1)
+          if(str[2].length == 4){
+            str[2] = "0" + str[2].substr(0,1)
+          }else if(str[2].length == 5){
+            str[2] = str[2].substr(0,2)
+          }
+        }else{
+          if(str[2].length == 4){
+            str[2] = "0" + str[2].substr(0,1)
+          }else if(str[2].length == 5){
+            str[2] = str[2].substr(0,2)
+          }
+        }
+        let strrr = `${str[0]}-${str[1]}-${str[2]}`
+        goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+      });
+      $(".date6").on("click", function () {
+        str = $(".date6").html().split('-');
+        if(str[1].length == 1){
+          str[1] = "0" + str[1].substr(0,1)
+          if(str[2].length == 4){
+            str[2] = "0" + str[2].substr(0,1)
+          }else if(str[2].length == 5){
+            str[2] = str[2].substr(0,2)
+          }
+        }else{
+          if(str[2].length == 4){
+            str[2] = "0" + str[2].substr(0,1)
+          }else if(str[2].length == 5){
+            str[2] = str[2].substr(0,2)
+          }
+        }
+        let strrr = `${str[0]}-${str[1]}-${str[2]}`
+        goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+      });
+
+    // 날짜 눌렀을때 데이터
+    $(".dating0").on("click", function () {
+      str = $(".dating0").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      comeSearch($('#schArrivalPoint').val(),$('#schDeparturePoint').val(), strrr);
+    });
+
+    $(".dating1").on("click", function () {
+      str = $(".dating1").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      comeSearch($('#schArrivalPoint').val(),$('#schDeparturePoint').val(), strrr);
+    });
+    $(".dating2").on("click", function () {
+      str = $(".dating2").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      comeSearch($('#schArrivalPoint').val(),$('#schDeparturePoint').val(), strrr);
+    });
+    $(".dating3").on("click", function () {
+      str = $(".dating3").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      comeSearch($('#schArrivalPoint').val(),$('#schDeparturePoint').val(), strrr);
+    });
+    $(".dating4").on("click", function () {
+      str = $(".dating4").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      comeSearch($('#schArrivalPoint').val(),$('#schDeparturePoint').val(), strrr);
+    });
+    $(".dating5").on("click", function () {
+      str = $(".dating5").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      comeSearch($('#schArrivalPoint').val(),$('#schDeparturePoint').val(), strrr);
+    });
+    $(".dating6").on("click", function () {
+      str = $(".dating6").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      comeSearch($('#schArrivalPoint').val(),$('#schDeparturePoint').val(), strrr);
+    });
+
+  }
+  if(str[5] == 'oneway'){
+    $('.date3').html($('#goDateSelectOptt').val());
+    $('.dating3').html($('#comeDateSelectOptt').val());
+    $('.dep_area').html($('#schDeparturePoint').val());
+    $('.arr_area').html($('#schArrivalPoint').val());
+    $('.air_list_wrap2').css('display', 'none');
+    $('.text_way').html('편도');
+    $('.trip_info2').css('display', 'none');
+    $(".arrow_img").css('display', 'none');
+    // 처음 받아온 기본 데이터 넣기
+    goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(),$('#goDateSelectOptt').val());
+    // 날짜 눌렀을때 데이터
+    $(".date0").on("click", function () {
+      str = $(".date0").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+    });
+
+    $(".date1").on("click", function () {
+      str = $(".date1").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+    });
+    $(".date2").on("click", function () {
+      str = $(".date2").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+    });
+    $(".date3").on("click", function () {
+      str = $(".date3").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+    });
+    $(".date4").on("click", function () {
+      str = $(".date4").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+    });
+    $(".date5").on("click", function () {
+      str = $(".date5").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+    });
+    $(".date6").on("click", function () {
+      str = $(".date6").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+    });
+
+  }
+  if(str[5] == 'multiway'){
+    console.log($('#goDateSelectOptt1').val());
+    $('.date3').html($('#goDateSelectOptt').val());
+    $('.dating3').html($('#goDateSelectOptt1').val());
+    $('.dep_area').html($('#schDeparturePoint').val());
+    $('.arr_area').html($('#schArrivalPoint').val());
+    $('.dep_area1').html($('#schDeparturePoint1').val());
+    $('.arr_area1').html($('#schArrivalPoint1').val());
+    $('.text_way').html('다구간');
+    $('#go_area2').html($('#schDeparturePoint1').val());
+    $('#arr_area2').html($('#schArrivalPoint1').val());
+
+    // 처음 받아온 기본 데이터 넣기
+    goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(),$('#goDateSelectOptt').val());
+    comeSearch($('#schDeparturePoint1').val(),$('#schArrivalPoint1').val(),$('#goDateSelectOptt1').val());
+
+    // 날짜 눌렀을때 데이터
+    $(".date0").on("click", function () {
+      str = $(".date0").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+    });
+
+    $(".date1").on("click", function () {
+      str = $(".date1").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+    });
+    $(".date2").on("click", function () {
+      str = $(".date2").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+    });
+    $(".date3").on("click", function () {
+      str = $(".date3").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+    });
+    $(".date4").on("click", function () {
+      str = $(".date4").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+    });
+    $(".date5").on("click", function () {
+      str = $(".date5").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+    });
+    $(".date6").on("click", function () {
+      str = $(".date6").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+    });
+
+    // 날짜 눌렀을때 데이터
+    $(".dating0").on("click", function () {
+      str = $(".dating0").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      comeSearch($('#schDeparturePoint1').val(),$('#schArrivalPoint1').val(), strrr);
+    });
+
+    $(".dating1").on("click", function () {
+      str = $(".dating1").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      comeSearch($('#schDeparturePoint1').val(),$('#schArrivalPoint1').val(), strrr);
+    });
+    $(".dating2").on("click", function () {
+      str = $(".dating2").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      comeSearch($('#schDeparturePoint1').val(),$('#schArrivalPoint1').val(), strrr);
+    });
+    $(".dating3").on("click", function () {
+      str = $(".dating3").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      comeSearch($('#schDeparturePoint1').val(),$('#schArrivalPoint1').val(), strrr);
+    });
+    $(".dating4").on("click", function () {
+      str = $(".dating4").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      comeSearch($('#schDeparturePoint1').val(),$('#schArrivalPoint1').val(), strrr);
+    });
+    $(".dating5").on("click", function () {
+      str = $(".dating5").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      comeSearch($('#schDeparturePoint1').val(),$('#schArrivalPoint1').val(), strrr);
+    });
+    $(".dating6").on("click", function () {
+      str = $(".dating6").html().split('-');
+      if(str[1].length == 1){
+        str[1] = "0" + str[1].substr(0,1)
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }else{
+        if(str[2].length == 4){
+          str[2] = "0" + str[2].substr(0,1)
+        }else if(str[2].length == 5){
+          str[2] = str[2].substr(0,2)
+        }
+      }
+      let strrr = `${str[0]}-${str[1]}-${str[2]}`
+      comeSearch($('#schDeparturePoint1').val(),$('#schArrivalPoint1').val(), strrr);
+    });
+  }
+
+})
 $(function () {
   $(".open1").on("click", function (e) {
     e.stopPropagation();
@@ -196,7 +982,7 @@ $(function () {
   let select_day = sub_res.split("-");
 
   let yyyy = Number(select_day[0]);
-  let mm = Number(select_day[1]);
+  let mm = Number(select_day[1])-1; // 3 -> 4월
   let dd = Number(select_day[2]);
   let week = new Array("일", "월", "화", "수", "목", "금", "토"); //숫자로 추출한sel_day 문자로 변경할 배열;
   let datearr = new Array(1, 2, 3, 4, 5, 6, 7);
@@ -209,19 +995,28 @@ $(function () {
   let date5 = new Date(yyyy, mm, dd + 2);
   let date6 = new Date(yyyy, mm, dd + 3);
 
-  let sel_date0 = `${date0.getFullYear()}-${date0.getMonth()}-${date0.getDate()}(${week[date0.getDay()]
+  let dat0 = new Date(yyyy, mm+1, dd - 3);
+  let dat1 = new Date(yyyy, mm+1, dd - 2);
+  let dat2 = new Date(yyyy, mm+1, dd - 1);
+  let dat3 = new Date(yyyy, mm+1, dd);
+  let dat4 = new Date(yyyy, mm+1, dd + 1);
+  let dat5 = new Date(yyyy, mm+1, dd + 2);
+  let dat6 = new Date(yyyy, mm+1, dd + 3);
+
+
+  let sel_date0 = `${date0.getFullYear()}-${date0.getMonth()+1}-${date0.getDate()}(${week[date0.getDay()]
     })`;
-  let sel_date1 = `${date1.getFullYear()}-${date1.getMonth()}-${date1.getDate()}(${week[date1.getDay()]
+  let sel_date1 = `${date1.getFullYear()}-${date1.getMonth()+1}-${date1.getDate()}(${week[date1.getDay()]
     })`;
-  let sel_date2 = `${date2.getFullYear()}-${date2.getMonth()}-${date2.getDate()}(${week[date2.getDay()]
+  let sel_date2 = `${date2.getFullYear()}-${date2.getMonth()+1}-${date2.getDate()}(${week[date2.getDay()]
     })`;
-  let sel_date3 = `${date3.getFullYear()}-${date3.getMonth()}-${date3.getDate()}(${week[date3.getDay()]
+  let sel_date3 = `${date3.getFullYear()}-${date3.getMonth()+1}-${date3.getDate()}(${week[date3.getDay()]
     })`;
-  let sel_date4 = `${date4.getFullYear()}-${date4.getMonth()}-${date4.getDate()}(${week[date4.getDay()]
+  let sel_date4 = `${date4.getFullYear()}-${date4.getMonth()+1}-${date4.getDate()}(${week[date4.getDay()]
     })`;
-  let sel_date5 = `${date5.getFullYear()}-${date5.getMonth()}-${date5.getDate()}(${week[date5.getDay()]
+  let sel_date5 = `${date5.getFullYear()}-${date5.getMonth()+1}-${date5.getDate()}(${week[date5.getDay()]
     })`;
-  let sel_date6 = `${date6.getFullYear()}-${date6.getMonth()}-${date6.getDate()}(${week[date6.getDay()]
+  let sel_date6 = `${date6.getFullYear()}-${date6.getMonth()+1}-${date6.getDate()}(${week[date6.getDay()]
     })`;
 
   $(".date0").html(sel_date0);
@@ -260,6 +1055,83 @@ $(function () {
     res = $(".date6").html();
     set_day(res);
   });
+
+  /*날짜 설정 --------------*/
+  let todays = new Date();
+
+  $("#a").click(function () {
+    $("#div").unbind("click");
+  });
+  let ress = $(".dating3").text(); // 나중에 jsp할 때 선택된 날짜 받아와서 넣어주기
+  console.log(ress);
+  let sub_ress = ress.substring(0, 10);
+  let select_days = sub_ress.split("-");
+
+  let yyyy1 = Number(select_days[0]);
+  let mm1 = Number(select_days[1])-1;
+  let dd1 = Number(select_days[2]);
+  let week1 = new Array("일", "월", "화", "수", "목", "금", "토"); //숫자로 추출한sel_day 문자로 변경할 배열;
+  let datearr1 = new Array(1, 2, 3, 4, 5, 6, 7);
+
+  let dating0 = new Date(yyyy1, mm1, dd1 - 3);
+  let dating1 = new Date(yyyy1, mm1, dd1 - 2);
+  let dating2 = new Date(yyyy1, mm1, dd1 - 1);
+  let dating3 = new Date(yyyy1, mm1, dd1);
+  let dating4 = new Date(yyyy1, mm1, dd1 + 1);
+  let dating5 = new Date(yyyy1, mm1, dd1 + 2);
+  let dating6 = new Date(yyyy1, mm1, dd1 + 3);
+
+  let sel_dating0 = `${dating0.getFullYear()}-${dating0.getMonth()+1}-${dating0.getDate()}(${week1[dating0.getDay()]
+  })`;
+  let sel_dating1 = `${dating1.getFullYear()}-${dating1.getMonth()+1}-${dating1.getDate()}(${week1[dating1.getDay()]
+  })`;
+  let sel_dating2 = `${dating2.getFullYear()}-${dating2.getMonth()+1}-${dating2.getDate()}(${week1[dating2.getDay()]
+  })`;
+  let sel_dating3 = `${dating3.getFullYear()}-${dating3.getMonth()+1}-${dating3.getDate()}(${week1[dating3.getDay()]
+  })`;
+  let sel_dating4 = `${dating4.getFullYear()}-${dating4.getMonth()+1}-${dating4.getDate()}(${week1[dating4.getDay()]
+  })`;
+  let sel_dating5 = `${dating5.getFullYear()}-${dating5.getMonth()+1}-${dating5.getDate()}(${week1[dating5.getDay()]
+  })`;
+  let sel_dating6 = `${dating6.getFullYear()}-${dating6.getMonth()+1}-${dating6.getDate()}(${week1[dating6.getDay()]
+  })`;
+
+  $(".dating0").html(sel_dating0);
+  $(".dating1").html(sel_dating1);
+  $(".dating2").html(sel_dating2);
+  $(".dating3").html(sel_dating3);
+  $(".dating4").html(sel_dating4);
+  $(".dating5").html(sel_dating5);
+  $(".dating6").html(sel_dating6);
+
+  $(".dating0").on("click", function () {
+    ress = $(".dating0").html();
+    setting_day(ress);
+  });
+  $(".dating1").on("click", function () {
+    ress = $(".dating1").html();
+    setting_day(ress);
+  });
+  $(".dating2").on("click", function () {
+    ress = $(".dating2").html();
+    setting_day(ress);
+  });
+  $(".dating3").on("click", function () {
+    ress = $(".dating3").html();
+    setting_day(ress);
+  });
+  $(".dating4").on("click", function () {
+    ress = $(".dating4").html();
+    setting_day(ress);
+  });
+  $(".dating5").on("click", function () {
+    ress = $(".dating5").html();
+    setting_day(ress);
+  });
+  $(".dating6").on("click", function () {
+    ress = $(".dating6").html();
+    setting_day(ress);
+  });
 });
 
 function set_day(res) {
@@ -277,7 +1149,7 @@ function set_day(res) {
   let select_day = sub_res.split("-");
 
   let yyyy = Number(select_day[0]);
-  let mm = Number(select_day[1]);
+  let mm = Number(select_day[1])-1;
   let dd = Number(select_day[2]);
   let week = new Array("일", "월", "화", "수", "목", "금", "토"); //숫자로 추출한sel_day 문자로 변경할 배열;
   let datearr = new Array(1, 2, 3, 4, 5, 6, 7);
@@ -290,20 +1162,20 @@ function set_day(res) {
   let date5 = new Date(yyyy, mm, dd + 2);
   let date6 = new Date(yyyy, mm, dd + 3);
 
-  let sel_date0 = `${date0.getFullYear()}-${date0.getMonth()}-${date0.getDate()}(${week[date0.getDay()]
-    })`;
-  let sel_date1 = `${date1.getFullYear()}-${date1.getMonth()}-${date1.getDate()}(${week[date1.getDay()]
-    })`;
-  let sel_date2 = `${date2.getFullYear()}-${date2.getMonth()}-${date2.getDate()}(${week[date2.getDay()]
-    })`;
-  let sel_date3 = `${date3.getFullYear()}-${date3.getMonth()}-${date3.getDate()}(${week[date3.getDay()]
-    })`;
-  let sel_date4 = `${date4.getFullYear()}-${date4.getMonth()}-${date4.getDate()}(${week[date4.getDay()]
-    })`;
-  let sel_date5 = `${date5.getFullYear()}-${date5.getMonth()}-${date5.getDate()}(${week[date5.getDay()]
-    })`;
-  let sel_date6 = `${date6.getFullYear()}-${date6.getMonth()}-${date6.getDate()}(${week[date6.getDay()]
-    })`;
+  let sel_date0 = `${date0.getFullYear()}-${date0.getMonth()+1}-${date0.getDate()}(${week[date0.getDay()]
+  })`;
+  let sel_date1 = `${date1.getFullYear()}-${date1.getMonth()+1}-${date1.getDate()}(${week[date1.getDay()]
+  })`;
+  let sel_date2 = `${date2.getFullYear()}-${date2.getMonth()+1}-${date2.getDate()}(${week[date2.getDay()]
+  })`;
+  let sel_date3 = `${date3.getFullYear()}-${date3.getMonth()+1}-${date3.getDate()}(${week[date3.getDay()]
+  })`;
+  let sel_date4 = `${date4.getFullYear()}-${date4.getMonth()+1}-${date4.getDate()}(${week[date4.getDay()]
+  })`;
+  let sel_date5 = `${date5.getFullYear()}-${date5.getMonth()+1}-${date5.getDate()}(${week[date5.getDay()]
+  })`;
+  let sel_date6 = `${date6.getFullYear()}-${date6.getMonth()+1}-${date6.getDate()}(${week[date6.getDay()]
+  })`;
 
   $(".date0").html(sel_date0);
   $(".date1").html(sel_date1);
@@ -312,6 +1184,58 @@ function set_day(res) {
   $(".date4").html(sel_date4);
   $(".date5").html(sel_date5);
   $(".date6").html(sel_date6);
+}
+
+function setting_day(res) {
+  let ress = res;
+  console.log(ress);
+  let sub_res;
+  console.log(ress.length);
+  if (ress.length == 13) {
+    sub_res = res.substring(0, 10);
+  } else if (ress.length == 12) {
+    sub_res = res.substring(0, 9);
+  } else {
+    sub_res = res.substring(0, 8);
+  }
+  let select_day = sub_res.split("-");
+
+  let yyyy = Number(select_day[0]);
+  let mm = Number(select_day[1])-1;
+  let dd = Number(select_day[2]);
+  let week = new Array("일", "월", "화", "수", "목", "금", "토"); //숫자로 추출한sel_day 문자로 변경할 배열;
+  let datearr = new Array(1, 2, 3, 4, 5, 6, 7);
+
+  let date0 = new Date(yyyy, mm, dd - 3);
+  let date1 = new Date(yyyy, mm, dd - 2);
+  let date2 = new Date(yyyy, mm, dd - 1);
+  let date3 = new Date(yyyy, mm, dd);
+  let date4 = new Date(yyyy, mm, dd + 1);
+  let date5 = new Date(yyyy, mm, dd + 2);
+  let date6 = new Date(yyyy, mm, dd + 3);
+
+  let sel_date0 = `${date0.getFullYear()}-${date0.getMonth()+1}-${date0.getDate()}(${week[date0.getDay()]
+  })`;
+  let sel_date1 = `${date1.getFullYear()}-${date1.getMonth()+1}-${date1.getDate()}(${week[date1.getDay()]
+  })`;
+  let sel_date2 = `${date2.getFullYear()}-${date2.getMonth()+1}-${date2.getDate()}(${week[date2.getDay()]
+  })`;
+  let sel_date3 = `${date3.getFullYear()}-${date3.getMonth()+1}-${date3.getDate()}(${week[date3.getDay()]
+  })`;
+  let sel_date4 = `${date4.getFullYear()}-${date4.getMonth()+1}-${date4.getDate()}(${week[date4.getDay()]
+  })`;
+  let sel_date5 = `${date5.getFullYear()}-${date5.getMonth()+1}-${date5.getDate()}(${week[date5.getDay()]
+  })`;
+  let sel_date6 = `${date6.getFullYear()}-${date6.getMonth()+1}-${date6.getDate()}(${week[date6.getDay()]
+  })`;
+
+  $(".dating0").html(sel_date0);
+  $(".dating1").html(sel_date1);
+  $(".dating2").html(sel_date2);
+  $(".dating3").html(sel_date3);
+  $(".dating4").html(sel_date4);
+  $(".dating5").html(sel_date5);
+  $(".dating6").html(sel_date6);
 }
 
 $(() => {
@@ -328,237 +1252,409 @@ $(() => {
     $("body").css("overflow", "");
   });
 
-  // $(".img").on('click', () => {
-  //     $(".img").css("display","none");
-  //     $(".img2").css("display","block");
-  //     $("#modal_totP_wrap").fadeIn();
-  //     $("#modal_totP_wrap").css("position", "fixed");
-  //     $("#modal_totP_wrap").css("bottom", "10px");
-  // })
-  // $(".img2").on('click', () => {
-  //     $(".img2").css("display","none");
-  //     $(".img").css("display","block");
-  //     $("#modal_totP_wrap").fadeOut();
-  // })
-  // $(".close").on('click', () => {
-  //     $(".img2").css("display","none");
-  //     $(".img").css("display","block");
-  //     $("#modal_totP_wrap").fadeOut();
-  // })
 });
 
 // 찬영 라인
 
 $(() => {
-  let strrr1 = 0;
-  let strrr2 = 0;
+  // let strrr1 = 0;
+  // let strrr2 = 0;
+  //
+  // $('.price_wrap').on('click' ,function(){
+  //   console.log(1123)
+  //   $('.price_wrap').removeClass('on');
+  //   $(this).addClass('on');
+  //
+  //   // 위치 움직이기
+  //   window.scrollTo({
+  //     top: $('.air_list2_wrap').offset().top - 90,
+  //     behavior: 'smooth'
+  //   });
+  //
+  //   let str = $(this).children('.date_price').html().split(',');
+  //   strrr1 = '';
+  //   for (let i = 0; i < str.length; i++) {
+  //     strrr1 = strrr1 + str[i];
+  //   }
+  //   // 확인점1
+  //   // 구간 1 + 구간 2 = 항공운임
+  //   let totprice = Number(strrr1) + Number(strrr2);
+  //   // 구간1 (,) 넣어주고 자세히보기에 출력
+  //   if (strrr1.length == 5) {
+  //     $('.strrr1').html(`${strrr1.substr(-5, 2)},${strrr1.substr(-3, 3)}`);
+  //   } else if (strrr1.length == 6) {
+  //     $('.strrr1').html(`${strrr1.substr(-6, 3)},${strrr1.substr(-3, 3)}`);
+  //   }
+  //   // 구간2 (,) 넣어주고 자세히보기에 출력
+  //   if (strrr2.length == 5) {
+  //     $('.strrr2').html(`${strrr2.substr(-5, 2)},${strrr2.substr(-3, 3)}`);
+  //   } else if (strrr2.length == 6) {
+  //     $('.strrr2').html(`${strrr2.substr(-6, 3)},${strrr2.substr(-3, 3)}`);
+  //   }
+  //
+  //   // 항공운인 (,) 처리
+  //   let totpricecom = '';
+  //   if (String(totprice).length == 5) {
+  //     totpricecom = `${String(totprice).substr(-5, 2)},${String(totprice).substr(-3, 3)}`;
+  //   } else if (String(totprice).length == 6) {
+  //     totpricecom = `${String(totprice).substr(-6, 3)},${String(totprice).substr(-3, 3)}`;
+  //   }
+  //
+  //   $('.tot_price_wrap').find('.tot_price1').html(totpricecom); // 항공운임에 출력
+  //   $('.tot_price11').html(totpricecom); // 자세히보기에 항공운임 출력
+  //
+  //   let taxprice = totprice * 0.01; // 세금 계산
+  //   if (String(taxprice).length > 3) { // 세금이 4자리수 넘어갈 때
+  //     let backtaxpricecom = '';
+  //
+  //     if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 3) {
+  //       // 뒷 3자리 처리
+  //       backtaxpricecom = `,${Math.floor(String(taxprice).substr(-3, 3))}`;
+  //     } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 2) {
+  //       if (Math.floor(String(taxprice).substr(-3, 3)) % 10 == 0) {
+  //         backtaxpricecom = `,${String(Math.floor(String(taxprice).substr(-3, 3)))}0`;
+  //       } else {
+  //         backtaxpricecom = `,0${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
+  //       }
+  //     } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 1) {
+  //       backtaxpricecom = `,00${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
+  //     }
+  //     // 앞자리 처리
+  //     let forwardtaxpricecom = ''
+  //     if (String(taxprice).length == 4) {
+  //       forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-4, 1)));
+  //     } else if (String(taxprice).length == 5) {
+  //       forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-5, 2)));
+  //     }
+  //
+  //     // 앞 뒷자리 결합
+  //     let taxpricecom = forwardtaxpricecom + backtaxpricecom;
+  //     $('.tot_price_wrap').find('.tot_price3').html(taxpricecom); // 세금 출력
+  //     $('.tot_price33').html(taxpricecom); // 자세히보기 1 출력
+  //     $('.taxpriceprint').html(taxpricecom); // 자세히보기 2 출력
+  //   } else { // 세금이 3자리수 이하일때
+  //     $('.tot_price_wrap').find('.tot_price3').html(taxprice);  // 세금 출력
+  //     $('.tot_price33').html(taxprice); // 자세히보기 1 출력
+  //     $('.taxpriceprint').html(taxprice); // 자세히보기 2 출력
+  //   }
+  //
+  //   // 총액
+  //   let totalprice = totprice + 10000 + totprice * 0.01;
+  //   let finaltotalprice = '';
+  //   if (String(totalprice).length == 5) {
+  //     finaltotalprice = `${String(totalprice).substr(-5, 2)},${String(totalprice).substr(-3, 3)}`;
+  //   } else if (String(totalprice).length == 6) {
+  //     finaltotalprice = `${String(totalprice).substr(-6, 3)},${String(totalprice).substr(-3, 3)}`;
+  //   }
+  //
+  //   $('.total_price_wrap').find('.total_price').html(finaltotalprice);
+  //   $('.finaltotalprice').html(finaltotalprice);
+  //   $('.finaltotalpricee').html(finaltotalprice);
+  //
+  //   // 확인점2
+  //   $('.price_wrap1').on('click', function () {
+  //     $('.price_wrap1').removeClass('on1');
+  //     // 위치 움직이기
+  //     window.scrollTo({
+  //       top: $('.fare_wrap').offset().top - 120,
+  //       behavior: 'smooth'
+  //     });
+  //
+  //     $(this).addClass('on1');
+  //     let str = $(this).children('.date_price').html().split(',');
+  //     strrr2 = '';
+  //     for (let i = 0; i < str.length; i++) {
+  //       strrr2 = strrr2 + str[i];
+  //     }
+  //
+  //     // 확인점3
+  //     // 구간 1 + 구간 2 = 항공운임
+  //     let totprice = Number(strrr1) + Number(strrr2);
+  //     // 구간1 (,) 넣어주고 자세히보기에 출력
+  //     if (strrr1.length == 5) {
+  //       $('.strrr1').html(`${strrr1.substr(-5, 2)},${strrr1.substr(-3, 3)}`);
+  //     } else if (strrr1.length == 6) {
+  //       $('.strrr1').html(`${strrr1.substr(-6, 3)},${strrr1.substr(-3, 3)}`);
+  //     }
+  //     // 구간2 (,) 넣어주고 자세히보기에 출력
+  //     if (strrr2.length == 5) {
+  //       $('.strrr2').html(`${strrr2.substr(-5, 2)},${strrr2.substr(-3, 3)}`);
+  //     } else if (strrr2.length == 6) {
+  //       $('.strrr2').html(`${strrr2.substr(-6, 3)},${strrr2.substr(-3, 3)}`);
+  //     }
+  //
+  //     // 항공운인 (,) 처리
+  //     let totpricecom = '';
+  //     if (String(totprice).length == 5) {
+  //       totpricecom = `${String(totprice).substr(-5, 2)},${String(totprice).substr(-3, 3)}`;
+  //     } else if (String(totprice).length == 6) {
+  //       totpricecom = `${String(totprice).substr(-6, 3)},${String(totprice).substr(-3, 3)}`;
+  //     }
+  //
+  //     $('.tot_price_wrap').find('.tot_price1').html(totpricecom); // 항공운임에 출력
+  //     $('.tot_price11').html(totpricecom); // 자세히보기에 항공운임 출력
+  //
+  //     let taxprice = totprice * 0.01; // 세금 계산
+  //     if (String(taxprice).length > 3) { // 세금이 4자리수 넘어갈 때
+  //       let backtaxpricecom = '';
+  //
+  //       if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 3) {
+  //         // 뒷 3자리 처리
+  //         backtaxpricecom = `,${Math.floor(String(taxprice).substr(-3, 3))}`;
+  //       } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 2) {
+  //         if (Math.floor(String(taxprice).substr(-3, 3)) % 10 == 0) {
+  //           backtaxpricecom = `,${String(Math.floor(String(taxprice).substr(-3, 3)))}0`;
+  //         } else {
+  //           backtaxpricecom = `,0${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
+  //         }
+  //       } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 1) {
+  //         backtaxpricecom = `,00${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
+  //       }
+  //       // 앞자리 처리
+  //       let forwardtaxpricecom = ''
+  //       if (String(taxprice).length == 4) {
+  //         forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-4, 1)));
+  //       } else if (String(taxprice).length == 5) {
+  //         forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-5, 2)));
+  //       }
+  //
+  //       // 앞 뒷자리 결합
+  //       let taxpricecom = forwardtaxpricecom + backtaxpricecom;
+  //       $('.tot_price_wrap').find('.tot_price3').html(taxpricecom); // 세금 출력
+  //       $('.tot_price33').html(taxpricecom); // 자세히보기 1 출력
+  //       $('.taxpriceprint').html(taxpricecom); // 자세히보기 2 출력
+  //     } else { // 세금이 3자리수 이하일때
+  //       $('.tot_price_wrap').find('.tot_price3').html(taxprice);  // 세금 출력
+  //       $('.tot_price33').html(taxprice); // 자세히보기 1 출력
+  //       $('.taxpriceprint').html(taxprice); // 자세히보기 2 출력
+  //     }
+  //
+  //     // 총액
+  //     let totalprice = totprice + 10000 + totprice * 0.01;
+  //     let finaltotalprice = '';
+  //     if (String(totalprice).length == 5) {
+  //       finaltotalprice = `${String(totalprice).substr(-5, 2)},${String(totalprice).substr(-3, 3)}`;
+  //     } else if (String(totalprice).length == 6) {
+  //       finaltotalprice = `${String(totalprice).substr(-6, 3)},${String(totalprice).substr(-3, 3)}`;
+  //     }
+  //
+  //     $('.total_price_wrap').find('.total_price').html(finaltotalprice);
+  //     $('.finaltotalprice').html(finaltotalprice);
+  //     $('.finaltotalpricee').html(finaltotalprice);
+  //   })
+  //
+  // })
 
-  $('.price_wrap').on('click', function () {
-    $('.price_wrap').removeClass('on');
-    $(this).addClass('on');
-
-    // 위치 움직이기
-    window.scrollTo({
-      top: $('.air_list2_wrap').offset().top - 90,
-      behavior: 'smooth'
-    });
-
-    let str = $(this).children('.date_price').html().split(',');
-    strrr1 = '';
-    for (let i = 0; i < str.length; i++) {
-      strrr1 = strrr1 + str[i];
-    }
-    // 확인점1
-    // 구간 1 + 구간 2 = 항공운임
-    let totprice = Number(strrr1) + Number(strrr2);
-    // 구간1 (,) 넣어주고 자세히보기에 출력
-    if (strrr1.length == 5) {
-      $('.strrr1').html(`${strrr1.substr(-5, 2)},${strrr1.substr(-3, 3)}`);
-    } else if (strrr1.length == 6) {
-      $('.strrr1').html(`${strrr1.substr(-6, 3)},${strrr1.substr(-3, 3)}`);
-    }
-    // 구간2 (,) 넣어주고 자세히보기에 출력
-    if (strrr2.length == 5) {
-      $('.strrr2').html(`${strrr2.substr(-5, 2)},${strrr2.substr(-3, 3)}`);
-    } else if (strrr2.length == 6) {
-      $('.strrr2').html(`${strrr2.substr(-6, 3)},${strrr2.substr(-3, 3)}`);
-    }
-
-    // 항공운인 (,) 처리
-    let totpricecom = '';
-    if (String(totprice).length == 5) {
-      totpricecom = `${String(totprice).substr(-5, 2)},${String(totprice).substr(-3, 3)}`;
-    } else if (String(totprice).length == 6) {
-      totpricecom = `${String(totprice).substr(-6, 3)},${String(totprice).substr(-3, 3)}`;
-    }
-
-    $('.tot_price_wrap').find('.tot_price1').html(totpricecom); // 항공운임에 출력
-    $('.tot_price11').html(totpricecom); // 자세히보기에 항공운임 출력
-
-    let taxprice = totprice * 0.01; // 세금 계산
-    if (String(taxprice).length > 3) { // 세금이 4자리수 넘어갈 때
-      let backtaxpricecom = '';
-
-      if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 3) {
-        // 뒷 3자리 처리
-        backtaxpricecom = `,${Math.floor(String(taxprice).substr(-3, 3))}`;
-      } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 2) {
-        if (Math.floor(String(taxprice).substr(-3, 3)) % 10 == 0) {
-          backtaxpricecom = `,${String(Math.floor(String(taxprice).substr(-3, 3)))}0`;
-        } else {
-          backtaxpricecom = `,0${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
-        }
-      } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 1) {
-        backtaxpricecom = `,00${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
-      }
-      // 앞자리 처리
-      let forwardtaxpricecom = ''
-      if (String(taxprice).length == 4) {
-        forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-4, 1)));
-      } else if (String(taxprice).length == 5) {
-        forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-5, 2)));
-      }
-
-      // 앞 뒷자리 결합
-      let taxpricecom = forwardtaxpricecom + backtaxpricecom;
-      $('.tot_price_wrap').find('.tot_price3').html(taxpricecom); // 세금 출력
-      $('.tot_price33').html(taxpricecom); // 자세히보기 1 출력
-      $('.taxpriceprint').html(taxpricecom); // 자세히보기 2 출력
-    } else { // 세금이 3자리수 이하일때
-      $('.tot_price_wrap').find('.tot_price3').html(taxprice);  // 세금 출력
-      $('.tot_price33').html(taxprice); // 자세히보기 1 출력
-      $('.taxpriceprint').html(taxprice); // 자세히보기 2 출력
-    }
-
-    // 총액
-    let totalprice = totprice + 10000 + totprice * 0.01;
-    let finaltotalprice = '';
-    if (String(totalprice).length == 5) {
-      finaltotalprice = `${String(totalprice).substr(-5, 2)},${String(totalprice).substr(-3, 3)}`;
-    } else if (String(totalprice).length == 6) {
-      finaltotalprice = `${String(totalprice).substr(-6, 3)},${String(totalprice).substr(-3, 3)}`;
-    }
-
-    $('.total_price_wrap').find('.total_price').html(finaltotalprice);
-    $('.finaltotalprice').html(finaltotalprice);
-    $('.finaltotalpricee').html(finaltotalprice);
-
-    // 확인점2
-    $('.price_wrap1').on('click', function () {
-      $('.price_wrap1').removeClass('on1');
-      // 위치 움직이기
-      window.scrollTo({
-        top: $('.fare_wrap').offset().top - 120,
-        behavior: 'smooth'
-      });
-
-      $(this).addClass('on1');
-      let str = $(this).children('.date_price').html().split(',');
-      strrr2 = '';
-      for (let i = 0; i < str.length; i++) {
-        strrr2 = strrr2 + str[i];
-      }
-
-      // 확인점3
-      // 구간 1 + 구간 2 = 항공운임
-      let totprice = Number(strrr1) + Number(strrr2);
-      // 구간1 (,) 넣어주고 자세히보기에 출력
-      if (strrr1.length == 5) {
-        $('.strrr1').html(`${strrr1.substr(-5, 2)},${strrr1.substr(-3, 3)}`);
-      } else if (strrr1.length == 6) {
-        $('.strrr1').html(`${strrr1.substr(-6, 3)},${strrr1.substr(-3, 3)}`);
-      }
-      // 구간2 (,) 넣어주고 자세히보기에 출력
-      if (strrr2.length == 5) {
-        $('.strrr2').html(`${strrr2.substr(-5, 2)},${strrr2.substr(-3, 3)}`);
-      } else if (strrr2.length == 6) {
-        $('.strrr2').html(`${strrr2.substr(-6, 3)},${strrr2.substr(-3, 3)}`);
-      }
-
-      // 항공운인 (,) 처리
-      let totpricecom = '';
-      if (String(totprice).length == 5) {
-        totpricecom = `${String(totprice).substr(-5, 2)},${String(totprice).substr(-3, 3)}`;
-      } else if (String(totprice).length == 6) {
-        totpricecom = `${String(totprice).substr(-6, 3)},${String(totprice).substr(-3, 3)}`;
-      }
-
-      $('.tot_price_wrap').find('.tot_price1').html(totpricecom); // 항공운임에 출력
-      $('.tot_price11').html(totpricecom); // 자세히보기에 항공운임 출력
-
-      let taxprice = totprice * 0.01; // 세금 계산
-      if (String(taxprice).length > 3) { // 세금이 4자리수 넘어갈 때
-        let backtaxpricecom = '';
-
-        if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 3) {
-          // 뒷 3자리 처리
-          backtaxpricecom = `,${Math.floor(String(taxprice).substr(-3, 3))}`;
-        } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 2) {
-          if (Math.floor(String(taxprice).substr(-3, 3)) % 10 == 0) {
-            backtaxpricecom = `,${String(Math.floor(String(taxprice).substr(-3, 3)))}0`;
-          } else {
-            backtaxpricecom = `,0${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
-          }
-        } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 1) {
-          backtaxpricecom = `,00${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
-        }
-        // 앞자리 처리
-        let forwardtaxpricecom = ''
-        if (String(taxprice).length == 4) {
-          forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-4, 1)));
-        } else if (String(taxprice).length == 5) {
-          forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-5, 2)));
-        }
-
-        // 앞 뒷자리 결합
-        let taxpricecom = forwardtaxpricecom + backtaxpricecom;
-        $('.tot_price_wrap').find('.tot_price3').html(taxpricecom); // 세금 출력
-        $('.tot_price33').html(taxpricecom); // 자세히보기 1 출력
-        $('.taxpriceprint').html(taxpricecom); // 자세히보기 2 출력
-      } else { // 세금이 3자리수 이하일때
-        $('.tot_price_wrap').find('.tot_price3').html(taxprice);  // 세금 출력
-        $('.tot_price33').html(taxprice); // 자세히보기 1 출력
-        $('.taxpriceprint').html(taxprice); // 자세히보기 2 출력
-      }
-
-      // 총액
-      let totalprice = totprice + 10000 + totprice * 0.01;
-      let finaltotalprice = '';
-      if (String(totalprice).length == 5) {
-        finaltotalprice = `${String(totalprice).substr(-5, 2)},${String(totalprice).substr(-3, 3)}`;
-      } else if (String(totalprice).length == 6) {
-        finaltotalprice = `${String(totalprice).substr(-6, 3)},${String(totalprice).substr(-3, 3)}`;
-      }
-
-      $('.total_price_wrap').find('.total_price').html(finaltotalprice);
-      $('.finaltotalprice').html(finaltotalprice);
-      $('.finaltotalpricee').html(finaltotalprice);
-    })
-
-  })
 
 })
 
 
+export default {
+  mounted() {
+    $('.price_wrap').click(function() {
+      alert('hi');
+    });
+  }
+}
+// let strrr1 = 0;
+// let strrr2 = 0;
+//
+// function price_wrapclick(){
+//   console.log(1123)
+// }
+//
+// const price_wrap = document.getElementsByClassName("price_wrap");
+// price_wrap.addEventListener('click', price_wrapclick);
 
-
-
-
-
-
-
-
-
+// $('.price_wrap').on('click' ,function(){
+//
+//   $('.price_wrap').removeClass('on');
+//   $(this).addClass('on');
+//
+//   // 위치 움직이기
+//   window.scrollTo({
+//     top: $('.air_list2_wrap').offset().top - 90,
+//     behavior: 'smooth'
+//   });
+//
+//   let str = $(this).children('.date_price').html().split(',');
+//   strrr1 = '';
+//   for (let i = 0; i < str.length; i++) {
+//     strrr1 = strrr1 + str[i];
+//   }
+//   // 확인점1
+//   // 구간 1 + 구간 2 = 항공운임
+//   let totprice = Number(strrr1) + Number(strrr2);
+//   // 구간1 (,) 넣어주고 자세히보기에 출력
+//   if (strrr1.length == 5) {
+//     $('.strrr1').html(`${strrr1.substr(-5, 2)},${strrr1.substr(-3, 3)}`);
+//   } else if (strrr1.length == 6) {
+//     $('.strrr1').html(`${strrr1.substr(-6, 3)},${strrr1.substr(-3, 3)}`);
+//   }
+//   // 구간2 (,) 넣어주고 자세히보기에 출력
+//   if (strrr2.length == 5) {
+//     $('.strrr2').html(`${strrr2.substr(-5, 2)},${strrr2.substr(-3, 3)}`);
+//   } else if (strrr2.length == 6) {
+//     $('.strrr2').html(`${strrr2.substr(-6, 3)},${strrr2.substr(-3, 3)}`);
+//   }
+//
+//   // 항공운인 (,) 처리
+//   let totpricecom = '';
+//   if (String(totprice).length == 5) {
+//     totpricecom = `${String(totprice).substr(-5, 2)},${String(totprice).substr(-3, 3)}`;
+//   } else if (String(totprice).length == 6) {
+//     totpricecom = `${String(totprice).substr(-6, 3)},${String(totprice).substr(-3, 3)}`;
+//   }
+//
+//   $('.tot_price_wrap').find('.tot_price1').html(totpricecom); // 항공운임에 출력
+//   $('.tot_price11').html(totpricecom); // 자세히보기에 항공운임 출력
+//
+//   let taxprice = totprice * 0.01; // 세금 계산
+//   if (String(taxprice).length > 3) { // 세금이 4자리수 넘어갈 때
+//     let backtaxpricecom = '';
+//
+//     if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 3) {
+//       // 뒷 3자리 처리
+//       backtaxpricecom = `,${Math.floor(String(taxprice).substr(-3, 3))}`;
+//     } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 2) {
+//       if (Math.floor(String(taxprice).substr(-3, 3)) % 10 == 0) {
+//         backtaxpricecom = `,${String(Math.floor(String(taxprice).substr(-3, 3)))}0`;
+//       } else {
+//         backtaxpricecom = `,0${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
+//       }
+//     } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 1) {
+//       backtaxpricecom = `,00${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
+//     }
+//     // 앞자리 처리
+//     let forwardtaxpricecom = ''
+//     if (String(taxprice).length == 4) {
+//       forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-4, 1)));
+//     } else if (String(taxprice).length == 5) {
+//       forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-5, 2)));
+//     }
+//
+//     // 앞 뒷자리 결합
+//     let taxpricecom = forwardtaxpricecom + backtaxpricecom;
+//     $('.tot_price_wrap').find('.tot_price3').html(taxpricecom); // 세금 출력
+//     $('.tot_price33').html(taxpricecom); // 자세히보기 1 출력
+//     $('.taxpriceprint').html(taxpricecom); // 자세히보기 2 출력
+//   } else { // 세금이 3자리수 이하일때
+//     $('.tot_price_wrap').find('.tot_price3').html(taxprice);  // 세금 출력
+//     $('.tot_price33').html(taxprice); // 자세히보기 1 출력
+//     $('.taxpriceprint').html(taxprice); // 자세히보기 2 출력
+//   }
+//
+//   // 총액
+//   let totalprice = totprice + 10000 + totprice * 0.01;
+//   let finaltotalprice = '';
+//   if (String(totalprice).length == 5) {
+//     finaltotalprice = `${String(totalprice).substr(-5, 2)},${String(totalprice).substr(-3, 3)}`;
+//   } else if (String(totalprice).length == 6) {
+//     finaltotalprice = `${String(totalprice).substr(-6, 3)},${String(totalprice).substr(-3, 3)}`;
+//   }
+//
+//   $('.total_price_wrap').find('.total_price').html(finaltotalprice);
+//   $('.finaltotalprice').html(finaltotalprice);
+//   $('.finaltotalpricee').html(finaltotalprice);
+//
+//   // 확인점2
+//   $('.price_wrap1').on('click', function () {
+//     $('.price_wrap1').removeClass('on1');
+//     // 위치 움직이기
+//     window.scrollTo({
+//       top: $('.fare_wrap').offset().top - 120,
+//       behavior: 'smooth'
+//     });
+//
+//     $(this).addClass('on1');
+//     let str = $(this).children('.date_price').html().split(',');
+//     strrr2 = '';
+//     for (let i = 0; i < str.length; i++) {
+//       strrr2 = strrr2 + str[i];
+//     }
+//
+//     // 확인점3
+//     // 구간 1 + 구간 2 = 항공운임
+//     let totprice = Number(strrr1) + Number(strrr2);
+//     // 구간1 (,) 넣어주고 자세히보기에 출력
+//     if (strrr1.length == 5) {
+//       $('.strrr1').html(`${strrr1.substr(-5, 2)},${strrr1.substr(-3, 3)}`);
+//     } else if (strrr1.length == 6) {
+//       $('.strrr1').html(`${strrr1.substr(-6, 3)},${strrr1.substr(-3, 3)}`);
+//     }
+//     // 구간2 (,) 넣어주고 자세히보기에 출력
+//     if (strrr2.length == 5) {
+//       $('.strrr2').html(`${strrr2.substr(-5, 2)},${strrr2.substr(-3, 3)}`);
+//     } else if (strrr2.length == 6) {
+//       $('.strrr2').html(`${strrr2.substr(-6, 3)},${strrr2.substr(-3, 3)}`);
+//     }
+//
+//     // 항공운인 (,) 처리
+//     let totpricecom = '';
+//     if (String(totprice).length == 5) {
+//       totpricecom = `${String(totprice).substr(-5, 2)},${String(totprice).substr(-3, 3)}`;
+//     } else if (String(totprice).length == 6) {
+//       totpricecom = `${String(totprice).substr(-6, 3)},${String(totprice).substr(-3, 3)}`;
+//     }
+//
+//     $('.tot_price_wrap').find('.tot_price1').html(totpricecom); // 항공운임에 출력
+//     $('.tot_price11').html(totpricecom); // 자세히보기에 항공운임 출력
+//
+//     let taxprice = totprice * 0.01; // 세금 계산
+//     if (String(taxprice).length > 3) { // 세금이 4자리수 넘어갈 때
+//       let backtaxpricecom = '';
+//
+//       if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 3) {
+//         // 뒷 3자리 처리
+//         backtaxpricecom = `,${Math.floor(String(taxprice).substr(-3, 3))}`;
+//       } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 2) {
+//         if (Math.floor(String(taxprice).substr(-3, 3)) % 10 == 0) {
+//           backtaxpricecom = `,${String(Math.floor(String(taxprice).substr(-3, 3)))}0`;
+//         } else {
+//           backtaxpricecom = `,0${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
+//         }
+//       } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 1) {
+//         backtaxpricecom = `,00${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
+//       }
+//       // 앞자리 처리
+//       let forwardtaxpricecom = ''
+//       if (String(taxprice).length == 4) {
+//         forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-4, 1)));
+//       } else if (String(taxprice).length == 5) {
+//         forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-5, 2)));
+//       }
+//
+//       // 앞 뒷자리 결합
+//       let taxpricecom = forwardtaxpricecom + backtaxpricecom;
+//       $('.tot_price_wrap').find('.tot_price3').html(taxpricecom); // 세금 출력
+//       $('.tot_price33').html(taxpricecom); // 자세히보기 1 출력
+//       $('.taxpriceprint').html(taxpricecom); // 자세히보기 2 출력
+//     } else { // 세금이 3자리수 이하일때
+//       $('.tot_price_wrap').find('.tot_price3').html(taxprice);  // 세금 출력
+//       $('.tot_price33').html(taxprice); // 자세히보기 1 출력
+//       $('.taxpriceprint').html(taxprice); // 자세히보기 2 출력
+//     }
+//
+//     // 총액
+//     let totalprice = totprice + 10000 + totprice * 0.01;
+//     let finaltotalprice = '';
+//     if (String(totalprice).length == 5) {
+//       finaltotalprice = `${String(totalprice).substr(-5, 2)},${String(totalprice).substr(-3, 3)}`;
+//     } else if (String(totalprice).length == 6) {
+//       finaltotalprice = `${String(totalprice).substr(-6, 3)},${String(totalprice).substr(-3, 3)}`;
+//     }
+//
+//     $('.total_price_wrap').find('.total_price').html(finaltotalprice);
+//     $('.finaltotalprice').html(finaltotalprice);
+//     $('.finaltotalpricee').html(finaltotalprice);
+//   })
+//
+// })
 
 
 
 // 운임 규정
 $(() => {
-  // 모달 열기
-  $(".crr_open").on("click", function () {
-    $(".crr_modal").fadeIn(200);
-    $("body").css("overflow", "hidden");
-  });
   // 모달 닫기
   $(".close_crr").on("click", function () {
     $(".crr_modal").fadeOut(200);

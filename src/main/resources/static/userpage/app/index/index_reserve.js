@@ -865,7 +865,7 @@ $(() => {
                 f.appendChild(obj7);
 
                 f.setAttribute('method', 'post');
-                f.setAttribute('action', '/pages/getAvailabilityList');
+                f.setAttribute('action', '/pages/getAvailabilityList/twoway');
                 document.body.appendChild(f);
                 f.submit();
             }
@@ -956,21 +956,21 @@ $(() => {
                 obj4 = document.createElement('input');
                 obj4.setAttribute('type', 'hidden');
                 obj4.setAttribute('name', 'schDeparturePoint1');
-                obj4.setAttribute('value', $('.go_select_optt').val());
+                obj4.setAttribute('value', $('.go_select_optt2').val());
                 f.appendChild(obj4);
 
                 let obj5;
                 obj5 = document.createElement('input');
                 obj5.setAttribute('type', 'hidden');
                 obj5.setAttribute('name', 'schArrivalPoint1');
-                obj5.setAttribute('value', $('.arrive_select_optt').val());
+                obj5.setAttribute('value', $('.arrive_select_optt2').val());
                 f.appendChild(obj5);
 
                 let obj6;
                 obj6 = document.createElement('input');
                 obj6.setAttribute('type', 'hidden');
                 obj6.setAttribute('name', 'goDateSelectOptt1');
-                obj6.setAttribute('value', $('.go_date_select_optt').val());
+                obj6.setAttribute('value', $('.go_date_select_optt2').val());
                 f.appendChild(obj6);
 
                 let obj7;
