@@ -32,7 +32,8 @@ $(() => {
               reSchStartTime : schStartTime,
               reSchEndTime : schEndTime,
               reAirplainType : schAirplaneType,
-              reSchName : schAirplaneName
+              reSchName : schAirplaneName,
+              reTotal : Number(strrrr)+9000
             }
           }
           $.ajax({
@@ -93,7 +94,8 @@ $(() => {
               reSchStartTime : schStartTime,
               reSchEndTime : schEndTime,
               reAirplainType : schAirplaneType,
-              reSchName : schAirplaneName
+              reSchName : schAirplaneName,
+              reTotal : Number(strrrr)+9000
             }
           }
           $.ajax({
@@ -1466,6 +1468,60 @@ $(function () {
       $(".fix_trip_info").css("position", "absolute");
     }
   });
+
+
+
+
+  // 다음 버튼
+  $('.next_butt').on('click', function (){
+    if(str[5] == 'twoway'){
+      if($('.strrr1').html() == 0 || $('.strrr2').html() == 0){
+        alert('구간 선택을 완료해주세요');
+      }else{
+        location.href="/pages/registerPassenger"
+      }
+    }
+    if(str[5] == 'oneway'){
+      if($('.strrr1').html() == 0){
+        alert('구간 선택을 완료해주세요');
+      }else{
+        location.href="/pages/registerPassenger"
+      }
+    }
+    if(str[5] == 'multiway'){
+      if($('.strrr1').html() == 0 || $('.strrr2').html() == 0){
+        alert('구간 선택을 완료해주세요');
+      }else{
+        location.href="/pages/registerPassenger"
+      }
+    }
+  })
+  // 최종결제다음 버튼
+  $('.fix_next_butt').on('click', function (){
+    if(str[5] == 'twoway'){
+      if($('.strrr1').html() == 0 || $('.strrr2').html() == 0){
+        alert('구간 선택을 완료해주세요');
+      }else{
+        location.href="/pages/registerPassenger"
+      }
+    }
+    if(str[5] == 'oneway'){
+      if($('.strrr1').html() == 0){
+        alert('구간 선택을 완료해주세요');
+      }else{
+        location.href="/pages/registerPassenger"
+      }
+    }
+    if(str[5] == 'multiway'){
+      if($('.strrr1').html() == 0 || $('.strrr2').html() == 0){
+        alert('구간 선택을 완료해주세요');
+      }else{
+        location.href="/pages/registerPassenger"
+      }
+    }
+  })
+
+
 
   /*날짜 설정 */
   let today = new Date();
