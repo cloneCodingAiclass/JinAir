@@ -50,6 +50,7 @@ $(function () {
                 async: false,
                 success: function(arr) {
                     window.open(arr, 'width=500, height=700');
+                    location.href=arr;
                 },
                 error: function (error) {
                     console.log('error')

@@ -112,10 +112,6 @@ $(function () {
         text += '<p>' + '타이틀 : ' + title + ' / ' + '<br> 할인율 : ' + discount + "%<br> 기간 : " + startDate + " ~ " + endDate +
             " <br> 시작 코드 : " + startCode + "<br> 종료 코드 : " + endCode + "로 쿠폰을 발급하겠습니다." + '</p>'
         //
-        // if (title == "" || totalcoupon == "" || discount == "" || startDate == "" || endDate == "" || crprice == "") {
-        //     alert('미입력 정보가 있습니다.');
-        //     location.reload();
-        // } else {
             document.getElementById("modal_isfind_title").innerHTML = text;
         //
         // let arr = new Array();

@@ -1441,7 +1441,7 @@ td > ul > li::before {
 }
 
 #modal_fare_rules .modal_fare_rules .modal_contents > table td {
-  padding: 5px;
+  padding: 15px;
   border-right: 1px solid rgba(168, 165, 165, 0.3) !important;
   border-bottom: 1px solid rgba(168, 165, 165, 0.3) !important;
 }
@@ -1453,6 +1453,7 @@ td > ul > li::before {
 
 #modal_fare_rules .modal_fare_rules .modal_contents table li {
   line-height: 15px;
+  font-weight: 600;
 }
 
 #modal_fare_rules .modal_fare_rules .modal_contents table li::before {
@@ -1705,7 +1706,7 @@ td:last-child {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background: url(../img/ico_radio.png) no-repeat 0 0;
+  background: url("/userpage/lib/img/ico_radio.png") no-repeat 0 0;
 }
 .edit_jour_wrap .radio_wrap input[type="radio"]:checked {
   background-position-y: 100%;

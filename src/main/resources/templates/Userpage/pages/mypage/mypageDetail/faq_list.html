@@ -44,181 +44,36 @@
                         <input type="button" value="검색" id="searchFaq">
                     </form>
                 </div>
-                <div id="board">
-                    <table class="faqlist" id="listFaq">
-                        <colgroup>
-                            <col width="10%">
-                            <col width="18%">
-                            <col width="">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th scope="col">번호</th>
-                                <th scope="col">상세분류</th>
-                                <th scope="col">제목</th>
-                            </tr>
-                        </thead>
-                        <tbody v-for="(faq, index) in listFaq" :key="index">
-                        <td>{{faq.faqIndex}}</td>
-                        <td>{{faq.faqType}}</td>
-                        <td class="al">
-                            <p class="question">
-                            <a href="#" v-on:click="toggle">{{faq.faqTitle}}</a>
-                            </p>
-                        </td>
-                        <tr class="tr_answer" v-show="visible" :index="index">
-                            <td colspan="3" class="td_answer">{{faq.faqContent}}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="board1">
-                    <table class="faqlist" id="listFaq1">
-                        <colgroup>
-                            <col width="10%">
-                            <col width="18%">
-                            <col width="">
-                        </colgroup>
-                        <thead>
+                <table class="faqlist" id="faqList">
+                    <colgroup>
+                        <col width="10%">
+                        <col width="18%">
+                        <col width="">
+                    </colgroup>
+                    <thead>
                         <tr>
                             <th scope="col">번호</th>
                             <th scope="col">상세분류</th>
                             <th scope="col">제목</th>
                         </tr>
-                        </thead>
-                        <tbody v-for="faq in listFaq1By('항공권 예매')">
-                        <td>{{faq.faqIndex}}</td>
-                        <td>{{faq.faqType}}</td>
-                        <td class="al">
-                            <p class="question">
-                                <a href="#" v-on:click="toggle">{{faq.faqTitle}}</a>
-                            </p>
-                        </td>
-                        <tr class="tr_answer" v-if="visible">
+                    </thead>
+                        <tbody v-for="(faq, i) in faqList">
+                        <tr :id=`faqNumber${i}` style="cursor: pointer">
+                            <td >{{i+1}}</td>
+                            <td>{{faq.faqType}}</td>
+                            <td class="al">
+                                <p class="question">
+                                    <a>{{faq.faqTitle}}</a>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr :id=`tr_answer${i}` style="display: none">
                             <td colspan="3" class="td_answer">{{faq.faqContent}}
                             </td>
                         </tr>
                         </tbody>
-                    </table>
-                </div>
-                <div id="board2">
-                    <table class="faqlist" id="listFaq2">
-                        <colgroup>
-                            <col width="10%">
-                            <col width="18%">
-                            <col width="">
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th scope="col">번호</th>
-                            <th scope="col">상세분류</th>
-                            <th scope="col">제목</th>
-                        </tr>
-                        </thead>
-                        <tbody v-for="faq in listFaq2By('할인 제도')">
-                        <td>{{faq.faqIndex}}</td>
-                        <td>{{faq.faqType}}</td>
-                        <td class="al">
-                            <p class="question">
-                                <a href="#" v-on:click="toggle">{{faq.faqTitle}}</a>
-                            </p>
-                        </td>
-                        <tr class="tr_answer" v-if="visible">
-                            <td colspan="3" class="td_answer">{{faq.faqContent}}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="board3">
-                    <table class="faqlist" id="listFaq3">
-                        <colgroup>
-                            <col width="10%">
-                            <col width="18%">
-                            <col width="">
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th scope="col">번호</th>
-                            <th scope="col">상세분류</th>
-                            <th scope="col">제목</th>
-                        </tr>
-                        </thead>
-                        <tbody v-for="faq in listFaq3By('수하물')">
-                        <td>{{faq.faqIndex}}</td>
-                        <td>{{faq.faqType}}</td>
-                        <td class="al">
-                            <p class="question">
-                                <a href="#" v-on:click="toggle">{{faq.faqTitle}}</a>
-                            </p>
-                        </td>
-                        <tr class="tr_answer" v-if="visible">
-                            <td colspan="3" class="td_answer">{{faq.faqContent}}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="board4">
-                    <table class="faqlist" id="listFaq4">
-                        <colgroup>
-                            <col width="10%">
-                            <col width="18%">
-                            <col width="">
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th scope="col">번호</th>
-                            <th scope="col">상세분류</th>
-                            <th scope="col">제목</th>
-                        </tr>
-                        </thead>
-                        <tbody v-for="faq in listFaq4By('기내 서비스')">
-                        <td>{{faq.faqIndex}}</td>
-                        <td>{{faq.faqType}}</td>
-                        <td class="al">
-                            <p class="question">
-                                <a href="#" v-on:click="toggle">{{faq.faqTitle}}</a>
-                            </p>
-                        </td>
-                        <tr class="tr_answer" v-if="visible">
-                            <td colspan="3" class="td_answer">{{faq.faqContent}}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="board5">
-                    <table class="faqlist" id="listFaq5">
-                        <colgroup>
-                            <col width="10%">
-                            <col width="18%">
-                            <col width="">
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th scope="col">번호</th>
-                            <th scope="col">상세분류</th>
-                            <th scope="col">제목</th>
-                        </tr>
-                        </thead>
-                        <tbody v-for="faq in listFaq5By('기타')">
-                        <td>{{faq.faqIndex}}</td>
-                        <td>{{faq.faqType}}</td>
-                        <td class="al">
-                            <p class="question">
-                                <a href="#" v-on:click="toggle">{{faq.faqTitle}}</a>
-                            </p>
-                        </td>
-                        <tr class="tr_answer" v-if="visible">
-                            <td colspan="3" class="td_answer">{{faq.faqContent}}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="button"> </div>
+                </table>
+                <div id="footer"> </div>
                 <div class="info_main">
                     <div class="footer_text">
                         <p>더 궁금한 사항이 있으신가요?</p>
@@ -274,8 +129,9 @@
     <!--퀵 메뉴 끝-->
     <div class="modal">
     </div>
+    <script src="/Userpage/app/mypage/faq_list.js"></script>
 </body>
-<script src="/Userpage/app/mypage/faq_list.js"></script>
+
 
 
 </html>
