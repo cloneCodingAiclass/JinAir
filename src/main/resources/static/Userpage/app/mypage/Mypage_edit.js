@@ -171,6 +171,10 @@ function hidePopupLayer(){
     // 사용자 휴대폰 국가 코드
     let hpNation;
 
+    let oldPw;
+
+    let userid;
+
     console.log(idx)
 
     let memberDetail = new Vue({
@@ -186,6 +190,9 @@ function hidePopupLayer(){
         console.log("index : " + index);
         $.get("/api/user/"+index, function (response){
             console.dir(response);
+
+            userid = response.data.memUserid;
+
             gender = response.data.memGender;
 
             isEmail = response.data.memEmailIsagree;
@@ -196,8 +203,8 @@ function hidePopupLayer(){
 
             hpNation = response.data.memHpNation;
 
-            console.log(nation);
-            console.log(hpNation);
+            oldPw = response.data.memUserpw;
+
 
             $(".idField").text(response.data.memUserid);
             $('#pwField').val(response.data.memUserpw);
@@ -255,6 +262,66 @@ function hidePopupLayer(){
                 }
             }
 
+            $('#pwChange').on('click', function (){
+                if(sendPw()){
+                    // 비밀번호 입력 완료
+                    console.log($('#newPw').val());
+                    $('#pwField').val($('#newPw').val());
+                    console.log($('#pwField').val());
+                    $('.confirm_modal1').fadeOut();
+                    $('body').css('overflow', '');
+                }
+            })
+
+            function sendPw(){
+                let pw = $("#newPw").val();
+                let checkNumber = pw.search(/[0-9]/g);
+                let checkEnglish = pw.search(/[a-z]/ig);
+                if($('#oldPw').val() == '' || $('#newPw').val() == '' || $('#newPwCheck').val() ==''){
+                    alert('입력을 확인해주세요');
+                    return false;
+                }else{
+                    if($('#oldPw').val() != oldPw){
+                        alert('기존 비밀번호 불일치 \n 입력을 확인해주세요');
+                        return false;
+                    }
+                    else{
+                        if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test(pw)){
+                            alert('숫자+영문자+특수문자 조합으로 8자리 이상 사용해야 합니다.');
+                            $('#newPw').val("");
+                            $('#newPwCheck').val("");
+                            $('#newPw').focus();
+                            return false;
+                        }else if(checkNumber <0 || checkEnglish <0){
+                            alert("숫자와 영문자를 혼용하여야 합니다.");
+                            $('#newPw').val("");
+                            $('#newPwCheck').val("");
+                            $('#newPw').focus();
+                            return false;
+                        }else if(/(\w)\1\1\1/.test(pw)){
+                            alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
+                            $('#newPw').val("");
+                            $('#newPwCheck').val("");
+                            $('#newPw').focus();
+                            return false;
+                        }else if(pw.search(userid) > -1){
+                            alert("비밀번호에 아이디가 포함되었습니다.");
+                            $('#newPw').val("");
+                            $('#newPwCheck').val("");
+                            $('#newPw').focus();
+                            return false;
+                        }
+                        if($('#newPw').val() != $('#newPwCheck').val()){
+                            alert('비밀번호와 비밀번호 확인의 값이 다릅니다');
+                            $('#newPw').val("");
+                            $('#newPwCheck').val("");
+                            $('#newPw').focus();
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
         })
     }
 

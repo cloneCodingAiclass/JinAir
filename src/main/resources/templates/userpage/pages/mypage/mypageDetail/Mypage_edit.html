@@ -43,7 +43,7 @@
                     <tr>
                         <th scope="row"><em>*</em>비밀번호</th>
                         <td>
-                            <a href="/pages/index/passwordEdit" class="btnTypeA">비밀번호 변경</a>
+                            <a class="btnTypeA">비밀번호 변경</a>
                             <input type="hidden" id="pwField">
                         </td>
                     </tr>
@@ -199,9 +199,42 @@
     <div class="confirm_modal_box">
         <div class="popTitle">
             <h1>비밀번호 변경</h1>
-            <lable class="xbox"><img src="/userpage/lib/btn_xpop.png" alt="X"></lable>
+            <lable class="xbox"><img src="/userpage/lib/img/btn_xpop.png" alt="X"></lable>
         </div>
-        <iframe src="password_edit.html"></iframe>
+        <div id="popWrap">
+            <div id="popCont">
+                <div id="pwForm">
+                    <p class="text">회원님의 개인정보를 안전하게 보호하기 위해 비밀번호를 암호화하여 저장,관리하고 있습니다.<br>새로운 비밀번호로 변경해 주세요.</p>
+                    <table class="fieldForm">
+                        <colgroup>
+                            <col width="25%"><col width="">
+                        </colgroup>
+                        <tr>
+                            <th><label for="oldPw">기존 비밀번호</label></th>
+                            <td><input type="password" name="oldPw" id="oldPw" maxlength="150" autocomplete="off"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="newPw">신규 비밀번호<p id="pwTest"></p></label></th>
+                            <td><input type="password" name="newPw" id="newPw" maxlength="20" autocomplete="off"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="newPwCheck">신규 비밀번호 확인</label></th>
+                            <td><input type="password" name="newPwCheck" id="newPwCheck" maxlength="20" autocomplete="off"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <p>영어/숫자/특수문자 중 2가지 이상 조합하여 최소 10자리 이상 20자리 이하, 3가지 이상을 조합할 경우에는 최소 8자리 이상 20자리 이하로 구성</p>
+                    <p>PW내 동일 또는 연속의 숫자 또는 키보드 상의 연속한 위치의 문자열 4자리 이상 포함 금지</p>
+                    <p>ID 중 연속되는 숫자 또는 문자는 6자리 이상 PW로 사용 금지</p>
+                    <p>개인 신상 정보와 4자리 이상 중복 (생년월일,전화번호,핸드폰번호) 금지 </p>
+                </div>
+                <div class="btn">
+                    <span><a href="javascript://" role="btn-save" id="pwChange">확인</a></span>
+                    <span><a href="javascript://" onclick="hidePopupLayer(); return false" id="pwChangeCancel">취소</a></span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script src="/userpage/app/mypage/Mypage_edit.js"></script>

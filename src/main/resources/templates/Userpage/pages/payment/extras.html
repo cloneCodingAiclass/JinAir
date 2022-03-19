@@ -123,45 +123,22 @@
                     <div class="service_content">
                         <!--탑승객 정보 랩-->
                         <div class="passenger_info_wrap passenger_info_wrap1" id="passenger_info_1">
-<!--                            <div class="passenger_info">-->
-<!--                                <h3>탑승객 1</h3>-->
-<!--                                <p><img src="/userpage/lib/img/ico-person.png" alt=""><span>유/영은</span></p>-->
-<!--                                <p class="select_seat_num select_seat_num1">-->
-<!--                                    <span class="seat_num seat_num1"></span>-->
-<!--                                    <span class="close cursor">x</span>-->
-<!--                                </p>-->
-<!--                                <p class="select_seat_price">-->
-<!--                                    <span class="seat_P seat_P1">KRW</span>-->
-<!--                                    <span class="price"></span>-->
-<!--                                </p>-->
-<!--                            </div>-->
 
                         </div>
                         <!-- 좌석 정보 랩-->
                         <!-- 좌석 정보랩 1 -->
-                        <div th:replace="userpage/pages/payment/seat_info/B777-200ER-info1 :: B777-200ER-info1"></div>
+                        <div th:replace="userpage/pages/payment/seat_info/B777-200ER-info1 :: B777-200ER-info1" id="seat_info1"></div>
                         <!-- 좌석 정보랩 1 끝 -->
                         <!-- 좌석 선택랩 1 -->
                         <div th:replace="userpage/pages/payment/select_seat/B777-200ER-1 :: B777-200ER-1"></div>
                         <!-- 좌석 선택랩 1 끝 -->
                         <!--탑승객 정보 랩2-->
                         <div class="passenger_info_wrap passenger_info_wrap2" id="passenger_info_2">
-<!--                            <div class="passenger_info">-->
-<!--                                <h3>탑승객 1</h3>-->
-<!--                                <p><img src="/userpage/lib/img/ico-person.png" alt=""><span>유/영은</span></p>-->
-<!--                                <p class="select_seat_num select_seat_num2">-->
-<!--                                    <span class="seat_num seat_num2"></span>-->
-<!--                                    <span class="close cursor">x</span>-->
-<!--                                </p>-->
-<!--                                <p class="select_seat_price">-->
-<!--                                    <span class="seat_P seat_P2">KRW</span>-->
-<!--                                    <span class="price"></span>-->
-<!--                                </p>-->
-<!--                            </div>-->
+
                         </div>
                         <!--탑승객 정보 랩2 끝-->
                         <!-- 좌석 정보랩 2 -->
-                        <div th:replace="userpage/pages/payment/seat_info/B737-900-info2 :: B737-900-info2"></div>
+                        <div th:replace="userpage/pages/payment/seat_info/B737-900-info2 :: B737-900-info2" id="seat_info2"></div>
                         <!-- 좌석 정보랩 2 끝 -->
                         <!-- 좌석 선택랩 2 -->
                         <div th:replace="userpage/pages/payment/select_seat/B737-900-2 :: B737-900-2"></div>
@@ -184,56 +161,56 @@
                     <!--서비스 컨텐츠2-->
                     <div class="service_content">
                         <!--탑승객 정보 랩-->
-                        <div class="passenger_info_wrap">
-                            <div class="passenger_info">
-                                <h3>탑승객 1</h3>
-                                <p><img src="/userpage/lib/img/ico-person.png" alt=""><span>유/영은</span></p>
+                        <div class="passenger_info_wrap" id="passenger_info_3">
+<!--                            <div class="passenger_info">-->
+<!--                                <h3>탑승객 1</h3>-->
+<!--                                <p><img src="/userpage/lib/img/ico-person.png" alt=""><span>유/영은</span></p>-->
 
-                                <p class="section1 section"><img src="/userpage/lib/img/airplane2.png" alt="비행기">구간1</p>
-                                <p class="select_bagg_price select_bagg_price1">
-                                    <span class="select_bagg"></span>
-                                    <span class="close cursor">x</span>
-                                </p>
-                                <p class="bot_bagg_price bot_bagg_price1"><span class="cur">KRW</span><span
-                                        class="price"></span></p>
+<!--                                <p class="section1 section"><img src="/userpage/lib/img/airplane2.png" alt="비행기">구간1</p>-->
+<!--                                <p class="select_bagg_price select_bagg_price1">-->
+<!--                                    <span class="select_bagg"></span>-->
+<!--                                    <span class="close cursor">x</span>-->
+<!--                                </p>-->
+<!--                                <p class="bot_bagg_price bot_bagg_price1"><span class="cur">KRW</span><span-->
+<!--                                        class="price"></span></p>-->
 
-                                <p class="section2 section"><img src="/userpage/lib/img/airplane2.png" alt="비행기">구간2</p>
-                                <p class="select_bagg_price select_bagg_price2">
-                                    <span class="select_bagg"></span>
-                                    <span class="close cursor">x</span>
-                                </p>
-                                <p class="bot_bagg_price bot_bagg_price2"><span class="cur">KRW</span><span
-                                        class="price"></span></p>
-                            </div>
+<!--                                <p class="section2 section"><img src="/userpage/lib/img/airplane2.png" alt="비행기">구간2</p>-->
+<!--                                <p class="select_bagg_price select_bagg_price2">-->
+<!--                                    <span class="select_bagg"></span>-->
+<!--                                    <span class="close cursor">x</span>-->
+<!--                                </p>-->
+<!--                                <p class="bot_bagg_price bot_bagg_price2"><span class="cur">KRW</span><span-->
+<!--                                        class="price"></span></p>-->
+<!--                            </div>-->
                         </div>
                         <!--탑승객 정보 랩 끝-->
                         <!--수하물 선택 랩-->
-                        <div class="select_baggage_wrap">
-                            <div class="baggage_wrap">
-                                <div class="baggage_1">
-                                    <p class="section1 section"><img src="/userpage/lib/img/airplane2.png" alt="비행기">구간1(탑승객 1)
-                                    </p>
-                                    <select name="bagg1" id="bagg1">
-                                        <option value="">초과수하물 추가 선택</option>
-                                        <option value="5KG(+KRW 8,000)">5KG(+KRW 8,000)</option>
-                                        <option value="10KG(+KRW 16,000)">10KG(+KRW 16,000)</option>
-                                        <option value="15KG(+KRW 24,000)">15KG(+KRW 24,000)</option>
-                                        <option value="20KG(+KRW 32,000)">20KG(+KRW 32,000)</option>
-                                    </select>
-                                </div>
-                                <div class="baggage_2">
-                                    <p class="section1 section"><img src="/userpage/lib/img/airplane2.png" alt="비행기">구간2(탑승객 1)
-                                    </p>
-                                    <select name="bagg2" id="bagg2">
-                                        <option value="">초과수하물 추가 선택</option>
-                                        <option value="5KG(+KRW 8,000)">5KG(+KRW 8,000)</option>
-                                        <option value="10KG(+KRW 16,000)">10KG(+KRW 16,000)</option>
-                                        <option value="15KG(+KRW 24,000)">15KG(+KRW 24,000)</option>
-                                        <option value="20KG(+KRW 32,000)">20KG(+KRW 32,000)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <input type="button" class="cursor select_comp" value="선택완료">
+                        <div class="select_baggage_wrap" id="select_baggage_wrap">
+<!--                            <div class="baggage_wrap">-->
+<!--                                <div class="baggage_1">-->
+<!--                                    <p class="section1 section"><img src="/userpage/lib/img/airplane2.png" alt="비행기">구간1(탑승객 1)-->
+<!--                                    </p>-->
+<!--                                    <select name="bagg1" id="bagg1">-->
+<!--                                        <option value="">초과수하물 추가 선택</option>-->
+<!--                                        <option value="5KG(+KRW 8,000)">5KG(+KRW 8,000)</option>-->
+<!--                                        <option value="10KG(+KRW 16,000)">10KG(+KRW 16,000)</option>-->
+<!--                                        <option value="15KG(+KRW 24,000)">15KG(+KRW 24,000)</option>-->
+<!--                                        <option value="20KG(+KRW 32,000)">20KG(+KRW 32,000)</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                                <div class="baggage_2">-->
+<!--                                    <p class="section1 section"><img src="/userpage/lib/img/airplane2.png" alt="비행기">구간2(탑승객 1)-->
+<!--                                    </p>-->
+<!--                                    <select name="bagg2" id="bagg2">-->
+<!--                                        <option value="">초과수하물 추가 선택</option>-->
+<!--                                        <option value="5KG(+KRW 8,000)">5KG(+KRW 8,000)</option>-->
+<!--                                        <option value="10KG(+KRW 16,000)">10KG(+KRW 16,000)</option>-->
+<!--                                        <option value="15KG(+KRW 24,000)">15KG(+KRW 24,000)</option>-->
+<!--                                        <option value="20KG(+KRW 32,000)">20KG(+KRW 32,000)</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <input type="button" class="cursor select_comp" value="선택완료">-->
                         </div>
                         <!--수하물 선택 랩 끝-->
                     </div>
@@ -252,7 +229,7 @@
                     <!--서비스 타이틀 끝-->
                     <!--서비스 컨텐츠3-->
                     <div class="service_content">
-                        <div class="passenger_info_wrap">
+                        <div class="passenger_info_wrap" id="passenger_info_wrap_ins">
                             <!--탑승객 정보 랩-->
                             <div class="passenger_info_wrap">
                                 <div class="passenger_info">
@@ -337,6 +314,7 @@
                                             <td>가입금액</td>
                                             <td>보험료(원)</td>
                                         </tr>
+                                        <tbody id="ins_people">
                                         <tr>
                                             <td class="normal"><input type="checkbox" name="check_ins"
                                                                       id="check_ins">유 영은</td>
@@ -356,11 +334,12 @@
                                                 <option value="고급형">고급형</option>
                                             </select></td>
                                         </tr>
+                                        </tbody>
                                     </table>
                                     <table class="insurance_price">
                                         <tr>
                                             <td class="tit">총 보험료(1명)<span class="cul">KRW</span><span
-                                                    class="price">7,040</span></td>
+                                                    class="int_tot_price">7,040</span></td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -433,7 +412,7 @@
                                     </div>
                                     <div class="modal_join_ins modal_agree2">
                                         보험 가입 요청이 완료되었습니다.
-                                        <div class="butt">
+                                        <div class="modal_join_butt cursor" >
                                             <input type="button" value="확인">
                                         </div>
                                     </div>
@@ -476,8 +455,8 @@
                                             </tr>
                                         </table>
                                         <p>가입 전 보험계약 중요 안내사항을 확인 후, 보험 가입자 모두 체크해 주시기 바랍니다.</p>
-                                        <div class="nameBox">
-                                            <input type="checkbox" class="checkbox"><span>유영은</span>
+                                        <div id="modal_ins_people">
+
                                         </div>
                                         <table class="Guaranteed">
                                             <congroup>

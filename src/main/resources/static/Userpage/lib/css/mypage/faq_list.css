@@ -652,9 +652,6 @@ table .question{
 table .question a{
     padding-left: 60px;
 }
-table .tr_answer{
-
-}
 table .td_answer{
     width: 100%;
     display: table-cell;
