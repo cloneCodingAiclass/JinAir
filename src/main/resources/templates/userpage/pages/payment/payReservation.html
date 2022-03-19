@@ -101,11 +101,11 @@
                                     <th class="borderT">생년월일</th>
                                     <th class="borderT">국적</th>
                                 </tr>
-                                <tr>
-                                    <td class="borderB">유/영은</td>
+                                <tr th:each="passengerDto : ${reserveApiResponse1}">
+                                    <td class="borderB">[[${passengerDto.reFirstName}]]/[[${passengerDto.reLastName}]]</td>
                                     <td class="borderB">성인1</td>
-                                    <td class="borderB">970924</td>
-                                    <td class="borderB">한국 (REPUBLIC OF KOREA)</td>
+                                    <td class="borderB">[[${passengerDto.reBirth}]]</td>
+                                    <td class="borderB">[[${passengerDto.reNation}]]</td>
                                 </tr>
                             </table>
                         </div>
@@ -164,7 +164,7 @@
                                     <td>
                                         <div class="td_wrap">
                                             <span class="cul">KRW</span>
-                                            <span class="price">184,900</span>
+                                            <span class="areaTtotal"></span>
                                             <span class="arrow">
                                                 <img src="/userpage/lib/img/arr_bott.png" alt="아래"
                                                     class="arr_bott arr_bott1 cursor">
@@ -180,30 +180,20 @@
                                                 <col width="85%">
                                                 <col width="15%">
                                             </colgroup>
+                                            <th:block th:each="area : ${reserveApiResponse1}">
                                             <tr>
-                                                <td>구간 1 : GMP-CJU</td>
+                                                <td>구간 1 : [[${area.reNation}]]</td>
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td><span class="name">유/영은</span></td>
+                                                <td><span class="name">[[${area.reFirstName}]]/[[${area.reLastName}]]</span></td>
                                                 <td>
                                                     <div class="td_wrap">
-                                                        <span class="cul">KRW</span><span class="price">[[${reserveApiResponse1[0].reTotal}]]</span>
+                                                        <span class="cul">KRW</span><span class="price areaPrice" th:value="${area.reTotal}"></span>
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>구간 1 : GMP-CJU</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="name">유/영은</span></td>
-                                                <td>
-                                                    <div class="td_wrap">
-                                                        <span class="cul">KRW</span><span class="price">[[${reserveApiResponse1[1].reTotal}]]</span>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            </th:block>
                                         </table>
                                     </td>
                                 </tr>

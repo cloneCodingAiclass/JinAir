@@ -1,6 +1,14 @@
 // reIndex 정보 가져오기
 $(() => {
     let str = $(location).attr('href').split('/');
+    let priceT = 0;
+    $('.areaPrice').each(function (i){
+        let price = Number($('.areaPrice').eq(i).attr("value"));
+        priceT += price;
+        $('.areaPrice').eq(i).text(Math.ceil(price).toLocaleString());
+    })
+    $('.areaTtotal').text(Math.ceil(priceT).toLocaleString());
+    // $('.price').text(price.toLocaleString());
     console.log(str[5])
     if (str[5] == 'oneway'){
         // 여행 타입에 따른 값, 클릭이벤트 변경
