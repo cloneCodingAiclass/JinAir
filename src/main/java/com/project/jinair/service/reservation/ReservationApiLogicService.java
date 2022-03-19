@@ -40,6 +40,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .reAirplainType(reserveApiRequest.getReAirplainType())
                 .reSchName(reserveApiRequest.getReSchName())
                 .reTripKind(reserveApiRequest.getReTripKind())
+                .rePeopleType(reserveApiRequest.getRePeopleType())
                 .reFirstName(reserveApiRequest.getReFirstName())
                 .reLastName(reserveApiRequest.getReLastName())
                 .reBirth(reserveApiRequest.getReBirth())
@@ -89,6 +90,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                     reserve.setReAirplainType(reserveApiRequest.getReAirplainType());
                     reserve.setReSchName(reserveApiRequest.getReSchName());
                     reserve.setReTripKind(reserveApiRequest.getReTripKind());
+                    reserve.setRePeopleType(reserveApiRequest.getRePeopleType());
                     reserve.setReFirstName(reserveApiRequest.getReFirstName());
                     reserve.setReLastName(reserveApiRequest.getReLastName());
                     reserve.setReBirth(reserveApiRequest.getReBirth());
@@ -139,6 +141,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .reAirplainType(tbReservation.getReAirplainType())
                 .reSchName(tbReservation.getReSchName())
                 .reTripKind(tbReservation.getReTripKind())
+                .rePeopleType(tbReservation.getRePeopleType())
                 .reFirstName(tbReservation.getReFirstName())
                 .reLastName(tbReservation.getReLastName())
                 .reBirth(tbReservation.getReBirth())

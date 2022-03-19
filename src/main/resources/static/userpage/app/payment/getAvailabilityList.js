@@ -33,7 +33,8 @@ $(() => {
               reSchEndTime : schEndTime,
               reAirplainType : schAirplaneType,
               reSchName : schAirplaneName,
-              reTotal : Number(strrrr)+9000
+              reTotal : Number(strrrr)+9000,
+              reTripKind : $('.text_way').html
             }
           }
           $.ajax({
@@ -95,7 +96,8 @@ $(() => {
               reSchEndTime : schEndTime,
               reAirplainType : schAirplaneType,
               reSchName : schAirplaneName,
-              reTotal : Number(strrrr)+9000
+              reTotal : Number(strrrr)+9000,
+              reTripKind : $('.text_way').html
             }
           }
           $.ajax({
