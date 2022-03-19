@@ -1,6 +1,95 @@
 'use strict';
-
+let memIndex;
 $(function () {
+    // 비회원 회원 구분, 회원 인덱스 가져오기
+    if($('#memberApiResponse').val() == '비회원'){
+        memIndex = 0;
+    }else{
+        memIndex = $('#memberApiResponse').val().split(',')[0].substring($('#memberApiResponse').val().search('memIndex')+9, $('#memberApiResponse').val().split(',')[0].length);
+    }
+    // 인원 수 구하기
+    let personNum = 0
+    for( let i = 0 ; i < 60; i++){
+        if(document.getElementById(`${i}`)){
+            personNum = personNum + 1;
+        }
+    }
+
+    $('#0').val() // 1번고객, 구간 1
+
+
+    // 구간 2 정보 출력
+    let itemList = new Vue({
+        el : '#itemList',
+        data : {
+            itemList : {}
+        },
+        methods:{
+        }
+    });
+    let itemList1 = new Vue({
+        el : '#itemList1',
+        data : {
+            itemList1 : {}
+        },
+        methods:{
+        }
+    });
+    let itemList2 = new Vue({
+        el : '#itemList2',
+        data : {
+            itemList2 : {}
+        },
+        methods:{
+        }
+    });
+    let itemList3 = new Vue({
+        el : '#itemList3',
+        data : {
+            itemList3 : {}
+        },
+        methods:{
+        }
+    });
+    let itemList4 = new Vue({
+        el : '#itemList4',
+        data : {
+            itemList4 : {}
+        },
+        methods:{
+        }
+    });
+    function searchStart(index){
+        $.get("/api/reservation/"+index, function(response){
+            // 검색 데이터
+            itemList.itemList = response.data;
+            itemList1.itemList1 = response.data;
+            itemList2.itemList2 = response.data;
+            itemList3.itemList3 = response.data;
+            itemList4.itemList4 = response.data;
+        });
+    }
+
+    // 구간별 필요사항
+    if($('#reTripKind').html() == '왕복'){
+        searchStart($('#1').val()); // 1번고객, 구간 2
+    }
+    if($('#reTripKind').html() == '편도'){
+        $('.arrow_img').css('display', "none");
+        $('.trip_info2').css('display', "none");
+        $('.jour2').css("visibility","hidden");
+        $('.onewaywww').css('display', "none");
+    }
+    if($('#reTripKind').html() == '다구간'){
+        searchStart($('#1').val());
+    }
+
+
+
+
+
+
+
     $('.open1').on('click', function (e) {
         e.stopPropagation();
         $('.service').slideUp(50);
@@ -183,6 +272,8 @@ $(function () {
             $(".fix_trip_info").css("position", "absolute");
         }
     });
+
+
 
 })
 
