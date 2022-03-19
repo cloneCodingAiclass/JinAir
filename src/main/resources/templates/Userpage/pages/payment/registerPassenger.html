@@ -8,6 +8,16 @@
     <script src="/userpage/app/payment/registerPassenger.js"></script>
 
 <body>
+    <div>
+        <input type="hidden" name=""
+               th:each="dto, i : ${reIndex}"
+               class="cookies"
+               th:id="${i.index}"
+               th:value="${dto}">
+    </div>
+    <div>
+        <input type="hidden" name="" id="memberApiResponse" th:value="${memberApiResponse}">
+    </div>
     <ul class="skipnavi">
         <!--책갈피 역할-->
         <li><a href="#container">본문내용</a></li>
@@ -26,31 +36,31 @@
                         <!--여정1-->
                         <div class="trip_info">
                             <div class="schedule">
-                                <p><span>왕복</span> 여정1</p>
+                                <p><span th:text="${reserveApiResponse.reTripKind}" id="reTripKind"></span> 여정1</p>
                                 <p class="cursor arrow_img"></p>
                                 <p class="cursor arrow_img arrow_up_img"></p>
                             </div>
                             <div class="trip_area fs20">
-                                <p class="dep_area" id="go_area1">서울/김포(GMP)<span>[출발]</span></p>
-                                <p class="arr_area" id="arr_area1">제주(CJU)<span>[도착]</span></p>
+                                <p class="dep_area" id="go_area1" th:text="${reserveApiResponse.reSchDepPoint}"></p>
+                                <p class="arr_area" id="arr_area1" th:text="${reserveApiResponse.reSchArrPoint}"></p>
                             </div>
                         </div>
                         <!--여정1 끝-->
                         <!--여정2-->
                         <div class="trip_info2">
                             <div class="schedule">
-                                <p><span>왕복</span> 여정2</p>
+                                <p><span th:text="${reserveApiResponse.reTripKind}"></span> 여정2</p>
                             </div>
-                            <div class="trip_area fs20">
-                                <p class="dep_area">제주(CJU)<span>[출발]</span></p>
-                                <p class="arr_area">서울/김포(GMP)<span>[도착]</span></p>
+                            <div class="trip_area fs20" id="itemList">
+                                <p class="dep_area">{{itemList.reSchDepPoint}}</p>
+                                <p class="arr_area">{{itemList.reSchArrPoint}}</p>
                             </div>
                         </div>
                         <!--여정2 끝-->
                         <!--탑승객 수-->
                         <div class="nop">
                             <p>탑승객수</p>
-                            <p class="fs20 person_cnt">성인 1</p>
+                            <p class="fs20 person_cnt" th:text="${reserveApiResponse.rePeopleType}"></p>
                         </div>
                         <!--탑승객 수 끝-->
                         <!--수정버튼-->
@@ -1577,37 +1587,37 @@
                         <div class="jour_wrap">
                             <div class="jour1">
                                 <h2>여정1</h2>
-                                <p class="flight">LJ411</p>
+                                <p class="flight" id="flight1" th:text="${reserveApiResponse.reSchName}">LJ411</p>
                                 <table class="jour_info_wrap">
                                     <colgroup>
                                         <col width="40%">
                                         <col width="60%">
                                     </colgroup>
                                     <tr>
-                                        <td class="dep_area area">[출발]서울/김포(GMP)</td>
-                                        <td class="dep_date date">2022-02-09(수) 20:20</td>
+                                        <td class="dep_area area" id="dep_area1">[출발]<span th:text="${reserveApiResponse.reSchDepPoint}"></span></td>
+                                        <td class="dep_date date" id="dep_date1"><span th:text="${#strings.substring(reserveApiResponse.reSchStartTime, 0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse.reSchStartTime, 11, 16)}"></span>]</td>
                                     </tr>
                                     <tr>
-                                        <td class="arr_area area">[도착]제주(CJU)</td>
-                                        <td class="arr_date date">2022-02-09(수) 20:20</td>
+                                        <td class="arr_area area" id="arr_are1">[도착]<span th:text="${reserveApiResponse.reSchArrPoint}"></span></td>
+                                        <td class="arr_date date" id="arr_date1"><span th:text="${#strings.substring(reserveApiResponse.reSchEndTime, 0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse.reSchEndTime, 11, 16)}"></span>]</td>
                                     </tr>
                                 </table>
                             </div>
-                            <div class="jour2">
+                            <div class="jour2" id="itemList1">
                                 <h2>여정2</h2>
-                                <p class="flight">LJ411</p>
+                                <p class="flight" id="flight2">{{itemList1.reSchName}}</p>
                                 <table class="jour_info_wrap">
                                     <colgroup>
                                         <col width="40%">
                                         <col width="60%">
                                     </colgroup>
                                     <tr>
-                                        <td class="dep_area area">[출발]제주(CJU)</td>
-                                        <td class="dep_date date">2022-02-12(토) 16:00</td>
+                                        <td class="dep_area area" id="dep_area2">[출발]{{itemList1.reSchDepPoint}}</td>
+                                        <td class="dep_date date" id="dep_date2">{{itemList1.reSchStartTime.substr(0,10)}} [{{itemList1.reSchStartTime.substr(11,5)}}]</td>
                                     </tr>
                                     <tr>
-                                        <td class="arr_area area">[도착]서울/김포(GMP)</td>
-                                        <td class="arr_date date">2022-02-12(토) 17:10</td>
+                                        <td class="arr_area area" id="arr_are2">[도착]{{itemList1.reSchArrPoint}}</td>
+                                        <td class="arr_date date" id="arr_date2">{{itemList1.reSchEndTime.substr(0,10)}} [{{itemList1.reSchEndTime.substr(11,5)}}]</td>
                                     </tr>
                                 </table>
                             </div>
@@ -1635,15 +1645,15 @@
                                         </colgroup>
                                         <tr>
                                             <td class="mark price_tit">항공운임</td>
-                                            <td class="price">210,600</td>
+                                            <td class="price tot_price11">210,600</td>
                                         </tr>
                                         <tr>
                                             <td class="mark price_tit">유류할증료</td>
-                                            <td class="price">11,000</td>
+                                            <td class="price tot_price22">11,000</td>
                                         </tr>
                                         <tr>
                                             <td class="mark price_tit">세금</td>
-                                            <td class="price">8,000</td>
+                                            <td class="price tot_price33">8,000</td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -1667,74 +1677,79 @@
                                             <tr>
                                                 <th colspan="2">
                                                     <p class="title">항공운임</p>
-                                                    <p><span>KRW</span>215,000</p>
+                                                    <p><span>KRW</span> <span class="finaltotalpricee">0</span></p>
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <td colspan="2">구간 1 : GMP-CJU</td>
+                                                <td colspan="2">구간 1 : <span th:text="${#strings.substring(reserveApiResponse.reSchDepPoint, reserveApiResponse.reSchDepPoint.length()-4, reserveApiResponse.reSchDepPoint.length()-1)}"></span>-
+                                                    <span th:text="${#strings.substring(reserveApiResponse.reSchArrPoint, reserveApiResponse.reSchArrPoint.length()-4, reserveApiResponse.reSchArrPoint.length()-1)}"></span></td>
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td class="per">성인 1</td>
-                                                <td>70,000</td>
+                                                <td class="per" th:text="${reserveApiResponse.rePeopleType}"></td>
+                                                <td class="strrr1">0</td>
                                             </tr>
-                                            <tr>
-                                                <td colspan="2">구간 2 : CJU-GMP</td>
+                                            <tr class="onewaywww" id="itemList2">
+                                                <td colspan="2">구간 2 : {{itemList2.reSchDepPoint.substr(itemList2.reSchDepPoint.length-4,3)}}- 
+                                                    {{itemList2.reSchArrPoint.substr(itemList2.reSchArrPoint.length-4,3)}}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="per">성인 1</td>
-                                                <td>145,000</td>
+                                            <tr class="onewaywww">
+                                                <td class="per" th:text="${reserveApiResponse.rePeopleType}"></td>
+                                                <td class="strrr2">0</td>
                                             </tr>
                                             <tr>
                                                 <th colspan="2">
                                                     <p class="title">유류할증료</p>
-                                                    <p><span>KRW</span>11,000</p>
+                                                    <p><span>KRW</span><span class="final_tit">0</span></p>
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <td colspan="2">구간 1 : GMP-CJU</td>
+                                                <td colspan="2">구간 1 : <span th:text="${#strings.substring(reserveApiResponse.reSchDepPoint, reserveApiResponse.reSchDepPoint.length()-4, reserveApiResponse.reSchDepPoint.length()-1)}"></span>-
+                                                    <span th:text="${#strings.substring(reserveApiResponse.reSchArrPoint, reserveApiResponse.reSchArrPoint.length()-4, reserveApiResponse.reSchArrPoint.length()-1)}"></span></td>
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td class="per">성인 1</td>
-                                                <td>5,500</td>
+                                                <td class="per" th:text="${reserveApiResponse.rePeopleType}"></td>
+                                                <td class="way1_tit">0</td>
                                             </tr>
-                                            <tr>
-                                                <td colspan="2">구간 2 : CJU-GMP</td>
+                                            <tr class="onewaywww" id="itemList3">
+                                                <td colspan="2">구간 2 : {{itemList3.reSchDepPoint.substr(itemList3.reSchDepPoint.length-4,3)}}-
+                                                    {{itemList3.reSchArrPoint.substr(itemList3.reSchArrPoint.length-4,3)}}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="per">성인 1</td>
-                                                <td>5,500</td>
+                                            <tr class="onewaywww">
+                                                <td class="per" th:text="${reserveApiResponse.rePeopleType}"></td>
+                                                <td class="way2_tit">0</td>
                                             </tr>
                                             <tr>
                                                 <th colspan="2">
                                                     <p class="title">세금</p>
-                                                    <p><span>KRW</span>8,000</p>
+                                                    <p><span>KRW</span> <span class="taxpriceprint">0</span></p>
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <td colspan="2">구간 1 : GMP-CJU</td>
+                                                <td colspan="2">구간 1 : <span th:text="${#strings.substring(reserveApiResponse.reSchDepPoint, reserveApiResponse.reSchDepPoint.length()-4, reserveApiResponse.reSchDepPoint.length()-1)}"></span>-
+                                                    <span th:text="${#strings.substring(reserveApiResponse.reSchArrPoint, reserveApiResponse.reSchArrPoint.length()-4, reserveApiResponse.reSchArrPoint.length()-1)}"></span></td>
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td class="per">성인 1<span class="cursor det det1">자세히 보기<span
-                                                            class="ar"></span></span></td>
-                                                <td class="seb">4,000</td>
+                                                <td class="per"><span th:text="${reserveApiResponse.rePeopleType}"></span><span class="cursor det det1">자세히 보기<span class="ar"></span></span></td>
+                                                <td class="seb"> 4,000</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
                                                     <div class="detD detD1"></div>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td colspan="2">구간 2 : CJU-GMP</td>
+                                            <tr class="onewaywww" id="itemList4">
+                                                <td colspan="2">구간 2 : {{itemList4.reSchDepPoint.substr(itemList4.reSchDepPoint.length-4,3)}}-
+                                                    {{itemList4.reSchArrPoint.substr(itemList4.reSchArrPoint.length-4,3)}}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="per">성인 1<span class="cursor det det2">자세히 보기<span
+                                            <tr class="onewaywww">
+                                                <td class="per"><span th:text="${reserveApiResponse.rePeopleType}"></span><span class="cursor det det2">자세히 보기<span
                                                             class="ar"></span></span></td>
                                                 <td class="seb">4,000</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="onewaywww">
                                                 <td colspan="2">
                                                     <div class="detD detD2"></div>
                                                 </td>

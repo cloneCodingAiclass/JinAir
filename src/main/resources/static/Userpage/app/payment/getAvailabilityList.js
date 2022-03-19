@@ -34,7 +34,8 @@ $(() => {
               reAirplainType : schAirplaneType,
               reSchName : schAirplaneName,
               reTotal : Number(strrrr)+9000,
-              reTripKind : $('.text_way').html
+              reTripKind : $('.text_way').html(),
+              rePeopleType : $('.person_cnt').html()
             }
           }
           $.ajax({
@@ -97,7 +98,8 @@ $(() => {
               reAirplainType : schAirplaneType,
               reSchName : schAirplaneName,
               reTotal : Number(strrrr)+9000,
-              reTripKind : $('.text_way').html
+              reTripKind : $('.text_way').html(),
+              rePeopleType : $('.person_cnt').html()
             }
           }
           $.ajax({

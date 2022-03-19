@@ -66,7 +66,7 @@
                         <!--탑승객 수-->
                         <div class="nop">
                             <p>탑승객수</p>
-                            <p id="person_cnt" class="fs20"><span th:text="${people}"></span></p>
+                            <p id="person_cnt" class="fs20"><span th:text="${people}" class="person_cnt"></span></p>
                         </div>
                         <!--탑승객 수 끝-->
                         <!--수정버튼-->
@@ -574,7 +574,7 @@
                                                     <span th:text="${#strings.substring(schArrivalPoint, schArrivalPoint.length()-4, schArrivalPoint.length()-1)}"></span></td>
                                                 <td></td>
                                             </tr>
-                                            <tr class="onewaywww">
+                                            <tr>
                                                 <td class="per" th:text="${people}"></td>
                                                 <td class="strrr1">0</td>
                                             </tr>
@@ -582,7 +582,7 @@
                                                 <td colspan="2">구간 2 : <span th:text="${#strings.substring(schArrivalPoint, schArrivalPoint.length()-4, schArrivalPoint.length()-1)}"></span>-
                                                     <span th:text="${#strings.substring(schDeparturePoint, schDeparturePoint.length()-4, schDeparturePoint.length()-1)}"></span></td>
                                             </tr>
-                                            <tr>
+                                            <tr class="onewaywww">
                                                 <td class="per" th:text="${people}"></td>
                                                 <td class="strrr2">0</td>
                                             </tr>
@@ -597,7 +597,7 @@
                                                     <span th:text="${#strings.substring(schArrivalPoint, schArrivalPoint.length()-4, schArrivalPoint.length()-1)}"></span></td>
                                                 <td></td>
                                             </tr>
-                                            <tr class="onewaywww">
+                                            <tr>
                                                 <td class="per" th:text="${people}"></td>
                                                 <td class="way1_tit">0</td>
                                             </tr>
@@ -605,7 +605,7 @@
                                                 <td colspan="2">구간 2 : <span th:text="${#strings.substring(schArrivalPoint, schArrivalPoint.length()-4, schArrivalPoint.length()-1)}"></span>-
                                                     <span th:text="${#strings.substring(schDeparturePoint, schDeparturePoint.length()-4, schDeparturePoint.length()-1)}"></span></td>
                                             </tr>
-                                            <tr>
+                                            <tr class="onewaywww">
                                                 <td class="per" th:text="${people}"></td>
                                                 <td class="way2_tit">0</td>
                                             </tr>
@@ -623,7 +623,7 @@
                                             <tr>
                                                 <td class="per"><span th:text="${people}"></span><span class="cursor det det1">자세히 보기<span
                                                             class="ar"></span></span></td>
-                                                <td class="seb"> X 4,000</td>
+                                                <td class="seb"> 4,000</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
@@ -637,9 +637,9 @@
                                             <tr class="onewaywww">
                                                 <td class="per"><span th:text="${people}"></span><span class="cursor det det2">자세히 보기<span
                                                             class="ar"></span></span></td>
-                                                <td class="seb"> X 4,000</td>
+                                                <td class="seb"> 4,000</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="onewaywww">
                                                 <td colspan="2">
                                                     <div class="detD detD2"></div>
                                                 </td>
