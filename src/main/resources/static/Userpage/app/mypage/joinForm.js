@@ -96,6 +96,47 @@ $(function () {
         })
     })
 
+    // 국적
+    let countryList = [
+        '대만', '대한민국', '몽골', '미얀마', '베트남'
+        , '인도', '인도네시아', '말레이시아', '일본'
+        ,'중국', '카자흐스탄', '캄보디아', '필리핀', '홍콩'
+        , '그리스', '네덜란드', '덴마크', '노르웨이'
+        ,'독일', '벨기에', '스웨덴', '스위스', '아이슬란드'
+        , '영국', '이탈리아', '체코', '포르투갈',
+        '폴란드', '프랑스', '헝가리', '이집트', '미국', '멕시코', '브라질'
+    ]
+
+    // 휴대전화 국적
+    let hpNationList = [
+        '대한민국82', '대만886', '일본81', '베트남84',
+        '중국86', '홍콩852', '미국1'
+    ]
+
+    let selPass = $('#ntnltyCd');
+    let selNation = $('#residenceIataCountryCode');
+    let selHpNation = $('#mblFonCtrCd');
+
+    for (let i = 0; i < countryList.length; i++){
+        let option = document.createElement('option');
+        option.innerText = countryList[i];
+        option.value = countryList[i];
+        selPass.append(option);
+    }
+
+    for (let i = 0; i < countryList.length; i++){
+        let option = document.createElement('option');
+        option.innerText = countryList[i];
+        option.value = countryList[i];
+        selNation.append(option);
+    }
+
+    for (let i = 0; i < hpNationList.length; i++){
+        let option = document.createElement('option');
+        option.innerText = hpNationList[i];
+        option.value = hpNationList[i];
+        selHpNation.append(option);
+    }
 
     // 아이디 대소문자 숫자 제외 전부 막기
     $('#id').on("keyup", function (){
