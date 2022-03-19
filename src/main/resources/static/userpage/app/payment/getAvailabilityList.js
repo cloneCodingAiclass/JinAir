@@ -8,40 +8,17 @@ $(() => {
     }
   }
 
-  // // 운임확인
-  // let itemList5 = new Vue({
-  //   el : '#itemList5',
-  //   data : {
-  //     itemList5 : {}
-  //   },
-  //   methods:{
-  //   }
-  // });
-  // let itemList6 = new Vue({
-  //   el : '#itemList6',
-  //   data : {
-  //     itemList6 : {}
-  //   },
-  //   methods:{
-  //
-  //   }
-  // });
-  // function priceChick1(){
-  //   $.get("/api/reservation/"+$('#0').val() , function(response){ // 구간1
-  //     itemList5.itemList5 = response.data;
-  //   });
-  //   $.get("/api/reservation/"+$('#1').val() , function(response){ // 구간2
-  //     itemList6.itemList6 = response.data;
-  //   });
-  // }
-
 
   // 구간 1 선택시(홀수 인덱스)
   let jsonData;
   function price(str, schAirplaneType, schAirplaneName, schStartTime, schEndTime, schDeparturePoint, schArrivalPoint){
     let strrr = str.split(',');
-    let strrrr = `${strrr[0]}${strrr[1]}`;
-
+    let strrrr;
+    if(strrr.length == 3){
+      strrrr = `${strrr[0]}${strrr[1]}${strrr[2]}`;
+    }else{
+      strrrr = `${strrr[0]}${strrr[1]}`;
+    }
     for( let i = 0 ; i < 60; i++){
       if(document.getElementById(`${i}`)){
         if(i%2 == 0){
@@ -55,7 +32,9 @@ $(() => {
               reSchStartTime : schStartTime,
               reSchEndTime : schEndTime,
               reAirplainType : schAirplaneType,
-              reSchName : schAirplaneName
+              reSchName : schAirplaneName,
+              reTotal : Number(strrrr)+9000,
+              reTripKind : $('.text_way').html
             }
           }
           $.ajax({
@@ -97,7 +76,12 @@ $(() => {
   let jsonData1;
   function pricee(str, schAirplaneType, schAirplaneName, schStartTime, schEndTime, schDeparturePoint, schArrivalPoint){
     let strrr = str.split(',');
-    let strrrr = `${strrr[0]}${strrr[1]}`;
+    let strrrr;
+    if(strrr.length == 3){
+      strrrr = `${strrr[0]}${strrr[1]}${strrr[2]}`;
+    }else{
+      strrrr = `${strrr[0]}${strrr[1]}`;
+    }
     for( let i = 0 ; i < 60; i++){
       if(document.getElementById(`${i}`)){
         if(i%2 != 0){
@@ -111,7 +95,9 @@ $(() => {
               reSchStartTime : schStartTime,
               reSchEndTime : schEndTime,
               reAirplainType : schAirplaneType,
-              reSchName : schAirplaneName
+              reSchName : schAirplaneName,
+              reTotal : Number(strrrr)+9000,
+              reTripKind : $('.text_way').html
             }
           }
           $.ajax({
@@ -1484,6 +1470,60 @@ $(function () {
       $(".fix_trip_info").css("position", "absolute");
     }
   });
+
+
+
+
+  // 다음 버튼
+  $('.next_butt').on('click', function (){
+    if(str[5] == 'twoway'){
+      if($('.strrr1').html() == 0 || $('.strrr2').html() == 0){
+        alert('구간 선택을 완료해주세요');
+      }else{
+        location.href="/pages/registerPassenger"
+      }
+    }
+    if(str[5] == 'oneway'){
+      if($('.strrr1').html() == 0){
+        alert('구간 선택을 완료해주세요');
+      }else{
+        location.href="/pages/registerPassenger"
+      }
+    }
+    if(str[5] == 'multiway'){
+      if($('.strrr1').html() == 0 || $('.strrr2').html() == 0){
+        alert('구간 선택을 완료해주세요');
+      }else{
+        location.href="/pages/registerPassenger"
+      }
+    }
+  })
+  // 최종결제다음 버튼
+  $('.fix_next_butt').on('click', function (){
+    if(str[5] == 'twoway'){
+      if($('.strrr1').html() == 0 || $('.strrr2').html() == 0){
+        alert('구간 선택을 완료해주세요');
+      }else{
+        location.href="/pages/registerPassenger"
+      }
+    }
+    if(str[5] == 'oneway'){
+      if($('.strrr1').html() == 0){
+        alert('구간 선택을 완료해주세요');
+      }else{
+        location.href="/pages/registerPassenger"
+      }
+    }
+    if(str[5] == 'multiway'){
+      if($('.strrr1').html() == 0 || $('.strrr2').html() == 0){
+        alert('구간 선택을 완료해주세요');
+      }else{
+        location.href="/pages/registerPassenger"
+      }
+    }
+  })
+
+
 
   /*날짜 설정 */
   let today = new Date();

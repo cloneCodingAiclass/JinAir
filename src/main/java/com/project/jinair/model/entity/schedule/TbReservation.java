@@ -50,6 +50,18 @@ public class TbReservation {
     private LocalDateTime reSchEndTime;   // 도착 시간
     private String reAirplainType;  // 비행기 기종
     private String reSchName;       // 운항편 이름
+    private String reTripKind;      // 여정종류 (왕복, 편도, 다구간)
+    private String rePeopleType;  // 동반 여행자 인원수(성인 2 소아 1 유아 1)(있으면 유용해보임 ㅎㅎ)
+    private String reFirstName; // 탑승자 성
+    private String reLastName;  // 탑승자 이름
+    private String reBirth;     // 탑승자 생년월일
+    private String reGender;     // 탑승자 성별
+    private String reNation;    // 탑승자 국적
+    private String reMemberId;  // 탑승자 아이디
+    private String reExtraSale; // 탑승자 추가할인
+    private String reEmail; // 탑승자 이메일
+    private String reHpNation;  // 탑승자 휴대폰 국가번호
+    private String reHp; // 탑승자 휴대전화
 
     @ManyToOne
     @JoinColumn(name= "reUserindex", referencedColumnName = "memIndex", insertable = false, updatable = false)

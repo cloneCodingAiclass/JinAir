@@ -217,21 +217,21 @@
                                             <td>
                                                 <div class="price_wrap" :class=`price_wrap1${index}` @click="price_wrap1(index)">
                                                     <p class="curr">KRW</p>
-                                                    <p class="date_price">{{(dto.schBasicPrice+"").substr(0,((dto.schBasicPrice+"").length-3))}},{{(dto.schBasicPrice+"").substr(-3,3)}}</p>
+                                                    <p class="date_price">{{(dto.schBasicPrice).toLocaleString('ko-KR')}}</p>
                                                     <p class="seats">잔여 9석!</p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="price_wrap" :class=`price_wrap2${index}` @click="price_wrap2(index)">
                                                     <p class="curr">KRW</p>
-                                                    <p class="date_price">{{((dto.schBasicPrice*1.6)+"").substr(0,(((dto.schBasicPrice*1.6)+"").length-3))}},{{((dto.schBasicPrice*1.6)+"").substr(-3,3)}}</p>
+                                                    <p class="date_price">{{(dto.schBasicPrice*1.6).toLocaleString('ko-KR')}}</p>
                                                     <p class="seats">잔여 9석!</p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="price_wrap" :class=`price_wrap3${index}` @click="price_wrap3(index)">
                                                     <p class="curr">KRW</p>
-                                                    <p class="date_price">{{((dto.schBasicPrice*2.6)+"").substr(0,(((dto.schBasicPrice*2.6)+"").length-3))}},{{((dto.schBasicPrice*2.6)+"").substr(-3,3)}}</p>
+                                                    <p class="date_price">{{(dto.schBasicPrice*2.6).toLocaleString('ko-KR')}}</p>
                                                     <p class="seats">잔여 9석!</p>
                                                 </div>
                                             </td>
@@ -358,21 +358,21 @@
                                             <td>
                                                 <div class="price_wrap1" :class=`price_wrap4${index}` @click="price_wrap4(index)">
                                                     <p class="curr">KRW</p>
-                                                    <p class="date_price">{{(dto.schBasicPrice+"").substr(0,((dto.schBasicPrice+"").length-3))}},{{(dto.schBasicPrice+"").substr(-3,3)}}</p>
+                                                    <p class="date_price">{{(dto.schBasicPrice).toLocaleString('ko-KR')}}</p>
                                                     <p class="seats">잔여 9석!</p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="price_wrap1" :class=`price_wrap5${index}` @click="price_wrap5(index)">
                                                     <p class="curr">KRW</p>
-                                                    <p class="date_price">{{((dto.schBasicPrice*1.6)+"").substr(0,(((dto.schBasicPrice*1.6)+"").length-3))}},{{((dto.schBasicPrice*1.6)+"").substr(-3,3)}}</p>
+                                                    <p class="date_price">{{(dto.schBasicPrice*1.6).toLocaleString('ko-KR')}}</p>
                                                     <p class="seats">잔여 9석!</p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="price_wrap1" :class=`price_wrap6${index}` @click="price_wrap6(index)">
                                                     <p class="curr">KRW</p>
-                                                    <p class="date_price">{{((dto.schBasicPrice*2.6)+"").substr(0,(((dto.schBasicPrice*2.6)+"").length-3))}},{{((dto.schBasicPrice*2.6)+"").substr(-3,3)}}</p>
+                                                    <p class="date_price">{{(dto.schBasicPrice*2.6).toLocaleString('ko-KR')}}</p>
                                                     <p class="seats">잔여 9석!</p>
                                                 </div>
                                             </td>
@@ -720,7 +720,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <input type="button" value="바로결제" class="fix_next_butt">
+                        <input type="button" value="다음" class="fix_next_butt">
                     </div>
                 </div>
                 <!--fix_bott 총액 확인 끝-->
