@@ -713,7 +713,8 @@ body{
     margin-right: 20px;
     cursor: pointer;
 }
-.btnTypeA{
+.btnTypeA,
+#pwChange{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -723,7 +724,8 @@ body{
     background-color: #BDD600;
     font-weight: 700;
 }
-.btnTypeB{
+.btnTypeB,
+#pwChangeCancel{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -786,7 +788,6 @@ table em{
 .confirm_modal_box{
     background-color: white;
     width: 700px;
-    height: 600px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -795,13 +796,8 @@ table em{
     border: 2px solid #BDD600;
     font-weight: 600;
 }
-.confirm_modal_box iframe{
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
 .confirm_modal_box .popTitle{
-    width: 700px;
+    width: 698px;
     height: 100px;
     background-color: #661E43;
     text-indent: 20px;
@@ -869,7 +865,7 @@ table em{
     font-weight: 600;
     margin: 10px 0;
 }
-#popCont .btn .btnTypeA{
+#popCont .btn .pwChange{
     margin-right: 20px;
 }
 #popCont{
