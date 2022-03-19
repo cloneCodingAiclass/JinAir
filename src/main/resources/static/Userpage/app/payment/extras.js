@@ -328,6 +328,8 @@ $(function () {
     $(".passenger_info_wrap2").css("display", "block");
     $(".seat_info_wrap1").css("display", "none");
     $(".seat_info_wrap2").css("display", "block");
+    $("#seat_info1").css("display", "none");
+    $("#seat_info2").css("display", "none");
   })
 
   $(".select_seat_wrap1 .select_comp").on("click", function () {
@@ -352,6 +354,8 @@ $(function () {
     $(".passenger_info_wrap2").css("display", "block");
     $(".seat_info_wrap1").css("display", "none");
     $(".seat_info_wrap2").css("display", "block");
+    $("#seat_info1").css("display", "none");
+    $("#seat_info2").css("display", "block");
   })
   /*구간선택2 */
   /*구간선택 끝 */
@@ -507,14 +511,25 @@ $(function () {
   $(".insContent2").css("display", "none");
 
   $(".insurance_price .next_butt").on("click", function () {
-    if ($("#check_ins").is(":checked")) {
+    if ($(".ins_check").is(":checked")) {
       $(".insurance_menu_wrap .ins_menu1").css("background-color", "#fff");
       $(".insurance_menu_wrap .ins_menu2").css("background-color", "#661e43");
       $(".insurance_menu_wrap .ins_menu1").css("color", "#444");
       $(".insurance_menu_wrap .ins_menu2").css("color", "#fff");
-
       $(".insContent1").css("display", "none");
       $(".insContent2").css("display", "block");
+      console.log("왜도대체왜안되는건덴아ㅣ루나ㅣㅓ둑/눌마.울.안ㄹ" + nameArr);
+      for (let i = 0; i < personNumber; i++) {
+        console.log("0번째" + nameArr[0]);
+        console.log("1번째" + nameArr[1]);
+        console.log("2번째" + nameArr[2]);
+        if(nameArr[i] != null) {
+          str7 += '<div class="nameBox" id="modal_ins_people_' + i + '">'
+          str7 += '<input type="checkbox" class="checkbox insCheckBox" id="ins_check_' + i + '"><span>' + nameArr[i] + '</span>'
+          str7 += '</div>'
+        }
+      }  $("#modal_ins_people").html(str7);
+      console.log($("#modal_ins_people").html());
     } else {
       $("#modal_agree_wrap").fadeIn();
     }
@@ -523,18 +538,29 @@ $(function () {
     $("#modal_agree_wrap").fadeOut();
   })
 
+  $(".insContent2 .noti").on("click", function () {
+    $("#modal_insurance_info_wrap").fadeIn();
+
+  })
+  $("#modal_insurance_info_wrap .title .close").on("click", function () {
+    $("#modal_insurance_info_wrap").fadeOut();
+    str7 = "";
+  })
+
+
   $(".insContent2 .ins_before_butt").on("click", function () {
     $(".insurance_menu_wrap .ins_menu1").css("background-color", "#661e43");
     $(".insurance_menu_wrap .ins_menu2").css("background-color", "#fff");
     $(".insurance_menu_wrap .ins_menu1").css("color", "#fff");
     $(".insurance_menu_wrap .ins_menu2").css("color", "#444");
-
+    str7 = "";
     let offset = $(".insurance_menu_wrap .ins_menu1").offset();
     $("html body").animate({ scrollTop: offset.top }, 2000);
-
     $(".insContent1").css("display", "block");
     $(".insContent2").css("display", "none");
   })
+
+
 
 
 
@@ -549,6 +575,7 @@ $(function () {
   let str4 = ""; // 수하물 선택
   let str5 = ""; // 보험 탑승객
   let str6 = ""; // 보험 선택
+  let str7 = ""; // 모달 보험 가입자 선택
 
   $("#person_cnt").html("성인 " + personNumber);
 
@@ -646,7 +673,7 @@ $(function () {
     // str5 += "<span class='close cursor' id='ins_close_" + i + "'>x</span>"
     str5 += "</p>"
     str5 += "<p class='select_ins_price' id='select_ins_price_" + i + "'>"
-    str5 += "<span class='ins_P' id='ins_" + i + "'>KRW</span>"
+    str5 += "<span class='ins_P cur' id='ins_" + i + "'>KRW</span>"
     str5 += "<span class='ins_price' id='ins_price_" + i + "'></span>"
     str5 += "</p>"
     str5 += "</div>"
@@ -655,7 +682,8 @@ $(function () {
 
   for (let i = 0; i < personNumber; i++) {
     str6 += '<tr>'
-    str6 += '<td class="normal"><label for="check_ins_'+i+'"><input type="checkbox" name="check_ins_'+i+'" id="check_ins_' + i + '">유 영은</label></td>'
+    str6 += '<td class="normal"><label for="check_ins_'+i+'">'
+    str6 += '<input type="checkbox" class="ins_check" name="check_ins_'+i+'" id="check_ins_' + i + '"><span id="name' + i + '">' + '유영은' + '</span></label></td>'
     str6 += '<td class="normal">여</td>'
     str6 += '<td class="normal bir_date">'
     str6 += '<input type="text" value="19970924" class="birth" id="ins_birth_' + i + '" readOnly></td>'
@@ -666,19 +694,15 @@ $(function () {
     str6 += '<td class="normal">1억원</td>'
     str6 += '<td class="normal">7,040</td>'
     str6 += '<td class="normal sel_pro">'
-    str6 += '<select name="product_' + i + '" class="select_product" id="select_product' + i + '" disabled>'
-    str6 += '<option value="실속형">실속형</option>'
-    str6 += '<option value="표준형" selected>표준형</option>'
-    str6 += '<option value="고급형">고급형</option>'
+    str6 += '<select name="product_' + i + '" class="select_product" id="select_product_' + i + '" disabled>'
+    str6 += '<option value="1970">실속형</option>'
+    str6 += '<option value="3660" selected>표준형</option>'
+    str6 += '<option value="7040">고급형</option>'
     str6 += '</select>'
     str6 += '</td>'
     str6 += '</tr>'
   }
-
-
-  /*좌석 선택 */
-
-
+  $("#ins_people").html(str6);
 
   $(".seat_P1, .seat_P2").css("visibility", "hidden");
 
@@ -1027,43 +1051,92 @@ $(function () {
 
   /*보험 선택 구간 */
 
-  for(let i = 0; i < personNumber; i++) {
-
-  }
-  $(".insurance_price .price").text("0");
+  // 처음 페이지 로드 시 총보험료 0원 세팅, 셀렉트박스 비활성화화
+  $(".insurance_price .int_tot_price").text("0");
   $('.select_product').prop('disabled', true);
 
-  $("#check_ins").change(function () {
-    if ($("#check_ins").is(":checked")) {
-      $(".insurance_price .price").text("3,660");
-      $('#select_product').attr('disabled', false);
-      // prop('readonly', true);
-    } else {
-      $('#select_product').attr("disabled", true);
-      $(".insurance_price .price").text("0");
-    }
-  })
-
-
-  $('#select_product').change(function () {
-    $(".bot_bagg_price2 .price").text(" ");
-    if ($(this).val() == "실속형") {
-      $(".insurance_price .price").text("1,970");
-    } else if ($(this).val() == "표준형") {
-      $(".insurance_price .price").text("3,660");
-    } else if ($(this).val() == "고급형") {
-      $(".insurance_price .price").text("7,040");
-    }
-  });
+  let priceArr = [];
+  let nameArr = [personNumber];
+  let totalPrice = Number(0);
+  let sum = 0;
+  for (let i = 0; i < personNumber; i++) {
+    $("#check_ins_" + i).change(function() {
+      // 가입자명 체크박스 체크 시 보험종료 선택 가능
+      if ($("#check_ins_" + i).is(":checked")) {
+        $("#select_product_" + i).prop('disabled', false);
+        priceArr[i] = Number($("#select_product_" + i).val());
+        totalPrice += priceArr[i]
+        nameArr[i] = $("#name" + i).text();
+        sum += 1;
+        console.log(i + " : " + nameArr[i])
+        $(".insurance_price .int_tot_price").text(totalPrice.toLocaleString('ko-KR'));
+      } else if ($("#check_ins_" + i).is(":checked") == false) {
+        $("#select_product_" + i).prop('disabled', true);
+        totalPrice -= priceArr[i]
+        nameArr[i] = "";
+        console.log(i + " : " + nameArr[i])
+        sum -= 1;
+        console.log("sum개수" + sum);
+        console.log(nameArr)
+        $(".insurance_price .int_tot_price").text(totalPrice.toLocaleString('ko-KR'));
+      }
+    })
+    $("#select_product_" + i).change(function() {
+      if ($("#select_product_" + i).val() == "1970") {
+        totalPrice -= priceArr[i];
+        priceArr[i] = Number(1970);
+        totalPrice += priceArr[i];
+      } else if ($("#select_product_" + i).val() == "3660") {
+        totalPrice -= priceArr[i];
+        priceArr[i] = Number(3660);
+        totalPrice += priceArr[i];
+      } else if ($("#select_product_" + i).val() == "7040") {
+        totalPrice -= priceArr[i];
+        priceArr[i] = Number(7040);
+        totalPrice += priceArr[i];
+      }
+      $(".insurance_price .int_tot_price").text(totalPrice.toLocaleString('ko-KR'));
+    })
+  }
 
   $(".ins_join_butt").on("click", function () {
     if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
       $("#modal_service_app_wrap").fadeIn();
       $(".modal_join_ins").fadeIn();
     }
-    else {
-    }
   });
+
+  // 보험 안내사항 확인 눌렀을 시 체크박스 확인
+  $("#modal_insurance_info_wrap .butt_ok").on("click", function () {
+    let isCheck = $(".insCheckBox").length;
+    let is = 0;
+    for (let i = 0; i < personNumber; i++) {
+      if ($("#ins_check_" + i).is(":checked")) {
+        is += 1;
+      }
+    }
+    if (isCheck == is) {
+      $("#modal_insurance_info_wrap").fadeOut();
+      $("#agree_check1").prop("checked", true);
+    } else {
+      $("#modal_insurance_info_wrap .modal_agree2").fadeIn();
+    }
+
+  })
+
+  $(".insCheckBox").change(function() {
+    console.log("나실행됨ㄴㅇㄹㅇ너ㅏ라ㅓㄴㄷ")
+    for (let i = 0; i < personNumber; i++) {
+      if ($("ins_check_" + i).is(':checked')) {
+        console.log("나실행됨ㄴㅇㄹㅇ너ㅏ라ㅓㄴㄷ")
+        $("#modal_ins_people_" + i).css("background-color", "rgb(0, 173, 239)");
+        $("#modal_ins_people_" + i).css("color", "#fff");
+      } else {
+        $("#modal_ins_people_" + i).css("background-color", "#fff");
+        $("#modal_ins_people_" + i).css("color", "rgb(0, 173, 239)");
+      }
+    }
+  })
 
   /*보험 선택 구간 끝*/
 
@@ -1219,21 +1292,7 @@ $(() => {
   })
 
 
-  $(".insContent2 .noti").on("click", function () {
-    $("#modal_insurance_info_wrap").fadeIn();
-  })
-  $("#modal_insurance_info_wrap .title .close").on("click", function () {
-    $("#modal_insurance_info_wrap").fadeOut();
-  })
 
-  $("#modal_insurance_info_wrap .butt_ok").on("click", function () {
-    if ($(".nameBox .checkbox").is(":checked")) {
-      $("#modal_insurance_info_wrap").fadeOut();
-      $("#agree_check1").prop("checked", true);
-    } else {
-      $("#modal_insurance_info_wrap .modal_agree2").fadeIn();
-    }
-  })
 
   $("#modal_insurance_info_wrap .modal_agree2 .butt input").on("click", function () {
     $("#modal_insurance_info_wrap .modal_agree2").fadeOut();
@@ -1334,15 +1393,6 @@ $(() => {
     $("table .detail").not("table .detail18").css("display", "none");
   })
 
-  $(".nameBox .checkbox").change(function () {
-    if ($(".nameBox .checkbox").is(':checked')) {
-      $(".nameBox").css("background-color", "rgb(0, 173, 239)");
-      $(".nameBox").css("color", "#fff");
-    } else {
-      $(".nameBox").css("background-color", "#fff");
-      $(".nameBox").css("color", "rgb(0, 173, 239)");
-    }
-  })
 })
 
 
@@ -1356,9 +1406,9 @@ $(() => {
   $("#agree_check2").on("click", function () {
     $("#modal_agreement_wrap").fadeIn();
     if ($("#agree1").is(":checked") && $("#agree2").is(":checked")) {
-      $(this).prop("checked", true);
+      $("#agree_check2").prop("checked", true);
     } else {
-      $(this).prop("checked", false);
+      $("#agree_check2").prop("checked", false);
     }
   })
   $(".insContent2 .agree").on("click", function () {
@@ -1398,8 +1448,6 @@ $(() => {
   $("#addmodal_autoCheck_noti").hide();
   $("#modal_conf_check").hide();
 
-
-
   $(".ins_join_butt").on("click", () => {
     if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
       $("#modal_service_app_wrap").fadeIn();
@@ -1431,7 +1479,7 @@ $(() => {
     }
   })
 
-  $(".modal_join_ins .butt input").on("click", () => {
+  $(".modal_join_ins .modal_join_butt input").on("click", () => {
     $(".modal_join_ins").fadeOut();
   });
 
@@ -1994,6 +2042,7 @@ function updateTrip() {
   $(".arrive_default").attr("value", arr1);
   $(".go_date_default").attr("value", godate);
 }
+
 
 
 
