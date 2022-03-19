@@ -43,7 +43,7 @@ public class KakaoPayMentService {
             params.add("total_amount", "3000000");
             params.add("vat_amount", "10000");
             params.add("tax_free_amount", "10000");
-            params.add("approval_url", "http://localhost:8080/api/kakao/complete");
+            params.add("approval_url", "http://localhost:8080/pages/complete");
             params.add("cancel_url", "http://localhost:8080/pages/cancel");
             params.add("fail_url", "http://localhost:8080/kakao/kakaoPaySuccessFail");
 

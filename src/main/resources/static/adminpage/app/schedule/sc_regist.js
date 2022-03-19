@@ -146,7 +146,6 @@ $(function () {
     }
 
     $(document).on('click', '#findApName', function (){
-        console.log('작동?');
         airplaneName($('#aptype').find('option:selected').val());
     })
 
