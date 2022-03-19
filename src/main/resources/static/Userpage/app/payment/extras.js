@@ -310,6 +310,8 @@ $(function () {
     $(".seat_info").css("position", "absolute");
     $(".seat_info").css("top", "95px");
     $(".seat_info").css("left", "30px");
+    let radio2 = $("#person2_0").parents(".passenger_info2");
+    borderChange2(radio2);
 
     $(this).css("background-color", "#661e43");
     $(this).css("color", "#fff");
@@ -455,91 +457,7 @@ $(function () {
   })
   /*스크롤시 미니맵 이동 끝*/
   /*스크롤시 따라다니는 영역 끝*/
-  /*수하물 선택 구간 */
 
-  $(".bot_bagg_price1 .passenger_info_wrap .cur").css("display", "none");
-  $(".bot_bagg_price1 .passenger_info_wrap .price").text(" ");
-  $(".bot_bagg_price2 .passenger_info_wrap .cur").css("display", "none");
-  $(".bot_bagg_price2 .passenger_info_wrap .price").text(" ");
-  $(".seat_info_wrap .seat_box .cur, .seat_box .seat_name").css("display", "block");
-
-  $('#bagg1').change(function () {
-    $(".select_bagg_price1 .select_bagg").text($(this).val());
-    $(".bot_bagg_price1 .cur").css("display", "inline-block");
-    $(".bot_bagg_price1 .price").text(" ");
-    if ($(this).val() == "5KG(+KRW 8,000)") {
-      $(".bot_bagg_price1 .price").text("8,000");
-    } else if ($(this).val() == "10KG(+KRW 16,000)") {
-      $(".bot_bagg_price1 .price").text("16,000");
-    } else if ($(this).val() == "15KG(+KRW 24,000)") {
-      $(".bot_bagg_price1 .price").text("24,000");
-    } else if ($(this).val() == "20KG(+KRW 32,000)") {
-      $(".bot_bagg_price1 .price").text("32,000");
-    } else {
-      $(".bot_bagg_price1 .cur").css("display", "none");
-      $(".bot_bagg_price1 .price").text(" ");
-    }
-  });
-
-  $('#bagg2').change(function () {
-    $(".select_bagg_price2 .select_bagg").text($(this).val());
-    $(".bot_bagg_price2 .cur").css("display", "inline-block");
-    $(".bot_bagg_price2 .price").text(" ");
-    if ($(this).val() == "5KG(+KRW 8,000)") {
-      $(".bot_bagg_price2 .price").text("8,000");
-    } else if ($(this).val() == "10KG(+KRW 16,000)") {
-      $(".bot_bagg_price2 .price").text("16,000");
-    } else if ($(this).val() == "15KG(+KRW 24,000)") {
-      $(".bot_bagg_price2 .price").text("24,000");
-    } else if ($(this).val() == "20KG(+KRW 32,000)") {
-      $(".bot_bagg_price2 .cur").css("display", "inline-block");
-      $(".bot_bagg_price2 .price").text("32,000");
-    } else {
-      $(".bot_bagg_price2 .cur").css("display", "none");
-      $(".bot_bagg_price2 .price").text(" ");
-    }
-  });
-
-  /*수하물 선택 구간 끝 */
-
-  /*보험 선택 구간 */
-
-  $(".insurance_price .price").text("0");
-  $('#select_product').prop('disabled', true);
-
-  $("#check_ins").change(function () {
-    if ($("#check_ins").is(":checked")) {
-      $(".insurance_price .price").text("3,660");
-      $('#select_product').attr('disabled', false);
-      // prop('readonly', true);
-    } else {
-      $('#select_product').attr("disabled", true);
-      $(".insurance_price .price").text("0");
-    }
-  })
-
-
-  $('#select_product').change(function () {
-    $(".bot_bagg_price2 .price").text(" ");
-    if ($(this).val() == "실속형") {
-      $(".insurance_price .price").text("1,970");
-    } else if ($(this).val() == "표준형") {
-      $(".insurance_price .price").text("3,660");
-    } else if ($(this).val() == "고급형") {
-      $(".insurance_price .price").text("7,040");
-    }
-  });
-
-  $(".ins_join_butt").on("click", function () {
-    if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
-      $("#modal_service_app_wrap").fadeIn();
-      $(".modal_join_ins").fadeIn();
-    }
-    else {
-    }
-  });
-
-  /*보험 선택 구간 끝*/
 
   /*무료 수하물/기내식 안내*/
   $(".modal_content1").css("display", "block");
@@ -625,8 +543,12 @@ $(function () {
 
   // 탑승객 수
   let personNumber = 3;
-  let str = "";
-  let str2 = "";
+  let str = "";  // 좌석선택 탑승객 1
+  let str2 = ""; // 좌석선택 탑승객 2
+  let str3 = ""; // 수하물 탑승객
+  let str4 = ""; // 수하물 선택
+  let str5 = ""; // 보험 탑승객
+  let str6 = ""; // 보험 선택
 
   $("#person_cnt").html("성인 " + personNumber);
 
@@ -646,6 +568,7 @@ $(function () {
     str += "</div>"
   }
   $("#passenger_info_1").html(str);
+
   for (let i = 0; i < personNumber; i++) {
     str2 += "<div class='passenger_info passenger_info2'>"
     str2 += "<h3>탑승객 " + Number(i+1) + "</h3>";
@@ -663,8 +586,99 @@ $(function () {
   }
   $("#passenger_info_2").html(str2);
 
+  for (let i = 0; i < personNumber; i++) {
+    str3 += "<div class='passenger_info' id='passenger_info3_" + i + "'>"
+    str3 += "<h3>탑승객 " + Number(i+1) + "</h3>"
+    str3 += "<p><img src='/userpage/lib/img/ico-person.png' alt=''><span>유/영은</span></p>"
+    str3 += "<p class='section1 section'><img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간1</p>"
+
+    str3 += "<p class='select_bagg_price select_bagg_price1' id = select_bagg_price1_" + i + "'>"
+    str3 += "<span class='select_bagg' id='select_bagg1_" + i + "'></span>"
+    str3 += "<span class='close cursor' id='bagg_close1_" + i + "'>x</span>"
+    str3 += "</p>"
+    str3 += "<p class='bot_bagg_price bot_bagg_price1'><span class='cur' id='cur1_" + i + "'>KRW</span><span class='price bagg_price' id='bagg_price1_" + i + "'></span></p>"
+    str3 += "<p class='section2 section'><img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간2</p>"
+
+    str3 += "<p class='select_bagg_price select_bagg_price2' id = select_bagg_price2_" + i + "'>"
+    str3 += "<span class='select_bagg' id='select_bagg2_" + i + "'></span>"
+    str3 += "<span class='close cursor' id='bagg_close2_" + i + "'>x</span>"
+    str3 += "</p>"
+    str3 += "<p class='bot_bagg_price bot_bagg_price2'><span class='cur' id='cur2_" + i + "'>KRW</span><span class='price bagg_price' id='bagg_price2_" + i + "'></span></p>"
+    str3 += "</div>"
+  }
+  $("#passenger_info_3").html(str3);
+
+  for (let i = 0; i < personNumber; i++) {
+    str4 += "<div class='baggage_wrap' id='baggage_wrap" + i + "'>"
+    str4 += "<div class='baggage_1'>"
+    str4 += "<p class='section1 section'>"
+    str4 += "<img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간1(탑승객 " + Number(i+1) + ")</p>"
+    str4 += "<select class='selectBagg1' name='bagg1_" + i + "' id='bagg1_" + i + "'>"
+    str4 += "<option value=''>초과수하물 추가 선택</option>"
+    str4 += "<option value='5KG(+KRW 8,000)'>5KG(+KRW 8,000)</option>"
+    str4 += "<option value='10KG(+KRW 16,000)'>10KG(+KRW 16,000)</option>"
+    str4 += "<option value='15KG(+KRW 24,000)'>15KG(+KRW 24,000)</option>"
+    str4 += "<option value='20KG(+KRW 32,000)'>20KG(+KRW 32,000)</option>"
+    str4 += "</select>"
+    str4 += "</div>"
+    str4 += "<div class='baggage_2'>"
+    str4 += "<p class='section2 section'>"
+    str4 += "<img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간2(탑승객 " + Number(i+1) + ")</p>"
+    str4 += "<select class='selectBagg2' name='bagg2_" + i + "' id='bagg2_" + i + "'>"
+    str4 += "<option value=''>초과수하물 추가 선택</option>"
+    str4 += "<option value='5KG(+KRW 8,000)'>5KG(+KRW 8,000)</option>"
+    str4 += "<option value='10KG(+KRW 16,000)'>10KG(+KRW 16,000)</option>"
+    str4 += "<option value='15KG(+KRW 24,000)'>15KG(+KRW 24,000)</option>"
+    str4 += "<option value='20KG(+KRW 32,000)'>20KG(+KRW 32,000)</option>"
+    str4 += "</select>"
+    str4 += "</div>"
+    str4 += "</div>"
+  }
+  str4 += "<input type='button' class='cursor select_comp' value='선택완료'>"
+  $("#select_baggage_wrap").html(str4);
+
+  for (let i = 0; i < personNumber; i++) {
+    str5 += "<div class='passenger_info' id='passenger_info_ins_" + i + "'>"
+    str5 += "<h3>탑승객 " + Number(i+1) + "</h3>"
+    str5 += "<p><img src='/userpage/lib/img/ico-person.png' alt=''><span>유/영은</span></p>"
+    str5 += "<p class='select_ins_num'>"
+    str5 += "<input type='text' class='insuranceNum cursor' id='ins_num_" + i + "' readOnly>"
+    // str5 += "<span class='close cursor' id='ins_close_" + i + "'>x</span>"
+    str5 += "</p>"
+    str5 += "<p class='select_ins_price' id='select_ins_price_" + i + "'>"
+    str5 += "<span class='ins_P' id='ins_" + i + "'>KRW</span>"
+    str5 += "<span class='ins_price' id='ins_price_" + i + "'></span>"
+    str5 += "</p>"
+    str5 += "</div>"
+  }
+  $("#passenger_info_wrap_ins").html(str5);
+
+  for (let i = 0; i < personNumber; i++) {
+    str6 += '<tr>'
+    str6 += '<td class="normal"><label for="check_ins_'+i+'"><input type="checkbox" name="check_ins_'+i+'" id="check_ins_' + i + '">유 영은</label></td>'
+    str6 += '<td class="normal">여</td>'
+    str6 += '<td class="normal bir_date">'
+    str6 += '<input type="text" value="19970924" class="birth" id="ins_birth_' + i + '" readOnly></td>'
+    str6 += '<td class="normal">5,000만원</td>'
+    str6 += '<td class="normal">1,970</td>'
+    str6 += '<td class="normal">7,000만원</td>'
+    str6 += '<td class="normal">3,660</td>'
+    str6 += '<td class="normal">1억원</td>'
+    str6 += '<td class="normal">7,040</td>'
+    str6 += '<td class="normal sel_pro">'
+    str6 += '<select name="product_' + i + '" class="select_product" id="select_product' + i + '" disabled>'
+    str6 += '<option value="실속형">실속형</option>'
+    str6 += '<option value="표준형" selected>표준형</option>'
+    str6 += '<option value="고급형">고급형</option>'
+    str6 += '</select>'
+    str6 += '</td>'
+    str6 += '</tr>'
+  }
+
 
   /*좌석 선택 */
+
+
 
   $(".seat_P1, .seat_P2").css("visibility", "hidden");
 
@@ -731,12 +745,13 @@ $(function () {
   }
 
   function borderChange2(radio2) {
+    console.log(radio2)
     let c = radio2.find(".select_seat_num2");
     $(".select_seat_num2").not(c).css("border", "none");
     c.css("border", "3px solid #661e43");
   }
 
-  if ($(".checkPerson").is(":checked") == false ) {
+  if ($(".checkPerson").is(":checked") == false) {
     $("#person_0").prop("checked", true)
     radio = $("#person_0").parents(".passenger_info1");
     borderChange(radio)
@@ -919,42 +934,139 @@ $(function () {
     }
   })
 
-
-
-
-
-  //
-  // $('.SSC2').click(function () {
-  //   let i = 0;
-  //   countChecked2(this)
-  //   if ($('.SSC2').is(':checked')) {
-  //     $(".passenger_info_wrap2 .select_seat_num2 span.seat_num2").val($(this).val());
-  //     $(".seat_P2").css("display", "block");
-  //     $(".passenger_info_wrap2 .price").html($(this).next().text());
-  //     // $('.SSC2').not(this).attr("disabled", true);
-  //     // $(this).attr("disabled", true);
-  //     i++;
-  //
-  //     $(".seat_P2").css("visibility", "visible");
-  //
-  //     if ($('.SSC2').next().hasClass("box7") === true) {
-  //       $(".passenger_info_wrap2 .select_seat_price .price").html($(this).next().text());
-  //       $(".passenger_info_wrap2 .select_seat_price .seat_P2").css("display", "none");
-  //       $(this).css("disabled", false);
-  //       // $(".seat_P2").css("visibility", "hidden");
-  //     }
-  //   } else {
-  //     $(".passenger_info_wrap2 .select_seat_num2 span.seat_num2").val("");
-  //
-  //     $(".passenger_info_wrap2 .select_seat_price .price").html("");
-  //     $(".passenger_info_wrap2 .select_seat_price .seat_P2").css("display", "none");
-  //     $(".seat_P2").css("visibility", "hidden");
-  //     // $('.SSC2').not(this).attr("disabled", false);
-  //     i--;
-  //   }
-  // });
-
   /*좌석 선택 끝 */
+
+  /*수하물 선택 구간 */
+
+  $(".bot_bagg_price1 .cur").css("display", "none");
+  $(".bot_bagg_price1 .price").text("");
+  $(".bot_bagg_price1 .close").css("display", "none");
+
+  $(".bot_bagg_price2 .cur").css("display", "none");
+  $(".bot_bagg_price2 .price").text("");
+  $(".bot_bagg_price2 .close").css("display", "none");
+  $(".seat_info_wrap .seat_box .cur, .seat_box .seat_name").css("display", "block");
+
+
+
+  // 수하물 선택 구간1
+  function bagg_borderChange(priceBox) {
+    $(".select_bagg_price").not(priceBox).css("border", "none")
+    priceBox.css("border", "3px solid #661e43");
+  }
+
+  let i = $(".selectBagg1").length
+  console.log("select 개수 : " + i)
+  for(let i = 0; i < $(".selectBagg1").length; i++) {
+    $('#bagg1_'+i +'').change(function () {
+      let s = i;
+      let a = $("#select_bagg_price1_" + s);
+      console.log($("#select_bagg_price1_" + i));
+      bagg_borderChange(a)
+      $('#select_bagg1_' + i + '').text($(this).val());
+      $("#cur1_" + i).css("display", "inline-block");
+      $("#bagg_price1_" + i).text("");
+      $("#bagg_close1_" + i).css("display", "block");
+      if ($('#bagg1_'+i +'').val() == "5KG(+KRW 8,000)") {
+        $("#bagg_price1_" + i).text("8,000");
+      } else if ($('#bagg1_'+i +'').val() == "10KG(+KRW 16,000)") {
+        $("#bagg_price1_" + i).text("16,000");
+      } else if ($('#bagg1_'+i +'').val() == "15KG(+KRW 24,000)") {
+        $("#bagg_price1_" + i).text("24,000");
+      } else if ($('#bagg1_'+i +'').val() == "20KG(+KRW 32,000)") {
+        $("#bagg_price1_" + i).text("32,000");
+      } else {
+        $("#cur1_" + i).css("display", "none");
+        $("#bagg_price1_" + i).text("");
+        $("#bagg_close1_" + i).css("display", "none");
+      }
+    });
+    $("#bagg_close1_" + i).on("click", function() {
+      $("#cur1_" + i).css("display", "none");
+      $("#bagg_price1_" + i).text("");
+      $('#select_bagg1_' + i + '').text("");
+      $("#bagg_close1_" + i).css("display", "none");
+      $('#bagg1_'+i).val('').prop("selected", true);
+    })
+  }
+
+  // 수하물 선택 구간2
+  let i2 = $(".selectBagg2").length
+  console.log("select 개수 : " + i2)
+  for(let i2 = 0; i2 < $(".selectBagg2").length; i2++) {
+    $('#bagg2_'+i2 +'').change(function () {
+      $('#select_bagg2_' + i2 + '').text($(this).val());
+      $("#cur2_" + i2).css("display", "inline-block");
+      $("#bagg_price2_" + i2).text("");
+      $("#bagg_close2_" + i2).css("display", "block");
+      if ($('#bagg2_'+i2 +'').val() == "5KG(+KRW 8,000)") {
+        $("#bagg_price2_" + i2).text("8,000");
+      } else if ($('#bagg2_'+i2 +'').val() == "10KG(+KRW 16,000)") {
+        $("#bagg_price2_" + i2).text("16,000");
+      } else if ($('#bagg2_'+i2 +'').val() == "15KG(+KRW 24,000)") {
+        $("#bagg_price2_" + i2).text("24,000");
+      } else if ($('#bagg2_'+i2 +'').val() == "20KG(+KRW 32,000)") {
+        $("#bagg_price2_" + i2).text("32,000");
+      } else {
+        $("#cur2_" + i2).css("display", "none");
+        $("#bagg_price2_" + i2).text("");
+        $("#bagg_close2_" + i2).css("display", "none");
+      }
+    });
+    $("#bagg_close2_" + i2).on("click", function() {
+      $("#cur2_" + i2).css("display", "none");
+      $("#bagg_price2_" + i2).text("");
+      $('#select_bagg2_' + i2 + '').text("");
+      $("#bagg_close2_" + i2).css("display", "none");
+      $('#bagg2_'+i2).val('').prop("selected", true);
+    })
+  }
+
+  /*수하물 선택 구간 끝 */
+
+
+  /*보험 선택 구간 */
+
+  for(let i = 0; i < personNumber; i++) {
+
+  }
+  $(".insurance_price .price").text("0");
+  $('.select_product').prop('disabled', true);
+
+  $("#check_ins").change(function () {
+    if ($("#check_ins").is(":checked")) {
+      $(".insurance_price .price").text("3,660");
+      $('#select_product').attr('disabled', false);
+      // prop('readonly', true);
+    } else {
+      $('#select_product').attr("disabled", true);
+      $(".insurance_price .price").text("0");
+    }
+  })
+
+
+  $('#select_product').change(function () {
+    $(".bot_bagg_price2 .price").text(" ");
+    if ($(this).val() == "실속형") {
+      $(".insurance_price .price").text("1,970");
+    } else if ($(this).val() == "표준형") {
+      $(".insurance_price .price").text("3,660");
+    } else if ($(this).val() == "고급형") {
+      $(".insurance_price .price").text("7,040");
+    }
+  });
+
+  $(".ins_join_butt").on("click", function () {
+    if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
+      $("#modal_service_app_wrap").fadeIn();
+      $(".modal_join_ins").fadeIn();
+    }
+    else {
+    }
+  });
+
+  /*보험 선택 구간 끝*/
+
 
 
   /*하단 총액 모달창 */
@@ -1047,9 +1159,9 @@ $(() => {
 /* 비상구 좌석 유의사항안내 모달창 */
 $(() => {
   let block;
-  if ($("passenger_info_wrap1").css("display", "block")) {
+  if ($(".passenger_info_wrap1").css("display", "block")) {
     block = $(".checkPerson").is("b").parents(".passenger_info1");
-  } else if($("passenger_info_wrap1").css("display", "block")) {
+  } else if($(".passenger_info_wrap1").css("display", "block")) {
     block = $(".checkPerson2").is(":checked").parents(".passenger_info2");
   }
 
@@ -1882,7 +1994,6 @@ function updateTrip() {
   $(".arrive_default").attr("value", arr1);
   $(".go_date_default").attr("value", godate);
 }
-
 
 
 
