@@ -250,7 +250,7 @@ $(function () {
                     })
                 }
 
-                let url = "";
+
                 let NumberPage = 0;
                 let last = pagination.totalPages;
 

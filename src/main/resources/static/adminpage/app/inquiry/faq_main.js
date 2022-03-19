@@ -351,11 +351,16 @@ $(function () {
 
 
     // 검색어 데이터
-    // function searchFaq(searchFaq){
-    //     $.get("/api/faq/listsearch/"+searchFaq, function(response){
-    //         tableBoard1.tableBoard1 = response.data;
-    //     });
-    // }
+    function searchFaq(searchFaq){
+        $.get("/api/faq/listsearch/"+searchFaq, function(response){
+            tableBoard.tableBoard = response.data;
+            tableBoard1.tableBoard1 = response.data;
+            tableBoard2.tableBoard2 = response.data;
+            tableBoard3.tableBoard3 = response.data;
+            tableBoard4.tableBoard4 = response.data;
+            tableBoard5.tableBoard5 = response.data;
+        });
+    }
 
     $('#searchFaq').on('click', function (){
         searchFaq($('#searchText').val());
