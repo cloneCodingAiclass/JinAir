@@ -419,13 +419,13 @@ public class PageController {
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
             return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_edit")
                     .addObject("code", "Mypage_edit");
         }else{
             return new ModelAndView("/userpage/pages/index/error")
                     .addObject("code", "add_qna");
         }
-
     }
     @RequestMapping("/index/mypageGetReservationDetail")
     public ModelAndView mypageGetReservationDetail(HttpServletResponse response, HttpServletRequest request, Model model) {

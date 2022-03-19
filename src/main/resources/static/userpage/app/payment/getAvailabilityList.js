@@ -8,40 +8,17 @@ $(() => {
     }
   }
 
-  // // 운임확인
-  // let itemList5 = new Vue({
-  //   el : '#itemList5',
-  //   data : {
-  //     itemList5 : {}
-  //   },
-  //   methods:{
-  //   }
-  // });
-  // let itemList6 = new Vue({
-  //   el : '#itemList6',
-  //   data : {
-  //     itemList6 : {}
-  //   },
-  //   methods:{
-  //
-  //   }
-  // });
-  // function priceChick1(){
-  //   $.get("/api/reservation/"+$('#0').val() , function(response){ // 구간1
-  //     itemList5.itemList5 = response.data;
-  //   });
-  //   $.get("/api/reservation/"+$('#1').val() , function(response){ // 구간2
-  //     itemList6.itemList6 = response.data;
-  //   });
-  // }
-
 
   // 구간 1 선택시(홀수 인덱스)
   let jsonData;
   function price(str, schAirplaneType, schAirplaneName, schStartTime, schEndTime, schDeparturePoint, schArrivalPoint){
     let strrr = str.split(',');
-    let strrrr = `${strrr[0]}${strrr[1]}`;
-
+    let strrrr;
+    if(strrr.length == 3){
+      strrrr = `${strrr[0]}${strrr[1]}${strrr[2]}`;
+    }else{
+      strrrr = `${strrr[0]}${strrr[1]}`;
+    }
     for( let i = 0 ; i < 60; i++){
       if(document.getElementById(`${i}`)){
         if(i%2 == 0){
@@ -97,7 +74,12 @@ $(() => {
   let jsonData1;
   function pricee(str, schAirplaneType, schAirplaneName, schStartTime, schEndTime, schDeparturePoint, schArrivalPoint){
     let strrr = str.split(',');
-    let strrrr = `${strrr[0]}${strrr[1]}`;
+    let strrrr;
+    if(strrr.length == 3){
+      strrrr = `${strrr[0]}${strrr[1]}${strrr[2]}`;
+    }else{
+      strrrr = `${strrr[0]}${strrr[1]}`;
+    }
     for( let i = 0 ; i < 60; i++){
       if(document.getElementById(`${i}`)){
         if(i%2 != 0){
