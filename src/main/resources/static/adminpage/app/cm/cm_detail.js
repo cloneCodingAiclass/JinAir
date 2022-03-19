@@ -116,6 +116,7 @@ $(function () {
 
     search(idx);
     point(idx);
+    couponResult(idx);
 
     function search(index){
         console.log("index : " + index);
@@ -130,16 +131,22 @@ $(function () {
         let sum = 0;
         $.get("/api/point/user/"+index, function (response){
             for(let i = 0; i < response.data.length; i++){
-                console.log(response.data[i].poPoint);
                 let point = response.data[i].poPoint;
-                console.log(point)
-                console.log(typeof point)
                 sum += point;
-                console.log(typeof sum)
-                console.log(sum);
+                $('#point').val(sum.toLocaleString('ko-KR'));
             }
-            $('#point').val(sum);
         })
     }
 
+    function couponResult(idx) {
+        $.get("/api/userCoupon/list/" + idx, function (response) {
+            let coupon;
+            if (response == "") {
+                coupon = "-";
+            } else {
+                coupon = response + "장";
+            }
+            $('#coupon').val(coupon.toLocaleString('ko-KR'));
+        });
+    }
 })(jQuery)

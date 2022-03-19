@@ -1,39 +1,552 @@
 "use strict";
 let str = $(location).attr('href').split('/');
 $(() => {
-  let cookie = [];
+  let personNum = 0
   for( let i = 0 ; i < 60; i++){
     if(document.getElementById(`${i}`)){
-      cookie[i] = $(`#${i}`).val();
-      console.log( $(`#${i}`).val())
+      personNum = personNum + 1;
     }
   }
+
+  // // 운임확인
+  // let itemList5 = new Vue({
+  //   el : '#itemList5',
+  //   data : {
+  //     itemList5 : {}
+  //   },
+  //   methods:{
+  //   }
+  // });
+  // let itemList6 = new Vue({
+  //   el : '#itemList6',
+  //   data : {
+  //     itemList6 : {}
+  //   },
+  //   methods:{
+  //
+  //   }
+  // });
+  // function priceChick1(){
+  //   $.get("/api/reservation/"+$('#0').val() , function(response){ // 구간1
+  //     itemList5.itemList5 = response.data;
+  //   });
+  //   $.get("/api/reservation/"+$('#1').val() , function(response){ // 구간2
+  //     itemList6.itemList6 = response.data;
+  //   });
+  // }
+
+
+  // 구간 1 선택시(홀수 인덱스)
+  let jsonData;
+  function price(str, schAirplaneType, schAirplaneName, schStartTime, schEndTime, schDeparturePoint, schArrivalPoint){
+    let strrr = str.split(',');
+    let strrrr = `${strrr[0]}${strrr[1]}`;
+
+    for( let i = 0 ; i < 60; i++){
+      if(document.getElementById(`${i}`)){
+        if(i%2 == 0){
+          jsonData = {
+            data : {
+              reIndex : $(`#${i}`).val(),
+              reStatus: "Progress",
+              reSchBasicPrice: strrrr,
+              reSchDepPoint : schDeparturePoint,
+              reSchArrPoint : schArrivalPoint,
+              reSchStartTime : schStartTime,
+              reSchEndTime : schEndTime,
+              reAirplainType : schAirplaneType,
+              reSchName : schAirplaneName
+            }
+          }
+          $.ajax({
+            url : "/api/reservation",
+            type : "PUT",
+            data : JSON.stringify(jsonData),
+            dataType : "text",
+            contentType : "application/json"
+          });
+        }
+      }
+    }
+    $('.itemList5_price').val(Number(strrrr) * (personNum/2));
+    $('.price_tit1').val(Number(5000) * (personNum/2));
+    $('.price_tax1').val(Number(4000) * (personNum/2));
+    $('.tot_price1').html((Number($('.itemList5_price').val())+Number($('.itemList6_price').val())).toLocaleString('ko-KR'));
+    $('.tot_price2').html((Number($('.price_tit1').val())+Number($('.price_tit2').val())).toLocaleString('ko-KR'));
+    $('.tot_price3').html((Number($('.price_tax1').val())+Number($('.price_tax2').val())).toLocaleString('ko-KR'));
+    $('.total_price').html((
+        Number($('.itemList5_price').val())+Number($('.itemList6_price').val())+
+        Number($('.price_tit1').val())+Number($('.price_tit2').val())+
+        Number($('.price_tax1').val())+Number($('.price_tax2').val())
+    ).toLocaleString('ko-KR'));
+    $('.tot_price11').html((Number($('.itemList5_price').val())+Number($('.itemList6_price').val())).toLocaleString('ko-KR'));
+    $('.tot_price22').html((Number($('.price_tit1').val())+Number($('.price_tit2').val())).toLocaleString('ko-KR'));
+    $('.tot_price33').html((Number($('.price_tax1').val())+Number($('.price_tax2').val())).toLocaleString('ko-KR'));
+    $('.finaltotalpricee').html((Number($('.itemList5_price').val())+Number($('.itemList6_price').val())).toLocaleString('ko-KR'));
+    $('.strrr1').html((Number(strrrr) * (personNum/2)).toLocaleString('ko-KR'));
+    $('.way1_tit').html((Number(5000) * (personNum/2)).toLocaleString('ko-KR'));
+    $('.final_tit').html((Number($('.price_tit1').val())+Number($('.price_tit2').val())).toLocaleString('ko-KR'));
+    $('.taxpriceprint').html((Number($('.price_tax1').val())+Number($('.price_tax2').val())).toLocaleString('ko-KR'));
+    $('.finaltotalprice').html((
+        Number($('.itemList5_price').val())+Number($('.itemList6_price').val())+
+        Number($('.price_tit1').val())+Number($('.price_tit2').val())+
+        Number($('.price_tax1').val())+Number($('.price_tax2').val())
+    ).toLocaleString('ko-KR'));
+  }
+  // 구간 2 선택시(짝수 인덱스)
+  let jsonData1;
+  function pricee(str, schAirplaneType, schAirplaneName, schStartTime, schEndTime, schDeparturePoint, schArrivalPoint){
+    let strrr = str.split(',');
+    let strrrr = `${strrr[0]}${strrr[1]}`;
+    for( let i = 0 ; i < 60; i++){
+      if(document.getElementById(`${i}`)){
+        if(i%2 != 0){
+          jsonData1 = {
+            data : {
+              reIndex : $(`#${i}`).val(),
+              reStatus: "Progress",
+              reSchBasicPrice: strrrr,
+              reSchDepPoint : schDeparturePoint,
+              reSchArrPoint : schArrivalPoint,
+              reSchStartTime : schStartTime,
+              reSchEndTime : schEndTime,
+              reAirplainType : schAirplaneType,
+              reSchName : schAirplaneName
+            }
+          }
+          $.ajax({
+            url : "/api/reservation",
+            type : "PUT",
+            data : JSON.stringify(jsonData1),
+            dataType : "text",
+            contentType : "application/json"
+          });
+        }
+      }
+    }
+    $('.itemList6_price').val(Number(strrrr) * (personNum/2));
+    $('.price_tit2').val(Number(5000) * (personNum/2));
+    $('.price_tax2').val(Number(4000) * (personNum/2));
+    $('.tot_price1').html((Number($('.itemList5_price').val())+Number($('.itemList6_price').val())).toLocaleString('ko-KR'));
+    $('.tot_price2').html((Number($('.price_tit1').val())+Number($('.price_tit2').val())).toLocaleString('ko-KR'));
+    $('.tot_price3').html((Number($('.price_tax1').val())+Number($('.price_tax2').val())).toLocaleString('ko-KR'));
+    $('.total_price').html((
+        Number($('.itemList5_price').val())+Number($('.itemList6_price').val())+
+        Number($('.price_tit1').val())+Number($('.price_tit2').val())+
+        Number($('.price_tax1').val())+Number($('.price_tax2').val())
+    ).toLocaleString('ko-KR'));
+    $('.tot_price11').html((Number($('.itemList5_price').val())+Number($('.itemList6_price').val())).toLocaleString('ko-KR'));
+    $('.tot_price22').html((Number($('.price_tit1').val())+Number($('.price_tit2').val())).toLocaleString('ko-KR'));
+    $('.tot_price33').html((Number($('.price_tax1').val())+Number($('.price_tax2').val())).toLocaleString('ko-KR'));
+    $('.finaltotalpricee').html((Number($('.itemList5_price').val())+Number($('.itemList6_price').val())).toLocaleString('ko-KR'));
+    $('.strrr2').html((Number(strrrr) * (personNum/2)).toLocaleString('ko-KR'));
+    $('.way2_tit').html((Number(5000) * (personNum/2)).toLocaleString('ko-KR'));
+    $('.final_tit').html((Number($('.price_tit1').val())+Number($('.price_tit2').val())).toLocaleString('ko-KR'));
+    $('.taxpriceprint').html((Number($('.price_tax1').val())+Number($('.price_tax2').val())).toLocaleString('ko-KR'));
+    $('.finaltotalprice').html((
+        Number($('.itemList5_price').val())+Number($('.itemList6_price').val())+
+        Number($('.price_tit1').val())+Number($('.price_tit2').val())+
+        Number($('.price_tax1').val())+Number($('.price_tax2').val())
+    ).toLocaleString('ko-KR'));
+  }
+
+
   // 구간1
   let itemList1 = new Vue({
     el : '#itemList1',
     data : {
-      itemList1 : {}
+      itemList1 : {},
+      preNum : 1000
     },
     methods:{
       crr_open : function (){
         $(".crr_modal").fadeIn(200);
         $("body").css("overflow", "hidden");
+      },
+      price_wrap1 : function (index){
+          if(this.preNum == index){
+            $(`.price_wrap1${index}`).css({"color":"white"})
+            $(`.price_wrap1${index}`).css({"backgroundColor":"#661e43"})
+            $(`.price_wrap2${this.preNum}`).css({"color":"black"})
+            $(`.price_wrap2${this.preNum}`).css({"backgroundColor":"white"})
+            $(`.price_wrap3${this.preNum}`).css({"color":"black"})
+            $(`.price_wrap3${this.preNum}`).css({"backgroundColor":"white"})
+            this.preNum = 1000
+            $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
+            $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+            $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+            $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
+            $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+
+            price($(`.price_wrap1${index}`).children('.date_price').html(),
+                itemList1.itemList1[index].schAirplaneType,
+                itemList1.itemList1[index].schAirplaneName,
+                itemList1.itemList1[index].schStartTime,
+                itemList1.itemList1[index].schArrivalDate,
+                itemList1.itemList1[index].schDeparturePoint,
+                itemList1.itemList1[index].schArrivalPoint,
+            );
+            window.scrollTo({
+              top: $('.air_list2_wrap').offset().top - 90,
+              behavior: 'smooth'
+            });
+          }else{
+            $(`.price_wrap1${index}`).css({"color":"white"})
+            $(`.price_wrap1${index}`).css({"backgroundColor":"#661e43"})
+            $(`.price_wrap2${index}`).css({"color":"black"})
+            $(`.price_wrap2${index}`).css({"backgroundColor":"white"})
+            $(`.price_wrap3${index}`).css({"color":"black"})
+            $(`.price_wrap3${index}`).css({"backgroundColor":"white"})
+            $(`.price_wrap1${this.preNum}`).css({"color":"black"})
+            $(`.price_wrap1${this.preNum}`).css({"backgroundColor":"white"})
+            $(`.price_wrap2${this.preNum}`).css({"color":"black"})
+            $(`.price_wrap2${this.preNum}`).css({"backgroundColor":"white"})
+            $(`.price_wrap3${this.preNum}`).css({"color":"black"})
+            $(`.price_wrap3${this.preNum}`).css({"backgroundColor":"white"})
+            this.preNum = index;
+            $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
+            $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+            $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+            $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
+            $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+
+            price($(`.price_wrap1${index}`).children('.date_price').html(),
+                itemList1.itemList1[index].schAirplaneType,
+                itemList1.itemList1[index].schAirplaneName,
+                itemList1.itemList1[index].schStartTime,
+                itemList1.itemList1[index].schArrivalDate,
+                itemList1.itemList1[index].schDeparturePoint,
+                itemList1.itemList1[index].schArrivalPoint,
+            );
+            window.scrollTo({
+              top: $('.air_list2_wrap').offset().top - 90,
+              behavior: 'smooth'
+            });
+          }
+      },
+      price_wrap2 : function (index){
+        if(this.preNum == index){
+          $(`.price_wrap2${index}`).css({"color":"white"})
+          $(`.price_wrap2${index}`).css({"backgroundColor":"#661e43"})
+          $(`.price_wrap1${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap1${this.preNum}`).css({"backgroundColor":"white"})
+          $(`.price_wrap3${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap3${this.preNum}`).css({"backgroundColor":"white"})
+          this.preNum = 1000
+          $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
+          $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+          $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+          $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
+          $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+
+          price($(`.price_wrap2${index}`).children('.date_price').html(),
+              itemList1.itemList1[index].schAirplaneType,
+              itemList1.itemList1[index].schAirplaneName,
+              itemList1.itemList1[index].schStartTime,
+              itemList1.itemList1[index].schArrivalDate,
+              itemList1.itemList1[index].schDeparturePoint,
+              itemList1.itemList1[index].schArrivalPoint,
+          );
+          window.scrollTo({
+            top: $('.air_list2_wrap').offset().top - 90,
+            behavior: 'smooth'
+          });
+        }else{
+          $(`.price_wrap2${index}`).css({"color":"white"})
+          $(`.price_wrap2${index}`).css({"backgroundColor":"#661e43"})
+          $(`.price_wrap1${index}`).css({"color":"black"})
+          $(`.price_wrap1${index}`).css({"backgroundColor":"white"})
+          $(`.price_wrap3${index}`).css({"color":"black"})
+          $(`.price_wrap3${index}`).css({"backgroundColor":"white"})
+          $(`.price_wrap1${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap1${this.preNum}`).css({"backgroundColor":"white"})
+          $(`.price_wrap2${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap2${this.preNum}`).css({"backgroundColor":"white"})
+          $(`.price_wrap3${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap3${this.preNum}`).css({"backgroundColor":"white"})
+          this.preNum = index
+          $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
+          $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+          $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+          $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
+          $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+
+          price($(`.price_wrap2${index}`).children('.date_price').html(),
+              itemList1.itemList1[index].schAirplaneType,
+              itemList1.itemList1[index].schAirplaneName,
+              itemList1.itemList1[index].schStartTime,
+              itemList1.itemList1[index].schArrivalDate,
+              itemList1.itemList1[index].schDeparturePoint,
+              itemList1.itemList1[index].schArrivalPoint,
+          );
+          window.scrollTo({
+            top: $('.air_list2_wrap').offset().top - 90,
+            behavior: 'smooth'
+          });
+         }
+        },
+      price_wrap3 : function (index){
+        if(this.preNum == index){
+          $(`.price_wrap3${index}`).css({"color": "white"})
+          $(`.price_wrap3${index}`).css({"backgroundColor": "#661e43"})
+          $(`.price_wrap1${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap1${this.preNum}`).css({"backgroundColor":"white"})
+          $(`.price_wrap2${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap2${this.preNum}`).css({"backgroundColor":"white"})
+          this.preNum = 1000
+          $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
+          $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+          $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+          $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
+          $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+
+          price($(`.price_wrap3${index}`).children('.date_price').html(),
+              itemList1.itemList1[index].schAirplaneType,
+              itemList1.itemList1[index].schAirplaneName,
+              itemList1.itemList1[index].schStartTime,
+              itemList1.itemList1[index].schArrivalDate,
+              itemList1.itemList1[index].schDeparturePoint,
+              itemList1.itemList1[index].schArrivalPoint,
+          );
+          window.scrollTo({
+            top: $('.air_list2_wrap').offset().top - 90,
+            behavior: 'smooth'
+          });
+        }else {
+          $(`.price_wrap3${index}`).css({"color": "white"})
+          $(`.price_wrap3${index}`).css({"backgroundColor": "#661e43"})
+          $(`.price_wrap1${index}`).css({"color": "black"})
+          $(`.price_wrap1${index}`).css({"backgroundColor": "white"})
+          $(`.price_wrap2${index}`).css({"color": "black"})
+          $(`.price_wrap2${index}`).css({"backgroundColor": "white"})
+          $(`.price_wrap1${this.preNum}`).css({"color": "black"})
+          $(`.price_wrap1${this.preNum}`).css({"backgroundColor": "white"})
+          $(`.price_wrap2${this.preNum}`).css({"color": "black"})
+          $(`.price_wrap2${this.preNum}`).css({"backgroundColor": "white"})
+          $(`.price_wrap3${this.preNum}`).css({"color": "black"})
+          $(`.price_wrap3${this.preNum}`).css({"backgroundColor": "white"})
+          this.preNum = index
+          $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
+          $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+          $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+          $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
+          $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+
+          price($(`.price_wrap3${index}`).children('.date_price').html(),
+              itemList1.itemList1[index].schAirplaneType,
+              itemList1.itemList1[index].schAirplaneName,
+              itemList1.itemList1[index].schStartTime,
+              itemList1.itemList1[index].schArrivalDate,
+              itemList1.itemList1[index].schDeparturePoint,
+              itemList1.itemList1[index].schArrivalPoint,
+          );
+          window.scrollTo({
+            top: $('.air_list2_wrap').offset().top - 90,
+            behavior: 'smooth'
+          });
+        }
       }
     }
   });
+
   // 구간2
   let itemList2 = new Vue({
     el : '#itemList2',
     data : {
-      itemList2 : {}
+      itemList2 : {},
+      preNum : 1000
     },
     methods:{
       crr_open : function (){
         $(".crr_modal").fadeIn(200);
         $("body").css("overflow", "hidden");
+      },
+      price_wrap4 : function (index){
+        if(this.preNum == index){
+          $(`.price_wrap4${index}`).css({"color":"white"})
+          $(`.price_wrap4${index}`).css({"backgroundColor":"#661e43"})
+          $(`.price_wrap5${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap5${this.preNum}`).css({"backgroundColor":"white"})
+          $(`.price_wrap6${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap6${this.preNum}`).css({"backgroundColor":"white"})
+          this.preNum = 1000
+          $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
+          $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+          $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+          $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
+          $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+
+          pricee($(`.price_wrap4${index}`).children('.date_price').html(),
+              itemList2.itemList2[index].schAirplaneType,
+              itemList2.itemList2[index].schAirplaneName,
+              itemList2.itemList2[index].schStartTime,
+              itemList2.itemList2[index].schArrivalDate,
+              itemList2.itemList2[index].schDeparturePoint,
+              itemList2.itemList2[index].schArrivalPoint,
+          );
+          window.scrollTo({
+            top: $('.fare_wrap').offset().top - 120,
+            behavior: 'smooth'
+          });
+        }else{
+          $(`.price_wrap4${index}`).css({"color":"white"})
+          $(`.price_wrap4${index}`).css({"backgroundColor":"#661e43"})
+          $(`.price_wrap5${index}`).css({"color":"black"})
+          $(`.price_wrap5${index}`).css({"backgroundColor":"white"})
+          $(`.price_wrap6${index}`).css({"color":"black"})
+          $(`.price_wrap6${index}`).css({"backgroundColor":"white"})
+          $(`.price_wrap4${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap4${this.preNum}`).css({"backgroundColor":"white"})
+          $(`.price_wrap5${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap5${this.preNum}`).css({"backgroundColor":"white"})
+          $(`.price_wrap6${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap6${this.preNum}`).css({"backgroundColor":"white"})
+          this.preNum = index
+          $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
+          $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+          $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+          $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
+          $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+
+          pricee($(`.price_wrap4${index}`).children('.date_price').html(),
+              itemList2.itemList2[index].schAirplaneType,
+              itemList2.itemList2[index].schAirplaneName,
+              itemList2.itemList2[index].schStartTime,
+              itemList2.itemList2[index].schArrivalDate,
+              itemList2.itemList2[index].schDeparturePoint,
+              itemList2.itemList2[index].schArrivalPoint,
+          );
+          window.scrollTo({
+            top: $('.fare_wrap').offset().top - 120,
+            behavior: 'smooth'
+          });
+        }
+      },
+      price_wrap5 : function (index){
+        if(this.preNum == index){
+          $(`.price_wrap5${index}`).css({"color":"white"})
+          $(`.price_wrap5${index}`).css({"backgroundColor":"#661e43"})
+          $(`.price_wrap4${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap4${this.preNum}`).css({"backgroundColor":"white"})
+          $(`.price_wrap6${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap6${this.preNum}`).css({"backgroundColor":"white"})
+          this.preNum = 1000
+          $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
+          $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+          $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+          $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
+          $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+
+          pricee($(`.price_wrap5${index}`).children('.date_price').html(),
+              itemList2.itemList2[index].schAirplaneType,
+              itemList2.itemList2[index].schAirplaneName,
+              itemList2.itemList2[index].schStartTime,
+              itemList2.itemList2[index].schArrivalDate,
+              itemList2.itemList2[index].schDeparturePoint,
+              itemList2.itemList2[index].schArrivalPoint,
+          );
+          window.scrollTo({
+            top: $('.fare_wrap').offset().top - 120,
+            behavior: 'smooth'
+          });
+        }else{
+          $(`.price_wrap5${index}`).css({"color":"white"})
+          $(`.price_wrap5${index}`).css({"backgroundColor":"#661e43"})
+          $(`.price_wrap4${index}`).css({"color":"black"})
+          $(`.price_wrap4${index}`).css({"backgroundColor":"white"})
+          $(`.price_wrap6${index}`).css({"color":"black"})
+          $(`.price_wrap6${index}`).css({"backgroundColor":"white"})
+          $(`.price_wrap4${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap4${this.preNum}`).css({"backgroundColor":"white"})
+          $(`.price_wrap5${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap5${this.preNum}`).css({"backgroundColor":"white"})
+          $(`.price_wrap6${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap6${this.preNum}`).css({"backgroundColor":"white"})
+          this.preNum = index
+          $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
+          $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+          $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+          $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
+          $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+
+          pricee($(`.price_wrap5${index}`).children('.date_price').html(),
+              itemList2.itemList2[index].schAirplaneType,
+              itemList2.itemList2[index].schAirplaneName,
+              itemList2.itemList2[index].schStartTime,
+              itemList2.itemList2[index].schArrivalDate,
+              itemList2.itemList2[index].schDeparturePoint,
+              itemList2.itemList2[index].schArrivalPoint,
+          );
+          window.scrollTo({
+            top: $('.fare_wrap').offset().top - 120,
+            behavior: 'smooth'
+          });
+        }
+      },
+      price_wrap6 : function (index){
+        if(this.preNum == index){
+          $(`.price_wrap6${index}`).css({"color": "white"})
+          $(`.price_wrap6${index}`).css({"backgroundColor": "#661e43"})
+          $(`.price_wrap4${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap4${this.preNum}`).css({"backgroundColor":"white"})
+          $(`.price_wrap5${this.preNum}`).css({"color":"black"})
+          $(`.price_wrap5${this.preNum}`).css({"backgroundColor":"white"})
+          this.preNum = 1000
+          $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
+          $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+          $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+          $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
+          $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+
+          pricee($(`.price_wrap6${index}`).children('.date_price').html(),
+              itemList2.itemList2[index].schAirplaneType,
+              itemList2.itemList2[index].schAirplaneName,
+              itemList2.itemList2[index].schStartTime,
+              itemList2.itemList2[index].schArrivalDate,
+              itemList2.itemList2[index].schDeparturePoint,
+              itemList2.itemList2[index].schArrivalPoint,
+          );
+          window.scrollTo({
+            top: $('.fare_wrap').offset().top - 120,
+            behavior: 'smooth'
+          });
+        }else {
+          $(`.price_wrap6${index}`).css({"color": "white"})
+          $(`.price_wrap6${index}`).css({"backgroundColor": "#661e43"})
+          $(`.price_wrap4${index}`).css({"color": "black"})
+          $(`.price_wrap4${index}`).css({"backgroundColor": "white"})
+          $(`.price_wrap5${index}`).css({"color": "black"})
+          $(`.price_wrap5${index}`).css({"backgroundColor": "white"})
+          $(`.price_wrap4${this.preNum}`).css({"color": "black"})
+          $(`.price_wrap4${this.preNum}`).css({"backgroundColor": "white"})
+          $(`.price_wrap5${this.preNum}`).css({"color": "black"})
+          $(`.price_wrap5${this.preNum}`).css({"backgroundColor": "white"})
+          $(`.price_wrap6${this.preNum}`).css({"color": "black"})
+          $(`.price_wrap6${this.preNum}`).css({"backgroundColor": "white"})
+          this.preNum = index
+          $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
+          $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+          $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+          $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
+          $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+
+          pricee($(`.price_wrap6${index}`).children('.date_price').html(),
+              itemList2.itemList2[index].schAirplaneType,
+              itemList2.itemList2[index].schAirplaneName,
+              itemList2.itemList2[index].schStartTime,
+              itemList2.itemList2[index].schArrivalDate,
+              itemList2.itemList2[index].schDeparturePoint,
+              itemList2.itemList2[index].schArrivalPoint,
+          );
+          window.scrollTo({
+            top: $('.fare_wrap').offset().top - 120,
+            behavior: 'smooth'
+          });
+        }
       }
     }
   });
+
 
   // 구간1
   function goSearch(schDeparturePoint, schArrivalPoint, goDateSelectOptt){
@@ -357,6 +870,8 @@ $(() => {
     $('.text_way').html('편도');
     $('.trip_info2').css('display', 'none');
     $(".arrow_img").css('display', 'none');
+    $('.jour2').css('visibility', 'hidden');
+    $('.onewaywww').css('display', 'none');
     // 처음 받아온 기본 데이터 넣기
     goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(),$('#goDateSelectOptt').val());
     // 날짜 눌렀을때 데이터
@@ -1027,6 +1542,193 @@ $(function () {
   $(".date5").html(sel_date5);
   $(".date6").html(sel_date6);
 
+
+  let str0 = sel_date0.split('-')
+  if(str0[1].length == 1){
+    str0[1] = `0${str0[1]}`
+  }
+  if(str0[2].length == 4){
+    str0[2] = `0${str0[2]}`
+  }
+  let strr0 = `${str0[0]}-${str0[1]}-${str0[2].substring(0,2)}`
+
+  let str1 = sel_date1.split('-')
+  if(str1[1].length == 1){
+    str1[1] = `0${str1[1]}`
+  }
+  if(str1[2].length == 4){
+    str1[2] = `0${str1[2]}`
+  }
+  let strr1 = `${str1[0]}-${str1[1]}-${str1[2].substring(0,2)}`
+
+  let str2 = sel_date2.split('-')
+  if(str2[1].length == 1){
+    str2[1] = `0${str2[1]}`
+  }
+  if(str2[2].length == 4){
+    str2[2] = `0${str2[2]}`
+  }
+  let strr2 = `${str2[0]}-${str2[1]}-${str2[2].substring(0,2)}`
+
+  let str3 = sel_date3.split('-')
+  if(str3[1].length == 1){
+    str3[1] = `0${str3[1]}`
+  }
+  if(str3[2].length == 4){
+    str3[2] = `0${str3[2]}`
+  }
+  let strr3 = `${str3[0]}-${str3[1]}-${str3[2].substring(0,2)}`
+
+  let str4 = sel_date4.split('-')
+  if(str4[1].length == 1){
+    str4[1] = `0${str4[1]}`
+  }
+  if(str4[2].length == 4){
+    str4[2] = `0${str4[2]}`
+  }
+  let strr4 = `${str4[0]}-${str4[1]}-${str4[2].substring(0,2)}`
+
+  let str5 = sel_date5.split('-')
+  if(str5[1].length == 1){
+    str5[1] = `0${str5[1]}`
+  }
+  if(str5[2].length == 4){
+    str5[2] = `0${str5[2]}`
+  }
+  let strr5 = `${str5[0]}-${str5[1]}-${str5[2].substring(0,2)}`
+
+  let str6 = sel_date6.split('-')
+  if(str6[1].length == 1){
+    str6[1] = `0${str6[1]}`
+  }
+  if(str6[2].length == 4){
+    str6[2] = `0${str6[2]}`
+  }
+  let strr6 = `${str6[0]}-${str6[1]}-${str6[2].substring(0,2)}`
+
+  searchStart0(strr0);
+  searchStart1(strr1);
+  searchStart2(strr2);
+  searchStart3(strr3);
+  searchStart4(strr4);
+  searchStart5(strr5);
+  searchStart6(strr6);
+
+  function searchStart0(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area').html() + "&schArrivalPoint=" + $('.arr_area').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#date0").html('-');
+          $("#date0").siblings('.curr').css('display', 'none');
+        }else{
+          $("#date0").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStart1(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area').html() + "&schArrivalPoint=" + $('.arr_area').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#date1").html('-');
+          $("#date1").siblings('.curr').css('display', 'none');
+        }else{
+          $("#date1").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStart2(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area').html() + "&schArrivalPoint=" + $('.arr_area').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#date2").html('-');
+          $("#date2").siblings('.curr').css('display', 'none');
+        }else{
+          $("#date2").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStart3(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area').html() + "&schArrivalPoint=" + $('.arr_area').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#date3").html('-');
+          $("#date3").siblings('.curr').css('display', 'none');
+        }else{
+          $("#date3").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStart4(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area').html() + "&schArrivalPoint=" + $('.arr_area').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#date4").html('-');
+          $("#date4").siblings('.curr').css('display', 'none');
+        }else{
+          $("#date4").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStart5(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area').html() + "&schArrivalPoint=" + $('.arr_area').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#date5").html('-');
+          $("#date5").siblings('.curr').css('display', 'none');
+        }else{
+          $("#date5").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStart6(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area').html() + "&schArrivalPoint=" + $('.arr_area').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#date6").html('-');
+          $("#date6").siblings('.curr').css('display', 'none');
+        }else{
+          $("#date6").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+
+
+
   $(".date0").on("click", function () {
     res = $(".date0").html();
     set_day(res);
@@ -1103,6 +1805,193 @@ $(function () {
   $(".dating4").html(sel_dating4);
   $(".dating5").html(sel_dating5);
   $(".dating6").html(sel_dating6);
+
+  if(str[5] != 'oneway'){
+    let string0 = sel_dating0.split('-')
+    if(string0[1].length == 1){
+      string0[1] = `0${string0[1]}`
+    }
+    if(string0[2].length == 4){
+      string0[2] = `0${string0[2]}`
+    }
+    let strring0 = `${string0[0]}-${string0[1]}-${string0[2].substring(0,2)}`
+
+    let string1 = sel_dating1.split('-')
+    if(string1[1].length == 1){
+      string1[1] = `0${string1[1]}`
+    }
+    if(string1[2].length == 4){
+      string1[2] = `0${string1[2]}`
+    }
+    let strring1 = `${string1[0]}-${string1[1]}-${string1[2].substring(0,2)}`
+
+    let string2 = sel_dating2.split('-')
+    if(string2[1].length == 1){
+      string2[1] = `0${string2[1]}`
+    }
+    if(string2[2].length == 4){
+      string2[2] = `0${string2[2]}`
+    }
+    let strring2 = `${string2[0]}-${string2[1]}-${string2[2].substring(0,2)}`
+
+    let string3 = sel_dating3.split('-')
+    if(string3[1].length == 1){
+      string3[1] = `0${string3[1]}`
+    }
+    if(string3[2].length == 4){
+      string3[2] = `0${string3[2]}`
+    }
+    let strring3 = `${string3[0]}-${string3[1]}-${string3[2].substring(0,2)}`
+
+    let string4 = sel_dating4.split('-')
+    if(string4[1].length == 1){
+      string4[1] = `0${string4[1]}`
+    }
+    if(string4[2].length == 4){
+      string4[2] = `0${string4[2]}`
+    }
+    let strring4 = `${string4[0]}-${string4[1]}-${string4[2].substring(0,2)}`
+
+    let string5 = sel_dating5.split('-')
+    if(string5[1].length == 1){
+      string5[1] = `0${string5[1]}`
+    }
+    if(string5[2].length == 4){
+      string5[2] = `0${string5[2]}`
+    }
+    let strring5 = `${string5[0]}-${string5[1]}-${string5[2].substring(0,2)}`
+
+    let string6 = sel_dating6.split('-')
+    if(string6[1].length == 1){
+      string6[1] = `0${string6[1]}`
+    }
+    if(string6[2].length == 4){
+      string6[2] = `0${string6[2]}`
+    }
+    let strring6 = `${string6[0]}-${string6[1]}-${string6[2].substring(0,2)}`
+
+    searchStaring0(strring0);
+    searchStarting1(strring1);
+    searchStarting2(strring2);
+    searchStarting3(strring3);
+    searchStarting4(strring4);
+    searchStarting5(strring5);
+    searchStarting6(strring6);
+
+    function searchStaring0(strr){
+      $.post({
+        url: "/api/schedule/price",
+        data: "schDeparturePoint=" + $('.dep_area1').html() + "&schArrivalPoint=" + $('.arr_area1').html() + "&goDateSelectOptt=" + strr,
+        dataType: "text",
+        success: function (response) {
+          let dataJson = JSON.parse(response)
+          if(dataJson.data == 0){
+            $("#dating0").html('-');
+            $("#dating0").siblings('.curr').css('display', 'none');
+          }else{
+            $("#dating0").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+          }
+        }
+      })
+    }
+    function searchStarting1(strr){
+      $.post({
+        url: "/api/schedule/price",
+        data: "schDeparturePoint=" + $('.dep_area1').html() + "&schArrivalPoint=" + $('.arr_area1').html() + "&goDateSelectOptt=" + strr,
+        dataType: "text",
+        success: function (response) {
+          let dataJson = JSON.parse(response)
+          if(dataJson.data == 0){
+            $("#dating1").html('-');
+            $("#dating1").siblings('.curr').css('display', 'none');
+          }else{
+            $("#dating1").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+          }
+        }
+      })
+    }
+    function searchStarting2(strr){
+      $.post({
+        url: "/api/schedule/price",
+        data: "schDeparturePoint=" + $('.dep_area1').html() + "&schArrivalPoint=" + $('.arr_area1').html() + "&goDateSelectOptt=" + strr,
+        dataType: "text",
+        success: function (response) {
+          let dataJson = JSON.parse(response)
+          if(dataJson.data == 0){
+            $("#dating2").html('-');
+            $("#dating2").siblings('.curr').css('display', 'none');
+          }else{
+            $("#dating2").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+          }
+        }
+      })
+    }
+    function searchStarting3(strr){
+      $.post({
+        url: "/api/schedule/price",
+        data: "schDeparturePoint=" + $('.dep_area1').html() + "&schArrivalPoint=" + $('.arr_area1').html() + "&goDateSelectOptt=" + strr,
+        dataType: "text",
+        success: function (response) {
+          let dataJson = JSON.parse(response)
+          if(dataJson.data == 0){
+            $("#dating3").html('-');
+            $("#dating3").siblings('.curr').css('display', 'none');
+          }else{
+            $("#dating3").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+          }
+        }
+      })
+    }
+    function searchStarting4(strr){
+      $.post({
+        url: "/api/schedule/price",
+        data: "schDeparturePoint=" + $('.dep_area1').html() + "&schArrivalPoint=" + $('.arr_area1').html() + "&goDateSelectOptt=" + strr,
+        dataType: "text",
+        success: function (response) {
+          let dataJson = JSON.parse(response)
+          if(dataJson.data == 0){
+            $("#dating4").html('-');
+            $("#dating4").siblings('.curr').css('display', 'none');
+          }else{
+            $("#dating4").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+          }
+        }
+      })
+    }
+    function searchStarting5(strr){
+      $.post({
+        url: "/api/schedule/price",
+        data: "schDeparturePoint=" + $('.dep_area1').html() + "&schArrivalPoint=" + $('.arr_area1').html() + "&goDateSelectOptt=" + strr,
+        dataType: "text",
+        success: function (response) {
+          let dataJson = JSON.parse(response)
+          if(dataJson.data == 0){
+            $("#dating5").html('-');
+            $("#dating5").siblings('.curr').css('display', 'none');
+          }else{
+            $("#dating5").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+          }
+        }
+      })
+    }
+    function searchStarting6(strr){
+      $.post({
+        url: "/api/schedule/price",
+        data: "schDeparturePoint=" + $('.dep_area1').html() + "&schArrivalPoint=" + $('.arr_area1').html() + "&goDateSelectOptt=" + strr,
+        dataType: "text",
+        success: function (response) {
+          let dataJson = JSON.parse(response)
+          if(dataJson.data == 0){
+            $("#dating6").html('-');
+            $("#dating6").siblings('.curr').css('display', 'none');
+          }else{
+            $("#dating6").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+          }
+        }
+      })
+    }
+  }
+
 
   $(".dating0").on("click", function () {
     ress = $(".dating0").html();
@@ -1184,6 +2073,190 @@ function set_day(res) {
   $(".date4").html(sel_date4);
   $(".date5").html(sel_date5);
   $(".date6").html(sel_date6);
+
+  let str0 = sel_date0.split('-')
+  if(str0[1].length == 1){
+    str0[1] = `0${str0[1]}`
+  }
+  if(str0[2].length == 4){
+    str0[2] = `0${str0[2]}`
+  }
+  let strr0 = `${str0[0]}-${str0[1]}-${str0[2].substring(0,2)}`
+
+  let str1 = sel_date1.split('-')
+  if(str1[1].length == 1){
+    str1[1] = `0${str1[1]}`
+  }
+  if(str1[2].length == 4){
+    str1[2] = `0${str1[2]}`
+  }
+  let strr1 = `${str1[0]}-${str1[1]}-${str1[2].substring(0,2)}`
+
+  let str2 = sel_date2.split('-')
+  if(str2[1].length == 1){
+    str2[1] = `0${str2[1]}`
+  }
+  if(str2[2].length == 4){
+    str2[2] = `0${str2[2]}`
+  }
+  let strr2 = `${str2[0]}-${str2[1]}-${str2[2].substring(0,2)}`
+
+  let str3 = sel_date3.split('-')
+  if(str3[1].length == 1){
+    str3[1] = `0${str3[1]}`
+  }
+  if(str3[2].length == 4){
+    str3[2] = `0${str3[2]}`
+  }
+  let strr3 = `${str3[0]}-${str3[1]}-${str3[2].substring(0,2)}`
+
+  let str4 = sel_date4.split('-')
+  if(str4[1].length == 1){
+    str4[1] = `0${str4[1]}`
+  }
+  if(str4[2].length == 4){
+    str4[2] = `0${str4[2]}`
+  }
+  let strr4 = `${str4[0]}-${str4[1]}-${str4[2].substring(0,2)}`
+
+  let str5 = sel_date5.split('-')
+  if(str5[1].length == 1){
+    str5[1] = `0${str5[1]}`
+  }
+  if(str5[2].length == 4){
+    str5[2] = `0${str5[2]}`
+  }
+  let strr5 = `${str5[0]}-${str5[1]}-${str5[2].substring(0,2)}`
+
+  let str6 = sel_date6.split('-')
+  if(str6[1].length == 1){
+    str6[1] = `0${str6[1]}`
+  }
+  if(str6[2].length == 4){
+    str6[2] = `0${str6[2]}`
+  }
+  let strr6 = `${str6[0]}-${str6[1]}-${str6[2].substring(0,2)}`
+
+  searchStart0(strr0);
+  searchStart1(strr1);
+  searchStart2(strr2);
+  searchStart3(strr3);
+  searchStart4(strr4);
+  searchStart5(strr5);
+  searchStart6(strr6);
+
+  function searchStart0(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area').html() + "&schArrivalPoint=" + $('.arr_area').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#date0").html('-');
+          $("#date0").siblings('.curr').css('display', 'none');
+        }else{
+          $("#date0").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStart1(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area').html() + "&schArrivalPoint=" + $('.arr_area').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#date1").html('-');
+          $("#date1").siblings('.curr').css('display', 'none');
+        }else{
+          $("#date1").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStart2(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area').html() + "&schArrivalPoint=" + $('.arr_area').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#date2").html('-');
+          $("#date2").siblings('.curr').css('display', 'none');
+        }else{
+          $("#date2").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStart3(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area').html() + "&schArrivalPoint=" + $('.arr_area').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#date3").html('-');
+          $("#date3").siblings('.curr').css('display', 'none');
+        }else{
+          $("#date3").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStart4(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area').html() + "&schArrivalPoint=" + $('.arr_area').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#date4").html('-');
+          $("#date4").siblings('.curr').css('display', 'none');
+        }else{
+          $("#date4").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStart5(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area').html() + "&schArrivalPoint=" + $('.arr_area').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#date5").html('-');
+          $("#date5").siblings('.curr').css('display', 'none');
+        }else{
+          $("#date5").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStart6(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area').html() + "&schArrivalPoint=" + $('.arr_area').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#date6").html('-');
+          $("#date6").siblings('.curr').css('display', 'none');
+        }else{
+          $("#date6").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
 }
 
 function setting_day(res) {
@@ -1236,6 +2309,190 @@ function setting_day(res) {
   $(".dating4").html(sel_date4);
   $(".dating5").html(sel_date5);
   $(".dating6").html(sel_date6);
+
+  let string0 = sel_date0.split('-')
+  if(string0[1].length == 1){
+    string0[1] = `0${string0[1]}`
+  }
+  if(string0[2].length == 4){
+    string0[2] = `0${string0[2]}`
+  }
+  let strring0 = `${string0[0]}-${string0[1]}-${string0[2].substring(0,2)}`
+
+  let string1 = sel_date1.split('-')
+  if(string1[1].length == 1){
+    string1[1] = `0${string1[1]}`
+  }
+  if(string1[2].length == 4){
+    string1[2] = `0${string1[2]}`
+  }
+  let strring1 = `${string1[0]}-${string1[1]}-${string1[2].substring(0,2)}`
+
+  let string2 = sel_date2.split('-')
+  if(string2[1].length == 1){
+    string2[1] = `0${string2[1]}`
+  }
+  if(string2[2].length == 4){
+    string2[2] = `0${string2[2]}`
+  }
+  let strring2 = `${string2[0]}-${string2[1]}-${string2[2].substring(0,2)}`
+
+  let string3 = sel_date3.split('-')
+  if(string3[1].length == 1){
+    string3[1] = `0${string3[1]}`
+  }
+  if(string3[2].length == 4){
+    string3[2] = `0${string3[2]}`
+  }
+  let strring3 = `${string3[0]}-${string3[1]}-${string3[2].substring(0,2)}`
+
+  let string4 = sel_date4.split('-')
+  if(string4[1].length == 1){
+    string4[1] = `0${string4[1]}`
+  }
+  if(string4[2].length == 4){
+    string4[2] = `0${string4[2]}`
+  }
+  let strring4 = `${string4[0]}-${string4[1]}-${string4[2].substring(0,2)}`
+
+  let string5 = sel_date5.split('-')
+  if(string5[1].length == 1){
+    string5[1] = `0${string5[1]}`
+  }
+  if(string5[2].length == 4){
+    string5[2] = `0${string5[2]}`
+  }
+  let strring5 = `${string5[0]}-${string5[1]}-${string5[2].substring(0,2)}`
+
+  let string6 = sel_date6.split('-')
+  if(string6[1].length == 1){
+    string6[1] = `0${string6[1]}`
+  }
+  if(string6[2].length == 4){
+    string6[2] = `0${string6[2]}`
+  }
+  let strring6 = `${string6[0]}-${string6[1]}-${string6[2].substring(0,2)}`
+
+  searchStaring0(strring0);
+  searchStarting1(strring1);
+  searchStarting2(strring2);
+  searchStarting3(strring3);
+  searchStarting4(strring4);
+  searchStarting5(strring5);
+  searchStarting6(strring6);
+
+  function searchStaring0(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area1').html() + "&schArrivalPoint=" + $('.arr_area1').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#dating0").html('-');
+          $("#dating0").siblings('.curr').css('display', 'none');
+        }else{
+          $("#dating0").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStarting1(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area1').html() + "&schArrivalPoint=" + $('.arr_area1').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#dating1").html('-');
+          $("#dating1").siblings('.curr').css('display', 'none');
+        }else{
+          $("#dating1").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStarting2(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area1').html() + "&schArrivalPoint=" + $('.arr_area1').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#dating2").html('-');
+          $("#dating2").siblings('.curr').css('display', 'none');
+        }else{
+          $("#dating2").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStarting3(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area1').html() + "&schArrivalPoint=" + $('.arr_area1').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#dating3").html('-');
+          $("#dating3").siblings('.curr').css('display', 'none');
+        }else{
+          $("#dating3").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStarting4(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area1').html() + "&schArrivalPoint=" + $('.arr_area1').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#dating4").html('-');
+          $("#dating4").siblings('.curr').css('display', 'none');
+        }else{
+          $("#dating4").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStarting5(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area1').html() + "&schArrivalPoint=" + $('.arr_area1').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#dating5").html('-');
+          $("#dating5").siblings('.curr').css('display', 'none');
+        }else{
+          $("#dating5").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
+  function searchStarting6(strr){
+    $.post({
+      url: "/api/schedule/price",
+      data: "schDeparturePoint=" + $('.dep_area1').html() + "&schArrivalPoint=" + $('.arr_area1').html() + "&goDateSelectOptt=" + strr,
+      dataType: "text",
+      success: function (response) {
+        let dataJson = JSON.parse(response)
+        if(dataJson.data == 0){
+          $("#dating6").html('-');
+          $("#dating6").siblings('.curr').css('display', 'none');
+        }else{
+          $("#dating6").html((dataJson.data[0].schBasicPrice).toLocaleString('ko-KR'));
+        }
+      }
+    })
+  }
 }
 
 $(() => {
@@ -1253,202 +2510,6 @@ $(() => {
   });
 
 });
-
-// 찬영 라인
-
-$(() => {
-  // let strrr1 = 0;
-  // let strrr2 = 0;
-  //
-  // $('.price_wrap').on('click' ,function(){
-  //   console.log(1123)
-  //   $('.price_wrap').removeClass('on');
-  //   $(this).addClass('on');
-  //
-  //   // 위치 움직이기
-  //   window.scrollTo({
-  //     top: $('.air_list2_wrap').offset().top - 90,
-  //     behavior: 'smooth'
-  //   });
-  //
-  //   let str = $(this).children('.date_price').html().split(',');
-  //   strrr1 = '';
-  //   for (let i = 0; i < str.length; i++) {
-  //     strrr1 = strrr1 + str[i];
-  //   }
-  //   // 확인점1
-  //   // 구간 1 + 구간 2 = 항공운임
-  //   let totprice = Number(strrr1) + Number(strrr2);
-  //   // 구간1 (,) 넣어주고 자세히보기에 출력
-  //   if (strrr1.length == 5) {
-  //     $('.strrr1').html(`${strrr1.substr(-5, 2)},${strrr1.substr(-3, 3)}`);
-  //   } else if (strrr1.length == 6) {
-  //     $('.strrr1').html(`${strrr1.substr(-6, 3)},${strrr1.substr(-3, 3)}`);
-  //   }
-  //   // 구간2 (,) 넣어주고 자세히보기에 출력
-  //   if (strrr2.length == 5) {
-  //     $('.strrr2').html(`${strrr2.substr(-5, 2)},${strrr2.substr(-3, 3)}`);
-  //   } else if (strrr2.length == 6) {
-  //     $('.strrr2').html(`${strrr2.substr(-6, 3)},${strrr2.substr(-3, 3)}`);
-  //   }
-  //
-  //   // 항공운인 (,) 처리
-  //   let totpricecom = '';
-  //   if (String(totprice).length == 5) {
-  //     totpricecom = `${String(totprice).substr(-5, 2)},${String(totprice).substr(-3, 3)}`;
-  //   } else if (String(totprice).length == 6) {
-  //     totpricecom = `${String(totprice).substr(-6, 3)},${String(totprice).substr(-3, 3)}`;
-  //   }
-  //
-  //   $('.tot_price_wrap').find('.tot_price1').html(totpricecom); // 항공운임에 출력
-  //   $('.tot_price11').html(totpricecom); // 자세히보기에 항공운임 출력
-  //
-  //   let taxprice = totprice * 0.01; // 세금 계산
-  //   if (String(taxprice).length > 3) { // 세금이 4자리수 넘어갈 때
-  //     let backtaxpricecom = '';
-  //
-  //     if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 3) {
-  //       // 뒷 3자리 처리
-  //       backtaxpricecom = `,${Math.floor(String(taxprice).substr(-3, 3))}`;
-  //     } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 2) {
-  //       if (Math.floor(String(taxprice).substr(-3, 3)) % 10 == 0) {
-  //         backtaxpricecom = `,${String(Math.floor(String(taxprice).substr(-3, 3)))}0`;
-  //       } else {
-  //         backtaxpricecom = `,0${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
-  //       }
-  //     } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 1) {
-  //       backtaxpricecom = `,00${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
-  //     }
-  //     // 앞자리 처리
-  //     let forwardtaxpricecom = ''
-  //     if (String(taxprice).length == 4) {
-  //       forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-4, 1)));
-  //     } else if (String(taxprice).length == 5) {
-  //       forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-5, 2)));
-  //     }
-  //
-  //     // 앞 뒷자리 결합
-  //     let taxpricecom = forwardtaxpricecom + backtaxpricecom;
-  //     $('.tot_price_wrap').find('.tot_price3').html(taxpricecom); // 세금 출력
-  //     $('.tot_price33').html(taxpricecom); // 자세히보기 1 출력
-  //     $('.taxpriceprint').html(taxpricecom); // 자세히보기 2 출력
-  //   } else { // 세금이 3자리수 이하일때
-  //     $('.tot_price_wrap').find('.tot_price3').html(taxprice);  // 세금 출력
-  //     $('.tot_price33').html(taxprice); // 자세히보기 1 출력
-  //     $('.taxpriceprint').html(taxprice); // 자세히보기 2 출력
-  //   }
-  //
-  //   // 총액
-  //   let totalprice = totprice + 10000 + totprice * 0.01;
-  //   let finaltotalprice = '';
-  //   if (String(totalprice).length == 5) {
-  //     finaltotalprice = `${String(totalprice).substr(-5, 2)},${String(totalprice).substr(-3, 3)}`;
-  //   } else if (String(totalprice).length == 6) {
-  //     finaltotalprice = `${String(totalprice).substr(-6, 3)},${String(totalprice).substr(-3, 3)}`;
-  //   }
-  //
-  //   $('.total_price_wrap').find('.total_price').html(finaltotalprice);
-  //   $('.finaltotalprice').html(finaltotalprice);
-  //   $('.finaltotalpricee').html(finaltotalprice);
-  //
-  //   // 확인점2
-  //   $('.price_wrap1').on('click', function () {
-  //     $('.price_wrap1').removeClass('on1');
-  //     // 위치 움직이기
-  //     window.scrollTo({
-  //       top: $('.fare_wrap').offset().top - 120,
-  //       behavior: 'smooth'
-  //     });
-  //
-  //     $(this).addClass('on1');
-  //     let str = $(this).children('.date_price').html().split(',');
-  //     strrr2 = '';
-  //     for (let i = 0; i < str.length; i++) {
-  //       strrr2 = strrr2 + str[i];
-  //     }
-  //
-  //     // 확인점3
-  //     // 구간 1 + 구간 2 = 항공운임
-  //     let totprice = Number(strrr1) + Number(strrr2);
-  //     // 구간1 (,) 넣어주고 자세히보기에 출력
-  //     if (strrr1.length == 5) {
-  //       $('.strrr1').html(`${strrr1.substr(-5, 2)},${strrr1.substr(-3, 3)}`);
-  //     } else if (strrr1.length == 6) {
-  //       $('.strrr1').html(`${strrr1.substr(-6, 3)},${strrr1.substr(-3, 3)}`);
-  //     }
-  //     // 구간2 (,) 넣어주고 자세히보기에 출력
-  //     if (strrr2.length == 5) {
-  //       $('.strrr2').html(`${strrr2.substr(-5, 2)},${strrr2.substr(-3, 3)}`);
-  //     } else if (strrr2.length == 6) {
-  //       $('.strrr2').html(`${strrr2.substr(-6, 3)},${strrr2.substr(-3, 3)}`);
-  //     }
-  //
-  //     // 항공운인 (,) 처리
-  //     let totpricecom = '';
-  //     if (String(totprice).length == 5) {
-  //       totpricecom = `${String(totprice).substr(-5, 2)},${String(totprice).substr(-3, 3)}`;
-  //     } else if (String(totprice).length == 6) {
-  //       totpricecom = `${String(totprice).substr(-6, 3)},${String(totprice).substr(-3, 3)}`;
-  //     }
-  //
-  //     $('.tot_price_wrap').find('.tot_price1').html(totpricecom); // 항공운임에 출력
-  //     $('.tot_price11').html(totpricecom); // 자세히보기에 항공운임 출력
-  //
-  //     let taxprice = totprice * 0.01; // 세금 계산
-  //     if (String(taxprice).length > 3) { // 세금이 4자리수 넘어갈 때
-  //       let backtaxpricecom = '';
-  //
-  //       if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 3) {
-  //         // 뒷 3자리 처리
-  //         backtaxpricecom = `,${Math.floor(String(taxprice).substr(-3, 3))}`;
-  //       } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 2) {
-  //         if (Math.floor(String(taxprice).substr(-3, 3)) % 10 == 0) {
-  //           backtaxpricecom = `,${String(Math.floor(String(taxprice).substr(-3, 3)))}0`;
-  //         } else {
-  //           backtaxpricecom = `,0${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
-  //         }
-  //       } else if (String(Math.floor(String(taxprice).substr(-3, 3))).length == 1) {
-  //         backtaxpricecom = `,00${String(Math.floor(String(taxprice).substr(-3, 3)))}`;
-  //       }
-  //       // 앞자리 처리
-  //       let forwardtaxpricecom = ''
-  //       if (String(taxprice).length == 4) {
-  //         forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-4, 1)));
-  //       } else if (String(taxprice).length == 5) {
-  //         forwardtaxpricecom = String(Math.floor(String(taxprice).substr(-5, 2)));
-  //       }
-  //
-  //       // 앞 뒷자리 결합
-  //       let taxpricecom = forwardtaxpricecom + backtaxpricecom;
-  //       $('.tot_price_wrap').find('.tot_price3').html(taxpricecom); // 세금 출력
-  //       $('.tot_price33').html(taxpricecom); // 자세히보기 1 출력
-  //       $('.taxpriceprint').html(taxpricecom); // 자세히보기 2 출력
-  //     } else { // 세금이 3자리수 이하일때
-  //       $('.tot_price_wrap').find('.tot_price3').html(taxprice);  // 세금 출력
-  //       $('.tot_price33').html(taxprice); // 자세히보기 1 출력
-  //       $('.taxpriceprint').html(taxprice); // 자세히보기 2 출력
-  //     }
-  //
-  //     // 총액
-  //     let totalprice = totprice + 10000 + totprice * 0.01;
-  //     let finaltotalprice = '';
-  //     if (String(totalprice).length == 5) {
-  //       finaltotalprice = `${String(totalprice).substr(-5, 2)},${String(totalprice).substr(-3, 3)}`;
-  //     } else if (String(totalprice).length == 6) {
-  //       finaltotalprice = `${String(totalprice).substr(-6, 3)},${String(totalprice).substr(-3, 3)}`;
-  //     }
-  //
-  //     $('.total_price_wrap').find('.total_price').html(finaltotalprice);
-  //     $('.finaltotalprice').html(finaltotalprice);
-  //     $('.finaltotalpricee').html(finaltotalprice);
-  //   })
-  //
-  // })
-
-
-})
-
-
 
 
 // 운임 규정

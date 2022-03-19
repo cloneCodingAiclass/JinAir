@@ -221,7 +221,7 @@
     color: white;
     cursor: pointer;
 }
-#title, #nation, #route, #discount, #startDate, #endDate, #totalcoupon, #type, #totalprice, #crprice{
+#title, #nation, #route, #discount, #startDate, #endDate, #totalcoupon, #type, #totalprice, #crprice, #startCode, #endCode{
     width: 90%;
     height: 30px;
     border: 1px solid #888888;
