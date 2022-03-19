@@ -881,14 +881,15 @@ label.men {
     margin-left: 5px;
     margin-right: 5px;
     font-size: 22px;
-    font-weight: 600;
+    font-weight: 900;
 }
 
 .modal_con_wrap > .jour_wrap {
     display: flex;
     width: 100%;
     height: 90px;
-    justify-content: center
+    justify-content: center;
+    font-weight: 900;
 }
 
 .modal_con_wrap hr {
@@ -898,6 +899,7 @@ label.men {
 .jour_wrap h2, .jour_wrap .flight{
     display: inline;
     font-weight: 400;
+    font-weight: 900;
 }
 
 .jour_wrap .jour_info_wrap{
@@ -905,15 +907,18 @@ label.men {
     font-size: 16px;
     width: 500px;
     height: 20px !important;
+    font-weight: 900;
 }
 
 .jour1 .jour_info_wrap {
     margin-right: 60px;
+    font-weight: 900;
 }
 
 .jour_info_wrap td {
     padding: 3px;
     height: 15px;
+    font-weight: 900;
 }
 
 .jour_info_wrap .area {

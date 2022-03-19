@@ -837,15 +837,24 @@ public class PageController {
                 Cook.add(myCookies[i].getName());
             }
         }
-        model.addAttribute("reIndex", Cook);
-        HttpSession session = request.getSession();
-        if(session.getAttribute("memberApiResponse") != null){
-            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+        if(Cook.size() == 0){
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "registerPassenger");
         }else{
-            model.addAttribute("loginURL", "/userpage/fragment/menu");
+            ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf((String) Cook.get(0))).getData();
+            model.addAttribute("reserveApiResponse", reserveApiResponse);
+            model.addAttribute("reIndex", Cook);
+            HttpSession session = request.getSession();
+            if(session.getAttribute("memberApiResponse") != null){
+                model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+                model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
+            }else{
+                model.addAttribute("loginURL", "/userpage/fragment/menu");
+                model.addAttribute("memberApiResponse", "비회원");
+            }
+            return new ModelAndView("/userpage/pages/payment/registerPassenger")
+                    .addObject("code", "registerPassenger");
         }
-        return new ModelAndView("/userpage/pages/payment/registerPassenger")
-                .addObject("code", "registerPassenger");
     }
     // 사용자 엑스트라 페이지
     @RequestMapping("/extras")
