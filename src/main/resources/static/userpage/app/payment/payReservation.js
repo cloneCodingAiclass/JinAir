@@ -84,17 +84,6 @@ $(function () {
     $(".modal").fadeOut(200);
   });
 
-  $(".arrow_img").on("click", function () {
-    $(".arrow_img").css("display", "none");
-    $(".trip_info2").slideDown(200);
-    $(".arrow_up_img").css("display", "block");
-  });
-  $(".arrow_up_img").on("click", function () {
-    $(".arrow_img").css("display", "block");
-    $(".arrow_up_img").css("display", "none");
-    $(".trip_info2").slideUp(200);
-  });
-
   $("select .KRW").on("select", function () {
     $("butt_ok").css("background-color", "#BDD600");
   });
