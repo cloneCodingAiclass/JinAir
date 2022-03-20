@@ -1,5 +1,7 @@
 // reIndex 정보 가져오기
 $(() => {
+    let memIndex = $('#memid').val();
+
     let str = $(location).attr('href').split('/');
     let priceT = 0;
 
@@ -62,22 +64,60 @@ $(() => {
     });
     console.log(str[5])
 
-    $('#finalPayment').on('click', function (){
-        let status = 'PaymentFinished';
-        let arr = [];
-        $('.cookies').each(function (i){
-            let arr1 = new Object();
-            arr.reTotal = price;
-            arr.rePayment = "KAKAOPAY";
-            arr.
-        })
+    $("#modal_fare_rules .butt_ok").on("click", () => {
+        if ($("#modal_fare_rules #checkBox").is(":checked")) {
+            let item_name = "초코파이";
+            let quantity = 2;
+            let total_amount = 2200;
+            let vat_amount = 200;
+            let tax_free_amount = 0;
 
-        $.get({
-            url : "/api/reservation",
-            data : JSON.stringify()
-
-        })
-    })
+            let arr = new Array();
+            for (i = 0; i < quantity; i++) {
+                let data = new Object();
+                data.reTotal = 100000;
+                arr.push(data);
+            }
+            let final = new Array();
+            $('.cookies').each(function (i){
+                let reIndex = $('.cookies').eq(i).attr("value");
+                let finalarr = new Object();
+                finalarr.reIndex = reIndex;
+                finalarr.reTotal = price;
+                finalarr.rePayment = "KAKAOPAY";
+                final.push(finalarr);
+            });
+            console.dir(final);
+            $.ajax({
+                url: "/api/reservation/paymentsUpdate",
+                type : "PUT",
+                data: JSON.stringify(final),
+                dataType: "text",
+                contentType: "application/json",
+                success(final){
+                    alert("dddd")
+                }
+            });
+            // $.post({
+            //     url: "/api/kakao/create",
+            //     data: JSON.stringify(arr),
+            //     async: false,
+            //     success: function(arr) {
+            //         location.href=arr;
+            //
+            //     },
+            //     error: function (error) {
+            //         console.log('error')
+            //         console.dir(error)
+            //     }
+            // })
+            // $(location).attr("href", "/pages/complete");
+            $("#modal_fare_rules").fadeOut();
+            $("body").css("overflow", "scroll");
+        } else {
+            $("#modal_fare_rules > .modal_conf_ok_wrap").fadeIn();
+        }
+    });
     if (str[5] == 'oneway'){
         // 여행 타입에 따른 값, 클릭이벤트 변경
         $('#triptype1, #tripinfo1').text('편도');
@@ -142,40 +182,6 @@ $(function () {
         () => {
            $("#modal_fare_rules").fadeOut();
                 $("body").css("overflow", "scroll");
-    });
-    $("#modal_fare_rules .butt_ok").on("click", () => {
-        if ($("#modal_fare_rules #checkBox").is(":checked")) {
-            let item_name = "초코파이";
-            let quantity = 2;
-            let total_amount = 2200;
-            let vat_amount = 200;
-            let tax_free_amount = 0;
-
-            let arr = new Array();
-            for (i = 0; i < quantity; i++) {
-                let data = new Object();
-                data.reTotal = 100000;
-                arr.push(data);
-            }
-            $.post({
-                url: "/api/kakao/create",
-                data: JSON.stringify(arr),
-                async: false,
-                success: function(arr) {
-                    window.open(arr, 'width=500, height=700');
-                    location.href=arr;
-                },
-                error: function (error) {
-                    console.log('error')
-                    console.dir(error)
-                }
-            })
-                // $(location).attr("href", "/pages/complete");
-            $("#modal_fare_rules").fadeOut();
-            $("body").css("overflow", "scroll");
-        } else {
-            $("#modal_fare_rules > .modal_conf_ok_wrap").fadeIn();
-        }
     });
 
     $(".modal_conf_ok_wrap .butt_conf").on("click", () => {
