@@ -62,6 +62,22 @@ $(() => {
     });
     console.log(str[5])
 
+    $('#finalPayment').on('click', function (){
+        let status = 'PaymentFinished';
+        let arr = [];
+        $('.cookies').each(function (i){
+            let arr1 = new Object();
+            arr.reTotal = price;
+            arr.rePayment = "KAKAOPAY";
+            arr.
+        })
+
+        $.get({
+            url : "/api/reservation",
+            data : JSON.stringify()
+
+        })
+    })
     if (str[5] == 'oneway'){
         // 여행 타입에 따른 값, 클릭이벤트 변경
         $('#triptype1, #tripinfo1').text('편도');
@@ -181,6 +197,7 @@ $(function () {
             sel_coupon.sel_coupon = response.data;
         })
     }
+
 
 
 });

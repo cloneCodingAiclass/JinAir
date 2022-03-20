@@ -183,6 +183,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
         for (int i = 0; i < reservation.size(); i++) {
             TbReservation tbReservation = TbReservation.builder()
                     .reTotal(reservation.get(i).getReTotal())
+                    .reStatus(reservation.get(i).getReStatus())
                     .rePayment(reservation.get(i).getRePayment())
                     .build();
             reservationList.add(tbReservation);
