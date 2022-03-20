@@ -497,7 +497,18 @@ public class PageController {
             }
         }
         HttpSession session = request.getSession();
-        if(session.getAttribute("memberApiResponse") != null){
+        ArrayList arrrr = new ArrayList<>();
+        for(int i = 39; i <= 40; i++) {
+            Long idx = Long.valueOf(i);
+            ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(idx).getData();
+            System.out.println(reserveApiResponse);
+            if(reserveApiResponse.getReStatus() != null){
+                arrrr.add(reserveApiResponse);
+            };
+        }
+        System.out.println(arrrr);
+        session.setAttribute("reserveApiResponse1", arrrr);
+        if (session.getAttribute("memberApiResponse") != null) {
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
             model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
             return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_qna")
@@ -946,9 +957,21 @@ public class PageController {
     // 사용자 결제 완료
     @RequestMapping("/complete")
     public ModelAndView complete(HttpServletRequest request, HttpServletResponse response, Model model) {
+        Cookie[] myCookies = request.getCookies();
         HttpSession session = request.getSession();
+        ArrayList arrrr = new ArrayList<>();
+        for(int i = 39; i <= 40; i++) {
+            Long idx = Long.valueOf(i);
+            ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(idx).getData();
+            System.out.println(reserveApiResponse);
+            if(reserveApiResponse.getReStatus() != null){
+                arrrr.add(reserveApiResponse);
+            };
+        }
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
+            model.addAttribute("reserveApiResponse1", session.getAttribute("reserveApiResponse1"));
         }else{
             model.addAttribute("loginURL", "/userpage/fragment/menu");
         }
