@@ -2,6 +2,7 @@ package com.project.jinair.service.reservation;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.schedule.TbReservation;
+import com.project.jinair.model.enumclass.PaymentStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.schedule.ReserveApiRequest;
 import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
@@ -9,6 +10,8 @@ import com.project.jinair.repository.TbReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -163,5 +166,29 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
         return newTbReservation.getReIndex();
     }
 
+    public Header<ReserveApiResponse> readPayment(Long id, PaymentStatus paymentStatus){
+        return  tbReservationRepository.findByReUserindexAndReStatus(id, paymentStatus)
+                .map(reserve -> response(reserve))
+                .orElseGet(
+                        () -> Header.ERROR("NO DATA")
+                );
+    }
 
+    public Header<List<TbReservation>> paymentsUpdate(Header<ReserveApiRequest> request) {
+        ReserveApiRequest reserveApiRequest = request.getData();
+        List<TbReservation> reservation = tbReservationRepository.findAllByReUserindexAndReStatus(reserveApiRequest.getReIndex(), PaymentStatus.Progress);
+
+        List<TbReservation> reservationList = new ArrayList<>();
+
+        for (int i = 0; i < reservation.size(); i++) {
+            TbReservation tbReservation = TbReservation.builder()
+                    .reTotal(reservation.get(i).getReTotal())
+                    .reStatus(reservation.get(i).getReStatus())
+                    .rePayment(reservation.get(i).getRePayment())
+                    .build();
+            reservationList.add(tbReservation);
+        }
+        tbReservationRepository.saveAll(reservationList);
+        return Header.OK(reservation);
+    }
 }

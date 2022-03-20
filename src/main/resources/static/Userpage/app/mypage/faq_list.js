@@ -171,7 +171,9 @@ $(function () {
     let faqList = new Vue({
         el : '#faqList',
         data : {
-            faqList : {}
+            faqList : {
+                faqType : ['전체', '항공권 예매', '할인 제도', '수하물', '기내 서비스', '기타']
+            }
         }
     })
 
@@ -192,11 +194,26 @@ $(function () {
 
             // 리스트
             for(let i = 0; i < response.data.length; i++){
-                $.get('/api/faq/view/'+ response.data[i].faqIndex, function (){
+                $.get('/api/faq/view/'+ response.data[i].faqIndex, function (response2){
                     $(`#faqNumber${i}`).on('click', function (){
                         $(`#tr_answer${i}`).toggle('fast');
                     })
+                    $('.faq1').on('click', function (){
+                        if ($('.faq1').text() == '전체'){
+                            return response2.data[i].faqType('전체');
+                            alert('전체');
+                        }
+                    })
+                    $('.faq2').on('click', function (){
+                        if ($('.faq2').text() == '항공권 예매'){
+                            return response2.data[i].faqType('항공권 예매');
+                            alert('항공권 예매');
+                        }
+                    })
+
+
                 })
+
             }
 
 
@@ -215,9 +232,6 @@ $(function () {
             })
         })
     }
-    $('#searchFaq').on('click', function (){
-        searchFaq($('#searchText').val(), 0)
-    })
 
     function searchFaq(searchFaq){
         $.get("/api/faq/listsearch/"+searchFaq, function(response){
