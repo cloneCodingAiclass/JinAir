@@ -196,9 +196,6 @@ $(function () {
                     $(`#faqNumber${i}`).on('click', function (){
                         $(`#tr_answer${i}`).toggle('fast');
                     })
-                    $('#faq2').on('click', function (){
-
-                    })
 
 
                 })
@@ -238,9 +235,10 @@ $(function () {
         }
     });
 
-    function type(type){
+    function type(type, page){
         $.get("/api/faq/typeSearch/"+type, function(response){
             faqList.faqList = response.data;
+
 
         });
     }
