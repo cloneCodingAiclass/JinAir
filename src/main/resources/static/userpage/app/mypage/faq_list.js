@@ -171,9 +171,7 @@ $(function () {
     let faqList = new Vue({
         el : '#faqList',
         data : {
-            faqList : {
-                faqType : ['전체', '항공권 예매', '할인 제도', '수하물', '기내 서비스', '기타']
-            }
+            faqList : {}
         }
     })
 
@@ -198,23 +196,15 @@ $(function () {
                     $(`#faqNumber${i}`).on('click', function (){
                         $(`#tr_answer${i}`).toggle('fast');
                     })
-                    $('.faq1').on('click', function (){
-                        if ($('.faq1').text() == '전체'){
-                            return response2.data[i].faqType('전체');
-                            alert('전체');
-                        }
-                    })
-                    $('.faq2').on('click', function (){
-                        if ($('.faq2').text() == '항공권 예매'){
-                            return response2.data[i].faqType('항공권 예매');
-                            alert('항공권 예매');
-                        }
+                    $('#faq2').on('click', function (){
+
                     })
 
 
                 })
 
             }
+
 
 
             let url = "";
@@ -236,14 +226,41 @@ $(function () {
     function searchFaq(searchFaq){
         $.get("/api/faq/listsearch/"+searchFaq, function(response){
             faqList.faqList = response.data;
+
         });
     }
+
 
     $('#searchFaq').on('click', function (){
         searchFaq($('#searchText').val());
         if ( $('#searchText').val().length == 0){
             alert('검색어를 확인해주세요.');
         }
+    });
+
+    function type(type){
+        $.get("/api/faq/typeSearch/"+type, function(response){
+            faqList.faqList = response.data;
+
+        });
+    }
+    $('#faq1').on('click', function () {
+        type($('#faq2').attr("value"));
+    });
+    $('#faq2').on('click', function () {
+        type($('#faq2').attr("value"));
+    });
+    $('#faq3').on('click', function () {
+        type($('#faq3').attr("value"));
+    });
+    $('#faq4').on('click', function () {
+        type($('#faq4').attr("value"));
+    });
+    $('#faq5').on('click', function () {
+        type($('#faq5').attr("value"));
+    });
+    $('#faq6').on('click', function () {
+        type($('#faq6').attr("value"));
     });
 
 })(jQuery);

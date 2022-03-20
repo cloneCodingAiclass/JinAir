@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface TbFaqRepository extends JpaRepository<TbFaq, Long> {
     Optional<TbFaq> findByFaqIndex(Long faqIndex);
     List<TbFaq> findByFaqTitleContaining(String FaqType);
+    List<TbFaq> findByFaqTypeContaining(String FaqType);
 }

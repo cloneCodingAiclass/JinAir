@@ -126,4 +126,12 @@ public class FaqApiLogicService implements CrudInterface<FaqApiRequest, FaqApiRe
                 .collect(Collectors.toList());
         return Header.OK(faqApiResponseList);
     }
+
+    public Header<List<FaqApiResponse>> getFaqType(String a) {
+        List<TbFaq> tbFaq = tbFaqRepository.findByFaqTypeContaining(a);
+        List<FaqApiResponse> faqApiResponseList = tbFaq.stream()
+                .map(user -> responseFaq(user))
+                .collect(Collectors.toList());
+        return Header.OK(faqApiResponseList);
+    }
 }
