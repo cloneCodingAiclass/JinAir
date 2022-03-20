@@ -1,6 +1,6 @@
 <html lang="ko"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org/">
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <!-- head -->
     <div th:replace="userpage/fragment/head :: head"></div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -35,31 +35,33 @@
                         <!--여정1-->
                         <div class="trip_info">
                             <div class="schedule">
-                                <p><span id="triptype1"></span> 여정1</p>
+                                <p><span id="triptype1"></span> 여정 1</p>
                                 <p class="cursor arrow_img"></p>
                                 <p class="cursor arrow_img arrow_up_img"></p>
                             </div>
-                            <div class="trip_area fs20" v-for="dto in itemList">
-                                <p class="dep_area" id="go_area1">[[${reserveApiResponse1[0].reSchDepPoint}]]<span>[출발]</span></p>
-                                <p class="arr_area" id="arr_area1">[[${reserveApiResponse1[0].reSchArrPoint}]]<span>[도착]</span></p>
+                            <div class="trip_area fs20">
+                                <p class="dep_area" id="go_area1">[[${reserveApiResponse1[0].reSchDepPoint}]] <span>[출발]</span><span id="goArea1"></span></p>
+                                <p class="arr_area" id="arr_area1">[[${reserveApiResponse1[0].reSchArrPoint}]] <span>[도착]</span><span id="arrArea1"></span></p>
                             </div>
                         </div>
                         <!--여정1 끝-->
                         <!--여정2-->
-                        <div class="trip_info2">
-                            <div class="schedule">
-                                <p><span>왕복</span> 여정2</p>
-                            </div>
-                            <div class="trip_area fs20">
-                                <p class="dep_area">제주(CJU)<span>[출발]</span></p>
-                                <p class="arr_area">서울/김포(GMP)<span>[도착]</span></p>
+                        <div class="trip_area fs20">
+                            <div class="trip_info2">
+                                <div class="schedule">
+                                    <p><span>왕복</span> 여정2</p>
+                                </div>
+                                <div class="trip_area fs20">
+                                    <p class="dep_area" id="go_area2">[[${reserveApiResponse1[1].reSchDepPoint}]] <span>[출발]</span><span id="goArea2"></span></p>
+                                    <p class="arr_area" id="arr_area2">[[${reserveApiResponse1[1].reSchArrPoint}]] <span>[도착]</span><span id="arrArea2"></span></p>
+                                </div>
                             </div>
                         </div>
                         <!--여정2 끝-->
                         <!--탑승객 수-->
                         <div class="nop">
                             <p>탑승객수</p>
-                            <p class="fs20" id="person_cnt">성인 1</p>
+                            <p class="fs20" id="person_cnt">[[${reserveApiResponse1[0].rePeopleType}]]</p>
                         </div>
                         <!--탑승객 수 끝-->
                         <!--수정버튼-->
@@ -81,7 +83,6 @@
                         </div>
                         </table>
                         <!--결제 헤더 끝-->
-
                     </div>
                     <!--결제랩-->
                     <div class="pay_wrap">
@@ -102,10 +103,10 @@
                                     <th class="borderT">국적</th>
                                 </tr>
                                 <tr th:each="passengerDto : ${reserveApiResponse1}">
-                                    <td class="borderB">[[${passengerDto.reFirstName}]]/[[${passengerDto.reLastName}]]</td>
-                                    <td class="borderB">성인1</td>
-                                    <td class="borderB">[[${passengerDto.reBirth}]]</td>
-                                    <td class="borderB">[[${passengerDto.reNation}]]</td>
+                                    <td>[[${passengerDto.reFirstName}]]/[[${passengerDto.reLastName}]]</td>
+                                    <td>성인1</td>
+                                    <td>[[${passengerDto.reBirth}]]</td>
+                                    <td>[[${passengerDto.reNation}]]</td>
                                 </tr>
                             </table>
                         </div>
@@ -114,19 +115,19 @@
                         <div class="fare_wrap">
                             <h2>여정 및 운임정보</h2>
                             <div class="fare_info borderT">
-                                <p class="tit" id="triptype2"></p>
+                                <p class="tit" id="tripinfo1"></p>
                                 <div class="jour_wrap">
                                     <div class="jour1_wrap">
                                         <p class="flight">여정 1 [[${reserveApiResponse1[0].reAirplainType}]]</p>
                                         <div class="area1_wrap area_wrap">
                                             <div class="depart">
                                                 <p class="area">[[${reserveApiResponse1[0].reSchDepPoint}]]</p>
-                                                <p class="time" id="godate">[출발] [[${reserveApiResponse1[0].reSchStartTime}]]</p>
+                                                <p class="time" id="godate">[출발] <span id="spanStart1" th:value="${reserveApiResponse1[0].reSchStartTime}"></span></p>
                                             </div>
                                             <p class="arrow"><img src="/userpage/lib/img/right_arrow.PNG" alt=""></p>
                                             <div class="arr">
                                                 <p class="area">[[${reserveApiResponse1[0].reSchArrPoint}]]</p>
-                                                <p class="time">[도착] [[${reserveApiResponse1[0].reSchEndTime}]]</p>
+                                                <p class="time">[도착] <span id="spanEnd1" th:value="${reserveApiResponse1[0].reSchEndTime}"></span></p>
                                             </div>
                                             <p class="detail detail1 cursor">View Flight Details</p>
 
@@ -136,13 +137,13 @@
                                         <p class="flight">여정 2 LJ304</p>
                                         <div class="area2_wrap area_wrap">
                                             <div class="depart">
-                                                <p class="area">제주(CJU)</p>
-                                                <p class="time">[출발] 2022-02-26(토) 07:50</p>
+                                                <p class="area">[[${reserveApiResponse1[1].reAirplainType}]]</p>
+                                                <p class="time">[출발] <span id="spanStart2" th:value="${reserveApiResponse1[1].reSchStartTime}"></span></p>
                                             </div>
                                             <p class="arrow"><img src="/userpage/lib/img/right_arrow.PNG" alt=""></p>
                                             <div class="arr">
-                                                <p class="area">서울/김포(GMP)</p>
-                                                <p class="time">[도착] 2022-02-26(토) 09:05</p>
+                                                <p class="area">[[${reserveApiResponse1[1].reSchArrPoint}]]</p>
+                                                <p class="time">[도착] <span id="spanEnd2" th:value="${reserveApiResponse1[1].reSchEndTime}"></span></p>
                                             </div>
                                             <p class="detail detail2 cursor">View Flight Details</p>
                                         </div>
@@ -150,7 +151,7 @@
                                     <div class="tot">
                                         <p class="txt">총 운임</p>
                                         <p class="price_wrap"><span class="cul">KRW</span><span
-                                                class="price">203,900</span></p>
+                                                class="price priceSum"></span></p>
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +203,7 @@
                                     <td>
                                         <div class="td_wrap">
                                             <span class="cul">KRW</span>
-                                            <span class="price">11,000</span>
+                                            <span class="price oilT"></span>
                                             <span class="arrow">
                                                 <img src="/userpage/lib/img/arr_bott.png" alt="아래"
                                                     class="arr_bott arr_bott2 cursor"><img src="/userpage/lib/img/arr_top.png"
@@ -218,30 +219,20 @@
                                                 <col width="85%">
                                                 <col width="15%">
                                             </colgroup>
+                                            <th:block th:each="area : ${reserveApiResponse1}">
                                             <tr>
                                                 <td>구간 1 : GMP-CJU</td>
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td><span class="name">유/영은</span></td>
+                                                <td><span class="name">[[${area.reFirstName}]]/[[${area.reLastName}]]</span></td>
                                                 <td>
                                                     <div class="td_wrap">
-                                                        <span class="cul">KRW</span><span class="price">107,000</span>
+                                                        <span class="cul">KRW</span><span class="price oil"></span>
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>구간 1 : GMP-CJU</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="name">유/영은</span></td>
-                                                <td>
-                                                    <div class="td_wrap">
-                                                        <span class="cul">KRW</span><span class="price">77,900</span>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            </th:block>
                                         </table>
                                     </td>
                                 </tr>
@@ -250,7 +241,7 @@
                                     <td>
                                         <div class="td_wrap">
                                             <span class="cul">KRW</span>
-                                            <span class="price">8,000</span>
+                                            <span class="price taxT"></span>
                                             <span class="arrow">
                                                 <img src="/userpage/lib/img/arr_bott.png" alt="아래"
                                                     class="arr_bott arr_bott3 cursor"><img src="/userpage/lib/img/arr_top.png"
@@ -266,30 +257,20 @@
                                                 <col width="85%">
                                                 <col width="15%">
                                             </colgroup>
+                                            <th:block th:each="area : ${reserveApiResponse1}">
                                             <tr>
                                                 <td>구간 1 : GMP-CJU</td>
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td><span class="name">유/영은</span></td>
+                                                <td><span class="name">[[${area.reFirstName}]]/[[${area.reLastName}]]</span></td>
                                                 <td>
                                                     <div class="td_wrap">
-                                                        <span class="cul">KRW</span><span class="price">107,000</span>
+                                                        <span class="cul">KRW</span><span class="price tax"></span>
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>구간 1 : GMP-CJU</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="name">유/영은</span></td>
-                                                <td>
-                                                    <div class="td_wrap">
-                                                        <span class="cul">KRW</span><span class="price">77,900</span>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            </th:block>
                                         </table>
                                     </td>
                                 </tr>
@@ -308,7 +289,7 @@
                                     <td class="borderT">총 운임</td>
                                     <td class="borderT">
                                         <div class="td_wrap">
-                                            <span class="cul">KRW</span><span class="price">55,610</span>
+                                            <span class="cul">KRW</span><span class="price optPrice">55610</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -463,9 +444,9 @@
                                     <td>
                                         <select name="sel_coupon" id="sel_coupon" placeholder="선택">
                                             <option value="undefined">선택</option>
-                                            <option v-for="dto in sel_coupon" value="${dto.ucDiscount}">{{dto.ucDesc}}</option>
+                                            <option v-for="dto in sel_coupon" v-bind:value="dto.ucDiscount">{{dto.ucDesc}}</option>
                                         </select>
-                                        <input type="button" value="적용" class="butt_apply cursor">
+                                        <input type="button" value="적용" class="butt_apply cursor" id="checkBut">
                                     </td>
                                 </tr>
                                 <tr>
@@ -552,7 +533,6 @@
                         <!--결제정보-->
                         <div class="pay_info_wrap">
                             <h2>결제정보</h2>
-
                             <table class="pay_info_T">
                                 <colgroup>
                                     <col width="33.3%">
@@ -563,17 +543,17 @@
                                     <td>
                                         <p class="tit">총 운임</p>
                                         <p class="price_wrap"><span class="cul">KRW</span><span
-                                                class="price">259,510</span></p>
+                                                class="price" id="pPrice"></span></p>
                                     </td>
                                     <td>
                                         <p class="tit">할인금액</p>
-                                        <p class="price_wrap"><span class="cul">KRW</span><span class="price">0</span>
+                                        <p class="price_wrap"><span class="cul">KRW</span><span class="price" id="disC">0</span>
                                         </p>
                                     </td>
                                     <td>
                                         <p class="tit">최종 결제금액</p>
                                         <p class="price_wrap"><span class="cul">KRW</span><span
-                                                class="price tot">259,510</span></p>
+                                                class="price tot" id="totalPrice"></span></p>
                                     </td>
                                 </tr>
                             </table>
