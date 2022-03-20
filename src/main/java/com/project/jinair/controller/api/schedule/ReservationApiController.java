@@ -1,6 +1,7 @@
 package com.project.jinair.controller.api.schedule;
 
 import com.project.jinair.ifs.CrudInterface;
+import com.project.jinair.model.entity.schedule.TbReservation;
 import com.project.jinair.model.enumclass.PaymentStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.schedule.ReserveApiRequest;
@@ -77,6 +78,11 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     @GetMapping("/{id}/{enum}")
     public Header<ReserveApiResponse> readPayment(@PathVariable(name = "id") Long id, @PathVariable(name = "paymentStatus") PaymentStatus paymentStatus) {
         return reservationApiLogicService.readPayment(id, paymentStatus);
+    }
+
+    @PutMapping("")
+    public Header<List<TbReservation>> paymentsUpdate(@RequestBody Header<ReserveApiRequest> request) {
+        return reservationApiLogicService.paymentsUpdate(request);
     }
 
 }
