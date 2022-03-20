@@ -36,6 +36,7 @@ function adult_memberOk(i){
 }
 
 function child_memberOk(i){
+    console.log(adult)
     if(!$(`.childFirstName${i}`).val()){
         alert('성(한글)을 입력하세요')
     }else if(!$(`.childLastName${i}`).val()){

@@ -219,21 +219,25 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 );
     }
 
-    public Header<TbReservation> paymentsUpdate(Header<ReserveApiRequest> request) {
-        ReserveApiRequest reserveApiRequest = request.getData();
-        List<TbReservation> reservation = tbReservationRepository.findAllByReUserindexAndReStatus(reserveApiRequest.getReIndex(), PaymentStatus.Progress);
+    public ReserveApiResponse paymentsUpdate(List<ReserveApiRequest> request) {
 
-        List<TbReservation> reservationList = new ArrayList<>();
+        int size = request.size();
+        System.out.println(size);
 
-        for (int i = 0; i < reservation.size(); i++) {
-            TbReservation tbReservation = TbReservation.builder()
-                    .reTotal(reservation.get(i).getReTotal())
-                    .reStatus(reservation.get(i).getReStatus())
-                    .rePayment(reservation.get(i).getRePayment())
-                    .build();
-            reservationList.add(tbReservation);
+        for (int i = 0; i < size; i++) {
+            long num = request.get(i).getReIndex();
+            Optional<TbReservation> reservation = tbReservationRepository.findById(num);
+            String responsePay = request.get(i).getRePayment();
+            Long responseNum = request.get(i).getReTotal();
+
+            reservation.ifPresent(
+                    selectPay ->{
+                        selectPay.setRePayment(responsePay);
+                        selectPay.setReTotal(responseNum);
+                        tbReservationRepository.save(selectPay);
+                    }
+            );
         }
-        tbReservationRepository.saveAll(reservationList);
         return null;
     }
 

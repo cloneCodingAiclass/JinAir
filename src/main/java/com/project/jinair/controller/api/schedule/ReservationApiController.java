@@ -91,7 +91,7 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     }
 
     @PutMapping("/paymentsUpdate")
-    public Header<TbReservation> paymentsUpdate(@RequestBody Header<ReserveApiRequest> request) {
+    public ReserveApiResponse paymentsUpdate(@RequestBody List<ReserveApiRequest> request) {
         return reservationApiLogicService.paymentsUpdate(request);
     }
 
@@ -99,5 +99,7 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     public void member(@PathVariable(name = "reIndex") Long reIndex, @PathVariable(name = "userid") Long userid) {
         reservationApiLogicService.member(reIndex, userid);
     }
+
+
 
 }
