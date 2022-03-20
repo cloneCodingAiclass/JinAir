@@ -13,12 +13,21 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ReservationApiLogicService implements CrudInterface<ReserveApiRequest, ReserveApiResponse> {
 
     private final TbReservationRepository tbReservationRepository;
+
+    public Header<List<ReserveApiResponse>> find(Long startIdx, Long endIdx){
+        List<TbReservation> tbReservations = tbReservationRepository.findAllByReIndexBetween(startIdx, endIdx);
+        List<ReserveApiResponse> ReserveApiResponse = tbReservations.stream()
+                .map(user -> responseReservation(user))
+                .collect(Collectors.toList());
+        return Header.OK(ReserveApiResponse);
+    }
 
     @Override
     public Header<ReserveApiResponse> create(Header<ReserveApiRequest> request) {
@@ -158,6 +167,42 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .build();
         return Header.OK(reserveApiResponse);
     }
+    private ReserveApiResponse responseReservation(TbReservation tbReservation){
+        ReserveApiResponse reserveApiResponse = ReserveApiResponse.builder()
+                .reIndex(tbReservation.getReIndex())
+                .reUserindex(tbReservation.getReUserindex())
+                .rePercentpoint(tbReservation.getRePercentpoint())
+                .reStatus(tbReservation.getReStatus())
+                .reUserStatus(tbReservation.getReUserStatus())
+                .reReserNum(tbReservation.getReReserNum())
+                .rePayment(tbReservation.getRePayment())
+                .rePetsidx(tbReservation.getRePetsidx())
+                .reBaggageidx(tbReservation.getReBaggageidx())
+                .reInsuranceidx(tbReservation.getReInsuranceidx())
+                .reScheduleidx(tbReservation.getReScheduleidx())
+                .reTotal(tbReservation.getReTotal())
+                .reSchBasicPrice(tbReservation.getReSchBasicPrice())
+                .reSchDepPoint(tbReservation.getReSchDepPoint())
+                .reSchArrPoint(tbReservation.getReSchArrPoint())
+                .reSchStartTime(tbReservation.getReSchStartTime())
+                .reSchEndTime(tbReservation.getReSchEndTime())
+                .reAirplainType(tbReservation.getReAirplainType())
+                .reSchName(tbReservation.getReSchName())
+                .reTripKind(tbReservation.getReTripKind())
+                .rePeopleType(tbReservation.getRePeopleType())
+                .reFirstName(tbReservation.getReFirstName())
+                .reLastName(tbReservation.getReLastName())
+                .reBirth(tbReservation.getReBirth())
+                .reGender(tbReservation.getReGender())
+                .reNation(tbReservation.getReNation())
+                .reMemberId(tbReservation.getReMemberId())
+                .reExtraSale(tbReservation.getReExtraSale())
+                .reEmail(tbReservation.getReEmail())
+                .reHpNation(tbReservation.getReHpNation())
+                .reHp(tbReservation.getReHp())
+                .build();
+        return reserveApiResponse;
+    }
 
     public Long creating() {
         TbReservation tbReservation = TbReservation.builder()
@@ -174,7 +219,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 );
     }
 
-    public Header<List<TbReservation>> paymentsUpdate(Header<ReserveApiRequest> request) {
+    public Header<TbReservation> paymentsUpdate(Header<ReserveApiRequest> request) {
         ReserveApiRequest reserveApiRequest = request.getData();
         List<TbReservation> reservation = tbReservationRepository.findAllByReUserindexAndReStatus(reserveApiRequest.getReIndex(), PaymentStatus.Progress);
 
@@ -189,6 +234,15 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
             reservationList.add(tbReservation);
         }
         tbReservationRepository.saveAll(reservationList);
-        return Header.OK(reservation);
+        return null;
+    }
+
+    public void member(Long reIndex, Long userid) {
+        tbReservationRepository.findById(reIndex)
+                .map(tbReservation -> {
+                    tbReservation.setReUserindex(userid);
+                    return tbReservation;
+                }).map(tbReservation -> tbReservationRepository.save(tbReservation));
+
     }
 }

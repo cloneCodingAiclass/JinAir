@@ -6,8 +6,12 @@ import com.project.jinair.model.enumclass.PaymentStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.schedule.ReserveApiRequest;
 import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
+import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import com.project.jinair.service.reservation.ReservationApiLogicService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,6 +50,12 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
 
     private final ReservationApiLogicService reservationApiLogicService;
 
+    @GetMapping("/list/{startIdx}/{endIdx}") // http://localhost:8080/api/reservation/list
+    public Header<List<ReserveApiResponse>> findAll(
+            @PathVariable(name = "startIdx") Long startIdx, @PathVariable(name = "endIdx") Long endIdx) {
+        return reservationApiLogicService.find(startIdx, endIdx);
+    }
+
     @Override
     @PostMapping("")
     public Header<ReserveApiResponse> create(@RequestBody Header<ReserveApiRequest> request) {
@@ -80,9 +90,14 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
         return reservationApiLogicService.readPayment(id, paymentStatus);
     }
 
-    @PutMapping("")
-    public Header<List<TbReservation>> paymentsUpdate(@RequestBody Header<ReserveApiRequest> request) {
+    @PutMapping("/paymentsUpdate")
+    public Header<TbReservation> paymentsUpdate(@RequestBody Header<ReserveApiRequest> request) {
         return reservationApiLogicService.paymentsUpdate(request);
+    }
+
+    @GetMapping("/member/{reIndex}/{userid}")
+    public void member(@PathVariable(name = "reIndex") Long reIndex, @PathVariable(name = "userid") Long userid) {
+        reservationApiLogicService.member(reIndex, userid);
     }
 
 }

@@ -193,6 +193,15 @@ public class MemberApiLogicService implements CrudInterface<MemberApiRequest, Me
                 );
     }
 
+    public Header<MemberApiResponse> searchToReser(String bthDt, String mbrLnm, String mbrFnm)
+            throws InterruptedException {
+        return memberRepository.findByMemBirthAndMemKorFirstNameAndMemKorLastName(bthDt, mbrLnm, mbrFnm)
+                .map(member -> response(member))
+                .orElseGet(
+                        () -> Header.ERROR("데이터 없음")
+                );
+    }
+
     public Header<MemberApiResponse> searchs(String emAdr, String bthDt, String mbrLnm, String mbrFnm)
             throws InterruptedException {
         return memberRepository.findByMemEmailAndMemBirthAndMemKorFirstNameAndMemKorLastName(emAdr, bthDt, mbrLnm, mbrFnm)
