@@ -33,7 +33,7 @@
                             <th>예약일</th>
                             <td th:value="${reserveApiResponse1[0].reSchStartTime}"></td>
                             <th>예약번호</th>
-                            <td>[[${reReserNum}]]</td>
+                            <td>[[${reserveApiResponse1[0].reReserNum}]]</td>
                         </tr>
                         <tr>
                             <th>상태</th>
@@ -44,38 +44,38 @@
                         <tr>
                             <th>
                                 여정1
-                                <p>LJ309</p>
+                                <p>[[${reserveApiResponse1[0].reSchName}]]</p>
                             </th>
                             <td colspan="3" class="info">
                                 <div class="in_bl">
                                     <span>[[${reserveApiResponse1[0].reSchDepPoint}]]</span>
-                                    <p>[출발]2022-10-25(화) 06:05</p>
+                                    <p>[출발] <span th:value="${reserveApiResponse1[0].reSchStartTime}"></span></p>
                                 </div>
                                 <span class="arrow">
                                     <img src="/userpage/lib/img/right_arrow.PNG" alt="에서">
                                 </span>
                                 <div class="in_bl">
                                     <span>[[${reserveApiResponse1[0].reSchArrPoint}]]</span>
-                                    <p>[도착]2022-10-25(화) 07:20</p>
+                                    <p>[도착] <span th:value="${reserveApiResponse1[0].reSchEndTime}"></span></p>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <th>
                                 여정2
-                                <p>LJ309</p>
+                                <p>[[${reserveApiResponse1[1].reSchName}]]</p>
                             </th>
                             <td colspan="3" class="info">
                                 <div class="in_bl">
-                                    <span>제주(CJU)</span>
-                                    <p>[출발]2022-10-25(화) 06:05</p>
+                                    <span>[[${reserveApiResponse1[1].reSchDepPoint}]]</span>
+                                    <p>[출발] <span th:value="${reserveApiResponse1[1].reSchStartTime}"></span></p>
                                 </div>
                                 <span class="arrow">
                                     <img src="/userpage/lib/img/right_arrow.PNG" alt="에서">
                                 </span>
                                 <div class="in_bl">
-                                    <span>서울/김포(GMP)</span>
-                                    <p>[도착]2022-10-25(화) 07:20</p>
+                                    <span>[[${reserveApiResponse1[1].reSchDepPoint}]]</span>
+                                    <p>[도착] <span th:value="${reserveApiResponse1[1].reSchEndTime}"></span></p>
                                 </div>
                             </td>
                         </tr>
@@ -94,13 +94,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <th:block th:each="dto : ${reserveApiResponse1}">
                             <tr>
-                                <td>김사과</td>
+                                <td>[[${dto.reFirstName]]/[[${dto.reLastName}]]</td>
                                 <td>성인</td>
-                                <td>여</td>
-                                <td>2000-10-11</td>
-                                <td>한국 (REPUBLIC OF KOREA)</td>
+                                <td>[[${dto.reGender}]]</td>
+                                <td>[[${dto.reBirth}]]</td>
+                                <td>[[${dto.reNation}]]</td>
                             </tr>
+                        </th:block>
                         </tbody>
                     </table>
                 </div>
@@ -109,9 +111,9 @@
                     <table>
                         <tr>
                             <th>결제방식</th>
-                            <td>마스터카드</td>
+                            <td>[[${reserveApiResponse1[0].rePayment}]]</td>
                             <th>상세정보</th>
-                            <td>606045XXXXXX0646</td>
+                            <td>test</td>
                         </tr>
                         <tr>
                             <th>승인번호</th>
@@ -121,7 +123,7 @@
                         </tr>
                         <tr>
                             <th>결제금액</th>
-                            <td>KRW 164,200</td>
+                            <td>KRW [[${reserveApiResponse1[0].reTotal}]]</td>
                             <td colspan="2">
                                 <button>
                                     <img src="/userpage/lib/img/printer.png" alt="프린터">
@@ -132,7 +134,7 @@
                     </table>
                 </div>
                 <div class="to_main">
-                    <a href="../../../index.html">
+                    <a href="/pages/index">
                         메인
                     </a>
                 </div>
