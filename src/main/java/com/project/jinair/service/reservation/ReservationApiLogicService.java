@@ -249,4 +249,49 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 }).map(tbReservation -> tbReservationRepository.save(tbReservation));
 
     }
+
+    public void updating(Header<ReserveApiRequest> request) {
+        ReserveApiRequest reserveApiRequest = request.getData();
+        Optional<TbReservation> reservation = tbReservationRepository.findById(reserveApiRequest.getReIndex());
+        reservation.ifPresent(
+                select ->{
+                    select.setReFirstName(reserveApiRequest.getReFirstName());
+                    select.setReLastName(reserveApiRequest.getReLastName());
+                    select.setReBirth(reserveApiRequest.getReBirth());
+                    select.setReNation(reserveApiRequest.getReNation());
+                    select.setReMemberId(reserveApiRequest.getReMemberId());
+                    select.setReGender(reserveApiRequest.getReGender());
+                    select.setReExtraSale(reserveApiRequest.getReExtraSale());
+                    tbReservationRepository.save(select);
+                }
+        );
+    }
+    public void updating1(Header<ReserveApiRequest> request) {
+        ReserveApiRequest reserveApiRequest = request.getData();
+        Optional<TbReservation> reservation = tbReservationRepository.findById(reserveApiRequest.getReIndex());
+        reservation.ifPresent(
+                select ->{
+                    select.setReFirstName(reserveApiRequest.getReFirstName());
+                    select.setReLastName(reserveApiRequest.getReLastName());
+                    select.setReBirth(reserveApiRequest.getReBirth());
+                    select.setReNation(reserveApiRequest.getReNation());
+                    select.setReMemberId("유아-해당사항없음");
+                    select.setReGender(reserveApiRequest.getReGender());
+                    select.setReExtraSale("유아-해당사항없음");
+                    tbReservationRepository.save(select);
+                }
+        );
+    }
+    public void updating2(Header<ReserveApiRequest> request) {
+        ReserveApiRequest reserveApiRequest = request.getData();
+        Optional<TbReservation> reservation = tbReservationRepository.findById(reserveApiRequest.getReIndex());
+        reservation.ifPresent(
+                select ->{
+                    select.setReEmail(reserveApiRequest.getReEmail());
+                    select.setReHpNation(reserveApiRequest.getReHpNation());
+                    select.setReHp(reserveApiRequest.getReHp());
+                    tbReservationRepository.save(select);
+                }
+        );
+    }
 }

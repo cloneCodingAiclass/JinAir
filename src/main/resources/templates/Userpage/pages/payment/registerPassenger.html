@@ -1260,6 +1260,10 @@
                         <!--예매자 정보 끝-->
                     </div>
                 </div>
+                <input type="hidden" class="reSchBasicPrice1" th:value="${reserveApiResponse.reSchBasicPrice}">
+                <input type="hidden" class="reSchBasicPrice2" th:value="${reserveApiResponse1.reSchBasicPrice}">
+                <input type="hidden" class="reSchDepPoint2" th:value="${reserveApiResponse1.reSchDepPoint}">
+                <input type="hidden" class="reSchArrPoint2" th:value="${reserveApiResponse1.reSchArrPoint}">
                 <!--총액 모달창-->
                 <div class="fix_modal"></div>
                 <div id="modal_totP_wrap">
@@ -1283,21 +1287,21 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div class="jour2" id="itemList1">
+                            <div class="jour2">
                                 <h2>여정2</h2>
-                                <p class="flight" id="flight2">{{itemList1.reSchName}}</p>
+                                <p class="flight" id="flight2" th:text="${reserveApiResponse1.reSchName}"></p>
                                 <table class="jour_info_wrap">
                                     <colgroup>
                                         <col width="40%">
                                         <col width="60%">
                                     </colgroup>
                                     <tr>
-                                        <td class="dep_area area" id="dep_area2">[출발]{{itemList1.reSchDepPoint}}</td>
-                                        <td class="dep_date date" id="dep_date2">{{itemList1.reSchStartTime.substr(0,10)}} [{{itemList1.reSchStartTime.substr(11,5)}}]</td>
+                                        <td class="dep_area area" id="dep_area2">[출발]<span th:text="${reserveApiResponse1.reSchDepPoint}"></span></td>
+                                        <td class="dep_date date" id="dep_date2"><span th:text="${#strings.substring(reserveApiResponse1.reSchStartTime, 0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse1.reSchStartTime, 11, 16)}"></span>]</td>
                                     </tr>
                                     <tr>
-                                        <td class="arr_area area" id="arr_are2">[도착]{{itemList1.reSchArrPoint}}</td>
-                                        <td class="arr_date date" id="arr_date2">{{itemList1.reSchEndTime.substr(0,10)}} [{{itemList1.reSchEndTime.substr(11,5)}}]</td>
+                                        <td class="arr_area area" id="arr_are2">[도착]<span th:text="${reserveApiResponse.reSchArrPoint}"></span></td>
+                                        <td class="arr_date date" id="arr_date2"><span th:text="${#strings.substring(reserveApiResponse1.reSchEndTime, 0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse1.reSchEndTime, 11, 16)}"></span>]</td>
                                     </tr>
                                 </table>
                             </div>
@@ -1323,17 +1327,17 @@
                                             <col width="80%">
                                             <col width="20%">
                                         </colgroup>
-                                        <tr>
+                                        <tr id="itemList2">
                                             <td class="mark price_tit">항공운임</td>
-                                            <td class="price tot_price11">210,600</td>
+                                            <td class="price tot_price11"></td>
                                         </tr>
-                                        <tr>
+                                        <tr id="itemList4">
                                             <td class="mark price_tit">유류할증료</td>
-                                            <td class="price tot_price22">11,000</td>
+                                            <td class="price tot_price22"></td>
                                         </tr>
-                                        <tr>
+                                        <tr id="itemList7">
                                             <td class="mark price_tit">세금</td>
-                                            <td class="price tot_price33">8,000</td>
+                                            <td class="price tot_price33"></td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -1357,7 +1361,7 @@
                                             <tr>
                                                 <th colspan="2">
                                                     <p class="title">항공운임</p>
-                                                    <p><span>KRW</span> <span class="finaltotalpricee">0</span></p>
+                                                    <p><span>KRW</span> <span class="finaltotalpricee"></span></p>
                                                 </th>
                                             </tr>
                                             <tr>
@@ -1367,20 +1371,19 @@
                                             </tr>
                                             <tr>
                                                 <td class="per" th:text="${reserveApiResponse.rePeopleType}"></td>
-                                                <td class="strrr1">0</td>
+                                                <td class="strrr1"></td>
                                             </tr>
-                                            <tr class="onewaywww" id="itemList2">
-                                                <td colspan="2">구간 2 : {{itemList2.reSchDepPoint.substr(itemList2.reSchDepPoint.length-4,3)}}-
-                                                    {{itemList2.reSchArrPoint.substr(itemList2.reSchArrPoint.length-4,3)}}</td>
+                                            <tr class="onewaywww">
+                                                <td colspan="2">구간 2 : <span class="DepPoint"></span>-<span class="ArrPoint"></span></td>
                                             </tr>
                                             <tr class="onewaywww">
                                                 <td class="per" th:text="${reserveApiResponse.rePeopleType}"></td>
-                                                <td class="strrr2">0</td>
+                                                <td class="strrr2"></td>
                                             </tr>
                                             <tr>
                                                 <th colspan="2">
                                                     <p class="title">유류할증료</p>
-                                                    <p><span>KRW</span><span class="final_tit">0</span></p>
+                                                    <p><span>KRW</span><span class="final_tit"></span></p>
                                                 </th>
                                             </tr>
                                             <tr>
@@ -1390,20 +1393,19 @@
                                             </tr>
                                             <tr>
                                                 <td class="per" th:text="${reserveApiResponse.rePeopleType}"></td>
-                                                <td class="way1_tit">0</td>
+                                                <td class="way1_tit"></td>
                                             </tr>
-                                            <tr class="onewaywww" id="itemList3">
-                                                <td colspan="2">구간 2 : {{itemList3.reSchDepPoint.substr(itemList3.reSchDepPoint.length-4,3)}}-
-                                                    {{itemList3.reSchArrPoint.substr(itemList3.reSchArrPoint.length-4,3)}}</td>
+                                            <tr class="onewaywww">
+                                                <td colspan="2">구간 2 : <span class="DepPoint"></span>-<span class="ArrPoint"></span></td>
                                             </tr>
                                             <tr class="onewaywww">
                                                 <td class="per" th:text="${reserveApiResponse.rePeopleType}"></td>
-                                                <td class="way2_tit">0</td>
+                                                <td class="way2_tit"></td>
                                             </tr>
                                             <tr>
                                                 <th colspan="2">
                                                     <p class="title">세금</p>
-                                                    <p><span>KRW</span> <span class="taxpriceprint">0</span></p>
+                                                    <p><span>KRW</span> <span class="taxpriceprint"></span></p>
                                                 </th>
                                             </tr>
                                             <tr>
@@ -1420,9 +1422,8 @@
                                                     <div class="detD detD1"></div>
                                                 </td>
                                             </tr>
-                                            <tr class="onewaywww" id="itemList4">
-                                                <td colspan="2">구간 2 : {{itemList4.reSchDepPoint.substr(itemList4.reSchDepPoint.length-4,3)}}-
-                                                    {{itemList4.reSchArrPoint.substr(itemList4.reSchArrPoint.length-4,3)}}</td>
+                                            <tr class="onewaywww">
+                                                <td colspan="2">구간 2 : <span class="DepPoint"></span>-<span class="ArrPoint"></span></td>
                                             </tr>
                                             <tr class="onewaywww">
                                                 <td class="per"><span th:text="${reserveApiResponse.rePeopleType}"></span><span class="cursor det det2">자세히 보기<span
@@ -1503,12 +1504,11 @@
                                 <td class="img2 cursor"></td>
                                 <td class="price_tit">
                                     <p>항공운임 등 총액<br /><span>(KRW)</span></p>
-                                    <p class="price">234,000</p>
+                                    <p class="price" id="finalPrice"></p>
                                 </td>
                             </tr>
                         </table>
-                        <input type="button" value="다음" class="fix_next_butt"
-                            onclick="location.href='/UserPage/payment/extras.html'">
+                        <input type="button" value="다음" class="fix_next_butt">
                     </div>
                 </div>
                 <!--fix_bott 총액 확인 끝-->

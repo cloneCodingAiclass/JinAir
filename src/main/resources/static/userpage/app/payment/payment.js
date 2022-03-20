@@ -64,6 +64,23 @@ $(() => {
     });
     console.log(str[5])
 
+    $(".birthD").each(function (i){
+        let age = $('.birthD').eq(i).attr('value');
+        let resultAge = 2022 - age.substring(0, 3);
+
+        let result = "";
+        if(resultAge > 13){
+            result = "성인";
+            $('.birthD').eq(i).text(result);
+        }else if(2 < resultAge < 13){
+            result = "소아"
+            $('.birthD').eq(i).text(result);
+        }else if(0 < resultAge < 2){
+            result = "유아"
+            $('.birthD').eq(i).text(result);
+        }
+    })
+
     $("#modal_fare_rules .butt_ok").on("click", () => {
         if ($("#modal_fare_rules #checkBox").is(":checked")) {
             let item_name = "초코파이";
@@ -94,25 +111,30 @@ $(() => {
                 async: false,
                 success: function (arr) {
                     location.href=arr;
-                    $(location).attr("href", "/pages/complete");
-                    $("#modal_fare_rules").fadeOut();
-                    $("body").css("overflow", "scroll");
-                    $.ajax({
-                        url: "/api/reservation/paymentsUpdate",
-                        type: "PUT",
-                        data: JSON.stringify(final),
-                        dataType: "text",
-                        contentType: "application/json",
-                        success: function (final) {
-                            alert("결제 성공")
-                        },
-                        error(error) {
-                            console.log('error')
-                            console.dir(error)
-                        }
-                    });
+                    alert(arr);
+                },
+                error: function (error){
+                    alert("통신 장애 발생")
+                    location.reload();
                 }
             });
+            $.ajax({
+                url: "/api/reservation/paymentsUpdate",
+                type: "PUT",
+                data: JSON.stringify(final),
+                dataType: "text",
+                contentType: "application/json",
+                success: function (final) {
+                    alert("결제 성공")
+                },
+                error(error) {
+                    console.log('error')
+                    console.dir(error)
+                }
+            });
+            $(location).attr("href", "/pages/complete");
+            $("#modal_fare_rules").fadeOut();
+            $("body").css("overflow", "scroll");
         } else {
             $("#modal_fare_rules > .modal_conf_ok_wrap").fadeIn();
         }
@@ -126,29 +148,40 @@ $(() => {
     }
     if (str[5] == 'multiway') {
         // 여행 타입에 따른 값, 클릭이벤트 변경
-        $('#triptype1,  #tripinfo1').text('왕복');
+        $('#triptype1, #triptype2, #tripinfo1, #tripinfo2').text('다구간');
+        $('.jour2_wrap, .multiway').css('display', "flex");
+
+        $(".arrow_img").on("click", function () {
+            $(".arrow_img").css("display", "none");
+            $(".trip_info2").slideDown(200);
+            $(".arrow_up_img").css("display", "block");
+        });
+        $(".arrow_up_img").on("click", function () {
+            $(".arrow_img").css("display", "block");
+            $(".arrow_up_img").css("display", "none");
+            $(".trip_info2").slideUp(200);
+        });
+
 
     }
     if (str[5] == 'twoway') {
         // 여행 타입에 따른 값, 클릭이벤트 변경
-        $('#triptype1, #triptype2').text('편도');
+        $('#triptype1, #triptype2, #tripinfo1, #tripinfo2').text('왕복');
+        $('.jour2_wrap, .multiway').css('display', "flex");
 
+        $(".arrow_img").on("click", function () {
+            $(".arrow_img").css("display", "none");
+            $(".trip_info2").slideDown(200);
+            $(".arrow_up_img").css("display", "block");
+        });
+        $(".arrow_up_img").on("click", function () {
+            $(".arrow_img").css("display", "block");
+            $(".arrow_up_img").css("display", "none");
+            $(".trip_info2").slideUp(200);
+        });
     }
-
 });
 
-// 클릭 이벤트(왕복, 다구간용)
-//
-// $(".arrow_img").on("click", function () {
-//     $(".arrow_img").css("display", "none");
-//     $(".trip_info2").slideDown(200);
-//     $(".arrow_up_img").css("display", "block");
-// });
-// $(".arrow_up_img").on("click", function () {
-//     $(".arrow_img").css("display", "block");
-//     $(".arrow_up_img").css("display", "none");
-//     $(".trip_info2").slideUp(200);
-// });
 
 $(function () {
     // 멤버정보 가져오기

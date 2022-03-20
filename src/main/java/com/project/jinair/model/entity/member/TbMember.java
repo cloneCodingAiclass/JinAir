@@ -59,8 +59,6 @@ public class TbMember { // 회원 테이블
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember")
     private List<TbPoint> tbPointList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember")
-    private List<TbReservation> tbReservationsList;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tbMember")
     private List<TbUsercoupon> tbUsercouponList;
