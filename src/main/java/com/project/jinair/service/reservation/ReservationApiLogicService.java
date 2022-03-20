@@ -10,6 +10,8 @@ import com.project.jinair.repository.TbReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -170,6 +172,22 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .orElseGet(
                         () -> Header.ERROR("NO DATA")
                 );
+    }
 
+    public Header<List<TbReservation>> paymentsUpdate(Header<ReserveApiRequest> request) {
+        ReserveApiRequest reserveApiRequest = request.getData();
+        List<TbReservation> reservation = tbReservationRepository.findAllByReUserindexAndReStatus(reserveApiRequest.getReIndex(), PaymentStatus.Progress);
+
+        List<TbReservation> reservationList = new ArrayList<>();
+
+        for (int i = 0; i < reservation.size(); i++) {
+            TbReservation tbReservation = TbReservation.builder()
+                    .reTotal(reservation.get(i).getReTotal())
+                    .rePayment(reservation.get(i).getRePayment())
+                    .build();
+            reservationList.add(tbReservation);
+        }
+        tbReservationRepository.saveAll(reservationList);
+        return Header.OK(reservation);
     }
 }

@@ -15,5 +15,6 @@ import java.util.Optional;
 public interface TbReservationRepository extends JpaRepository<TbReservation, Long> {
 
     Optional<TbReservation> findByReUserindexAndReStatus(Long id, PaymentStatus paymentStatus);
+    List<TbReservation> findAllByReUserindexAndReStatus(Long id, PaymentStatus paymentStatus);
 
 }
