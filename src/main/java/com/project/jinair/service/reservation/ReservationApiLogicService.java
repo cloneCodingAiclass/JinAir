@@ -2,6 +2,7 @@ package com.project.jinair.service.reservation;
 
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.schedule.TbReservation;
+import com.project.jinair.model.enumclass.PaymentStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.schedule.ReserveApiRequest;
 import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
@@ -163,5 +164,12 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
         return newTbReservation.getReIndex();
     }
 
+    public Header<ReserveApiResponse> readPayment(Long id, PaymentStatus paymentStatus){
+        return  tbReservationRepository.findByReUserindexAndReStatus(id, paymentStatus)
+                .map(reserve -> response(reserve))
+                .orElseGet(
+                        () -> Header.ERROR("NO DATA")
+                );
 
+    }
 }

@@ -680,6 +680,7 @@ body{
     padding: 30px;
     background-color: #EBEBEB;
     font-weight: 600;
+    border-bottom: 1px solid #fff;
 }
 
 .service_content .passenger_info_wrap .passenger_info h3 {
@@ -799,7 +800,7 @@ body{
     top: 95px;
     left: 30px;
     width: 140px;
-    height: 440px;
+    height: 500px;
     z-index: 20;
 }
 
@@ -832,8 +833,8 @@ body{
     height: 40px;
     display: flex;
     flex-wrap: nowrap;
-    align-items: center;
-    margin-bottom: 10px !important;
+    align-items: center !important;
+    margin-bottom: 20px !important;
     font-size: 14px;
 }
 
@@ -1054,8 +1055,13 @@ body{
     border: 3px solid #636363;
 }
 
+.box7 {
+    pointer-events: none;
+}
+
 .service_content .seat_info_wrap .seat_info .seat_box .txt {
     width: 100px;
+    height: 25px;
     display: inline-block;
     font-weight: bold;
     margin-left: 5px;
@@ -1067,40 +1073,42 @@ body{
 }
 
 .service_content .seat_info_wrap .seat_info .seat_box .txt .cur {
-    display: inline-block !important;
+    display: inline-block;
+    font-size: 12px;
+    height: 14px;
 }
 
 .service_content .seat_info_wrap .seat_info .seat_box .txt .seat_name {
-    display: inline-block !important;
-    /* background-color: red; */
+    display: inline-block;
 }
 
 .service_content .seat_info_wrap .seat_info .seat_box .box1+.txt {
-    color: #518BBB;
+    color: #518BBB !important;
     /* background-color: #661e43; */
 }
 .service_content .seat_info_wrap .seat_info .seat_box .box2+.txt {
-    color: #72008E;
+    color: #72008E !important;
 }
 .service_content .seat_info_wrap .seat_info .seat_box .box3+.txt {
-    color: #A82628;
+    color: #A82628 !important;
 }
 .service_content .seat_info_wrap .seat_info .seat_box .box4+.txt {
-    color: #00103F;
+    color: #00103F !important;
 }
 .service_content .seat_info_wrap .seat_info .seat_box .box5+.txt {
-    color: #007074;
+    color: #007074 !important;
 }
 .service_content .seat_info_wrap .seat_info .seat_box .box6+.txt {
-    color: #737373;
+    color: #737373!important;
 }
 
 .service_content .seat_info_wrap .seat_info .seat_box .boxPlus+.txt {
-    color: #B28913;
+    color: #B28913 !important;
 }
 
 .service_content .seat_info_wrap .seat_info .seat_box .cur {
     font-size: 12px;
+    color: inherit !important;
 }
 
 .seat .left_seat label, .seat .right_seat label {
@@ -1418,11 +1426,13 @@ body{
 
 .service_content_wrap2 .service_content .passenger_info_wrap .passenger_info {
     width: 100%;
-    height: 480px;
+    height: 400px;
     padding: 30px;
     background-color: #EBEBEB;
     font-weight: 600;
+    border-bottom: 1px solid #fff;
 }
+
 
 .service_content_wrap2 .service_content .passenger_info_wrap .passenger_info p.section {
     display: flex;
@@ -1480,6 +1490,7 @@ body{
     display: flex;
     align-items: center;
     font-size: 20px;
+    height: 28px;
     margin: 10px 12px;
     color: black;
     font-weight: bold;
@@ -1489,11 +1500,19 @@ body{
     font-size: 10px;
     margin-right: 5px;
     color: #444;
+    height: 30px;
+    padding-top: 5px;
 }
 
 .service_content .select_baggage_wrap {
     width: 745px;
-    padding: 0 10px;
+    padding: 0px;
+}
+
+.service_content .select_baggage_wrap .baggage_wrap {
+    height: 400px;
+    padding: 30px;
+    border-bottom: 1px solid rgba(167, 167, 165, 0.5);
 }
 
 .service_content .select_baggage_wrap .baggage_1, .baggage_2 {
@@ -1502,6 +1521,7 @@ body{
     width: 230px;
     height: 120px;
 }
+
 
 .service_content .select_baggage_wrap .baggage_wrap .section{
     display: flex;
@@ -1537,7 +1557,20 @@ body{
 /*서비스 컨텐츠 랩2 끝*/
 
 /*서비스 컨텐츠 랩3*/
-.service_content_wrap3
+.insuranceNum {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 15px;
+    background-color: #fff;
+    border: none;
+}
+
+.service_content_wrap3 .passenger_info {
+    width: 315px !important;
+}
 
 .service_content_wrap3 .section2 .checkBox_1 {
     display: block;
@@ -1579,12 +1612,23 @@ body{
 }
 
 .service_content_wrap3 .service_content .join_insurance_wrap .insurance_content {
-    width: 100%;
+    width: 100% !important;
     height: 2240px;
     background-color: #FFFFFF;
     padding: 30px 0 30px 30px;
 }
 
+.select_ins_price {
+    margin-top: 10px;
+    display: none;
+}
+
+.cur {
+    height: 80px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #444;
+}
 
 .service_content_wrap3 .service_content .join_insurance_wrap .insurance_content .insurance_menu_wrap {
     width: 100%;
@@ -1709,6 +1753,7 @@ body{
 
 .service_content_wrap3 .service_content .join_insurance_wrap .insurance_content .insurance_product {
     border-top: 2px solid black;
+    border-bottom: 2px solid black;
     width: 100%;
     font-size: 14px;
     margin-top: 10px;
@@ -1723,9 +1768,12 @@ body{
     border: 1px solid rgba(168, 165, 165, 0.3);
 }
 
+.select_ins_num {
+    display: none;
+}
+
 .service_content_wrap3 .service_content .join_insurance_wrap .insurance_content .insurance_product .normal {
     background: none;
-    border-bottom: 2px solid black;
 }
 
 .service_content_wrap3 .service_content .join_insurance_wrap .insurance_content .insurance_product .bir_date {
@@ -1738,6 +1786,8 @@ body{
     background-color: #f7f7f6;
     text-align: center;
     border: 1px solid rgba(168, 165, 165, 0.3);
+    font-width: 800;
+    font-size: 12px;
 }
 
 .service_content_wrap3 .service_content .join_insurance_wrap .insurance_content .insurance_product .sel_pro {
@@ -2454,6 +2504,14 @@ body{
     content: "※"
 }
 
+#modal_insurance_info_wrap .modal_insurance_info_wrap #modal_ins_people {
+    width: 100%;
+    display: flex;
+    height: 60px;
+    margin: 10px;
+    align-items: center;
+}
+
 #modal_insurance_info_wrap .modal_insurance_info_wrap .nameBox {
     display: flex;
     padding: 10px 20px;
@@ -2461,10 +2519,10 @@ body{
     width: 230px;
     height: 50px;
     border: 3px solid rgb(0, 173, 239);
-    margin: 30px 40px 15px;
     color: rgb(0, 173, 239);
     font-weight: bold;
     cursor: pointer;
+    margin: 15px;
 }
 
 #modal_insurance_info_wrap .modal_insurance_info_wrap .nameBox .checkbox {
@@ -2591,17 +2649,15 @@ table .pointer {
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     left: 0; right: 0; top: 0; bottom: 0;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 800;
 }
 
 #modal_agreement_wrap .modal_agreement_wrap {
-    position: absolute;
-    width: 58%;
-    top: 50px;
-    left: 400px;
+    position: relative;
+    width: 860px;
     height: 800px;
     background-color: #fff;
 }
@@ -2696,6 +2752,23 @@ h2 {
 
 .modal_agree2 {
     position: fixed;
+    top: 350px;
+    left: 50%;
+    transform: translate(-50%);
+    width: 350px;
+    height: 200px;
+    padding: 30px;
+    margin: auto;
+    background-color: #fff;
+    border: 1px solid #661e43;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.modal_join_ins {
+    position: fixed;
+    top: 350px;
     left: 50%;
     transform: translate(-50%);
     width: 350px;
@@ -2779,6 +2852,20 @@ h2 {
     font-weight: bold;
 }
 
+.modal_join_butt {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.modal_join_butt input {
+    width: 100px !important;
+    height: 45px !important;
+    margin-top: 30px;
+    background-color: #BDD600;
+    border: none;
+    font-weight: bold;
+}
 
 /*여행자보험 가입규약 및 개인정보 제3자 제공 동의 끝*/
 

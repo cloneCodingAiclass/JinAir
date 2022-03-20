@@ -1,5 +1,55 @@
-$(function () {
+// reIndex 정보 가져오기
+$(() => {
+    let str = $(location).attr('href').split('/');
+    let priceT = 0;
+    $('.areaPrice').each(function (i){
+        let price = Number($('.areaPrice').eq(i).attr("value"));
+        priceT += price;
+        $('.areaPrice').eq(i).text(Math.ceil(price).toLocaleString());
+    })
+    $('.areaTtotal').text(Math.ceil(priceT).toLocaleString());
+    // $('.price').text(price.toLocaleString());
+    console.log(str[5])
+    if (str[5] == 'oneway'){
+        // 여행 타입에 따른 값, 클릭이벤트 변경
+        $('#triptype1, #triptype2').text('편도');
+        $('.arrow_img, .jour2_wrap').css('display', "none");
+        $('.fare_info').css('height', '140px');
 
+        let arr = [];
+        $('.cookies').each(function (i){
+            let num = $('.cookies').eq(i).attr("value");
+            $.get("/api/reservation/" + num, (function (response){
+                arr.push(response.data);
+            }));
+        });
+        console.dir(arr)
+        for(i = 0; i < arr.length; i++){
+            let pepe = 0;
+            let arrval = arr[i].reLastName;
+            if(arrval != arr[i+1].reLastName){
+                pepe++;
+                console.log(pepe);
+            }
+        }
+    }
+});
+
+// 클릭 이벤트(왕복, 다구간용)
+//
+// $(".arrow_img").on("click", function () {
+//     $(".arrow_img").css("display", "none");
+//     $(".trip_info2").slideDown(200);
+//     $(".arrow_up_img").css("display", "block");
+// });
+// $(".arrow_up_img").on("click", function () {
+//     $(".arrow_img").css("display", "block");
+//     $(".arrow_up_img").css("display", "none");
+//     $(".trip_info2").slideUp(200);
+// });
+
+$(function () {
+    // 멤버정보 가져오기
     let memIndex = $('#memid').val();
 
     /*운임 규정 안내 모달창 */
@@ -104,6 +154,12 @@ $(function () {
 
         $('#totalPrice').text(Math.ceil(tot).toLocaleString('ko-KR'));
     });
+
+
+
+
+
+
 });
 
     /*운임 규정 안내 모달창 끝 */

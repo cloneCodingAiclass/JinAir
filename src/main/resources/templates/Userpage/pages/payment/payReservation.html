@@ -11,6 +11,10 @@
     <script src="/userpage/app/payment/payment.js"></script>
 <!-- head 끝 -->
 <body>
+<div>
+    <input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
+    <input type="hidden" name="" th:each="dto : ${reserveApiResponse1}" class="cookies" th:id="${dto.reIndex}" th:value="${dto.reIndex}">
+</div>
     <ul class="skipnavi">
         <!--책갈피 역할-->
         <li><a href="#container">본문내용</a></li>
@@ -24,7 +28,6 @@
         <form action="#">
             <!--container-->
             <div id="container">
-                <input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
                 <!--contentswrap-->
                 <div class="contentswrap">
                     <!--여정선택-->
@@ -32,13 +35,13 @@
                         <!--여정1-->
                         <div class="trip_info">
                             <div class="schedule">
-                                <p><span>왕복</span> 여정1</p>
+                                <p><span id="triptype1"></span> 여정1</p>
                                 <p class="cursor arrow_img"></p>
                                 <p class="cursor arrow_img arrow_up_img"></p>
                             </div>
-                            <div class="trip_area fs20">
-                                <p class="dep_area" id="go_area1">서울/김포(GMP)<span>[출발]</span></p>
-                                <p class="arr_area" id="arr_area1">제주(CJU)<span>[도착]</span></p>
+                            <div class="trip_area fs20" v-for="dto in itemList">
+                                <p class="dep_area" id="go_area1">[[${reserveApiResponse1[0].reSchDepPoint}]]<span>[출발]</span></p>
+                                <p class="arr_area" id="arr_area1">[[${reserveApiResponse1[0].reSchArrPoint}]]<span>[도착]</span></p>
                             </div>
                         </div>
                         <!--여정1 끝-->
@@ -98,11 +101,11 @@
                                     <th class="borderT">생년월일</th>
                                     <th class="borderT">국적</th>
                                 </tr>
-                                <tr>
-                                    <td class="borderB">유/영은</td>
+                                <tr th:each="passengerDto : ${reserveApiResponse1}">
+                                    <td class="borderB">[[${passengerDto.reFirstName}]]/[[${passengerDto.reLastName}]]</td>
                                     <td class="borderB">성인1</td>
-                                    <td class="borderB">970924</td>
-                                    <td class="borderB">한국 (REPUBLIC OF KOREA)</td>
+                                    <td class="borderB">[[${passengerDto.reBirth}]]</td>
+                                    <td class="borderB">[[${passengerDto.reNation}]]</td>
                                 </tr>
                             </table>
                         </div>
@@ -111,19 +114,19 @@
                         <div class="fare_wrap">
                             <h2>여정 및 운임정보</h2>
                             <div class="fare_info borderT">
-                                <p class="tit">왕복</p>
+                                <p class="tit" id="triptype2"></p>
                                 <div class="jour_wrap">
                                     <div class="jour1_wrap">
-                                        <p class="flight">여정 1 LJ307</p>
+                                        <p class="flight">여정 1 [[${reserveApiResponse1[0].reAirplainType}]]</p>
                                         <div class="area1_wrap area_wrap">
                                             <div class="depart">
-                                                <p class="area">서울/김포(GMP)</p>
-                                                <p class="time" id="godate">[출발] 2022-02-24(목) 09:40</p>
+                                                <p class="area">[[${reserveApiResponse1[0].reSchDepPoint}]]</p>
+                                                <p class="time" id="godate">[출발] [[${reserveApiResponse1[0].reSchStartTime}]]</p>
                                             </div>
                                             <p class="arrow"><img src="/userpage/lib/img/right_arrow.PNG" alt=""></p>
                                             <div class="arr">
-                                                <p class="area">제주(CJU)</p>
-                                                <p class="time">[도착] 2022-02-24(목) 10:50</p>
+                                                <p class="area">[[${reserveApiResponse1[0].reSchArrPoint}]]</p>
+                                                <p class="time">[도착] [[${reserveApiResponse1[0].reSchEndTime}]]</p>
                                             </div>
                                             <p class="detail detail1 cursor">View Flight Details</p>
 
@@ -142,7 +145,6 @@
                                                 <p class="time">[도착] 2022-02-26(토) 09:05</p>
                                             </div>
                                             <p class="detail detail2 cursor">View Flight Details</p>
-
                                         </div>
                                     </div>
                                     <div class="tot">
@@ -162,7 +164,7 @@
                                     <td>
                                         <div class="td_wrap">
                                             <span class="cul">KRW</span>
-                                            <span class="price">184,900</span>
+                                            <span class="areaTtotal"></span>
                                             <span class="arrow">
                                                 <img src="/userpage/lib/img/arr_bott.png" alt="아래"
                                                     class="arr_bott arr_bott1 cursor">
@@ -178,30 +180,20 @@
                                                 <col width="85%">
                                                 <col width="15%">
                                             </colgroup>
+                                            <th:block th:each="area : ${reserveApiResponse1}">
                                             <tr>
-                                                <td>구간 1 : GMP-CJU</td>
+                                                <td>구간 1 : [[${area.reNation}]]</td>
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td><span class="name">유/영은</span></td>
+                                                <td><span class="name">[[${area.reFirstName}]]/[[${area.reLastName}]]</span></td>
                                                 <td>
                                                     <div class="td_wrap">
-                                                        <span class="cul">KRW</span><span class="price">107,000</span>
+                                                        <span class="cul">KRW</span><span class="price areaPrice" th:value="${area.reTotal}"></span>
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>구간 1 : GMP-CJU</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="name">유/영은</span></td>
-                                                <td>
-                                                    <div class="td_wrap">
-                                                        <span class="cul">KRW</span><span class="price">77,900</span>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            </th:block>
                                         </table>
                                     </td>
                                 </tr>
@@ -1269,9 +1261,9 @@
                     <li>
                         <구간 1>
                     </li>
-                    <li>편명 : LJ309</li>
-                    <li>출발 : 2022-02-24(목) 08:05 서울/김포(GMP)</li>
-                    <li>도착 : 2022-02-24(목) 09:15 제주(CJU)</li>
+                    <li>편명 : [[${reserveApiResponse1[0].reAirplainType}]]</li>
+                    <li>출발 : [[${reserveApiResponse1[0].reSchStartTime}]][[${reserveApiResponse1[0].reSchDepPoint}]]</li>
+                    <li>도착 : [[${reserveApiResponse1[0].reSchEndTime}]][[${reserveApiResponse1[0].reSchArrPoint}]]</li>
                     <li>비행시간 : 01h 10m</li>
                     <li>대기시간 : 00h 00m</li>
                     <li>A/C 타입 : B737-800</li>

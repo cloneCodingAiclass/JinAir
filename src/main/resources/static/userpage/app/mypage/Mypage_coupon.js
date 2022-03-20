@@ -135,8 +135,8 @@ $(function () {
 
     function couponResult(memIndex) {
         console.log(memIndex);
-        $.get("/api/userCoupon/list/" + memIndex, function (response) {
-            console.dir(response);
+            $.get("/api/userCoupon/list/" + memIndex, function (response) {
+                console.dir(response);
             let coupon;
             if (response == "") {
                 coupon = 0;
