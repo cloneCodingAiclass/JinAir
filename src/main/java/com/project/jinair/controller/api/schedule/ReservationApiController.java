@@ -100,6 +100,19 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
         reservationApiLogicService.member(reIndex, userid);
     }
 
+    // 탑승자 정보 입력
+    @PutMapping("/updating")
+    public void updating(@RequestBody Header<ReserveApiRequest> request) {
+        reservationApiLogicService.updating(request);
+    }
+    @PutMapping("/updating1")
+    public void updating1(@RequestBody Header<ReserveApiRequest> request) {
+        reservationApiLogicService.updating1(request);
+    }
+    @PutMapping("/updating2")
+    public void updating2(@RequestBody Header<ReserveApiRequest> request) {
+        reservationApiLogicService.updating2(request);
+    }
 
 
 }

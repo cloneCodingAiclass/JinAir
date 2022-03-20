@@ -63,7 +63,4 @@ public class TbReservation {
     private String reHpNation;  // 탑승자 휴대폰 국가번호
     private String reHp; // 탑승자 휴대전화
 
-    @ManyToOne
-    @JoinColumn(name= "reUserindex", referencedColumnName = "memIndex", insertable = false, updatable = false)
-    private TbMember tbMember;
 }

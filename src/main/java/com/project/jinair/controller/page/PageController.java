@@ -865,7 +865,9 @@ public class PageController {
                     .addObject("code", "registerPassenger");
         }else{
             ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf((String) Cook.get(0))).getData();
+            ReserveApiResponse reserveApiResponse1 = reservationApiLogicService.read(Long.valueOf((String) Cook.get(1))).getData();
             model.addAttribute("reserveApiResponse", reserveApiResponse);
+            model.addAttribute("reserveApiResponse1", reserveApiResponse1);
             model.addAttribute("reIndex", Cook);
             HttpSession session = request.getSession();
             if(session.getAttribute("memberApiResponse") != null){

@@ -14,49 +14,87 @@ let child = 0;
 let baby = 0;
 
 function adult_memberOk(i){
-    if(!$(`.adultFirstName${i}`).val()){
-        alert('성(한글)을 입력하세요')
-    }else if(!$(`.adultLastName${i}`).val()){
-        alert('이름(한글)을 입력하세요')
-    }else if(!$(`.adultBirth${i}`).val()){
-        alert('생년월일을 입력하세요')
-    }else if(!$(`.adultId${i}`).val()){
-        alert('회원 아이디을 입력하세요')
-    }else{
-        $.get("/api/user/searchToReser/"+$(`.adultBirth${i}`).val()+"/"+$(`.adultFirstName${i}`).val()+"/"+$(`.adultLastName${i}`).val(), function(response){
-            if(response.data.memUserid == $(`.adultId${i}`).val()){
-                $.get("/api/reservation/member/"+$(`#${(i-1)*2}`).val()+"/"+response.data.memIndex, function(){});
-                $.get("/api/reservation/member/"+$(`#${(i-1)*2+1}`).val()+"/"+response.data.memIndex, function(){});
-                alert('확인되었습니다.')
-            }else{
-                alert('일치하는 회원 정보가 없습니다.')
-            }
-        });
+    if($(`.adultEdit${i}`).val()=='확인'){
+        if(!$(`.adultFirstName${i}`).val()){
+            alert('성(한글)을 입력하세요')
+        }else if(!$(`.adultLastName${i}`).val()){
+            alert('이름(한글)을 입력하세요')
+        }else if(!$(`.adultBirth${i}`).val()){
+            alert('생년월일을 입력하세요')
+        }else if(!$(`.adultId${i}`).val()){
+            alert('회원 아이디을 입력하세요')
+        }else {
+            $.get("/api/user/searchToReser/" + $(`.adultBirth${i}`).val() + "/" + $(`.adultFirstName${i}`).val() + "/" + $(`.adultLastName${i}`).val(), function (response) {
+                if (response.data.memUserid == $(`.adultId${i}`).val().toLowerCase()) {
+                    $.get("/api/reservation/member/" + $(`#${(i - 1) * 2}`).val() + "/" + response.data.memIndex, function () {
+                    });
+                    $.get("/api/reservation/member/" + $(`#${(i - 1) * 2 + 1}`).val() + "/" + response.data.memIndex, function () {
+                    });
+                    alert('확인되었습니다.')
+                    $(`.adultFirstName${i}`).attr('readonly', true);
+                    $(`.adultLastName${i}`).attr('readonly', true);
+                    $(`.adultBirth${i}`).attr('readonly', true);
+                    $(`.adultId${i}`).attr('readonly', true);
+                    $(`.adultEdit${i}`).val('수정')
+                } else {
+                    alert('일치하는 회원 정보가 없습니다.');
+                    $(`.adultId${i}`).val('');
+                }
+            });
+        }
+    }else if($(`.adultEdit${i}`).val()=='수정') {
+        $(`.adultFirstName${i}`).attr('readonly', false);
+        $(`.adultLastName${i}`).attr('readonly', false);
+        $(`.adultBirth${i}`).attr('readonly', false);
+        $(`.adultId${i}`).attr('readonly', false);
+        $(`.adultEdit${i}`).val('확인')
+        $.get("/api/reservation/member/"+$(`#${(i-1)*2}`).val()+"/-1", function(){});
+        $.get("/api/reservation/member/"+$(`#${(i-1)*2+1}`).val()+"/-1", function(){});
+        $("input:radio[name='adultGender1'][value='남자']").attr('disabled', false);
+        $("input:radio[name='adultGender1'][value='여자']").attr('disabled', false);
+        $('.adultNation1').attr('disabled', false);
     }
 }
-
 function child_memberOk(i){
-    console.log(adult)
-    if(!$(`.childFirstName${i}`).val()){
-        alert('성(한글)을 입력하세요')
-    }else if(!$(`.childLastName${i}`).val()){
-        alert('이름(한글)을 입력하세요')
-    }else if(!$(`.childBirth${i}`).val()){
-        alert('생년월일을 입력하세요')
-    }else if(!$(`.childId${i}`).val()){
-        alert('회원 아이디을 입력하세요')
-    }else{
-        $.get("/api/user/searchToReser/"+$(`.childBirth${i}`).val()+"/"+$(`.childFirstName${i}`).val()+"/"+$(`.childLastName${i}`).val(), function(response){
-            if(response.data.memUserid == $(`.childId${i}`).val()){
-                $.get("/api/reservation/member/"+$(`#${(adult+i-1)*2}`).val()+"/"+response.data.memIndex, function(){});
-                $.get("/api/reservation/member/"+$(`#${(adult+i-1)*2+1}`).val()+"/"+response.data.memIndex, function(){});
-                alert('확인되었습니다.')
-            }else{
-                console.log($(`.childId${i}`).val())
-                console.log(response.data.memUserid)
-                alert('일치하는 회원 정보가 없습니다.')
-            }
-        });
+    if($(`.childEdit${i}`).val()=='확인'){
+        if(!$(`.childFirstName${i}`).val()){
+            alert('성(한글)을 입력하세요')
+        }else if(!$(`.childLastName${i}`).val()){
+            alert('이름(한글)을 입력하세요')
+        }else if(!$(`.childBirth${i}`).val()){
+            alert('생년월일을 입력하세요')
+        }else if(!$(`.childId${i}`).val()){
+            alert('회원 아이디을 입력하세요')
+        }else {
+            $.get("/api/user/searchToReser/" + $(`.childBirth${i}`).val() + "/" + $(`.childFirstName${i}`).val() + "/" + $(`.childLastName${i}`).val(), function (response) {
+                if (response.data.memUserid == $(`.childId${i}`).val().toLowerCase()) {
+                    $.get("/api/reservation/member/" + $(`#${(Number(adult) + i - 1) * 2}`).val() + "/" + response.data.memIndex, function () {
+                    });
+                    $.get("/api/reservation/member/" + $(`#${(Number(adult) + i - 1) * 2 + 1}`).val() + "/" + response.data.memIndex, function () {
+                    });
+                    alert('확인되었습니다.')
+                    $(`.childFirstName${i}`).attr('readonly', true);
+                    $(`.childLastName${i}`).attr('readonly', true);
+                    $(`.childBirth${i}`).attr('readonly', true);
+                    $(`.childId${i}`).attr('readonly', true);
+                    $(`.childEdit${i}`).val('수정')
+                } else {
+                    alert('일치하는 회원 정보가 없습니다.');
+                    $(`.childId${i}`).val('');
+                }
+            });
+        }
+    }else if($(`.childEdit${i}`).val()=='수정'){
+        $(`.childFirstName${i}`).attr('readonly',false);
+        $(`.childLastName${i}`).attr('readonly',false);
+        $(`.childBirth${i}`).attr('readonly',false);
+        $(`.childId${i}`).attr('readonly',false);
+        $(`.childEdit${i}`).val('확인')
+        $.get("/api/reservation/member/"+$(`#${(Number(adult)+i-1)*2}`).val()+"/-1", function(){});
+        $.get("/api/reservation/member/"+$(`#${(Number(adult)+i-1)*2+1}`).val()+"/-1", function(){});
+        $("input:radio[name='childGender1'][value='남자']").attr('disabled', false);
+        $("input:radio[name='childGender1'][value='여자']").attr('disabled', false);
+        $('.childNation1').attr('disabled', false);
     }
 }
 
@@ -84,8 +122,6 @@ $(function () {
         }
     }
 
-    $('#0').val() // 1번고객, 구간 1
-
 
     // 구간 2 정보 출력
     let itemList = new Vue({
@@ -96,61 +132,65 @@ $(function () {
         methods:{
         }
     });
-    let itemList1 = new Vue({
-        el : '#itemList1',
-        data : {
-            itemList1 : {}
-        },
-        methods:{
-        }
-    });
-    let itemList2 = new Vue({
-        el : '#itemList2',
-        data : {
-            itemList2 : {}
-        },
-        methods:{
-        }
-    });
-    let itemList3 = new Vue({
-        el : '#itemList3',
-        data : {
-            itemList3 : {}
-        },
-        methods:{
-        }
-    });
-    let itemList4 = new Vue({
-        el : '#itemList4',
-        data : {
-            itemList4 : {}
-        },
-        methods:{
-        }
-    });
     function searchStart(index){
         $.get("/api/reservation/"+index, function(response){
             // 검색 데이터
             itemList.itemList = response.data;
-            itemList1.itemList1 = response.data;
-            itemList2.itemList2 = response.data;
-            itemList3.itemList3 = response.data;
-            itemList4.itemList4 = response.data;
         });
     }
 
+
+    let reSchBasicPrice1 = $('.reSchBasicPrice1').val();
+    let reSchBasicPrice2 = $('.reSchBasicPrice2').val();
+    let reSchDepPoint2 = $('.reSchDepPoint2').val();
+    let reSchArrPoint2 = $('.reSchArrPoint2').val();
     // 구간별 필요사항
     if($('#reTripKind').html() == '왕복'){
-        searchStart($('#1').val()); // 1번고객, 구간 2
+        searchStart($('#1').val());
+        $('.tot_price11').html(((Number(reSchBasicPrice1)+Number(reSchBasicPrice2))*personNum/2).toLocaleString('ko-KR'));
+        $('.tot_price22').html((10000*personNum/2).toLocaleString('ko-KR'))
+        $('.tot_price33').html((8000*personNum/2).toLocaleString('ko-KR'))
+        $('.finaltotalpricee').html(((Number(reSchBasicPrice1)+Number(reSchBasicPrice2))*personNum/2).toLocaleString('ko-KR'));
+        $('.strrr1').html((Number(reSchBasicPrice1)*personNum/2).toLocaleString('ko-KR'));
+        $('.strrr2').html((Number(reSchBasicPrice2)*personNum/2).toLocaleString('ko-KR'));
+        $('.final_tit').html((10000*personNum/2).toLocaleString('ko-KR'))
+        $('.way1_tit').html((5000*personNum/2).toLocaleString('ko-KR'))
+        $('.way2_tit').html((5000*personNum/2).toLocaleString('ko-KR'))
+        $('.taxpriceprint').html((8000*personNum/2).toLocaleString('ko-KR'))
+        $('#finalPrice').html((((Number(reSchBasicPrice1)+Number(reSchBasicPrice2))*personNum/2)+(10000*personNum/2)+(8000*personNum/2)).toLocaleString('ko-KR'));
+        $('.DepPoint').html(reSchDepPoint2.substr(reSchDepPoint2.length-4, 3))
+        $('.ArrPoint').html(reSchArrPoint2.substr(reSchArrPoint2.length-4, 3))
     }
     if($('#reTripKind').html() == '편도'){
         $('.arrow_img').css('display', "none");
         $('.trip_info2').css('display', "none");
         $('.jour2').css("visibility","hidden");
         $('.onewaywww').css('display', "none");
+        $('.tot_price11').html(((Number(reSchBasicPrice1))*personNum/2).toLocaleString('ko-KR'));
+        $('.tot_price22').html((5000*personNum/2).toLocaleString('ko-KR'))
+        $('.tot_price33').html((4000*personNum/2).toLocaleString('ko-KR'))
+        $('.finaltotalpricee').html(((Number(reSchBasicPrice1))*personNum/2).toLocaleString('ko-KR'));
+        $('.strrr1').html((Number(reSchBasicPrice1)*personNum/2).toLocaleString('ko-KR'));
+        $('.final_tit').html((5000*personNum/2).toLocaleString('ko-KR'))
+        $('.way1_tit').html((5000*personNum/2).toLocaleString('ko-KR'))
+        $('.taxpriceprint').html((4000*personNum/2).toLocaleString('ko-KR'))
+        $('#finalPrice').html(((Number(reSchBasicPrice1)*personNum/2)+(5000*personNum/2)+(4000*personNum/2)).toLocaleString('ko-KR'));
     }
     if($('#reTripKind').html() == '다구간'){
         searchStart($('#1').val());
+        $('.tot_price11').html(((Number(reSchBasicPrice1)+Number(reSchBasicPrice2))*personNum/2).toLocaleString('ko-KR'));
+        $('.tot_price22').html((10000*personNum/2).toLocaleString('ko-KR'))
+        $('.tot_price33').html((8000*personNum/2).toLocaleString('ko-KR'))
+        $('.finaltotalpricee').html(((Number(reSchBasicPrice1)+Number(reSchBasicPrice2))*personNum/2).toLocaleString('ko-KR'));
+        $('.strrr1').html((Number(reSchBasicPrice1)*personNum/2).toLocaleString('ko-KR'));
+        $('.strrr2').html((Number(reSchBasicPrice2)*personNum/2).toLocaleString('ko-KR'));
+        $('.final_tit').html((10000*personNum/2).toLocaleString('ko-KR'))
+        $('.way1_tit').html((5000*personNum/2).toLocaleString('ko-KR'))
+        $('.way2_tit').html((5000*personNum/2).toLocaleString('ko-KR'))
+        $('.taxpriceprint').html((8000*personNum/2).toLocaleString('ko-KR'))
+        $('#finalPrice').html((((Number(reSchBasicPrice1)+Number(reSchBasicPrice2))*personNum/2)+(10000*personNum/2)+(8000*personNum/2)).toLocaleString('ko-KR'));
+        $('.DepPoint').html(reSchDepPoint2.substr(reSchDepPoint2.length-4, 3))
+        $('.ArrPoint').html(reSchArrPoint2.substr(reSchArrPoint2.length-4, 3))
     }
 
     // 인원수 구하기
@@ -175,9 +215,6 @@ $(function () {
         baby = peice[5].substr(0, peice[5].length)
     }
 
-
-
-
     function adults(i){
         $('#pass_info_title').after(
             `<div id="tableWrapper" class="tableWrapper">
@@ -190,8 +227,8 @@ $(function () {
                     </colgroup>
                     <tr>
                         <th colspan="4">
-                            <p class="nop">성인 ${i}</p><input type="checkbox" class="userCheck">
-                            <p class="check_txt">회원 본인이 탑승하지 않는 경우 체크 해 주세요.</p>
+                            <p class="nop">성인 ${i}</p><input type="checkbox" class="userCheck" id="adultUserCheck${i}">
+                            <p class="check_txt" id="adultCheckTxt${i}">회원 본인이 탑승하지 않는 경우 체크 해 주세요.</p>
                         </th>
                     </tr>
                     <tr>
@@ -513,8 +550,8 @@ $(function () {
                     </colgroup>
                     <tr>
                         <th colspan="4">
-                            <p class="nop">소아 ${i}</p><input type="checkbox" class="userCheck">
-                            <p class="check_txt">회원 본인이 탑승하지 않는 경우 체크 해 주세요.</p>
+                            <p class="nop">소아 ${i}</p><input type="checkbox" class="userCheck" id="childUserCheck${i}">
+                            <p class="check_txt" id="childCheckTxt${i}">회원 본인이 탑승하지 않는 경우 체크 해 주세요.</p>
                         </th>
                     </tr>
                     <tr>
@@ -838,8 +875,7 @@ $(function () {
                     </colgroup>
                     <tr>
                         <th colspan="4">
-                            <p class="nop">유아 ${i}</p><input type="checkbox" class="userCheck">
-                            <p class="check_txt">회원 본인이 탑승하지 않는 경우 체크 해 주세요.</p>
+                            <p class="nop">유아 ${i}</p>
                         </th>
                     </tr>
                     <tr>
@@ -1098,8 +1134,6 @@ $(function () {
     }
 
 
-
-
     if(memIndex == 0){ // 회원이 아니라면
         if (adult === 0){
             for(let i = child ; i > 0 ; i--){
@@ -1119,10 +1153,13 @@ $(function () {
         $('.userCheck').css('display','none');
         $('.check_txt').css('display','none');
 
+
     }else{ // 회원이라면
         $('.input_email').val(memEmail);
         $('#countryNum').val(memHpNation).prop("selected",true);
         $('.input_phone').val(memHp);
+        $('.userCheck').css('display','none');
+        $('.check_txt').css('display','none');
         if (adult === 0){
             for(let i = child ; i > 0 ; i--){
                 childs(i);
@@ -1133,7 +1170,51 @@ $(function () {
             $('.childBirth1').val(memBirth);
             $('.childNation1').val(memNation).prop("selected",true);
             $('.childId1').val(memUserId.toUpperCase());
-            $('.')
+            $('.childFirstName1').attr('readonly', true);
+            $('.childLastName1').attr('readonly', true);
+            $('.childBirth1').attr('readonly', true);
+            $('.childId1').attr('readonly', true);
+            $("input:radio[name='childGender1'][value='남자']").attr('disabled', true);
+            $("input:radio[name='childGender1'][value='여자']").attr('disabled', true);
+            $('.childNation1').attr('disabled', true);
+            $('.childEdit1').val('수정');
+            $('.userCheck').css('display','none');
+            $('.check_txt').css('display','none');
+            $('#childUserCheck1').css('display','inline');
+            $('#childCheckTxt1').css('display','inline');
+            $.get("/api/reservation/member/"+$('#0').val()+"/"+memIndex, function(){});
+            $.get("/api/reservation/member/"+$('#1').val()+"/"+memIndex, function(){});
+
+            $('#childUserCheck1').on('change', function (){
+                if($('#childUserCheck1').is(":checked")){
+                    $('.childFirstName1').attr('readonly', false);
+                    $('.childLastName1').attr('readonly', false);
+                    $('.childBirth1').attr('readonly', false);
+                    $("input:radio[name='childGender1'][value='남자']").attr('disabled', false);
+                    $("input:radio[name='childGender1'][value='여자']").attr('disabled', false);
+                    $('.childNation1').attr('disabled', false);
+                    $('.childFirstName1').val('');
+                    $('.childLastName1').val('');
+                    $('.childBirth1').val('');
+                }else{
+                    $('.childFirstName1').val(memKorFirstName);
+                    $('.childLastName1').val(memKorLastName);
+                    $("input:radio[name='childGender1'][value='" + memGender + "']").attr('checked', true);
+                    $('.childBirth1').val(memBirth);
+                    $('.childNation1').val(memNation).prop("selected",true);
+                    $('.childId1').val(memUserId.toUpperCase());
+                    $('.childFirstName1').attr('readonly', true);
+                    $('.childLastName1').attr('readonly', true);
+                    $('.childBirth1').attr('readonly', true);
+                    $("input:radio[name='childGender1'][value='남자']").attr('disabled', true);
+                    $("input:radio[name='childGender1'][value='여자']").attr('disabled', true);
+                    $('.childNation1').attr('disabled', true);
+                    $.get("/api/reservation/member/"+$('#0').val()+"/"+memIndex, function(){});
+                    $.get("/api/reservation/member/"+$('#1').val()+"/"+memIndex, function(){});
+                    $('.childEdit1').val('수정');
+                }
+            })
+
         }else{
             for(let i = baby ; i > 0 ; i--){
                 babys(i);
@@ -1150,15 +1231,201 @@ $(function () {
             $('.adultBirth1').val(memBirth);
             $('.adultNation1').val(memNation).prop("selected",true);
             $('.adultId1').val(memUserId.toUpperCase());
+            $('.adultFirstName1').attr('readonly', true);
+            $('.adultLastName1').attr('readonly', true);
+            $('.adultBirth1').attr('readonly', true);
+            $('.adultId1').attr('readonly', true);
+            $("input:radio[name='adultGender1'][value='남자']").attr('disabled', true);
+            $("input:radio[name='adultGender1'][value='여자']").attr('disabled', true);
+            $('.adultNation1').attr('disabled', true);
+            $('.adultEdit1').val('수정');
+            $('.userCheck').css('display','none');
+            $('.check_txt').css('display','none');
+            $('#adultUserCheck1').css('display','inline');
+            $('#adultCheckTxt1').css('display','inline');
+            $.get("/api/reservation/member/"+$('#0').val()+"/"+memIndex, function(){});
+            $.get("/api/reservation/member/"+$('#1').val()+"/"+memIndex, function(){});
+
+            $('#adultUserCheck1').on('change', function (){
+                if($('#adultUserCheck1').is(":checked")){
+                    $('.adultFirstName1').attr('readonly', false);
+                    $('.adultLastName1').attr('readonly', false);
+                    $('.adultBirth1').attr('readonly', false);
+                    $("input:radio[name='adultGender1'][value='남자']").attr('disabled', false);
+                    $("input:radio[name='adultGender1'][value='여자']").attr('disabled', false);
+                    $('.adultNation1').attr('disabled', false);
+                    $('.adultFirstName1').val('');
+                    $('.adultLastName1').val('');
+                    $('.adultBirth1').val('');
+                }else{
+                    $('.adultFirstName1').val(memKorFirstName);
+                    $('.adultLastName1').val(memKorLastName);
+                    $("input:radio[name='adultGender1'][value='" + memGender + "']").attr('checked', true);
+                    $('.adultBirth1').val(memBirth);
+                    $('.adultNation1').val(memNation).prop("selected",true);
+                    $('.adultId1').val(memUserId.toUpperCase());
+                    $('.adultFirstName1').attr('readonly', true);
+                    $('.adultLastName1').attr('readonly', true);
+                    $('.adultBirth1').attr('readonly', true);
+                    $("input:radio[name='adultGender1'][value='남자']").attr('disabled', true);
+                    $("input:radio[name='adultGender1'][value='여자']").attr('disabled', true);
+                    $('.adultNation1').attr('disabled', true);
+                    $.get("/api/reservation/member/"+$('#0').val()+"/"+memIndex, function(){});
+                    $.get("/api/reservation/member/"+$('#1').val()+"/"+memIndex, function(){});
+                    $('.adultEdit1').val('수정');
+                }
+            })
         }
-
-
-
-
+    }
+    function adultUpdate(a, b, c, d, e, f, g, h) {
+        let jsonData;
+            jsonData = {
+                data : {
+                    reIndex: Number(a),
+                    reFirstName: b,
+                    reLastName: c,
+                    reBirth : d,
+                    reNation : e,
+                    reMemberId : f,
+                    reGender : g,
+                    reExtraSale : h
+                }
+            }
+            $.ajax({
+                url : "/api/reservation/updating",
+                type : "PUT",
+                data : JSON.stringify(jsonData),
+                dataType : "text",
+                contentType : "application/json"
+            });
+        let jsonData1;
+        jsonData1 = {
+            data : {
+                reIndex: Number(a)+1,
+                reFirstName: b,
+                reLastName: c,
+                reBirth : d,
+                reNation : e,
+                reMemberId : f,
+                reGender : g,
+                reExtraSale : h
+            }
+        }
+        $.ajax({
+            url : "/api/reservation/updating",
+            type : "PUT",
+            data : JSON.stringify(jsonData1),
+            dataType : "text",
+            contentType : "application/json"
+        });
+    }
+    function babyUpdate(a, b, c, d, e, f) {
+        let jsonData;
+        jsonData = {
+            data : {
+                reIndex: Number(a),
+                reFirstName: b,
+                reLastName: c,
+                reBirth : d,
+                reNation : e,
+                reGender : f
+            }
+        }
+        $.ajax({
+            url : "/api/reservation/updating1",
+            type : "PUT",
+            data : JSON.stringify(jsonData),
+            dataType : "text",
+            contentType : "application/json"
+        });
+        let jsonData1;
+        jsonData1 = {
+            data : {
+                reIndex: Number(a)+1,
+                reFirstName: b,
+                reLastName: c,
+                reBirth : d,
+                reNation : e,
+                reGender : f
+            }
+        }
+        $.ajax({
+            url : "/api/reservation/updating1",
+            type : "PUT",
+            data : JSON.stringify(jsonData1),
+            dataType : "text",
+            contentType : "application/json"
+        });
     }
 
+    function email(a, b, c, d){
+        let jsonData;
+        jsonData = {
+            data : {
+                reIndex: Number(a),
+                reEmail: b,
+                reHpNation: c,
+                reHp : d
+            }
+        }
+        $.ajax({
+            url : "/api/reservation/updating2",
+            type : "PUT",
+            data : JSON.stringify(jsonData),
+            dataType : "text",
+            contentType : "application/json"
+        });
+    }
 
-
+    $('.fix_next_butt').on('click',function (){
+        for(let i = 1 ; i < Number(adult)+1 ; i ++){
+            adultUpdate(
+                $(`#${(i - 1) * 2}`).val(),
+                $(`.adultFirstName${i}`).val(),
+                $(`.adultLastName${i}`).val(),
+                $(`.adultBirth${i}`).val(),
+                $(`.adultNation${i}`).val(),
+                $(`.adultId${i}`).val(),
+                $(`input:radio[name='adultGender${i}']:checked`).val(),
+                $(`.adultDiscount${i}`).val()
+            );
+        }
+        for(let i = 1 ; i < Number(child)+1 ; i ++){
+            adultUpdate(
+                $(`#${(Number(adult) + i - 1) * 2}`).val(),
+                $(`.childFirstName${i}`).val(),
+                $(`.childLastName${i}`).val(),
+                $(`.childBirth${i}`).val(),
+                $(`.childNation${i}`).val(),
+                $(`.childId${i}`).val(),
+                $(`input:radio[name='childGender${i}']:checked`).val(),
+                $(`.childDiscount${i}`).val()
+            );
+        }
+        for(let i = 1 ; i < Number(baby)+1 ; i ++){
+            babyUpdate(
+                $(`#${(Number(adult) + Number(child) + i - 1) * 2}`).val(),
+                $(`.babyFirstName${i}`).val(),
+                $(`.babyLastName${i}`).val(),
+                $(`.babyBirth${i}`).val(),
+                $(`.babyNation${i}`).val(),
+                $(`input:radio[name='babyGender${i}']:checked`).val()
+            );
+        }
+        if(!$('#countryNum').val() || !$('.input_email').val() || !$('.input_phone').val()){
+            alert('필수 항목을 입력해주세요.')
+        }else{
+            for(let i = 0 ; i < personNum ; i++){
+                email(
+                    $(`#${i}`).val(),
+                    $('.input_email').val(),
+                    $('#countryNum').val(),
+                    $('.input_phone').val()
+                )
+            }
+            location.href="/pages/extras"
+        }
+    })
 
 
 
