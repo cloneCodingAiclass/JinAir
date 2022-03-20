@@ -88,32 +88,31 @@ $(() => {
                 final.push(finalarr);
             });
             console.dir(final);
-            $.ajax({
-                url: "/api/reservation/paymentsUpdate",
-                type : "PUT",
-                data: JSON.stringify(final),
-                dataType: "text",
-                contentType: "application/json",
-                success(final){
-                    alert("dddd")
+            $.post({
+                url: "/api/kakao/create",
+                data: JSON.stringify(arr),
+                async: false,
+                success: function (arr) {
+                    location.href=arr;
+                    $(location).attr("href", "/pages/complete");
+                    $("#modal_fare_rules").fadeOut();
+                    $("body").css("overflow", "scroll");
+                    $.ajax({
+                        url: "/api/reservation/paymentsUpdate",
+                        type: "PUT",
+                        data: JSON.stringify(final),
+                        dataType: "text",
+                        contentType: "application/json",
+                        success: function (final) {
+                            alert("결제 성공")
+                        },
+                        error(error) {
+                            console.log('error')
+                            console.dir(error)
+                        }
+                    });
                 }
             });
-            // $.post({
-            //     url: "/api/kakao/create",
-            //     data: JSON.stringify(arr),
-            //     async: false,
-            //     success: function(arr) {
-            //         location.href=arr;
-            //
-            //     },
-            //     error: function (error) {
-            //         console.log('error')
-            //         console.dir(error)
-            //     }
-            // })
-            // $(location).attr("href", "/pages/complete");
-            $("#modal_fare_rules").fadeOut();
-            $("body").css("overflow", "scroll");
         } else {
             $("#modal_fare_rules > .modal_conf_ok_wrap").fadeIn();
         }

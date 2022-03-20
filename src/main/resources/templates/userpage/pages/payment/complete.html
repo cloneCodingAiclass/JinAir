@@ -10,6 +10,7 @@
 <script src="/userpage/app/payment/complete.js"></script>
 <body>
 <input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
+<input type="hidden" name="" th:each="dto : ${reserveApiResponse1}" class="cookies" th:id="${dto.reIndex}" th:value="${dto.reIndex}">
     <ul class="skipnavi">
         <!--책갈피 역할-->
         <li><a href="#container">본문내용</a></li>
@@ -30,9 +31,9 @@
                     <table>
                         <tr>
                             <th>예약일</th>
-                            <td>2022-01-29(토)</td>
+                            <td th:value="${reserveApiResponse1[0].reSchStartTime}"></td>
                             <th>예약번호</th>
-                            <td>ZN882R</td>
+                            <td>[[${reReserNum}]]</td>
                         </tr>
                         <tr>
                             <th>상태</th>
@@ -47,14 +48,14 @@
                             </th>
                             <td colspan="3" class="info">
                                 <div class="in_bl">
-                                    <span>서울/김포(GMP)</span>
+                                    <span>[[${reserveApiResponse1[0].reSchDepPoint}]]</span>
                                     <p>[출발]2022-10-25(화) 06:05</p>
                                 </div>
                                 <span class="arrow">
                                     <img src="/userpage/lib/img/right_arrow.PNG" alt="에서">
                                 </span>
                                 <div class="in_bl">
-                                    <span>제주(CJU)</span>
+                                    <span>[[${reserveApiResponse1[0].reSchArrPoint}]]</span>
                                     <p>[도착]2022-10-25(화) 07:20</p>
                                 </div>
                             </td>
