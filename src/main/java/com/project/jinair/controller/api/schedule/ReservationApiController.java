@@ -1,12 +1,17 @@
 package com.project.jinair.controller.api.schedule;
 
 import com.project.jinair.ifs.CrudInterface;
+import com.project.jinair.model.entity.schedule.TbReservation;
 import com.project.jinair.model.enumclass.PaymentStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.schedule.ReserveApiRequest;
 import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
+import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import com.project.jinair.service.reservation.ReservationApiLogicService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,6 +50,12 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
 
     private final ReservationApiLogicService reservationApiLogicService;
 
+    @GetMapping("/list/{startIdx}/{endIdx}") // http://localhost:8080/api/reservation/list
+    public Header<List<ReserveApiResponse>> findAll(
+            @PathVariable(name = "startIdx") Long startIdx, @PathVariable(name = "endIdx") Long endIdx) {
+        return reservationApiLogicService.find(startIdx, endIdx);
+    }
+
     @Override
     @PostMapping("")
     public Header<ReserveApiResponse> create(@RequestBody Header<ReserveApiRequest> request) {
@@ -78,5 +89,30 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     public Header<ReserveApiResponse> readPayment(@PathVariable(name = "id") Long id, @PathVariable(name = "paymentStatus") PaymentStatus paymentStatus) {
         return reservationApiLogicService.readPayment(id, paymentStatus);
     }
+
+    @PutMapping("/paymentsUpdate")
+    public ReserveApiResponse paymentsUpdate(@RequestBody List<ReserveApiRequest> request) {
+        return reservationApiLogicService.paymentsUpdate(request);
+    }
+
+    @GetMapping("/member/{reIndex}/{userid}")
+    public void member(@PathVariable(name = "reIndex") Long reIndex, @PathVariable(name = "userid") Long userid) {
+        reservationApiLogicService.member(reIndex, userid);
+    }
+
+    // 탑승자 정보 입력
+    @PutMapping("/updating")
+    public void updating(@RequestBody Header<ReserveApiRequest> request) {
+        reservationApiLogicService.updating(request);
+    }
+    @PutMapping("/updating1")
+    public void updating1(@RequestBody Header<ReserveApiRequest> request) {
+        reservationApiLogicService.updating1(request);
+    }
+    @PutMapping("/updating2")
+    public void updating2(@RequestBody Header<ReserveApiRequest> request) {
+        reservationApiLogicService.updating2(request);
+    }
+
 
 }

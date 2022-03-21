@@ -62,6 +62,16 @@ public class MemberApiController implements CrudInterface<MemberApiRequest, Memb
         return memberApiLogicService.reads(id);
     }
 
+    // 이름, 생년월일로 아이디 찾기
+    @GetMapping("/searchToReser/{bthDt}/{mbrLnm}/{mbrFnm}")
+    public Header<MemberApiResponse> searchToReser(
+            @PathVariable(name = "bthDt") String bthDt,
+            @PathVariable(name = "mbrLnm") String mbrLnm,
+            @PathVariable(name = "mbrFnm") String mbrFnm
+    ) throws InterruptedException {
+        return memberApiLogicService.searchToReser(bthDt, mbrLnm, mbrFnm);
+    }
+
     // 이메일로 아이디 찾기
     @GetMapping("/searchs/{emAdr}/{bthDt}/{mbrLnm}/{mbrFnm}")
     public Header<MemberApiResponse> searchs(
@@ -72,6 +82,7 @@ public class MemberApiController implements CrudInterface<MemberApiRequest, Memb
     ) throws InterruptedException {
         return memberApiLogicService.searchs(emAdr, bthDt, mbrLnm, mbrFnm);
     }
+
     // 휴대폰번호로 아이디 찾기
     @GetMapping("/searchd/{emAdr}/{bthDt}/{mbrLnm}/{mbrFnm}")
     public Header<MemberApiResponse> searchd(

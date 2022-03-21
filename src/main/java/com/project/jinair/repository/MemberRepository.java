@@ -18,6 +18,9 @@ public interface MemberRepository extends JpaRepository<TbMember,  Long> {
     // 인덱스 번호로 검색
     TbMember findByMemIndex(Long idx);
 
+    // 생년월일, 이름으로 회원찾기
+    Optional<TbMember> findByMemBirthAndMemKorFirstNameAndMemKorLastName(String bthDt, String mbrLnm, String mbrFnm);
+
     // 이메일로 회원 찾기
     Optional<TbMember> findByMemEmailAndMemBirthAndMemKorFirstNameAndMemKorLastName(String emAdr, String bthDt, String mbrLnm, String mbrFnm);
 

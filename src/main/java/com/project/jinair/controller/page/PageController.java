@@ -497,7 +497,18 @@ public class PageController {
             }
         }
         HttpSession session = request.getSession();
-        if(session.getAttribute("memberApiResponse") != null){
+        ArrayList arrrr = new ArrayList<>();
+        for(int i = 39; i <= 40; i++) {
+            Long idx = Long.valueOf(i);
+            ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(idx).getData();
+            System.out.println(reserveApiResponse);
+            if(reserveApiResponse.getReStatus() != null){
+                arrrr.add(reserveApiResponse);
+            };
+        }
+        System.out.println(arrrr);
+        session.setAttribute("reserveApiResponse1", arrrr);
+        if (session.getAttribute("memberApiResponse") != null) {
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
             model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
             return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_qna")
@@ -679,14 +690,18 @@ public class PageController {
             }else{
                 model.addAttribute("people", "성인 " + AdultNumber + " 유아 " + InfantNumber);
             }
-        }else{
-            if(InfantNumber == 0){
-                model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber);
+        }else if(AdultNumber == 0){
+            model.addAttribute("people", "소아 " + ChildNumber);
+        }else if(InfantNumber == 0){
+            if(ChildNumber == 0){
+                model.addAttribute("people", "성인 " + AdultNumber);
             }else if(AdultNumber == 0){
                 model.addAttribute("people", "소아 " + ChildNumber);
             }else{
-                model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber + " 유아 " + InfantNumber);
+                model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber);
             }
+        }else{
+            model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber + " 유아 " + InfantNumber);
         }
 
         HttpSession session = request.getSession();
@@ -740,14 +755,18 @@ public class PageController {
             }else{
                 model.addAttribute("people", "성인 " + AdultNumber + " 유아 " + InfantNumber);
             }
-        }else{
-            if(InfantNumber == 0){
-                model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber);
+        }else if(AdultNumber == 0){
+            model.addAttribute("people", "소아 " + ChildNumber);
+        }else if(InfantNumber == 0){
+            if(ChildNumber == 0){
+                model.addAttribute("people", "성인 " + AdultNumber);
             }else if(AdultNumber == 0){
                 model.addAttribute("people", "소아 " + ChildNumber);
             }else{
-                model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber + " 유아 " + InfantNumber);
+                model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber);
             }
+        }else{
+            model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber + " 유아 " + InfantNumber);
         }
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
@@ -807,14 +826,18 @@ public class PageController {
             }else{
                 model.addAttribute("people", "성인 " + AdultNumber + " 유아 " + InfantNumber);
             }
-        }else{
-            if(InfantNumber == 0){
-                model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber);
+        }else if(AdultNumber == 0){
+            model.addAttribute("people", "소아 " + ChildNumber);
+        }else if(InfantNumber == 0){
+            if(ChildNumber == 0){
+                model.addAttribute("people", "성인 " + AdultNumber);
             }else if(AdultNumber == 0){
                 model.addAttribute("people", "소아 " + ChildNumber);
             }else{
-                model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber + " 유아 " + InfantNumber);
+                model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber);
             }
+        }else{
+            model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber + " 유아 " + InfantNumber);
         }
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
@@ -842,7 +865,9 @@ public class PageController {
                     .addObject("code", "registerPassenger");
         }else{
             ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf((String) Cook.get(0))).getData();
+            ReserveApiResponse reserveApiResponse1 = reservationApiLogicService.read(Long.valueOf((String) Cook.get(1))).getData();
             model.addAttribute("reserveApiResponse", reserveApiResponse);
+            model.addAttribute("reserveApiResponse1", reserveApiResponse1);
             model.addAttribute("reIndex", Cook);
             HttpSession session = request.getSession();
             if(session.getAttribute("memberApiResponse") != null){
@@ -881,18 +906,37 @@ public class PageController {
                 .addObject("code", "restrictedCountry");
     }
     // 최종 결제
-    @RequestMapping("/payment")
-    public ModelAndView payment(HttpServletRequest request, HttpServletResponse response, Model model){
+    @RequestMapping(value = {"/payment/oneway", "/payment/multiway", "/payment/twoway"})
+    public ModelAndView payment(HttpServletRequest request, HttpServletResponse response, Model model) {
+        Cookie[] myCookies = request.getCookies();
+        List cook = new ArrayList();
+
         HttpSession session = request.getSession();
-        if(session.getAttribute("memberApiResponse") != null){
+        ArrayList arrrr = new ArrayList<>();
+
+        for(int i = 0; i < myCookies.length; i++) {
+            if(myCookies[i].getValue().equals("reIndex")){
+                long idx = Long.valueOf(myCookies[i].getName());
+                ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf(myCookies[i].getName())).getData();
+                System.out.println(reserveApiResponse);
+                if(reserveApiResponse.getReStatus() != null){
+                    arrrr.add(reserveApiResponse);
+                }
+            }
+        }
+        System.out.println(arrrr);
+        session.setAttribute("reserveApiResponse1", arrrr);
+        if (session.getAttribute("memberApiResponse") != null) {
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
             model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
-        }else{
+            model.addAttribute("reserveApiResponse1", session.getAttribute("reserveApiResponse1"));
+        } else {
             model.addAttribute("loginURL", "/userpage/fragment/menu");
         }
         return new ModelAndView("/userpage/pages/payment/payReservation")
                 .addObject("code", "payReservation");
     }
+
     // 사용자 예약 취소
     @RequestMapping("/cancel")
     public ModelAndView cancel(HttpServletRequest request, HttpServletResponse response, Model model){
@@ -920,9 +964,24 @@ public class PageController {
     // 사용자 결제 완료
     @RequestMapping("/complete")
     public ModelAndView complete(HttpServletRequest request, HttpServletResponse response, Model model) {
+        Cookie[] myCookies = request.getCookies();
         HttpSession session = request.getSession();
+        ArrayList arrrr = new ArrayList<>();
+
+        for(int i = 0; i < myCookies.length; i++) {
+            if(myCookies[i].getValue().equals("reIndex")){
+                long idx = Long.valueOf(myCookies[i].getName());
+                ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf(myCookies[i].getName())).getData();
+                System.out.println(reserveApiResponse);
+                if(reserveApiResponse.getReStatus() != null){
+                    arrrr.add(reserveApiResponse);
+                }
+            }
+        }
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
+            model.addAttribute("reserveApiResponse1", session.getAttribute("reserveApiResponse1"));
         }else{
             model.addAttribute("loginURL", "/userpage/fragment/menu");
         }

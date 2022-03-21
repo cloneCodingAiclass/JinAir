@@ -289,7 +289,7 @@ body{
 /* container */
 #container{
     width: 100%;
-    height: 1800px;
+    height: auto;
 }
 
 .cursor {
@@ -491,6 +491,7 @@ body{
     padding-top: 70px;
     font-weight: bold;
     color: black;
+    border-bottom: 1px solid #444;
 }
 
 .pass_info_wrap > .pass_info_title > p{
@@ -506,8 +507,12 @@ body{
     font-weight: 600;
 }
 
+.babyTableWrapper{
+    border-bottom: 1px solid #444;
+    padding-bottom: 40px;
+}
+
 .pass_info_wrap table.required_table {
-    border-top: 1px solid #444;
     border-bottom: none;
     padding-top: 40px;
 }
@@ -537,6 +542,7 @@ body{
 
 table td {
     height: 60px;
+    font-weight: bold;
 }
 
 table input {
@@ -686,8 +692,7 @@ label.men {
 /*공지사항 끝*/
 
 .buyer_wrap {
-    position: relative;
-    top: 50px;
+    height: 850px;
 }
 
 .pass_info_title {
@@ -761,7 +766,7 @@ label.men {
 
 .fix_bott_wrap {
     position: absolute;
-    margin-top: 400px;
+    margin-top: -250px;
     width: 100%;
     height: 100px;
 }
