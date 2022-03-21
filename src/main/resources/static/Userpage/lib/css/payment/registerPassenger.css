@@ -372,6 +372,7 @@ body{
     padding: 20px;
     border: none;
     cursor: pointer;
+    font-weight: 600;
 }
 .trip_info > .schedule > .arrow_img {
     display: block;
@@ -391,8 +392,13 @@ body{
     background-image: url("/userpage/lib/img/up.png");
 }
 
-.trip_info > .trip_area, .trip_info2 > .trip_area {
+.trip_info > .trip_area,
+.trip_info2 > .trip_area {
     display: flex;
+    font-weight: 600;
+}
+.person_cnt{
+    font-weight: 600;
 }
 
 .trip_info > .trip_area .arr_area::before, .trip_info2 > .trip_area .arr_area::before {
@@ -638,7 +644,7 @@ select.p90 {
     font-weight: 600;
     font-size: 18px;
 }
-.radio_wrap input[type="radio"]{
+.genderRadio .radio_wrap input[type="radio"]{
     display: none;
 }
 
@@ -1970,6 +1976,7 @@ td.cur::before {
     border: 3px solid #bdd600;
     font-size: 22px;
     font-weight: bold;
+    cursor: pointer;
 }
 .update_submit a::before {
     content: "";
