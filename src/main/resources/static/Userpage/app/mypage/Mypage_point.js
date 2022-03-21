@@ -513,6 +513,20 @@ $(function () {
         });
     }
 
+    pointResult(memIndex);
+
+    function pointResult(index){
+        let sum = 0;
+        $.get("/api/point/user/"+index, function (response){
+            for(let i = 0; i < response.data.length; i++){
+                let point = response.data[i].poPoint;
+                sum += point;
+            }
+            console.log(sum)
+            $('#point').text(sum);
+        })
+    }
+
 });
 
 function hidePopupLayer(){

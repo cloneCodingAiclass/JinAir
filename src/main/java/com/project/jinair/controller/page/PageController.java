@@ -379,6 +379,7 @@ public class PageController {
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
             return new ModelAndView("/userpage/pages/mypage/mypageDetail/faq_list")
                     .addObject("code", "faq_list");
         }else{
@@ -439,8 +440,10 @@ public class PageController {
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
             return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_getReservationDetail")
                     .addObject("code", "Mypage_getReservationDetail");
+
         }else{
             return new ModelAndView("/userpage/pages/index/error")
                     .addObject("code", "add_qna");
