@@ -46,7 +46,7 @@
                     </div>
                     <!--여정1 끝-->
                     <!--여정2-->
-                        <div class="triptype2">
+                        <div class="trip_info2">
                             <div class="schedule">
                                 <p><span id="triptype2"></span> 여정2</p>
                             </div>
@@ -1228,12 +1228,12 @@
             <li>
                 <구간 1>
             </li>
-            <li>편명 : [[${reserveApiResponse1[0].reAirplainType}]]</li>
+            <li>편명 : [[${reserveApiResponse1[0].reSchName}]]</li>
             <li>출발 : [[${reserveApiResponse1[0].reSchStartTime}]][[${reserveApiResponse1[0].reSchDepPoint}]]</li>
             <li>도착 : [[${reserveApiResponse1[0].reSchEndTime}]][[${reserveApiResponse1[0].reSchArrPoint}]]</li>
             <li>비행시간 : 01h 10m</li>
             <li>대기시간 : 00h 00m</li>
-            <li>A/C 타입 : B737-800</li>
+            <li>A/C 타입 : [[${reserveApiResponse1[0].reAirplainType}]]</li>
         </ul>
         </p>
     </div>
@@ -1251,7 +1251,7 @@
             <li>
                 <구간 1>
             </li>
-            <li>편명 : LJ309</li>
+            <li>편명 : [[${reserveApiResponse1[1].reSchName}]]</li>
             <li>출발 : 2022-02-24(목) 08:05 서울/김포(GMP)</li>
             <li>도착 : 2022-02-24(목) 09:15 제주(CJU)</li>
             <li>비행시간 : 01h 10m</li>
