@@ -153,8 +153,8 @@ $(() => {
 
         $(".arrow_img").on("click", function () {
             $(".arrow_img").css("display", "none");
-            $(".trip_info2").slideDown(200);
             $(".arrow_up_img").css("display", "block");
+            $(".trip_info2").slideDown(200);
         });
         $(".arrow_up_img").on("click", function () {
             $(".arrow_img").css("display", "block");
