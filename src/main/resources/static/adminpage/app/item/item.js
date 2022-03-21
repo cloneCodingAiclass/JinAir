@@ -109,19 +109,12 @@ $(() => {
 
 $(() =>{
 
-    let airplaneList = [
-        '필수 선택', 'B777-200ER', 'B737-800', 'B737-900'
-    ]
-
     let typeList = [
         '필수 선택', '가방', '전자제품', '노트북/테블릿', '담배', '도서', '모자'
         , '배게/담요', '시계', '식품', '신발', '안경/선글라스', '액세서리', '의류'
         , '이어폰/휴대폰', '주류', '지갑', '화장품', '기타'
     ]
 
-    let airportList = [
-        '필수 선택', '인천', '김포', '부산', '제주'
-    ]
 
     let itemList = $("#item_list");
     let arrAirport = $("#arrival_airport_list");
@@ -134,18 +127,44 @@ $(() =>{
         itemList.append(option);
     }
 
-    for (let i = 0; i < airportList.length; i++){
-        let option = document.createElement('option');
-        option.innerText = airportList[i];
-        option.value = airportList[i];
-        arrAirport.append(option);
+    airplaneType();
+    areaList();
+
+    // 항공기 타입 데이터 목록
+    function airplaneType(){
+        $.get("/api/airplane/list", function (response){
+            console.dir(response)
+            let arr = response.data.map(function (val, index){
+                return val['apType']
+            }).filter(function (val, index, arr2){
+                return arr2.indexOf(val) === index;
+            })
+
+            console.log(arr);
+
+            for (let i = 0; i < arr.length; i++){
+                let a = arr[i];
+                let option = document.createElement('option');
+                option.innerText = a;
+                option.value = a;
+                airplane.append(option);
+            }
+
+        })
     }
 
-    for (let i = 0; i < airplaneList.length; i++){
-        let option = document.createElement('option');
-        option.innerText = airplaneList[i];
-        option.value = airplaneList[i];
-        airplane.append(option);
+    // 출발지 도착지 데이터 목록
+    function areaList(){
+        $.get("/api/airport/list", function (response){
+            // 도착지 셀렉트
+            for (let i = 0; i < response.data.length; i++){
+                let a = response.data[i].aptAirport;
+                let option = document.createElement('option');
+                option.innerText = a;
+                option.value = a;
+                arrAirport.append(option);
+            }
+        })
     }
 
     $("option[value='필수 선택']").attr('selected', true);
