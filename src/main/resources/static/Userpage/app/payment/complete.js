@@ -103,10 +103,6 @@ $(function () {
         location.href='/index.html'
     })
 
-    let memidx = $('#memid').val();
-    console.log(memidx);
-
-
     let spst1 = $('#startTime1').attr("value").split("T");
     let spend1 = $('#endTime1').attr("value").split("T");
     let spst2 = $('#startTime2').attr("value").split("T");
@@ -115,5 +111,56 @@ $(function () {
     $('#endTime1').text(" " + spend1[0] + " " + spend1[1]);
     $('#startTime2').text(" " + spst2[0] + " " + spst2[1]);
     $('#endTime2').text(" " + spend2[0] + " " + spend2[1]);
+
+    let date = new Date();
+    let week = new Array('일', '월', '화', '수', '목', '금', '토');
+    let today = date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).toString().slice(-2) + "-" + ("00" + date.getDay()).toString().slice(-2) + " (" + week[date.getDay()] +")";
+
+    $('#today').text(today);
+
+
+    // 총 결제금액 찍어주기
+    let money = $('#totalPrice').attr("value");
+    $('#totalPrice').text(" " + Math.ceil(money).toLocaleString() + "원");
+
+    // 최종 업데이트
+    $('.cookies').each(function (i){
+       // 예약번호 출력
+       let ranstr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+       let randomText = "";
+       for(let i = 0; i < 6; i++){
+           randomText += ranstr.charAt(Math.floor(Math.random() * ranstr.length));
+       };
+
+        let val = $('.cookie').eq(i).attr("value");
+        let status = "PaymentFinished";
+        let reReserNum = randomText;
+        console.log(randomText)
+
+        let jsonData = {
+            data :{
+                reIndex : val,
+                reReserNum : reReserNum,
+                reStatus : status
+            }
+        }
+        finalUpdate(val);
+        function finalUpdate(val){
+            $.ajax({
+                url: "/api/reservation/paymentsUpdate",
+                type: "PUT",
+                data: JSON.stringify(jsonData),
+                dataType: "text",
+                contentType: "application/json",
+                success: function (jsonData) {
+                    alert("결제 완료")
+                    console.log(jsonData);
+                },
+                error(error) {
+                    console.dir(error)
+                }
+            });
+        }
+    });
 
 });

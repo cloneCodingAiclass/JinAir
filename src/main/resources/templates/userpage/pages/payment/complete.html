@@ -125,7 +125,7 @@
                         </tr>
                         <tr>
                             <th>결제금액</th>
-                            <td>KRW [[${reserveApiResponse1[0].reTotal}]]</td>
+                            <td>KRW <span id="totalPrice" th:value="${reserveApiResponse1[0].reTotal}"></span></td>
                             <td colspan="2">
                                 <button>
                                     <img src="/userpage/lib/img/printer.png" alt="프린터">
