@@ -755,6 +755,21 @@ $(() => {
         $(".modal_container").fadeOut(200);
     });
 
+    let memIndex = $('#memid').val();
+
+    pointResult(memIndex);
+
+    function pointResult(index){
+        let sum = 0;
+        $.get("/api/point/user/"+index, function (response){
+            for(let i = 0; i < response.data.length; i++){
+                let point = response.data[i].poPoint;
+                sum += point;
+                $('#point').val(sum.toLocaleString('ko-KR'));
+            }
+        })
+    }
+
     couponResult(0);
 
     function couponResult(index) {

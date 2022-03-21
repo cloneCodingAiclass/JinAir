@@ -277,6 +277,20 @@ $(function () {
         console.dir(jsonData);
     })
 
+    point(idx);
+
+    // 유저에 따른 포인트
+    function point(index){
+        let sum = 0;
+        $.get("/api/point/user/"+index, function (response){
+            for(let i = 0; i < response.data.length; i++){
+                let point = response.data[i].poPoint;
+                sum += point;
+                $('#point').val(sum.toLocaleString('ko-KR'));
+            }
+        })
+    }
+
 
 
 })(jQuery)
