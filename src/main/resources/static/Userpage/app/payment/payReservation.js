@@ -944,42 +944,141 @@ function fnSetPaxCountUp(strPaxType, obj) {
   }
 }
 
-function submit() {
-
-  var
-    iAdultCount = parseInt($('.round_wrap').find('strong[name=adultPaxCnt]').text()), // 성인
-    iChildCount = parseInt($('.oneway_wrap').find('strong[name=childPaxCnt]').text()), // 소아
-    iInfantCount = parseInt($('.multi_wrap').find('strong[name=infantPaxCnt]').text()); // 유아
-
-  console.log(iAdultCount);
-  console.log(iChildCount);
-  console.log(iInfantCount)
+function submit1() {
+  console.log("작동");
+  var iAdultCount = parseInt(
+          $(".person_pop_layer1").find("strong[name=adultPaxCnt]").text()
+      ),
+      iChildCount = parseInt(
+          $(".person_pop_layer1").find("strong[name=childPaxCnt]").text()
+      ),
+      iInfantCount = parseInt(
+          $(".person_pop_layer1").find("strong[name=infantPaxCnt]").text()
+      );
 
   if (iAdultCount > 0 && iChildCount > 0 && iInfantCount > 0) {
-    $("strong[name=person_num]").text('성인 ' + iAdultCount + ' 소아 ' + iChildCount + ' 유아 ' + iInfantCount);
+    $("strong[name=person_num]").text(
+        "성인 " + iAdultCount + " 소아 " + iChildCount + " 유아 " + iInfantCount
+    );
   } else if (iAdultCount > 0 && iChildCount > 0) {
-    $("strong[name=person_num]").text('성인 ' + iAdultCount + ' 소아 ' + iChildCount);
+    $("strong[name=person_num]").text(
+        "성인 " + iAdultCount + " 소아 " + iChildCount
+    );
   } else if (iAdultCount > 0 && iInfantCount > 0) {
-    $("strong[name=person_num]").text('성인 ' + iAdultCount + ' 유아 ' + iInfantCount);
+    $("strong[name=person_num]").text(
+        "성인 " + iAdultCount + " 유아 " + iInfantCount
+    );
   } else if (iAdultCount > 0) {
-    $("strong[name=person_num]").text('성인 ' + iAdultCount);
+    $("strong[name=person_num]").text("성인 " + iAdultCount);
   } else if (iChildCount > 0) {
-    $("strong[name=person_num]").text('소아 ' + iChildCount);
+    $("strong[name=person_num]").text("소아 " + iChildCount);
   }
 
   // 중요. 확인 버튼 누를 때 성인, 소아, 유아의 수를 input:hidden에 넣음
   // 아무것도 선택 안할 경우 .adultPaxCnt의 default값 : 1로 지정
-  $('.adultPaxCnt').val(iAdultCount);
-  $('.childPaxCnt').val(iChildCount);
-  $('.infantPaxCnt').val(iInfantCount);
+  $(".adultPaxCnt").val(iAdultCount);
+  $(".childPaxCnt").val(iChildCount);
+  $(".infantPaxCnt").val(iInfantCount);
 
-  $(".person_layerbtn").css({ "color": "rgb(0, 0, 0)" });
-  $(".person_down_img").css({ "display": "inline-block" });
-  $(".person_up_img").css({ "display": "none" });
-  $('.person_pop_layer').slideUp(50);
+  $(".person_layerbtn").css({ color: "rgb(0, 0, 0)" });
+  $(".person_down_img").css({ display: "inline-block" });
+  $(".person_up_img").css({ display: "none" });
+  $(".person_pop_layer").slideUp(50);
 
-  $(".go_layerbtn").css({ "color": "rgb(145, 0, 70)" });
-  $(".go_select_opt").addClass('on');
+  $(".go_layerbtn").css({ color: "rgb(145, 0, 70)" });
+  $(".go_select_opt").addClass("on");
+  $(".go_layer").slideDown("fast");
+}
+
+function submit2() {
+  console.log("작동");
+  var iAdultCount = parseInt(
+          $(".person_pop_layer2").find("strong[name=adultPaxCnt]").text()
+      ),
+      iChildCount = parseInt(
+          $(".person_pop_layer2").find("strong[name=childPaxCnt]").text()
+      ),
+      iInfantCount = parseInt(
+          $(".person_pop_layer2").find("strong[name=infantPaxCnt]").text()
+      );
+
+  if (iAdultCount > 0 && iChildCount > 0 && iInfantCount > 0) {
+    $("strong[name=person_num]").text(
+        "성인 " + iAdultCount + " 소아 " + iChildCount + " 유아 " + iInfantCount
+    );
+  } else if (iAdultCount > 0 && iChildCount > 0) {
+    $("strong[name=person_num]").text(
+        "성인 " + iAdultCount + " 소아 " + iChildCount
+    );
+  } else if (iAdultCount > 0 && iInfantCount > 0) {
+    $("strong[name=person_num]").text(
+        "성인 " + iAdultCount + " 유아 " + iInfantCount
+    );
+  } else if (iAdultCount > 0) {
+    $("strong[name=person_num]").text("성인 " + iAdultCount);
+  } else if (iChildCount > 0) {
+    $("strong[name=person_num]").text("소아 " + iChildCount);
+  }
+
+  // 중요. 확인 버튼 누를 때 성인, 소아, 유아의 수를 input:hidden에 넣음
+  // 아무것도 선택 안할 경우 .adultPaxCnt의 default값 : 1로 지정
+  $(".adultPaxCnt").val(iAdultCount);
+  $(".childPaxCnt").val(iChildCount);
+  $(".infantPaxCnt").val(iInfantCount);
+
+  $(".person_layerbtn").css({ color: "rgb(0, 0, 0)" });
+  $(".person_down_img").css({ display: "inline-block" });
+  $(".person_up_img").css({ display: "none" });
+  $(".person_pop_layer").slideUp(50);
+
+  $(".go_layerbtn").css({ color: "rgb(145, 0, 70)" });
+  $(".go_select_opt").addClass("on");
+  $(".go_layer").slideDown("fast");
+}
+
+function submit3() {
+  console.log("작동");
+  var iAdultCount = parseInt(
+          $(".person_pop_layer3").find("strong[name=adultPaxCnt]").text()
+      ),
+      iChildCount = parseInt(
+          $(".person_pop_layer3").find("strong[name=childPaxCnt]").text()
+      ),
+      iInfantCount = parseInt(
+          $(".person_pop_layer3").find("strong[name=infantPaxCnt]").text()
+      );
+
+  if (iAdultCount > 0 && iChildCount > 0 && iInfantCount > 0) {
+    $("strong[name=person_num]").text(
+        "성인 " + iAdultCount + " 소아 " + iChildCount + " 유아 " + iInfantCount
+    );
+  } else if (iAdultCount > 0 && iChildCount > 0) {
+    $("strong[name=person_num]").text(
+        "성인 " + iAdultCount + " 소아 " + iChildCount
+    );
+  } else if (iAdultCount > 0 && iInfantCount > 0) {
+    $("strong[name=person_num]").text(
+        "성인 " + iAdultCount + " 유아 " + iInfantCount
+    );
+  } else if (iAdultCount > 0) {
+    $("strong[name=person_num]").text("성인 " + iAdultCount);
+  } else if (iChildCount > 0) {
+    $("strong[name=person_num]").text("소아 " + iChildCount);
+  }
+
+  // 중요. 확인 버튼 누를 때 성인, 소아, 유아의 수를 input:hidden에 넣음
+  // 아무것도 선택 안할 경우 .adultPaxCnt의 default값 : 1로 지정
+  $(".adultPaxCnt").val(iAdultCount);
+  $(".childPaxCnt").val(iChildCount);
+  $(".infantPaxCnt").val(iInfantCount);
+
+  $(".person_layerbtn").css({ color: "rgb(0, 0, 0)" });
+  $(".person_down_img").css({ display: "inline-block" });
+  $(".person_up_img").css({ display: "none" });
+  $(".person_pop_layer").slideUp(50);
+
+  $(".go_layerbtn").css({ color: "rgb(145, 0, 70)" });
+  $(".go_select_opt").addClass("on");
   $(".go_layer").slideDown("fast");
 }
 
@@ -1001,164 +1100,381 @@ $(function () {
       $(".child_modal").fadeOut(200);
     });
   });
-
-
-  function comewhatday() {
-    $(".whatday").html("오는날");
-  }
-  function gowhatday() {
-    $(".whatday").html("가는날");
-  }
-
-// 왕복에 넣어주기
-  function gowhatdaydd(str) {
-    let str1 = str.substr(0, 4);
-    let str2 = str.substr(4, 2);
-    let str3 = str.substr(6, 2);
-    $(".go_date_select_optt").val(`${str1}-${str2}-${str3}`);
-  }
-  function comewhatdaydd(str) {
-    let str1 = str.substr(0, 4);
-    let str2 = str.substr(4, 2);
-    let str3 = str.substr(6, 2);
-    $(".come_date_select_optt").val(`${str1}-${str2}-${str3}`);
-  }
-
-// 편도에 넣어주기
-  function gowhatdayddd(str) {
-    let str1 = str.substr(0, 4);
-    let str2 = str.substr(4, 2);
-    let str3 = str.substr(6, 2);
-    $(".go_date_select_optt").val(`${str1}-${str2}-${str3}`);
-  }
-
-// 다구간에 넣어주기
-  function gowhatdaydddd(str) {
-    let str1 = str.substr(0, 4);
-    let str2 = str.substr(4, 2);
-    let str3 = str.substr(6, 2);
-    $(".go_date_select_optt2").val(`${str1}-${str2}-${str3}`);
-  }
-
-  function minday() {
-    $(".modal_container").fadeIn(200);
-    $(".moditext").html("출발일보다 이전 날짜를 선택할 수 없습니다.");
-  }
-
-  function twochoice() {
-    $(".cal").css({ display: "none" });
-    $(".cal2").css({ display: "none" });
-    $(".cal3").css({ display: "none" });
-  }
-
-  let bbb = "n";
-  let ccc = "n";
-  $(() => {
-    // 왕복, 편도 출발지 지정
-    $(".go_layer")
-        .find("li")
-        .find("a")
-        .on("click", function (e) {
-          e.stopPropagation();
-          let str = "";
-          str = $(this).html();
-          $(".go_select_optt").val(str);
-          $(".go_layer").slideUp(50);
-          $(".arrive_layer").slideDown(100);
-          $(".go_select_opt").removeClass("on");
-          $(".arrive_select_opt").addClass("on");
-          bbb = "y";
-        });
-    // 왕복, 편도 도착지 지정
-    $(".arrive_layer")
-        .find("li")
-        .find("a")
-        .on("click", function () {
-          let str = "";
-          str = $(this).html();
-          $(".arrive_select_optt").val(str);
-          ccc = "y";
-        });
-    // 왕복 달력 모달
-    $(".go_date").on("click", function () {
-      $(".cal").css({ display: "flex" });
-      $(".whatday").html("가는날");
-      d;
-    });
-    $(".come_date").on("click", function () {
-      $(".cal").css({ display: "flex" });
-      $(".whatday").html("오는날");
-    });
-
-    // 편도 달력 모달
-    $(".go_date2").on("click", function () {
-      $(".cal2").css({ display: "flex" });
-      $(".whatday").html("가는날");
-    });
-
-    // 다구간 출발지 지정
-    $(".go_layer2")
-        .find("li")
-        .find("a")
-        .on("click", function (e) {
-          e.stopPropagation();
-          let str = "";
-          str = $(this).html();
-          $(".go_select_optt2").val(str);
-          $(".go_layer2").slideUp(50);
-          $(".arrive_layer2").slideDown(100);
-          $(".go_select_opt2").removeClass("on");
-          $(".arrive_select_opt2").addClass("on");
-          bbb = "y";
-        });
-    // 다구간 도착지 지정
-    $(".arrive_layer2")
-        .find("li")
-        .find("a")
-        .on("click", function () {
-          let str = "";
-          str = $(this).html();
-          $(".arrive_select_optt2").val(str);
-          ccc = "y";
-        });
-    // 다구간1 달력 모달
-    $(".go_date3").on("click", function () {
-      if (bbb == "n" && ccc == "n") {
-        departure();
-        $(".cal3").css({ display: "none" });
-      } else if (bbb == "y" && ccc == "n") {
-        arrive();
-      } else {
-        $(".cal3").css({ display: "flex" });
-        $(".whatday").html("가는날");
-      }
-    });
-
-    // 달력 X 버튼
-    $(".x_box").on("click", function () {
-      $(".cal").css({ display: "none" });
-      $(".cal2").css({ display: "none" });
-      $(".cal3").css({ display: "none" });
-    });
-
-    // 모달모음 확인 버튼
-    $(".btn_cancel").on("click", function () {
-      $(".modal_container").fadeOut(200);
-    });
-  });
 });
 
 function updateTrip() {
   let person = $("#person_cnt").text();
   let go1 = $("#go_area1").text();
   let arr1 = $("#arr_area1").text();
-  let godate = $("#godate").text();
 
-  let sub = godate.substr(5, 14);
-
-  console.log(person, go1, arr1, godate);
   $(".person_num").text(person);
-  $(".go_default").attr("value", go1);
-  $(".arrive_default").attr("value", arr1);
-  $(".go_date_default").attr("value", sub);
+  $(".go_default").attr("value", go1.substr(0,go1.indexOf("[출발]")-1));
+  $(".arrive_default").attr("value", arr1.substr(0,arr1.indexOf("[도착]")-1));
 }
+
+function modification() {
+  let inonesoo = $('.person_num').html().split(' ');
+  let modiAdult = 0;
+  let modiChild = 0;
+  let modiBaby = 0;
+  if(inonesoo.length == 2){
+    if(inonesoo[0] == '소아'){
+      modiChild = Number(inonesoo[1])
+    }else if(inonesoo[0] == '성인'){
+      modiAdult = Number(inonesoo[1])
+    }
+  }else if(inonesoo.length == 4){
+    if(inonesoo[2] == '유아'){
+      modiAdult = Number(inonesoo[1]);
+      modiBaby = Number(inonesoo[3]);
+    }else if(inonesoo[2] == '소아'){
+      modiAdult = Number(inonesoo[1]);
+      modiChild = Number(inonesoo[3])
+    }
+  }else if(inonesoo.length == 6){
+    modiAdult = Number(inonesoo[1]);
+    modiChild = Number(inonesoo[3])
+    modiBaby = Number(inonesoo[5]);
+  }
+
+
+  if($('input[type="radio"][name="tripType"]:checked').val() == "왕복"){
+
+    if($('.go_date_select_optt').val()=="가는날" || $('.come_date_select_optt').val()=="오는날"){
+      alert('입력하신 내용을 확인해주세요');
+    }else{
+      let f = document.createElement('form');
+
+      let obj1;
+      obj1 = document.createElement('input');
+      obj1.setAttribute('type', 'hidden');
+      obj1.setAttribute('name', 'schDeparturePoint');
+      obj1.setAttribute('value', $('.go_select_optt').val());
+      f.appendChild(obj1);
+
+      let obj2;
+      obj2 = document.createElement('input');
+      obj2.setAttribute('type', 'hidden');
+      obj2.setAttribute('name', 'schArrivalPoint');
+      obj2.setAttribute('value', $('.arrive_select_optt').val());
+      f.appendChild(obj2);
+
+      let obj3;
+      obj3 = document.createElement('input');
+      obj3.setAttribute('type', 'hidden');
+      obj3.setAttribute('name', 'goDateSelectOptt');
+      obj3.setAttribute('value', $('.go_date_select_optt').val());
+      f.appendChild(obj3);
+
+      let obj4;
+      obj4 = document.createElement('input');
+      obj4.setAttribute('type', 'hidden');
+      obj4.setAttribute('name', 'comeDateSelectOptt');
+      obj4.setAttribute('value', $('.come_date_select_optt').val());
+      f.appendChild(obj4);
+
+      let obj5;
+      obj5 = document.createElement('input');
+      obj5.setAttribute('type', 'hidden');
+      obj5.setAttribute('name', 'AdultNumber');
+      obj5.setAttribute('value', modiAdult);
+      f.appendChild(obj5);
+
+      let obj6;
+      obj6 = document.createElement('input');
+      obj6.setAttribute('type', 'hidden');
+      obj6.setAttribute('name', 'ChildNumber');
+      obj6.setAttribute('value', modiChild);
+      f.appendChild(obj6);
+
+      let obj7;
+      obj7 = document.createElement('input');
+      obj7.setAttribute('type', 'hidden');
+      obj7.setAttribute('name', 'InfantNumber');
+      obj7.setAttribute('value', modiBaby);
+      f.appendChild(obj7);
+
+      f.setAttribute('method', 'post');
+      f.setAttribute('action', '/pages/getAvailabilityList/twoway');
+      document.body.appendChild(f);
+      f.submit();
+    }
+  }else if($('input[type="radio"][name="tripType"]:checked').val() == "편도") {
+    if($('.go_date_select_optt').val()=="가는날"){
+      alert('입력하신 내용을 확인해주세요');
+    }else{
+      let f = document.createElement('form');
+
+      let obj1;
+      obj1 = document.createElement('input');
+      obj1.setAttribute('type', 'hidden');
+      obj1.setAttribute('name', 'schDeparturePoint');
+      obj1.setAttribute('value', $('.go_select_optt').val());
+      f.appendChild(obj1);
+
+      let obj2;
+      obj2 = document.createElement('input');
+      obj2.setAttribute('type', 'hidden');
+      obj2.setAttribute('name', 'schArrivalPoint');
+      obj2.setAttribute('value', $('.arrive_select_optt').val());
+      f.appendChild(obj2);
+
+      let obj3;
+      obj3 = document.createElement('input');
+      obj3.setAttribute('type', 'hidden');
+      obj3.setAttribute('name', 'goDateSelectOptt');
+      obj3.setAttribute('value', $('.go_date_select_optt').val());
+      f.appendChild(obj3);
+
+      let obj4;
+      obj4 = document.createElement('input');
+      obj4.setAttribute('type', 'hidden');
+      obj4.setAttribute('name', 'AdultNumber');
+      obj4.setAttribute('value', modiAdult);
+      f.appendChild(obj4);
+
+      let obj5;
+      obj5 = document.createElement('input');
+      obj5.setAttribute('type', 'hidden');
+      obj5.setAttribute('name', 'ChildNumber');
+      obj5.setAttribute('value', modiChild);
+      f.appendChild(obj5);
+
+      let obj6;
+      obj6 = document.createElement('input');
+      obj6.setAttribute('type', 'hidden');
+      obj6.setAttribute('name', 'InfantNumber');
+      obj6.setAttribute('value', modiBaby);
+      f.appendChild(obj6);
+
+      f.setAttribute('method', 'post');
+      f.setAttribute('action', '/pages/getAvailabilityList/oneway');
+      document.body.appendChild(f);
+      f.submit();
+    }
+  }else if($('input[type="radio"][name="tripType"]:checked').val() == "다구간") {
+    if($('.go_select_optt').val()=="출발지" || $('.arrive_select_optt').val()=="도착지" ||
+        $('.go_date_select_optt').val()=="가는날" || $('.go_select_optt2').val()=="출발지" ||
+        $('.arrive_select_optt2').val()=="도착지" || $('.go_date_select_optt2').val()=="가는날"){
+      alert('입력하신 내용을 확인해주세요');
+    }else{
+      let f = document.createElement('form');
+
+      let obj1;
+      obj1 = document.createElement('input');
+      obj1.setAttribute('type', 'hidden');
+      obj1.setAttribute('name', 'schDeparturePoint');
+      obj1.setAttribute('value', $('.go_select_optt').val());
+      f.appendChild(obj1);
+
+      let obj2;
+      obj2 = document.createElement('input');
+      obj2.setAttribute('type', 'hidden');
+      obj2.setAttribute('name', 'schArrivalPoint');
+      obj2.setAttribute('value', $('.arrive_select_optt').val());
+      f.appendChild(obj2);
+
+      let obj3;
+      obj3 = document.createElement('input');
+      obj3.setAttribute('type', 'hidden');
+      obj3.setAttribute('name', 'goDateSelectOptt');
+      obj3.setAttribute('value', $('.go_date_select_optt').val());
+      f.appendChild(obj3);
+
+      let obj4;
+      obj4 = document.createElement('input');
+      obj4.setAttribute('type', 'hidden');
+      obj4.setAttribute('name', 'schDeparturePoint1');
+      obj4.setAttribute('value', $('.go_select_optt2').val());
+      f.appendChild(obj4);
+
+      let obj5;
+      obj5 = document.createElement('input');
+      obj5.setAttribute('type', 'hidden');
+      obj5.setAttribute('name', 'schArrivalPoint1');
+      obj5.setAttribute('value', $('.arrive_select_optt2').val());
+      f.appendChild(obj5);
+
+      let obj6;
+      obj6 = document.createElement('input');
+      obj6.setAttribute('type', 'hidden');
+      obj6.setAttribute('name', 'goDateSelectOptt1');
+      obj6.setAttribute('value', $('.go_date_select_optt2').val());
+      f.appendChild(obj6);
+
+      let obj7;
+      obj7 = document.createElement('input');
+      obj7.setAttribute('type', 'hidden');
+      obj7.setAttribute('name', 'AdultNumber');
+      obj7.setAttribute('value', modiAdult);
+      f.appendChild(obj7);
+
+      let obj8;
+      obj8 = document.createElement('input');
+      obj8.setAttribute('type', 'hidden');
+      obj8.setAttribute('name', 'ChildNumber');
+      obj8.setAttribute('value', modiChild);
+      f.appendChild(obj8);
+
+      let obj9;
+      obj9 = document.createElement('input');
+      obj9.setAttribute('type', 'hidden');
+      obj9.setAttribute('name', 'InfantNumber');
+      obj9.setAttribute('value', modiBaby);
+      f.appendChild(obj9);
+
+      f.setAttribute('method', 'post');
+      f.setAttribute('action', '/pages/getAvailabilityList/multiway');
+      document.body.appendChild(f);
+      f.submit();
+    }
+  }
+}
+
+
+
+function comewhatday() {
+  $(".whatday").html("오는날");
+}
+function gowhatday() {
+  $(".whatday").html("가는날");
+}
+
+// 왕복에 넣어주기
+function gowhatdaydd(str) {
+  let str1 = str.substr(0, 4);
+  let str2 = str.substr(4, 2);
+  let str3 = str.substr(6, 2);
+  $(".go_date_select_optt").val(`${str1}-${str2}-${str3}`);
+}
+function comewhatdaydd(str) {
+  let str1 = str.substr(0, 4);
+  let str2 = str.substr(4, 2);
+  let str3 = str.substr(6, 2);
+  $(".come_date_select_optt").val(`${str1}-${str2}-${str3}`);
+}
+
+// 편도에 넣어주기
+function gowhatdayddd(str) {
+  let str1 = str.substr(0, 4);
+  let str2 = str.substr(4, 2);
+  let str3 = str.substr(6, 2);
+  $(".go_date_select_optt").val(`${str1}-${str2}-${str3}`);
+}
+
+// 다구간에 넣어주기
+function gowhatdaydddd(str) {
+  let str1 = str.substr(0, 4);
+  let str2 = str.substr(4, 2);
+  let str3 = str.substr(6, 2);
+  $(".go_date_select_optt2").val(`${str1}-${str2}-${str3}`);
+}
+
+function minday() {
+  $(".modal_container").fadeIn(200);
+  $(".moditext").html("출발일보다 이전 날짜를 선택할 수 없습니다.");
+}
+
+function twochoice() {
+  $(".cal").css({ display: "none" });
+  $(".cal2").css({ display: "none" });
+  $(".cal3").css({ display: "none" });
+}
+
+let bbb = "n";
+let ccc = "n";
+$(() => {
+  // 왕복, 편도 출발지 지정
+  $(".go_layer")
+      .find("li")
+      .find("a")
+      .on("click", function (e) {
+        e.stopPropagation();
+        let str = "";
+        str = $(this).html();
+        $(".go_select_optt").val(str);
+        $(".go_layer").slideUp(50);
+        $(".arrive_layer").slideDown(100);
+        $(".go_select_opt").removeClass("on");
+        $(".arrive_select_opt").addClass("on");
+        bbb = "y";
+      });
+  // 왕복, 편도 도착지 지정
+  $(".arrive_layer")
+      .find("li")
+      .find("a")
+      .on("click", function () {
+        let str = "";
+        str = $(this).html();
+        $(".arrive_select_optt").val(str);
+        ccc = "y";
+      });
+  // 왕복 달력 모달
+  $(".go_date").on("click", function () {
+    $(".cal").css({ display: "flex" });
+    $(".whatday").html("가는날");
+    d;
+  });
+  $(".come_date").on("click", function () {
+    $(".cal").css({ display: "flex" });
+    $(".whatday").html("오는날");
+  });
+
+  // 편도 달력 모달
+  $(".go_date2").on("click", function () {
+    $(".cal2").css({ display: "flex" });
+    $(".whatday").html("가는날");
+  });
+
+  // 다구간 출발지 지정
+  $(".go_layer2")
+      .find("li")
+      .find("a")
+      .on("click", function (e) {
+        e.stopPropagation();
+        let str = "";
+        str = $(this).html();
+        $(".go_select_optt2").val(str);
+        $(".go_layer2").slideUp(50);
+        $(".arrive_layer2").slideDown(100);
+        $(".go_select_opt2").removeClass("on");
+        $(".arrive_select_opt2").addClass("on");
+        bbb = "y";
+      });
+  // 다구간 도착지 지정
+  $(".arrive_layer2")
+      .find("li")
+      .find("a")
+      .on("click", function () {
+        let str = "";
+        str = $(this).html();
+        $(".arrive_select_optt2").val(str);
+        ccc = "y";
+      });
+  // 다구간1 달력 모달
+  $(".go_date3").on("click", function () {
+    if (bbb == "n" && ccc == "n") {
+      departure();
+      $(".cal3").css({ display: "none" });
+    } else if (bbb == "y" && ccc == "n") {
+      arrive();
+    } else {
+      $(".cal3").css({ display: "flex" });
+      $(".whatday").html("가는날");
+    }
+  });
+
+  // 달력 X 버튼
+  $(".x_box").on("click", function () {
+    $(".cal").css({ display: "none" });
+    $(".cal2").css({ display: "none" });
+    $(".cal3").css({ display: "none" });
+  });
+
+  // 모달모음 확인 버튼
+  $(".btn_cancel").on("click", function () {
+    $(".modal_container").fadeOut(200);
+  });
+});
+
+

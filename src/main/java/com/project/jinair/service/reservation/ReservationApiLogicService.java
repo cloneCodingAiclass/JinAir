@@ -222,7 +222,6 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
     public ReserveApiResponse paymentsUpdate(List<ReserveApiRequest> request) {
 
         int size = request.size();
-        System.out.println(size);
 
         for (int i = 0; i < size; i++) {
             long num = request.get(i).getReIndex();

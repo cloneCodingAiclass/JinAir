@@ -359,14 +359,14 @@ public class PageController {
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-            return new ModelAndView("/userpage/pages/mypage/mypageDetail/faq_list")
-                    .addObject("code", "faq_list");
         }else{
-            return new ModelAndView("/userpage/pages/index/error")
-                    .addObject("code", "add_qna");
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
         }
-
+        return new ModelAndView("/userpage/pages/mypage/mypageDetail/faq_list")
+                .addObject("code", "faq_list");
     }
+
+
     @RequestMapping("/index/mypageCancelService")
     public ModelAndView mypageCancelService(HttpServletResponse response, HttpServletRequest request, Model model) {
         Cookie[] myCookies = request.getCookies();
@@ -500,17 +500,6 @@ public class PageController {
             }
         }
         HttpSession session = request.getSession();
-        ArrayList arrrr = new ArrayList<>();
-        for(int i = 39; i <= 40; i++) {
-            Long idx = Long.valueOf(i);
-            ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(idx).getData();
-            System.out.println(reserveApiResponse);
-            if(reserveApiResponse.getReStatus() != null){
-                arrrr.add(reserveApiResponse);
-            };
-        }
-        System.out.println(arrrr);
-        session.setAttribute("reserveApiResponse1", arrrr);
         if (session.getAttribute("memberApiResponse") != null) {
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
             model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
