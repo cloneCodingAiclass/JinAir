@@ -44,8 +44,8 @@ public class KakaoPayMentService {
             params.add("vat_amount", "10000");
             params.add("tax_free_amount", "10000");
             params.add("approval_url", "http://localhost:8080/pages/complete");
-            params.add("cancel_url", "http://localhost:8080/pages/cancel");
-            params.add("fail_url", "http://localhost:8080/kakao/kakaoPaySuccessFail");
+            params.add("cancel_url", "http://localhost:8080/pages/payment");
+            params.add("fail_url", "http://localhost:8080/pages/payment");
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
