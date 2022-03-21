@@ -544,10 +544,9 @@ $(function () {
   /*보험가입 페이지 끝 */
 
   // 탑승객 수
-  let num = 0;
   let personNum = 0;
   for( let i = 0 ; i < 60; i++){
-    if(document.getElementById(`${i}`)){
+    if(document.getElementById(`${i.reIndex}`)){
       personNum = personNum + 1;
     }
   }
@@ -561,24 +560,23 @@ $(function () {
   let str6 = ""; // 보험 선택
   let str7 = ""; // 모달 보험 가입자 선택
 
-  $("#person_cnt").html("성인 " + personNumber);
-
-  for (let i = 0; i < personNumber; i++) {
-    str += "<div class='passenger_info passenger_info1'>"
-    str += "<h3>탑승객 " +  Number(i+1) + "</h3>";
-    str += "<label for='person_" + i + "' ><img src='/userpage/lib/img/ico-person.png' alt='탑승객'><span class='cursor'>" + [[${reserveApiResponse.reFirstName}]] + "/" +  [[${reserveApiResponse.reLastName}]] + "</span></label>"
-    str += "<label for='person_" + i + "'  class='label'><p class='select_seat_num select_seat_num1'>"
-    str += "<input type='text' class='seat_num seat_num1 cursor' id='seat_num1_" + i + "' readonly>"
-    str += "<span class='close cursor'>x</span>"
-    str += "</p>"
-    str += "<p class='select_seat_price' id='seat_price1_" + i + "'>"
-    str += "<span class='seat_P seat_P1'>KRW</span>"
-    str += "<span class='price price1' id='price1_" + i + "'></span>"
-    str += "</p>"
-    str += "<input type='radio' name='selectPerson' class='checkPerson' id='person_" + i + "'></label>"
-    str += "</div>"
-  }
-  $("#passenger_info_1").html(str);
+  //
+  // for (let i = 0; i < personNumber; i++) {
+  //   str += "<div class='passenger_info passenger_info1'>"
+  //   str += "<h3>탑승객 " +  Number(i+1) + "</h3>";
+  //   str += "<label for='person_" + i + "' ><img src='/userpage/lib/img/ico-person.png' alt='탑승객'><span class='cursor'>" + [[${reserveApiResponse.reFirstName}]] + "/" +  [[${reserveApiResponse.reLastName}]] + "</span></label>"
+  //   str += "<label for='person_" + i + "'  class='label'><p class='select_seat_num select_seat_num1'>"
+  //   str += "<input type='text' class='seat_num seat_num1 cursor' id='seat_num1_" + i + "' readonly>"
+  //   str += "<span class='close cursor'>x</span>"
+  //   str += "</p>"
+  //   str += "<p class='select_seat_price' id='seat_price1_" + i + "'>"
+  //   str += "<span class='seat_P seat_P1'>KRW</span>"
+  //   str += "<span class='price price1' id='price1_" + i + "'></span>"
+  //   str += "</p>"
+  //   str += "<input type='radio' name='selectPerson' class='checkPerson' id='person_" + i + "'></label>"
+  //   str += "</div>"
+  // }
+  // $("#passenger_info_1").html(str);
 
   for (let i = 0; i < personNumber; i++) {
     str2 += "<div class='passenger_info passenger_info2'>"
@@ -754,7 +752,6 @@ $(function () {
   }
 
   function borderChange2(radio2) {
-    console.log(radio2)
     let c = radio2.find(".select_seat_num2");
     $(".select_seat_num2").not(c).css("border", "none");
     c.css("border", "3px solid #661e43");

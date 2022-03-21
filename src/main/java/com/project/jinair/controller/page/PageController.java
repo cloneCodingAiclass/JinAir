@@ -883,15 +883,31 @@ public class PageController {
     }
     // 사용자 엑스트라 페이지
     @RequestMapping("/extras")
-    public ModelAndView extra(HttpServletRequest request, Model model) {
+    public ModelAndView extra(HttpServletRequest request, HttpServletResponse response, Model model) {
+        Cookie[] myCookies = request.getCookies();
+        List  cookie = new ArrayList();
         HttpSession session = request.getSession();
-        if(session.getAttribute("memberApiResponse") != null){
+        ArrayList arrrr = new ArrayList<>();
+
+        for(int i = 0; i < myCookies.length; i++) {
+            if(myCookies[i].getValue().equals("reIndex")){
+                ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf(myCookies[i].getName())).getData();
+                System.out.println(reserveApiResponse);
+                if(reserveApiResponse.getReStatus() != null){
+                    arrrr.add(reserveApiResponse);
+                }
+            }
+        }
+        System.out.println(arrrr);
+        session.setAttribute("reserveApiResponse", arrrr);
+        if (session.getAttribute("memberApiResponse") != null) {
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-        }else{
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
+            model.addAttribute("reserveApiResponse", session.getAttribute("reserveApiResponse"));
+        } else {
             model.addAttribute("loginURL", "/userpage/fragment/menu");
         }
-        return new ModelAndView("/userpage/pages/payment/extras")
-                .addObject("code", "extra");
+        return new ModelAndView("/userpage/pages/payment/extras");
     }
     // 엑스트라 보험 인수 제한 국가
     @RequestMapping("/extras/restricted")
