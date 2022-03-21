@@ -374,6 +374,10 @@ function hidePopupLayer(){
                 location.href = '/pages/index';
             }
         })
+        $.ajax({
+            url : "/api/point/user/" + idx,
+            type : "DELETE"
+        })
 
     })
 

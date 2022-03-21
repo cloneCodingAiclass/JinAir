@@ -14,4 +14,5 @@ import java.util.Optional;
 @Repository
 public interface TbPointRepository extends JpaRepository<TbPoint, Long> {
     Page<TbPoint> findByPoUserindex(Long id, Pageable pageable);
+    List<TbPoint> findByPoUserindex(Long id);
 }

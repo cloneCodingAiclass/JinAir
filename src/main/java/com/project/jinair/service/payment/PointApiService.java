@@ -130,4 +130,15 @@ public class PointApiService implements CrudInterface<PointApiRequest, PointApiR
                 .build();
         return Header.OK(pointApiResponseList, pagination);
     }
+
+    // 유저 탈퇴에 따른 포인트 삭제
+    public List<Header<Object>> userDelete(Long id){
+        List<TbPoint> tbPoint = tbPointRepository.findByPoUserindex(id);
+
+        return tbPoint.stream()
+                .map(point -> {
+                    tbPointRepository.delete(point);
+                    return Header.OK();
+        }).collect(Collectors.toList());
+    }
 }

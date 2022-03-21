@@ -25,18 +25,21 @@ function adult_memberOk(i){
             alert('회원 아이디을 입력하세요')
         }else {
             $.get("/api/user/searchToReser/" + $(`.adultBirth${i}`).val() + "/" + $(`.adultFirstName${i}`).val() + "/" + $(`.adultLastName${i}`).val(), function (response) {
-                if (response.data.memUserid == $(`.adultId${i}`).val().toLowerCase()) {
-                    $.get("/api/reservation/member/" + $(`#${(i - 1) * 2}`).val() + "/" + response.data.memIndex, function () {
-                    });
-                    $.get("/api/reservation/member/" + $(`#${(i - 1) * 2 + 1}`).val() + "/" + response.data.memIndex, function () {
-                    });
-                    alert('확인되었습니다.')
-                    $(`.adultFirstName${i}`).attr('readonly', true);
-                    $(`.adultLastName${i}`).attr('readonly', true);
-                    $(`.adultBirth${i}`).attr('readonly', true);
-                    $(`.adultId${i}`).attr('readonly', true);
-                    $(`.adultEdit${i}`).val('수정')
-                } else {
+                if(response.data != null){
+                    if (response.data.memUserid == $(`.adultId${i}`).val().toLowerCase()) {
+                        $.get("/api/reservation/member/" + $(`#${(i - 1) * 2}`).val() + "/" + response.data.memIndex, function (response) {});
+                        $.get("/api/reservation/member/" + $(`#${(i - 1) * 2 + 1}`).val() + "/" + response.data.memIndex, function (response) {});
+                        alert('확인되었습니다.')
+                        $(`.adultFirstName${i}`).attr('readonly', true);
+                        $(`.adultLastName${i}`).attr('readonly', true);
+                        $(`.adultBirth${i}`).attr('readonly', true);
+                        $(`.adultId${i}`).attr('readonly', true);
+                        $(`.adultEdit${i}`).val('수정')
+                    } else {
+                        alert('일치하는 회원 정보가 없습니다.');
+                        $(`.adultId${i}`).val('');
+                    }
+                }else{
                     alert('일치하는 회원 정보가 없습니다.');
                     $(`.adultId${i}`).val('');
                 }
@@ -67,20 +70,22 @@ function child_memberOk(i){
             alert('회원 아이디을 입력하세요')
         }else {
             $.get("/api/user/searchToReser/" + $(`.childBirth${i}`).val() + "/" + $(`.childFirstName${i}`).val() + "/" + $(`.childLastName${i}`).val(), function (response) {
-                if (response.data.memUserid == $(`.childId${i}`).val().toLowerCase()) {
-                    $.get("/api/reservation/member/" + $(`#${(Number(adult) + i - 1) * 2}`).val() + "/" + response.data.memIndex, function () {
-                    });
-                    $.get("/api/reservation/member/" + $(`#${(Number(adult) + i - 1) * 2 + 1}`).val() + "/" + response.data.memIndex, function () {
-                    });
-                    alert('확인되었습니다.')
-                    $(`.childFirstName${i}`).attr('readonly', true);
-                    $(`.childLastName${i}`).attr('readonly', true);
-                    $(`.childBirth${i}`).attr('readonly', true);
-                    $(`.childId${i}`).attr('readonly', true);
-                    $(`.childEdit${i}`).val('수정')
-                } else {
-                    alert('일치하는 회원 정보가 없습니다.');
-                    $(`.childId${i}`).val('');
+                if(response.data != null) {
+                    if (response.data.memUserid == $(`.childId${i}`).val().toLowerCase()) {
+                        $.get("/api/reservation/member/" + $(`#${(Number(adult) + i - 1) * 2}`).val() + "/" + response.data.memIndex, function (response) {
+                        });
+                        $.get("/api/reservation/member/" + $(`#${(Number(adult) + i - 1) * 2 + 1}`).val() + "/" + response.data.memIndex, function (response) {
+                        });
+                        alert('확인되었습니다.')
+                        $(`.childFirstName${i}`).attr('readonly', true);
+                        $(`.childLastName${i}`).attr('readonly', true);
+                        $(`.childBirth${i}`).attr('readonly', true);
+                        $(`.childId${i}`).attr('readonly', true);
+                        $(`.childEdit${i}`).val('수정')
+                    } else {
+                        alert('일치하는 회원 정보가 없습니다.');
+                        $(`.childId${i}`).val('');
+                    }
                 }
             });
         }
@@ -253,229 +258,36 @@ $(function () {
                         <td class="required">국적</td>
                         <td>
                             <select name="nationality" class="p90 cursor adultNation${i}">
-                                <option value=""></option>
-                                <option value="KOR" selected="selected">한국 (REPUBLIC OF KOREA)</option>
-                                <option value="JPN">일본 (JAPAN)</option>
-                                <option value="GHA">가나 (GHANA)</option>
-                                <option value="GUY">가이아나 (GUYANA)</option>
-                                <option value="GAB">가봉 (GABON)</option>
-                                <option value="GMB">감비아 (GAMBIA)</option>
-                                <option value="GLP">과들루프 (GUADELOUPE)</option>
-                                <option value="GTM">과테말라 (GUATEMALA)</option>
-                                <option value="GUM">괌 (GUAM)</option>
-                                <option value="GRD">그레나다 (GRENADA)</option>
-                                <option value="GEO">그루지아 (GEORGIA)</option>
-                                <option value="GRC">그리스 (GREECE)</option>
-                                <option value="GRL">그린란드 (GREENLAND)</option>
-                                <option value="GIN">기니 (GUINEA)</option>
-                                <option value="GNB">기니 (GUINEA BISSAU)</option>
-                                <option value="GUF">기아나(프) (FRENCH GUIANA)</option>
-                                <option value="NAM">나미비아 (NAMIBIA)</option>
-                                <option value="NRU">나우루 (NAURU)</option>
-                                <option value="NGA">나이지리아 (NIGERIA)</option>
-                                <option value="ZAF">남아프리카공화국 (REP SOUTH AFRICA)</option>
-                                <option value="NLD">네덜란드 (NETHERLANDS)</option>
-                                <option value="NPL">네팔 (NEPAL)</option>
-                                <option value="NOR">노르웨이 (NORWAY)</option>
-                                <option value="NFK">노퍽 (NORFOLK ISLAND)</option>
-                                <option value="NCL">누벨칼레도니 (NEW CALEDONIA)</option>
-                                <option value="NZL">뉴질랜드 (NEW ZEALAND)</option>
-                                <option value="NIU">니우에 (NIUE)</option>
-                                <option value="NER">니제르 (NIGER)</option>
-                                <option value="NIC">니카라과 (NICARAGUA)</option>
-                                <option value="TWN">대만 (TAIWAN)</option>
-                                <option value="DNK">덴마크 (DENMARK)</option>
-                                <option value="DOM">도미니카공화국 (DOMINICAN REP)</option>
-                                <option value="DMA">도미니카연방 (DOMINICA)</option>
-                                <option value="DEU">독일 (GERMANY)</option>
-                                <option value="TLS">동티모르 (EAST TIMOR)</option>
-                                <option value="LAO">라오스 (LAOS)</option>
-                                <option value="LVA">라트비아 (LATVIA)</option>
-                                <option value="RUS">러시아 (RUSSIAN FED)</option>
-                                <option value="LBN">레바논 (LEBANON)</option>
-                                <option value="LSO">레소토 (LESOTHO)</option>
-                                <option value="ROU">루마니아 (ROMANIA)</option>
-                                <option value="LUX">룩셈르완다 (RWANDA)</option>
-                                <option value="LBR">리베리아 (LIBERIA)</option>
-                                <option value="LBY">리비아 (LIBYAN)</option>
-                                <option value="LTU">리투아니아 (LITHUANIA)</option>
-                                <option value="MDG">마다가스카르 (MADAGASCAR)</option>
-                                <option value="MTQ">마르티니크 (MARTINIQUE)</option>
-                                <option value="MHL">마샬제도 (MARSHALL ISLANDS)</option>
-                                <option value="MAC">마카오 (MACAO)</option>
-                                <option value="MKD">마케도니아 (MACEDONIA)</option>
-                                <option value="MWI">말라위 (MALAWI)</option>
-                                <option value="MYS">말레이시아 (MALAYSIA)</option>
-                                <option value="MLI">말리 (MALI)</option>
-                                <option value="MEX">멕시코 (MEXICO)</option>
-                                <option value="MCO">모나코 (MONACO)</option>
-                                <option value="MAR">모로코 (MOROCCO)</option>
-                                <option value="MUS">모리셔스 (MAURITIUS)</option>
-                                <option value="MRT">모리타니 (MAURITANIA)</option>
-                                <option value="MOZ">모잠비크 (MOZAMBIQUE)</option>
-                                <option value="MNE">몬테네그로 (REPUBLIC OF MENTENEGRO)</option>
-                                <option value="MSR">몬트세라트 (MONTSERRAT)</option>
-                                <option value="MDA">몰도바 (MOLDOVA)</option>
-                                <option value="MDV">몰디브 (MALDIVES)</option>
-                                <option value="MLT">몰타 (MALTA)</option>
-                                <option value="MNG">몽골 (MONGOLIA)</option>
-                                <option value="USA">미국 (U S A)</option>
-                                <option value="MMR">미얀마 (MYANMAR)</option>
-                                <option value="FSM">미크로네시아연방 (MICRONESIA)</option>
-                                <option value="VUT">바누아투 (VANUATU)</option>
-                                <option value="BHR">바레인 (BAHRAIN)</option>
-                                <option value="BRB">바베이도스 (BARBADOS)</option>
-                                <option value="VAT">바티칸 (Vatican City)</option>
-                                <option value="BHS">바하마 (BAHAMAS)</option>
-                                <option value="BGD">방글라데시 (BANGLADESH)</option>
-                                <option value="BMU">버뮤다 (BERMUDA)</option>
-                                <option value="VIR">버진제도(미) (US VIRGIN IS)</option>
-                                <option value="VGB">버진제도(영) (BRITISH VIRGIN IS)</option>
-                                <option value="VEN">베네수엘라 (VENEZUELA)</option>
-                                <option value="BEN">베넹 (BENIN PEOPLES REP)</option>
-                                <option value="VNM">베트남 (VIET NAM)</option>
-                                <option value="BEL">벨기에 (BELGIUM)</option>
-                                <option value="BLR">벨로루시 (BELARUS)</option>
-                                <option value="BLZ">벨리즈 (BELIZE)</option>
-                                <option value="BIH">보스니아 (BOSNIA HERZ)</option>
-                                <option value="BWA">보츠와나 (BOTSWANA)</option>
-                                <option value="BOL">볼리비아 (BOLIVIA)</option>
-                                <option value="BDI">부룬디 (BURUNDI)</option>
-                                <option value="BFA">부르키나파소 (BURKINA FASO)</option>
-                                <option value="BTN">부탄 (BHUTAN)</option>
-                                <option value="BGR">불가리아 (BULGARIA)</option>
-                                <option value="BRA">브라질 (BRASIL)</option>
-                                <option value="BRN">브루나이 (BRUNEI)</option>
-                                <option value="WSM">사모아 (INDEPENDENT SAMOA)</option>
-                                <option value="ASM">사모아(미) (AMERICAN SAMOA)</option>
-                                <option value="SAU">사우디아라비아 (SAUDI ARABIA)</option>
-                                <option value="SMR">산마리노 (SAN MARINO)</option>
-                                <option value="STP">상투메 프린시페 (SAO TOME PRINCIPE)</option>
-                                <option value="SEN">세네갈 (SENEGAL)</option>
-                                <option value="SRB">세르비아 (REPUBLIC OF SERBIA)</option>
-                                <option value="SYC">세이셜 (SEYCHELLES)</option>
-                                <option value="LCA">세인트루시아 (SAINT LUCIA)</option>
-                                <option value="VCT">세인트빈센트 그레나 (ST VINCENT)</option>
-                                <option value="KNA">세인트키츠 네비스 (ST KITTS NEVIS)</option>
-                                <option value="SHN">세인트헬레나 (ST HELENA)</option>
-                                <option value="SOM">소말리아 (SOMALIA)</option>
-                                <option value="SLB">솔로몬제도 (SOLOMON ISLANDS)</option>
-                                <option value="SDN">수단 (SUDAN)</option>
-                                <option value="SUR">수리남 (SURINAME)</option>
-                                <option value="LKA">스리랑카 (SRI LANKA)</option>
-                                <option value="SWZ">스와질랜드 (SWAZILAND)</option>
-                                <option value="SWE">스웨덴 (SWEDEN)</option>
-                                <option value="CHE">스위스 (SWITZERLAND)</option>
-                                <option value="ESP">스페인 (SPAIN)</option>
-                                <option value="SVK">슬로바키아 (SLOVAKIA)</option>
-                                <option value="SVN">슬로베니아 (SLOVENIA)</option>
-                                <option value="SYR">시리아 (SYRIA)</option>
-                                <option value="SLE">시에라리온 (SIERRA LEONE)</option>
-                                <option value="SGP">싱가폴 (SINGAPORE)</option>
-                                <option value="ARE">아랍에미리트 (UNITED ARAB EMRTS)</option>
-                                <option value="ABW">아루바 (ARUBA)</option>
-                                <option value="ARM">아르메니아 (ARMENIA)</option>
-                                <option value="ARG">아르헨티나 (ARGENTINA)</option>
-                                <option value="ISL">아이슬랜드 (ICELAND)</option>
-                                <option value="HTI">아이티 (HAITI)</option>
-                                <option value="IRL">아일랜드 (IRELAND)</option>
-                                <option value="AZE">아제르바이잔 (AZERBAIJAN)</option>
-                                <option value="AFG">아프가니스탄 (AFGHANISTAN)</option>
-                                <option value="AND">안도라 (ANDORRA)</option>
-                                <option value="ANT">안틸레스(네덜란드) (ANTILLES)</option>
-                                <option value="ALB">알바니아 (ALBANIA)</option>
-                                <option value="DZA">알제리 (ALGERIA)</option>
-                                <option value="AGO">앙골라 (ANGOLA)</option>
-                                <option value="EST">에스토니아 (ESTONIA)</option>
-                                <option value="ECU">에쿠아도르 (ECUADOR)</option>
-                                <option value="ETH">에티오피아 (ETHIOPIA)</option>
-                                <option value="ATG">엔티가 바부다 (ANTIGUA BARBUDA)</option>
-                                <option value="SLV">엘살바도르 (EL SALVADOR)</option>
-                                <option value="AIA">엥귈라 (ANGUILLA)</option>
-                                <option value="GBR">영국 (UNITED KINGDOM)</option>
-                                <option value="IOT">영국령인도양식민지 (BRITISH INDIAN OCEAN TERRITORY)</option>
-                                <option value="YEM">예멘 (YEMEN ARAB REP)</option>
-                                <option value="OMN">오만 (OMAN)</option>
-                                <option value="AUT">오스트리아 (AUSTRIA)</option>
-                                <option value="HND">온두라스 (HONDURAS)</option>
-                                <option value="JOR">요르단 (JORDAN)</option>
-                                <option value="UGA">우간다 (UGANDA)</option>
-                                <option value="URY">우루과이 (URUGUAY)</option>
-                                <option value="UZB">우즈베키스탄 (UZBEKISTAN)</option>
-                                <option value="UKR">우크라이나 (UKRAINE)</option>
-                                <option value="WLF">웰리스 푸투나 (WALLIS AND FUTUNA)</option>
-                                <option value="YUG">유고슬라비아 (YUGOSLAVIA)</option>
-                                <option value="IRQ">이라크 (IRAQ)</option>
-                                <option value="IRN">이란 (IRAN)</option>
-                                <option value="ISR">이스라엘 (ISRAEL)</option>
-                                <option value="EGY">이집트 (EGYPT)</option>
-                                <option value="ITA">이탈리아 (ITALY)</option>
-                                <option value="IND">인도 (INDIA)</option>
-                                <option value="IDN">인도네시아 (INDONESIA)</option>
-                                <option value="JAM">자메이카 (JAMAICA)</option>
-                                <option value="COD">자이르 (CONGO KINSHASA)</option>
-                                <option value="ZMB">잠비아 (ZAMBIA)</option>
-                                <option value="GNQ">적도기니 (EQUATORIAL GUINEA)</option>
-                                <option value="CHN">중국 (MAINLAND CHINA)</option>
-                                <option value="CAF">중앙아프리카공화국 (CNTRAL AFRICN REP)</option>
-                                <option value="DJI">지부티 (DJIBOUTI)</option>
-                                <option value="GIB">지브랄타 (GIBRALTAR)</option>
-                                <option value="ZWE">짐바브웨 (ZIMBABWE)</option>
-                                <option value="TCD">차드 (CHAD)</option>
-                                <option value="CZE">체코 (CZECH REP)</option>
-                                <option value="CHL">칠레 (CHILE)</option>
-                                <option value="CMR">카메룬 (REPUBLIC CAMEROON)</option>
-                                <option value="CPV">카보베르데 (REP OF CAPE VERDE)</option>
-                                <option value="KAZ">카자흐스탄 (KAZAKHSTAN)</option>
-                                <option value="QAT">카타르 (QATAR)</option>
-                                <option value="KHM">캄보디아 (KAMPUCHEA)</option>
-                                <option value="CAN">캐나다 (CANADA)</option>
-                                <option value="KEN">케냐 (KENYA)</option>
-                                <option value="CYM">케이맨제도 (CAYMAN IS)</option>
-                                <option value="COM">코모로 (COMOROS)</option>
-                                <option value="CRI">코스타리카 (COSTA RICA)</option>
-                                <option value="CCK">코코스킬링제도 (COCOS ISL)</option>
-                                <option value="CIV">코트디부와르 (COTE D IVOIRE)</option>
-                                <option value="COL">콜롬비아 (COLOMBIA)</option>
-                                <option value="COG">콩고 (CONGO BRAZZAVILLE)</option>
-                                <option value="CUB">쿠바 (CUBA)</option>
-                                <option value="KWT">쿠웨이트 (KUWAIT)</option>
-                                <option value="COK">쿡제도 (COOK ISLANDS)</option>
-                                <option value="HRV">크로아티아 (CROATIA)</option>
-                                <option value="KGZ">키르키스스탄 (KYRGYZSTAN)</option>
-                                <option value="KIR">키리바시 (KIRIBATI)</option>
-                                <option value="CYP">키프로스 (CYPRUS)</option>
-                                <option value="TJK">타지키스탄 (TAJIKISTAN)</option>
-                                <option value="TZA">탄자니아 (TANZANIA)</option>
-                                <option value="THA">태국 (THAILAND)</option>
-                                <option value="TCA">터크스 케이커스제도 (TURKS CAICOS IS)</option>
-                                <option value="TUR">터키 (TURKEY)</option>
-                                <option value="TGO">토고 (TOGO)</option>
-                                <option value="TON">통가 (TONGA)</option>
-                                <option value="TKM">투르크메니스탄 (TURKMENISTAN)</option>
-                                <option value="TUV">투발루 (TUVALU)</option>
-                                <option value="TUN">튀니지 (TUNISIA)</option>
-                                <option value="TTO">트리니다드토바고 (TRINIDAD TOBAGO)</option>
-                                <option value="PAN">파나마 (PANAMA)</option>
-                                <option value="PRY">파라과이 (PARAGUAY)</option>
-                                <option value="FRO">파로제도 (FAROE ISLAND)</option>
-                                <option value="PAK">파키스탄 (PAKISTAN)</option>
-                                <option value="PNG">파푸아뉴기니 (PAPUA NEW GUINEA)</option>
-                                <option value="PLW">팔라우 (PALAU ISLANDS)</option>
-                                <option value="PSE">팔레스타인 (PALESTINIAN TERRITORY, OCCUPIED)</option>
-                                <option value="PER">페루 (PERU)</option>
-                                <option value="PRT">포르투갈 (PORTUGAL)</option>
-                                <option value="FLK">포클랜드 (FALKLAND)</option>
-                                <option value="POL">폴란드 (POLAND)</option>
-                                <option value="PYF">폴리네시아(프) (FRENCH POLYNESIA)</option>
-                                <option value="PRI">푸에르토리코 (PUERTO RICO)</option>
-                                <option value="FRA">프랑스 (FRANCE)</option>
-                                <option value="FJI">피지 (FIJI)</option>
-                                <option value="FIN">핀란드 (FINLAND)</option>
-                                <option value="PHL">필리핀 (PHILIPPINES)</option>
-                                <option value="HUN">헝가리 (HUNGARY)</option>
-                                <option value="AUS">호주 (AUSTRALIA)</option>
-                                <option value="HKG">홍콩 (HONG KONG)</option>
+                                <option value="대한민국" selected="selected">대한민국</option>
+                                <option value="대만">대만</option>
+                                <option value="몽골">몽골</option>
+                                <option value="미얀마">미얀마</option>
+                                <option value="베트남">베트남</option>
+                                <option value="인도">인도</option>
+                                <option value="인도네시아">인도네시아</option>
+                                <option value="캄보디아">캄보디아</option>
+                                <option value="필리핀">필리핀</option>
+                                <option value="홍콩">홍콩</option>
+                                <option value="그리스">그리스</option>
+                                <option value="네덜란드">네덜란드</option>
+                                <option value="덴마크">덴마크</option>
+                                <option value="노르웨이">노르웨이</option>
+                                <option value="독일">독일</option>
+                                <option value="벨기에">벨기에</option>
+                                <option value="스웨덴">스웨덴</option>
+                                <option value="스위스">스위스</option>
+                                <option value="아이슬란드">아이슬란드</option>
+                                <option value="영국">영국</option>
+                                <option value="이탈리아">이탈리아</option>
+                                <option value="체코">체코</option>
+                                <option value="포르투갈">포르투갈</option>
+                                <option value="폴란드">폴란드</option>
+                                <option value="프랑스">프랑스</option>
+                                <option value="헝가리">헝가리</option>
+                                <option value="이집트">이집트</option>
+                                <option value="미국">미국</option>
+                                <option value="멕시코">멕시코</option>
+                                <option value="브라질">브라질</option>
                             </select>
                         </td>
                     </tr>
@@ -578,229 +390,36 @@ $(function () {
                         <td class="required">국적</td>
                         <td>
                             <select name="nationality" class="p90 cursor childNation${i}">
-                                <option value=""></option>
-                                <option value="KOR" selected="selected">한국 (REPUBLIC OF KOREA)</option>
-                                <option value="JPN">일본 (JAPAN)</option>
-                                <option value="GHA">가나 (GHANA)</option>
-                                <option value="GUY">가이아나 (GUYANA)</option>
-                                <option value="GAB">가봉 (GABON)</option>
-                                <option value="GMB">감비아 (GAMBIA)</option>
-                                <option value="GLP">과들루프 (GUADELOUPE)</option>
-                                <option value="GTM">과테말라 (GUATEMALA)</option>
-                                <option value="GUM">괌 (GUAM)</option>
-                                <option value="GRD">그레나다 (GRENADA)</option>
-                                <option value="GEO">그루지아 (GEORGIA)</option>
-                                <option value="GRC">그리스 (GREECE)</option>
-                                <option value="GRL">그린란드 (GREENLAND)</option>
-                                <option value="GIN">기니 (GUINEA)</option>
-                                <option value="GNB">기니 (GUINEA BISSAU)</option>
-                                <option value="GUF">기아나(프) (FRENCH GUIANA)</option>
-                                <option value="NAM">나미비아 (NAMIBIA)</option>
-                                <option value="NRU">나우루 (NAURU)</option>
-                                <option value="NGA">나이지리아 (NIGERIA)</option>
-                                <option value="ZAF">남아프리카공화국 (REP SOUTH AFRICA)</option>
-                                <option value="NLD">네덜란드 (NETHERLANDS)</option>
-                                <option value="NPL">네팔 (NEPAL)</option>
-                                <option value="NOR">노르웨이 (NORWAY)</option>
-                                <option value="NFK">노퍽 (NORFOLK ISLAND)</option>
-                                <option value="NCL">누벨칼레도니 (NEW CALEDONIA)</option>
-                                <option value="NZL">뉴질랜드 (NEW ZEALAND)</option>
-                                <option value="NIU">니우에 (NIUE)</option>
-                                <option value="NER">니제르 (NIGER)</option>
-                                <option value="NIC">니카라과 (NICARAGUA)</option>
-                                <option value="TWN">대만 (TAIWAN)</option>
-                                <option value="DNK">덴마크 (DENMARK)</option>
-                                <option value="DOM">도미니카공화국 (DOMINICAN REP)</option>
-                                <option value="DMA">도미니카연방 (DOMINICA)</option>
-                                <option value="DEU">독일 (GERMANY)</option>
-                                <option value="TLS">동티모르 (EAST TIMOR)</option>
-                                <option value="LAO">라오스 (LAOS)</option>
-                                <option value="LVA">라트비아 (LATVIA)</option>
-                                <option value="RUS">러시아 (RUSSIAN FED)</option>
-                                <option value="LBN">레바논 (LEBANON)</option>
-                                <option value="LSO">레소토 (LESOTHO)</option>
-                                <option value="ROU">루마니아 (ROMANIA)</option>
-                                <option value="LUX">룩셈르완다 (RWANDA)</option>
-                                <option value="LBR">리베리아 (LIBERIA)</option>
-                                <option value="LBY">리비아 (LIBYAN)</option>
-                                <option value="LTU">리투아니아 (LITHUANIA)</option>
-                                <option value="MDG">마다가스카르 (MADAGASCAR)</option>
-                                <option value="MTQ">마르티니크 (MARTINIQUE)</option>
-                                <option value="MHL">마샬제도 (MARSHALL ISLANDS)</option>
-                                <option value="MAC">마카오 (MACAO)</option>
-                                <option value="MKD">마케도니아 (MACEDONIA)</option>
-                                <option value="MWI">말라위 (MALAWI)</option>
-                                <option value="MYS">말레이시아 (MALAYSIA)</option>
-                                <option value="MLI">말리 (MALI)</option>
-                                <option value="MEX">멕시코 (MEXICO)</option>
-                                <option value="MCO">모나코 (MONACO)</option>
-                                <option value="MAR">모로코 (MOROCCO)</option>
-                                <option value="MUS">모리셔스 (MAURITIUS)</option>
-                                <option value="MRT">모리타니 (MAURITANIA)</option>
-                                <option value="MOZ">모잠비크 (MOZAMBIQUE)</option>
-                                <option value="MNE">몬테네그로 (REPUBLIC OF MENTENEGRO)</option>
-                                <option value="MSR">몬트세라트 (MONTSERRAT)</option>
-                                <option value="MDA">몰도바 (MOLDOVA)</option>
-                                <option value="MDV">몰디브 (MALDIVES)</option>
-                                <option value="MLT">몰타 (MALTA)</option>
-                                <option value="MNG">몽골 (MONGOLIA)</option>
-                                <option value="USA">미국 (U S A)</option>
-                                <option value="MMR">미얀마 (MYANMAR)</option>
-                                <option value="FSM">미크로네시아연방 (MICRONESIA)</option>
-                                <option value="VUT">바누아투 (VANUATU)</option>
-                                <option value="BHR">바레인 (BAHRAIN)</option>
-                                <option value="BRB">바베이도스 (BARBADOS)</option>
-                                <option value="VAT">바티칸 (Vatican City)</option>
-                                <option value="BHS">바하마 (BAHAMAS)</option>
-                                <option value="BGD">방글라데시 (BANGLADESH)</option>
-                                <option value="BMU">버뮤다 (BERMUDA)</option>
-                                <option value="VIR">버진제도(미) (US VIRGIN IS)</option>
-                                <option value="VGB">버진제도(영) (BRITISH VIRGIN IS)</option>
-                                <option value="VEN">베네수엘라 (VENEZUELA)</option>
-                                <option value="BEN">베넹 (BENIN PEOPLES REP)</option>
-                                <option value="VNM">베트남 (VIET NAM)</option>
-                                <option value="BEL">벨기에 (BELGIUM)</option>
-                                <option value="BLR">벨로루시 (BELARUS)</option>
-                                <option value="BLZ">벨리즈 (BELIZE)</option>
-                                <option value="BIH">보스니아 (BOSNIA HERZ)</option>
-                                <option value="BWA">보츠와나 (BOTSWANA)</option>
-                                <option value="BOL">볼리비아 (BOLIVIA)</option>
-                                <option value="BDI">부룬디 (BURUNDI)</option>
-                                <option value="BFA">부르키나파소 (BURKINA FASO)</option>
-                                <option value="BTN">부탄 (BHUTAN)</option>
-                                <option value="BGR">불가리아 (BULGARIA)</option>
-                                <option value="BRA">브라질 (BRASIL)</option>
-                                <option value="BRN">브루나이 (BRUNEI)</option>
-                                <option value="WSM">사모아 (INDEPENDENT SAMOA)</option>
-                                <option value="ASM">사모아(미) (AMERICAN SAMOA)</option>
-                                <option value="SAU">사우디아라비아 (SAUDI ARABIA)</option>
-                                <option value="SMR">산마리노 (SAN MARINO)</option>
-                                <option value="STP">상투메 프린시페 (SAO TOME PRINCIPE)</option>
-                                <option value="SEN">세네갈 (SENEGAL)</option>
-                                <option value="SRB">세르비아 (REPUBLIC OF SERBIA)</option>
-                                <option value="SYC">세이셜 (SEYCHELLES)</option>
-                                <option value="LCA">세인트루시아 (SAINT LUCIA)</option>
-                                <option value="VCT">세인트빈센트 그레나 (ST VINCENT)</option>
-                                <option value="KNA">세인트키츠 네비스 (ST KITTS NEVIS)</option>
-                                <option value="SHN">세인트헬레나 (ST HELENA)</option>
-                                <option value="SOM">소말리아 (SOMALIA)</option>
-                                <option value="SLB">솔로몬제도 (SOLOMON ISLANDS)</option>
-                                <option value="SDN">수단 (SUDAN)</option>
-                                <option value="SUR">수리남 (SURINAME)</option>
-                                <option value="LKA">스리랑카 (SRI LANKA)</option>
-                                <option value="SWZ">스와질랜드 (SWAZILAND)</option>
-                                <option value="SWE">스웨덴 (SWEDEN)</option>
-                                <option value="CHE">스위스 (SWITZERLAND)</option>
-                                <option value="ESP">스페인 (SPAIN)</option>
-                                <option value="SVK">슬로바키아 (SLOVAKIA)</option>
-                                <option value="SVN">슬로베니아 (SLOVENIA)</option>
-                                <option value="SYR">시리아 (SYRIA)</option>
-                                <option value="SLE">시에라리온 (SIERRA LEONE)</option>
-                                <option value="SGP">싱가폴 (SINGAPORE)</option>
-                                <option value="ARE">아랍에미리트 (UNITED ARAB EMRTS)</option>
-                                <option value="ABW">아루바 (ARUBA)</option>
-                                <option value="ARM">아르메니아 (ARMENIA)</option>
-                                <option value="ARG">아르헨티나 (ARGENTINA)</option>
-                                <option value="ISL">아이슬랜드 (ICELAND)</option>
-                                <option value="HTI">아이티 (HAITI)</option>
-                                <option value="IRL">아일랜드 (IRELAND)</option>
-                                <option value="AZE">아제르바이잔 (AZERBAIJAN)</option>
-                                <option value="AFG">아프가니스탄 (AFGHANISTAN)</option>
-                                <option value="AND">안도라 (ANDORRA)</option>
-                                <option value="ANT">안틸레스(네덜란드) (ANTILLES)</option>
-                                <option value="ALB">알바니아 (ALBANIA)</option>
-                                <option value="DZA">알제리 (ALGERIA)</option>
-                                <option value="AGO">앙골라 (ANGOLA)</option>
-                                <option value="EST">에스토니아 (ESTONIA)</option>
-                                <option value="ECU">에쿠아도르 (ECUADOR)</option>
-                                <option value="ETH">에티오피아 (ETHIOPIA)</option>
-                                <option value="ATG">엔티가 바부다 (ANTIGUA BARBUDA)</option>
-                                <option value="SLV">엘살바도르 (EL SALVADOR)</option>
-                                <option value="AIA">엥귈라 (ANGUILLA)</option>
-                                <option value="GBR">영국 (UNITED KINGDOM)</option>
-                                <option value="IOT">영국령인도양식민지 (BRITISH INDIAN OCEAN TERRITORY)</option>
-                                <option value="YEM">예멘 (YEMEN ARAB REP)</option>
-                                <option value="OMN">오만 (OMAN)</option>
-                                <option value="AUT">오스트리아 (AUSTRIA)</option>
-                                <option value="HND">온두라스 (HONDURAS)</option>
-                                <option value="JOR">요르단 (JORDAN)</option>
-                                <option value="UGA">우간다 (UGANDA)</option>
-                                <option value="URY">우루과이 (URUGUAY)</option>
-                                <option value="UZB">우즈베키스탄 (UZBEKISTAN)</option>
-                                <option value="UKR">우크라이나 (UKRAINE)</option>
-                                <option value="WLF">웰리스 푸투나 (WALLIS AND FUTUNA)</option>
-                                <option value="YUG">유고슬라비아 (YUGOSLAVIA)</option>
-                                <option value="IRQ">이라크 (IRAQ)</option>
-                                <option value="IRN">이란 (IRAN)</option>
-                                <option value="ISR">이스라엘 (ISRAEL)</option>
-                                <option value="EGY">이집트 (EGYPT)</option>
-                                <option value="ITA">이탈리아 (ITALY)</option>
-                                <option value="IND">인도 (INDIA)</option>
-                                <option value="IDN">인도네시아 (INDONESIA)</option>
-                                <option value="JAM">자메이카 (JAMAICA)</option>
-                                <option value="COD">자이르 (CONGO KINSHASA)</option>
-                                <option value="ZMB">잠비아 (ZAMBIA)</option>
-                                <option value="GNQ">적도기니 (EQUATORIAL GUINEA)</option>
-                                <option value="CHN">중국 (MAINLAND CHINA)</option>
-                                <option value="CAF">중앙아프리카공화국 (CNTRAL AFRICN REP)</option>
-                                <option value="DJI">지부티 (DJIBOUTI)</option>
-                                <option value="GIB">지브랄타 (GIBRALTAR)</option>
-                                <option value="ZWE">짐바브웨 (ZIMBABWE)</option>
-                                <option value="TCD">차드 (CHAD)</option>
-                                <option value="CZE">체코 (CZECH REP)</option>
-                                <option value="CHL">칠레 (CHILE)</option>
-                                <option value="CMR">카메룬 (REPUBLIC CAMEROON)</option>
-                                <option value="CPV">카보베르데 (REP OF CAPE VERDE)</option>
-                                <option value="KAZ">카자흐스탄 (KAZAKHSTAN)</option>
-                                <option value="QAT">카타르 (QATAR)</option>
-                                <option value="KHM">캄보디아 (KAMPUCHEA)</option>
-                                <option value="CAN">캐나다 (CANADA)</option>
-                                <option value="KEN">케냐 (KENYA)</option>
-                                <option value="CYM">케이맨제도 (CAYMAN IS)</option>
-                                <option value="COM">코모로 (COMOROS)</option>
-                                <option value="CRI">코스타리카 (COSTA RICA)</option>
-                                <option value="CCK">코코스킬링제도 (COCOS ISL)</option>
-                                <option value="CIV">코트디부와르 (COTE D IVOIRE)</option>
-                                <option value="COL">콜롬비아 (COLOMBIA)</option>
-                                <option value="COG">콩고 (CONGO BRAZZAVILLE)</option>
-                                <option value="CUB">쿠바 (CUBA)</option>
-                                <option value="KWT">쿠웨이트 (KUWAIT)</option>
-                                <option value="COK">쿡제도 (COOK ISLANDS)</option>
-                                <option value="HRV">크로아티아 (CROATIA)</option>
-                                <option value="KGZ">키르키스스탄 (KYRGYZSTAN)</option>
-                                <option value="KIR">키리바시 (KIRIBATI)</option>
-                                <option value="CYP">키프로스 (CYPRUS)</option>
-                                <option value="TJK">타지키스탄 (TAJIKISTAN)</option>
-                                <option value="TZA">탄자니아 (TANZANIA)</option>
-                                <option value="THA">태국 (THAILAND)</option>
-                                <option value="TCA">터크스 케이커스제도 (TURKS CAICOS IS)</option>
-                                <option value="TUR">터키 (TURKEY)</option>
-                                <option value="TGO">토고 (TOGO)</option>
-                                <option value="TON">통가 (TONGA)</option>
-                                <option value="TKM">투르크메니스탄 (TURKMENISTAN)</option>
-                                <option value="TUV">투발루 (TUVALU)</option>
-                                <option value="TUN">튀니지 (TUNISIA)</option>
-                                <option value="TTO">트리니다드토바고 (TRINIDAD TOBAGO)</option>
-                                <option value="PAN">파나마 (PANAMA)</option>
-                                <option value="PRY">파라과이 (PARAGUAY)</option>
-                                <option value="FRO">파로제도 (FAROE ISLAND)</option>
-                                <option value="PAK">파키스탄 (PAKISTAN)</option>
-                                <option value="PNG">파푸아뉴기니 (PAPUA NEW GUINEA)</option>
-                                <option value="PLW">팔라우 (PALAU ISLANDS)</option>
-                                <option value="PSE">팔레스타인 (PALESTINIAN TERRITORY, OCCUPIED)</option>
-                                <option value="PER">페루 (PERU)</option>
-                                <option value="PRT">포르투갈 (PORTUGAL)</option>
-                                <option value="FLK">포클랜드 (FALKLAND)</option>
-                                <option value="POL">폴란드 (POLAND)</option>
-                                <option value="PYF">폴리네시아(프) (FRENCH POLYNESIA)</option>
-                                <option value="PRI">푸에르토리코 (PUERTO RICO)</option>
-                                <option value="FRA">프랑스 (FRANCE)</option>
-                                <option value="FJI">피지 (FIJI)</option>
-                                <option value="FIN">핀란드 (FINLAND)</option>
-                                <option value="PHL">필리핀 (PHILIPPINES)</option>
-                                <option value="HUN">헝가리 (HUNGARY)</option>
-                                <option value="AUS">호주 (AUSTRALIA)</option>
-                                <option value="HKG">홍콩 (HONG KONG)</option>
+                                <option value="대한민국" selected="selected">대한민국</option>
+                                <option value="대만">대만</option>
+                                <option value="몽골">몽골</option>
+                                <option value="미얀마">미얀마</option>
+                                <option value="베트남">베트남</option>
+                                <option value="인도">인도</option>
+                                <option value="인도네시아">인도네시아</option>
+                                <option value="캄보디아">캄보디아</option>
+                                <option value="필리핀">필리핀</option>
+                                <option value="홍콩">홍콩</option>
+                                <option value="그리스">그리스</option>
+                                <option value="네덜란드">네덜란드</option>
+                                <option value="덴마크">덴마크</option>
+                                <option value="노르웨이">노르웨이</option>
+                                <option value="독일">독일</option>
+                                <option value="벨기에">벨기에</option>
+                                <option value="스웨덴">스웨덴</option>
+                                <option value="스위스">스위스</option>
+                                <option value="아이슬란드">아이슬란드</option>
+                                <option value="영국">영국</option>
+                                <option value="이탈리아">이탈리아</option>
+                                <option value="체코">체코</option>
+                                <option value="포르투갈">포르투갈</option>
+                                <option value="폴란드">폴란드</option>
+                                <option value="프랑스">프랑스</option>
+                                <option value="헝가리">헝가리</option>
+                                <option value="이집트">이집트</option>
+                                <option value="미국">미국</option>
+                                <option value="멕시코">멕시코</option>
+                                <option value="브라질">브라질</option>
                             </select>
                         </td>
                     </tr>
@@ -902,229 +521,36 @@ $(function () {
                         <td class="required">국적</td>
                         <td>
                             <select name="nationality" class="p90 cursor babyNation${i}">
-                                <option value=""></option>
-                                <option value="KOR" selected="selected">한국 (REPUBLIC OF KOREA)</option>
-                                <option value="JPN">일본 (JAPAN)</option>
-                                <option value="GHA">가나 (GHANA)</option>
-                                <option value="GUY">가이아나 (GUYANA)</option>
-                                <option value="GAB">가봉 (GABON)</option>
-                                <option value="GMB">감비아 (GAMBIA)</option>
-                                <option value="GLP">과들루프 (GUADELOUPE)</option>
-                                <option value="GTM">과테말라 (GUATEMALA)</option>
-                                <option value="GUM">괌 (GUAM)</option>
-                                <option value="GRD">그레나다 (GRENADA)</option>
-                                <option value="GEO">그루지아 (GEORGIA)</option>
-                                <option value="GRC">그리스 (GREECE)</option>
-                                <option value="GRL">그린란드 (GREENLAND)</option>
-                                <option value="GIN">기니 (GUINEA)</option>
-                                <option value="GNB">기니 (GUINEA BISSAU)</option>
-                                <option value="GUF">기아나(프) (FRENCH GUIANA)</option>
-                                <option value="NAM">나미비아 (NAMIBIA)</option>
-                                <option value="NRU">나우루 (NAURU)</option>
-                                <option value="NGA">나이지리아 (NIGERIA)</option>
-                                <option value="ZAF">남아프리카공화국 (REP SOUTH AFRICA)</option>
-                                <option value="NLD">네덜란드 (NETHERLANDS)</option>
-                                <option value="NPL">네팔 (NEPAL)</option>
-                                <option value="NOR">노르웨이 (NORWAY)</option>
-                                <option value="NFK">노퍽 (NORFOLK ISLAND)</option>
-                                <option value="NCL">누벨칼레도니 (NEW CALEDONIA)</option>
-                                <option value="NZL">뉴질랜드 (NEW ZEALAND)</option>
-                                <option value="NIU">니우에 (NIUE)</option>
-                                <option value="NER">니제르 (NIGER)</option>
-                                <option value="NIC">니카라과 (NICARAGUA)</option>
-                                <option value="TWN">대만 (TAIWAN)</option>
-                                <option value="DNK">덴마크 (DENMARK)</option>
-                                <option value="DOM">도미니카공화국 (DOMINICAN REP)</option>
-                                <option value="DMA">도미니카연방 (DOMINICA)</option>
-                                <option value="DEU">독일 (GERMANY)</option>
-                                <option value="TLS">동티모르 (EAST TIMOR)</option>
-                                <option value="LAO">라오스 (LAOS)</option>
-                                <option value="LVA">라트비아 (LATVIA)</option>
-                                <option value="RUS">러시아 (RUSSIAN FED)</option>
-                                <option value="LBN">레바논 (LEBANON)</option>
-                                <option value="LSO">레소토 (LESOTHO)</option>
-                                <option value="ROU">루마니아 (ROMANIA)</option>
-                                <option value="LUX">룩셈르완다 (RWANDA)</option>
-                                <option value="LBR">리베리아 (LIBERIA)</option>
-                                <option value="LBY">리비아 (LIBYAN)</option>
-                                <option value="LTU">리투아니아 (LITHUANIA)</option>
-                                <option value="MDG">마다가스카르 (MADAGASCAR)</option>
-                                <option value="MTQ">마르티니크 (MARTINIQUE)</option>
-                                <option value="MHL">마샬제도 (MARSHALL ISLANDS)</option>
-                                <option value="MAC">마카오 (MACAO)</option>
-                                <option value="MKD">마케도니아 (MACEDONIA)</option>
-                                <option value="MWI">말라위 (MALAWI)</option>
-                                <option value="MYS">말레이시아 (MALAYSIA)</option>
-                                <option value="MLI">말리 (MALI)</option>
-                                <option value="MEX">멕시코 (MEXICO)</option>
-                                <option value="MCO">모나코 (MONACO)</option>
-                                <option value="MAR">모로코 (MOROCCO)</option>
-                                <option value="MUS">모리셔스 (MAURITIUS)</option>
-                                <option value="MRT">모리타니 (MAURITANIA)</option>
-                                <option value="MOZ">모잠비크 (MOZAMBIQUE)</option>
-                                <option value="MNE">몬테네그로 (REPUBLIC OF MENTENEGRO)</option>
-                                <option value="MSR">몬트세라트 (MONTSERRAT)</option>
-                                <option value="MDA">몰도바 (MOLDOVA)</option>
-                                <option value="MDV">몰디브 (MALDIVES)</option>
-                                <option value="MLT">몰타 (MALTA)</option>
-                                <option value="MNG">몽골 (MONGOLIA)</option>
-                                <option value="USA">미국 (U S A)</option>
-                                <option value="MMR">미얀마 (MYANMAR)</option>
-                                <option value="FSM">미크로네시아연방 (MICRONESIA)</option>
-                                <option value="VUT">바누아투 (VANUATU)</option>
-                                <option value="BHR">바레인 (BAHRAIN)</option>
-                                <option value="BRB">바베이도스 (BARBADOS)</option>
-                                <option value="VAT">바티칸 (Vatican City)</option>
-                                <option value="BHS">바하마 (BAHAMAS)</option>
-                                <option value="BGD">방글라데시 (BANGLADESH)</option>
-                                <option value="BMU">버뮤다 (BERMUDA)</option>
-                                <option value="VIR">버진제도(미) (US VIRGIN IS)</option>
-                                <option value="VGB">버진제도(영) (BRITISH VIRGIN IS)</option>
-                                <option value="VEN">베네수엘라 (VENEZUELA)</option>
-                                <option value="BEN">베넹 (BENIN PEOPLES REP)</option>
-                                <option value="VNM">베트남 (VIET NAM)</option>
-                                <option value="BEL">벨기에 (BELGIUM)</option>
-                                <option value="BLR">벨로루시 (BELARUS)</option>
-                                <option value="BLZ">벨리즈 (BELIZE)</option>
-                                <option value="BIH">보스니아 (BOSNIA HERZ)</option>
-                                <option value="BWA">보츠와나 (BOTSWANA)</option>
-                                <option value="BOL">볼리비아 (BOLIVIA)</option>
-                                <option value="BDI">부룬디 (BURUNDI)</option>
-                                <option value="BFA">부르키나파소 (BURKINA FASO)</option>
-                                <option value="BTN">부탄 (BHUTAN)</option>
-                                <option value="BGR">불가리아 (BULGARIA)</option>
-                                <option value="BRA">브라질 (BRASIL)</option>
-                                <option value="BRN">브루나이 (BRUNEI)</option>
-                                <option value="WSM">사모아 (INDEPENDENT SAMOA)</option>
-                                <option value="ASM">사모아(미) (AMERICAN SAMOA)</option>
-                                <option value="SAU">사우디아라비아 (SAUDI ARABIA)</option>
-                                <option value="SMR">산마리노 (SAN MARINO)</option>
-                                <option value="STP">상투메 프린시페 (SAO TOME PRINCIPE)</option>
-                                <option value="SEN">세네갈 (SENEGAL)</option>
-                                <option value="SRB">세르비아 (REPUBLIC OF SERBIA)</option>
-                                <option value="SYC">세이셜 (SEYCHELLES)</option>
-                                <option value="LCA">세인트루시아 (SAINT LUCIA)</option>
-                                <option value="VCT">세인트빈센트 그레나 (ST VINCENT)</option>
-                                <option value="KNA">세인트키츠 네비스 (ST KITTS NEVIS)</option>
-                                <option value="SHN">세인트헬레나 (ST HELENA)</option>
-                                <option value="SOM">소말리아 (SOMALIA)</option>
-                                <option value="SLB">솔로몬제도 (SOLOMON ISLANDS)</option>
-                                <option value="SDN">수단 (SUDAN)</option>
-                                <option value="SUR">수리남 (SURINAME)</option>
-                                <option value="LKA">스리랑카 (SRI LANKA)</option>
-                                <option value="SWZ">스와질랜드 (SWAZILAND)</option>
-                                <option value="SWE">스웨덴 (SWEDEN)</option>
-                                <option value="CHE">스위스 (SWITZERLAND)</option>
-                                <option value="ESP">스페인 (SPAIN)</option>
-                                <option value="SVK">슬로바키아 (SLOVAKIA)</option>
-                                <option value="SVN">슬로베니아 (SLOVENIA)</option>
-                                <option value="SYR">시리아 (SYRIA)</option>
-                                <option value="SLE">시에라리온 (SIERRA LEONE)</option>
-                                <option value="SGP">싱가폴 (SINGAPORE)</option>
-                                <option value="ARE">아랍에미리트 (UNITED ARAB EMRTS)</option>
-                                <option value="ABW">아루바 (ARUBA)</option>
-                                <option value="ARM">아르메니아 (ARMENIA)</option>
-                                <option value="ARG">아르헨티나 (ARGENTINA)</option>
-                                <option value="ISL">아이슬랜드 (ICELAND)</option>
-                                <option value="HTI">아이티 (HAITI)</option>
-                                <option value="IRL">아일랜드 (IRELAND)</option>
-                                <option value="AZE">아제르바이잔 (AZERBAIJAN)</option>
-                                <option value="AFG">아프가니스탄 (AFGHANISTAN)</option>
-                                <option value="AND">안도라 (ANDORRA)</option>
-                                <option value="ANT">안틸레스(네덜란드) (ANTILLES)</option>
-                                <option value="ALB">알바니아 (ALBANIA)</option>
-                                <option value="DZA">알제리 (ALGERIA)</option>
-                                <option value="AGO">앙골라 (ANGOLA)</option>
-                                <option value="EST">에스토니아 (ESTONIA)</option>
-                                <option value="ECU">에쿠아도르 (ECUADOR)</option>
-                                <option value="ETH">에티오피아 (ETHIOPIA)</option>
-                                <option value="ATG">엔티가 바부다 (ANTIGUA BARBUDA)</option>
-                                <option value="SLV">엘살바도르 (EL SALVADOR)</option>
-                                <option value="AIA">엥귈라 (ANGUILLA)</option>
-                                <option value="GBR">영국 (UNITED KINGDOM)</option>
-                                <option value="IOT">영국령인도양식민지 (BRITISH INDIAN OCEAN TERRITORY)</option>
-                                <option value="YEM">예멘 (YEMEN ARAB REP)</option>
-                                <option value="OMN">오만 (OMAN)</option>
-                                <option value="AUT">오스트리아 (AUSTRIA)</option>
-                                <option value="HND">온두라스 (HONDURAS)</option>
-                                <option value="JOR">요르단 (JORDAN)</option>
-                                <option value="UGA">우간다 (UGANDA)</option>
-                                <option value="URY">우루과이 (URUGUAY)</option>
-                                <option value="UZB">우즈베키스탄 (UZBEKISTAN)</option>
-                                <option value="UKR">우크라이나 (UKRAINE)</option>
-                                <option value="WLF">웰리스 푸투나 (WALLIS AND FUTUNA)</option>
-                                <option value="YUG">유고슬라비아 (YUGOSLAVIA)</option>
-                                <option value="IRQ">이라크 (IRAQ)</option>
-                                <option value="IRN">이란 (IRAN)</option>
-                                <option value="ISR">이스라엘 (ISRAEL)</option>
-                                <option value="EGY">이집트 (EGYPT)</option>
-                                <option value="ITA">이탈리아 (ITALY)</option>
-                                <option value="IND">인도 (INDIA)</option>
-                                <option value="IDN">인도네시아 (INDONESIA)</option>
-                                <option value="JAM">자메이카 (JAMAICA)</option>
-                                <option value="COD">자이르 (CONGO KINSHASA)</option>
-                                <option value="ZMB">잠비아 (ZAMBIA)</option>
-                                <option value="GNQ">적도기니 (EQUATORIAL GUINEA)</option>
-                                <option value="CHN">중국 (MAINLAND CHINA)</option>
-                                <option value="CAF">중앙아프리카공화국 (CNTRAL AFRICN REP)</option>
-                                <option value="DJI">지부티 (DJIBOUTI)</option>
-                                <option value="GIB">지브랄타 (GIBRALTAR)</option>
-                                <option value="ZWE">짐바브웨 (ZIMBABWE)</option>
-                                <option value="TCD">차드 (CHAD)</option>
-                                <option value="CZE">체코 (CZECH REP)</option>
-                                <option value="CHL">칠레 (CHILE)</option>
-                                <option value="CMR">카메룬 (REPUBLIC CAMEROON)</option>
-                                <option value="CPV">카보베르데 (REP OF CAPE VERDE)</option>
-                                <option value="KAZ">카자흐스탄 (KAZAKHSTAN)</option>
-                                <option value="QAT">카타르 (QATAR)</option>
-                                <option value="KHM">캄보디아 (KAMPUCHEA)</option>
-                                <option value="CAN">캐나다 (CANADA)</option>
-                                <option value="KEN">케냐 (KENYA)</option>
-                                <option value="CYM">케이맨제도 (CAYMAN IS)</option>
-                                <option value="COM">코모로 (COMOROS)</option>
-                                <option value="CRI">코스타리카 (COSTA RICA)</option>
-                                <option value="CCK">코코스킬링제도 (COCOS ISL)</option>
-                                <option value="CIV">코트디부와르 (COTE D IVOIRE)</option>
-                                <option value="COL">콜롬비아 (COLOMBIA)</option>
-                                <option value="COG">콩고 (CONGO BRAZZAVILLE)</option>
-                                <option value="CUB">쿠바 (CUBA)</option>
-                                <option value="KWT">쿠웨이트 (KUWAIT)</option>
-                                <option value="COK">쿡제도 (COOK ISLANDS)</option>
-                                <option value="HRV">크로아티아 (CROATIA)</option>
-                                <option value="KGZ">키르키스스탄 (KYRGYZSTAN)</option>
-                                <option value="KIR">키리바시 (KIRIBATI)</option>
-                                <option value="CYP">키프로스 (CYPRUS)</option>
-                                <option value="TJK">타지키스탄 (TAJIKISTAN)</option>
-                                <option value="TZA">탄자니아 (TANZANIA)</option>
-                                <option value="THA">태국 (THAILAND)</option>
-                                <option value="TCA">터크스 케이커스제도 (TURKS CAICOS IS)</option>
-                                <option value="TUR">터키 (TURKEY)</option>
-                                <option value="TGO">토고 (TOGO)</option>
-                                <option value="TON">통가 (TONGA)</option>
-                                <option value="TKM">투르크메니스탄 (TURKMENISTAN)</option>
-                                <option value="TUV">투발루 (TUVALU)</option>
-                                <option value="TUN">튀니지 (TUNISIA)</option>
-                                <option value="TTO">트리니다드토바고 (TRINIDAD TOBAGO)</option>
-                                <option value="PAN">파나마 (PANAMA)</option>
-                                <option value="PRY">파라과이 (PARAGUAY)</option>
-                                <option value="FRO">파로제도 (FAROE ISLAND)</option>
-                                <option value="PAK">파키스탄 (PAKISTAN)</option>
-                                <option value="PNG">파푸아뉴기니 (PAPUA NEW GUINEA)</option>
-                                <option value="PLW">팔라우 (PALAU ISLANDS)</option>
-                                <option value="PSE">팔레스타인 (PALESTINIAN TERRITORY, OCCUPIED)</option>
-                                <option value="PER">페루 (PERU)</option>
-                                <option value="PRT">포르투갈 (PORTUGAL)</option>
-                                <option value="FLK">포클랜드 (FALKLAND)</option>
-                                <option value="POL">폴란드 (POLAND)</option>
-                                <option value="PYF">폴리네시아(프) (FRENCH POLYNESIA)</option>
-                                <option value="PRI">푸에르토리코 (PUERTO RICO)</option>
-                                <option value="FRA">프랑스 (FRANCE)</option>
-                                <option value="FJI">피지 (FIJI)</option>
-                                <option value="FIN">핀란드 (FINLAND)</option>
-                                <option value="PHL">필리핀 (PHILIPPINES)</option>
-                                <option value="HUN">헝가리 (HUNGARY)</option>
-                                <option value="AUS">호주 (AUSTRALIA)</option>
-                                <option value="HKG">홍콩 (HONG KONG)</option>
+                                <option value="대한민국" selected="selected">대한민국</option>
+                                <option value="대만">대만</option>
+                                <option value="몽골">몽골</option>
+                                <option value="미얀마">미얀마</option>
+                                <option value="베트남">베트남</option>
+                                <option value="인도">인도</option>
+                                <option value="인도네시아">인도네시아</option>
+                                <option value="캄보디아">캄보디아</option>
+                                <option value="필리핀">필리핀</option>
+                                <option value="홍콩">홍콩</option>
+                                <option value="그리스">그리스</option>
+                                <option value="네덜란드">네덜란드</option>
+                                <option value="덴마크">덴마크</option>
+                                <option value="노르웨이">노르웨이</option>
+                                <option value="독일">독일</option>
+                                <option value="벨기에">벨기에</option>
+                                <option value="스웨덴">스웨덴</option>
+                                <option value="스위스">스위스</option>
+                                <option value="아이슬란드">아이슬란드</option>
+                                <option value="영국">영국</option>
+                                <option value="이탈리아">이탈리아</option>
+                                <option value="체코">체코</option>
+                                <option value="포르투갈">포르투갈</option>
+                                <option value="폴란드">폴란드</option>
+                                <option value="프랑스">프랑스</option>
+                                <option value="헝가리">헝가리</option>
+                                <option value="이집트">이집트</option>
+                                <option value="미국">미국</option>
+                                <option value="멕시코">멕시코</option>
+                                <option value="브라질">브라질</option>
                             </select>
                         </td>
                     </tr>
@@ -1296,28 +722,9 @@ $(function () {
                 type : "PUT",
                 data : JSON.stringify(jsonData),
                 dataType : "text",
-                contentType : "application/json"
+                contentType : "application/json",
+                async: false
             });
-        let jsonData1;
-        jsonData1 = {
-            data : {
-                reIndex: Number(a)+1,
-                reFirstName: b,
-                reLastName: c,
-                reBirth : d,
-                reNation : e,
-                reMemberId : f,
-                reGender : g,
-                reExtraSale : h
-            }
-        }
-        $.ajax({
-            url : "/api/reservation/updating",
-            type : "PUT",
-            data : JSON.stringify(jsonData1),
-            dataType : "text",
-            contentType : "application/json"
-        });
     }
     function babyUpdate(a, b, c, d, e, f) {
         let jsonData;
@@ -1336,25 +743,8 @@ $(function () {
             type : "PUT",
             data : JSON.stringify(jsonData),
             dataType : "text",
-            contentType : "application/json"
-        });
-        let jsonData1;
-        jsonData1 = {
-            data : {
-                reIndex: Number(a)+1,
-                reFirstName: b,
-                reLastName: c,
-                reBirth : d,
-                reNation : e,
-                reGender : f
-            }
-        }
-        $.ajax({
-            url : "/api/reservation/updating1",
-            type : "PUT",
-            data : JSON.stringify(jsonData1),
-            dataType : "text",
-            contentType : "application/json"
+            contentType : "application/json",
+            async: false
         });
     }
 
@@ -1373,12 +763,13 @@ $(function () {
             type : "PUT",
             data : JSON.stringify(jsonData),
             dataType : "text",
-            contentType : "application/json"
+            contentType : "application/json",
+            async: false
         });
     }
 
     $('.fix_next_butt').on('click',function (){
-        for(let i = 1 ; i < Number(adult)+1 ; i ++){
+        for(let i = 1 ; i < Number(adult)+1 ; i++){
             adultUpdate(
                 $(`#${(i - 1) * 2}`).val(),
                 $(`.adultFirstName${i}`).val(),
@@ -1389,8 +780,18 @@ $(function () {
                 $(`input:radio[name='adultGender${i}']:checked`).val(),
                 $(`.adultDiscount${i}`).val()
             );
+            adultUpdate(
+                $(`#${((i-1)*2)+1}`).val(),
+                $(`.adultFirstName${i}`).val(),
+                $(`.adultLastName${i}`).val(),
+                $(`.adultBirth${i}`).val(),
+                $(`.adultNation${i}`).val(),
+                $(`.adultId${i}`).val(),
+                $(`input:radio[name='adultGender${i}']:checked`).val(),
+                $(`.adultDiscount${i}`).val()
+            );
         }
-        for(let i = 1 ; i < Number(child)+1 ; i ++){
+        for(let i = 1 ; i < Number(child)+1 ; i++){
             adultUpdate(
                 $(`#${(Number(adult) + i - 1) * 2}`).val(),
                 $(`.childFirstName${i}`).val(),
@@ -1401,10 +802,28 @@ $(function () {
                 $(`input:radio[name='childGender${i}']:checked`).val(),
                 $(`.childDiscount${i}`).val()
             );
+            adultUpdate(
+                $(`#${((Number(adult) + i - 1) * 2)+1}`).val(),
+                $(`.childFirstName${i}`).val(),
+                $(`.childLastName${i}`).val(),
+                $(`.childBirth${i}`).val(),
+                $(`.childNation${i}`).val(),
+                $(`.childId${i}`).val(),
+                $(`input:radio[name='childGender${i}']:checked`).val(),
+                $(`.childDiscount${i}`).val()
+            );
         }
-        for(let i = 1 ; i < Number(baby)+1 ; i ++){
+        for(let i = 1 ; i < Number(baby)+1 ; i++){
             babyUpdate(
                 $(`#${(Number(adult) + Number(child) + i - 1) * 2}`).val(),
+                $(`.babyFirstName${i}`).val(),
+                $(`.babyLastName${i}`).val(),
+                $(`.babyBirth${i}`).val(),
+                $(`.babyNation${i}`).val(),
+                $(`input:radio[name='babyGender${i}']:checked`).val()
+            );
+            babyUpdate(
+                $(`#${((Number(adult) + Number(child) + i - 1) * 2)+1}`).val(),
                 $(`.babyFirstName${i}`).val(),
                 $(`.babyLastName${i}`).val(),
                 $(`.babyBirth${i}`).val(),
@@ -1423,10 +842,13 @@ $(function () {
                     $('.input_phone').val()
                 )
             }
-            location.href="/pages/extras"
+            window.setTimeout(goToNext, 500);
         }
     })
 
+    function goToNext(){
+        location.href="/pages/extras"
+    }
 
 
 
