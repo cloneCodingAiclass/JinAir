@@ -124,10 +124,12 @@ $(function () {
     $('#oneway').on('change', function(){
         $('.sc_search_bw').css({"display":"none"});
         $('.sc_search_oneway').css({"display":"block"});
+        $('.result_kind').css({"display":"none"});
     })
     $('#between').on('change', function(){
         $('.sc_search_oneway').css({"display":"none"});
         $('.sc_search_bw').css({"display":"block"});
+        $('.result_kind').css({"display":"block"});
     })
 
     // 출발지, 도착지
@@ -174,19 +176,6 @@ $(function () {
         $('#container').css({"height":"2300px"});
     })
 
-    // 스케줄 결과 표
-    $('.dis_go').on('click', function () {
-        $('.go').css({"display":"block"});
-        $(this).css({"color": "#fff", "background-color": "rgb(102, 30, 67)"});
-        $('.dis_back').css({"background-color":"white", "color": "#444"});
-        $('.back').css({"display":"none"});
-    })
-    $('.dis_back').on('click', function () {
-        $('.back').css({"display":"block"});
-        $(this).css({"color": "#fff", "background-color": "rgb(102, 30, 67)"});
-        $('.dis_go').css({"background-color":"white", "color": "#444"});
-        $('.go').css({"display":"none"});
-    })
 
 
 
@@ -347,3 +336,137 @@ function twochoice(){
 $('.cal').css({"display":"none"});
 $('.cal2').css({"display":"none"});
 }
+
+$(() => {
+
+    let itemList = new Vue({
+        el : '#itemList',
+        data : {
+            itemList : {}
+        }
+    })
+
+    let itemList2 = new Vue({
+        el : '#itemList2',
+        data : {
+            itemList : {}
+        }
+    })
+
+    // 왕복검색
+    $('#betweenSearch').on('click', function (){
+        if($('#goPointB').val() == '출발지' || $('#comePointB').val() == '도착지' || $('#goDateB').val() == "가는날" || $('#comeDateB').val() == '오는날'){
+            alert('입력을 확인해주세요')
+            location.reload();
+        }
+        else{
+            searchBetween($('#goPointB').val(), $('#comePointB').val(), $('#goDateB').val() + 'T08:00:00');
+        }
+    })
+
+    // 편도검색
+    $('#onewaySearch').on('click', function (){
+        if($('#goPointOW').val() == '출발지' || $('#comePointOW').val() == '도착지' || $('#goDateOW').val() == "가는날"){
+            alert('입력을 확인해주세요')
+            location.reload();
+        }
+        else{
+            searchBetween($('#goPointOW').val(), $('#comePointOW').val(), $('#goDateOW').val() + 'T08:00:00');
+        }
+    })
+
+    // 출도착 검색
+    $('#de_result_btn').on('click', function (){
+        if($('#goPoint').val() == '출발지' || $('#comePoint').val() == '도착지' || $('#goDate').val() == "가는날"){
+            alert('입력을 확인해주세요')
+            location.reload();
+        }
+        else{
+            searchBetween($('#goPoint').val(), $('#comePoint').val(), $('#goDate').val() + 'T08:00:00');
+        }
+    })
+
+
+    // 왕복 가기
+    $('#dis_go').on('click', function (){
+        $('#dis_go').css({"color": "#fff", "background-color": "rgb(102, 30, 67)"});
+        $('.dis_back').css({"background-color":"white", "color": "#444"});
+        searchBetween($('#goPointB').val(), $('#comePointB').val(), $('#goDateB').val() + 'T08:00:00');
+    })
+
+
+    // 조건 검색 (왕복) // 출발지 - 도착지 - 가는날
+    function searchBetween(goPoint, comePoint, goDate){
+        $.post({
+            url: "/api/schedule/between",
+            data: "goPoint=" + goPoint + "&comePoint=" + comePoint + "&goDate=" + goDate,
+            dataType: "text",
+            success : function (response){
+                let dataJson = JSON.parse(response)
+
+                for(let i = 0; i < dataJson.data.length; i++) {
+                    $.get('/api/schedule/' + dataJson.data[i].schIndex, function (response2){
+                        $('.goPoint').text(response2.data.schDeparturePoint);
+                        $('.comePoint').text(response2.data.schArrivalPoint);
+                        let goYear = response2.data.schDepartureDate.substr(0, 4);
+                        let goMonth = response2.data.schDepartureDate.substr(5, 2);
+                        let goDay = response2.data.schDepartureDate.substr(8, 2);
+                        $('.goDate').text(goYear + '년 ' + goMonth + '월 ' + goDay + '일 ');
+                        let time = response2.data.schFlyingTime.substr(11, 5);
+                        $('.playingTime').text(time);
+                        let startTime = response2.data.schStartTime.substr(11, 5);
+                        let arriveTime = response2.data.schArrivalDate.substr(11, 5);
+                        $(`.startTime${i}`).text(startTime);
+                        $(`.arriveTime${i}`).text(arriveTime);
+                    })
+                }
+
+                itemList.itemList = dataJson.data;
+                itemList2.itemList = dataJson.data;
+
+            }
+        })
+    }
+
+    // 왕복 돌아오기
+    $('#dis_back').on('click', function (){
+        $('#dis_back').css({"color": "#fff", "background-color": "rgb(102, 30, 67)"});
+        $('.dis_go').css({"background-color":"white", "color": "#444"});
+        searchBetweenReverse($('#comePointB').val(), $('#goPointB').val(), $('#comeDateB').val() + 'T08:00:00');
+    })
+
+    // 조건 검색 (왕복) // 도착지 - 출발지 - 오는날
+    function searchBetweenReverse(goPoint, comePoint, comeDate){
+        console.log(goPoint, comePoint, comeDate)
+        $.post({
+            url: "/api/schedule/between",
+            data: "goPoint=" + goPoint + "&comePoint=" + comePoint + "&goDate=" + comeDate,
+            dataType: "text",
+            success : function (response2){
+                let dataJson = JSON.parse(response2)
+
+                for(let i = 0; i < dataJson.data.length; i++) {
+                    console.log(dataJson.data[i].schIndex)
+                    $.get('/api/schedule/' + dataJson.data[i].schIndex, function (response3){
+                        $('.goPoint').text(response3.data.schArrivalPoint);
+                        $('.comePoint').text(response3.data.schDeparturePoint);
+                        let goYear = response3.data.schDepartureDate.substr(0, 4);
+                        let goMonth = response3.data.schDepartureDate.substr(5, 2);
+                        let goDay = response3.data.schDepartureDate.substr(8, 2);
+                        $('.goDate').text(goYear + '년 ' + goMonth + '월 ' + goDay + '일 ');
+                        let time = response3.data.schFlyingTime.substr(11, 5);
+                        $('.playingTime').text(time);
+                        let startTime = response3.data.schStartTime.substr(11, 5);
+                        let arriveTime = response3.data.schArrivalDate.substr(11, 5);
+                        $(`#startTime${i}`).text(startTime);
+                        $(`#arriveTime${i}`).text(arriveTime);
+                    })
+                }
+
+                itemList.itemList = dataJson.data;
+                itemList2.itemList = dataJson.data;
+            }
+        })
+    }
+
+})

@@ -129,4 +129,26 @@ public class ScListApiController implements CrudInterface<ScheduleApiRequest, Sc
         return scListApiService.price(schDeparturePoint, schArrivalPoint, goDateSelectOptt);
 
     }
+
+    // 출발지, 도착지, 가는날, 오는날 조회 (왕복)
+    @PostMapping("/between") // http://localhost:8080/api/schedule/between
+    public Header<List<ScheduleApiResponse>> between(
+            @RequestParam(value = "goPoint") String goPoint,
+            @RequestParam(value = "comePoint") String comePoint,
+            @RequestParam(value = "goDate") String goDate
+    ){
+        System.out.println(goPoint + comePoint + goDate);
+        return scListApiService.between(goPoint, comePoint, goDate);
+    }
+
+    // 출발지, 도착지, 가는날 (편도)
+    @PostMapping("/oneway") // http://localhost:8080/api/schedule/oneway
+    public Header<List<ScheduleApiResponse>> oneway(
+            @RequestParam(value = "goPoint") String goPoint,
+            @RequestParam(value = "comePoint") String comePoint,
+            @RequestParam(value = "goDate") String goDate
+    ){
+        return scListApiService.oneway(goPoint, comePoint, goDate);
+    }
+
 }
