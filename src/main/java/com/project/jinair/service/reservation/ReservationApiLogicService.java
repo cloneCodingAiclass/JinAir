@@ -266,6 +266,22 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 }
         );
     }
+    public void updating3(Header<ReserveApiRequest> request) {
+        ReserveApiRequest reserveApiRequest = request.getData();
+        Optional<TbReservation> reservation = tbReservationRepository.findById(reserveApiRequest.getReIndex());
+        reservation.ifPresent(
+                select ->{
+                    select.setReFirstName(reserveApiRequest.getReFirstName());
+                    select.setReLastName(reserveApiRequest.getReLastName());
+                    select.setReBirth(reserveApiRequest.getReBirth());
+                    select.setReNation(reserveApiRequest.getReNation());
+                    select.setReMemberId(reserveApiRequest.getReMemberId());
+                    select.setReGender(reserveApiRequest.getReGender());
+                    select.setReExtraSale(reserveApiRequest.getReExtraSale());
+                    tbReservationRepository.save(select);
+                }
+        );
+    }
     public void updating1(Header<ReserveApiRequest> request) {
         ReserveApiRequest reserveApiRequest = request.getData();
         Optional<TbReservation> reservation = tbReservationRepository.findById(reserveApiRequest.getReIndex());
