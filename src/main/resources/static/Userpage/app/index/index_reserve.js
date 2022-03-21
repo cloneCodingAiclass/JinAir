@@ -809,7 +809,7 @@ $(() => {
     $('#reservateBTN').on('click', function(){
         if($('#hidden_trip_type').val() == "왕복") {
 
-            if($('.go_select_optt').val()=="출발일" || $('.arrive_select_optt').val()=="도착일" ||
+            if($('.go_select_optt').val()=="출발지" || $('.arrive_select_optt').val()=="도착지" ||
                 $('.go_date_select_optt').val()=="가는날" || $('.come_date_select_optt').val()=="오는날"){
                 alert('입력하신 내용을 확인해주세요');
             }else{
@@ -870,7 +870,7 @@ $(() => {
                 f.submit();
             }
         }else if($('#hidden_trip_type').val() == "편도") {
-            if($('.go_select_optt').val()=="출발일" || $('.arrive_select_optt').val()=="도착일" ||
+            if($('.go_select_optt').val()=="출발지" || $('.arrive_select_optt').val()=="도착지" ||
                 $('.go_date_select_optt').val()=="가는날"){
                 alert('입력하신 내용을 확인해주세요');
             }else{
@@ -924,9 +924,9 @@ $(() => {
                 f.submit();
             }
         }else if($('#hidden_trip_type').val() == "다구간") {
-            if($('.go_select_optt').val()=="출발일" || $('.arrive_select_optt').val()=="도착일" ||
-                $('.go_date_select_optt').val()=="가는날" || $('.go_select_optt2').val()=="출발일" ||
-                $('.arrive_select_optt2').val()=="도착일" || $('.go_date_select_optt2').val()=="가는날"){
+            if($('.go_select_optt').val()=="출발지" || $('.arrive_select_optt').val()=="도착지" ||
+                $('.go_date_select_optt').val()=="가는날" || $('.go_select_optt2').val()=="출발지" ||
+                $('.arrive_select_optt2').val()=="도착지" || $('.go_date_select_optt2').val()=="가는날"){
                 alert('입력하신 내용을 확인해주세요');
             }else{
                 let f = document.createElement('form');
