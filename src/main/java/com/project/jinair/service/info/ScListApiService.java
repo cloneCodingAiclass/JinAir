@@ -203,4 +203,20 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
         return Header.OK(scheduleApiResponseList);
     }
 
+    public Header<List<ScheduleApiResponse>> between(String goPoint, String comePoint, String goDate){
+        List<TbSchedule> tbScheduleList= tbScheduleRepository.findBySchDeparturePointAndSchArrivalPointAndSchDepartureDate(goPoint, comePoint, LocalDateTime.parse(goDate));
+        List<ScheduleApiResponse> responseList = tbScheduleList.stream()
+                .map(sch -> responseSchedule(sch))
+                .collect(Collectors.toList());
+        return Header.OK(responseList);
+    }
+
+    public Header<List<ScheduleApiResponse>> oneway(String goPoint, String comePoint, String goDate){
+        List<TbSchedule> tbScheduleList = tbScheduleRepository.findBySchDeparturePointAndSchArrivalPointAndSchDepartureDate(goPoint, comePoint, LocalDateTime.parse(goDate));
+        List<ScheduleApiResponse> responseList = tbScheduleList.stream()
+                .map(sch -> responseSchedule(sch))
+                .collect(Collectors.toList());
+        return Header.OK(responseList);
+    }
+
 }

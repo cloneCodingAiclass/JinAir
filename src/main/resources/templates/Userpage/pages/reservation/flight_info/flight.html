@@ -3,8 +3,6 @@
       xmlns:th="http://www.thymeleaf.org/">
 <div th:replace="userpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/userpage/lib/css/reservation/flight_info/flight.css">
-<script src="/userpage/app/reservation/flight_info/flight.js"></script>
-
 <body>
     <ul class="skipnavi"><!--책갈피 역할-->
         <li><a href="#container">본문내용</a></li> 
@@ -31,7 +29,7 @@
                         </tr>
                     </table>
                 </div>
-                <!--제휴 카드-->
+                <!--운항 스케줄 조회-->
                 <div class="schedule">
                     <div class="schedule_wrapper">
                         <div class="sc_search">
@@ -41,44 +39,44 @@
                             <label for="oneway">편도</label>
                             <!-- 왕복 -->
                             <div class="sc_search_between sc_search_bw">
-                                <form action="#">
+                                <div>
                                     <div class="go_back_airport">
                                         <div class="go_select_opt">
-                                            <input type="text" value="출발지" readonly class="go_select_optt">
+                                            <input type="text" value="출발지" readonly class="go_select_optt" id="goPointB">
                                         </div>
                                         <div class="arrive_select_opt">
-                                            <input type="text" value="도착지" readonly class="arrive_select_optt">
+                                            <input type="text" value="도착지" readonly class="arrive_select_optt" id="comePointB">
                                         </div>
                                     </div>
                                     <div class="go_back_date">
                                         <div class="go_date_select_opt">
-                                            <input type="text" value="가는날" readonly class="go_date_select_optt">
+                                            <input type="text" value="가는날" readonly class="go_date_select_optt" id="goDateB">
                                         </div>
                                         <div class="come_date_select_opt">
-                                            <input type="text" value="오는날" readonly class="come_date_select_optt">
+                                            <input type="text" value="오는날" readonly class="come_date_select_optt" id="comeDateB">
                                         </div>
                                     </div>
-                                    <span><input type="submit" value="조회" class="search_btn"></span>
-                                </form>
+                                    <span><input type="button" value="조회" id="betweenSearch" class="search_btn"></span>
+                                </div>
                             </div>
+                            <!-- 편도 -->
                             <div class="sc_search_between sc_search_oneway">
-                                <!-- 편도 -->
-                                <form action="#">
+                                <div>
                                     <div class="go_back_airport">
                                         <div class="go_select_opt">
-                                            <input type="text" value="출발지" readonly class="go_select_optt">
+                                            <input type="text" value="출발지" readonly class="go_select_optt" id="goPointOW">
                                         </div>
                                         <div class="arrive_select_opt">
-                                            <input type="text" value="도착지" readonly class="arrive_select_optt">
+                                            <input type="text" value="도착지" readonly class="arrive_select_optt" id="comePointOW">
                                         </div>
                                     </div>
                                     <div class="go_back_date2">
                                         <div class="go_date_select_opt2">
-                                            <input type="text" value="가는날" readonly class="go_date_select_optt2">
+                                            <input type="text" value="가는날" readonly class="go_date_select_optt2" id="goDateOW">
                                         </div>
                                     </div>
-                                    <span><input type="submit" value="조회" class="search_btn"></span>
-                                </form>
+                                    <span><input type="button" value="조회" class="search_btn" id="onewaySearch"></span>
+                                </div>
                             </div>
                             <div class="go_select in_bl">
                                 <div class="go_layer">
@@ -220,39 +218,84 @@
                         <p class="sc_search_text">오늘을 기준으로 361일 이내 출발하는 항공편에 대하여 조회하실 수 있습니다.</p>
                         <p class="sc_search_text">선택하신 출발일이 포함된 주간 스케줄을 조회하실 수 있습니다.</p>
                         <p class="sc_search_text">항공 스케줄은 정부인가 조건이며, 예고없이 변경될 수 있습니다.</p>
-                        <div class="result_wrapper">
+                        <!--결과-->
+                        <div class="result_wrapper" id="itemList">
                             <div class="result_kind">
                                 <table class="result_table">
                                     <tr>
-                                        <th class="dis_go cursor">서울/김포(GMP)-제주(CJU)</th>
-                                        <th class="dis_back cursor">제주(CJU)-서울/김포(GMP)</th>
+                                        <th class="dis_go cursor" id="dis_go">
+                                            <span class="goPoint"></span>-<span class="comePoint"></span>
+                                        </th>
+                                        <th class="dis_back cursor" id="dis_back">
+                                            <span class="comePoint"></span>-<span class="goPoint"></span>
+                                        </th>
                                     </tr>
                                 </table>
                             </div>
-                            <iframe src="/pages/reservation/iframe" frameborder="0"></iframe>
+                            <div class="result_wrapper">
+                                <div class="result_top">
+                                    <a href=""><p class="result_top_left"></p></a>
+                                    <p class="result_top_name"><span class="goDate"></span>스케줄</p>
+                                    <a href=""><p class="result_top_right"></p></a>
+                                </div>
+                                <table>
+                                    <colgroup>
+                                        <col width="70">
+                                        <col width="300">
+                                        <col width="80">
+                                        <col width="80">
+                                        <col width="100">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>번호</th>
+                                            <th>항공권</th>
+                                            <th>출발시간</th>
+                                            <th>도착시간</th>
+                                            <th>출발날짜</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(dto, i) in itemList">
+                                            <td>{{i+1}}</td>
+                                            <td>
+                                                <p>{{dto.schAirplaneName}} | 직항</p>
+                                                <p>{{dto.schDeparturePoint}} -> {{dto.schArrivalPoint}}</p>
+                                                <p>운항시간 : <span class="playingTime"></span></p>
+                                            </td>
+                                            <td :class=`startTime${i}`></td>
+                                            <td :class=`arriveTime${i}`></td>
+                                            <td class="goDate"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+                        <!--결과 끝-->
                     </div>
                 </div>
+                <!--운항 스케줄 조회 끝-->
+                <!--출도착 정보 안내-->
                 <div class="departure">
                     <div class="departure_wrapper">
                         <div class="sc_search">
                             <div class="sc_search_between">
-                                <form action="#">
+                                <div>
                                     <div class="go_back_airport">
                                         <div class="go_select_opt">
-                                            <input type="text" value="출발지" readonly class="go_select_optt">
+                                            <input type="text" value="출발지" readonly class="go_select_optt" id="goPoint">
                                         </div>
                                         <div class="arrive_select_opt">
-                                            <input type="text" value="도착지" readonly class="arrive_select_optt">
+                                            <input type="text" value="도착지" readonly class="arrive_select_optt" id="comePoint">
                                         </div>
                                     </div>
                                     <div class="go_back_date">
                                         <div class="go_date_select_opt2">
-                                            <input type="text" value="가는날" readonly class="go_date_select_optt2">
+                                            <input type="text" value="가는날" readonly class="go_date_select_optt2" id="goDate">
                                         </div>
                                     </div>
-                                    <span><input type="submit" value="조회" class="de_result_btn"></span>
-                                </form>
+                                    <span><input type="button" value="조회" class="de_result_btn" id="de_result_btn"></span>
+                                </div>
                             </div>
                             <div class="go_select in_bl">
                                 <div class="go_layer">
@@ -394,114 +437,38 @@
                         <p class="sc_search_text">조회 결과에서 선택일 기준으로 7일 전 항공편까지 확인하실 수 있습니다.</p>
                         <p class="sc_search_text">항공편의 도착 기준은 비행기 착륙 후 주기장에 도착하여 하기준비가 완료된 상태입니다.</p>
                         <p class="sc_search_text">활주로에 착륙 후 통상 15-20분 가량 소요됩니다. 화면에 표시되는 시각은 현지 시각 기준입니다.</p>
-                        <div class="de_result_wrap">
-                            <table class="de_result_table">
+                        <div class="de_result_wrap" id="itemList2">
+                            <table class="de_result_table" v-for="(dto, i) in itemList">
                                 <tr>
                                     <td colspan="2">항공편</td>
-                                    <td colspan="2">LJ423</td>
+                                    <td colspan="2">{{dto.schAirplaneName}}</td>
                                 </tr>
                                 <tr>
                                     <td rowspan="2">출발</td>
                                     <td>스케줄</td>
-                                    <td>06:15</td>
+                                    <td :class=`startTime${i}`></td>
                                     <td rowspan="2">출발</td>
                                 </tr>
                                 <tr>
                                     <td>실제시각</td>
-                                    <td>06:23</td>
+                                    <td :class=`startTime${i}`></td>
                                 </tr>
                                 <tr>
                                     <td rowspan="2">도착</td>
                                     <td>스케줄</td>
-                                    <td>07:25</td>
+                                    <td :class=`arriveTime${i}`></td>
                                     <td rowspan="2">출발</td>
                                 </tr>
                                 <tr>
                                     <td>실제시각</td>
-                                    <td>07:33</td>
+                                    <td :class=`arriveTime${i}`></td>
                                 </tr>
-                            </table>
-                            <table class="de_result_table">
-                                <tr>
-                                    <td colspan="2">항공편</td>
-                                    <td colspan="2">LJ423</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="2">출발</td>
-                                    <td>스케줄</td>
-                                    <td>06:15</td>
-                                    <td rowspan="2">출발</td>
-                                </tr>
-                                <tr>
-                                    <td>실제시각</td>
-                                    <td>06:23</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="2">도착</td>
-                                    <td>스케줄</td>
-                                    <td>07:25</td>
-                                    <td rowspan="2">출발</td>
-                                </tr>
-                                <tr>
-                                    <td>실제시각</td>
-                                    <td>07:33</td>
-                                </tr>
-                            </table>
-                            <table class="de_result_table">
-                                <tr>
-                                    <td colspan="2">항공편</td>
-                                    <td colspan="2">LJ423</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="2">출발</td>
-                                    <td>스케줄</td>
-                                    <td>06:15</td>
-                                    <td rowspan="2">출발</td>
-                                </tr>
-                                <tr>
-                                    <td>실제시각</td>
-                                    <td>06:23</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="2">도착</td>
-                                    <td>스케줄</td>
-                                    <td>07:25</td>
-                                    <td rowspan="2">출발</td>
-                                </tr>
-                                <tr>
-                                    <td>실제시각</td>
-                                    <td>07:33</td>
-                                </tr>
-                                <table class="de_result_table">
-                                    <tr>
-                                        <td colspan="2">항공편</td>
-                                        <td colspan="2">LJ423</td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="2">출발</td>
-                                        <td>스케줄</td>
-                                        <td>06:15</td>
-                                        <td rowspan="2">출발</td>
-                                    </tr>
-                                    <tr>
-                                        <td>실제시각</td>
-                                        <td>06:23</td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="2">도착</td>
-                                        <td>스케줄</td>
-                                        <td>07:25</td>
-                                        <td rowspan="2">출발</td>
-                                    </tr>
-                                    <tr>
-                                        <td>실제시각</td>
-                                        <td>07:33</td>
-                                    </tr>
-                                </table>
                             </table>
                         </div>
                     </div>
                 </div>
+                <!--출도착 정보 안내 끝-->
+                <!--취항 노선 안내-->
                 <div class="route">
                     <div class="route_wrapper">
                         <div class="route_img"></div>
@@ -510,6 +477,7 @@
                         <p class="route_contents">운항 스케줄은 부득이한 사유로 예고 없이 변경될 수 있습니다.</p>
                     </div>
                 </div>
+                <!--취항 노선 안내끝-->
             </div>
         </div>
         <!-- container 끝-->
@@ -578,5 +546,6 @@
             <input type="button" value="확인" class="btn_cancel">
         </div>
     </div>
+    <script src="/userpage/app/reservation/flight_info/flight.js"></script>
 </body>
 </html>

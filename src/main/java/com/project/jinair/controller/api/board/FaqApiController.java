@@ -26,8 +26,8 @@ public class FaqApiController implements CrudInterface<FaqApiRequest, FaqApiResp
         return faqApiLogicService.getFaqList(id);
     }
     @GetMapping("/typeSearch/{id}")
-    public Header<List<FaqApiResponse>> Typesearch(@PathVariable(name = "id") String id) {
-        return faqApiLogicService.getFaqType(id);
+    public Header<List<FaqApiResponse>> Typesearch(@PathVariable(name = "id") String id, @PageableDefault(sort = {"faqIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        return faqApiLogicService.getFaqType(id, pageable);
     }
 
     // 게시판 리스트
