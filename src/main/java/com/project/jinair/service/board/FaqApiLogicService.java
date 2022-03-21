@@ -127,11 +127,18 @@ public class FaqApiLogicService implements CrudInterface<FaqApiRequest, FaqApiRe
         return Header.OK(faqApiResponseList);
     }
 
-    public Header<List<FaqApiResponse>> getFaqType(String a) {
-        List<TbFaq> tbFaq = tbFaqRepository.findByFaqTypeContaining(a);
+    public Header<List<FaqApiResponse>> getFaqType(String a, Pageable pageable) {
+        Page<TbFaq> tbFaq = tbFaqRepository.findByFaqTypeContaining(a, pageable);
         List<FaqApiResponse> faqApiResponseList = tbFaq.stream()
                 .map(user -> responseFaq(user))
                 .collect(Collectors.toList());
-        return Header.OK(faqApiResponseList);
+
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbFaq.getTotalPages())
+                .totalElements(tbFaq.getTotalElements())
+                .currentPage(tbFaq.getNumber())
+                .currentElements(tbFaq.getNumberOfElements())
+                .build();
+        return Header.OK(faqApiResponseList, pagination);
     }
 }
