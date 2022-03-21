@@ -235,30 +235,48 @@ $(function () {
         }
     });
 
-    function type(type, page){
-        $.get("/api/faq/typeSearch/"+type, function(response){
+    function Type(type, page){
+        $.get("/api/faq/typeSearch/"+type+"?page="+page, function(response){
             faqList.faqList = response.data;
+
+            pagination = response.pagination;
+
+            showPage.totalElements = pagination.currentPage;
+            showPage.currentPage = pagination.currentPage;
+
+            let NumberPage = 0;
+            let last = pagination.totalPages;
+
+            for(NumberPage; NumberPage < last; NumberPage++){
+                url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
+            }
+            document.getElementById("footer").innerHTML = url;
+
+            $(".pageButton").on('click', function (){
+                page = $(this).attr('id');
+                Type(type, page);
+            })
 
 
         });
     }
     $('#faq1').on('click', function () {
-        type($('#faq2').attr("value"));
+        Type($('#faq2').attr("value"));
     });
     $('#faq2').on('click', function () {
-        type($('#faq2').attr("value"));
+        Type($('#faq2').attr("value"));
     });
     $('#faq3').on('click', function () {
-        type($('#faq3').attr("value"));
+        Type($('#faq3').attr("value"));
     });
     $('#faq4').on('click', function () {
-        type($('#faq4').attr("value"));
+        Type($('#faq4').attr("value"));
     });
     $('#faq5').on('click', function () {
-        type($('#faq5').attr("value"));
+        Type($('#faq5').attr("value"));
     });
     $('#faq6').on('click', function () {
-        type($('#faq6').attr("value"));
+        Type($('#faq6').attr("value"));
     });
 
 })(jQuery);
