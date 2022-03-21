@@ -118,8 +118,6 @@ $(function () {
         memEmail = $('#memberApiResponse').val().split(',')[9].substring(10, $('#memberApiResponse').val().split(',')[9].length);
         memHpNation = $('#memberApiResponse').val().split(',')[7].substring(13, $('#memberApiResponse').val().split(',')[7].length);
         memHp = $('#memberApiResponse').val().split(',')[8].substring(7, $('#memberApiResponse').val().split(',')[8].length);
-        console.log(memNation)
-        console.log(memHpNation)
     }
     // 쿠키갯수(인원수 * 2) 구하기
     let personNum = 0
@@ -728,50 +726,6 @@ $(function () {
                 async: false
             });
     }
-    function childUpdate(a, b, c, d, e, f, g, h) {
-        let jsonData;
-        jsonData = {
-            data : {
-                reIndex: Number(a),
-                reFirstName: b,
-                reLastName: c,
-                reBirth : d,
-                reNation : e,
-                reMemberId : f,
-                reGender : g,
-                reExtraSale : h
-            }
-        }
-        $.ajax({
-            url : "/api/reservation/updating3",
-            type : "PUT",
-            data : JSON.stringify(jsonData),
-            dataType : "text",
-            contentType : "application/json",
-            async: false
-        });
-        let jsonData1;
-        jsonData1 = {
-            data : {
-                reIndex: Number(a)+1,
-                reFirstName: b,
-                reLastName: c,
-                reBirth : d,
-                reNation : e,
-                reMemberId : f,
-                reGender : g,
-                reExtraSale : h
-            }
-        }
-        $.ajax({
-            url : "/api/reservation/updating3",
-            type : "PUT",
-            data : JSON.stringify(jsonData1),
-            dataType : "text",
-            contentType : "application/json",
-            async: false
-        });
-    }
     function babyUpdate(a, b, c, d, e, f) {
         let jsonData;
         jsonData = {
@@ -788,25 +742,6 @@ $(function () {
             url : "/api/reservation/updating1",
             type : "PUT",
             data : JSON.stringify(jsonData),
-            dataType : "text",
-            contentType : "application/json",
-            async: false
-        });
-        let jsonData1;
-        jsonData1 = {
-            data : {
-                reIndex: Number(a)+1,
-                reFirstName: b,
-                reLastName: c,
-                reBirth : d,
-                reNation : e,
-                reGender : f
-            }
-        }
-        $.ajax({
-            url : "/api/reservation/updating1",
-            type : "PUT",
-            data : JSON.stringify(jsonData1),
             dataType : "text",
             contentType : "application/json",
             async: false
@@ -857,8 +792,18 @@ $(function () {
             );
         }
         for(let i = 1 ; i < Number(child)+1 ; i++){
-            childUpdate(
+            adultUpdate(
                 $(`#${(Number(adult) + i - 1) * 2}`).val(),
+                $(`.childFirstName${i}`).val(),
+                $(`.childLastName${i}`).val(),
+                $(`.childBirth${i}`).val(),
+                $(`.childNation${i}`).val(),
+                $(`.childId${i}`).val(),
+                $(`input:radio[name='childGender${i}']:checked`).val(),
+                $(`.childDiscount${i}`).val()
+            );
+            adultUpdate(
+                $(`#${((Number(adult) + i - 1) * 2)+1}`).val(),
                 $(`.childFirstName${i}`).val(),
                 $(`.childLastName${i}`).val(),
                 $(`.childBirth${i}`).val(),
@@ -871,6 +816,14 @@ $(function () {
         for(let i = 1 ; i < Number(baby)+1 ; i++){
             babyUpdate(
                 $(`#${(Number(adult) + Number(child) + i - 1) * 2}`).val(),
+                $(`.babyFirstName${i}`).val(),
+                $(`.babyLastName${i}`).val(),
+                $(`.babyBirth${i}`).val(),
+                $(`.babyNation${i}`).val(),
+                $(`input:radio[name='babyGender${i}']:checked`).val()
+            );
+            babyUpdate(
+                $(`#${((Number(adult) + Number(child) + i - 1) * 2)+1}`).val(),
                 $(`.babyFirstName${i}`).val(),
                 $(`.babyLastName${i}`).val(),
                 $(`.babyBirth${i}`).val(),

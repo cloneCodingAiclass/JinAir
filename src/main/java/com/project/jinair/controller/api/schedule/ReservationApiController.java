@@ -105,10 +105,6 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     public void updating(@RequestBody Header<ReserveApiRequest> request) {
         reservationApiLogicService.updating(request);
     }
-    @PutMapping("/updating3")
-    public void updating3(@RequestBody Header<ReserveApiRequest> request) {
-        reservationApiLogicService.updating3(request);
-    }
     @PutMapping("/updating1")
     public void updating1(@RequestBody Header<ReserveApiRequest> request) {
         reservationApiLogicService.updating1(request);
