@@ -929,7 +929,7 @@ body{
     background-color: #737373;
 }
 
-.SSC:checked + .boxPlus {
+.SSC:checked + .boxPlus, .SSC:checked + .boxBiz {
     background-color: #B28913;
 }
 
@@ -970,7 +970,7 @@ body{
     background-color: #737373;
 }
 
-.SSC2:checked + .boxPlus {
+.SSC2:checked + .boxPlus, .SSC2:checked + .boxBiz {
     background-color: #B28913;
 }
 
@@ -1036,7 +1036,7 @@ body{
     border: 3px solid #737373;
     cursor: pointer;
 }
-.service_content .boxPlus {
+.service_content .boxPlus, .service_content .boxBiz {
     border: 3px solid #B28913;
     cursor: pointer;
 }
@@ -1060,20 +1060,23 @@ body{
 }
 
 .service_content .seat_info_wrap .seat_info .seat_box .txt {
-    width: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 110px;
     height: 25px;
-    display: inline-block;
     font-weight: bold;
     margin-left: 5px;
 }
 
 .service_content .seat_info_wrap .seat_info .seat_box .txt .price {
+    display: inline;
     font-size: 16px;
     margin-left: 3px;
 }
 
 .service_content .seat_info_wrap .seat_info .seat_box .txt .cur {
-    display: inline-block;
+    width: 40px !important;
+    display: inline;
     font-size: 12px;
     height: 14px;
 }
@@ -1102,7 +1105,7 @@ body{
     color: #737373!important;
 }
 
-.service_content .seat_info_wrap .seat_info .seat_box .boxPlus+.txt {
+.service_content .seat_info_wrap .seat_info .seat_box .boxPlus+.txt, .service_content .seat_info_wrap .seat_info .seat_box .boxBiz+.txt {
     color: #B28913 !important;
 }
 
@@ -1237,7 +1240,7 @@ body{
     justify-content: space-around;
 }
 
-.boxPlus {
+.boxBiz {
     height: 54px;
 }
 
@@ -2374,7 +2377,7 @@ body{
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     left: 0; right: 0; top: 0; bottom: 0;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 800;
@@ -2912,16 +2915,32 @@ h2 {
     height: 720px;
 }
 
+.modal_table_wrap {
+    width: 100%;
+}
+
 #modal_service_app_wrap .modal_service_app_wrap .modal_contents table {
     width: 100%;
     border-collapse: collapse;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
+    table-layout:fixed;
+}
+
+
+#modal_service_app_wrap .modal_service_app_wrap .modal_contents table tr {
+    width: 100%;
 }
 
 #modal_service_app_wrap .modal_service_app_wrap .modal_contents table th {
     background-color: rgb(247, 247, 246);
     line-height: 50px;
+    width: 100%;
+    border-top: 1px solid rgba(168, 165, 165, 0.3);
+}
+
+#modal_service_app_wrap .modal_service_app_wrap .modal_contents table #modal_option_people_info_0 th {
+    border-top: 1px solid black;
 }
 
 #modal_service_app_wrap .modal_service_app_wrap .modal_contents table td {
@@ -2934,7 +2953,7 @@ h2 {
     text-align: left;
 }
 
-#modal_service_app_wrap .modal_service_app_wrap .modal_contents table .item_wrap1 {
+#modal_service_app_wrap .modal_service_app_wrap .modal_contents table .item_wrap1, .item_wrap2 {
     display: flex;
     align-items: center;
 }

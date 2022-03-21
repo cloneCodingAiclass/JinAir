@@ -541,16 +541,18 @@ $(function () {
     $(".insContent1").css("display", "block");
     $(".insContent2").css("display", "none");
   })
-
-
-
-
-
-
   /*보험가입 페이지 끝 */
 
   // 탑승객 수
-  let personNumber = 3;
+  let num = 0;
+  let personNum = 0;
+  for( let i = 0 ; i < 60; i++){
+    if(document.getElementById(`${i}`)){
+      personNum = personNum + 1;
+    }
+  }
+  let personNumber = personNum / 2;
+
   let str = "";  // 좌석선택 탑승객 1
   let str2 = ""; // 좌석선택 탑승객 2
   let str3 = ""; // 수하물 탑승객
@@ -564,7 +566,7 @@ $(function () {
   for (let i = 0; i < personNumber; i++) {
     str += "<div class='passenger_info passenger_info1'>"
     str += "<h3>탑승객 " +  Number(i+1) + "</h3>";
-    str += "<label for='person_" + i + "' ><img src='/userpage/lib/img/ico-person.png' alt='탑승객'><span class='cursor'>" + '유/영은' + "</span></label>"
+    str += "<label for='person_" + i + "' ><img src='/userpage/lib/img/ico-person.png' alt='탑승객'><span class='cursor'>" + [[${reserveApiResponse.reFirstName}]] + "/" +  [[${reserveApiResponse.reLastName}]] + "</span></label>"
     str += "<label for='person_" + i + "'  class='label'><p class='select_seat_num select_seat_num1'>"
     str += "<input type='text' class='seat_num seat_num1 cursor' id='seat_num1_" + i + "' readonly>"
     str += "<span class='close cursor'>x</span>"
@@ -581,7 +583,7 @@ $(function () {
   for (let i = 0; i < personNumber; i++) {
     str2 += "<div class='passenger_info passenger_info2'>"
     str2 += "<h3>탑승객 " + Number(i+1) + "</h3>";
-    str2 += "<label for='person2_" + i + "'><img src='/userpage/lib/img/ico-person.png' alt='탑승객'><span class='cursor'>" + '유/영은' + "</span></label>"
+    str2 += "<label for='person2_" + i + "'><img src='/userpage/lib/img/ico-person.png' alt='탑승객'><span class='cursor'>" +'유/영은'+ "</span></label>"
     str2 += "<label for='person2_" + i + "'  class='label'><p class='select_seat_num select_seat_num2'>"
     str2 += "<input type='text' class='seat_num seat_num2' id='seat_num2_" + i + "' readonly>"
     str2 += "<span class='close cursor'>x</span>"
@@ -598,7 +600,7 @@ $(function () {
   for (let i = 0; i < personNumber; i++) {
     str3 += "<div class='passenger_info' id='passenger_info3_" + i + "'>"
     str3 += "<h3>탑승객 " + Number(i+1) + "</h3>"
-    str3 += "<p><img src='/userpage/lib/img/ico-person.png' alt=''><span>유/영은</span></p>"
+    str3 += "<p><img src='/userpage/lib/img/ico-person.png' alt=''><span>" + '유/영은' + "</span></p>"
     str3 += "<p class='section1 section'><img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간1</p>"
 
     str3 += "<p class='select_bagg_price select_bagg_price1' id = 'select_bagg_price1_" + i + "'>"
@@ -649,7 +651,7 @@ $(function () {
   for (let i = 0; i < personNumber; i++) {
     str5 += "<div class='passenger_info' id='passenger_info_ins_" + i + "'>"
     str5 += "<h3>탑승객 " + Number(i+1) + "</h3>"
-    str5 += "<p><img src='/userpage/lib/img/ico-person.png' alt=''><span>유/영은</span></p>"
+    str5 += "<p><img src='/userpage/lib/img/ico-person.png' alt=''><span>" + '유/영은' + "</span></p>"
     str5 += "<p class='select_ins_num'>"
     str5 += "<input type='text' class='insuranceNum cursor' id='ins_num_" + i + "' readOnly>"
     // str5 += "<span class='close cursor' id='ins_close_" + i + "'>x</span>"
@@ -665,7 +667,7 @@ $(function () {
   for (let i = 0; i < personNumber; i++) {
     str6 += '<tr>'
     str6 += '<td class="normal"><label for="check_ins_'+i+'">'
-    str6 += '<input type="checkbox" class="ins_check" name="check_ins_'+i+'" id="check_ins_' + i + '"><span id="name' + i + '">' + '유영은' + '</span></label></td>'
+    str6 += '<input type="checkbox" class="ins_check" name="check_ins_'+i+'" id="check_ins_' + i + '"><span id="name' + i + '">' + '유/영은' + '</span></label></td>'
     str6 += '<td class="normal">여</td>'
     str6 += '<td class="normal bir_date">'
     str6 += '<input type="text" value="19970924" class="birth" id="ins_birth_' + i + '" readOnly></td>'
@@ -1129,7 +1131,6 @@ $(function () {
     })
   }
 
-
   let seatNumArr1 = [personNumber];
   let seatNumArr2 = [personNumber];
   let seatTypeArr1 = [personNumber];
@@ -1333,7 +1334,7 @@ $(function () {
       option_table_body1[i] = "";
       option_table_body2[i] = "";
 
-      option_table_head[i] += '<tr><th colSpan="3" id="modal_option_name_' + i + '">' + '유영은' + '</th></tr>'
+      option_table_head[i] += '<tr><th colSpan="3" id="modal_option_name_' + i + '">'+ '유/영은' +'</th></tr>'
 
       if (seatNumArr1[i] != null &&  seatNumArr1[i] != undefined && seatPriceArr1[i] != 0 && baggArr1[i] != null && baggArr1[i] != undefined && baggPriceArr1[i] != 0) {
         option_table_body1[i] += '<tr><td rowSpan="2" class="b_r cell">구간1</td>'
@@ -1696,7 +1697,6 @@ $(() => {
 /*여행자보험 가입규약 및 개인정보 제3자 제공 동의 모달창 끝*/
 
 $(() => {
-
 })
 
 $(() => {
