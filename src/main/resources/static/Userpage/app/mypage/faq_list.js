@@ -179,6 +179,7 @@ $(function () {
 
 
     function list(page){
+
         // faq 리스트
         $.get('/api/faq/list?page='+page, function (response){
             console.dir(response)
@@ -194,15 +195,14 @@ $(function () {
             for(let i = 0; i < response.data.length; i++){
                 $.get('/api/faq/view/'+ response.data[i].faqIndex, function (response2){
                     $(`#faqNumber${i}`).on('click', function (){
-                        $(`#tr_answer${i}`).toggle('fast');
+                        $(`#tr_answer${i}`).toggle();
                     })
 
 
                 })
 
+
             }
-
-
 
             let url = "";
             let NumberPage = 0;
@@ -217,12 +217,18 @@ $(function () {
                 page = $(this).attr('id');
                 list(page);
             })
+
+
+
         })
+
     }
+
 
     function searchFaq(searchFaq){
         $.get("/api/faq/listsearch/"+searchFaq, function(response){
             faqList.faqList = response.data;
+
 
         });
     }
@@ -237,6 +243,7 @@ $(function () {
 
     function Type(type, page){
         $.get("/api/faq/typeSearch/"+type+"?page="+page, function(response){
+
             faqList.faqList = response.data;
 
             pagination = response.pagination;
@@ -244,13 +251,17 @@ $(function () {
             showPage.totalElements = pagination.currentPage;
             showPage.currentPage = pagination.currentPage;
 
+            let url = "";
             let NumberPage = 0;
             let last = pagination.totalPages;
+
 
             for(NumberPage; NumberPage < last; NumberPage++){
                 url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
             }
             document.getElementById("footer").innerHTML = url;
+
+            console.log(NumberPage)
 
             $(".pageButton").on('click', function (){
                 page = $(this).attr('id');
@@ -258,11 +269,13 @@ $(function () {
             })
 
 
+
         });
     }
     $('#faq1').on('click', function () {
-        Type($('#faq2').attr("value"));
+        list(0);
     });
+
     $('#faq2').on('click', function () {
         Type($('#faq2').attr("value"));
     });
