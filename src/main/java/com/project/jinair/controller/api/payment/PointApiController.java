@@ -56,4 +56,10 @@ public class PointApiController implements CrudInterface<PointApiRequest, PointA
     public Header<List<PointApiResponse>> userPoint(@PathVariable(name = "id")Long id, @PageableDefault(sort = {"poIndex"}, direction = Sort.Direction.DESC, size = 1000000)Pageable pageable){
         return pointApiService.userPoint(id, pageable);
     }
+
+    // 사용자 탈퇴시 관련 포인트 삭제
+    @DeleteMapping("/user/{id}")
+    public List<Header<Object>> userDelete(@PathVariable(name = "id")Long id){
+        return pointApiService.userDelete(id);
+    }
 }
