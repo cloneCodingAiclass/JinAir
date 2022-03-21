@@ -127,7 +127,7 @@ $(function () {
 
     pointResult(memIndex);
 
-    
+
     function pointResult(index){
         let sum = 0;
         $.get("/api/point/user/"+index, function (response){
