@@ -735,6 +735,7 @@ body{
     border: 1px solid #BDD600;
     font-size: 0.9rem;
     font-weight: 600;
+    cursor: pointer;
 }
 table em{
     position: relative;
