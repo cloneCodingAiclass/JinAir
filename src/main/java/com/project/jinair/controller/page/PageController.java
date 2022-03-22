@@ -874,7 +874,7 @@ public class PageController {
         }
     }
     // 사용자 엑스트라 페이지
-    @RequestMapping("/extras")
+    @RequestMapping(value = {"/extras/oneway", "/extras/multiway", "/extras/twoway"})
     public ModelAndView extra(HttpServletRequest request, HttpServletResponse response, Model model) {
         Cookie[] myCookies = request.getCookies();
         List  cookie = new ArrayList();
