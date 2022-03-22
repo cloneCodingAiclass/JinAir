@@ -191,6 +191,7 @@ $(function () {
 
             faqList.faqList = response.data;
 
+
             // 리스트
             for(let i = 0; i < response.data.length; i++){
                 $.get('/api/faq/view/'+ response.data[i].faqIndex, function (response2){
@@ -214,6 +215,8 @@ $(function () {
             }
             document.getElementById("footer").innerHTML = url;
 
+
+
             $(".pageButton").on('click', function (){
                 page = $(this).attr('id');
                 list(page);
@@ -226,10 +229,37 @@ $(function () {
     }
 
 
-    function searchFaq(searchFaq){
-        $.get("/api/faq/listsearch/"+searchFaq, function(response){
+    function searchFaq(schFaq){
+        $.get("/api/faq/listsearch/"+schFaq, function(response){
             faqList.faqList = response.data;
 
+
+
+            let url = "";
+            let NumberPage = 0;
+            let last = pagination.totalPages;
+
+
+
+            for(NumberPage; NumberPage < last; NumberPage++){
+                url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
+            }
+            document.getElementById("footer").innerHTML = url;
+
+            console.log(NumberPage)
+
+            console.dir(response)
+            console.log(pagination)
+            if (response.data.length == 0){
+                $("#footer").css({"display":"none"});
+                alert("검색결과 없음");
+                location.reload()
+            }
+
+            $(".pageButton").on('click', function (){
+                schFaq = $(this).attr('id');
+                searchFaq(schFaq);
+            })
 
         });
     }
