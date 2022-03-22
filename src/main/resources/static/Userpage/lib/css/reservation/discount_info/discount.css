@@ -1083,7 +1083,7 @@ div.standard {
     right: 0;
     top: 0;
     bottom: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }

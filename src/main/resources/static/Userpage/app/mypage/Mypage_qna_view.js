@@ -94,7 +94,7 @@ $(function () {
             e.stopPropagation();
         });
     });
-    
+
     $(window).scroll(function() {
         if($(this).scrollTop() > 91) {
             $(".mypage_menu").css("position", "fixed");
