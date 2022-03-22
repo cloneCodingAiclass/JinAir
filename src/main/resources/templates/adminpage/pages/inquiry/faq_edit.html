@@ -21,16 +21,18 @@
                         <div class="faq_table">
                             <table>
                                 <tr>
-                                    <td><select id="faqType" v-model="selected">
+                                    <td>
+                                        <select id="faqType" :value="tableBoard.faqType">
                                         <option disabled value="faqType">{{tableBoard.faqType}}</option>
                                         <option>항공권 예매</option>
                                         <option>할인 제도</option>
                                         <option>수하물</option>
                                         <option>기내 서비스</option>
                                         <option>기타</option>
-                                    </select></td>
+                                        </select>
+                                    </td>
                                     <td class="user_name"><textarea id="faqTitle" class="editTitle">{{tableBoard.faqTitle}}</textarea></td>
-                                    <td id="faqRegdate">{{tableBoard.faqRegdate}}</td>
+                                    <td id="faqRegdate">{{tableBoard.faqRegdate.substr(0,10)}}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="3"><textarea id="faqContent">{{tableBoard.faqContent}}</textarea></td>

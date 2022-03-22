@@ -9,8 +9,8 @@
 <!-- head 끝 -->
 <body>
 <div>
-    <input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
     <input type="hidden" name="" th:each="dto : ${reserveApiResponse1}" class="cookies" th:id="${dto.reIndex}" th:value="${dto.reIndex}">
+    <input type="hidden" class="memid" th:each="memid : ${reserveApiResponse1}" th:if="${memid.reUserindex} != null" th:value="${memid.reUserindex}">
 </div>
 <ul class="skipnavi">
     <!--책갈피 역할-->

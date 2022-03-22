@@ -428,6 +428,24 @@ public class PageController {
                     .addObject("code", "add_qna");
         }
     }
+
+    // 회원 탈퇴시
+    @RequestMapping("/jinair/index")
+    public ModelAndView memberDelete(HttpServletResponse response, HttpServletRequest request, Model model) {
+        Cookie[] myCookies = request.getCookies();
+        for(int i = 0; i < myCookies.length; i++) {
+            if(myCookies[i].getValue().equals("reIndex")){
+                reservationApiLogicService.delete(Long.valueOf(myCookies[i].getName()));
+                expiredCookie(response, myCookies[i].getName());
+            }
+        }
+        HttpSession session = request.getSession();
+        session.invalidate(); // 세션 삭제
+        model.addAttribute("loginURL", "/userpage/fragment/menu");
+        return new ModelAndView("/userpage/pages/index/index")
+                .addObject("code", "jinair");
+    }
+
     @RequestMapping("/index/mypageGetReservationDetail")
     public ModelAndView mypageGetReservationDetail(HttpServletResponse response, HttpServletRequest request, Model model) {
         Cookie[] myCookies = request.getCookies();
@@ -884,13 +902,11 @@ public class PageController {
         for(int i = 0; i < myCookies.length; i++) {
             if(myCookies[i].getValue().equals("reIndex")){
                 ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf(myCookies[i].getName())).getData();
-                System.out.println(reserveApiResponse);
                 if(reserveApiResponse.getReStatus() != null){
                     arrrr.add(reserveApiResponse);
                 }
             }
         }
-        System.out.println(arrrr);
         session.setAttribute("reserveApiResponse", arrrr);
         if (session.getAttribute("memberApiResponse") != null) {
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
@@ -926,18 +942,15 @@ public class PageController {
             if(myCookies[i].getValue().equals("reIndex")){
                 long idx = Long.valueOf(myCookies[i].getName());
                 ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf(myCookies[i].getName())).getData();
-                System.out.println(reserveApiResponse);
                 if(reserveApiResponse.getReStatus() != null){
                     arrrr.add(reserveApiResponse);
                 }
             }
         }
-        System.out.println(arrrr);
         session.setAttribute("reserveApiResponse1", arrrr);
+        model.addAttribute("reserveApiResponse1", session.getAttribute("reserveApiResponse1"));
         if (session.getAttribute("memberApiResponse") != null) {
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
-            model.addAttribute("reserveApiResponse1", session.getAttribute("reserveApiResponse1"));
         } else {
             model.addAttribute("loginURL", "/userpage/fragment/menu");
         }

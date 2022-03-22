@@ -243,6 +243,39 @@ $(function () {
         })
     }
 
+
+    $('#passwordValue').on('keydown', function (key){
+        if (key.keyCode==13){
+            if(!$('#passwordValue').val()) {
+                alert('비밀번호를 입력하세요');
+            }else {
+                list($('#passwordValue').val());
+            }
+        }
+    });
+
+    $('#btn_agree').on('click', function (){
+        if(!$('#passwordValue').val()) {
+            alert('비밀번호를 입력하세요');
+        }else {
+            list($('#passwordValue').val());
+        }
+    })
+
+    function list(index){
+        $.get("/api/user/"+memIndex, function(response){
+            let itemList = response.data;
+            if (itemList.memUserpw != index){
+                alert('비밀번호를 잘못 입력했습니다.\n' +
+                    '입력하신 내용을 다시 확인해주세요.');
+            }else if(itemList.memUserpw == index){
+                location.href='/pages/index/mypageEdit'
+            }
+        });
+    }
+
+
+
 });
 
 function hidePopupLayer(){

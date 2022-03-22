@@ -155,6 +155,12 @@ $(function () {
 
     $('#today, #reserDay').text(today);
 
+    // let pay = $('#pay').attr("value")
+    // console.log(pay)
+    // if(pay == "KAKAOPAY"){
+    //     $('#pay').html("카카오페이")
+    // }
+
     // 총 결제금액 찍어주기
     let money = $('#totalPrice').attr("value");
     $('#totalPrice').text(" " + Math.ceil(money).toLocaleString() + "원");
