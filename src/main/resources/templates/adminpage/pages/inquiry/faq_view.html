@@ -22,7 +22,7 @@
                             <tr>
                                 <td>{{tableBoard.faqType}}</td>
                                 <td class="user_name">{{tableBoard.faqTitle}}</td>
-                                <td>등록일 : {{tableBoard.faqRegdate}}</td>
+                                <td>등록일 : {{tableBoard.faqRegdate.substr(0,10)}}</td>
                             </tr>
                             <tr>
                                 <td colspan="3"><textarea name="" readonly> {{tableBoard.faqContent}}</textarea></td>
