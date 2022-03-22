@@ -216,7 +216,7 @@
                         <div class="passenger_info_wrap" id="passenger_info_3">
                             <th:block th:each="passengerInfo3, i3 : ${reserveApiResponse}" th:if="${i3.count % 2 != 0}">
                             <div class='passenger_info' th:id="'passenger_info3_'+${i3.index}">
-                            <h3>탑승객 <span th:if="${i3.count == 1}">[[${i3.count}]]</span>
+                            <h3>탑승객 <span th:if="${i3.count == 1}" >[[${i3.count}]]</span>
                                 <span th:if="${i3.count != 1}">[[${i3.count-2}]]</span></h3>
                             <p><img src='/userpage/lib/img/ico-person.png' alt=''><span>[[${passengerInfo3.reFirstName}]]/[[${passengerInfo3.reLastName}]]</span></p>
                             <p class='section1 section'><img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간1</p>
