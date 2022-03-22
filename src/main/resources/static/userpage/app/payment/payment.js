@@ -1,7 +1,5 @@
 // reIndex 정보 가져오기
 $(() => {
-    let memIndex = $('#memid').val();
-
     let str = $(location).attr('href').split('/');
     let priceT = 0;
 
@@ -184,8 +182,6 @@ $(() => {
 
 $(function () {
     // 멤버정보 가져오기
-    let memIndex = $('#memid').val();
-
     /*운임 규정 안내 모달창 */
     $("#modal_fare_rules").hide();
     $("#modal_fare_rules .modal_conf_ok_wrap").hide();
@@ -225,6 +221,12 @@ $(function () {
             sel_coupon : {}
         }
     })
+
+    let memIndex;
+    $('.memid').each(function (i){
+        memIndex = $('.memid').eq(i).attr("value");
+        console.log(memIndex);
+    });
 
     couponList(memIndex);
 
