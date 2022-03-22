@@ -53,8 +53,19 @@ public class PointApiController implements CrudInterface<PointApiRequest, PointA
 
     // 사용자에 따른 포인트
     @GetMapping("/user/{id}")
-    public Header<List<PointApiResponse>> userPoint(@PathVariable(name = "id")Long id, @PageableDefault(sort = {"poIndex"}, direction = Sort.Direction.DESC, size = 1000000)Pageable pageable){
+    public Header<List<PointApiResponse>> userPoint(@PathVariable(name = "id")Long id, @PageableDefault(sort = {"poIndex"}, direction = Sort.Direction.DESC)Pageable pageable){
         return pointApiService.userPoint(id, pageable);
+    }
+
+    // 사용자, 날짜 기간 검색
+    @PostMapping("/user/search")
+    public Header<List<PointApiResponse>> userSearch(
+            @RequestParam(value = "userIndex")Long id,
+            @RequestParam(value = "start")String startDate,
+            @RequestParam(value = "end")String endDate,
+            @PageableDefault(sort = {"poIndex"}, direction = Sort.Direction.DESC)Pageable pageable
+    ){
+        return pointApiService.userSearch(id, startDate, endDate, pageable);
     }
 
     // 사용자 탈퇴시 관련 포인트 삭제
