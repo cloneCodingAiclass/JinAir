@@ -288,7 +288,7 @@ body{
 /* 서브 네비 끝 */
 /* contents */
 #container{
-    height: auto;
+    height: fit-content;
 }
 
 /*푸터*/
@@ -646,8 +646,8 @@ body{
     margin: 0 auto;
     background-color: #f2f2f2;
     display: flex;
-    position: fixed;
-    top: 91px;
+    position: relative;
+    top: 0;
     align-items: center;
     text-align: center;
 }
@@ -697,13 +697,18 @@ body{
 }
 /* 서브타이틀 끝 */
 .menu_title{
-    margin: 140px 0 50px 0;
+    margin: 70px 0 50px 0;
     font-size: 3rem;
     color: #661E43;
     font-weight: 600;
     text-indent: 30px;
 }
-
+header{
+    height: 91px;
+}
+.qna_main{
+    min-height: 500px;
+}
 table.bbsList{
     width: 100%;
     text-align: center;
