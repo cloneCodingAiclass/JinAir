@@ -9,7 +9,6 @@
 <!-- head 끝 -->
 <body>
 <div>
-    <input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
     <input type="hidden" name="" th:each="dto : ${reserveApiResponse1}" class="cookies" th:id="${dto.reIndex}" th:value="${dto.reIndex}">
 </div>
 <ul class="skipnavi">

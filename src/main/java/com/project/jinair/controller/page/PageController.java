@@ -948,10 +948,9 @@ public class PageController {
             }
         }
         session.setAttribute("reserveApiResponse1", arrrr);
+        model.addAttribute("reserveApiResponse1", session.getAttribute("reserveApiResponse1"));
         if (session.getAttribute("memberApiResponse") != null) {
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
-            model.addAttribute("reserveApiResponse1", session.getAttribute("reserveApiResponse1"));
         } else {
             model.addAttribute("loginURL", "/userpage/fragment/menu");
         }
