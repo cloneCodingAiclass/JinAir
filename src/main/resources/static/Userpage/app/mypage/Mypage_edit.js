@@ -371,7 +371,7 @@ function hidePopupLayer(){
             type : "DELETE",
             success : function (){
                 alert('탈퇴 완료');
-                location.href = '/pages/index';
+                location.href = '/pages/jinair/index';
             }
         })
         $.ajax({
