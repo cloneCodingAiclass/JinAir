@@ -11,6 +11,6 @@ import java.time.LocalDateTime;
 @Repository
 public interface TbLostRepository extends JpaRepository<TbLost, Long> {
 
-    Page<TbLost> findAllByLosAirplaneAndLosAirportAreaAndLosTypeAndLosArrivedateBetween(String airplane, String airport, String type, LocalDateTime startDate, LocalDateTime endDate, Pageable pageable);
+    Page<TbLost> findByLosAirplaneAndLosAirportAreaAndLosTypeAndLosArrivedateBetween(String airplane, String airport, String type, LocalDateTime startDate, LocalDateTime endDate, Pageable pageable);
 
 }

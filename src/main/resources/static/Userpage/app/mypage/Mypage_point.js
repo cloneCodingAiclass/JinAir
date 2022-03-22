@@ -687,6 +687,16 @@ $(function () {
             }
         })
     }
+
+    $(document).on('click', '.pages', function(){
+        let pageId = this.id;
+        list(pageId);
+    });
+
+    $(document).on('click', '.pagesS', function(){
+        let pageId2 = this.id;
+        searchNoti(searchStr, pageId2);
+    });
 });
 
 function hidePopupLayer(){

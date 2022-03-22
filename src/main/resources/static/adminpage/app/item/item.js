@@ -171,6 +171,8 @@ $(() =>{
 
     let indexBtn = [];
 
+    let page;
+
     let pagination = {
         total_page : 0,
         total_element : 0,
@@ -208,24 +210,45 @@ $(() =>{
 
             lostList.lostList = response.data;
 
-            let url = "";
-            let NumberPage = 0;
-            let last = pagination.totalPages;
+            let lastPage = response.pagination.totalPages;
 
-            for (NumberPage; NumberPage < last; NumberPage++){
-                url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
+            let str = "";
+            str += "<td class='firstPage1'><<</td>";
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pages' id="+i+">" + (i+1) + "</td>";
             }
-            document.getElementById("footer").innerHTML = url;
-
-            $(".pageButton").on('click', function (){
-                page = $(this).attr("id");
-                list(page);
-            })
+            str += "<td class='lastPage1'>>></td>";
+            $("#showPage").html(str);
+            if(page == 0) {
+                $(".firstPage1").css("visibility", "hidden");
+            }
+            if(page == lastPage-1) {
+                $(".lastPage1").css("visibility", "hidden");
+            }
+            $(".pages").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+page+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            $(document).on('click', '.firstPage1', function(){
+                list(0);
+            });
+            $(document).on('click', '.lastPage1', function(){
+                list(lastPage-1);
+            });
         })
     }
 
     $("#btn_search").on('click', function (){
-        search($("#airplane_list").find('option:selected').val(), $("#arrival_airport_list").find('option:selected').val(), $("#item_list").find('option:selected').val(), $("#item_start_date").val() + "T00:00:00", $("#item_end_date").val() + "T00:00:00");
+        if($("#item_list").find('option:selected').val() == '필수 선택'){
+            alert('입력을 확인해주세요');
+        }else {
+            search($("#airplane_list").find('option:selected').val(), $("#arrival_airport_list").find('option:selected').val(), $("#item_list").find('option:selected').val(), $("#item_start_date").val() + "T00:00:00", $("#item_end_date").val() + "T00:00:00");
+        }
     })
 
     function search(airplane, airport, type, start, end){
@@ -237,12 +260,53 @@ $(() =>{
                 console.dir(response)
                 $("#footer").css("display", "none");
                 let dataJson = JSON.parse(response)
+                console.dir(dataJson)
                 lostList.lostList = dataJson.data;
+
+                let lastPage = dataJson.pagination.totalPages;
+
+                let str = "";
+                str += "<td class='firstPage1'><<</td>";
+                for (let i = 0; i < lastPage; i++) {
+                    str += "<td class='pages' id="+i+">" + (i+1) + "</td>";
+                }
+                str += "<td class='lastPage1'>>></td>";
+                $("#showPage").html(str);
+                if(page == 0) {
+                    $(".firstPage1").css("visibility", "hidden");
+                }
+                if(page == lastPage-1) {
+                    $(".lastPage1").css("visibility", "hidden");
+                }
+                $(".pages").css({
+                    "background-color" : "#fff",
+                    "color" : "#444",
+                    "cursor" : "pointer"
+                });
+                $("#"+page+"").css({
+                    "background-color" : "#661e43",
+                    "color" : "white"
+                });
+                $(document).on('click', '.firstPage1', function(){
+                    list(0);
+                });
+                $(document).on('click', '.lastPage1', function(){
+                    list(lastPage-1);
+                });
             }
         })
 
     }
 
+    $(document).on('click', '.pages', function(){
+        let pageId = this.id;
+        list(pageId);
+    });
+
+    $(document).on('click', '.pagesS', function(){
+        let pageId2 = this.id;
+        searchNoti(searchStr, pageId2);
+    });
 
 
 

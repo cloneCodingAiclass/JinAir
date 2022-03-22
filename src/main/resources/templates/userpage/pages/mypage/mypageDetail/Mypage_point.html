@@ -236,34 +236,41 @@
                         <p>+++나비포인트 이용 상세 내역이 없습니다.</p>
                     </div>
                     <div class="none_point" id="true">
+                        <table>
+                            <colgroup>
+                                <col width="70">
+                                <col width="120">
+                                <col width="120">
+                                <col width="400">
+                                <col width="150">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>적립내역</th>
+                                <th>사용내역</th>
+                                <th>내용</th>
+                                <th>날짜</th>
+                            </tr>
+                            </thead>
+                            <tbody id="pointList">
+                            <tr v-for="(dto, i) in pointList">
+                                <td>{{i+1}}</td>
+                                <td :id=`addPoint${i}`></td>
+                                <td :id=`usePoint${i}`></td>
+                                <td>{{dto.poMemo}}</td>
+                                <td :id=`regDate${i}`></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="footer">
+                        <div class="center">
                             <table>
-                                <colgroup>
-                                    <col width="70">
-                                    <col width="120">
-                                    <col width="120">
-                                    <col width="400">
-                                    <col width="150">
-                                </colgroup>
-                                <thead>
-                                    <tr>
-                                        <th>번호</th>
-                                        <th>적립내역</th>
-                                        <th>사용내역</th>
-                                        <th>내용</th>
-                                        <th>날짜</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="pointList">
-                                    <tr v-for="(dto, i) in pointList">
-                                        <td>{{i+1}}</td>
-                                        <td :id=`addPoint${i}`></td>
-                                        <td :id=`usePoint${i}`></td>
-                                        <td>{{dto.poMemo}}</td>
-                                        <td :id=`regDate${i}`></td>
-                                    </tr>
-                                </tbody>
+                                <tr id="showPage"></tr>
                             </table>
                         </div>
+                    </div>
                 </div>
                 <div class="footer_info">
                         <div class="footer_text">
