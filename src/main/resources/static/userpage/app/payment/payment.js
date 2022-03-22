@@ -41,7 +41,6 @@ $(() => {
     let priceSum = priceT + oilT + taxT;
     $('.priceSum').text(Math.ceil(priceSum).toLocaleString());
 
-
     // 운임료 구하기
     let optPrice = $('.optPrice').text();
 
@@ -144,8 +143,7 @@ $(() => {
         $('.arrow_img, .jour2_wrap, .multiway').css('display', "none");
         $('.fare_info').css('height', '140px');
 
-    }
-    if (str[5] == 'multiway') {
+    }else if (str[5] == 'multiway') {
         // 여행 타입에 따른 값, 클릭이벤트 변경
         $('#triptype1, #triptype2, #tripinfo1, #tripinfo2').text('다구간');
         $('.jour2_wrap, .multiway').css('display', "flex");
@@ -160,10 +158,7 @@ $(() => {
             $(".arrow_up_img").css("display", "none");
             $(".trip_info2").slideUp(200);
         });
-
-
-    }
-    if (str[5] == 'twoway') {
+    }else if (str[5] == 'twoway') {
         // 여행 타입에 따른 값, 클릭이벤트 변경
         $('#triptype1, #triptype2, #tripinfo1, #tripinfo2').text('왕복');
         $('.jour2_wrap, .multiway').css('display', "flex");
@@ -178,6 +173,9 @@ $(() => {
             $(".arrow_up_img").css("display", "none");
             $(".trip_info2").slideUp(200);
         });
+    }else{
+        alert("잘못된 경로입니다.");
+        history.back();
     }
 });
 
@@ -239,8 +237,5 @@ $(function () {
 
 });
 
-    /*운임 규정 안내 모달창 끝 */
-    // $('#modal_fare_rules #checkBox').on('click', function () {
-    // });
-    //
+
 

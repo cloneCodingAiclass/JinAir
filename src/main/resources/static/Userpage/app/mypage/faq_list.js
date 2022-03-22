@@ -194,6 +194,7 @@ $(function () {
             // 리스트
             for(let i = 0; i < response.data.length; i++){
                 $.get('/api/faq/view/'+ response.data[i].faqIndex, function (response2){
+                    $(`#tr_answer${i}`).hide();
                     $(`#faqNumber${i}`).on('click', function (){
                         $(`#tr_answer${i}`).toggle();
                     })
@@ -273,7 +274,8 @@ $(function () {
         });
     }
     $('#faq1').on('click', function () {
-        list(0);
+        list();
+        list();
     });
 
     $('#faq2').on('click', function () {

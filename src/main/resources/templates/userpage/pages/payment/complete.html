@@ -35,13 +35,13 @@
                             <th>예약일</th>
                             <td th:value="${reserveApiResponse1[0].reSchStartTime}"></td>
                             <th>예약번호</th>
-                            <td>[[${reserveApiResponse1[0].reReserNum}]]</td>
+                            <td id="reserNum"></td>
                         </tr>
                         <tr>
                             <th>상태</th>
-                            <td>확약</td>
+                            <td>결제완료</td>
                             <th>탑승객수</th>
-                            <td>1명</td>
+                            <td id="peopleSum"></td>
                         </tr>
                         <tr>
                             <th>

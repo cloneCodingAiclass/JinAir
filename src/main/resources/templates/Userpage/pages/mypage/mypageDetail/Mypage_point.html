@@ -222,31 +222,49 @@
                         </div>
                     </div>
                 <div class="srh_container">
-                        <form action="#" method="get">
+                    <div>
                             <div class="srh_box">
-                                <P>구분
-                                    <select name="" id="">
-                                        <option value="전체">전체</option>
-                                        <option value="소멸">소멸</option>
-                                        <option value="적립">적립</option>
-                                        <option value="환급">환급</option>
-                                        <option value="사용">사용</option>
-                                        <option value="잔여">잔여</option>
-                                        <option value="소멸예정">소멸예정</option>
-                                    </select>
-                                </P>
                                 <p>기간<input type="date" id="item_start_date1"><input type="date" id="item_start_date2">
                                 </p>
                                 <div class="btn">
-                                    <input type="submit" value="조회">
-                                    <input type="button" value="초기화" class="btn_cancel" onclick="history.back()">
+                                    <input type="button" id="searchPo" value="조회">
+                                    <input type="button" value="초기화" class="btn_cancel" onclick="location.reload()">
                                 </div>
                             </div>
-                        </form>
-                        <div class="none_point">
-                            <p>+++나비포인트 이용 상세 내역이 없습니다.</p>
                         </div>
+                    <div class="none_point" id="false">
+                        <p>+++나비포인트 이용 상세 내역이 없습니다.</p>
                     </div>
+                    <div class="none_point" id="true">
+                            <table>
+                                <colgroup>
+                                    <col width="70">
+                                    <col width="120">
+                                    <col width="120">
+                                    <col width="400">
+                                    <col width="150">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>번호</th>
+                                        <th>적립내역</th>
+                                        <th>사용내역</th>
+                                        <th>내용</th>
+                                        <th>날짜</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pointList">
+                                    <tr v-for="(dto, i) in pointList">
+                                        <td>{{i+1}}</td>
+                                        <td :id=`addPoint${i}`></td>
+                                        <td :id=`usePoint${i}`></td>
+                                        <td>{{dto.poMemo}}</td>
+                                        <td :id=`regDate${i}`></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
                 <div class="footer_info">
                         <div class="footer_text">
                             <p>나비포인트 이용방법</p>
