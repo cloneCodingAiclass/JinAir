@@ -573,7 +573,7 @@ p.jini_store_sub{
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     left: 0; right: 0; top: 0; bottom: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 800;
@@ -581,7 +581,6 @@ p.jini_store_sub{
 
 #modal_seatmap_wrap .modal_seatmap_wrap {
     font-weight: 600;
-    margin: 0 auto;
     width: 40%;
     height: 800px;
     background-color: #fff;
@@ -942,7 +941,7 @@ p.jini_store_sub{
     right: 0;
     top: 0;
     bottom: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
