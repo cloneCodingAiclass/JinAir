@@ -126,6 +126,8 @@ $(function () {
         }
     })
 
+    let page;
+
     list(0);
 
     function list(page){
@@ -141,20 +143,39 @@ $(function () {
 
             memberList.memberList = response.data;
 
-            let url = "";
-            let NumberPage = 0;
-            let last = pagination.totalPages;
-
-
-            for (NumberPage; NumberPage < last; NumberPage++){
-                url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
+            let lastPage = response.pagination.totalPages;
+            let str2 = "";
+            str2 += "<td class='firstPage2'><<</td>";
+            for ( let i = 0; i < lastPage; i++ ) {
+                str2 += "<td class='pagesS' id="+i+">" + (i+1) + "</td>";
             }
-            document.getElementById("footer").innerHTML = url;
-
-            $(".pageButton").on('click', function (){
-                page = $(this).attr("id");
-                list(page);
-            })
+            str2 += "<td class='lastPage2'>>></td>";
+            $("#showPage").html(str2);
+            if ( page == 0 ) {
+                $(".firstPage2").css("visibility", "hidden");
+            }
+            if ( page == lastPage-1 || response.totalElements != 0 ) {
+                $(".lastPage2").css("visibility", "hidden");
+            }
+            if ( response.pagination.totalElements == 0 ) {
+                alert("검색결과가 없습니다.");
+                list(0);
+            }
+            $(".pagesS").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+page+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            $(document).on('click', '.firstPage2', function(){
+                searchNoti(searchStr, 0);
+            });
+            $(document).on('click', '.lastPage2', function(){
+                searchNoti(searchStr, lastPage-1);
+            });
         })
     }
 
@@ -173,6 +194,25 @@ $(function () {
             alert("검색어를 확인해주세요");
         }
     })
+
+    $(document).on('click', '#searchNoti', function(){
+        searchStr = $('#searchText').val();
+        searchNoti(searchStr, 0);
+        if ( searchStr.length == 0){
+            alert('검색어를 확인해주세요.');
+            searchNoti(searchStr, 0);
+        }
+    });
+
+    $(document).on('click', '.pages', function(){
+        let pageId = this.id;
+        list(pageId);
+    });
+
+    $(document).on('click', '.pagesS', function(){
+        let pageId2 = this.id;
+        searchNoti(searchStr, pageId2);
+    });
 
 
 })(jQuery);

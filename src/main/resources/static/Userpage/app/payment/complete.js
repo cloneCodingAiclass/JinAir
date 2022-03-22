@@ -21,6 +21,22 @@ $(function () {
     console.log(sumResult);
     $('#peopleSum').html(sumResult + "명");
 
+    $(".isAdult").each(function (i){
+        let age = $('.isAdult').eq(i).attr("value");
+        let resultAge = 2022 - age.substr(0, 4);
+
+        let result = "";
+        if(resultAge > 13){
+            result = "성인";
+            $('.isAdult').eq(i).html(result);
+        }else if(resultAge < 13){
+            result = "소아"
+            $('.isAdult').eq(i).html(result);
+        }else if(resultAge < 12){
+            result = "유아"
+            $('.isAdult').eq(i).html(result);
+        }
+    })
     $('.open1').on('click', function (e) {
         e.stopPropagation();
         $('.service').slideUp(50);
@@ -137,7 +153,7 @@ $(function () {
     let today = date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).toString().slice(-2) + "-" + ("0" + date.getDay()).toString().slice(-2) + " (" + week[date.getDay()] +")";
     console.log("00"+date.getDay());
 
-    $('#today').text(today);
+    $('#today, #reserDay').text(today);
 
     // 총 결제금액 찍어주기
     let money = $('#totalPrice').attr("value");

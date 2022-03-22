@@ -33,9 +33,9 @@
                     <table>
                         <tr>
                             <th>예약일</th>
-                            <td th:value="${reserveApiResponse1[0].reSchStartTime}"></td>
+                                <td id="reserDay"></td>
                             <th>예약번호</th>
-                            <td id="reserNum"></td>
+                                <td id="reserNum"></td>
                         </tr>
                         <tr>
                             <th>상태</th>
@@ -99,7 +99,7 @@
                         <th:block th:each="dto, i : ${reserveApiResponse1}" th:if="${i.count} % 2 != 0">
                             <tr>
                                 <td>[[${dto.reFirstName}]]/[[${dto.reLastName}]]</td>
-                                <td>성인</td>
+                                <td class="isAdult" th:value="${dto.reBirth}"></td>
                                 <td>[[${dto.reGender}]]</td>
                                 <td>[[${dto.reBirth}]]</td>
                                 <td>[[${dto.reNation}]]</td>
@@ -113,7 +113,7 @@
                     <table>
                         <tr>
                             <th>결제방식</th>
-                            <td>[[${reserveApiResponse1[0].rePayment}]]</td>
+                            <td>[[${reserveApiResponse1[1].rePayment}]]</td>
                             <th>상세정보</th>
                             <td>test</td>
                         </tr>
