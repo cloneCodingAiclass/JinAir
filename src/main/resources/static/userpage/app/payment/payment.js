@@ -64,19 +64,21 @@ $(() => {
     console.log(str[5])
 
     $(".birthD").each(function (i){
-        let age = $('.birthD').eq(i).attr('value');
-        let resultAge = 2022 - age.substring(0, 3);
+        let age = $('.birthD').eq(i).attr("value");
+        let resultAge = 2022 - age.substr(0, 4);
 
+        console.log(age)
+        console.log(resultAge)
         let result = "";
         if(resultAge > 13){
             result = "성인";
-            $('.birthD').eq(i).text(result);
-        }else if(2 < resultAge < 13){
+            $('.birthD').eq(i).html(result);
+        }else if(resultAge < 13){
             result = "소아"
-            $('.birthD').eq(i).text(result);
-        }else if(0 < resultAge < 2){
+            $('.birthD').eq(i).html(result);
+        }else if(resultAge < 12){
             result = "유아"
-            $('.birthD').eq(i).text(result);
+            $('.birthD').eq(i).html(result);
         }
     })
 
