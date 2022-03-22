@@ -227,11 +227,11 @@ function submit(){
     iInfantCount = parseInt($('.person_pop_layer').find('strong[name=infantPaxCnt]').text())
     
     if(iAdultCount > 0 && iChildCount > 0 && iInfantCount >0){
-        $("strong[name=person_num]").text('성인 '+iAdultCount+' 유아 '+iChildCount+' 소아 '+iInfantCount);
+        $("strong[name=person_num]").text('성인 '+iAdultCount+' 소아 '+iChildCount+' 유아 '+iInfantCount);
     }else if(iAdultCount > 0 && iChildCount > 0){
-        $("strong[name=person_num]").text('성인 '+iAdultCount+' 유아 '+iChildCount);
+        $("strong[name=person_num]").text('성인 '+iAdultCount+' 소아 '+iChildCount);
     }else if(iAdultCount > 0 && iInfantCount >0){
-        $("strong[name=person_num]").text('성인 '+iAdultCount+' 소아 '+iInfantCount);
+        $("strong[name=person_num]").text('성인 '+iAdultCount+' 유아 '+iInfantCount);
     }else if(iAdultCount > 0){
         $("strong[name=person_num]").text('성인 '+iAdultCount);
     }else if(iChildCount > 0){

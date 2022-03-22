@@ -365,21 +365,24 @@
                                                 <p class="small_font">{{dto.schArrivalPoint.substr(-5,5)}}</p>
                                             </td>
                                             <td>
-                                                <button>
-                                                    <p class="small_font">KRW</p>
-                                                    <strong>{{(dto.schBasicPrice+"").substr(0,((dto.schBasicPrice+"").length-3))}},{{(dto.schBasicPrice+"").substr(-3,3)}}</strong>
+                                                <button class="button_seats">
+                                                    <p class="small_font koreaprice">KRW</p>
+                                                    <strong class="seatsPrice" @click="form">{{(dto.schBasicPrice+"").substr(0,((dto.schBasicPrice+"").length-3))}},{{(dto.schBasicPrice+"").substr(-3,3)}}</strong>
+                                                    <p class="seats">잔여 {{seatsNum}} 석!</p>
                                                 </button>
                                             </td>
                                             <td>
-                                                <button>
-                                                    <p class="small_font">KRW</p>
-                                                    <strong>{{((dto.schBasicPrice+12000)+"").substr(0,(((dto.schBasicPrice+12000)+"").length-3))}},{{((dto.schBasicPrice+12000)+"").substr(-3,3)}}</strong>
+                                                <button class="button_seats">
+                                                    <p class="small_font koreaprice">KRW</p>
+                                                    <strong class="seatsPrice" @click="form">{{((dto.schBasicPrice+12000)+"").substr(0,(((dto.schBasicPrice+12000)+"").length-3))}},{{((dto.schBasicPrice+12000)+"").substr(-3,3)}}</strong>
+                                                    <p class="seats">잔여 {{seatsNum}} 석!</p>
                                                 </button>
                                             </td>
                                             <td>
-                                                <button>
-                                                    <p class="small_font">KRW</p>
-                                                    <strong>{{((dto.schBasicPrice+51000)+"").substr(0,(((dto.schBasicPrice+51000)+"").length-3))}},{{((dto.schBasicPrice+51000)+"").substr(-3,3)}}</strong>
+                                                <button class="button_seats">
+                                                    <p class="small_font koreaprice">KRW</p>
+                                                    <strong class="seatsPrice" @click="form">{{((dto.schBasicPrice+51000)+"").substr(0,(((dto.schBasicPrice+51000)+"").length-3))}},{{((dto.schBasicPrice+51000)+"").substr(-3,3)}}</strong>
+                                                    <p class="seats">잔여 {{seatsNum}} 석!</p>
                                                 </button>
                                             </td>
                                         </tr>

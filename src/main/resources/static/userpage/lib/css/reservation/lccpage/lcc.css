@@ -835,6 +835,12 @@ h3.in_bl{
     font-size: 18px;
     line-height: 1.5;
 }
+.lcc_contents .search_list .list_table table td .seats{
+    font-weight: bold;
+}
+.lcc_contents .search_list .list_table table td .small_font{
+    font-weight: bold;
+}
 .lcc_contents .search_list .list_table table td .seat_p {
     font-size: 16px;
 }
