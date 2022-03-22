@@ -10,7 +10,6 @@
 <script src="/userpage/app/payment/complete.js"></script>
 <body>
     <div>
-        <input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
         <input type="hidden" name="" th:each="dto : ${reserveApiResponse1}" class="cookies" th:id="${dto.reIndex}" th:value="${dto.reIndex}">
     </div>
     <ul class="skipnavi">
@@ -69,7 +68,7 @@
                             </th>
                             <td colspan="3" class="info">
                                 <div class="in_bl">
-                                    <span>[[${reserveApiResponse1[1].reSchDepPoint}]]</span>
+                                    <span>[[${reserveApiResponse1[1].reSchArrPoint}]]</span>
                                     <p>[출발] <span id="startTime2" th:value="${reserveApiResponse1[1].reSchStartTime}"></span></p>
                                 </div>
                                 <span class="arrow">
@@ -113,7 +112,7 @@
                     <table>
                         <tr>
                             <th>결제방식</th>
-                            <td>[[${reserveApiResponse1[1].rePayment}]]</td>
+                            <td id="pay" th:value="${reserveApiResponse1[0].rePayment}">카카오페이</td>
                             <th>상세정보</th>
                             <td>test</td>
                         </tr>
