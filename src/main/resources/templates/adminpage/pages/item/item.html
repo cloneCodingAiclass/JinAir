@@ -77,7 +77,7 @@
                                 <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`><img :src=`/upload/${dto.losImgName}` alt="이미지"></a></td>
                                 <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losType}}</a></td>
                                 <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losAirplane}}</a></td>
-                                <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losArrivedate}}</a></td>
+                                <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losArrivedate.substr(0,10)}}</a></td>
                                 <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losAirportArea}}</a></td>
                                 <td><a :href=`/pages/admin/item/detail/${dto.losIndex}`>{{dto.losIsfind}}</a></td>
                             </tr>
