@@ -98,13 +98,13 @@ $(function () {
     })
 
     $(window).scroll(function() {
-        if($(this).scrollTop() > 90) {
+        if($(this).scrollTop() > 91) {
             $(".mypage_menu").css("position", "fixed");
-            $(".mypage_menu").css("top", "0px");
+            $(".mypage_menu").css("top", "0");
             $("#header").css("position", "relative");
         } else {
             $(".mypage_menu").css("position", "relative");
-            $(".mypage_menu").css("top", "90px");
+            $(".mypage_menu").css("top", "0");
             $("#header").css("position", "absolute");
         }
     });

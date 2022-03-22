@@ -79,43 +79,40 @@ $(() => {
             $('.birthD').eq(i).html(result);
         }
     })
-
+    // 예약 번호 출력
+    let reserNum = "";
+    for(let i = 0; i < 6; i++){
+        let ranstr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        reserNum += ranstr.charAt(Math.floor(Math.random() * ranstr.length))
+    }
+    console.log(reserNum)
     $("#modal_fare_rules .butt_ok").on("click", () => {
         if ($("#modal_fare_rules #checkBox2").is(":checked")) {
-            let item_name = "초코파이";
-            let quantity = 2;
-            let total_amount = 2200;
-            let vat_amount = 200;
-            let tax_free_amount = 0;
-
-            let arr = new Array();
-            for (i = 0; i < quantity; i++) {
-                let data = new Object();
-                data.reTotal = 100000;
-                arr.push(data);
-            }
+            // let item_name = "초코파이";
+            // let quantity = 2;
+            // let total_amount = 2200;
+            // let vat_amount = 200;
+            // let tax_free_amount = 0;
+            //
+            // let arr = new Array();
+            // for (i = 0; i < quantity; i++) {
+            //     let data = new Object();
+            //     data.reTotal = 100000;
+            //     arr.push(data);
+            // }
             let final = new Array();
-            $('.cookies').each(function (i){
+            $('.cookies').each(function (i) {
                 let reIndex = $('.cookies').eq(i).attr("value");
                 let finalarr = new Object();
                 finalarr.reIndex = reIndex;
                 finalarr.reTotal = price;
                 finalarr.rePayment = "KAKAOPAY";
+                finalarr.reReserNum = reserNum;
+                finalarr.reExtraSale =
                 final.push(finalarr);
             });
             console.dir(final);
-            $.post({
-                url: "/api/kakao/create",
-                data: JSON.stringify(arr),
-                async: false,
-                success: function (arr) {
-                    location.href=arr;
-                },
-                error: function (error){
-                    alert("통신 장애 발생")
-                    location.reload();
-                }
-            });
+
             $.ajax({
                 url: "/api/reservation/paymentsUpdate",
                 type: "PUT",
@@ -123,17 +120,16 @@ $(() => {
                 dataType: "text",
                 contentType: "application/json",
                 success: function (final) {
-                    alert("결제 성공")
+                    location.href="/pages/pay/"+reserNum;
                 },
-                error(error) {
-                    console.log('error')
-                    console.dir(error)
-                }
-            });
-            $(location).attr("href", "/pages/complete");
-            $("#modal_fare_rules").fadeOut();
-            $("body").css("overflow", "scroll");
-        } else {
+                    error(error) {
+                        console.log('error')
+                        console.dir(error)
+                    }
+                });
+                $("#modal_fare_rules").fadeOut();
+                $("body").css("overflow", "scroll");
+        }else {
             $("#modal_fare_rules > .modal_conf_ok_wrap").fadeIn();
         }
     });
@@ -177,10 +173,7 @@ $(() => {
         alert("잘못된 경로입니다.");
         history.back();
     }
-});
 
-
-$(function () {
     // 멤버정보 가져오기
     /*운임 규정 안내 모달창 */
     $("#modal_fare_rules").hide();
@@ -236,8 +229,6 @@ $(function () {
             sel_coupon.sel_coupon = response.data;
         })
     }
-
-
 
 });
 

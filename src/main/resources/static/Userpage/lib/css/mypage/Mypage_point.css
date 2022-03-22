@@ -555,7 +555,7 @@ body{
     position: fixed;
     background: rgba(0, 0, 0, 0.5);
     left: 0; right: 0; top: 0; bottom: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -645,8 +645,8 @@ body{
     margin: 0 auto;
     background-color: #f2f2f2;
     display: flex;
-    position: fixed;
-    top: 91px;
+    position: relative;
+    top: 0;
     align-items: center;
     text-align: center;
 }
@@ -696,11 +696,17 @@ body{
 }
 /* 서브타이틀 끝 */
 .menu_title{
-    margin: 140px 0 50px 0;
+    margin: 70px 0 50px 0;
     font-size: 3rem;
     color: #661E43;
     font-weight: 600;
     text-indent: 30px;
+}
+header{
+    height: 91px;
+}
+header{
+    height: 91px;
 }
 .sub_menu_check ul{
     display: flex;
@@ -746,7 +752,7 @@ body{
 }
 
 .save_container{
-    margin: 0 auto;
+    margin: 50px auto;
     height: 300px;
 }
 .save_container > p{
