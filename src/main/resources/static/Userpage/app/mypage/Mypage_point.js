@@ -522,11 +522,181 @@ $(function () {
                 let point = response.data[i].poPoint;
                 sum += point;
             }
-            console.log(sum)
             $('#point').text(sum);
         })
     }
 
+    let pointList = new Vue({
+        el : "#pointList",
+        data : {
+            pointList : {}
+        }
+    })
+
+    $('#searchPo').on('click', function (){
+        pointSearch(memIndex, $('#item_start_date1').val() + 'T00:00:00', $('#item_start_date2').val() + 'T23:59:59', 0);
+    })
+
+    pointArr(memIndex, 0);
+
+
+
+    // 사용자 포인트 리스트
+    function pointArr(index, page){
+        $.get(`/api/point/user/${index}?page=` + page, function (response){
+            if(response.data.length == 0){
+                $('#false').css("display", "block")
+                $('#true').css("display", "none")
+            }else {
+                $('#false').css("display", "none")
+                $('#true').css("display", "block")
+            }
+
+            for(let i = 0; i < response.data.length; i++){
+                $.get(`/api/point/user/${index}?page=` + page, function (response2){
+                    if(response2.data[i].poPoint > 0){
+                        // 적립 내역
+                        $(`#addPoint${i}`).text(response2.data[i].poPoint)
+                        $(`#usePoint${i}`).text('-')
+                    }else{
+                        // 사용 내역
+                        $(`#addPoint${i}`).text('-')
+                        $(`#usePoint${i}`).text(response2.data[i].poPoint)
+                    }
+                })
+            }
+
+            // 등록 날짜
+            for(let i = 0; i < response.data.length; i++){
+                $.get(`/api/point/user/${index}?page=` + page, function (response3){
+                    for(let j = 0; j < response3.data.length; j++){
+                        let reg = response3.data[j].poRegdate;
+                        $(`#regDate${j}`).text(reg.substr(0, 10));
+                    }
+                })
+            }
+            // 유저의 총 포인트
+            pointList.pointList = response.data;
+
+            let lastPage = response.pagination.totalPages;
+
+            let str = "";
+            str += "<td class='firstPage1'><<</td>";
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pages' id="+i+">" + (i+1) + "</td>";
+            }
+            str += "<td class='lastPage1'>>></td>";
+            $("#showPage").html(str);
+            if(page == 0) {
+                $(".firstPage1").css("visibility", "hidden");
+            }
+            if(page == lastPage-1) {
+                $(".lastPage1").css("visibility", "hidden");
+            }
+            $(".pages").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+page+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            $(document).on('click', '.firstPage1', function(){
+                list(0);
+            });
+            $(document).on('click', '.lastPage1', function(){
+                list(lastPage-1);
+            });
+        })
+    }
+
+    // 포인트 기간 조회 사용자 + 인덱스
+    function pointSearch(index, start, end, page){
+        $.post({
+            url: "/api/point/user/search",
+            data : "userIndex=" + index + "&start=" + start + "&end=" + end,
+            dataType: "text",
+            success: function (response){
+                let dataJson = JSON.parse(response);
+
+                if(dataJson.data.length == 0){
+                    $('#false').css("display", "block")
+                    $('#true').css("display", "none")
+                }else {
+                    $('#false').css("display", "none")
+                    $('#true').css("display", "block")
+                }
+
+                for(let i = 0; i < dataJson.data.length; i++){
+                    $.get(`/api/point/` + dataJson.data[i].poIndex, function (response2){
+                        console.log(response2)
+                        if(response2.data.poPoint > 0){
+                            // 적립 내역
+                            $(`#addPoint${i}`).text(response2.data.poPoint)
+                            $(`#usePoint${i}`).text('-')
+                        }else{
+                            // 사용 내역
+                            $(`#addPoint${i}`).text('-')
+                            $(`#usePoint${i}`).text(response2.data.poPoint)
+                        }
+                    })
+                }
+
+                // 등록 날짜
+                for(let i = 0; i < dataJson.data.length; i++){
+                    $.get(`/api/point/` + dataJson.data[i].poIndex, function (response3){
+                        console.log(response3)
+                        let reg = response3.data.poRegdate;
+                        $(`#regDate${i}`).text(reg.substr(0, 10));
+                    })
+                }
+
+                pointList.pointList = dataJson.data;
+
+                let lastPage = dataJson.pagination.totalPages;
+
+                let str = "";
+                str += "<td class='firstPage1'><<</td>";
+                for (let i = 0; i < lastPage; i++) {
+                    str += "<td class='pages' id="+i+">" + (i+1) + "</td>";
+                }
+                str += "<td class='lastPage1'>>></td>";
+                $("#showPage").html(str);
+                if(page == 0) {
+                    $(".firstPage1").css("visibility", "hidden");
+                }
+                if(page == lastPage-1) {
+                    $(".lastPage1").css("visibility", "hidden");
+                }
+                $(".pages").css({
+                    "background-color" : "#fff",
+                    "color" : "#444",
+                    "cursor" : "pointer"
+                });
+                $("#"+page+"").css({
+                    "background-color" : "#661e43",
+                    "color" : "white"
+                });
+                $(document).on('click', '.firstPage1', function(){
+                    list(0);
+                });
+                $(document).on('click', '.lastPage1', function(){
+                    list(lastPage-1);
+                });
+            }
+        })
+    }
+
+    $(document).on('click', '.pages', function(){
+        let pageId = this.id;
+        list(pageId);
+    });
+
+    $(document).on('click', '.pagesS', function(){
+        let pageId2 = this.id;
+        searchNoti(searchStr, pageId2);
+    });
 });
 
 function hidePopupLayer(){

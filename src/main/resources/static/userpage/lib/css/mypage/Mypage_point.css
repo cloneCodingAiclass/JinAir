@@ -841,7 +841,7 @@ table.bbsList td:last-child, thead tr th:last-child{
     margin-left: 10px;
 }
 .srh_container .srh_box select, input[type="date"]{
-    width: 170px;
+    width: 300px;
     height: 50px;
     text-indent: 10px;
     font-size: 1rem;
@@ -850,7 +850,7 @@ table.bbsList td:last-child, thead tr th:last-child{
     font-weight: 600;
     margin-left: 20px;
 }
-.srh_container .srh_box .btn input[type="submit"]{
+.srh_container .srh_box .btn input[type="button"]{
     width: 150px;
     height: 50px;
     background-color:#BDD600;
@@ -878,6 +878,37 @@ table.bbsList td:last-child, thead tr th:last-child{
     text-align: center;
     font-size: 1.1rem;
     font-weight: 700;
+}
+.none_point table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+}
+.none_point table thead {
+    border-bottom: 1px solid rgb(192,192,192, 0.5);
+    background-color:  #F7F7F7;
+}
+.none_point table tr {
+    height: 60px;
+    border-bottom: 1px solid rgb(192,192,192, 0.5);
+}
+.none_point table tr:last-child{
+    border: none;
+}
+.none_point table tr th {
+    border-right: 1px solid rgb(192,192,192, 0.5);
+    border-bottom: 1px solid rgb(192,192,192, 0.5);
+}
+.none_point table tr td {
+    text-align: center;
+    border-right: 1px solid rgb(192,192,192, 0.5);
+}
+.none_point table tr td:last-child,
+.none_point table tr th:last-child{
+    border-right: none;
+}
+#true {
+    height: fit-content;
 }
 .footer_info{
     display: flex;
@@ -1269,5 +1300,72 @@ table.bbsList td:last-child, thead tr th:last-child{
     background-color:#BDD600;
     border: none;
     margin: 40px 10px 0;
+    cursor: pointer;
+}
+
+.footer{
+    margin-top: 40px;
+    width: 100%;
+    height: 30px;
+}
+.footer > .center{
+    display: flex;
+    justify-content: center;
+}
+.footer table{
+    display: inline-block;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bolder;
+}
+.footer table td{
+    width: 25px;
+    height: 25px;
+    border: 1px solid rgb(187, 187, 187);
+    background-color: #fff;
+    padding-top: 2px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+}
+
+/*.footer table td:nth-child(1){*/
+/*    background-color: rgb(102, 30, 67);*/
+/*}*/
+/*.footer table td:nth-child(1) > a{*/
+/*    color:white*/
+/*}*/
+/*#showPage > .pages:hover{*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*#showPage > .pages:active {*/
+/*    background-color: #661e43;*/
+/*    color: #fff;*/
+/*}*/
+
+.footer > .notice_write{
+    display: inline;
+    float: right;
+    position: relative;
+    bottom: 30px;
+}
+.footer > .notice_write > input{
+    text-align: center;
+    width: 120px;
+    height: 30px;
+    border: none;
+    border-radius: 2px;
+    background-color: #BDD600;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+}
+
+.showPage > td:hover {
+    background-color: #BDD600;
+    color: white;
+}
+
+.firstPage1, .firstPage2, .lastPage1, .lastPage2 {
     cursor: pointer;
 }

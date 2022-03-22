@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -140,5 +141,23 @@ public class PointApiService implements CrudInterface<PointApiRequest, PointApiR
                     tbPointRepository.delete(point);
                     return Header.OK();
         }).collect(Collectors.toList());
+    }
+
+    // 사용자, 날짜 기간 검색
+    public Header<List<PointApiResponse>> userSearch(Long id, String startDate, String endDate, Pageable pageable){
+        Page<TbPoint> tbPointList = tbPointRepository.findByPoUserindexAndAndPoRegdateBetweenOrderByPoRegdateDesc(id, LocalDateTime.parse(startDate), LocalDateTime.parse(endDate), pageable);
+
+        List<PointApiResponse> pointApiResponseList = tbPointList.stream()
+                .map(point -> responsePoint(point))
+                .collect(Collectors.toList());
+
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbPointList.getTotalPages())
+                .totalElements(tbPointList.getTotalElements())
+                .currentPage(tbPointList.getNumber())
+                .currentElements(tbPointList.getNumberOfElements())
+                .build();
+
+        return Header.OK(pointApiResponseList, pagination);
     }
 }

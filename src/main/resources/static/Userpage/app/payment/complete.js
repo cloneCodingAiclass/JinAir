@@ -1,6 +1,42 @@
 'use strict';
 
 $(function () {
+    // 예약 인원수 확인
+    let reserNum = "";
+    for(let i = 0; i < 6; i++){
+        let ranstr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        reserNum += ranstr.charAt(Math.floor(Math.random() * ranstr.length))
+    }
+    $('#reserNum').text(reserNum);
+
+    let sumResult = 0;
+    $('.cookies').each(function (i){
+        // 예약번호 출력
+        let num = $('.cookies').eq(i).attr("value");
+        console.log(num);
+        if(num % 2 != 0) {
+            sumResult++;
+        }
+    });
+    console.log(sumResult);
+    $('#peopleSum').html(sumResult + "명");
+
+    $(".isAdult").each(function (i){
+        let age = $('.isAdult').eq(i).attr("value");
+        let resultAge = 2022 - age.substr(0, 4);
+
+        let result = "";
+        if(resultAge > 13){
+            result = "성인";
+            $('.isAdult').eq(i).html(result);
+        }else if(resultAge < 13){
+            result = "소아"
+            $('.isAdult').eq(i).html(result);
+        }else if(resultAge < 12){
+            result = "유아"
+            $('.isAdult').eq(i).html(result);
+        }
+    })
     $('.open1').on('click', function (e) {
         e.stopPropagation();
         $('.service').slideUp(50);
@@ -101,7 +137,7 @@ $(function () {
     });
     $('.btn').click(function(){
         location.href='/index.html'
-    })
+    });
 
     let spst1 = $('#startTime1').attr("value").split("T");
     let spend1 = $('#endTime1').attr("value").split("T");
@@ -114,28 +150,21 @@ $(function () {
 
     let date = new Date();
     let week = new Array('일', '월', '화', '수', '목', '금', '토');
-    let today = date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).toString().slice(-2) + "-" + ("00" + date.getDay()).toString().slice(-2) + " (" + week[date.getDay()] +")";
+    let today = date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).toString().slice(-2) + "-" + ("0" + date.getDay()).toString().slice(-2) + " (" + week[date.getDay()] +")";
+    console.log("00"+date.getDay());
 
-    $('#today').text(today);
-
+    $('#today, #reserDay').text(today);
 
     // 총 결제금액 찍어주기
     let money = $('#totalPrice').attr("value");
     $('#totalPrice').text(" " + Math.ceil(money).toLocaleString() + "원");
 
     // 최종 업데이트
-    $('.cookies').each(function (i){
-       // 예약번호 출력
-       let ranstr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-       let randomText = "";
-       for(let i = 0; i < 6; i++){
-           randomText += ranstr.charAt(Math.floor(Math.random() * ranstr.length));
-       };
-
+    $('.cookies').each(function (i) {
         let val = $('.cookie').eq(i).attr("value");
+        console.log(val);
         let status = "PaymentFinished";
-        let reReserNum = randomText;
-        console.log(randomText)
+        let reReserNum = reserNum;
 
         let jsonData = {
             data :{
