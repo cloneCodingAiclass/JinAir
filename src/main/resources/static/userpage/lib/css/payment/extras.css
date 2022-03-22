@@ -1779,6 +1779,7 @@ body{
     background: none;
 }
 
+
 .service_content_wrap3 .service_content .join_insurance_wrap .insurance_content .insurance_product .bir_date {
     padding: 2px;
 }
@@ -1807,8 +1808,8 @@ body{
 
 .service_content_wrap3 .service_content .join_insurance_wrap .insurance_content .insurance_product input {
     border-radius: 0;
-    width: 18px;
-    height: 18px;
+    width: 12px;
+    height: 12px;
     margin-right: 3px;
 }
 
