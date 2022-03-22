@@ -842,13 +842,23 @@ $(function () {
                     $('.input_phone').val()
                 )
             }
-            window.setTimeout(goToNext, 500);
+            window.setTimeout(goToNext, 200);
         }
     })
 
     function goToNext(){
-        location.href="/pages/extras"
+        if($('#reTripKind').html() == '왕복'){
+            location.href="/pages/extras/twoway"
+        }
+        if($('#reTripKind').html() == '편도'){
+            location.href="/pages/extras/oneway"
+        }
+        if($('#reTripKind').html() == '다구간'){
+            location.href="/pages/extras/multiway"
+        }
     }
+
+
 
 
 
