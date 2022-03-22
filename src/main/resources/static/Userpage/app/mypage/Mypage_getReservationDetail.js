@@ -770,12 +770,12 @@ $(() => {
         })
     }
 
-    couponResult(0);
+    couponResult(memIndex);
 
     function couponResult(index) {
         $.get("/api/userCoupon/list/" + index, function (response) {
             console.dir(response);
-            document.getElementById("coupon").innerHTML = response;
+            document.getElementById("coupon").innerHTML = response + "장";
         });
     }
 });

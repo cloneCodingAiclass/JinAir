@@ -66,7 +66,9 @@
                         <!--탑승객 수-->
                         <div class="nop">
                             <p>탑승객수</p>
-                            <p id="person_cnt" class="fs20"><span th:text="${people}" class="person_cnt"></span></p>
+                            <p id="person_cnt" class="fs20">
+                                <span th:text="${people}" class="person_cnt"></span>
+                            </p>
                         </div>
                         <!--탑승객 수 끝-->
                         <!--수정버튼-->
@@ -787,7 +789,7 @@
                                 <div class="person_layerbtn">
                                     <strong class="person_num" name="person_num">성인 1</strong>
                                 </div>
-                                <ul class="person_pop_layer in_bl">
+                                <ul class="person_pop_layer person_pop_layer1 in_bl">
                                     <li>
                                         <div class="w_180 in_bl">
                                             <input type="hidden" value="1" class="adultPaxCnt">
@@ -865,7 +867,7 @@
                                     </li>
                                     <li>
                                         <div class="submit_btn">
-                                            <a href="javascript://" onclick="submit()">확인</a>
+                                            <a href="javascript://" onclick="submit1()">확인</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -1053,7 +1055,7 @@
                                 <div class="person_layerbtn">
                                     <strong class="person_num" name="person_num">성인 1</strong>
                                 </div>
-                                <ul class="person_pop_layer in_bl">
+                                <ul class="person_pop_layer person_pop_layer2 in_bl">
                                     <li>
                                         <div class="w_180 in_bl">
                                             <input type="hidden" value="1" class="adultPaxCnt">
@@ -1131,7 +1133,7 @@
                                     </li>
                                     <li>
                                         <div class="submit_btn">
-                                            <a href="javascript://" onclick="submit()">확인</a>
+                                            <a href="javascript://" onclick="submit2()">확인</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -1313,7 +1315,7 @@
                                 <div class="person_layerbtn">
                                     <strong class="person_num" name="person_num">성인 1</strong>
                                 </div>
-                                <ul class="person_pop_layer in_bl">
+                                <ul class="person_pop_layer person_pop_layer3 in_bl">
                                     <li>
                                         <div class="w_180 in_bl">
                                             <input type="hidden" value="1" class="adultPaxCnt">
@@ -1391,7 +1393,7 @@
                                     </li>
                                     <li>
                                         <div class="submit_btn">
-                                            <a href="javascript://" onclick="submit()">확인</a>
+                                            <a href="javascript://" onclick="submit3()">확인</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -1723,7 +1725,7 @@
                 </table>
             </div>
             <div class="update_submit">
-                <a href="" onclick="">조회</a>
+                <a onclick="modification()">조회</a>
             </div>
         </div>
     </div>

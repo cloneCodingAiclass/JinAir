@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="/userpage/lib/css/payment/complete.css" />
 <script src="/userpage/app/payment/complete.js"></script>
 <body>
-<input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
-<input type="hidden" name="" th:each="dto : ${reserveApiResponse1}" class="cookies" th:id="${dto.reIndex}" th:value="${dto.reIndex}">
+    <div>
+        <input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
+        <input type="hidden" name="" th:each="dto : ${reserveApiResponse1}" class="cookies" th:id="${dto.reIndex}" th:value="${dto.reIndex}">
+    </div>
     <ul class="skipnavi">
         <!--책갈피 역할-->
         <li><a href="#container">본문내용</a></li>
@@ -49,14 +51,14 @@
                             <td colspan="3" class="info">
                                 <div class="in_bl">
                                     <span>[[${reserveApiResponse1[0].reSchDepPoint}]]</span>
-                                    <p>[출발] <span th:value="${reserveApiResponse1[0].reSchStartTime}"></span></p>
+                                    <p>[출발] <span id="startTime1" th:value="${reserveApiResponse1[0].reSchStartTime}"></span></p>
                                 </div>
                                 <span class="arrow">
                                     <img src="/userpage/lib/img/right_arrow.PNG" alt="에서">
                                 </span>
                                 <div class="in_bl">
                                     <span>[[${reserveApiResponse1[0].reSchArrPoint}]]</span>
-                                    <p>[도착] <span th:value="${reserveApiResponse1[0].reSchEndTime}"></span></p>
+                                    <p>[도착] <span id="endTime1" th:value="${reserveApiResponse1[0].reSchEndTime}"></span></p>
                                 </div>
                             </td>
                         </tr>
@@ -68,14 +70,14 @@
                             <td colspan="3" class="info">
                                 <div class="in_bl">
                                     <span>[[${reserveApiResponse1[1].reSchDepPoint}]]</span>
-                                    <p>[출발] <span th:value="${reserveApiResponse1[1].reSchStartTime}"></span></p>
+                                    <p>[출발] <span id="startTime2" th:value="${reserveApiResponse1[1].reSchStartTime}"></span></p>
                                 </div>
                                 <span class="arrow">
                                     <img src="/userpage/lib/img/right_arrow.PNG" alt="에서">
                                 </span>
                                 <div class="in_bl">
                                     <span>[[${reserveApiResponse1[1].reSchDepPoint}]]</span>
-                                    <p>[도착] <span th:value="${reserveApiResponse1[1].reSchEndTime}"></span></p>
+                                    <p>[도착] <span id="endTime2" th:value="${reserveApiResponse1[1].reSchEndTime}"></span></p>
                                 </div>
                             </td>
                         </tr>
@@ -94,9 +96,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <th:block th:each="dto : ${reserveApiResponse1}">
+                        <th:block th:each="dto, i : ${reserveApiResponse1}" th:if="${i.count} % 2 != 0">
                             <tr>
-                                <td>[[${dto.reFirstName]]/[[${dto.reLastName}]]</td>
+                                <td>[[${dto.reFirstName}]]/[[${dto.reLastName}]]</td>
                                 <td>성인</td>
                                 <td>[[${dto.reGender}]]</td>
                                 <td>[[${dto.reBirth}]]</td>
@@ -119,11 +121,11 @@
                             <th>승인번호</th>
                             <td>06116075</td>
                             <th>구매일</th>
-                            <td>2022-01-24(월)</td>
+                            <td id="today"></td>
                         </tr>
                         <tr>
                             <th>결제금액</th>
-                            <td>KRW [[${reserveApiResponse1[0].reTotal}]]</td>
+                            <td>KRW <span id="totalPrice" th:value="${reserveApiResponse1[0].reTotal}"></span></td>
                             <td colspan="2">
                                 <button>
                                     <img src="/userpage/lib/img/printer.png" alt="프린터">

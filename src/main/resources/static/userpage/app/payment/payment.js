@@ -82,7 +82,7 @@ $(() => {
     })
 
     $("#modal_fare_rules .butt_ok").on("click", () => {
-        if ($("#modal_fare_rules #checkBox").is(":checked")) {
+        if ($("#modal_fare_rules #checkBox2").is(":checked")) {
             let item_name = "초코파이";
             let quantity = 2;
             let total_amount = 2200;
@@ -111,7 +111,6 @@ $(() => {
                 async: false,
                 success: function (arr) {
                     location.href=arr;
-                    alert(arr);
                 },
                 error: function (error){
                     alert("통신 장애 발생")

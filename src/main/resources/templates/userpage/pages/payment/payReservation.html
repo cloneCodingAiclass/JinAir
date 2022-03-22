@@ -3,10 +3,7 @@
       xmlns:th="http://www.thymeleaf.org/" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <!-- head -->
 <div th:replace="userpage/fragment/head :: head"></div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="/userpage/app/index/index_reserve.js"></script>
 <link rel="stylesheet" href="/userpage/lib/css/payment/payReservation.css"/>
-<link rel="stylesheet" href="/userpage/lib/css/index/index.css"/>
 <script src="/userpage/app/payment/payReservation.js"></script>
 <script src="/userpage/app/payment/payment.js"></script>
 <!-- head 끝 -->
@@ -25,17 +22,15 @@
     <div th:replace="${loginURL} :: menu"></div>
     <!--header 끝-->
     <!--container-->
-    <form action="#">
-        <!--container-->
-        <div id="container">
-            <!--contentswrap-->
-            <div class="contentswrap">
-                <!--여정선택-->
-                <div class="fix_trip_info">
+    <div id="container">
+        <!--contentswrap-->
+        <div class="contentswrap">
+            <!--여정선택-->
+            <div class="fix_trip_info">
                     <!--여정1-->
                     <div class="trip_info">
                         <div class="schedule">
-                            <p><span id="triptype1"></span> 여정 1</p>
+                            <p><span id="triptype1"></span> 여정1</p>
                             <p class="cursor arrow_img"></p>
                             <p class="cursor arrow_img arrow_up_img"></p>
                         </div>
@@ -66,9 +61,9 @@
                     <input type="button" value="수정" onclick="updateTrip()" class="trip_edit_butt fs20">
                     <!--수정버튼 끝-->
                 </div>
-                <!--여정선택 끝-->
-                <!--탑승객 정보-->
-                <div class="select_wrap">
+            <!--여정선택 끝-->
+            <!--탑승객 정보-->
+            <div class="select_wrap">
                     <!--결제 헤더-->
                     <div class="title">결제</div>
                     <div class="select_step">
@@ -79,11 +74,10 @@
                         <p>4 부가서비스</p><span class="div"> </span>
                         <p class="fcpup bb">5 결제</p>
                     </div>
-                    </table>
                     <!--결제 헤더 끝-->
                 </div>
-                <!--결제랩-->
-                <div class="pay_wrap">
+            <!--결제랩-->
+            <div class="pay_wrap">
                     <!--탑승객 정보-->
                     <div class="passenger_wrap">
                         <h2>탑승객 정보</h2>
@@ -115,6 +109,7 @@
                         <div class="fare_info borderT">
                             <p class="tit" id="tripinfo1"></p>
                             <div class="jour_wrap">
+                                <!--여정1-->
                                 <div class="jour1_wrap">
                                     <p class="flight">여정 1 [[${reserveApiResponse1[0].reSchName}]]</p>
                                     <div class="area1_wrap area_wrap">
@@ -147,6 +142,7 @@
                                         <p class="detail detail2 cursor">View Flight Details</p>
                                     </div>
                                 </div>
+                                <!--여정2 끝-->
                                 <div class="tot">
                                     <p class="txt">총 운임</p>
                                     <p class="price_wrap"><span class="cul">KRW</span><span
@@ -245,7 +241,7 @@
                                                 <img src="/userpage/lib/img/arr_bott.png" alt="아래"
                                                      class="arr_bott arr_bott3 cursor"><img src="/userpage/lib/img/arr_top.png"
                                                                                             alt="위" class="arr_top arr_top3 cursor">
-                                            </span>
+                                        </span>
                                     </div>
                                 </td>
                             </tr>
@@ -380,10 +376,10 @@
                                         <span class="cul">KRW</span>
                                         <span class="price">2,610</span>
                                         <span class="arrow">
-                                                <img src="/userpage/lib/img/arr_bott.png" alt="아래"
+                                             <img src="/userpage/lib/img/arr_bott.png" alt="아래"
                                                      class="arr_bott arr_bott6 cursor"><img src="/userpage/lib/img/arr_top.png"
                                                                                             alt="위" class="arr_top arr_top6 cursor">
-                                            </span>
+                                        </span>
                                     </div>
                                 </td>
                             </tr>
@@ -709,47 +705,46 @@
                         </table>
                     </div>
                     <!--결제 끝-->
-                </div>
-                <div id="modal_restricted_items_wrap">
-                    <div class="modal_restricted_items_wrap">
-                        <div class="modal_title">
-                            <span class="txt">항공기 위험물 안내</span>
-                            <span class="close cursor"><img src="/userpage/lib/img/close.png" alt="닫기" width="35px"></span>
-                        </div>
-                        <div class="modal_contents">
-                            <div class="top">
-                                <ul>
-                                    <li>국제민간항공기구(ICAO) 및 국제항공운송협회(IATA)에서 지정한 항공위험물은 수하물로 운송될 수 없습니다.</li>
-                                    <li>항공기 및 개인 또는 타인의 재산에 위험을 가져올 수 있는 항공위험물 안내</li>
-                                </ul>
-                                <div class="detail_link cursor"><a
-                                        href="../serviceCount/airport/baggage/baggage.html" target="_blank">자세히
-                                    보기</a></div>
-                                <div class="item_list_wrap">
-                                    <div class="list list1">
-                                        <p class="txt">폭발물</p>
-                                        <table>
-                                            <colgroup>
-                                                <col width="50%">
-                                                <col width="50%">
-                                            </colgroup>
-                                            <tr>
-                                                <td><img src="/userpage/lib/img/list1-1.jpg" alt="탄약"></td>
-                                                <td><img src="/userpage/lib/img/list1-2.jpg" alt="폭죽"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p>탄약</p>
-                                                    <p>Ammunition</p>
-                                                </td>
-                                                <td>
-                                                    <p>폭죽</p>
-                                                    <p>Fireworks</p>
-                                                </td>
-                                            </tr>
-                                        </table>
+                    <div id="modal_restricted_items_wrap">
+                        <div class="modal_restricted_items_wrap">
+                            <div class="modal_title">
+                                <span class="txt">항공기 위험물 안내</span>
+                                <span class="close cursor"><img src="/userpage/lib/img/close.png" alt="닫기" width="35px"></span>
+                            </div>
+                            <div class="modal_contents">
+                                <div class="top">
+                                    <ul>
+                                        <li>국제민간항공기구(ICAO) 및 국제항공운송협회(IATA)에서 지정한 항공위험물은 수하물로 운송될 수 없습니다.</li>
+                                        <li>항공기 및 개인 또는 타인의 재산에 위험을 가져올 수 있는 항공위험물 안내</li>
+                                    </ul>
+                                    <div class="detail_link cursor">
+                                        <a href="../serviceCount/airport/baggage/baggage.html" target="_blank">자세히 보기</a>
                                     </div>
-                                    <div class="list list2">
+                                    <div class="item_list_wrap">
+                                        <div class="list list1">
+                                            <p class="txt">폭발물</p>
+                                            <table>
+                                                <colgroup>
+                                                    <col width="50%">
+                                                    <col width="50%">
+                                                </colgroup>
+                                                <tr>
+                                                    <td><img src="/userpage/lib/img/list1-1.jpg" alt="탄약"></td>
+                                                    <td><img src="/userpage/lib/img/list1-2.jpg" alt="폭죽"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p>탄약</p>
+                                                        <p>Ammunition</p>
+                                                    </td>
+                                                    <td>
+                                                        <p>폭죽</p>
+                                                        <p>Fireworks</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="list list2">
                                         <p class="txt">가스류</p>
                                         <table>
                                             <colgroup>
@@ -772,166 +767,167 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    <div class="list list3">
-                                        <p class="txt">인화성 액체</p>
-                                        <table>
-                                            <colgroup>
-                                                <col width="50%">
-                                                <col width="50%">
-                                            </colgroup>
-                                            <tr>
-                                                <td><img src="/userpage/lib/img/list3-1.jpg" alt="페인트"></td>
-                                                <td><img src="/userpage/lib/img/list-3-2.jpg" alt="알코올"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p>페인트</p>
-                                                    <p>Paint</p>
-                                                </td>
-                                                <td>
-                                                    <p>알코올</p>
-                                                    <p>Alcohol</p>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="list list4">
-                                        <p class="txt">인화성 고체</p>
-                                        <table>
-                                            <colgroup>
-                                                <col width="50%">
-                                                <col width="50%">
-                                            </colgroup>
-                                            <tr>
-                                                <td><img src="/userpage/lib/img/list4-1.jpg" alt="고체연료"></td>
-                                                <td><img src="/userpage/lib/img/list4-2.jpg" alt="번개탄"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p>고체연료</p>
-                                                    <p>Solid Fuel</p>
-                                                </td>
-                                                <td>
-                                                    <p>번개탄</p>
-                                                    <p>Ignition Coal</p>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="list list5">
-                                        <p class="txt">산화성 물질</p>
-                                        <table>
-                                            <colgroup>
-                                                <col width="50%">
-                                                <col width="50%">
-                                            </colgroup>
-                                            <tr>
-                                                <td><img src="/userpage/lib/img/list5-1.jpg" alt="락스"></td>
-                                                <td><img src="/userpage/lib/img/list5-2.jpg" alt="표백제"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p>락스</p>
-                                                    <p>Clorox</p>
-                                                </td>
-                                                <td>
-                                                    <p>표백제</p>
-                                                    <p>Bleach</p>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="list list6">
-                                        <p class="txt">독성 및 전염성 물질</p>
-                                        <table>
-                                            <colgroup>
-                                                <col width="50%">
-                                                <col width="50%">
-                                            </colgroup>
-                                            <tr>
-                                                <td><img src="/userpage/lib/img/list6-1.jpg" alt="제초제"></td>
-                                                <td><img src="/userpage/lib/img/list6-2.jpg" alt="살충제"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p>제초제</p>
-                                                    <p>Herbcide</p>
-                                                </td>
-                                                <td>
-                                                    <p>살충제</p>
-                                                    <p>Pesticide</p>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="list list7">
-                                        <p class="txt">방사성 물질</p>
-                                        <table>
-                                            <colgroup>
-                                                <col width="50%">
-                                                <col width="50%">
-                                            </colgroup>
-                                            <tr>
-                                                <td><img src="/userpage/lib/img/list7-1.jpg" alt="방사성 동위원소"></td>
-                                                <td><img src="/userpage/lib/img/list7-2.jpg" alt="방사선 투과검사 장비"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p>방사성 동위원소</p>
-                                                    <p>Radioisotope</p>
-                                                </td>
-                                                <td>
-                                                    <p>방사선 투과검사</p>
-                                                    <p>Radiographic <br>Test Equipment</p>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="list list8">
-                                        <p class="txt">부식성 물질</p>
-                                        <table>
-                                            <colgroup>
-                                                <col width="50%">
-                                                <col width="50%">
-                                            </colgroup>
-                                            <tr>
-                                                <td><img src="/userpage/lib/img/list8-1.jpg" alt="습식 배터리"></td>
-                                                <td><img src="/userpage/lib/img/list8-2.jpg" alt="수은 온도계"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p>습식 배터리</p>
-                                                    <p>Wet Battery</p>
-                                                </td>
-                                                <td>
-                                                    <p>수은 온도계</p>
-                                                    <p>Mercury <br>Thermometer</p>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="list list9">
-                                        <p class="txt">기타 위험 물질</p>
-                                        <table>
-                                            <colgroup>
-                                                <col width="50%">
-                                                <col width="50%">
-                                            </colgroup>
-                                            <tr>
-                                                <td><img src="/userpage/lib/img/list9-1.jpg" alt="여분의 리튬"></td>
-                                                <td><img src="/userpage/lib/img/list9-2.jpg" alt="드라이 아이스"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p>여분의 리튬</p>
-                                                    <p>Spare Li-ion<br>Batteries<br>(휴대만 가능)</p>
-                                                </td>
-                                                <td>
-                                                    <p>드라이 아이스</p>
-                                                    <p>Dry Ice</p>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <div class="list list3">
+                                            <p class="txt">인화성 액체</p>
+                                            <table>
+                                                <colgroup>
+                                                    <col width="50%">
+                                                    <col width="50%">
+                                                </colgroup>
+                                                <tr>
+                                                    <td><img src="/userpage/lib/img/list3-1.jpg" alt="페인트"></td>
+                                                    <td><img src="/userpage/lib/img/list-3-2.jpg" alt="알코올"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p>페인트</p>
+                                                        <p>Paint</p>
+                                                    </td>
+                                                    <td>
+                                                        <p>알코올</p>
+                                                        <p>Alcohol</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="list list4">
+                                            <p class="txt">인화성 고체</p>
+                                            <table>
+                                                <colgroup>
+                                                    <col width="50%">
+                                                    <col width="50%">
+                                                </colgroup>
+                                                <tr>
+                                                    <td><img src="/userpage/lib/img/list4-1.jpg" alt="고체연료"></td>
+                                                    <td><img src="/userpage/lib/img/list4-2.jpg" alt="번개탄"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p>고체연료</p>
+                                                        <p>Solid Fuel</p>
+                                                    </td>
+                                                    <td>
+                                                        <p>번개탄</p>
+                                                        <p>Ignition Coal</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="list list5">
+                                            <p class="txt">산화성 물질</p>
+                                            <table>
+                                                <colgroup>
+                                                    <col width="50%">
+                                                    <col width="50%">
+                                                </colgroup>
+                                                <tr>
+                                                    <td><img src="/userpage/lib/img/list5-1.jpg" alt="락스"></td>
+                                                    <td><img src="/userpage/lib/img/list5-2.jpg" alt="표백제"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p>락스</p>
+                                                        <p>Clorox</p>
+                                                    </td>
+                                                    <td>
+                                                        <p>표백제</p>
+                                                        <p>Bleach</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="list list6">
+                                            <p class="txt">독성 및 전염성 물질</p>
+                                            <table>
+                                                <colgroup>
+                                                    <col width="50%">
+                                                    <col width="50%">
+                                                </colgroup>
+                                                <tr>
+                                                    <td><img src="/userpage/lib/img/list6-1.jpg" alt="제초제"></td>
+                                                    <td><img src="/userpage/lib/img/list6-2.jpg" alt="살충제"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p>제초제</p>
+                                                        <p>Herbcide</p>
+                                                    </td>
+                                                    <td>
+                                                        <p>살충제</p>
+                                                        <p>Pesticide</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="list list7">
+                                            <p class="txt">방사성 물질</p>
+                                            <table>
+                                                <colgroup>
+                                                    <col width="50%">
+                                                    <col width="50%">
+                                                </colgroup>
+                                                <tr>
+                                                    <td><img src="/userpage/lib/img/list7-1.jpg" alt="방사성 동위원소"></td>
+                                                    <td><img src="/userpage/lib/img/list7-2.jpg" alt="방사선 투과검사 장비"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p>방사성 동위원소</p>
+                                                        <p>Radioisotope</p>
+                                                    </td>
+                                                    <td>
+                                                        <p>방사선 투과검사</p>
+                                                        <p>Radiographic <br>Test Equipment</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="list list8">
+                                            <p class="txt">부식성 물질</p>
+                                            <table>
+                                                <colgroup>
+                                                    <col width="50%">
+                                                    <col width="50%">
+                                                </colgroup>
+                                                <tr>
+                                                    <td><img src="/userpage/lib/img/list8-1.jpg" alt="습식 배터리"></td>
+                                                    <td><img src="/userpage/lib/img/list8-2.jpg" alt="수은 온도계"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p>습식 배터리</p>
+                                                        <p>Wet Battery</p>
+                                                    </td>
+                                                    <td>
+                                                        <p>수은 온도계</p>
+                                                        <p>Mercury <br>Thermometer</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="list list9">
+                                            <p class="txt">기타 위험 물질</p>
+                                            <table>
+                                                <colgroup>
+                                                    <col width="50%">
+                                                    <col width="50%">
+                                                </colgroup>
+                                                <tr>
+                                                    <td><img src="/userpage/lib/img/list9-1.jpg" alt="여분의 리튬"></td>
+                                                    <td><img src="/userpage/lib/img/list9-2.jpg" alt="드라이 아이스"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p>여분의 리튬</p>
+                                                        <p>Spare Li-ion<br>Batteries<br>(휴대만 가능)</p>
+                                                    </td>
+                                                    <td>
+                                                        <p>드라이 아이스</p>
+                                                        <p>Dry Ice</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="bottom">
@@ -955,11 +951,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--항공기 위험물 안내 모달창 끝-->
-                <!--운임 규정 안내 모달창-->
-                <div id="modal_fare_rules">
-                    <div class="modal_fare_rules">
+                    <!--항공기 위험물 안내 모달창 끝-->
+                    <!--운임 규정 안내 모달창-->
+                    <div id="modal_fare_rules">
+                        <div class="modal_fare_rules">
                         <div class="modal_title">
                             <span class="text">운임 규정 안내</span>
                             <span class="close cursor"><img src="/userpage/lib/img/close.png" alt="닫기" width="30px"></span>
@@ -1122,7 +1117,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal_conf_ok_wrap">
+                        <div class="modal_conf_ok_wrap">
                         <div class="modal_conf_ok">
                             위 내용을 확인 후 동의하셔야 다음 단계 진행이 가능합니다.
                             <p>
@@ -1130,10 +1125,10 @@
                             </p>
                         </div>
                     </div>
-                </div>
-                <!--운임 규정 안내 모달창 끝-->
-                <!--신용카드 무이자 할부 및 혜택 안내 모달창-->
-                <div id="modal_credit_int">
+                    </div>
+                        <!--운임 규정 안내 모달창 끝-->
+                        <!--신용카드 무이자 할부 및 혜택 안내 모달창-->
+                    <div id="modal_credit_int">
                     <div class="modal_credit_int">
                         <div class="modal_credit_title">
                             <span class="text">신용카드 무이자 할부 및 혜택 안내</span>
@@ -1208,14 +1203,13 @@
                         </div>
                     </div>
                 </div>
-                <!--신용카드 무이자 할부 및 혜택 안내 모달창 끝-->
-            </div>
-            <!--결제랩 끝-->
+                    <!--신용카드 무이자 할부 및 혜택 안내 모달창 끝-->
+                </div>
+        <!--결제랩 끝-->
         </div>
         <!--contents_wrap 끝-->
-    </form>
-</div>
-<!--container 끝-->
+    </div>
+    <!--container 끝-->
 <!--모달 1-->
 <div class="modal_flight_info1 modal_flight_info">
     <div class="modal_flight_title">
@@ -1252,20 +1246,20 @@
                 <구간 1>
             </li>
             <li>편명 : [[${reserveApiResponse1[1].reSchName}]]</li>
-            <li>출발 : 2022-02-24(목) 08:05 서울/김포(GMP)</li>
-            <li>도착 : 2022-02-24(목) 09:15 제주(CJU)</li>
+            <li>출발 : [[${reserveApiResponse1[1].reSchStartTime}]][[${reserveApiResponse1[1].reSchDepPoint}]]</li>
+            <li>도착 : [[${reserveApiResponse1[1].reSchEndTime}]][[${reserveApiResponse1[1].reSchArrPoint}]]</li>
             <li>비행시간 : 01h 10m</li>
             <li>대기시간 : 00h 00m</li>
-            <li>A/C 타입 : B737-800</li>
+            <li>A/C 타입 : [[${reserveApiResponse1[1].reAirplainType}]]</li>
         </ul>
         </p>
     </div>
 </div>
 <!--모달 2끝-->
 <div class="modal"></div>
-<!-- 푸터-->
+<!-- 푸터 -->
 <div th:replace="userpage/fragment/footer :: footer"></div>
-<!--푸터 끝-->
+<!--푸터 끝 -->
 </div>
 <!--wrap 끝-->
 <div class="modal">
@@ -1294,7 +1288,7 @@
                             <div class="person_layerbtn">
                                 <strong class="person_num" name="person_num">성인 1</strong>
                             </div>
-                            <ul class="person_pop_layer in_bl">
+                            <ul class="person_pop_layer person_pop_layer1 in_bl">
                                 <li>
                                     <div class="w_180 in_bl">
                                         <input type="hidden" value="1" class="adultPaxCnt">
@@ -1372,7 +1366,7 @@
                                 </li>
                                 <li>
                                     <div class="submit_btn">
-                                        <a href="javascript://" onclick="submit()">확인</a>
+                                        <a href="javascript://" onclick="submit1()">확인</a>
                                     </div>
                                 </li>
                             </ul>
@@ -1560,7 +1554,7 @@
                             <div class="person_layerbtn">
                                 <strong class="person_num" name="person_num">성인 1</strong>
                             </div>
-                            <ul class="person_pop_layer in_bl">
+                            <ul class="person_pop_layer person_pop_layer2 in_bl">
                                 <li>
                                     <div class="w_180 in_bl">
                                         <input type="hidden" value="1" class="adultPaxCnt">
@@ -1638,7 +1632,7 @@
                                 </li>
                                 <li>
                                     <div class="submit_btn">
-                                        <a href="javascript://" onclick="submit()">확인</a>
+                                        <a href="javascript://" onclick="submit2()">확인</a>
                                     </div>
                                 </li>
                             </ul>
@@ -1820,7 +1814,7 @@
                             <div class="person_layerbtn">
                                 <strong class="person_num" name="person_num">성인 1</strong>
                             </div>
-                            <ul class="person_pop_layer in_bl">
+                            <ul class="person_pop_layer person_pop_layer3 in_bl">
                                 <li>
                                     <div class="w_180 in_bl">
                                         <input type="hidden" value="1" class="adultPaxCnt">
@@ -1898,7 +1892,7 @@
                                 </li>
                                 <li>
                                     <div class="submit_btn">
-                                        <a href="javascript://" onclick="submit()">확인</a>
+                                        <a href="javascript://" onclick="submit3()">확인</a>
                                     </div>
                                 </li>
                             </ul>
@@ -2060,8 +2054,7 @@
                     <td>
                         <div class="go_date2 in_bl">
                             <div class="go_date_layerbtn">
-                                    <span class="go_date_select_opt"><input type="text" value="가는날" readonly
-                                                                            class="go_date_select_optt"></span>
+                                    <span class="go_date_select_opt"><input type="text" value="가는날" readonly class="go_date_select_optt"></span>
                             </div>
                         </div>
                     </td>
@@ -2229,7 +2222,7 @@
             </table>
         </div>
         <div class="update_submit">
-            <a href="" onclick="">조회</a>
+            <a onclick="modification()">조회</a>
         </div>
     </div>
 </div>
@@ -2254,7 +2247,7 @@
         </table>
         <div class="calinner">
             <div class="calscroll">
-                <iframe src="/pages/index/cal" frameborder="0" id="ifm2"></iframe>
+                <iframe src="/pages/index/cal" frameborder="0" id="ifm"></iframe>
             </div>
         </div>
     </div>
@@ -2279,7 +2272,7 @@
         </table>
         <div class="calinner">
             <div class="calscroll">
-                <iframe src="/pages/index/onewaycal" frameborder="0" id="ifm"></iframe>
+                <iframe src="/pages/index/onewaycal" frameborder="0" id="ifm1"></iframe>
             </div>
         </div>
     </div>
@@ -2304,7 +2297,7 @@
         </table>
         <div class="calinner">
             <div class="calscroll">
-                <iframe src="/pages/index/multical" frameborder="0" id="ifm1"></iframe>
+                <iframe src="/pages/index/multical" frameborder="0" id="ifm2"></iframe>
             </div>
         </div>
     </div>
