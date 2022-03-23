@@ -1,21 +1,21 @@
 package com.project.jinair.controller.api.schedule;
 
 import com.project.jinair.ifs.CrudInterface;
-import com.project.jinair.model.entity.schedule.TbReservation;
 import com.project.jinair.model.enumclass.PaymentStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.schedule.ReserveApiRequest;
 import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
-import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import com.project.jinair.service.reservation.ReservationApiLogicService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -54,10 +54,29 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     @PersistenceContext
     private EntityManager em;
 
-    public Long searchperson(){
-        List date = em.createQuery("select count(r.reIndex) from TbReservation r where (r.reSchStartTime, 'yyyy-mm-dd') = today").getResultList();
+    @GetMapping("/resultIndex")
+    public ArrayList<Long> searchperson(){
 
-        return null;
+        ArrayList<Long> day = new ArrayList();
+
+        LocalDate ddd = LocalDate.of(2022,3,1);
+        LocalDate lll = LocalDate.of(2022,3,31);
+
+        for (LocalDate i = ddd; i.isBefore(lll); i = i.plusDays(1)){
+
+            LocalDateTime date = LocalDateTime.of(i, LocalTime.MIDNIGHT);
+            LocalDateTime maxDate = LocalDateTime.of(i, LocalTime.MAX);
+
+            Query query = em.createQuery("select count(r.reIndex) from TbReservation r where r.reSchStartTime between :startDate and :endDate");
+            query.setParameter("startDate", date);
+            query.setParameter("endDate", maxDate);
+
+            Long p = (Long) query.getSingleResult();
+            day.add(p);
+        };
+
+        System.out.println(day);
+        return day;
     }
 
     @GetMapping("/list/{startIdx}/{endIdx}") // http://localhost:8080/api/reservation/list
