@@ -428,7 +428,7 @@
                             <td>
                                 <select name="sel_coupon" id="sel_coupon" placeholder="선택">
                                     <option value="undefined">선택</option>
-                                    <option v-for="dto in sel_coupon" v-bind:value="dto.ucDiscount">{{dto.ucDesc}}</option>
+                                    <option v-for="dto in sel_coupon" v-bind:value="dto.ucDiscount" v-bind:value2="dto.ucCode">{{dto.ucDesc}}</option>
                                 </select>
                                 <input type="button" value="적용" class="butt_apply cursor" id="checkBut">
                             </td>
