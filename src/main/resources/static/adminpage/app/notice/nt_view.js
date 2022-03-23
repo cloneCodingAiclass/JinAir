@@ -96,12 +96,10 @@ $(function () {
 });
 
 
-(function ($){
-    console.log("url : "+$(location).attr('href'));
 
-    console.log($(location).attr('href').split('/')[6]);
+(function ($){
     let idx = $(location).attr('href').split('/')[6];
-    console.log(idx);
+
     let notiView = new Vue({
         el : '#notiView',
         data : {
@@ -110,7 +108,6 @@ $(function () {
     })
 
     search(idx);
-
     function search(idx){
         console.log("index : " + idx);
         $.get("/api/notify/"+idx, function (response){
@@ -119,12 +116,12 @@ $(function () {
         })
     }
 
-    $("#delete").click( () => {
-        deletenoti();
+    $("#delete").click(() => {
+        deletenoti(idx);
         location.href = `/pages/admin/notice`;
     })
 
-    function deletenoti(){
+    function deletenoti(idx){
         $.ajax({
             url: `/api/notify/`+idx,
             method: "DELETE",
@@ -133,7 +130,6 @@ $(function () {
     }
 
 })(jQuery)
-
 
 $(() => {
     $('.modal_container').hide();
@@ -146,3 +142,4 @@ $(() => {
         $(".modal_container").css("display", "none");
     })
 })
+

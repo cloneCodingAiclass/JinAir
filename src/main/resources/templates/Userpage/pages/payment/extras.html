@@ -354,7 +354,7 @@
                                         <li class="font_col">여행 예정인 국가 중 보험 인수 제한 국가가 포함되어 있을 경우 보험 가입이 불가능 합니다.
                                         </li>
                                     </ul>
-                                    <a href="restrictedCountry.html" target="_blank">
+                                    <a href="/extras/restricted" target="_blank">
                                         <div class="limit cursor">보험인수 제한 국가</div>
                                     </a>
                                     <hr>
@@ -396,7 +396,7 @@
                                         <th:block th:each="passengerInfo6, i6 : ${reserveApiResponse}" th:if="${i6.count % 2 != 0}">
                                             <tr>
                                                 <td class="normal"><label th:for="'check_ins_'+${i6.index}">
-                                                    <input type="checkbox" class="ins_check" th:name="'check_ins_'+${i6.index}" th:id="'check_ins_'+${i6.index}">
+                                                    <input type="checkbox" class="ins_check" th:name="'check_ins_'+${i6.index}" th:id="'ins_check_'+${i6.index}">
                                                     <span th:id="'name'+${i6.index}">[[${passengerInfo6.reFirstName}]]/[[${passengerInfo6.reLastName}]]</span></label></td>
                                                 <td class="normal">여</td>
                                                 <td class="normal bir_date">
@@ -453,17 +453,17 @@
                                 </div>
                                 <div class="insContent2 insContent">
                                     <ul>
-                                        <li><input type="checkbox" id="agree_check0"><span>본인은 본 보험계약의 피보험자로 되는 것에
+                                        <li><label for="agree_check0"><input type="checkbox" id="agree_check0" class="ins2_checkbox"><span>본인은 본 보험계약의 피보험자로 되는 것에
                                                     동의하며, 만일 본인이 타 여행객을 대신하여 보험 가입 절차를 이행하는 경우 본인은 여행 계약 체결에 대하여 타
                                                     여행객으로부터 적법하게 대리권을 수여 받았음을 확인합니다. 만약 대리권이 존재하지 않는 경우, 그 범위 내에서
                                                     단체보험계약이 일부 무효로 되거나 보험 사고시 보험금 지급이 거절될 수 있다는 점을 충분히 이해하였습니다.</span>
-                                        </li>
-                                        <li><label for="agree_check1"><input type="checkbox"
+                                        </label></li>
+                                        <li><label for="agree_check1"><input type="checkbox" class="ins2_checkbox"
                                                                              id="agree_check1"><span>가입 전 보험계약 중요 안내 사항을
                                                         확인하였습니다.</span></label>
                                             <div class="noti cursor">보험계약 중요 안내 사항</div>
                                         </li>
-                                        <li><label for="agree_check2"><input type="checkbox"
+                                        <li><label for="agree_check2"><input type="checkbox" class="ins2_checkbox"
                                                                              id="agree_check2"><span>여행보험 가입규약 및 개인정보 제 3자 제공 동의를
                                                         확인하였습니다.</span></label>
                                             <div class="agree cursor">가입 규약 및 제 3자 제공 동의</div>
@@ -1138,7 +1138,7 @@
                 <div class="modal_service_app_wrap">
                     <div class="modal_title">
                         <span class="tit_txt">부가 서비스 신청내역</span>
-                        <span class="tit_close"><img src="/userpage/lib/img/close.png" alt="닫기" width="30px"></span>
+                        <span class="tit_close cursor"><img src="/userpage/lib/img/close.png" alt="닫기" width="30px"></span>
                     </div>
                     <div class="modal_contents">
                         <div class="modal_table_wrap">
@@ -1441,8 +1441,8 @@
                                     </li>
                                 </ul>
                                 <p style="font-weight: bold; font-size: 15px;">* 참고</p>
-                                <p><a href="../serviceCount/airport/baggage/baggage.html"
-                                      target='_blank'>지니키친(사전주문기내식)</a><a href="../index/mypage/faq_list.html"
+                                <p><a :href="/pages/index/baggage"
+                                      target='_blank'>지니키친(사전주문기내식)</a><a :href="/pages/index/faqList"
                                                                           target='_blank'>자주 묻는 질문(FAQ)</a></p>
                             </div>
                         </div>

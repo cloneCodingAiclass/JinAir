@@ -503,7 +503,6 @@ $(function () {
       $(".insContent1").css("display", "none");
       $(".insContent2").css("display", "block");
       for (let i = 0; i < $(".ins_check").length * 2; i++) {
-
         if(nameArr[i] != null) {
           str7 += '<div class="nameBox" id="modal_ins_people_' + i + '">'
           str7 += '<input type="checkbox" class="checkbox insCheckBox" id="check_ins_' + i + '"><span>' + nameArr[i] + '</span>'
@@ -605,7 +604,6 @@ $(function () {
   }
   cookies = cookies.slice(0, -1); // /api/reservation
   let indexArr = cookies.split(",")
-
 
   // multiway
   for (let i = 0; i < indexArr.length; i++) {
@@ -1099,16 +1097,16 @@ $(function () {
     reTotal1[i] = $("#re_total1").val();
     reTotal2[i] = $("#re_total2").val();
 
-    if($("#check_ins_" + i).is(":checked") == true) {
+    if($("#ins_check_" + i).is(":checked") == true) {
       nameArr[i] = $("#name" + i).text();
     } else {
       delete nameArr[i];
       delete priceArr[i];
     }
 
-    $("#check_ins_" + i).change(function() {
+    $("#ins_check_" + i).change(function() {
       // 가입자명 체크박스 체크 시 보험종료 선택 가능
-      if ($("#check_ins_" + i).is(":checked") == true) {
+      if ($("#ins_check_" + i).is(":checked") == true) {
         $("#select_product_" + i).prop('disabled', false);
         priceArr[i] = Number($("#select_product_" + i).val());
         ins_totalPrice += priceArr[i]
@@ -1116,7 +1114,7 @@ $(function () {
         ins_join_num += 1;
         $("#ins_join_num").text(ins_join_num);
         $(".insurance_price .int_tot_price").text(ins_totalPrice.toLocaleString('ko-KR'));
-      } else if ($("#check_ins_" + i).is(":checked") == false) {
+      } else if ($("#ins_check_" + i).is(":checked") == false) {
         $("#select_product_" + i).prop('disabled', true);
         ins_totalPrice -= priceArr[i]
         delete nameArr[i];
@@ -1161,6 +1159,12 @@ $(function () {
   let seat_price = 0;
   let bagg_price = 0;
   let finalTotalPrice = 0;
+  let baggIndex = [personNumber];
+  let insIndex = [personNumber];
+  let jourPrice1 = [personNumber];
+  let jourPrice2 = [personNumber];
+  let flightPrice = 0;
+  let flightArr = [personNumber];
 
   /*부가서비스 신청내역*/
   function optionTotalPrice(personNumber) {
@@ -1168,7 +1172,7 @@ $(function () {
     for (let i = 0; i < personNumber; i++) {
       seatNumArr1[i] = "";seatNumArr2[i] = "";seatPriceArr1[i] = 0;seatPriceArr2[i] = 0;baggArr1[i] = "";baggArr2[i] = "";
       baggPriceArr1[i] = 0;baggPriceArr2[i] = 0;insArr[i] = "";insPriceArr[i] = 0;seatTypeArr1[i] = "";seatTypeArr2[i] = "";
-
+      flightArr[i] = "";jourPrice1[i] = "";jourPrice2[i] = ""
       total_price = 0;
       seat_price = 0;
       bagg_price = 0;
@@ -1182,7 +1186,7 @@ $(function () {
       baggPriceArr1[i] = Number($("#bagg_price1_" + i).text());
       baggPriceArr2[i] = Number($("#bagg_price2_" + i).text());
 
-      if ($("#check_ins_" + i).is(":checked")) {
+      if ($("#ins_check_" + i).is(":checked")) {
         insArr[i] = $("#select_product_" + i + " option:selected").text();
         insPriceArr[i] = Number($("#select_product_"+i).val());
         console.log("보험ㅇ룡료뇨오러ㅏ농러낭ㄹ.ㄴ다ㅓㄴㅇ" + i + " : " + insPriceArr[i]);
@@ -1257,21 +1261,44 @@ $(function () {
       total_price += ins_totalPrice;
     }
 
+    for (let i = 0; i < personNumber; i++) {
+      console.log("구간1좌석가격" + i + " : " + seatPriceArr1[i])
+      console.log("구간2좌석가격" + i + " : " + seatPriceArr2[i])
+      console.log("보험" + i + " : " + insPriceArr[i])
+      console.log("구간1수하물가격" + i + " : " + baggPriceArr1[i])
+      console.log("구간2수하물가격" + i + " : " + baggPriceArr2[i])
+      console.log("운임금액" + i + " : " + flightArr[i])
+      console.log("-------------------------------------")
+
+
+    }
 
     for (let i = 0; i < personNumber; i++) {
-      console.log("구간1좌석번호" + i + " : " + seatNumArr1[i])
-      console.log("구간2좌석번호" + i + " : " + seatNumArr2[i])
-      console.log("보험" + i + " : " + insArr[i])
-      console.log("구간1수하물" + i + " : " + baggArr1[i])
-      console.log("구간2수하물" + i + " : " + baggArr2[i])
-      console.log("-------------------------------------")
+      if (baggArr1[i] == '초과수하물 5KG(+KRW 8,000)') {baggIndex[i] = Number(13);}
+      else if(baggArr1[i] == '10KG(+KRW 16,000)') {baggIndex[i] = Number(20);}
+      else if(baggArr1[i] == '15KG(+KRW 24,000)') {baggIndex[i] = Number(21);}
+      else if(baggArr1[i] == '20KG(+KRW 32,000)') {baggIndex[i] = Number(22);}
+      if (insArr[i] == '실속형') {insIndex[i] = Number(1);}
+      else if(insArr[i] == '표준형') {insIndex[i] = Number(2);}
+      else if(insArr[i] == '고급형') {insIndex[i] = Number(3);}
+    }
+
+    for (let i = 0; i < personNumber; i++) {
+      console.log("수하물번홍ㅇㅇㅇㅇㅇㅇ" + baggIndex[i])
+      console.log("보험 번홍ㅇㅇㅇㅇㅇ" + insIndex[i])
+      console.log("좌석 번홍ㅇㅇㅇㅇ" + seatNumArr1[i])
+      console.log("인덱스 번홍ㅇㅇㅇㅇ" + indexArr[i])
     }
 
     // 항공 운임금액
-    let flightPrice = 0;
     $(".flight_price").each(function() {
       flightPrice += Number($(this).val());
     })
+
+    for (let i = 0; i < $(".flight_price").length; i++) {
+      flightArr[i] = Number($(this).val());
+    }
+
     $("#flightPrice").html(flightPrice.toLocaleString("ko-KR"));
     // 세금
     let flightTax = 0;
@@ -1299,95 +1326,108 @@ $(function () {
       $("#option_price_list #option_bagg").html("초과수하물")
       $("#option_price_list #option_bagg_price").html(bagg_price.toLocaleString('ko-KR'))
     } if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
-      $("#option_price_list #option_ins").html("보험료")
-      $("#option_price_list #option_ins_price").html(ins_totalPrice.toLocaleString('ko-KR'))
-    }
+        $("#option_price_list #option_ins").html("보험료")
+        $("#option_price_list #option_ins_price").html(ins_totalPrice.toLocaleString('ko-KR'))
+      } else {
+        $("#option_price_list #option_ins").remove();
+        $("#option_price_list #option_ins_price").remove();
+      }
   }
 
-  // $("#optional_ok").on("click", function() {
-  //   if(href[5] == 'oneway') {
-  //     onewayData();
-  //     location.href = "/pages/payment/twoway"
-  //   } else if(href[5] == 'multiway') {
-  //     location.href = '/pages/payment/multiway'
-  //   } else if(href[5] == 'twoway') {
-  //     location.href = '/pages/payment/twoway'
-  //   }
-  // })
 
 
-  let baggIndex = 0;
-  let insIndex = 0;
+  $("#optional_ok").click( () => {
+    if(href[5] == 'oneway') {
+      onewayData();
+    } else if(href[5] == 'multiway') {
+      multiwayData()
+    } else if(href[5] == 'twoway') {
+      towayData();
+    }
+  })
 
+
+  let jsonData = new Array();
   function onewayData() {
     for (let i = 0; i < personNumber; i++) {
-      let jsonData;
-      for (let i = 0; i < personNumber; i++) {
-        if (baggArr1[i] == '초과수하물 5KG(+KRW 8,000)') {baggIndex = 13;}
-        else if(baggArr1[i] == '10KG(+KRW 16,000)') {baggIndex = 20;}
-        else if(baggArr1[i] == '15KG(+KRW 24,000)') {baggIndex = 21;}
-        else if(baggArr1[i] == '20KG(+KRW 32,000)') {baggIndex = 22;}
-        if (insArr[i] == '실속형') {insIndex = 1;}
-        else if(baggArr1[i] == '표준형') {insIndex = 2;}
-        else if(baggArr1[i] == '고급형') {insIndex = 3;}
-      }
       if (i % 2 == 0) {
-        jsonData = {
-          data : {
-            reIndex: indexArr[i], reSeatDetail: seatNumArr1[i], reBaggageidx: baggIndex,
-            reInsuranceidx : insIndex, reTotal: finalTotalPrice
-          }
+        let finalarr = new Object();
+        finalarr.reIndex = indexArr[i];
+        finalarr.reSeatDetail = seatNumArr1[i];
+        finalarr.reBaggageidx = Number(baggIndex[i]);
+        finalarr.reInsuranceidx = Number(insIndex[i]);
+        finalarr.reTotal = finalTotalPrice;
+        jsonData.push(finalarr);
+      }}
+      $.ajax({
+        url : "/api/reservation/paymentsUpdate",
+        type : "PUT",
+        data : JSON.stringify(jsonData),
+        dataType : "text",
+        contentType : "application/json",
+        success(jsonData) {
+          location.href = "/pages/payment/oneway"
+        },
+        error(error) {
+          alert(error);
         }
-        $.ajax({
-          url : "/api/reservation", type : "PUT", data : jsonData, dataType : "text"
-        });
-      }
-    }
+      });
   }
 
-  function multiway() {
+  let jsonData2 = new Array();
+  function multiwayData() {
     for (let i = 0; i < personNumber; i++) {
-      let jsonData;
-      if (i % 2 == 0) {
-        if (baggArr1[i].val() == '초과수하물 5KG(+KRW 8,000)') {baggIndex = 13;}
-        else if(baggArr1[i].val() == '10KG(+KRW 16,000)') {baggIndex = 20;}
-        else if(baggArr1[i].val() == '15KG(+KRW 24,000)') {baggIndex = 21;}
-        else if(baggArr1[i].val() == '20KG(+KRW 32,000)') {baggIndex = 22;}
-        if (baggArr2[i].val() == '초과수하물 5KG(+KRW 8,000)') {baggIndex = 13;}
-        else if(baggArr2[i].val() == '10KG(+KRW 16,000)') {baggIndex = 20;}
-        else if(baggArr2[i].val() == '15KG(+KRW 24,000)') {baggIndex = 21;}
-        else if(baggArr2[i].val() == '20KG(+KRW 32,000)') {baggIndex = 22;}
-        if (insArr[i].val() == '실속형') {insIndex = 1;}
-        else if(baggArr1[i].val() == '표준형') {insIndex = 2;}
-        else if(baggArr1[i].val() == '고급형') {insIndex = 3;}
-      } else {
-        if (insArr[i].val() == '실속형') {insIndex = 1;}
-        else if(baggArr1[i].val() == '표준형') {insIndex = 2;}
-        else if(baggArr1[i].val() == '고급형') {insIndex = 3;}
+      let finalarr2 = new Object();
+      finalarr2.reIndex = indexArr[i];
+      finalarr2.reSeatDetail = seatNumArr1[i];
+      finalarr2.reBaggageidx = Number(baggIndex[i]);
+      finalarr2.reInsuranceidx = Number(insIndex[i]);
+      finalarr2.reTotal = finalTotalPrice;
+      jsonData2.push(finalarr2);
+    }
+    $.ajax({
+      url : "/api/reservation/paymentsUpdate",
+      type : "PUT",
+      data : JSON.stringify(jsonData2),
+      dataType : "text",
+      contentType : "application/json",
+      success(jsonData2) {
+        location.href = "/pages/payment/multiway"
+      },
+      error(error) {
+        alert(error);
       }
-
-        jsonData = {
-          data : {
-            reIndex: indexArr[i], reSeatDetail: seatNumArr1[i], reBaggageidx: baggIndex,
-            reInsuranceidx : insIndex, reTotal: finalTotalPrice
-          }
-        }
-        $.ajax({
-          url : "/api/reservation", type : "PUT", data : jsonData, dataType : "text"
-        });
-      }
+    });
   }
-
+  let jsonData3 = new Array();
+  function towayData() {
+    for (let i = 0; i < personNumber; i++) {
+      let finalarr2 = new Object();
+        finalarr2.reIndex = indexArr[i];
+        finalarr2.reSeatDetail = seatNumArr1[i];
+        finalarr2.reBaggageidx = Number(baggIndex[i]);
+        finalarr2.reInsuranceidx = Number(insIndex[i]);
+        finalarr2.reTotal = finalTotalPrice;
+      jsonData3.push(finalarr2);
+    }
+    $.ajax({
+      url : "/api/reservation/paymentsUpdate",
+      type : "PUT",
+      data : JSON.stringify(jsonData3),
+      dataType : "text",
+      contentType : "application/json",
+      success(jsonData3) {
+        location.href = "/pages/payment/toway"
+      },
+      error(error) {
+        alert(error);
+      }
+    });
+  }
 
 
 
   // /*부가서비스 신청내역 끝*/
-
-  // let area1 = $("#go_area1").match(/\(.*\)/gi);
-  // let test = '(안녕하세요)'
-  // let test2 = test.match(/\(.*\)/gi);
-  // console.log(area1);
-  // console.log("테ㅔ스트ㅡ!!!!!!" + test2);
 
   $(".ins_join_butt").on("click", function () {
     optionTotalPrice(personNumber)
@@ -1395,15 +1435,6 @@ $(function () {
     if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
       $("#modal_service_app_wrap").fadeIn();
       $(".modal_join_ins").fadeIn();
-      for (let i = 0; i < personNumber; i++) {
-        $("#select_ins_num_"+i).css("display", "block");
-        $("#ins_num_"+i).val($("#select_product_" + i +" option:selected").text());
-      }
-    } else {
-      for (let i = 0; i < personNumber; i++) {
-        $("#select_ins_num_"+i).css("display", "none");
-        $("#ins_num_"+i).val("");
-      }
     }
   });
 
@@ -1425,6 +1456,10 @@ $(function () {
     }
 
   })
+
+  $(".fix_bott .img").on("click", function() {
+    optionTotalPrice(personNumber);
+  })
   confirmOptional();
 
   function confirmOptional() {
@@ -1432,11 +1467,9 @@ $(function () {
     let str8 = "";
     let personName = [personNumber];
     let name = $("#person_name0").text()
-    console.log("이르ㅜㅁ아룽ㄴ머ㅏ룽ㅁ너 : " + name);
     for (let i = 0; i < personNumber; i++) {
       personName[i] = $("#person_name"+i).text()
       if (i % 2 == 0) {
-        console.log("이름을아눌아눌이ㅓㅏ눌인/ㄹ : " + personName[i]);
         str8 += '<thead id="modal_option_people_info_'+i+'"></thead>'
         str8 += '<tbody id="modal_option_section1_'+i+'"></tbody>'
         str8 += '<tbody id="modal_option_section2_'+i+'"></tbody>'
@@ -1489,8 +1522,6 @@ $(function () {
             }
             option_table_body1[i] += '</tr>'
           }
-
-
         if (href[5] != 'oneway') { // 편도가 아닐 때
           // 사전좌석, 수하물 2개 다 신청 시
           if ((seatNumArr2[i+1] != null && typeof seatNumArr2[i+1] != undefined && seatPriceArr2[i+1] != 0) &&
@@ -1527,26 +1558,28 @@ $(function () {
               option_table_body2[i] += '</tr>'
             }
         }
-        if (insArr[i] != null && $("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
+        // 보험
+        if (insArr[i] != null && $("#agree_check0, #agree_check1, #agree_check2").is(":checked")) {
           option_table_body2[i] += '<tr><td class="b_r">전 구간</td>'
           option_table_body2[i] += '<td><div class="item_wrap1"><p class="img img_ins"></p>'
           option_table_body2[i] += '<p class="txt" id="modal_option_ins_' + i + '">여행보험 (' + insArr[i] + ')</p></div></td>'
           option_table_body2[i] += '<td class="left" id="modal_option_ins_price_' + i + '">KRW ' + insPriceArr[i].toLocaleString('ko-KR') + '</td></tr>'
         }
+        console.log("보험ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ" + "insArr[" + i + "]" + " : " + insArr[i] + insPriceArr[i])
+
       }
     }
     for(let i = 0;  i < personNumber; i++) {
       $("#modal_option_people_info_"+i).html(option_table_head[i]);
       $("#modal_option_section1_"+i).html(option_table_body1[i]);
-      if (href[5] != 'oneway') {
-        $("#modal_option_section2_"+i).html(option_table_body2[i]);
-      }
+      $("#modal_option_section2_"+i).html(option_table_body2[i]);
     }
 
   }
 
   $(".fix_next_butt, .menu4").on("click", () => {
     confirmOptional();
+    optionTotalPrice(personNumber);
     $("#modal_service_app_wrap").fadeIn();
   });
 
@@ -1580,7 +1613,7 @@ $(function () {
     $(".info_table_wrap1").css("overflow", "scroll");
     $(".info_table_wrap1").css("overflow-x", "hidden");
     $(".info_table_wrap1").animate({ scrollTop: 300 }, 600);
-    $("#minus1").css("display", "none");
+    $("#plus1").css("display", "none");
     $("#minus1").css("display", "inline-block");
   })
   $("#minus1").on('click', () => {
@@ -1872,14 +1905,6 @@ $(() => {
     $("#addmodal_autoCheck_noti").fadeOut();
     $("#modal_service_app_wrap").fadeIn();
     $("auto_check").prop(":checked", false);
-  })
-
-  $("#modal_service_app_wrap .modal_butt_ok").on("click", () => {
-    if ($("#auto_check").is(":checked")) {
-      $(location).attr("href", "/pages/payment");
-    } else {
-
-    }
   })
 
   $(".modal_join_ins .modal_join_butt input").on("click", () => {

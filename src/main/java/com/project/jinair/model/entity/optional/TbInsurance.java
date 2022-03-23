@@ -28,6 +28,4 @@ public class TbInsurance {
     private Long isIndex;
     private String isType;
     private BigDecimal isPrice;
-    @Enumerated(EnumType.STRING)
-    private ApplyStatus isStatus;
 }

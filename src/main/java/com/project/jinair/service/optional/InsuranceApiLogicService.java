@@ -24,7 +24,6 @@ public class InsuranceApiLogicService implements CrudInterface<InsuranceApiReque
         TbInsurance tbInsurance = TbInsurance.builder()
                 .isType(insuranceApiRequest.getIsType())
                 .isPrice(insuranceApiRequest.getIsPrice())
-                .isStatus(insuranceApiRequest.getIsStatus())
                 .build();
         TbInsurance newTbInsurance = tbInsuranceRepository.save(tbInsurance);
         return Header.OK(response(newTbInsurance));
@@ -49,7 +48,6 @@ public class InsuranceApiLogicService implements CrudInterface<InsuranceApiReque
         return tbInsurance.map(Insurance -> {
                     Insurance.setIsType(insuranceApiRequest.getIsType());
                     Insurance.setIsPrice(insuranceApiRequest.getIsPrice());
-                    Insurance.setIsStatus(insuranceApiRequest.getIsStatus());
 
                     return Insurance;
                 }).map(Insurance -> tbInsuranceRepository.save(Insurance))
@@ -73,7 +71,6 @@ public class InsuranceApiLogicService implements CrudInterface<InsuranceApiReque
                 .isIndex(tbInsurance.getIsIndex())
                 .isType(tbInsurance.getIsType())
                 .isPrice(tbInsurance.getIsPrice())
-                .isStatus(tbInsurance.getIsStatus())
                 .build();
         return insuranceApiResponse;
     }
