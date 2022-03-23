@@ -88,18 +88,6 @@ $(() => {
     console.log(reserNum)
     $("#modal_fare_rules .butt_ok").on("click", () => {
         if ($("#modal_fare_rules #checkBox2").is(":checked")) {
-            // let item_name = "초코파이";
-            // let quantity = 2;
-            // let total_amount = 2200;
-            // let vat_amount = 200;
-            // let tax_free_amount = 0;
-            //
-            // let arr = new Array();
-            // for (i = 0; i < quantity; i++) {
-            //     let data = new Object();
-            //     data.reTotal = 100000;
-            //     arr.push(data);
-            // }
             let final = new Array();
             $('.cookies').each(function (i) {
                 let reIndex = $('.cookies').eq(i).attr("value");
@@ -108,10 +96,10 @@ $(() => {
                 finalarr.reTotal = price;
                 finalarr.rePayment = "KAKAOPAY";
                 finalarr.reReserNum = reserNum;
-                finalarr.reExtraSale =
+                finalarr.reExtraSale = $('#sel_coupon option:selected').attr("value2");
+                finalarr.reStatus = "PaymentFinished";
                 final.push(finalarr);
             });
-            console.dir(final);
 
             $.ajax({
                 url: "/api/reservation/paymentsUpdate",
@@ -119,16 +107,16 @@ $(() => {
                 data: JSON.stringify(final),
                 dataType: "text",
                 contentType: "application/json",
+                async: false,
                 success: function (final) {
-                    location.href="/pages/pay/"+reserNum;
-                },
-                    error(error) {
-                        console.log('error')
-                        console.dir(error)
-                    }
-                });
-                $("#modal_fare_rules").fadeOut();
-                $("body").css("overflow", "scroll");
+                    location.href = "/pages/pay/" + reserNum;
+                },error(error) {
+                    console.log('error')
+                    console.dir(error)
+                }
+            });
+
+            $("#modal_fare_rules").fadeOut();
         }else {
             $("#modal_fare_rules > .modal_conf_ok_wrap").fadeIn();
         }

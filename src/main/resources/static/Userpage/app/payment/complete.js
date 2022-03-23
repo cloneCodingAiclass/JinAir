@@ -3,6 +3,38 @@
 $(function () {
     // 예약 인원수 확인
 
+    let cupo = $('.sale').attr("value");
+    coupon(cupo);
+
+    function coupon(cupo){
+        let ucIndex = $('.sale').attr("id");
+        console.log(ucIndex);
+        console.log(cupo);
+        let finalCoupon
+            finalCoupon = {
+                data: {
+                    ucUserindex: ucIndex,
+                    ucCode: cupo,
+                    ucIsUse: "Used",
+                    ucTotcoupon: 0
+                }
+            }
+        $.ajax({
+            url: "/api/userCoupon/update",
+            type: "PUT",
+            data : JSON.stringify(finalCoupon),
+            dataType: "text",
+            async: false,
+            contentType : "application/json",
+            success(finalCoupon) {
+                console.log(error)
+            },
+            error(error) {
+                alert(error);
+            }
+        })
+    }
+
     let sumResult = 0;
     $('.cookies').each(function (i){
         let num = $('.cookies').eq(i).attr("value");
@@ -148,46 +180,12 @@ $(function () {
 
     $('#today, #reserDay').text(today);
 
-    // let pay = $('#pay').attr("value")
-    // console.log(pay)
-    // if(pay == "KAKAOPAY"){
-    //     $('#pay').html("카카오페이")
-    // }
-
     // 총 결제금액 찍어주기
     let money = $('#totalPrice').attr("value");
     $('#totalPrice').text(" " + Math.ceil(money).toLocaleString() + "원");
 
-    // 최종 업데이트
-    $('.cookies').each(function (i) {
-        let val = $('.cookie').eq(i).attr("value");
-        console.log(val);
-        finalUpdate(val);
-    });
+    // 적립 데이터 확인
 
-    function finalUpdate(val){
 
-        let jsonData = {
-            data :{
-                reIndex : val,
-                reStatus : "PaymentFinished"
-            }
-        }
-
-        $.ajax({
-            url: "/api/reservation/paymentsUpdate",
-            type: "PUT",
-            data: JSON.stringify(jsonData),
-            dataType: "text",
-            contentType: "application/json",
-            success: function (jsonData) {
-                alert("결제 완료")
-                console.log(jsonData);
-            },
-            error(error) {
-                console.dir(error)
-            }
-        });
-    }
 
 });

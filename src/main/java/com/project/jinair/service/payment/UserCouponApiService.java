@@ -11,7 +11,6 @@ import com.project.jinair.model.network.response.payment.UsercouponApiResponse;
 import com.project.jinair.repository.MemberRepository;
 import com.project.jinair.repository.TbUsercouponRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,6 +21,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.project.jinair.model.enumclass.CouponStatus.Unused;
 
 @Service
 @RequiredArgsConstructor
@@ -176,5 +177,20 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
         }else{
             return null;
         }
+    }
+
+    public Header<UsercouponApiResponse> updateCoupon(Header<UsercouponApiRequest> request) {
+        UsercouponApiRequest usercouponApiRequest = request.getData();
+        Optional<TbUsercoupon> tbUsercoupons = tbUsercouponRepository.findByUcCodeAndUcUserindex(usercouponApiRequest.getUcCode(), usercouponApiRequest.getUcUserindex());
+
+        return tbUsercoupons.map(coupon -> {
+                    coupon.setUcIsUse(usercouponApiRequest.getUcIsUse());
+                    coupon.setUcTotcoupon(usercouponApiRequest.getUcTotcoupon());
+                    return coupon;
+                }).map(coupon -> tbUsercouponRepository.save(coupon))
+                .map(coupon -> response(coupon))
+                .orElseGet(
+                        () -> Header.ERROR("NO DATA")
+                );
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TbUsercouponRepository extends JpaRepository<TbUsercoupon, Long> {
@@ -22,4 +23,5 @@ public interface TbUsercouponRepository extends JpaRepository<TbUsercoupon, Long
     List<TbUsercoupon> findByUcCode(String code);
 
 
+    Optional<TbUsercoupon> findByUcCodeAndUcUserindex(String code, Long id);
 }

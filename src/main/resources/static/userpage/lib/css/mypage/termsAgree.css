@@ -626,17 +626,18 @@ body{
 .termsAgree_container > .join_step .step1::after{
     content: "";
     margin-left: 165px;
-    top: 251px;
+    top: 266px;
     width: 26px;
     height: 70px;
     position: absolute;
+    background: url('/userpage/lib/img/ico_member.png') -30px -200px;
 }
 .termsAgree_container > .join_step > .step2{
-    background: url('/userpage/lib/img/ico_member.png') -30px -200px;
     width: 175px;
     padding-left: 25px;
     height: 100%;
-    border: 1px solid gray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -645,18 +646,19 @@ body{
 .termsAgree_container > .join_step .step2::after{
     content: "";
     margin-left: 139px;
-    top: 251px;
     width: 26px;
     height: 70px;
     position: absolute;
-    background: url('/userpage/lib/img/ico_member.png') 0 -200px;
+    top: 265px;
+    background: url('/userpage/lib/img/ico_member.png') -2px -200px;
 }
 .termsAgree_container > .join_step > .step3{
     margin-right: 50px;
     padding-left: 25px;
-    width: 175px;
+    width: 171px;
     height: 100%;
-    border: 1px solid gray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -665,11 +667,11 @@ body{
 .termsAgree_container > .join_step .step3::after{
     content: "";
     margin-left: 139px;
-    top: 251px;
+    top: 266px;
     width: 26px;
     height: 70px;
     position: absolute;
-    background: url('/userpage/lib/img/ico_member.png') 0 -200px;
+    background: url('/userpage/lib/img/ico_member.png') -1px -201px;
 }
 .termsAgree_container > .join_step .step_text{
     font-size: 1rem;
