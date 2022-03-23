@@ -138,6 +138,7 @@ $(() => {
 
 
 $(() => {
+
     // 출발지 스케줄 검색에 따른 도착지 막기(실패)
     let itemList = new Vue({
         el : '#itemList',
@@ -163,13 +164,91 @@ $(() => {
         })
     }
 
+
+
     // 최저가 항공권 검색
     let itemList1 = new Vue({
         el : '#itemList1',
         data : {
-            itemList1 : {}
+            itemList1 : {},
+            itemList2 : {},
+            seatsNum : 0
         },
         methods:{
+            form(){
+                let inonesoo = $('.person_num').html().split(' ');
+                let modiAdult = 0;
+                let modiChild = 0;
+                let modiBaby = 0;
+                if(inonesoo.length == 2){
+                    if(inonesoo[0] == '소아'){
+                        modiChild = Number(inonesoo[1])
+                    }else if(inonesoo[0] == '성인'){
+                        modiAdult = Number(inonesoo[1])
+                    }
+                }else if(inonesoo.length == 4){
+                    if(inonesoo[2] == '유아'){
+                        modiAdult = Number(inonesoo[1]);
+                        modiBaby = Number(inonesoo[3]);
+                    }else if(inonesoo[2] == '소아'){
+                        modiAdult = Number(inonesoo[1]);
+                        modiChild = Number(inonesoo[3])
+                    }
+                }else if(inonesoo.length == 6){
+                    modiAdult = Number(inonesoo[1]);
+                    modiChild = Number(inonesoo[3])
+                    modiBaby = Number(inonesoo[5]);
+                }
+                if($('.seatsPrice').html() != '예약마감'){
+                    let f = document.createElement('form');
+                    let obj1;
+                    obj1 = document.createElement('input');
+                    obj1.setAttribute('type', 'hidden');
+                    obj1.setAttribute('name', 'schDeparturePoint');
+                    obj1.setAttribute('value', itemList1.itemList1[0].schDeparturePoint);
+                    f.appendChild(obj1);
+
+                    let obj2;
+                    obj2 = document.createElement('input');
+                    obj2.setAttribute('type', 'hidden');
+                    obj2.setAttribute('name', 'schArrivalPoint');
+                    obj2.setAttribute('value', itemList1.itemList1[0].schArrivalPoint);
+                    f.appendChild(obj2);
+
+                    let obj3;
+                    obj3 = document.createElement('input');
+                    obj3.setAttribute('type', 'hidden');
+                    obj3.setAttribute('name', 'goDateSelectOptt');
+                    obj3.setAttribute('value', itemList1.itemList1[0].schDepartureDate.substring(0,10));
+                    f.appendChild(obj3);
+
+                    let obj4;
+                    obj4 = document.createElement('input');
+                    obj4.setAttribute('type', 'hidden');
+                    obj4.setAttribute('name', 'AdultNumber');
+                    obj4.setAttribute('value', modiAdult);
+                    f.appendChild(obj4);
+
+                    let obj5;
+                    obj5 = document.createElement('input');
+                    obj5.setAttribute('type', 'hidden');
+                    obj5.setAttribute('name', 'ChildNumber');
+                    obj5.setAttribute('value', modiChild);
+                    f.appendChild(obj5);
+
+                    let obj6;
+                    obj6 = document.createElement('input');
+                    obj6.setAttribute('type', 'hidden');
+                    obj6.setAttribute('name', 'InfantNumber');
+                    obj6.setAttribute('value', modiBaby);
+                    f.appendChild(obj6);
+
+                    f.setAttribute('method', 'post');
+                    f.setAttribute('action', '/pages/getAvailabilityList/oneway');
+                    document.body.appendChild(f);
+                    f.submit();
+                }
+            }
         }
     });
 
@@ -190,10 +269,74 @@ $(() => {
                     itemList1.itemList1 = dataJson.data;
                     $('#itemList1').css('display','block');
                     $('#search_null1').css('display','none');
+                    searchese(itemList1.itemList1[0].schDeparturePoint, itemList1.itemList1[0].schArrivalPoint, itemList1.itemList1[0].schStartTime);
                 }
             }
         })
     }
+
+    function searchese(a, b, c){
+        $.post({
+            url: "/api/reservation/go",
+            data: "schDeparturePoint=" + a + "&schArrivalPoint=" + b + "&goDateSelectOptt=" + c,
+            dataType: "text",
+            success: function (response) {
+                let dataJson1 = JSON.parse(response)
+                if(dataJson1.data == 0){
+                    if(itemList1.itemList1[0].schAirplaneType == 'B777-200ER'){
+                        itemList1.seatsNum = Number(393);
+                    }else if(itemList1.itemList1[0].schAirplaneType == 'B737-800'){
+                        itemList1.seatsNum = Number(189);
+                    }else if(itemList1.itemList1[0].schAirplaneType == 'B737-900'){
+                        itemList1.seatsNum = Number(188);
+                    }
+                }else{
+                    itemList1.itemList2 = dataJson1.data;
+                    if(itemList1.itemList1[0].schAirplaneType == 'B777-200ER'){
+                        if((Number(393) - Number(itemList1.itemList2.length)) <= 0){
+                            $('.button_seats').css('background-color',"rgba(168, 165, 165, 0.2)")
+                            $('.seatsPrice').css('font-size',"20px")
+                            $('.seatsPrice').html('예약마감')
+                            $('.koreaprice').html('')
+                            $('.seats').html('')
+                        }else{
+                            itemList1.seatsNum = (Number(393) - Number(itemList1.itemList2.length));
+                            $('.button_seats').css('background-color',"#fff")
+                            $('.seatsPrice').css('font-size',"18px")
+                            $('.seatsPrice').html(`${itemList1.itemList1[0].schBasicPrice.toLocaleString('ko-KR')}`)
+                            $('.koreaprice').html('KRW')
+                            $('.seats').html(`잔여 ${itemList1.seatsNum} 석!`)
+                        }
+                    }else if(itemList1.itemList1[0].schAirplaneType == 'B737-800'){
+                        if((Number(189) - Number(itemList1.itemList2.length)) <= 0){
+                            $('.button_seats').css('background-color',"rgba(168, 165, 165, 0.2)")
+                            $('.seatsPrice').css('font-size',"20px")
+                            $('.seatsPrice').html('예약마감')
+                            $('.koreaprice').html('')
+                            $('.seats').html('')
+                        }else{
+                            itemList1.seatsNum = (Number(393) - Number(itemList1.itemList2.length));
+
+                        }
+                    }else if(itemList1.itemList1[0].schAirplaneType == 'B737-900'){
+                        if((Number(188) - Number(itemList1.itemList2.length)) <= 0){
+                            $('.button_seats').css('background-color',"rgba(168, 165, 165, 0.2)")
+                            $('.seatsPrice').css('font-size',"20px")
+                            $('.seatsPrice').html('예약마감')
+                            $('.koreaprice').html('')
+                            $('.seats').html('')
+                        }else{
+                            itemList1.seatsNum = (Number(393) - Number(itemList1.itemList2.length));
+
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+
+
 
     // 맞춤 항공권 검색
     let itemList2 = new Vue({

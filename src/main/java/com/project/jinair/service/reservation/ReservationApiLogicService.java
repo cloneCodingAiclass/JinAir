@@ -10,7 +10,7 @@ import com.project.jinair.repository.TbReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -43,6 +43,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .reBaggageidx(reserveApiRequest.getReBaggageidx())
                 .reInsuranceidx(reserveApiRequest.getReInsuranceidx())
                 .reScheduleidx(reserveApiRequest.getReScheduleidx())
+                .reSeatDetail(reserveApiRequest.getReSeatDetail())
                 .reTotal(reserveApiRequest.getReTotal())
                 .reSchBasicPrice(reserveApiRequest.getReSchBasicPrice())
                 .reSchDepPoint(reserveApiRequest.getReSchDepPoint())
@@ -93,6 +94,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                     reserve.setReBaggageidx(reserveApiRequest.getReBaggageidx());
                     reserve.setReInsuranceidx(reserveApiRequest.getReInsuranceidx());
                     reserve.setReScheduleidx(reserveApiRequest.getReScheduleidx());
+                    reserve.setReSeatDetail(reserveApiRequest.getReSeatDetail());
                     reserve.setReTotal(reserveApiRequest.getReTotal());
                     reserve.setReSchBasicPrice(reserveApiRequest.getReSchBasicPrice());
                     reserve.setReSchDepPoint(reserveApiRequest.getReSchDepPoint());
@@ -144,6 +146,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .reBaggageidx(tbReservation.getReBaggageidx())
                 .reInsuranceidx(tbReservation.getReInsuranceidx())
                 .reScheduleidx(tbReservation.getReScheduleidx())
+                .reSeatDetail(tbReservation.getReSeatDetail())
                 .reTotal(tbReservation.getReTotal())
                 .reSchBasicPrice(tbReservation.getReSchBasicPrice())
                 .reSchDepPoint(tbReservation.getReSchDepPoint())
@@ -180,6 +183,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .reBaggageidx(tbReservation.getReBaggageidx())
                 .reInsuranceidx(tbReservation.getReInsuranceidx())
                 .reScheduleidx(tbReservation.getReScheduleidx())
+                .reSeatDetail(tbReservation.getReSeatDetail())
                 .reTotal(tbReservation.getReTotal())
                 .reSchBasicPrice(tbReservation.getReSchBasicPrice())
                 .reSchDepPoint(tbReservation.getReSchDepPoint())
@@ -293,4 +297,23 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 }
         );
     }
+
+    public Header<List<ReserveApiResponse>> go(String schDeparturePoint, String schArrivalPoint, String goDateSelectOptt){
+        LocalDateTime searchDaystr1 = LocalDateTime.parse((goDateSelectOptt));
+        List<TbReservation> tbReservations = tbReservationRepository.findByReSchDepPointAndReSchArrPointAndReSchStartTime(schDeparturePoint, schArrivalPoint, searchDaystr1);
+        List<ReserveApiResponse> reserveApiResponse = tbReservations.stream()
+                .map(user -> responseReservation(user))
+                .collect(Collectors.toList());
+        return Header.OK(reserveApiResponse);
+    }
+
+    public Header<List<ReserveApiResponse>> paymentUpdate(String a) {
+        List<TbReservation> reservationList = tbReservationRepository.findFirstByReReserNum(a);
+        List<ReserveApiResponse> ReserveApiResponse = reservationList.stream()
+                .map(user -> responseReservation(user))
+                .collect(Collectors.toList());
+        return Header.OK(ReserveApiResponse);
+    }
+
+
 }

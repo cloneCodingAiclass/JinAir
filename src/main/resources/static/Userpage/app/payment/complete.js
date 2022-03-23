@@ -2,16 +2,9 @@
 
 $(function () {
     // 예약 인원수 확인
-    let reserNum = "";
-    for(let i = 0; i < 6; i++){
-        let ranstr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        reserNum += ranstr.charAt(Math.floor(Math.random() * ranstr.length))
-    }
-    $('#reserNum').text(reserNum);
 
     let sumResult = 0;
     $('.cookies').each(function (i){
-        // 예약번호 출력
         let num = $('.cookies').eq(i).attr("value");
         console.log(num);
         if(num % 2 != 0) {
@@ -169,33 +162,32 @@ $(function () {
     $('.cookies').each(function (i) {
         let val = $('.cookie').eq(i).attr("value");
         console.log(val);
-        let status = "PaymentFinished";
-        let reReserNum = reserNum;
+        finalUpdate(val);
+    });
+
+    function finalUpdate(val){
 
         let jsonData = {
             data :{
                 reIndex : val,
-                reReserNum : reReserNum,
-                reStatus : status
+                reStatus : "PaymentFinished"
             }
         }
-        finalUpdate(val);
-        function finalUpdate(val){
-            $.ajax({
-                url: "/api/reservation/paymentsUpdate",
-                type: "PUT",
-                data: JSON.stringify(jsonData),
-                dataType: "text",
-                contentType: "application/json",
-                success: function (jsonData) {
-                    alert("결제 완료")
-                    console.log(jsonData);
-                },
-                error(error) {
-                    console.dir(error)
-                }
-            });
-        }
-    });
+
+        $.ajax({
+            url: "/api/reservation/paymentsUpdate",
+            type: "PUT",
+            data: JSON.stringify(jsonData),
+            dataType: "text",
+            contentType: "application/json",
+            success: function (jsonData) {
+                alert("결제 완료")
+                console.log(jsonData);
+            },
+            error(error) {
+                console.dir(error)
+            }
+        });
+    }
 
 });

@@ -9,7 +9,6 @@ import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.response.board.*;
 import com.project.jinair.model.network.response.member.MemberApiResponse;
 import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
-import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import com.project.jinair.repository.*;
 import com.project.jinair.service.MenuService;
 import com.project.jinair.service.board.*;
@@ -957,7 +956,6 @@ public class PageController {
         return new ModelAndView("/userpage/pages/payment/payReservation")
                 .addObject("code", "payReservation");
     }
-
     // 사용자 예약 취소
     @RequestMapping("/cancel")
     public ModelAndView cancel(HttpServletRequest request, HttpServletResponse response, Model model){
@@ -993,7 +991,6 @@ public class PageController {
             if(myCookies[i].getValue().equals("reIndex")){
                 long idx = Long.valueOf(myCookies[i].getName());
                 ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf(myCookies[i].getName())).getData();
-                System.out.println(reserveApiResponse);
                 if(reserveApiResponse.getReStatus() != null){
                     arrrr.add(reserveApiResponse);
                 }
@@ -2805,5 +2802,25 @@ public class PageController {
 
         tbMagazineRepository.save(tbMagazine);
         return "redirect:/pages/admin/genielist_view/"+id;
+    }
+
+    @GetMapping("/pay/{a}")
+    public ModelAndView buyticket(HttpServletRequest request, Model model, @PathVariable(name = "a") String a) {
+
+        List<ReserveApiResponse> reserveApiResponseList = reservationApiLogicService.paymentUpdate(a).getData();
+        System.out.println(reserveApiResponseList);
+
+        HttpSession session = request.getSession();
+        model.addAttribute("reservation", session.getAttribute(String.valueOf(reserveApiResponseList)));
+        if (session.getAttribute("memberApiResponse") != null) {
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+                return new ModelAndView("/userpage/pages/payment/pay")
+                        .addObject("code", "genieListView")
+                        .addObject("menuList", menuService.getadminMenu());
+        } else {
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/payment/pay")
+                .addObject("code", "pay");
     }
 }

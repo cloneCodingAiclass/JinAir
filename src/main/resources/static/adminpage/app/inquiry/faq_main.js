@@ -309,7 +309,7 @@ $(function () {
 
             pagination = response.pagination;
 
-            showPage.totalPages = pagination.totalPages;
+            showPage.totalPages = pagination.currentPage;
             showPage.currentPage = pagination.currentPage;
 
             // 전체 페이지
@@ -321,18 +321,23 @@ $(function () {
             tableBoard4.tableBoard4 = response.data;
             tableBoard5.tableBoard5 = response.data;
 
-            console.dir(tableBoard);
-            console.dir(pagination);
+
 
 
             let url = "";
             let NumberPage = 0;
-            let last = showPage.totalPages;
+            let last = pagination.totalPages;
+
+
 
             for (NumberPage; NumberPage < last; NumberPage++){
                 url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
             }
             document.getElementById("button").innerHTML = url;
+            console.log(NumberPage)
+
+            console.dir(response)
+            console.log(pagination)
 
             $(".pageButton").on('click', function (){
                 page = $(this).attr("id");

@@ -115,4 +115,17 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     }
 
 
+    // 출발지, 도착지, 가는날 조회
+    @PostMapping("/go") // http://localhost:8080/api/reservation/go
+    public Header<List<ReserveApiResponse>> go(
+            @RequestParam(value = "schDeparturePoint") String schDeparturePoint,
+            @RequestParam(value = "schArrivalPoint") String schArrivalPoint,
+            @RequestParam(value = "goDateSelectOptt") String goDateSelectOptt
+    ) {
+        return reservationApiLogicService.go(schDeparturePoint, schArrivalPoint, goDateSelectOptt);
+    }
+
+
+
+
 }
