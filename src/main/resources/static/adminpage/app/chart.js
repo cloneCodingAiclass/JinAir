@@ -1,3 +1,30 @@
+$(function () {
+    visit();
+})
+
+
+let itemlist = [];
+function visit() {
+    fetch("/api/reservation/resultIndex").then(response => response.json())
+        .then(data => {
+            data.forEach(num => {
+                itemlist.push(num)
+            })
+        }).then(setTimeout(1000))
+    // $.get({
+    //     url: "",
+    //     dataType: "text",
+    //     success: function (response) {
+    //         for(i = 0; )
+    //         let result = JSON.parse(response);
+    //         itemlist.push(result)
+    //         console.dir(result);
+    //     }
+    // });
+}
+
+
+
 var today = new Date();
 var year = today.getFullYear();
 var month = today.getMonth();
@@ -32,7 +59,7 @@ const data = {
             borderDash:[0,0],
             lineTension : 0.3,
             fill: true,
-            data: [6, 10, 12, 20, 10, 2, 14, 2, 3, 15, 10, 23, 15, 22, 30, 27, 35, 24, 20, 35, 42, 40, 50, 60, 49, 50, 56, 62, 55, 40, 30],
+            data: itemlist
         }
     ]
 };

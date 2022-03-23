@@ -60,7 +60,8 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
         ArrayList<Long> day = new ArrayList();
 
         LocalDate ddd = LocalDate.of(2022,3,1);
-        LocalDate lll = LocalDate.of(2022,3,31);
+        LocalDate lll = LocalDate.of(2022,4,1);             // 마지막 일자 -1이므로 3/31까지 하려면 4/1까지 해야함
+
 
         for (LocalDate i = ddd; i.isBefore(lll); i = i.plusDays(1)){
 
