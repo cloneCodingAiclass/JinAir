@@ -900,9 +900,7 @@ public class PageController {
         for(int i = 0; i < myCookies.length; i++) {
             if(myCookies[i].getValue().equals("reIndex")){
                 ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf(myCookies[i].getName())).getData();
-                if(reserveApiResponse.getReStatus() != null){
-                    arrrr.add(reserveApiResponse);
-                }
+                arrrr.add(reserveApiResponse);
             }
         }
         session.setAttribute("reserveApiResponse", arrrr);

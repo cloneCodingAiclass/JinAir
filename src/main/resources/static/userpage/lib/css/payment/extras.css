@@ -612,6 +612,7 @@ body{
     height: 80px;
     display: flex;
     font-weight: 600;
+    background-color: #EBEBEB;
 }
 
 .service_title1 .section1 {
@@ -1569,6 +1570,7 @@ body{
     margin-top: 15px;
     background-color: #fff;
     border: none;
+    font-weight: bold;
 }
 
 .service_content_wrap3 .passenger_info {

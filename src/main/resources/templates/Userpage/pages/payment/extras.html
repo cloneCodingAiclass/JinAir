@@ -9,7 +9,6 @@
 <script src="/userpage/app/payment/extras.js"></script>
 <body>
 <div>
-    <input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
     <input type="hidden" name="" th:each="i : ${reserveApiResponse}" class="cookies" th:id="${i.reIndex}"
            th:value="${i.reIndex}">
 </div>
@@ -36,10 +35,10 @@
                             <p class="cursor arrow_img arrow_up_img"></p>
                         </div>
                         <div class="trip_area fs20">
-                            <span class="dep_area" id="go_area1">서울/김포(GMP)</span>
-                            <span class="sm_ft" id="godate">[출발]2022-02-17(목)17:45</span>
-                            <span class="arr_area" id="arr_area1">제주(CJU)</span>
-                            <span class="sm_ft">[도착] 2022-02-17(목) 19:00</span>
+                            <span class="dep_area" id="go_area1" th:text="${reserveApiResponse[0].reSchDepPoint}">서울/김포(GMP)</span>
+                            <span class="sm_ft" id="godate">[출발] <span th:text="${reserveApiResponse[0].reSchStartTime}"></span></span>
+                            <span class="arr_area" id="arr_area1" th:text="${reserveApiResponse[0].reSchArrPoint}">제주(CJU)</span>
+                            <span class="sm_ft">[도착]  <span th:text="${reserveApiResponse[0].reSchEndTime}"></span></span>
                         </div>
                     </div>
                     <!--여정1 끝-->
@@ -49,9 +48,9 @@
                             <p><span>왕복</span> 여정2</p>
                         </div>
                         <div class="trip_area fs20">
-                            <span class="dep_area">제주(CJU)</span>
+                            <span class="dep_area" th:text="${reserveApiResponse[1].reSchDepPoint}">제주(CJU)</span>
                             <span class="sm_ft">[출발] 2022-02-19(토) 16:00 </span>
-                            <span class="arr_area">서울/김포(GMP)</span>
+                            <span class="arr_area" th:text="${reserveApiResponse[1].reSchArrPoint}">서울/김포(GMP)</span>
                             <span class="sm_ft">[도착] 2022-02-19(토)17:10</span>
                         </div>
                     </div>
@@ -120,10 +119,10 @@
                     <!--서비스 타이틀-->
                     <div class="service_title1">
                         <div class="section1 cursor"><a href="" class="checkBox_1"></a>
-                            <a href="#" class="checkBox_2"></a>구간1 : 서울/김포(GMP)-제주(CJU)
+                            <a href="#" class="checkBox_2"></a>구간1 : <span th:text="${reserveApiResponse[0].reSchDepPoint}">서울/김포(GMP)</span>-<span th:text="${reserveApiResponse[0].reSchArrPoint}" th:if="${reserveApiResponse[0].reSchArrPoint != null}">제주(CJU)</span>
                         </div>
-                        <div class="section2 cursor"><a href="" class="checkBox_2"></a>
-                            <a href="#" class="checkBox_1"></a></a>구간2 : 제주(CJU)-서울/김포(GMP)
+                        <div class="section2 cursor"><a href="" class="checkBox_2" th:if="${reserveApiResponse[1].reStatus != null}"></a>
+                            <a href="#" class="checkBox_1"></a>구간2 : <span th:text="${reserveApiResponse[1].reSchDepPoint}">제주(CJU)</span>-<span th:text="${reserveApiResponse[1].reSchArrPoint}">서울/김포(GMP)</span>
                         </div>
                     </div>
                     <!--서비스 타이틀 끝-->
@@ -133,11 +132,11 @@
                         <div class="passenger_info_wrap passenger_info_wrap1" id="passenger_info_1">
                             <th:block th:each="passengerInfo1, i1 : ${reserveApiResponse}" th:if="${i1.count % 2 != 0}">
                             <div class='passenger_info passenger_info1'>
-                                <h3>탑승객 <span th:if="${i1.count == 1}" th:id="'info1' + ${i1.index}">[[${i1.count}]]</span>
-                                    <span th:if="${i1.count > 1}" th:id="'info1' + ${i1.index}">[[${i1.count-2}]]</span></h3>
+                                <h3>탑승객 <span th:if="${i1.count == 1}" th:id="'info1_' + ${i1.index}">[[${i1.count}]]</span>
+                                    <span th:if="${i1.count > 1}" th:id="'info1_' + ${i1.index}">[[${i1.count-2}]]</span></h3>
                                 <label th:for="'person_'+${i1.index}">
                                     <img src='/userpage/lib/img/ico-person.png' alt='탑승객'>
-                                    <span class='cursor'>[[${passengerInfo1.reFirstName}]]/[[${passengerInfo1.reLastName}]]</span>
+                                    <span class='cursor' th:id="'person_name'+${i1.index}">[[${passengerInfo1.reFirstName}]]/[[${passengerInfo1.reLastName}]]</span>
                                 </label>
                                 <label th:for="'person_'+${i1.index}" class='label'>
                                     <p class='select_seat_num select_seat_num1'>
@@ -167,8 +166,8 @@
                         <div class="passenger_info_wrap passenger_info_wrap2" id="passenger_info_2">
                             <th:block th:each="passengerInfo2, i2 : ${reserveApiResponse}" th:if="${i2.count % 2 == 0}">
                             <div class='passenger_info passenger_info2'>
-                                <h3>탑승객 <span th:if="i2.count == 2" th:id="'info2' + ${i2.index}">[[${i2.count}]]</span>
-                                    <span th:if="i2.count != 2" th:id="'info2' + ${i2.index}">[[${i2.count-2}]]</span></h3>
+                                <h3>탑승객 <span th:if="i2.count == 2" th:id="'info2_' + ${i2.index}">[[${i2.count}]]</span>
+                                    <span th:if="i2.count != 2" th:id="'info2_' + ${i2.index}">[[${i2.count-2}]]</span></h3>
                                 <label th:for="'person2_'+${i2.index}">
                                     <img src='/userpage/lib/img/ico-person.png' alt='탑승객'>
                                     <span class='cursor'>[[${passengerInfo2.reFirstName}]]/[[${passengerInfo2.reLastName}]]</span></label>
@@ -216,8 +215,8 @@
                         <div class="passenger_info_wrap" id="passenger_info_3">
                             <th:block th:each="passengerInfo3, i3 : ${reserveApiResponse}" th:if="${i3.count % 2 != 0}">
                             <div class='passenger_info' th:id="'passenger_info3_'+${i3.index}">
-                            <h3>탑승객 <span th:if="${i3.count == 1}" >[[${i3.count}]]</span>
-                                <span th:if="${i3.count != 1}">[[${i3.count-2}]]</span></h3>
+                            <h3>탑승객 <span th:if="${i3.count == 1}" th:id="'bagginfo' + ${i3.index}"></span>
+                                <span th:if="${i3.count > 1}" th:id="'bagginfo' + ${i3.index}"></span></h3>
                             <p><img src='/userpage/lib/img/ico-person.png' alt=''><span>[[${passengerInfo3.reFirstName}]]/[[${passengerInfo3.reLastName}]]</span></p>
                             <p class='section1 section'><img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간1</p>
 
@@ -244,7 +243,10 @@
                             <div class='baggage_wrap' th:id="'baggage_wrap'+${i4.index}">
                             <div class='baggage_1'>
                                 <p class='section1 section'>
-                                    <img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간1(탑승객[[${i4.count}]])</p>
+                                    <img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간1(탑승객
+                                <span th:if="${i4.count == 1}" th:id="'bagg1_1' + ${i4.index}">[[${i4.count}]]</span>
+                                    <span th:if="${i4.count > 1}" th:id="'bagg1_1' + ${i4.index}">[[${i4.count-2}]]</span>
+                                    )</p>
                                 <select class='selectBagg1' th:name="'bagg1_'+${i4.index}" th:id="'bagg1_'+${i4.index}">
                                     <option value=''>초과수하물 추가 선택</option>
                                     <option value='5KG(+KRW 8,000)'>5KG(+KRW 8,000)</option>
@@ -255,7 +257,10 @@
                                 </div>
                             <div class='baggage_2'>
                                 <p class='section2 section'>
-                                    <img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간2(탑승객[[${i4.count}]])</p>
+                                    <img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간2(탑승객
+                                <span th:if="${i4.count == 1}" th:id="'bagg1_2' + ${i4.index}">[[${i4.count}]]</span>
+                                    <span th:if="${i4.count > 1}" th:id="'bagg1_2' + ${i4.index}">[[${i4.count-2}]]</span>
+                                    )</p>
                                 <select class='selectBagg2' th:name="'bagg2_'+${i4.index}" th:id="'bagg2_'+${i4.index}">
                                     <option value=''>초과수하물 추가 선택</option>
                                     <option value='5KG(+KRW 8,000)'>5KG(+KRW 8,000)</option>
@@ -290,9 +295,11 @@
                             <div class="passenger_info_wrap">
                                 <th:block th:each="passengerInfo5, i5 : ${reserveApiResponse}" th:if="${i5.count % 2 != 0}">
                                 <div class='passenger_info' th:id="'passenger_info_ins_'+${i5.index}">
-                                    <h3>탑승객 [[${i5.count}]]</h3>
+                                    <h3>탑승객 <span th:if="${i5.count == 1}" th:id="'insinfo' + ${i5.index}">[[${i5.count}]]</span>
+                                        <span th:if="${i5.count > 1}" th:id="'insinfo' + ${i5.index}">[[${i5.count-2}]]</span>
+                                    </h3>
                                     <p><img src='/userpage/lib/img/ico-person.png' alt=''><span>[[${passengerInfo5.reFirstName}]]/[[${passengerInfo5.reLastName}]]</span></p>
-                                        <p class='select_ins_num'>
+                                        <p class='select_ins_num' th:id="'select_ins_num_'+${i5.index}">
                                         <input type='text' class='insuranceNum cursor' th:id="'ins_num_'+${i5.index}" readOnly>
                                     </p>
                                     <p class='select_ins_price' th:id="'select_ins_price_'+${i5.index}">
@@ -324,10 +331,11 @@
                                                             alt="비행기"><span>여행 기간</span>
                                     </p>
                                     <div class="date_wrap">
-                                        <input type="text" id="start_date" value="2022-02-16" class="date"/>
-                                        <span>부터</span>
-                                        <input type="date" id="end_date" class="date date2"/>
-                                        <span>까지</span>
+                                        <input type="text" id="start_date" th:value="${#strings.substring(reserveApiResponse[0].reSchStartTime, 0, 10)}" class="date"/>
+                                        <span>부터 </span>
+                                        <input type="date" id="end_date" th:value="${#strings.substring(reserveApiResponse[1].reSchEndTime, 0, 10)}" th:if="${reserveApiResponse[1].reSchEndTime != null}" class="date date2"/>
+                                        <input type="date" id="end_date2" th:value="${#strings.substring(reserveApiResponse[0].reSchEndTime, 0, 10)}" th:if="${reserveApiResponse[1].reSchEndTime == null}" class="date date2"/>
+                                        <span> 까지</span>
                                     </div>
                                     <ul>
                                         <li>보험은 일자 별로 신청 가능하며 1일 적용 기준은 00시~24시 입니다.</li>
@@ -533,7 +541,10 @@
                                             </tr>
                                             <tr>
                                                 <th class="borderB">여행기간</th>
-                                                <td class="borderB">2022-02-24 ~ 2022-02-26</td>
+                                                <td class="borderB"><span th:text="${#strings.substring(reserveApiResponse[0].reSchStartTime, 0, 10)}"></span> ~
+                                                    <span th:text="${#strings.substring(reserveApiResponse[1].reSchEndTime, 0, 10)}" th:if="${reserveApiResponse[1].reSchEndTime != null}"></span>
+                                                    <span th:text="${#strings.substring(reserveApiResponse[0].reSchEndTime, 0, 10)}" th:if="${reserveApiResponse[1].reSchEndTime == null}">
+                                                </td>
                                             </tr>
                                         </table>
                                         <p>가입 전 보험계약 중요 안내사항을 확인 후, 보험 가입자 모두 체크해 주시기 바랍니다.</p>
@@ -1499,14 +1510,10 @@
                                     <col width="40%">
                                     <col width="60%">
                                 </colgroup>
-                                <tr>
-                                    <td class="dep_area area">[출발]서울/김포(GMP)</td>
-                                    <td class="dep_date date">2022-02-09(수) 20:20</td>
-                                </tr>
-                                <tr>
-                                    <td class="arr_area area">[도착]제주(CJU)</td>
-                                    <td class="arr_date date">2022-02-09(수) 21:30</td>
-                                </tr>
+                                <tr><td class="dep_area area">[출발]서울/김포(GMP)</td>
+                                    <td class="dep_date date">2022-02-09(수) 20:20</td></tr>
+                                <tr><td class="arr_area area">[도착]제주(CJU)</td>
+                                    <td class="arr_date date">2022-02-09(수) 21:30</td></tr>
                             </table>
                         </div>
                         <div class="jour2">
@@ -1517,14 +1524,10 @@
                                     <col width="40%">
                                     <col width="60%">
                                 </colgroup>
-                                <tr>
-                                    <td class="dep_area area">[출발]제주(CJU)</td>
-                                    <td class="dep_date date">2022-02-12(토) 16:00</td>
-                                </tr>
-                                <tr>
-                                    <td class="arr_area area">[도착]서울/김포(GMP)</td>
-                                    <td class="arr_date date">2022-02-12(토) 17:10</td>
-                                </tr>
+                                <tr><td class="dep_area area">[출발]제주(CJU)</td>
+                                    <td class="dep_date date">2022-02-12(토) 16:00</td></tr>
+                                <tr><td class="arr_area area">[도착]서울/김포(GMP)</td>
+                                    <td class="arr_date date">2022-02-12(토) 17:10</td></tr>
                             </table>
                         </div>
                     </div>
@@ -1536,43 +1539,29 @@
                                     <col width="80%">
                                     <col width="20%">
                                 </colgroup>
-                                <tr>
-                                    <td class="tit">
-                                        <h2>운임정보</h2>
-                                    </td>
-                                    <td class="curr">(통화:KRW)</td>
-                                </tr>
+                                <tr><td class="tit"><h2>운임정보</h2></td>
+                                    <td class="curr">(통화:KRW)</td></tr>
                             </table>
-                            <div class="info_table_wrap">
+                            <div class="info_table_wrap info_table_wrap1">
+<!--                                <input type="text" name="" th:each="i : ${reserveApiResponse}" -->
+<!--                                       class="cookies" th:id="${i.reIndex}" th:value="${i.reIndex}">-->
+                                <input type="hidden" th:each="i : ${reserveApiResponse}" class="flight_price"
+                                       th:value="${i.reSchBasicPrice}">
                                 <table class="price_info_wrap price_info_wrap1">
                                     <colgroup>
                                         <col width="80%">
                                         <col width="20%">
                                     </colgroup>
-                                    <tr>
-                                        <td class="mark price_tit">항공운임</td>
-                                        <td class="price">210,600</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="mark price_tit">유류할증료</td>
-                                        <td class="price">11,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="mark price_tit">세금</td>
-                                        <td class="price">8,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p class="plus cursor">
-                                                더보기<img src="/userpage/lib/img/curr.PNG" alt="" class="plus_1"><img
-                                                    src="/userpage/lib/img/min.PNG" alt="" class="minus_1">
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                        </td>
-                                    </tr>
+                                    <tr><td class="mark price_tit">항공운임</td>
+                                        <td class="price" id="flightPrice">210,600</td></tr>
+                                    <tr><td class="mark price_tit">유류할증료</td>
+                                        <td class="price" id="flightCharge">11,000</td></tr>
+                                    <tr><td class="mark price_tit">세금</td>
+                                        <td class="price" id="flightTax">8,000</td></tr>
+                                    <tr><td><p class="plus cursor">
+                                                더보기<img src="/userpage/lib/img/curr.PNG" alt="" class="plus_1" id="plus1">
+                                                <img src="/userpage/lib/img/min.PNG" alt="" class="minus_1" id="minus1"></p></td></tr>
+                                    <tr><td></td></tr>
                                 </table>
                                 <div class="modal_price_info_wrap">
                                     <table>
@@ -1580,82 +1569,30 @@
                                             <col width="60%">
                                             <col width="40%">
                                         </colgroup>
-                                        <tr>
-                                            <th colspan="2">
-                                                <p class="title">항공운임</p>
-                                                <p><span>KRW</span>215,000</p>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">구간 1 : GMP-CJU</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="per">성인 1</td>
-                                            <td>70,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">구간 2 : CJU-GMP</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="per">성인 1</td>
-                                            <td>145,000</td>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="2">
-                                                <p class="title">유류할증료</p>
-                                                <p><span>KRW</span>11,000</p>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">구간 1 : GMP-CJU</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="per">성인 1</td>
-                                            <td>5,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">구간 2 : CJU-GMP</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="per">성인 1</td>
-                                            <td>5,500</td>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="2">
-                                                <p class="title">세금</p>
-                                                <p><span>KRW</span>8,000</p>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">구간 1 : GMP-CJU</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="per">성인 1<span class="cursor det det1">자세히 보기<span
-                                                    class="ar"></span></span></td>
-                                            <td class="seb">4,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="detD detD1" colspan="2"></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">구간 2 : CJU-GMP</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="per">성인 1<span class="cursor det det2">자세히 보기<span
-                                                    class="ar"></span></span></td>
-                                            <td class="seb">4,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="detD detD2" colspan="2"></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" class="cur">국제선 한국 출발 세금(BP)에는 국제여객공항이용료,
-                                                출국납부금,<br/>국제빈곤퇴치기여금이 포함되어 있습니다.
-                                            </td>
-                                        </tr>
+                                        <tr><th colspan="2"><p class="title">항공운임</p>
+                                                <p><span>KRW</span><span id="flight_price">215,000</span></p></th></tr>
+                                        <tr><td colspan="2">구간 1 : GMP-CJU</td><td></td></tr>
+                                        <tr><td class="per">성인 1</td><td>70,000</td></tr>
+                                        <tr><td colspan="2">구간 2 : CJU-GMP</td></tr>
+                                        <tr><td class="per">성인 1</td><td>145,000</td></tr>
+                                        <tr><th colspan="2"><p class="title">유류할증료</p>
+                                            <p><span>KRW</span>11,000</p></th></tr>
+                                        <tr><td colspan="2">구간 1 : GMP-CJU</td><td></td></tr>
+                                        <tr><td class="per">성인 1</td><td>5,500</td></tr>
+                                        <tr><td colspan="2">구간 2 : CJU-GMP</td></tr>
+                                        <tr><td class="per">성인 1</td><td>5,500</td></tr>
+                                        <tr><th colspan="2"><p class="title">세금</p>
+                                                <p><span>KRW</span>8,000</p></th></tr>
+                                        <tr><td colspan="2">구간 1 : GMP-CJU</td><td></td></tr>
+                                        <tr><td class="per">성인 1<span class="cursor det det1">자세히 보기<span class="ar">
+                                            </span></span></td><td class="seb">4,000</td></tr>
+                                        <tr><td class="detD detD1" colspan="2"></td></tr>
+                                        <tr><td colspan="2">구간 2 : CJU-GMP</td></tr>
+                                        <tr><td class="per">성인 1<span class="cursor det det2">자세히 보기<span class="ar">
+                                            </span></span></td><td class="seb">4,000</td></tr>
+                                        <tr><td class="detD detD2" colspan="2"></td></tr>
+                                        <tr><td colspan="2" class="cur">국제선 한국 출발 세금(BP)에는 국제여객공항이용료,
+                                                출국납부금,<br/>국제빈곤퇴치기여금이 포함되어 있습니다.</td></tr>
                                     </table>
                                 </div>
                             </div>
@@ -1666,41 +1603,57 @@
                                     <col width="80%">
                                     <col width="20%">
                                 </colgroup>
-                                <tr>
-                                    <td class="tit">
-                                        <h2>부가서비스 신청 내역</h2>
-                                    </td>
-                                    <td class="curr">(통화:KRW)</td>
-                                </tr>
+                                <tr><td class="tit"><h2>부가서비스 신청 내역</h2></td>
+                                    <td class="curr">(통화:KRW)</td></tr>
                             </table>
                             <div class="info_table_wrap">
-                                <table class="price_info_wrap">
+                                <table class="price_info_wrap" id="option_price_list">
                                     <colgroup>
                                         <col width="80%">
                                         <col width="20%">
                                     </colgroup>
-                                    <tr>
-                                        <td class="price_tit"></td>
-                                        <td class="price"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="price_tit"></td>
-                                        <td class="price"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="price_tit"></td>
-                                        <td class="price"></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <p class="plus cursor">
-                                                더보기<img src="/userpage/lib/img/curr.PNG" alt="" class="plus_2"><img
-                                                    src="/userpage/lib/img/min.PNG" alt="" class="minus_2">
-                                            </p>
-                                        </td>
-                                    </tr>
+                                    <tr><td class="price_tit" id="option_seat"></td>
+                                        <td class="price" id="option_seat_price"></td></tr>
+                                    <tr><td class="price_tit" id="option_bagg"></td>
+                                        <td class="price" id="option_bagg_price"></td></tr>
+                                    <tr><td class="price_tit" id="option_ins"></td>
+                                        <td class="price" id="option_ins_price"></td></tr>
+                                    <tr><td><p class="plus cursor">
+                                            더보기<img src="/userpage/lib/img/curr.PNG" alt="" class="plus_2">
+                                            <img src="/userpage/lib/img/min.PNG" alt="" class="minus_2"></p></td></tr>
                                 </table>
+                                <div class="modal_price_info_wrap">
+                                    <table>
+                                        <colgroup>
+                                            <col width="60%">
+                                            <col width="40%">
+                                        </colgroup>
+                                        <tr><th colspan="2"><p class="title">항공운임</p>
+                                            <p><span>KRW</span><span id="seat_price">215,000</span></p></th></tr>
+                                        <tr><td colspan="2">구간 1 : GMP-CJU</td><td></td></tr>
+                                        <tr><td class="per">성인 1</td><td>70,000</td></tr>
+                                        <tr><td colspan="2">구간 2 : CJU-GMP</td></tr>
+                                        <tr><td class="per">성인 1</td><td>145,000</td></tr>
+                                        <tr><th colspan="2"><p class="bagg_price">유류할증료</p>
+                                            <p><span>KRW</span>11,000</p></th></tr>
+                                        <tr><td colspan="2">구간 1 : GMP-CJU</td><td></td></tr>
+                                        <tr><td class="per">성인 1</td><td>5,500</td></tr>
+                                        <tr><td colspan="2">구간 2 : CJU-GMP</td></tr>
+                                        <tr><td class="per">성인 1</td><td>5,500</td></tr>
+                                        <tr><th colspan="2"><p class="ins_price">세금</p>
+                                            <p><span>KRW</span>8,000</p></th></tr>
+                                        <tr><td colspan="2">구간 1 : GMP-CJU</td><td></td></tr>
+                                        <tr><td class="per">성인 1<span class="cursor det det1">자세히 보기<span class="ar">
+                                            </span></span></td><td class="seb">4,000</td></tr>
+                                        <tr><td class="detD detD1" colspan="2"></td></tr>
+                                        <tr><td colspan="2">구간 2 : CJU-GMP</td></tr>
+                                        <tr><td class="per">성인 1<span class="cursor det det2">자세히 보기<span class="ar">
+                                            </span></span></td><td class="seb">4,000</td></tr>
+                                        <tr><td class="detD detD2" colspan="2"></td></tr>
+                                        <tr><td colspan="2" class="cur">국제선 한국 출발 세금(BP)에는 국제여객공항이용료,
+                                            출국납부금,<br/>국제빈곤퇴치기여금이 포함되어 있습니다.</td></tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

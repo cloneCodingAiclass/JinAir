@@ -127,8 +127,6 @@ $(function () {
 
   $(".service_menu .menu1").on("click", function () {
     $('html, body').scrollTop(0)
-    optionTotalPrice();
-    confirmOptional()
     $(".service_content_wrap1").css("display", "block");
     $(".service_content_wrap2").css("display", "none");
     $(".service_content_wrap3").css("display", "none");
@@ -158,8 +156,6 @@ $(function () {
 
   })
   $(".service_menu .menu2").on("click", function () {
-    optionTotalPrice();
-    confirmOptional()
     $('html, body').scrollTop(0)
     $(".service_content_wrap1").css("display", "none");
     $(".service_content_wrap2").css("display", "block");
@@ -182,8 +178,7 @@ $(function () {
     $(".service_menu .menu3_invert").css("display", "none");
   })
   $(".select_seat_wrap2 .select_comp").on("click", function () {
-    optionTotalPrice();
-    confirmOptional()
+    optionTotalPrice(personNumber)
     $(".service_content_wrap1").css("display", "none");
     $(".service_content_wrap2").css("display", "block");
     $(".service_content_wrap3").css("display", "none");
@@ -206,8 +201,7 @@ $(function () {
   })
 
   $(".service_menu .menu3").on("click", function () {
-    optionTotalPrice();
-    confirmOptional()
+
     $('html, body').scrollTop(0)
     $("#modal_agree_wrap").hide();
     $(".service_content_wrap1").css("display", "none");
@@ -298,6 +292,7 @@ $(function () {
     $(".seat_info").css("left", "30px");
     let radio2 = $("#person2_0").parents(".passenger_info2");
     borderChange2(radio2);
+    changeRadio2();
 
     $(this).css("background-color", "#661e43");
     $(this).css("color", "#fff");
@@ -319,6 +314,8 @@ $(function () {
   })
 
   $(".select_seat_wrap1 .select_comp").on("click", function () {
+    optionTotalPrice(personNumber)
+    changeRadio2()
     $(".move_map").css("position", "absolute");
     $(".move_map").css("top", "80px");
     $(".seat_info").css("position", "absolute");
@@ -509,7 +506,7 @@ $(function () {
 
         if(nameArr[i] != null) {
           str7 += '<div class="nameBox" id="modal_ins_people_' + i + '">'
-          str7 += '<input type="checkbox" class="checkbox insCheckBox" id="ins_check_' + i + '"><span>' + nameArr[i] + '</span>'
+          str7 += '<input type="checkbox" class="checkbox insCheckBox" id="check_ins_' + i + '"><span>' + nameArr[i] + '</span>'
           str7 += '</div>'
         }
       }  $("#modal_ins_people").html(str7);
@@ -524,11 +521,52 @@ $(function () {
 
   $(".insContent2 .noti").on("click", function () {
     $("#modal_insurance_info_wrap").fadeIn();
+    $("body").css("overflow", "hidden");
+
   })
   $("#modal_insurance_info_wrap .title .close").on("click", function () {
     $("#modal_insurance_info_wrap").fadeOut();
+    $("body").css("overflow", "scroll");
     str7 = "";
   })
+
+  $(".insCheckBox").change(function() {
+    for (let i = 0; i < personNumber; i++) {
+      if ($("#check_ins_" + i).is(':checked')) {
+        $("#modal_ins_people_" + i).css("background-color", "rgb(0, 173, 239)");
+        $("#modal_ins_people_" + i).css("color", "#fff");
+        // changeBackground1($("#modal_ins_people_" + i))
+      } else {
+        $("#modal_ins_people_" + i + "").css("background-color", "#fff");
+        $("#modal_ins_people_" + i + "").css("color", "rgb(0, 173, 239)");
+        // changeBackground2($("#modal_ins_people_" + i))
+
+      }
+    }
+  })
+
+  $(".ins_check").change(function() {
+    for (let i = 0; i < personNumber; i++) {
+      if ($("#ins_check_" + i).is(':checked') == false) {
+        $("#agree_check0").prop("checked", false)
+        $("#agree_check1").prop("checked", false)
+        $("#agree_check2").prop("checked", false)
+        $(".insCheckBox").prop("checked", false)
+        $("#agree1").prop("checked", false)
+        $("#agree2").prop("checked", false)
+      }
+    }
+  })
+
+  // function changeBackground1(box1) {
+  //   box1.css("background-color", "rgb(0, 173, 239)");
+  //   box1.css("color", "#fff");
+  // }
+  // function changeBackground2(box2) {
+  //   box2.css("background-color", "#fff");
+  //   box2.css("color", "rgb(0, 173, 239)");
+  // }
+
   let sum2 = 0;
   $('.cookies').each(function (i) {
 
@@ -536,8 +574,12 @@ $(function () {
     if (num % 2 != 0) {
       sum2++;
     }
-    $("#info1" + i).html(sum2);
-    $("#info2" + i).html(sum2);
+    $("#info1_" + i).html(sum2);
+    $("#info2_" + i).html(sum2);
+    $("#bagginfo" + i).html(sum2);
+    $("#bagg1_1" + i).html(sum2);
+    $("#bagg1_2" + i).html(sum2);
+    $("#insinfo" + i).html(sum2);
   })
 
   $(".insContent2 .ins_before_butt").on("click", function () {
@@ -554,146 +596,118 @@ $(function () {
 
   // 탑승객 수
   let personNumber = 0;
-  for( let i = 0 ; i < 60; i++){
+  let cookies = "";
+  for( let i = 0 ; i < 1000; i++){
     if(document.getElementById(`${i}`)){
       personNumber = personNumber + 1;
+      cookies += i + ",";
     }
   }
-  console.log("몇명" + " : " + personNumber)
+  cookies = cookies.slice(0, -1); // /api/reservation
+  let indexArr = cookies.split(",")
 
-  let str = "";  // 좌석선택 탑승객 1
-  let str2 = ""; // 좌석선택 탑승객 2
-  let str3 = ""; // 수하물 탑승객
-  let str4 = ""; // 수하물 선택
-  let str5 = ""; // 보험 탑승객
-  let str6 = ""; // 보험 선택
+
+  // multiway
+  for (let i = 0; i < indexArr.length; i++) {
+    // 좌석번호 구간1
+    // 좌석번호 구간2
+    // 수하물 선택 구간1
+    // 수하물 선택 구간2
+    // 보험
+  }
+
+  let href = $(location).attr('href').split('/');
+
+  if (href[5] == 'oneway') {
+    $(".service_title1 .section2").css("display", "none")
+    $("#passenger_info_3 .section2").css("display", "none")
+    $("#select_baggage_wrap .baggage_2").css("display", "none")
+    $(".select_bagg_price2").css("display", "none");
+    $(".passenger_info_wrap2").css("display", "none");
+    $(".seat_info_wrap2").css("display", "none");
+    $(".select_seat_wrap2").css("display", "none");
+    $("#passenger_info_3 .passenger_info").css("height", "260px")
+    $("#select_baggage_wrap .baggage_wrap").css("height", "260px")
+
+    $(".select_seat_wrap1 .select_comp").on("click", function () {
+      optionTotalPrice(personNumber)
+      $(".service_content_wrap1").css("display", "none");
+      $(".service_content_wrap2").css("display", "block");
+      $(".service_content_wrap3").css("display", "none");
+      $(".service_menu .menu2").css("color", "white");
+      $(".service_menu .menu2").css("background-color", "#661e43");
+
+      $(".service_menu .menu1").css("color", "#444");
+      $(".service_menu .menu1").css("background-color", "#EBEBEB");
+      $(".service_menu .menu3").css("color", "#444");
+      $(".service_menu .menu3").css("background-color", "#EBEBEB");
+
+      $(".service_menu .menu1img").css("display", "block");
+      $(".service_menu .menu1_invert").css("display", "none");
+
+      $(".service_menu .menu2img").css("display", "none");
+      $(".service_menu .menu2_invert").css("display", "block");
+
+      $(".service_menu .menu3img").css("display", "block");
+      $(".service_menu .menu3_invert").css("display", "none");
+    })
+
+    $(".service_menu .menu1").on("click", function() {
+      $(".service_content_wrap1 .section1").css("background-color", "#661e43");
+      $(".service_content_wrap1 .section1").css("color", "#fff");
+      $(".service_content_wrap1 .service_title1 .section2").css("background-color", "#EBEBEB");
+      $(".service_content_wrap1 .service_title1 .section2").css("color", "#444");
+
+      $(".service_content_wrap1 .service_title1 .section2 .checkBox_1").css("display", "none");
+      $(".service_content_wrap1 .service_title1 .section2 .checkBox_2").css("display", "inline-block");
+      $(".service_content_wrap1 .service_title1 .section1 .checkBox_1").css("display", "inline-block");
+      $(".service_content_wrap1 .service_title1 .section1 .checkBox_2").css("display", "none");
+
+      $(".select_seat_wrap1").css("display", "flex");
+      $(".select_seat_wrap2").css("display", "none");
+      $(".passenger_info_wrap1").css("display", "block");
+      $(".passenger_info_wrap2").css("display", "none");
+      $(".seat_info_wrap1").css("display", "block");
+      $(".seat_info_wrap2").css("display", "none");
+
+    })
+
+
+
+  } else if (href[5] == 'multiway') {
+
+  } else if (href[5] == 'twoway') {
+
+  }
+
+  firstTotal();
+  function firstTotal() {
+    let firstFlightPrice = 0;
+    $(".flight_price").each(function() {
+      firstFlightPrice += Number($(this).val());
+    })
+    $("#flightPrice").html(firstFlightPrice.toLocaleString("ko-KR"));
+    // 세금
+    let firstFlightTax = 0;
+    if(href[5] == 'oneway') {
+      firstFlightTax = Number(4000*personNumber/2);
+    } else {
+      firstFlightTax = Number(8000*personNumber/2);
+    }
+    $("#flightTax").html(firstFlightTax.toLocaleString("ko-KR"));
+    // 유류할증료
+    let firstFlightCharge = 0;
+    if(href[5] == 'oneway') {
+      firstFlightCharge = Number(5000*personNumber/2);
+    } else {
+      firstFlightCharge = Number(10000*personNumber/2);
+    }
+    $("#flightCharge").html(firstFlightCharge.toLocaleString("ko-KR"));
+    let firstTotal = + firstFlightPrice + firstFlightTax + firstFlightCharge
+    $("#modal_tot_price").html(firstTotal.toLocaleString("ko-KR"));
+  }
+
   let str7 = ""; // 모달 보험 가입자 선택
-
-  //
-  // for (let i = 0; i < personNumber; i++) {
-  //   str += "<div class='passenger_info passenger_info1'>"
-  //   str += "<h3>탑승객 " +  Number(i+1) + "</h3>";
-  //   str += "<label for='person_" + i + "' ><img src='/userpage/lib/img/ico-person.png' alt='탑승객'><span class='cursor'>" + [[${reserveApiResponse.reFirstName}]] + "/" +  [[${reserveApiResponse.reLastName}]] + "</span></label>"
-  //   str += "<label for='person_" + i + "'  class='label'><p class='select_seat_num select_seat_num1'>"
-  //   str += "<input type='text' class='seat_num seat_num1 cursor' id='seat_num1_" + i + "' readonly>"
-  //   str += "<span class='close cursor'>x</span>"
-  //   str += "</p>"
-  //   str += "<p class='select_seat_price' id='seat_price1_" + i + "'>"
-  //   str += "<span class='seat_P seat_P1'>KRW</span>"
-  //   str += "<span class='price price1' id='price1_" + i + "'></span>"
-  //   str += "</p>"
-  //   str += "<input type='radio' name='selectPerson' class='checkPerson' id='person_" + i + "'></label>"
-  //   str += "</div>"
-  // }
-  // $("#passenger_info_1").html(str);
-
-  // for (let i = 0; i < personNumber; i++) {
-  //   str2 += "<div class='passenger_info passenger_info2'>"
-  //   str2 += "<h3>탑승객 " + Number(i+1) + "</h3>";
-  //   str2 += "<label for='person2_" + i + "'><img src='/userpage/lib/img/ico-person.png' alt='탑승객'><span class='cursor'>" +'유/영은'+ "</span></label>"
-  //   str2 += "<label for='person2_" + i + "'  class='label'><p class='select_seat_num select_seat_num2'>"
-  //   str2 += "<input type='text' class='seat_num seat_num2' id='seat_num2_" + i + "' readonly>"
-  //   str2 += "<span class='close cursor'>x</span>"
-  //   str2 += "</p>"
-  //   str2 += "<p class='select_seat_price select_seat_price2' id='seat_price2_" + i + "'>"
-  //   str2 += "<span class='seat_P seat_P2'>KRW</span>"
-  //   str2 += "<span class='price price2' id='price2_" + i + "'></span>"
-  //   str2 += "</p>"
-  //   str2 += "<input type='radio' name='selectPerson2' class='checkPerson2' id='person2_" + i + "'>"
-  //   str2 += "</div>"
-  // }
-  // $("#passenger_info_2").html(str2);
-
-  // for (let i = 0; i < personNumber; i++) {
-  //   str3 += "<div class='passenger_info' id='passenger_info3_" + i + "'>"
-  //   str3 += "<h3>탑승객 " + Number(i+1) + "</h3>"
-  //   str3 += "<p><img src='/userpage/lib/img/ico-person.png' alt=''><span>" + '유/영은' + "</span></p>"
-  //   str3 += "<p class='section1 section'><img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간1</p>"
-  //
-  //   str3 += "<p class='select_bagg_price select_bagg_price1' id = 'select_bagg_price1_" + i + "'>"
-  //   str3 += "<span class='select_bagg' id='select_bagg1_" + i + "'></span>"
-  //   str3 += "<span class='close cursor' id='bagg_close1_" + i + "'>x</span>"
-  //   str3 += "</p>"
-  //   str3 += "<p class='bot_bagg_price bot_bagg_price1'><span class='cur' id='cur1_" + i + "'>KRW</span><span class='price bagg_price' id='bagg_price1_" + i + "'></span></p>"
-  //   str3 += "<p class='section2 section'><img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간2</p>"
-  //
-  //   str3 += "<p class='select_bagg_price select_bagg_price2' id = 'select_bagg_price2_" + i + "'>"
-  //   str3 += "<span class='select_bagg' id='select_bagg2_" + i + "'></span>"
-  //   str3 += "<span class='close cursor' id='bagg_close2_" + i + "'>x</span>"
-  //   str3 += "</p>"
-  //   str3 += "<p class='bot_bagg_price bot_bagg_price2'><span class='cur' id='cur2_" + i + "'>KRW</span><span class='price bagg_price' id='bagg_price2_" + i + "'></span></p>"
-  //   str3 += "</div>"
-  // }
-  // $("#passenger_info_3").html(str3);
-  //
-  // for (let i = 0; i < personNumber; i++) {
-  //   str4 += "<div class='baggage_wrap' id='baggage_wrap" + i + "'>"
-  //   str4 += "<div class='baggage_1'>"
-  //   str4 += "<p class='section1 section'>"
-  //   str4 += "<img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간1(탑승객 " + Number(i+1) + ")</p>"
-  //   str4 += "<select class='selectBagg1' name='bagg1_" + i + "' id='bagg1_" + i + "'>"
-  //   str4 += "<option value=''>초과수하물 추가 선택</option>"
-  //   str4 += "<option value='5KG(+KRW 8,000)'>5KG(+KRW 8,000)</option>"
-  //   str4 += "<option value='10KG(+KRW 16,000)'>10KG(+KRW 16,000)</option>"
-  //   str4 += "<option value='15KG(+KRW 24,000)'>15KG(+KRW 24,000)</option>"
-  //   str4 += "<option value='20KG(+KRW 32,000)'>20KG(+KRW 32,000)</option>"
-  //   str4 += "</select>"
-  //   str4 += "</div>"
-  //   str4 += "<div class='baggage_2'>"
-  //   str4 += "<p class='section2 section'>"
-  //   str4 += "<img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간2(탑승객 " + Number(i+1) + ")</p>"
-  //   str4 += "<select class='selectBagg2' name='bagg2_" + i + "' id='bagg2_" + i + "'>"
-  //   str4 += "<option value=''>초과수하물 추가 선택</option>"
-  //   str4 += "<option value='5KG(+KRW 8,000)'>5KG(+KRW 8,000)</option>"
-  //   str4 += "<option value='10KG(+KRW 16,000)'>10KG(+KRW 16,000)</option>"
-  //   str4 += "<option value='15KG(+KRW 24,000)'>15KG(+KRW 24,000)</option>"
-  //   str4 += "<option value='20KG(+KRW 32,000)'>20KG(+KRW 32,000)</option>"
-  //   str4 += "</select>"
-  //   str4 += "</div>"
-  //   str4 += "</div>"
-  // }
-  // str4 += "<input type='button' class='cursor select_comp' id='bagg_select_comp' value='선택완료'>"
-  // $("#select_baggage_wrap").html(str4);
-
-  // for (let i = 0; i < personNumber; i++) {
-  //   str5 += "<div class='passenger_info' id='passenger_info_ins_" + i + "'>"
-  //   str5 += "<h3>탑승객 " + Number(i+1) + "</h3>"
-  //   str5 += "<p><img src='/userpage/lib/img/ico-person.png' alt=''><span>" + '유/영은' + "</span></p>"
-  //   str5 += "<p class='select_ins_num'>"
-  //   str5 += "<input type='text' class='insuranceNum cursor' id='ins_num_" + i + "' readOnly>"
-  //   // str5 += "<span class='close cursor' id='ins_close_" + i + "'>x</span>"
-  //   str5 += "</p>"
-  //   str5 += "<p class='select_ins_price' id='select_ins_price_" + i + "'>"
-  //   str5 += "<span class='ins_P cur' id='ins_" + i + "'>KRW</span>"
-  //   str5 += "<span class='ins_price' id='ins_price_" + i + "'></span>"
-  //   str5 += "</p>"
-  //   str5 += "</div>"
-  // }
-  // $("#passenger_info_wrap_ins").html(str5);
-
-  // for (let i = 0; i < personNumber; i++) {
-  //   str6 += '<tr>'
-  //   str6 += '<td class="normal"><label for="check_ins_'+i+'">'
-  //   str6 += '<input type="checkbox" class="ins_check" name="check_ins_'+i+'" id="check_ins_' + i + '"><span id="name' + i + '">' + '유/영은' + '</span></label></td>'
-  //   str6 += '<td class="normal">여</td>'
-  //   str6 += '<td class="normal bir_date">'
-  //   str6 += '<input type="text" value="19970924" class="birth" id="ins_birth_' + i + '" readOnly></td>'
-  //   str6 += '<td class="normal">5,000만원</td>'
-  //   str6 += '<td class="normal">1,970</td>'
-  //   str6 += '<td class="normal">7,000만원</td>'
-  //   str6 += '<td class="normal">3,660</td>'
-  //   str6 += '<td class="normal">1억원</td>'
-  //   str6 += '<td class="normal">7,040</td>'
-  //   str6 += '<td class="normal sel_pro">'
-  //   str6 += '<select name="product_' + i + '" class="select_product" id="select_product_' + i + '" disabled>'
-  //   str6 += '<option value="1970">실속형</option>'
-  //   str6 += '<option value="3660" selected>표준형</option>'
-  //   str6 += '<option value="7040">고급형</option>'
-  //   str6 += '</select>'
-  //   str6 += '</td>'
-  //   str6 += '</tr>'
-  // }
-  // $("#ins_people").html(str6);
 
   $(".seat_P1, .seat_P2").css("visibility", "hidden");
 
@@ -788,7 +802,7 @@ $(function () {
 
   function changeRadio() {
     console.log("실행됨")
-    for(let i = 0; i < (".checkPerson").length * 2; i++) {
+    for(let i = 0; i < $(".checkPerson").length * 2; i++) {
       if (i % 2 == 0) {
         if ($("#person_" + i + "").val() == 'on' || $("#person_" + i + "").val().length == 0) {
           $("#person_" + i + "").prop("checked", true);
@@ -802,7 +816,7 @@ $(function () {
 
   function changeRadio2() {
     console.log("실행됨")
-    for(let i = 0; i < (".checkPerson2").length * 2; i++) {
+    for(let i = 1; i < $(".checkPerson2").length * 2; i++) {
       if (i % 2 != 0) {
         if ($("#person2_" + i + "").val() == 'on' || $("#person2_" + i + "").val().length == 0) {
           $("#person2_" + i + "").prop("checked", true);
@@ -878,7 +892,6 @@ $(function () {
         radio.removeClass('check');
       }
     }
-    optionTotalPrice();
   })
 
 
@@ -947,7 +960,6 @@ $(function () {
         radio2.removeClass('check');
       }
     }
-    optionTotalPrice();
   })
 
   /*좌석 선택 끝 */
@@ -993,7 +1005,6 @@ $(function () {
         $("#bagg_price1_" + i).text("");
         $("#bagg_close1_" + i).css("display", "none");
       }
-      optionTotalPrice();
     });
     $("#bagg_close1_" + i).on("click", function() {
       $("#cur1_" + i).css("display", "none");
@@ -1002,7 +1013,6 @@ $(function () {
       $("#bagg_close1_" + i).css("display", "none");
       $('#bagg1_'+i).val('').prop("selected", true);
     })
-    optionTotalPrice();
   }
 
   // 수하물 선택 구간2
@@ -1029,7 +1039,7 @@ $(function () {
         $("#bagg_price2_" + i2).text("");
         $("#bagg_close2_" + i2).css("display", "none");
       }
-      optionTotalPrice();
+      console.log(i2 + "::::::" + $("#bagg_price2_" + i2).text());
     });
     $("#bagg_close2_" + i2).on("click", function() {
       $("#cur2_" + i2).css("display", "none");
@@ -1038,13 +1048,11 @@ $(function () {
       $("#bagg_close2_" + i2).css("display", "none");
       $('#bagg2_'+i2).val('').prop("selected", true);
     })
-    optionTotalPrice();
   }
 
 
   $("#bagg_select_comp").on("click", function () {
-    optionTotalPrice();
-    confirmOptional()
+    optionTotalPrice(personNumber)
     $("#modal_agree_wrap").hide();
     $(".service_content_wrap1").css("display", "none");
     $(".service_content_wrap2").css("display", "none");
@@ -1080,12 +1088,17 @@ $(function () {
 
   let priceArr = [];
   let nameArr = [personNumber];
-  let totalPrice = Number(0);
+  let ins_totalPrice = Number(0);
   let sum = 0;
   let ins_join_num = 0;
-  for (let i = 0; i < $(".select_product").length*2; i++) {
+  let reTotal1 = []
+  let reTotal2 = []
+  for (let i = 0; i < personNumber; i++) {
     nameArr[i] = $("#name" + i).text();
     priceArr[i] = 0;
+    reTotal1[i] = $("#re_total1").val();
+    reTotal2[i] = $("#re_total2").val();
+
     if($("#check_ins_" + i).is(":checked") == true) {
       nameArr[i] = $("#name" + i).text();
     } else {
@@ -1098,49 +1111,40 @@ $(function () {
       if ($("#check_ins_" + i).is(":checked") == true) {
         $("#select_product_" + i).prop('disabled', false);
         priceArr[i] = Number($("#select_product_" + i).val());
-        totalPrice += priceArr[i]
+        ins_totalPrice += priceArr[i]
         nameArr[i] = $("#name" + i).text();
-        sum += 1;
         ins_join_num += 1;
         $("#ins_join_num").text(ins_join_num);
-        console.log(i +"넣음 : " + nameArr[i]);
-        console.log("  " + nameArr)
-        $(".insurance_price .int_tot_price").text(totalPrice.toLocaleString('ko-KR'));
+        $(".insurance_price .int_tot_price").text(ins_totalPrice.toLocaleString('ko-KR'));
       } else if ($("#check_ins_" + i).is(":checked") == false) {
         $("#select_product_" + i).prop('disabled', true);
-        totalPrice -= priceArr[i]
-        // nameArr[i] = "";
+        ins_totalPrice -= priceArr[i]
         delete nameArr[i];
         delete priceArr[i]
-        console.log(i +"삭제 : " + nameArr[i]);
-        console.log("  " + nameArr)
-        sum -= 1;
         ins_join_num -= 1;
         $("#ins_join_num").text(ins_join_num);
-        $(".insurance_price .int_tot_price").text(totalPrice.toLocaleString('ko-KR'));
+        $(".insurance_price .int_tot_price").text(ins_totalPrice.toLocaleString('ko-KR'));
       }
-      optionTotalPrice();
     })
     $("#select_product_" + i).change(function() {
       if ($("#select_product_" + i).val() == "1970") {
-        totalPrice -= priceArr[i];
+        ins_totalPrice -= priceArr[i];
         priceArr[i] = Number(1970);
-        totalPrice += priceArr[i];
+        ins_totalPrice += priceArr[i];
       } else if ($("#select_product_" + i).val() == "3660") {
-        totalPrice -= priceArr[i];
+        ins_totalPrice -= priceArr[i];
         priceArr[i] = Number(3660);
-        totalPrice += priceArr[i];
+        ins_totalPrice += priceArr[i];
       } else if ($("#select_product_" + i).val() == "7040") {
-        totalPrice -= priceArr[i];
+        ins_totalPrice -= priceArr[i];
         priceArr[i] = Number(7040);
-        totalPrice += priceArr[i];
+        ins_totalPrice += priceArr[i];
       }
-      $(".insurance_price .int_tot_price").text(totalPrice.toLocaleString('ko-KR'));
+      $(".insurance_price .int_tot_price").text(ins_totalPrice.toLocaleString('ko-KR'));
       $("#ins_join_num").text(ins_join_num);
     })
-    optionTotalPrice();
   }
-
+  //
   let seatNumArr1 = [personNumber];
   let seatNumArr2 = [personNumber];
   let seatTypeArr1 = [personNumber];
@@ -1153,20 +1157,31 @@ $(function () {
   let baggPriceArr2 = [personNumber];
   let insArr = [personNumber];
   let insPriceArr = [personNumber];
+  let total_price = 0;
+  let seat_price = 0;
+  let bagg_price = 0;
+  let finalTotalPrice = 0;
 
   /*부가서비스 신청내역*/
-  function optionTotalPrice() {
+  function optionTotalPrice(personNumber) {
+    /* 좌석 */
     for (let i = 0; i < personNumber; i++) {
+      seatNumArr1[i] = "";seatNumArr2[i] = "";seatPriceArr1[i] = 0;seatPriceArr2[i] = 0;baggArr1[i] = "";baggArr2[i] = "";
+      baggPriceArr1[i] = 0;baggPriceArr2[i] = 0;insArr[i] = "";insPriceArr[i] = 0;seatTypeArr1[i] = "";seatTypeArr2[i] = "";
+
+      total_price = 0;
+      seat_price = 0;
+      bagg_price = 0;
+
       seatNumArr1[i] = $("#seat_num1_" + i).val();
       seatNumArr2[i] = $("#seat_num2_" + i).val();
-      seatPriceArr1[i] = $("#price1_" + i).text();
-      seatPriceArr2[i] = $("#price2_" + i).text();
+      seatPriceArr1[i] = Number($("#price1_" + i).text());
+      seatPriceArr2[i] = Number($("#price2_" + i).text());
       baggArr1[i] = $("#select_bagg1_" + i).text();
       baggArr2[i] = $("#select_bagg2_" + i).text();
-      baggPriceArr1[i] = $("#bagg_price1_" + i).text();
-      baggPriceArr2[i] = $("#bagg_price2_" + i).text();
-      console.log("수하물이다이ㅏㄴㄹㄴ우라니우11111111 : " + baggPriceArr1);
-      console.log("수하물이다이ㅏㄴㄹㄴ우라니우222222222 : " + baggPriceArr2);
+      baggPriceArr1[i] = Number($("#bagg_price1_" + i).text());
+      baggPriceArr2[i] = Number($("#bagg_price2_" + i).text());
+
       if ($("#check_ins_" + i).is(":checked")) {
         insArr[i] = $("#select_product_" + i + " option:selected").text();
         insPriceArr[i] = Number($("#select_product_"+i).val());
@@ -1214,71 +1229,182 @@ $(function () {
       } else if(isNaN(seatPriceArr2[i])){
         delete seatTypeArr2[i]
       }
+      console.log(baggPriceArr2[i] + " ::::: 수하물222222222222222222222 :::: " + i);
+      console.log(seatNumArr2[i] + "::::::: 구간2 좌석번호 :::::::" + i);
+    }
+    // 부가서비스 옵션 총 금액 계산
+    for (let i = 0; i < personNumber; i++) {
+      if(seatNumArr1[i] != null && typeof seatNumArr1[i] != "undefined") {
+        total_price += seatPriceArr1[i];
+        seat_price += seatPriceArr1[i];
+      }
+      if (seatNumArr2 != null && typeof seatNumArr2[i] != "undefined") {
+        total_price += seatPriceArr2[i];
+        seat_price += seatPriceArr2[i];
+      }
+      if(baggArr1[i] != null && typeof baggArr1[i] != "undefined") {
+        total_price += baggPriceArr1[i];
+        bagg_price += baggPriceArr1[i];
+        console.log("수하물 1 금액: " + baggPriceArr1[i])
+      }
+      if (baggArr2 != null && typeof baggArr2[i] != "undefined") {
+        total_price += baggPriceArr2[i];
+        bagg_price += baggPriceArr2[i];
+        console.log("수하물 2 금액: " + baggPriceArr2[i])
+      }
+    }
+    if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
+      total_price += ins_totalPrice;
     }
 
 
-    let totalPrice = Number(0);
     for (let i = 0; i < personNumber; i++) {
-      if (isNaN(seatPriceArr1[i])) {
-        seatPriceArr1[i] = Number(0);
-      }
-      totalPrice += Number(seatPriceArr1[i]);
-      if (isNaN(seatPriceArr2[i])) {
-        seatPriceArr2[i] = Number(0);
-      }
-      totalPrice += Number(seatPriceArr2[i]);
-      if (isNaN(baggPriceArr1[i])) {
-        baggPriceArr1[i] = Number(0);
-      }
-      totalPrice += Number(baggPriceArr1[i]);
-      if (isNaN(baggPriceArr2[i])) {
-        baggPriceArr2[i] = Number(0);
-      }
-      totalPrice += Number(baggPriceArr2[i]);
-      if (isNaN(insPriceArr[i])) {
-        insPriceArr[i] = Number(0);
-      }
-      totalPrice += insPriceArr[i];
-      for (let i = 0; i < personNumber; i++) {
-        console.log("좌석번호1-" + i + " : " + seatNumArr1[i])
-        console.log("좌석번호2-" + i + "  : " + seatNumArr2[i])
-        console.log("좌석타입1-" + i + "  : " + seatTypeArr1[i])
-        console.log("좌석타입2-" + i + "  : " + seatTypeArr2[i])
-        console.log("좌석가격1-" + i + "  : " + seatPriceArr1[i])
-        console.log("좌석가격2-" + i + "  : " + seatPriceArr2[i])
-        console.log("수하물1-" + i + "  : " + baggArr1[i])
-        console.log("수하물2-" + i + "  : " + baggArr2[i])
-        console.log("수하물가격1-" + i + "  : " + baggPriceArr1[i])
-        console.log("수하물가격2-" + i + "  : " + baggPriceArr2[i])
-        console.log("보험-" + i + "  : " + insArr[i])
-        console.log("보험가격-" + i + "  : " + insPriceArr[i])
-        console.log("총 금액ㅇㅇㅇㅇㅇㅇㅇㅇㅇ:" + totalPrice)
-      }
-      console.log("좌석번호1크기 : " + seatNumArr1.length)
-      console.log("좌석번호1크기 : " + seatNumArr2.length)
-      console.log("좌석번호1크기 : " + seatTypeArr1.length)
-      console.log("좌석번호1크기 : " + seatTypeArr2.length)
-      console.log("좌석번호1크기 : " + seatPriceArr1.length)
-      console.log("좌석번호1크기 : " + seatPriceArr2.length)
-      console.log("좌석번호1크기 : " + baggArr1.length)
-      console.log("좌석번호1크기 : " + baggArr2.length)
-      console.log("수하물가격1 크기 : " + baggPriceArr1.length)
-      console.log("수하물가격2 크기 : " + baggPriceArr2.length)
-      console.log("보험 크기 : " + insArr.length)
-      console.log("보험가격 크기 : " + insPriceArr.length)
+      console.log("구간1좌석번호" + i + " : " + seatNumArr1[i])
+      console.log("구간2좌석번호" + i + " : " + seatNumArr2[i])
+      console.log("보험" + i + " : " + insArr[i])
+      console.log("구간1수하물" + i + " : " + baggArr1[i])
+      console.log("구간2수하물" + i + " : " + baggArr2[i])
+      console.log("-------------------------------------")
+    }
+
+    // 항공 운임금액
+    let flightPrice = 0;
+    $(".flight_price").each(function() {
+      flightPrice += Number($(this).val());
+    })
+    $("#flightPrice").html(flightPrice.toLocaleString("ko-KR"));
+    // 세금
+    let flightTax = 0;
+    if (href[5] == 'oneway') {
+      flightTax = Number(4000*personNumber/2);
+    } else {
+      flightTax = Number(8000*personNumber/2);
+    }
+    $("#flightTax").html(flightTax.toLocaleString("ko-KR"));
+    // 유류할증료
+    let flightCharge = 0;
+    if (href[5] == 'oneway') {
+      flightCharge = Number(5000*personNumber/2);
+    } else {
+      flightCharge = Number(10000*personNumber/2);
+    }
+    $("#flightCharge").html(flightCharge.toLocaleString("ko-KR"));
+    finalTotalPrice = total_price + flightPrice + flightTax + flightCharge
+    $("#modal_tot_price").html(finalTotalPrice.toLocaleString("ko-KR"));
+
+    if (seat_price > 0) {
+      $("#option_price_list #option_seat").html("사전좌석지정")
+      $("#option_price_list #option_seat_price").html(seat_price.toLocaleString('ko-KR'))
+    } if (bagg_price > 0) {
+      $("#option_price_list #option_bagg").html("초과수하물")
+      $("#option_price_list #option_bagg_price").html(bagg_price.toLocaleString('ko-KR'))
+    } if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
+      $("#option_price_list #option_ins").html("보험료")
+      $("#option_price_list #option_ins_price").html(ins_totalPrice.toLocaleString('ko-KR'))
     }
   }
 
+  // $("#optional_ok").on("click", function() {
+  //   if(href[5] == 'oneway') {
+  //     onewayData();
+  //     location.href = "/pages/payment/twoway"
+  //   } else if(href[5] == 'multiway') {
+  //     location.href = '/pages/payment/multiway'
+  //   } else if(href[5] == 'twoway') {
+  //     location.href = '/pages/payment/twoway'
+  //   }
+  // })
 
-  /*부가서비스 신청내역 끝*/
+
+  let baggIndex = 0;
+  let insIndex = 0;
+
+  function onewayData() {
+    for (let i = 0; i < personNumber; i++) {
+      let jsonData;
+      for (let i = 0; i < personNumber; i++) {
+        if (baggArr1[i] == '초과수하물 5KG(+KRW 8,000)') {baggIndex = 13;}
+        else if(baggArr1[i] == '10KG(+KRW 16,000)') {baggIndex = 20;}
+        else if(baggArr1[i] == '15KG(+KRW 24,000)') {baggIndex = 21;}
+        else if(baggArr1[i] == '20KG(+KRW 32,000)') {baggIndex = 22;}
+        if (insArr[i] == '실속형') {insIndex = 1;}
+        else if(baggArr1[i] == '표준형') {insIndex = 2;}
+        else if(baggArr1[i] == '고급형') {insIndex = 3;}
+      }
+      if (i % 2 == 0) {
+        jsonData = {
+          data : {
+            reIndex: indexArr[i], reSeatDetail: seatNumArr1[i], reBaggageidx: baggIndex,
+            reInsuranceidx : insIndex, reTotal: finalTotalPrice
+          }
+        }
+        $.ajax({
+          url : "/api/reservation", type : "PUT", data : jsonData, dataType : "text"
+        });
+      }
+    }
+  }
+
+  function multiway() {
+    for (let i = 0; i < personNumber; i++) {
+      let jsonData;
+      if (i % 2 == 0) {
+        if (baggArr1[i].val() == '초과수하물 5KG(+KRW 8,000)') {baggIndex = 13;}
+        else if(baggArr1[i].val() == '10KG(+KRW 16,000)') {baggIndex = 20;}
+        else if(baggArr1[i].val() == '15KG(+KRW 24,000)') {baggIndex = 21;}
+        else if(baggArr1[i].val() == '20KG(+KRW 32,000)') {baggIndex = 22;}
+        if (baggArr2[i].val() == '초과수하물 5KG(+KRW 8,000)') {baggIndex = 13;}
+        else if(baggArr2[i].val() == '10KG(+KRW 16,000)') {baggIndex = 20;}
+        else if(baggArr2[i].val() == '15KG(+KRW 24,000)') {baggIndex = 21;}
+        else if(baggArr2[i].val() == '20KG(+KRW 32,000)') {baggIndex = 22;}
+        if (insArr[i].val() == '실속형') {insIndex = 1;}
+        else if(baggArr1[i].val() == '표준형') {insIndex = 2;}
+        else if(baggArr1[i].val() == '고급형') {insIndex = 3;}
+      } else {
+        if (insArr[i].val() == '실속형') {insIndex = 1;}
+        else if(baggArr1[i].val() == '표준형') {insIndex = 2;}
+        else if(baggArr1[i].val() == '고급형') {insIndex = 3;}
+      }
+
+        jsonData = {
+          data : {
+            reIndex: indexArr[i], reSeatDetail: seatNumArr1[i], reBaggageidx: baggIndex,
+            reInsuranceidx : insIndex, reTotal: finalTotalPrice
+          }
+        }
+        $.ajax({
+          url : "/api/reservation", type : "PUT", data : jsonData, dataType : "text"
+        });
+      }
+  }
+
+
+
+
+  // /*부가서비스 신청내역 끝*/
+
+  // let area1 = $("#go_area1").match(/\(.*\)/gi);
+  // let test = '(안녕하세요)'
+  // let test2 = test.match(/\(.*\)/gi);
+  // console.log(area1);
+  // console.log("테ㅔ스트ㅡ!!!!!!" + test2);
 
   $(".ins_join_butt").on("click", function () {
+    optionTotalPrice(personNumber)
+    confirmOptional()
     if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
       $("#modal_service_app_wrap").fadeIn();
       $(".modal_join_ins").fadeIn();
+      for (let i = 0; i < personNumber; i++) {
+        $("#select_ins_num_"+i).css("display", "block");
+        $("#ins_num_"+i).val($("#select_product_" + i +" option:selected").text());
+      }
+    } else {
+      for (let i = 0; i < personNumber; i++) {
+        $("#select_ins_num_"+i).css("display", "none");
+        $("#ins_num_"+i).val("");
+      }
     }
-    optionTotalPrice();
-    confirmOptional()
   });
 
 
@@ -1287,7 +1413,7 @@ $(function () {
     let isCheck = $(".insCheckBox").length;
     let is = 0;
     for (let i = 0; i < $(".insCheckBox").length * 2; i++) {
-      if ($("#ins_check_" + i).is(":checked")) {
+      if ($("#check_ins_" + i).is(":checked")) {
         is += 1;
       }
     }
@@ -1299,109 +1425,124 @@ $(function () {
     }
 
   })
-
-  $(".insCheckBox").change(function() {
-    for (let i = 0; i < $(".insCheckBox").length * 2; i++) {
-      if ($("ins_check_" + i).is(':checked')) {
-        // $("#modal_ins_people_" + i).css("background-color", "rgb(0, 173, 239)");
-        // $("#modal_ins_people_" + i).css("color", "#fff");
-        changeBackground1($("#modal_ins_people_" + i))
-      } else {
-        // $("#modal_ins_people_" + i).css("background-color", "#fff");
-        // $("#modal_ins_people_" + i).css("color", "rgb(0, 173, 239)");
-        changeBackground2($("#modal_ins_people_" + i))
-      }
-    }
-  })
-
-  function changeBackground1(box1) {
-    box1.css("background-color", "rgb(0, 173, 239)");
-    box1.css("color", "#fff");
-  }
-  function changeBackground2(box2) {
-    box2.css("background-color", "#fff");
-    box2.css("color", "rgb(0, 173, 239)");
-  }
-
-
+  confirmOptional();
 
   function confirmOptional() {
-    optionTotalPrice()
-
     // 부가서비스신청 최종확인
     let str8 = "";
+    let personName = [personNumber];
+    let name = $("#person_name0").text()
+    console.log("이르ㅜㅁ아룽ㄴ머ㅏ룽ㅁ너 : " + name);
     for (let i = 0; i < personNumber; i++) {
-      str8 += '<thead id="modal_option_people_info_'+i+'"></thead>'
-      str8 += '<tbody id="modal_option_section1_'+i+'"></tbody>'
-      str8 += '<tbody id="modal_option_section2_'+i+'"></tbody>'
+      personName[i] = $("#person_name"+i).text()
+      if (i % 2 == 0) {
+        console.log("이름을아눌아눌이ㅓㅏ눌인/ㄹ : " + personName[i]);
+        str8 += '<thead id="modal_option_people_info_'+i+'"></thead>'
+        str8 += '<tbody id="modal_option_section1_'+i+'"></tbody>'
+        str8 += '<tbody id="modal_option_section2_'+i+'"></tbody>'
+      }
     }
+
     $("#modal_option_table").append(str8);
     let option_table_head = [personNumber]; // 탑승자 정보
     let option_table_body1 = [personNumber]; // 구간1
     let option_table_body2 = [personNumber]; // 구간2
     for (let i = 0; i < personNumber; i++) {
-      option_table_head[i] = "";
-      option_table_body1[i] = "";
-      option_table_body2[i] = "";
-      option_table_head[i] += '<tr><th colSpan="3" id="modal_option_name_' + i + '">'+ '유/영은' +'</th></tr>'
+      if (i % 2 == 0) {
+        option_table_head[i] = "";
+        option_table_body1[i] = "";
+        option_table_body2[i] = "";
+        option_table_head[i] += '<tr><th colSpan="3" id="modal_option_name_' + i + '">' + personName[i] +'</th></tr>'
 
-      if (seatNumArr1[i] != null &&  seatNumArr1[i] != undefined && seatPriceArr1[i] != 0 && baggArr1[i] != null && baggArr1[i] != undefined && baggPriceArr1[i] != 0) {
-        option_table_body1[i] += '<tr><td rowSpan="2" class="b_r cell">구간1</td>'
-      } else if (seatNumArr1[i] != null &&  seatNumArr1[i] != undefined && seatPriceArr1[i] != 0 || baggArr1[i] != null && baggArr1[i] != undefined && baggPriceArr1[i] != 0) {
-        option_table_body1[i] += '<tr><td class="b_r cell">구간1</td>'
-      }
-        if (seatNumArr1[i] != null && seatNumArr1[i] != undefined && seatPriceArr1[i] != 0) {
+        // 사전좌석, 수하물 2개 다 신청 시
+        if ((seatNumArr1[i] != null && typeof seatNumArr1[i] != undefined && seatPriceArr1[i] != 0) &&
+            (baggArr1[i] != null && typeof baggArr1[i] != undefined && baggPriceArr1[i] != 0)) {
+          option_table_body1[i] += '<tr><td rowSpan="2" class="b_r cell">구간1</td>'
+
           option_table_body1[i] += '<td class="cell"><div class="item_wrap1"><p class="img img_seat"></p>'
           option_table_body1[i] += '<p class="txt">사전좌석지정 <span id="modal_option_seat1_' + i + '">' + seatNumArr1[i] + ' </span>'
           option_table_body1[i] += '(<span id="modeal_option_seatType1_' + i + '">' + seatTypeArr1[i] + '</span>)</p></div></td>'
           option_table_body1[i] += '</div></td>'
-          option_table_body1[i] += '<td class="left cell">KRW ' + Number(seatPriceArr1[i]).toLocaleString('ko-KR') + '<p>자동 체크인 신청 가능</p></td>'
-          console.log(seatNumArr1[i]);
-        } else if (seatNumArr1[i] == null && seatNumArr1[i] == undefined) {
-          option_table_body1[i] += '<td rowSpan="2" colspan="2"></td>'
-        }
-        option_table_body1[i] += '</tr>'
-        if (baggArr1[i] != null && baggArr1[i] != undefined && baggPriceArr1[i] != 0) {
+          option_table_body1[i] += '<td class="left cell">KRW ' + Number(seatPriceArr1[i]).toLocaleString('ko-KR') + '<p>자동 체크인 신청 가능</p></td></tr>'
+
           option_table_body1[i] += '<tr><td class="none_b_t cell"><div class="item_wrap1"><p class="img img_bagg"></p>'
           option_table_body1[i] += '<p class="txt" id="modal_option_bagg1_' + i + '">초과수하물 ' + baggArr1[i] + '</p></div></td>'
           option_table_body1[i] += '<td class="left none_b_t cell">KRW <span id="modal_option_bagg_price1_' + i + '">' + Number(baggPriceArr1[i]).toLocaleString('ko-KR') + '</span></td></tr>'
         }
+          // 사전좌석, 수하물 중 한개만 신청 시
+          else if ((seatNumArr1[i] != null && typeof seatNumArr1[i] != undefined && seatPriceArr1[i] != 0) ||
+            (baggArr1[i] != null && typeof baggArr1[i] != undefined && baggPriceArr1[i] != 0)) {
+            option_table_body1[i] += '<tr><td class="b_r cell">구간1</td>'
+            // 사전 좌석만 신청 시
+            if ((seatNumArr1[i] != null && typeof seatNumArr1[i] != undefined && seatPriceArr1[i] != 0)) {
+              option_table_body1[i] += '<td class="cell"><div class="item_wrap1"><p class="img img_seat"></p>'
+              option_table_body1[i] += '<p class="txt">사전좌석지정 <span id="modal_option_seat1_' + i + '">' + seatNumArr1[i] + ' </span>'
+              option_table_body1[i] += '(<span id="modeal_option_seatType1_' + i + '">' + seatTypeArr1[i] + '</span>)</p></div></td>'
+              option_table_body1[i] += '</div></td>'
+              option_table_body1[i] += '<td class="left cell">KRW ' + Number(seatPriceArr1[i]).toLocaleString('ko-KR') + '<p>자동 체크인 신청 가능</p></td>'
+            }
+            // 수하물만 신청 시
+            if ((baggArr1[i] != null && typeof baggArr1[i] != undefined && baggPriceArr1[i] != 0)) {
+              option_table_body1[i] += '<td class="cell"><div class="item_wrap1"><p class="img img_bagg"></p>'
+              option_table_body1[i] += '<p class="txt" id="modal_option_bagg1_' + i + '">초과수하물 ' + baggArr1[i] + '</p></div></td>'
+              option_table_body1[i] += '<td class="left cell">KRW <span id="modal_option_bagg_price1_' + i + '">' + Number(baggPriceArr1[i]).toLocaleString('ko-KR') + '</span></td>'
+            }
+            option_table_body1[i] += '</tr>'
+          }
 
-      if (seatNumArr2[i] != null &&  seatNumArr2[i] != undefined && seatPriceArr2[i] != 0 && baggArr2[i] != null && baggArr2[i] != undefined && baggPriceArr2[i] != 0) {
-        option_table_body2[i] += '<tr><td rowSpan="2" class="b_r cell">구간2</td>'
-      } else if (seatNumArr2[i] != null &&  seatNumArr2[i] != undefined && seatPriceArr2[i] != 0 || baggArr2[i] != null && baggArr2[i] != undefined && baggPriceArr2[i] != 0) {
-        option_table_body2[i] += '<tr><td class="b_r cell">구간2</td>'
-      }
-        if (seatNumArr2[i] != null && seatNumArr2[i] != undefined && seatPriceArr2[i] != 0) {
-          option_table_body2[i] += '<td class="cell"><div class="item_wrap2"><p class="img img_seat"></p>'
-          option_table_body2[i] += '<p class="txt">사전좌석지정 <span id="modal_option_seat2_' + i + '">' + seatNumArr2[i] + ' </span>'
-          option_table_body2[i] += '(<span id="modeal_option_seatType2_' + i + '">' + seatTypeArr2[i] + '</span>)</p></div></td>'
-          option_table_body2[i] += '</div></td>'
-          option_table_body2[i] += '<td class="left cell">KRW <span id="modal_option_seat_price1_' + i + '">' + Number(seatPriceArr2[i]).toLocaleString('ko-KR') + '</span><p>자동 체크인 신청 가능</p></td>'
-          console.log(seatPriceArr2[i]);
-        } else if (seatNumArr2[i] == null || seatNumArr2[i] == undefined) {
-          option_table_body2[i] += '<td rowSpan="2" colspan="2"></td>'
-        }
-        option_table_body2[i] += '</tr>'
-        if (baggArr2[i] != null && baggArr2[i] != undefined && baggPriceArr2[i] != 0) {
-          option_table_body2[i] += '<tr><td class="none_b_t cell"><div class="item_wrap2"><p class="img img_bagg"></p>'
-          option_table_body2[i] += '<p class="txt" id="modal_option_bagg2_' + i + '">초과수하물' + baggArr2[i] + '</p></div></td>'
-          option_table_body2[i] += '<td class="left none_b_t cell">KRW <span id="modal_option_bagg_price2_' + i + '">' + Number(baggPriceArr2[i]).toLocaleString('ko-KR') + '</span></td>'
-        }
-        option_table_body2[i] += '</tr>'
 
-      if (insArr[i] != null) {
-        option_table_body2[i] += '<tr><td class="b_r">전 구간</td>'
-        option_table_body2[i] += '<td><div class="item_wrap1"><p class="img img_ins"></p>'
-        option_table_body2[i] += '<p class="txt" id="modal_option_ins_' + i + '">여행보험 (' + '고급형' + ')</p></div></td>'
-        option_table_body2[i] += '<td class="left" id="modal_option_ins_price_' + i + '">KRW ' + insPriceArr[i].toLocaleString('ko-KR') + '</td></tr>'
+        if (href[5] != 'oneway') { // 편도가 아닐 때
+          // 사전좌석, 수하물 2개 다 신청 시
+          if ((seatNumArr2[i+1] != null && typeof seatNumArr2[i+1] != undefined && seatPriceArr2[i+1] != 0) &&
+              (baggArr2[i] != null && baggArr2[i] != undefined && baggPriceArr2[i] != 0)) {
+            option_table_body2[i] += '<tr><td rowSpan="2"  class="b_r cell">구간2</td>'
+
+            option_table_body2[i] += '<td class="cell"><div class="item_wrap2"><p class="img img_seat"></p>'
+            option_table_body2[i] += '<p class="txt">사전좌석지정 <span id="modal_option_seat2_' + i + '">' + seatNumArr2[i+1] + ' </span>'
+            option_table_body2[i] += '(<span id="modeal_option_seatType2_' + i + '">' + seatTypeArr2[i+1] + '</span>)</p></div></td>'
+            option_table_body2[i] += '</div></td>'
+            option_table_body2[i] += '<td class="left cell">KRW ' + Number(seatPriceArr2[i+1]).toLocaleString('ko-KR') + '<p>자동 체크인 신청 가능</p></td></tr>'
+
+            option_table_body2[i] += '<td class="none_b_t cell"><div class="item_wrap2"><p class="img img_bagg"></p>'
+            option_table_body2[i] += '<p class="txt" id="modal_option_bagg2_' + i + '">초과수하물 ' + baggArr2[i] + '</p></div></td>'
+            option_table_body2[i] += '<td class="left none_b_t cell">KRW <span id="modal_option_bagg_price2_' + i + '">' + Number(baggPriceArr2[i]).toLocaleString('ko-KR') + '</span></td></tr>'
+          }
+            // 사전좌석, 수하물 중 한개만 신청 시
+            else if ((seatNumArr2[i+1] != null && typeof seatNumArr2[i+1] != undefined && seatPriceArr2[i+1] != 0) ||
+                (baggArr2[i] != null && baggArr2[i] != undefined && baggPriceArr2[i] != 0)) {
+              option_table_body2[i] += '<tr><td class="b_r cell">구간2</td>'
+              if ((seatNumArr2[i+1] != null && typeof seatNumArr2[i+1] != undefined && seatPriceArr2[i+1] != 0)) {
+                option_table_body2[i] += '<td class="cell"><div class="item_wrap2"><p class="img img_seat"></p>'
+                option_table_body2[i] += '<p class="txt">사전좌석지정 <span id="modal_option_seat2_' + i + '">' + seatNumArr2[i+1] + ' </span>'
+                option_table_body2[i] += '(<span id="modeal_option_seatType2_' + i + '">' + seatTypeArr2[i+1] + '</span>)</p></div></td>'
+                option_table_body2[i] += '</div></td>'
+                option_table_body2[i] += '<td class="left cell">KRW <span id="modal_option_seat_price1_' + i+1 + '">'
+                    + Number(seatPriceArr2[i+1]).toLocaleString('ko-KR') + '</span><p>자동 체크인 신청 가능</p></td>'
+              }
+              if ((baggArr2[i] != null && typeof baggArr2[i] != undefined && baggPriceArr2[i] != 0)){
+                option_table_body2[i] += '<td class="cell"><div class="item_wrap2"><p class="img img_bagg"></p>'
+                option_table_body2[i] += '<p class="txt" id="modal_option_bagg2_' + i + '">초과수하물 ' + baggArr2[i] + '</p></div></td>'
+                option_table_body2[i] += '<td class="left cell">KRW <span id="modal_option_bagg_price2_' + i + '">' + Number(baggPriceArr2[i]).toLocaleString('ko-KR') + '</span></td>'
+              }
+              option_table_body2[i] += '</tr>'
+            }
+        }
+        if (insArr[i] != null && $("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
+          option_table_body2[i] += '<tr><td class="b_r">전 구간</td>'
+          option_table_body2[i] += '<td><div class="item_wrap1"><p class="img img_ins"></p>'
+          option_table_body2[i] += '<p class="txt" id="modal_option_ins_' + i + '">여행보험 (' + insArr[i] + ')</p></div></td>'
+          option_table_body2[i] += '<td class="left" id="modal_option_ins_price_' + i + '">KRW ' + insPriceArr[i].toLocaleString('ko-KR') + '</td></tr>'
+        }
       }
     }
     for(let i = 0;  i < personNumber; i++) {
       $("#modal_option_people_info_"+i).html(option_table_head[i]);
       $("#modal_option_section1_"+i).html(option_table_body1[i]);
-      $("#modal_option_section2_"+i).html(option_table_body2[i]);
+      if (href[5] != 'oneway') {
+        $("#modal_option_section2_"+i).html(option_table_body2[i]);
+      }
     }
+
   }
 
   $(".fix_next_butt, .menu4").on("click", () => {
@@ -1434,19 +1575,19 @@ $(function () {
     $(".fix_modal").fadeOut();
   })
 
-
-  $(".plus_1").on('click', () => {
-    $(".info_table_wrap").css("overflow", "scroll");
-    $(".info_table_wrap").css("overflow-x", "hidden");
-    $(".info_table_wrap").animate({ scrollTop: 300 }, 600);
-    $(".plus_1").css("display", "none");
-    $(".minus_1").css("display", "inline-block");
+  // 운임총액 더보기
+  $("#plus1").on('click', () => {
+    $(".info_table_wrap1").css("overflow", "scroll");
+    $(".info_table_wrap1").css("overflow-x", "hidden");
+    $(".info_table_wrap1").animate({ scrollTop: 300 }, 600);
+    $("#minus1").css("display", "none");
+    $("#minus1").css("display", "inline-block");
   })
-  $(".minus_1").on('click', () => {
-    $(".info_table_wrap").css("overflow", "hidden");
-    $(".info_table_wrap").css("overflow-x", "none");
-    $(".plus_1").css("display", "inline-block");
-    $(".minus_1").css("display", "none");
+  $("#minus1").on('click', () => {
+    $(".info_table_wrap1").css("overflow", "hidden");
+    $(".info_table_wrap1").css("overflow-x", "none");
+    $("#plus1").css("display", "inline-block");
+    $("#minus1").css("display", "none");
   })
 
 
@@ -1481,10 +1622,6 @@ $(function () {
   /*하단 총액 모달창 끝 */
 });
 
-
-$(() => {
-  document.getElementById('end_date').valueAsDate = new Date('2022', '02', '20');
-});
 
 $(() => {
   $('#modal_free_wrap').hide();
