@@ -84,19 +84,24 @@
                 </div>
                 <div class="srh_container">
                     <div class="srh_box">
-                            <p>구분
-                                <select name="사용가능" id="enumid">
-                                    <option>Unused</option>
-                                    <option>Used</option>
-                                </select>
-                            </p>
-                            <p>기간<input type="date" class="item_date" id="startDate"><input type="date" class="item_start_date" id="endDate">
-                            </p>
+                        <div>
+                            구분
+                            <select name="사용가능" id="enumid">
+                                <option value="Unused">Unused</option>
+                                <option value="Used">Used</option>
+                            </select>
+                        </div>
+                        <div>
+                            기간
+                            <input type="date" class="item_date" id="startDate">
+                            <input type="date" class="item_start_date" id="endDate">
+                        </div>
                         <div class="btn">
                                 <input type="button" value="조회" id="searchbtn">
                                 <input type="button" value="초기화" class="btn_cancel" onclick="location.reload()">
                         </div>
                     </div>
+                    <p><em>* 기간은 종료 날짜를 기준으로 검색</em></p>
                 </div>
                 <div class="couponY" id="itemList">
                     <table>
@@ -126,7 +131,14 @@
                     </tr>
                         </tbody>
                     </table>
-                    <div id="showPage">
+                    <div class="footer">
+                        <div class="center">
+                            <table>
+                                <tr id="showPage">
+
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="couponN">
