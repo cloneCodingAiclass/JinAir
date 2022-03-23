@@ -14,6 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @RestController
@@ -49,6 +51,14 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
 */
 
     private final ReservationApiLogicService reservationApiLogicService;
+    @PersistenceContext
+    private EntityManager em;
+
+    public Long searchperson(){
+        List date = em.createQuery("select count(r.reIndex) from TbReservation r where (r.reSchStartTime, 'yyyy-mm-dd') = today").getResultList();
+
+        return null;
+    }
 
     @GetMapping("/list/{startIdx}/{endIdx}") // http://localhost:8080/api/reservation/list
     public Header<List<ReserveApiResponse>> findAll(
@@ -92,6 +102,7 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
 
     @PutMapping("/paymentsUpdate")
     public ReserveApiResponse paymentsUpdate(@RequestBody List<ReserveApiRequest> request) {
+        System.out.println(request);
         return reservationApiLogicService.paymentsUpdate(request);
     }
 
