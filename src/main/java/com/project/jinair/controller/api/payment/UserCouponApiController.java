@@ -76,4 +76,10 @@ public class UserCouponApiController implements CrudInterface<UsercouponApiReque
         return result;
     }
 
+    @PutMapping("/update")
+    public Header<UsercouponApiResponse> updateCoupon(@RequestBody Header<UsercouponApiRequest> request){
+        System.out.println(request);
+        return userCouponApiService.updateCoupon(request);
+    }
+
 }
