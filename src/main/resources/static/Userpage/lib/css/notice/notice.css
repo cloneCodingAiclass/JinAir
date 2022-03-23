@@ -109,7 +109,7 @@
     cursor : pointer;
 }
 
-showPage > td:hover {
+#showPage > td:hover {
     background-color: #BDD600;
     color: white;
 }

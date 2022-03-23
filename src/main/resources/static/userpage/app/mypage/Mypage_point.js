@@ -331,6 +331,9 @@ $(function () {
     let go_layer = '';
     let arrive_layer = '';
 
+    // 포인트 총액
+    let sum = 0;
+
     $('.go_layer').find('li').find('a').on('click', function (e) {
         e.stopPropagation();
         go_layer = $(this).html();
@@ -516,7 +519,6 @@ $(function () {
     pointResult(memIndex);
 
     function pointResult(index){
-        let sum = 0;
         $.get("/api/point/user/"+index, function (response){
             for(let i = 0; i < response.data.length; i++){
                 let point = response.data[i].poPoint;
@@ -536,6 +538,19 @@ $(function () {
     $('#searchPo').on('click', function (){
         pointSearch(memIndex, $('#item_start_date1').val() + 'T00:00:00', $('#item_start_date2').val() + 'T23:59:59', 0);
     })
+
+    $("#showPage").on('click', '.pageNum', function(){
+        let pageId = this.id;
+        console.log(pageId);
+        pointArr(memIndex, pageId);
+    });
+
+
+    $("#showPage").on('click', '.pageNum2', function(){
+        let pageId2 = this.id;
+        console.log(pageId2);
+        pointSearch(memIndex, $('#item_start_date1').val() + 'T00:00:00', $('#item_start_date2').val() + 'T23:59:59', pageId2);
+    });
 
     pointArr(memIndex, 0);
 
@@ -579,21 +594,20 @@ $(function () {
             pointList.pointList = response.data;
 
             let lastPage = response.pagination.totalPages;
-
-            let str = "";
-            str += "<td class='firstPage1'><<</td>";
-            for (let i = 0; i < lastPage; i++) {
-                str += "<td class='pages' id="+i+">" + (i+1) + "</td>";
+            let str2 = "";
+            str2 += "<td class='firstPage1 cursor'><<</td>";
+            for ( let i = 0; i < lastPage; i++ ) {
+                str2 += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
             }
-            str += "<td class='lastPage1'>>></td>";
-            $("#showPage").html(str);
-            if(page == 0) {
+            str2 += "<td class='lastPage1 cursor'>>></td>";
+            $("#showPage").html(str2);
+            if ( page == 0 ) {
                 $(".firstPage1").css("visibility", "hidden");
             }
-            if(page == lastPage-1) {
+            if ( page == lastPage-1 || response.totalElements != 0 ) {
                 $(".lastPage1").css("visibility", "hidden");
             }
-            $(".pages").css({
+            $(".pageNum").css({
                 "background-color" : "#fff",
                 "color" : "#444",
                 "cursor" : "pointer"
@@ -603,10 +617,10 @@ $(function () {
                 "color" : "white"
             });
             $(document).on('click', '.firstPage1', function(){
-                list(0);
+                pointArr(memIndex, 0);
             });
             $(document).on('click', '.lastPage1', function(){
-                list(lastPage-1);
+                pointArr(memIndex, lastPage-1);
             });
         })
     }
@@ -654,22 +668,25 @@ $(function () {
 
                 pointList.pointList = dataJson.data;
 
-                let lastPage = dataJson.pagination.totalPages;
-
-                let str = "";
-                str += "<td class='firstPage1'><<</td>";
-                for (let i = 0; i < lastPage; i++) {
-                    str += "<td class='pages' id="+i+">" + (i+1) + "</td>";
+                let lastPage = response.pagination.totalPages;
+                let str2 = "";
+                str2 += "<td class='firstPage2 cursor'><<</td>";
+                for ( let i = 0; i < lastPage; i++ ) {
+                    str2 += "<td class='pageNum2' id="+i+">" + (i+1) + "</td>";
                 }
-                str += "<td class='lastPage1'>>></td>";
-                $("#showPage").html(str);
-                if(page == 0) {
-                    $(".firstPage1").css("visibility", "hidden");
+                str2 += "<td class='lastPage2 cursor'>>></td>";
+                $("#showPage").html(str2);
+                if ( page == 0 ) {
+                    $(".firstPage2").css("visibility", "hidden");
                 }
-                if(page == lastPage-1) {
-                    $(".lastPage1").css("visibility", "hidden");
+                if ( page == lastPage-1 || response.totalElements != 0 ) {
+                    $(".lastPage2").css("visibility", "hidden");
                 }
-                $(".pages").css({
+                if ( response.pagination.totalElements == 0 ) {
+                    alert("검색결과가 없습니다.");
+                    list(0);
+                }
+                $(".pageNum2").css({
                     "background-color" : "#fff",
                     "color" : "#444",
                     "cursor" : "pointer"
@@ -678,25 +695,16 @@ $(function () {
                     "background-color" : "#661e43",
                     "color" : "white"
                 });
-                $(document).on('click', '.firstPage1', function(){
-                    list(0);
+                $(document).on('click', '.firstPage2', function(){
+                    pointSearch(index, start, end, 0);
                 });
-                $(document).on('click', '.lastPage1', function(){
-                    list(lastPage-1);
+                $(document).on('click', '.lastPage2', function(){
+                    pointSearch(index, start, end, lastPage-1);
                 });
             }
         })
     }
 
-    $(document).on('click', '.pages', function(){
-        let pageId = this.id;
-        list(pageId);
-    });
-
-    $(document).on('click', '.pagesS', function(){
-        let pageId2 = this.id;
-        searchNoti(searchStr, pageId2);
-    });
 });
 
 function hidePopupLayer(){
