@@ -1168,14 +1168,17 @@ $(function () {
 
   /*부가서비스 신청내역*/
   function optionTotalPrice(personNumber) {
+    total_price = 0;
+    seat_price = 0;
+    bagg_price = 0;
+    finalTotalPrice = 0;
+    flightPrice = 0;
     /* 좌석 */
     for (let i = 0; i < personNumber; i++) {
       seatNumArr1[i] = "";seatNumArr2[i] = "";seatPriceArr1[i] = 0;seatPriceArr2[i] = 0;baggArr1[i] = "";baggArr2[i] = "";
       baggPriceArr1[i] = 0;baggPriceArr2[i] = 0;insArr[i] = "";insPriceArr[i] = 0;seatTypeArr1[i] = "";seatTypeArr2[i] = "";
-      flightArr[i] = "";jourPrice1[i] = "";jourPrice2[i] = ""
-      total_price = 0;
-      seat_price = 0;
-      bagg_price = 0;
+      flightArr[i] = "";jourPrice1[i] = 0;jourPrice2[i] = 0;
+
 
       seatNumArr1[i] = $("#seat_num1_" + i).val();
       seatNumArr2[i] = $("#seat_num2_" + i).val();
@@ -1241,37 +1244,30 @@ $(function () {
       if(seatNumArr1[i] != null && typeof seatNumArr1[i] != "undefined") {
         total_price += seatPriceArr1[i];
         seat_price += seatPriceArr1[i];
+        jourPrice1[i] += seatPriceArr1[i];
       }
       if (seatNumArr2 != null && typeof seatNumArr2[i] != "undefined") {
         total_price += seatPriceArr2[i];
         seat_price += seatPriceArr2[i];
+        jourPrice2[i] += seatPriceArr1[i];
       }
       if(baggArr1[i] != null && typeof baggArr1[i] != "undefined") {
         total_price += baggPriceArr1[i];
         bagg_price += baggPriceArr1[i];
         console.log("수하물 1 금액: " + baggPriceArr1[i])
+        jourPrice1[i] += Number(baggPriceArr1[i]);
       }
       if (baggArr2 != null && typeof baggArr2[i] != "undefined") {
         total_price += baggPriceArr2[i];
         bagg_price += baggPriceArr2[i];
         console.log("수하물 2 금액: " + baggPriceArr2[i])
+        jourPrice2[i] += Number(baggPriceArr2[i]);
       }
     }
     if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
       total_price += ins_totalPrice;
     }
 
-    for (let i = 0; i < personNumber; i++) {
-      console.log("구간1좌석가격" + i + " : " + seatPriceArr1[i])
-      console.log("구간2좌석가격" + i + " : " + seatPriceArr2[i])
-      console.log("보험" + i + " : " + insPriceArr[i])
-      console.log("구간1수하물가격" + i + " : " + baggPriceArr1[i])
-      console.log("구간2수하물가격" + i + " : " + baggPriceArr2[i])
-      console.log("운임금액" + i + " : " + flightArr[i])
-      console.log("-------------------------------------")
-
-
-    }
 
     for (let i = 0; i < personNumber; i++) {
       if (baggArr1[i] == '초과수하물 5KG(+KRW 8,000)') {baggIndex[i] = Number(13);}
@@ -1297,6 +1293,24 @@ $(function () {
 
     for (let i = 0; i < $(".flight_price").length; i++) {
       flightArr[i] = Number($(this).val());
+      if (i % 2 == 0) {
+        jourPrice1[i] += flightArr[i]
+      } else if(i % 2 != 0) {
+        jourPrice2[i] += flightArr[i]
+      }
+    }
+
+    for (let i = 0; i < personNumber; i++) {
+      console.log("구간1좌석가격" + i + " : " + seatPriceArr1[i])
+      console.log("구간2좌석가격" + i + " : " + seatPriceArr2[i])
+      console.log("보험" + i + " : " + insPriceArr[i])
+      console.log("구간1수하물가격" + i + " : " + baggPriceArr1[i])
+      console.log("구간2수하물가격" + i + " : " + baggPriceArr2[i])
+      console.log("운임금액" + i + " : " + flightArr[i])
+      console.log("여정1 총금액 " + i + " : " + jourPrice1[i])
+      console.log("여정2 총금액 " + i + " : " + jourPrice2[i])
+      console.log("-------------------------------------")
+
     }
 
     $("#flightPrice").html(flightPrice.toLocaleString("ko-KR"));
@@ -1306,6 +1320,13 @@ $(function () {
       flightTax = Number(4000*personNumber/2);
     } else {
       flightTax = Number(8000*personNumber/2);
+      for (let i = 0; i < personNumber; i++) {
+        if (i % 2 == 0) {
+          jourPrice1[i] += flightTax/2
+        } else if(i % 2 != 0) {
+          jourPrice2[i] += flightTax/2
+        }
+      }
     }
     $("#flightTax").html(flightTax.toLocaleString("ko-KR"));
     // 유류할증료
@@ -1314,6 +1335,14 @@ $(function () {
       flightCharge = Number(5000*personNumber/2);
     } else {
       flightCharge = Number(10000*personNumber/2);
+      for (let i = 0; i < personNumber; i++) {
+        if (i % 2 == 0) {
+          jourPrice1[i] += flightCharge/2
+        } else if(i % 2 != 0) {
+          jourPrice2[i] += flightCharge/2
+        }
+      }
+
     }
     $("#flightCharge").html(flightCharge.toLocaleString("ko-KR"));
     finalTotalPrice = total_price + flightPrice + flightTax + flightCharge
