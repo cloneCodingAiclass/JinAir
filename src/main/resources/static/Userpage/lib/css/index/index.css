@@ -202,11 +202,13 @@ body {
     position: relative;
     left: 5px;
     text-align: center;
+    cursor: pointer;
 }
 #header nav .nav_all > .open2 {
     border-bottom: none;
     position: relative;
     left: 14px;
+    cursor: pointer;
 }
 #header nav .nav_all > .open3 {
     border-bottom: none;
@@ -214,16 +216,19 @@ body {
     position: relative;
     left: 22px;
     text-align: center;
+    cursor: pointer;
 }
 #header nav .nav_all > .open4 {
     border-bottom: none;
     position: relative;
     left: 29px;
+    cursor: pointer;
 }
 #header nav .nav_all > .open5 {
     border-bottom: none;
     position: relative;
     left: 35px;
+    cursor: pointer;
 }
 /* 서브 네비 시작 */
 #header .sub_nav {
