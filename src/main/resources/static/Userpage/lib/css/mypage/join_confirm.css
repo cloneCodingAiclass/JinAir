@@ -593,12 +593,12 @@ body{
 }
 .joinForm_step .step1::after{
     content: "";
-    margin-left: 172px;
-    top: 251px;
+    margin-left: 173px;
+    top: 265px;
     width: 26px;
     height: 70px;
     position: absolute;
-    background: url('/userpage/lib/img/ico_member.png') 0 -200px;
+    background: url('/userpage/lib/img/ico_member.png') -1px -200px;
 }
 .joinForm_step > .step2{
     width: 175px;
@@ -612,11 +612,11 @@ body{
 .joinForm_step .step2::after{
     content: "";
     margin-left: 172px;
-    top: 251px;
+    top: 265px;
     width: 26px;
     height: 70px;
     position: absolute;
-    background: url('/userpage/lib/img/ico_member.png') 0 -200px;
+    background: url('/userpage/lib/img/ico_member.png') -1px -200px;
 }
 .joinForm_step > .step3{
     margin-right: 50px;
@@ -634,7 +634,7 @@ body{
 .joinForm_step .step3::after{
     content: "";
     margin-left: 147px;
-    top: 251px;
+    top: 265px;
     width: 26px;
     height: 70px;
     position: absolute;
