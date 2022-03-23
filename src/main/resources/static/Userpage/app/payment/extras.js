@@ -1177,7 +1177,7 @@ $(function () {
     for (let i = 0; i < personNumber; i++) {
       seatNumArr1[i] = "";seatNumArr2[i] = "";seatPriceArr1[i] = 0;seatPriceArr2[i] = 0;baggArr1[i] = "";baggArr2[i] = "";
       baggPriceArr1[i] = 0;baggPriceArr2[i] = 0;insArr[i] = "";insPriceArr[i] = 0;seatTypeArr1[i] = "";seatTypeArr2[i] = "";
-      flightArr[i] = "";jourPrice1[i] = 0;jourPrice2[i] = 0;
+      flightArr[i] = "";jourPrice1[i] = 0;jourPrice2[i] = 0; insIndex[i] = 0; baggIndex[i] = 0;
 
 
       seatNumArr1[i] = $("#seat_num1_" + i).val();
@@ -1236,8 +1236,6 @@ $(function () {
       } else if(isNaN(seatPriceArr2[i])){
         delete seatTypeArr2[i]
       }
-      console.log(baggPriceArr2[i] + " ::::: 수하물222222222222222222222 :::: " + i);
-      console.log(seatNumArr2[i] + "::::::: 구간2 좌석번호 :::::::" + i);
     }
     // 부가서비스 옵션 총 금액 계산
     for (let i = 0; i < personNumber; i++) {
@@ -1280,10 +1278,10 @@ $(function () {
     }
 
     for (let i = 0; i < personNumber; i++) {
-      console.log("수하물번홍ㅇㅇㅇㅇㅇㅇ" + baggIndex[i])
-      console.log("보험 번홍ㅇㅇㅇㅇㅇ" + insIndex[i])
-      console.log("좌석 번홍ㅇㅇㅇㅇ" + seatNumArr1[i])
-      console.log("인덱스 번홍ㅇㅇㅇㅇ" + indexArr[i])
+      console.log("수하물번홍ㅇㅇㅇㅇㅇㅇ" +i + " : " + baggIndex[i])
+      console.log("보험 번홍ㅇㅇㅇㅇㅇ" +i + " : " + insIndex[i])
+      console.log("좌석 번홍ㅇㅇㅇㅇ" +i + " : " + seatNumArr1[i])
+      console.log("인덱스 번홍ㅇㅇㅇㅇ" +i + " : " + indexArr[i])
     }
 
     // 항공 운임금액
@@ -1509,6 +1507,7 @@ $(function () {
     let option_table_head = [personNumber]; // 탑승자 정보
     let option_table_body1 = [personNumber]; // 구간1
     let option_table_body2 = [personNumber]; // 구간2
+
     for (let i = 0; i < personNumber; i++) {
       if (i % 2 == 0) {
         option_table_head[i] = "";
@@ -1607,8 +1606,8 @@ $(function () {
   }
 
   $(".fix_next_butt, .menu4").on("click", () => {
-    confirmOptional();
     optionTotalPrice(personNumber);
+    confirmOptional();
     $("#modal_service_app_wrap").fadeIn();
   });
 
