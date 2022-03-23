@@ -3,8 +3,6 @@
       xmlns:th="http://www.thymeleaf.org/">
 <!-- head.html -->
 <div th:replace="userpage/fragment/head :: head"></div>
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-<link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/userpage/lib/css/payment/getAvailabilityList.css">
 </head>
 
@@ -218,23 +216,23 @@
                                             </td>
                                             <td>
                                                 <div class="price_wrap" :class=`price_wrap1${index}` @click="price_wrap1(index)">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">{{(dto.schBasicPrice).toLocaleString('ko-KR')}}</p>
-                                                    <p class="seats">잔여 9석!</p>
+                                                    <p class="curr">{{koreaprice[index]}}</p>
+                                                    <p class="date_price" :class=`date_price1${index}`>{{seatsPrice[index]}}</p>
+                                                    <p class="seats">{{seatsNum[index]}}</p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="price_wrap" :class=`price_wrap2${index}` @click="price_wrap2(index)">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">{{(dto.schBasicPrice*1.6).toLocaleString('ko-KR')}}</p>
-                                                    <p class="seats">잔여 9석!</p>
+                                                    <p class="curr">{{koreaprice[index]}}</p>
+                                                    <p class="date_price" :class=`date_price2${index}`>{{seatsPrice1[index]}}</p>
+                                                    <p class="seats">{{seatsNum[index]}}</p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="price_wrap" :class=`price_wrap3${index}` @click="price_wrap3(index)">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">{{(dto.schBasicPrice*2.6).toLocaleString('ko-KR')}}</p>
-                                                    <p class="seats">잔여 9석!</p>
+                                                    <p class="curr">{{koreaprice[index]}}</p>
+                                                    <p class="date_price" :class=`date_price3${index}`>{{seatsPrice2[index]}}</p>
+                                                    <p class="seats">{{seatsNum[index]}}</p>
                                                 </div>
                                             </td>
                                         </tr>
@@ -359,23 +357,23 @@
                                             </td>
                                             <td>
                                                 <div class="price_wrap1" :class=`price_wrap4${index}` @click="price_wrap4(index)">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">{{(dto.schBasicPrice).toLocaleString('ko-KR')}}</p>
-                                                    <p class="seats">잔여 9석!</p>
+                                                    <p class="curr">{{koreaprice[index]}}</p>
+                                                    <p class="date_price" :class=`date_price4${index}`>{{seatsPrice[index]}}</p>
+                                                    <p class="seats">{{seatsNum[index]}}</p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="price_wrap1" :class=`price_wrap5${index}` @click="price_wrap5(index)">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">{{(dto.schBasicPrice*1.6).toLocaleString('ko-KR')}}</p>
-                                                    <p class="seats">잔여 9석!</p>
+                                                    <p class="curr">{{koreaprice[index]}}</p>
+                                                    <p class="date_price" :class=`date_price5${index}`>{{seatsPrice1[index]}}</p>
+                                                    <p class="seats">{{seatsNum[index]}}</p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="price_wrap1" :class=`price_wrap6${index}` @click="price_wrap6(index)">
-                                                    <p class="curr">KRW</p>
-                                                    <p class="date_price">{{(dto.schBasicPrice*2.6).toLocaleString('ko-KR')}}</p>
-                                                    <p class="seats">잔여 9석!</p>
+                                                    <p class="curr">{{koreaprice[index]}}</p>
+                                                    <p class="date_price" :class=`date_price6${index}`>{{seatsPrice2[index]}}</p>
+                                                    <p class="seats">{{seatsNum[index]}}</p>
                                                 </div>
                                             </td>
                                         </tr>
@@ -735,10 +733,8 @@
     <div th:replace="userpage/fragment/footer :: footer"></div>
     <!--푸터 끝-->
     <!--wrap 끝-->
-    <div class="modal">
-    </div>
+    <div class="modal"></div>
     <!--퀵 메뉴-->
-    <div th:replace="userpage/fragment/quickmenu :: quickmenu"></div>
     <!--퀵 메뉴 끝-->
     <!--프로모션 코드 모달창-->
     <div id="modal_input_code_wrap">

@@ -734,12 +734,12 @@ body {
 }
 .list_wrap .price_wrap .date_price {
   font-size: 23px;
-  margin: 5px;
+  margin: 0px;
   margin-bottom: 10px;
 }
 .list_wrap .price_wrap1 .date_price {
   font-size: 23px;
-  margin: 5px;
+  margin: 0px;
   margin-bottom: 10px;
 }
 .list_wrap .curr {
