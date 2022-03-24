@@ -119,7 +119,7 @@
                     </div>
                     <div class="bottcont">
                         <div class="QnA" id="itemList">
-                            <p><a href="/page/admin/faq_main">Q&A</a></p>
+                            <p><a href="/pages/admin/qna_main">Q&A</a></p>
                             <p>답변이 필요한 게시글 : ({{itemList.length}})개</p>
                             <table>
                                 <tr v-for="dto in itemList.slice().reverse()">
@@ -127,13 +127,14 @@
                                     <td>NotComplete</td>
                                 </tr>
                             </table>
-                            <p><a href="/page/admin/faq_main">more</a></p>
+                            <p><a href="/pages/admin/qna_main">more</a></p>
                         </div>
                         <div class="notice" id="scList">
                             <p><a href="/pages/admin/scheduleList">운항 스케줄</a></p>
                             <table>
                                 <tr>
-                                    <td>운항편</td>
+                                    <td>항공기 코드</td>
+                                    <td>항공기 이름</td>
                                     <td>출발 일자</td>
                                     <td>출발지</td>
                                     <td>출발시간</td>
@@ -143,25 +144,28 @@
                                 </tr>
                                 <tr v-for="list in scList">
                                     <td>
-                                        <a href="/pages/admin/scheduleResultInfo/${list.schIndex}">{{list.schAirplaneId}}</a>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${list.schIndex}`>{{list.schAirplaneType}}</a>
                                     </td>
                                     <td>
-                                        <a href="/pages/admin/scheduleResultInfo/${list.schIndex}">{{list.schDepartureDate.substr(0,10)}}</a>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${list.schIndex}`>{{list.schAirplaneName}}</a>
                                     </td>
                                     <td>
-                                        <a href="/pages/admin/scheduleResultInfo/${list.schIndex}">{{list.schDeparturePoint}}</a>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${list.schIndex}`>{{list.schDepartureDate.substr(0,10)}}</a>
                                     </td>
                                     <td>
-                                        <a href="/pages/admin/scheduleResultInfo/${list.schIndex}">{{list.schStartTime.substr(11,16)}}</a>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${list.schIndex}`>{{list.schDeparturePoint}}</a>
                                     </td>
                                     <td>
-                                        <a href="/pages/admin/scheduleResultInfo/${list.schIndex}">{{list.schArrivalPoint}}</a>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${list.schIndex}`>{{list.schStartTime.substr(11,16)}}</a>
                                     </td>
                                     <td>
-                                        <a href="/pages/admin/scheduleResultInfo/${list.schIndex}">{{list.schArrivalDate.substr(11,16)}}</a>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${list.schIndex}`>{{list.schArrivalPoint}}</a>
                                     </td>
                                     <td>
-                                        <a href="/pages/admin/scheduleResultInfo/${list.schIndex}">278(430)</a>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${list.schIndex}`>{{list.schArrivalDate.substr(11,16)}}</a>
+                                    </td>
+                                    <td>
+                                        <a :href=`/pages/admin/scheduleResultInfo/${list.schIndex}`>278(430)</a>
                                     </td>
                                 </tr>
                             </table>

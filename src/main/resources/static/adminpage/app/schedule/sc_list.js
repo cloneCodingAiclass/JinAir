@@ -130,6 +130,8 @@ $(function () {
         }
     })
 
+    let page;
+
     sclist(0);
 
     function sclist(index){
@@ -144,24 +146,46 @@ $(function () {
             // 전체 페이지
             showPage.showPage = pagination.data;
 
-            // 검색 데이터
+            // 데이터
             itemList.itemList = response.data;
 
-            let url = "";
-            let NumberPage = 0;
-            let last = showPage.totalPages;
-
-            for (NumberPage; NumberPage < last; NumberPage++){
-                url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
+            let lastPage = response.pagination.totalPages;
+            let str = "";
+            str += "<td class='firstPage1'><<</td>";
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
             }
-            document.getElementById("button").innerHTML = url;
-
-            $(".pageButton").on('click', function (){
-                index = $(this).attr("id");
-                sclist(index);
-            })
+            str += "<td class='lastPage1'>>></td>";
+            $("#showPage").html(str);
+            if(page == 0) {
+                $(".firstPage1").css("visibility", "hidden");
+            }
+            if(page == lastPage-1) {
+                $(".lastPage1").css("visibility", "hidden");
+            }
+            $(".pageNum").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+page+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            $("#showPage").on('click', '.firstPage1', function(){
+                sclist(0);
+            });
+            $("#showPage").on('click', '.lastPage1', function(){
+                sclist(lastPage-1);
+            });
         })
     }
+
+    $("#showPage").on('click', '.pageNum', function(){
+        let pageId = this.id;
+        console.log(pageId);
+        sclist(pageId);
+    });
 
     areaList();
 
@@ -264,5 +288,6 @@ $(function () {
         findByDate(schAirplaneType, schAirplaneName, schDepartureDate, schDeparturePoint, schArrivalPoint);
 
         $('.modal_container').fadeOut(200);
+        $('.footer').css('display', 'none')
     });
 });
