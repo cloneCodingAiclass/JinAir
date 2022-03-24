@@ -445,8 +445,9 @@ public class PageController {
                 .addObject("code", "jinair");
     }
 
-    @RequestMapping("/index/mypageGetReservationDetail")
-    public ModelAndView mypageGetReservationDetail(HttpServletResponse response, HttpServletRequest request, Model model) {
+    @RequestMapping("/index/mypageGetReservationDetail/{reIndex}")
+    public ModelAndView mypageGetReservationDetail(HttpServletResponse response, HttpServletRequest request,
+                                                   Model model, @PathVariable(name="reIndex") Long reIndex) {
         Cookie[] myCookies = request.getCookies();
         for(int i = 0; i < myCookies.length; i++) {
             if(myCookies[i].getValue().equals("reIndex")){
@@ -454,6 +455,30 @@ public class PageController {
                 expiredCookie(response, myCookies[i].getName());
             }
         }
+
+        List reserveApiResponse;
+        String people;
+        if(reIndex%2 == 0){
+            people = reservationApiLogicService.read(reIndex -1).getData().getRePeopleType();
+        }else{
+            people = reservationApiLogicService.read(reIndex).getData().getRePeopleType();
+        }
+        String[] person = people.split(" ");
+        int personNum;
+        if(person.length == 6){
+            personNum = Integer.parseInt(person[1]) + Integer.parseInt(person[3]) + Integer.parseInt(person[5]);
+        }else if(person.length == 4){
+            personNum = Integer.parseInt(person[1]) + Integer.parseInt(person[3]);
+        }else{
+            personNum = Integer.parseInt(person[1]);
+        }
+        if(reIndex%2 == 0){
+            reserveApiResponse = reservationApiLogicService.find(reIndex -1, Long.valueOf(personNum)*2+reIndex -2).getData();
+        }else{
+            reserveApiResponse = reservationApiLogicService.find(reIndex, Long.valueOf(personNum)*2+reIndex -1).getData();
+        }
+
+        model.addAttribute("reserveApiResponse", reserveApiResponse);
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");

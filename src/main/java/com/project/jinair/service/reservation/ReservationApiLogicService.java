@@ -34,6 +34,14 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
         return Header.OK(ReserveApiResponse);
     }
 
+//    public Header<List<ReserveApiResponse>> listNotNull(Long startIdx, Long endIdx){
+//        List<TbReservation> tbReservations = tbReservationRepository.findAllByReIndexBetweenAndReIndexOdd(startIdx, endIdx);
+//        List<ReserveApiResponse> ReserveApiResponse = tbReservations.stream()
+//                .map(user -> responseReservation(user))
+//                .collect(Collectors.toList());
+//        return Header.OK(ReserveApiResponse);
+//    }
+
     @Override
     public Header<ReserveApiResponse> create(Header<ReserveApiRequest> request) {
         ReserveApiRequest reserveApiRequest = request.getData();
@@ -170,6 +178,8 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .reHpNation(tbReservation.getReHpNation())
                 .reHp(tbReservation.getReHp())
                 .reRegdate(tbReservation.getReRegdate())
+                .reSeatDetail(tbReservation.getReSeatDetail())
+                .reSeatPrice(tbReservation.getReSeatPrice())
                 .build();
         return Header.OK(reserveApiResponse);
     }
@@ -207,6 +217,8 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .reHpNation(tbReservation.getReHpNation())
                 .reHp(tbReservation.getReHp())
                 .reRegdate(tbReservation.getReRegdate())
+                .reSeatDetail(tbReservation.getReSeatDetail())
+                .reSeatPrice(tbReservation.getReSeatPrice())
                 .build();
         return reserveApiResponse;
     }

@@ -275,6 +275,9 @@ $(function () {
             itemList : {}
         },
         methods:{
+            btnDetail(reIndex){
+                location.href="/pages/index/mypageGetReservationDetail/"+reIndex;
+            }
         }
     });
     searchStart();
@@ -300,6 +303,9 @@ $(function () {
             itemList1 : {}
         },
         methods:{
+            btnDetail(reIndex){
+                location.href="/pages/index/mypageGetReservationDetail/"+reIndex;
+            }
         }
     });
     function searchStartt(){
