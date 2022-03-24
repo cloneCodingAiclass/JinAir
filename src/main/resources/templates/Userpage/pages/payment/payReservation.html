@@ -9,12 +9,11 @@
 <!-- head 끝 -->
 <body>
 <div>
-    <input type="hidden" name="" th:each="dto : ${reserveApiResponse1}" class="cookies" th:id="${dto.reIndex}" th:value="${dto.reIndex}">
     <input type="hidden" th:each="dto : ${reserveApiResponse1}" class="cookies" th:id="${dto.reIndex}" th:value="${dto.reIndex}">
     <input type="hidden" class="memid" th:each="memid, i : ${reserveApiResponse1}" th:if="${memid.reUserindex} != null and ${i.count} % 2 != 0" th:value="${memid.reUserindex}">
     <input type="hidden" class="insuranceIndex" th:each="insuranceIndex : ${reserveApiResponse1}" th:if="${insuranceIndex.reInsuranceidx} != null" th:id="${insuranceIndex.reIndex}" th:value="${insuranceIndex.reInsuranceidx}">
     <input type="hidden" class="baggageIndex" th:each="baggageIndex : ${reserveApiResponse1}" th:if="${baggageIndex.reBaggageidx} != null" th:id="${baggageIndex.reIndex}" th:value="${baggageIndex.reBaggageidx}">
-    <input type="hidden" class="seatNum" th:each="seat : ${reserveApiResponse1}" th:if="${seat.reSeatDetail} != null" th:id="${seat.reIndex}" th:value="${seat.reSeatDetail}">
+    <input type="hidden" class="seatNum" th:each="seat : ${reserveApiResponse1}" th:if="${seat.reIndex} != null" th:id="${seat.reSeatDetail}" th:value="${seat.reSeatPrice}">
 </div>
 <ul class="skipnavi">
     <!--책갈피 역할-->
@@ -301,7 +300,7 @@
                             <td>
                                 <div class="td_wrap">
                                     <span class="cul">KRW</span>
-                                    <span class="price"></span>
+                                    <span class="price seatT"></span>
                                     <span class="arrow">
                                                 <img src="/userpage/lib/img/arr_bott.png" alt="아래"
                                                      class="arr_bott arr_bott4 cursor"><img src="/userpage/lib/img/arr_top.png"
@@ -329,7 +328,7 @@
                                             <td></td>
                                             <td>
                                                 <div class="td_wrap">
-                                                    <span class="cul">KRW</span><span class="price" th:if="${opt1.reSeatPrice} != ' '" th:text="${opt1.reSeatPrice}"></span>
+                                                    <span class="cul">KRW</span><span class="price priceOpt" th:if="${opt1.reSeatPrice} != null" th:value="${opt1.reSeatPrice}"><span class="price" th:if="${opt1.reSeatPrice} == null" th:text="0"></span>
                                                 </div>
                                             </td>
                                         </tr>

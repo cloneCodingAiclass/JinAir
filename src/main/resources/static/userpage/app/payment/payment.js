@@ -2,6 +2,7 @@
 $(() => {
     let str = $(location).attr('href').split('/');
     let priceT = 0;
+    let resultOpt = 0; // 부가서비스 금액
 
     // 날짜 자르기
     let spst1 = $('#spanStart1').attr("value").split("T");
@@ -39,11 +40,8 @@ $(() => {
     let priceSum = priceT + oilT + taxT;
     $('.priceSum').text(Math.ceil(priceSum).toLocaleString());
 
-    // 운임료 구하기
-    let optPrice = $('.optPrice').text();
-
     // 총 운임료
-    let price = Number(priceSum) + Number(optPrice);
+    let price = Number(priceSum) + Number(resultOpt);
 
     $('#pPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
     $('#totalPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
@@ -217,6 +215,9 @@ $(() => {
             sel_coupon.sel_coupon = response.data;
         })
     }
+
+
+
     bagList();
     function bagList(){
         let BagPriceT = 0;
@@ -235,6 +236,7 @@ $(() => {
                 $('#bagPriceT').text(Math.ceil(BagPriceT).toLocaleString());
             });
         });
+        resultOpt += BagPriceT;
     }
 
     insList();
@@ -250,20 +252,24 @@ $(() => {
                 if(insPirce == ins || ins == issu){
                     $('.insPrice').eq(i).text(isPrice.toLocaleString());
                     $('.issu').eq(i).text(isType.toLocaleString());
+                    resultOpt += isPrice;
                 }
                 isPriceT += isPrice;
                 $('.incPriceT').text(Math.ceil(isPriceT).toLocaleString());
             });
         })
+        resultOpt += isPriceT;
     }
+    let seatT = 0;
+    $('.priceOpt').each(function (i){
+        let val = $('.priceOpt').eq(i).attr("value");
+        $('.priceOpt').eq(i).text(val.toLocaleString());
+        seatT += Number(val);
+        resultOpt += Number(val);
+    });
+    $('.seatT').text(seatT.toLocaleString());
+    $('.optPrice').text(resultOpt.toLocaleString())
 
-    seatList();
-    function seatList() {
-        let seatPrice = 0;
-        $('.seatNum').each(function (i) {
-            $.get("/api/seatDetail")
-        })
-    };
 });
 
 
