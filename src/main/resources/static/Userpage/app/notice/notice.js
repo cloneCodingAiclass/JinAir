@@ -101,13 +101,13 @@ $(function () {
         $.get("/api/notify/list?page="+page, function(response){
             console.dir(response);
             notiList.notiList = response.data;
+
             let lastPage = response.pagination.totalPages;
             let str = "";
-            str += "<td class='firstPage1'><<</td>";
+
             for (let i = 0; i < lastPage; i++) {
                 str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
             }
-            str += "<td class='lastPage1'>>></td>";
             $("#showPage").html(str);
             if(page == 0) {
                 $(".firstPage1").css("visibility", "hidden");
@@ -124,6 +124,12 @@ $(function () {
                 "background-color" : "#661e43",
                 "color" : "white"
             });
+            if (lastPage != 0) {
+                str += "<td class='firstPage1'><<</td>";
+            }
+            if (lastPage != 0){
+                str += "<td class='lastPage1'>>></td>";
+            }
             $("#showPage").on('click', '.firstPage1', function(){
                 list(0);
             });

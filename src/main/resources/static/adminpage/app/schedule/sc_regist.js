@@ -247,11 +247,22 @@ $(function () {
         })
     })
 
-
+    let airportType;
+    let arrivaldate;
+    let nationType;
+    let aptype;
+    let apname;
+    let startdate;
+    let departurepoint;
+    let starttime;
+    let arrivalpoint;
+    let resultseat;
+    let flyingtime;
+    let price;
+    let point;
 
 
     function register(){
-        let airportType;
 
         if(itemList.itemList[0].aptTypedetail == '국내') {
             if(itemList1.itemList1[0].aptTypedetail == '국내'){
@@ -315,8 +326,6 @@ $(function () {
             }
         }
 
-        let arrivaldate;
-
         let date = new Date($('#startdate').val().substring(0,4), $('#startdate').val().substring(5,7)-1, $('#startdate').val().substring(8,10));
         date.setDate(date.getDate()+1);
         let str = date.getMonth()+1;
@@ -340,17 +349,17 @@ $(function () {
             arrivaldate = strrr + "T" + document.getElementById("arrivaldate").value ;
         }
 
-        let nationType = $('#nationType').find('option:selected').val();
-        let aptype = $('#aptype').find('option:selected').val();
-        let apname = $('#apname').find('option:selected').val();
-        let startdate = document.getElementById("startdate").value + "T08:00:00";
-        let departurepoint = $('#departure_point').find('option:selected').val();
-        let starttime = document.getElementById("startdate").value+ "T" + document.getElementById("starttime").value;
-        let arrivalpoint = $('#arrive_point').find('option:selected').val();
-        let resultseat = document.getElementById("resultseat").value;
-        let flyingtime = "2000-01-01T" + document.getElementById("flyingtime").value;
-        let price = document.getElementById("price").value;
-        let point = document.getElementById("point").value;
+        nationType = $('#nationType').find('option:selected').val();
+        aptype = $('#aptype').find('option:selected').val();
+        apname = $('#apname').find('option:selected').val();
+        startdate = document.getElementById("startdate").value + "T08:00:00";
+        departurepoint = $('#departure_point').find('option:selected').val();
+        starttime = document.getElementById("startdate").value+ "T" + document.getElementById("starttime").value;
+        arrivalpoint = $('#arrive_point').find('option:selected').val();
+        resultseat = document.getElementById("resultseat").value;
+        flyingtime = "2000-01-01T" + document.getElementById("flyingtime").value;
+        price = document.getElementById("price").value;
+        point = document.getElementById("point").value;
 
         let schedule = {
             data: {
@@ -380,10 +389,25 @@ $(function () {
         });
     }
 
-
     $('#regist').click( () =>{
-        register();
-        location.href='/pages/admin/scheduleList';
+        if( !$('#nationType').find('option:selected').val()
+            || !$('#aptype').find('option:selected').val()
+            || !$('#apname').find('option:selected').val()
+            || !document.getElementById("startdate").value
+            || !$('#departure_point').find('option:selected').val()
+            || !document.getElementById("starttime").value
+            || !$('#arrive_point').find('option:selected').val()
+            || !document.getElementById("resultseat").value
+            || !document.getElementById("flyingtime").value
+            || !document.getElementById("price").value
+            || !document.getElementById("point").value
+        ){
+            alert('입력을 확인해주세요')
+        }
+        else{
+            register();
+            location.href='/pages/admin/scheduleList';
+        }
     })
 
 

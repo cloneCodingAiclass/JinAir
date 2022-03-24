@@ -1,4 +1,7 @@
 /* contents */
+#container > .contents {
+    margin-top: 60px;
+}
 #container > .contents > .con_wrap{
     width: 88%;
     margin-left: 50px;
@@ -48,7 +51,6 @@
 }
 .file-upload{
     margin-top: 6px;
-    text-align: right;
 }
 #ntTitle {
     margin-left: 4px;
