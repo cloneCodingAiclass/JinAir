@@ -11,6 +11,10 @@
 <div>
     <input type="hidden" name="" th:each="i : ${reserveApiResponse}" class="cookies" th:id="${i.reIndex}"
            th:value="${i.reIndex}">
+    <input type="hidden" name="" class="type" th:id="type1"
+           th:value="${reserveApiResponse[0].reAirplainType}">
+    <input type="hidden" name="" class="type" th:id="type2"
+           th:value="${reserveApiResponse[1].reAirplainType}" th:if="${reserveApiResponse[1].reAirplainType != null}">
 </div>
 <ul class="skipnavi">
     <!--책갈피 역할-->

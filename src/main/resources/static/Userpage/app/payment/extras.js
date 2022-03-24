@@ -1286,15 +1286,15 @@ $(function () {
       insIndex[i] = 0;
       baggIndex1[i] = 0;
       baggIndex2[i] = 0;
-      if (baggArr1[i] == '5KG(+KRW 8,000)') {baggIndex1[i] = Number(13);}
-      else if(baggArr1[i] == '10KG(+KRW 16,000)') {baggIndex1[i] = Number(20);}
-      else if(baggArr1[i] == '15KG(+KRW 24,000)') {baggIndex1[i] = Number(21);}
-      else if(baggArr1[i] == '20KG(+KRW 32,000)') {baggIndex1[i] = Number(22);}
+      if (baggArr1[i] == '5KG(+KRW 8,000)') {baggIndex1[i] = Number(11);}
+      else if(baggArr1[i] == '10KG(+KRW 16,000)') {baggIndex1[i] = Number(18);}
+      else if(baggArr1[i] == '15KG(+KRW 24,000)') {baggIndex1[i] = Number(19);}
+      else if(baggArr1[i] == '20KG(+KRW 32,000)') {baggIndex1[i] = Number(20);}
       else {delete baggIndex1[i]}
-      if (baggArr2[i] == '5KG(+KRW 8,000)') {baggIndex2[i] = Number(13);}
-      else if(baggArr2[i] == '10KG(+KRW 16,000)') {baggIndex2[i] = Number(20);}
-      else if(baggArr2[i] == '15KG(+KRW 24,000)') {baggIndex2[i] = Number(21);}
-      else if(baggArr2[i] == '20KG(+KRW 32,000)') {baggIndex2[i] = Number(22);}
+      if (baggArr2[i] == '5KG(+KRW 8,000)') {baggIndex2[i] = Number(11);}
+      else if(baggArr2[i] == '10KG(+KRW 16,000)') {baggIndex2[i] = Number(18);}
+      else if(baggArr2[i] == '15KG(+KRW 24,000)') {baggIndex2[i] = Number(19);}
+      else if(baggArr2[i] == '20KG(+KRW 32,000)') {baggIndex2[i] = Number(20);}
       else {delete baggIndex2[i]}
       if (insArr[i] == '실속형') {insIndex[i] = Number(1); jourPrice1[i] += Number(1970);jourPrice2[i] += Number(1970) }
       else if(insArr[i] == '표준형') {insIndex[i] = Number(2); jourPrice1[i] += Number(3660);jourPrice2[i] += Number(3660) }
