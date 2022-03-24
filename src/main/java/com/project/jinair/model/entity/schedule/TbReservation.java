@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -43,6 +44,7 @@ public class TbReservation {
     private Long reInsuranceidx;
     private Long reScheduleidx;
     private String reSeatDetail;    // 예약 좌석
+    private Long  reSeatPrice; // 예약 좌석 금액
     private Long reTotal;           // 전체 금액
     private Long reSchBasicPrice;   // 기본 금액
     private String reSchDepPoint;   // 출발지
@@ -63,5 +65,6 @@ public class TbReservation {
     private String reEmail; // 탑승자 이메일
     private String reHpNation;  // 탑승자 휴대폰 국가번호
     private String reHp; // 탑승자 휴대전화
-
+    @CreatedDate
+    private LocalDateTime reRegdate; // 예약 등록일
 }

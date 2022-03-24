@@ -169,6 +169,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .reEmail(tbReservation.getReEmail())
                 .reHpNation(tbReservation.getReHpNation())
                 .reHp(tbReservation.getReHp())
+                .reRegdate(tbReservation.getReRegdate())
                 .build();
         return Header.OK(reserveApiResponse);
     }
@@ -205,6 +206,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .reEmail(tbReservation.getReEmail())
                 .reHpNation(tbReservation.getReHpNation())
                 .reHp(tbReservation.getReHp())
+                .reRegdate(tbReservation.getReRegdate())
                 .build();
         return reserveApiResponse;
     }
@@ -238,6 +240,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
             String reSeatDetail = request.get(i).getReSeatDetail();
             Long reBaggageidx = request.get(i).getReBaggageidx();
             Long reInsuranceidx = request.get(i).getReInsuranceidx();
+            Long reSeatPrice = request.get(i).getReSeatPrice();
 
             reservation.ifPresent(
                     selectPay -> {
@@ -249,6 +252,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                         selectPay.setReSeatDetail(reSeatDetail);
                         selectPay.setReBaggageidx(reBaggageidx);
                         selectPay.setReInsuranceidx(reInsuranceidx);
+                        selectPay.setReSeatPrice(reSeatPrice);
                         tbReservationRepository.save(selectPay);
                     }
             );
@@ -325,5 +329,14 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .collect(Collectors.toList());
         return Header.OK(ReserveApiResponse);
     }
+
+    public Header<List<ReserveApiResponse>> reservation(Long reUserindex){
+        List<TbReservation> tbReservations = tbReservationRepository.findByReUserindexOrderByReSchStartTimeAsc(reUserindex);
+        List<ReserveApiResponse> ReserveApiResponse = tbReservations.stream()
+                .map(user -> responseReservation(user))
+                .collect(Collectors.toList());
+        return Header.OK(ReserveApiResponse);
+    }
+
 
 }

@@ -208,7 +208,6 @@ $(function () {
     /*부가서비스 끝 */
 
     // 쿠폰 수
-
     let memIndex = $('#memid').val();
 
     couponResult(memIndex);
@@ -223,7 +222,6 @@ $(function () {
             } else {
                 coupon = response + "장";
             }
-
             document.getElementById("coupon").innerHTML = coupon;
             document.getElementById("resultCoupon").innerHTML = coupon;
         });
@@ -242,8 +240,6 @@ $(function () {
             $('#point').text(sum);
         })
     }
-
-
     $('#passwordValue').on('keydown', function (key){
         if (key.keyCode==13){
             if(!$('#passwordValue').val()) {
@@ -253,7 +249,6 @@ $(function () {
             }
         }
     });
-
     $('#btn_agree').on('click', function (){
         if(!$('#passwordValue').val()) {
             alert('비밀번호를 입력하세요');
@@ -261,7 +256,6 @@ $(function () {
             list($('#passwordValue').val());
         }
     })
-
     function list(index){
         $.get("/api/user/"+memIndex, function(response){
             let itemList = response.data;
@@ -271,6 +265,26 @@ $(function () {
             }else if(itemList.memUserpw == index){
                 location.href='/pages/index/mypageEdit'
             }
+        });
+    }
+
+
+    // list
+    let itemList = new Vue({
+        el : '#itemList',
+        data : {
+            itemList : {}
+        },
+        methods:{
+        }
+    });
+
+    searchStart();
+
+    function searchStart(){
+        $.get("/api/reservation/reservation/"+memIndex, function(response){
+            itemList.itemList = response.data;
+
         });
     }
 
