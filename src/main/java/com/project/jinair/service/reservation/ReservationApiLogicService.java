@@ -169,6 +169,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .reEmail(tbReservation.getReEmail())
                 .reHpNation(tbReservation.getReHpNation())
                 .reHp(tbReservation.getReHp())
+                .reRegdate(tbReservation.getReRegdate())
                 .build();
         return Header.OK(reserveApiResponse);
     }
@@ -205,6 +206,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .reEmail(tbReservation.getReEmail())
                 .reHpNation(tbReservation.getReHpNation())
                 .reHp(tbReservation.getReHp())
+                .reRegdate(tbReservation.getReRegdate())
                 .build();
         return reserveApiResponse;
     }
