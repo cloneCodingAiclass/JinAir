@@ -144,24 +144,18 @@ $(function () {
             memberList.memberList = response.data;
 
             let lastPage = response.pagination.totalPages;
-            let str2 = "";
-            str2 += "<td class='firstPage2'><<</td>";
-            for ( let i = 0; i < lastPage; i++ ) {
-                str2 += "<td class='pagesS' id="+i+">" + (i+1) + "</td>";
+            let str = "";
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
             }
-            str2 += "<td class='lastPage2'>>></td>";
-            $("#showPage").html(str2);
-            if ( page == 0 ) {
-                $(".firstPage2").css("visibility", "hidden");
+            $("#showPage").html(str);
+            if(page == 0) {
+                $(".firstPage1").css("visibility", "hidden");
             }
-            if ( page == lastPage-1 || response.totalElements != 0 ) {
-                $(".lastPage2").css("visibility", "hidden");
+            if(page == lastPage-1) {
+                $(".lastPage1").css("visibility", "hidden");
             }
-            if ( response.pagination.totalElements == 0 ) {
-                alert("검색결과가 없습니다.");
-                list(0);
-            }
-            $(".pagesS").css({
+            $(".pageNum").css({
                 "background-color" : "#fff",
                 "color" : "#444",
                 "cursor" : "pointer"
@@ -170,11 +164,17 @@ $(function () {
                 "background-color" : "#661e43",
                 "color" : "white"
             });
+            if (lastPage != 0) {
+                str += "<td class='firstPage1'><<</td>";
+            }
+            if (lastPage != 0){
+                str += "<td class='lastPage1'>>></td>";
+            }
             $(document).on('click', '.firstPage2', function(){
-                searchNoti(searchStr, 0);
+                list(0);
             });
             $(document).on('click', '.lastPage2', function(){
-                searchNoti(searchStr, lastPage-1);
+                list(lastPage-1);
             });
         })
     }
@@ -189,30 +189,18 @@ $(function () {
     }
 
     $("#searchSubmit").click(() => {
-        search($("#searchUserid").val());
-        if($("#searchUserid").val() == null){
-            alert("검색어를 확인해주세요");
+        if(!$("#searchUserid").val()){
+            alert('입력을 확인해주세요')
+        }else{
+            search($("#searchUserid").val());
         }
     })
-
-    $(document).on('click', '#searchNoti', function(){
-        searchStr = $('#searchText').val();
-        searchNoti(searchStr, 0);
-        if ( searchStr.length == 0){
-            alert('검색어를 확인해주세요.');
-            searchNoti(searchStr, 0);
-        }
-    });
 
     $(document).on('click', '.pages', function(){
         let pageId = this.id;
         list(pageId);
     });
 
-    $(document).on('click', '.pagesS', function(){
-        let pageId2 = this.id;
-        searchNoti(searchStr, pageId2);
-    });
 
 
 })(jQuery);
