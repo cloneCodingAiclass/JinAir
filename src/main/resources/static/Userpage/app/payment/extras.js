@@ -1448,12 +1448,6 @@ $(function () {
         data : JSON.stringify(jsonData),
         dataType : "text",
         contentType : "application/json",
-        // success(jsonData) {
-        //   location.href="/pages/payment/oneway"
-        // },
-        // error(error) {
-        //   alert(error);
-        // }
       });
   }
 
