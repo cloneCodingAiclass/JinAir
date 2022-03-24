@@ -156,10 +156,18 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
         return reservationApiLogicService.go(schDeparturePoint, schArrivalPoint, goDateSelectOptt);
     }
 
+    // 현재 예약 조회
     @GetMapping("/reservation/{reUserindex}") // http://localhost:8080/api/reservation/reservation/{}
     public Header<List<ReserveApiResponse>> reservation(
             @PathVariable(name = "reUserindex") Long reUserindex) {
         return reservationApiLogicService.reservation(reUserindex);
+    }
+
+    // 과거 예약 조회
+    @GetMapping("/oldReservation/{reUserindex}") // http://localhost:8080/api/reservation/reservation/{}
+    public Header<List<ReserveApiResponse>> oldReservation(
+            @PathVariable(name = "reUserindex") Long reUserindex) {
+        return reservationApiLogicService.oldReservation(reUserindex);
     }
 
 

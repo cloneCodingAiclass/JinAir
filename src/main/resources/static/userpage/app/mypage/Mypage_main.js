@@ -84,27 +84,6 @@ $(function () {
         $('.modal').fadeOut(200);
     })
 
-    $('.old_booking_list').hide();
-    $(".now_booking").on('click', function () {
-        $(".old_booking_list").css("display","none");
-        $(".old_booking").css("background-color", "white");
-        $(".old_booking").css("color", "#444");
-        $(".now_booking").css({
-            "background-color" : "rgb(102, 30, 67)",
-            "color" : "white"
-        });
-        $(".booking_list").css("display","block");
-    })
-    $(".old_booking").on('click', function () {
-        $(".booking_list").css("display","none");
-        $(".now_booking").css("background-color", "white");
-        $(".now_booking").css("color", "#444");
-        $(".old_booking").css({
-            "background-color" : "rgb(102, 30, 67)",
-            "color" : "white"
-        });
-        $(".old_booking_list").css("display","block");
-    })
     $('.edit').click(function(){
         $('.pwcheck_modal').css('display', 'flex');
         $('.pwcheck_modal').fadeIn(200);
@@ -268,6 +247,26 @@ $(function () {
         });
     }
 
+    // 기본 세팅
+    $("#itemList1").css("display","none");
+    $(".old_booking_list").css("display","none");
+    $(".now_booking").on('click', function () {
+        $(".old_booking").css("background-color", "white");
+        $(".old_booking").css("color", "#444");
+        $(".now_booking").css({"background-color" : "rgb(102, 30, 67)", "color" : "white"});
+        $("#itemList1").css("display","none");
+        $(".old_booking_list").css("display","none");
+        searchStart();
+    })
+    $(".old_booking").on('click', function () {
+        $(".now_booking").css("background-color", "white");
+        $(".now_booking").css("color", "#444");
+        $(".old_booking").css({"background-color" : "rgb(102, 30, 67)", "color" : "white"});
+        $("#itemList").css("display","none");
+        $(".cur_booking_list").css("display","none");
+        searchStartt();
+    })
+
 
     // list
     let itemList = new Vue({
@@ -278,15 +277,46 @@ $(function () {
         methods:{
         }
     });
-
     searchStart();
-
     function searchStart(){
         $.get("/api/reservation/reservation/"+memIndex, function(response){
-            itemList.itemList = response.data;
-
+            if(response.data == 0){
+                $("#itemList").css("display","none");
+                $(".cur_booking_list").css("display","block");
+            }else{
+                itemList.itemList = response.data;
+                $("#itemList").css("display","block");
+                $(".cur_booking_list").css("display","none");
+            }
         });
     }
+
+
+
+    // list1
+    let itemList1 = new Vue({
+        el : '#itemList1',
+        data : {
+            itemList1 : {}
+        },
+        methods:{
+        }
+    });
+    function searchStartt(){
+        $.get("/api/reservation/oldReservation/"+memIndex, function(response){
+            if(response.data == 0){
+                $("#itemList1").css("display","none");
+                $(".old_booking_list").css("display","block");
+            }else{
+                itemList1.itemList1 = response.data;
+                $("#itemList1").css("display","block");
+                $(".old_booking_list").css("display","none");
+            }
+        });
+    }
+
+
+
 
 
 

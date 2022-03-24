@@ -90,7 +90,8 @@ body {
     width: 100%;
     left: 0;
     top: 0;
-    z-index: 100;
+    position: absolute;
+    z-index: 120;
 }
 #header .header_sub {
     border-bottom: 1px solid rgba(128, 128, 128, 0.19);
@@ -316,8 +317,10 @@ body {
     height: auto;
 }
 #container .mypage_main {
+    width: 1160px;
+    display: flex;
+    flex-direction: column;
     margin: 0 auto;
-    text-align: center;
 }
 #container .mypage_main .title{
     margin-top: 150px;
@@ -333,11 +336,10 @@ body {
     margin: 0 auto;
     background-color: #f2f2f2;
     display: flex;
-    position: fixed;
-    top: 91px;
+    position: relative;
+    top:90px;
     align-items: center;
     text-align: center;
-    z-index: 99;
 }
 .mypage_main .mypage_menu p{
     width: 100px;

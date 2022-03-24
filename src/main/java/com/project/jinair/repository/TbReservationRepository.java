@@ -17,5 +17,7 @@ public interface TbReservationRepository extends JpaRepository<TbReservation, Lo
     List<TbReservation> findAllByReIndexBetween(Long startIdx, Long endIdx);
     List<TbReservation> findByReSchDepPointAndReSchArrPointAndReSchStartTime(String reSchDepPoint, String reSchArrPoint, LocalDateTime reSchStartTime);
     List<TbReservation> findFirstByReReserNum(String a);
-    List<TbReservation> findByReUserindexOrderByReSchStartTimeAsc(Long reUserindex);
+    List<TbReservation> findByReUserindexAndReSchStartTimeGreaterThanOrderByReSchStartTimeAsc(Long reUserindex, LocalDateTime local);
+    List<TbReservation> findByReUserindexAndReSchStartTimeLessThanOrderByReSchStartTimeAsc(Long reUserindex, LocalDateTime local);
+
 }

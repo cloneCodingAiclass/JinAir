@@ -288,7 +288,7 @@ body{
 /* 서브 네비 끝 */
 /* contents */
 #container{
-    height: 1000px;
+    height: auto;
 }
 
 /*푸터*/
@@ -632,6 +632,7 @@ body{
     font-weight: 700;
     cursor: pointer;
 }
+
 /* 마이페이지 메인 */
 /* 서브타이틀 시작 */
 .mypage_main{
@@ -738,9 +739,11 @@ header{
     font-size: 1.1rem;
     font-weight: 700;
 }
+.old_booking_list{
+    display: none;
+}
 .old_booking_list ul{
     border-top: 1px solid black;
-    border-bottom: 1px solid black;
     padding: 50px 0;
 }
 .old_booking_list ul li{
@@ -748,10 +751,27 @@ header{
     font-size: 1.1rem;
     font-weight: 700;
 }
+.cur_booking_list{
+    display: none;
+}
+.cur_booking_list ul{
+    border-top: 1px solid black;
+    padding: 50px 0;
+}
+.cur_booking_list ul li{
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.cont{
+    font-weight: 600;
+    color: #444;
+}
 .sub_text{
     display: flex;
     justify-content: right;
-    margin: 20px 0;
+    padding: 25px 0;
+    border-top:1px solid #000;
 }
 .sub_text p{
     margin-right: 15px;
@@ -808,9 +828,8 @@ header{
 
 /* ㅠㅠ */
 .detailTbl {
-    overflow:hidden; 
-    border-top:1px solid #000; 
-    border-bottom:1px solid #000;
+    overflow:hidden;
+    border-top:1px solid #000;
 }
 .detailTbl p {
     position: relative; 
@@ -978,6 +997,7 @@ header{
     height: 150px;
     background-color: #F7F7F7;
     padding: 0 40px;
+    margin-bottom: 80px;
 }
 
 .footer_info p:first-child{
