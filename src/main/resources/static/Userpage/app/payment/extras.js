@@ -1375,10 +1375,10 @@ $(function () {
       for (let i = 0; i < personNumber; i++) {
         if(i % 2 == 0) {
           towayData1(i)
-          location.href="/pages/payment/toway"
+          location.href="/pages/payment/twoway"
         } else {
           towayData2(i)
-          location.href="/pages/payment/toway"
+          location.href="/pages/payment/twoway"
         }
       }
     }
