@@ -10,7 +10,11 @@
 <body>
 <div>
     <input type="hidden" name="" th:each="dto : ${reserveApiResponse1}" class="cookies" th:id="${dto.reIndex}" th:value="${dto.reIndex}">
+    <input type="hidden" th:each="dto : ${reserveApiResponse1}" class="cookies" th:id="${dto.reIndex}" th:value="${dto.reIndex}">
     <input type="hidden" class="memid" th:each="memid, i : ${reserveApiResponse1}" th:if="${memid.reUserindex} != null and ${i.count} % 2 != 0" th:value="${memid.reUserindex}">
+    <input type="hidden" class="insuranceIndex" th:each="insuranceIndex : ${reserveApiResponse1}" th:if="${insuranceIndex.reInsuranceidx} != null" th:id="${insuranceIndex.reIndex}" th:value="${insuranceIndex.reInsuranceidx}">
+    <input type="hidden" class="baggageIndex" th:each="baggageIndex : ${reserveApiResponse1}" th:if="${baggageIndex.reBaggageidx} != null" th:id="${baggageIndex.reIndex}" th:value="${baggageIndex.reBaggageidx}">
+    <input type="hidden" class="seatNum" th:each="seat : ${reserveApiResponse1}" th:if="${seat.reSeatDetail} != null" th:id="${seat.reIndex}" th:value="${seat.reSeatDetail}">
 </div>
 <ul class="skipnavi">
     <!--책갈피 역할-->
@@ -45,10 +49,12 @@
                     <div class="schedule">
                         <p><span id="triptype2"></span> 여정2</p>
                     </div>
-                    <div class="trip_area fs20">
-                        <p class="dep_area" id="go_area2">[[${reserveApiResponse1[1].reSchDepPoint}]] <span>[출발]</span><span id="goArea2"></span></p>
-                        <p class="arr_area" id="arr_area2">[[${reserveApiResponse1[1].reSchArrPoint}]] <span>[도착]</span><span id="arrArea2"></span></p>
-                    </div>
+                    <th:block th:each="memid, i : ${reserveApiResponse1}" th:if="${i.count} % 2 == 0">
+                        <div class="trip_area fs20">
+                            <p class="dep_area" id="go_area2">[[${reserveApiResponse1[1].reSchDepPoint}]] <span>[출발]</span><span id="goArea2"></span></p>
+                            <p class="arr_area" id="arr_area2">[[${reserveApiResponse1[1].reSchArrPoint}]] <span>[도착]</span><span id="arrArea2"></span></p>
+                        </div>
+                    </th:block>
                 </div>
                 <!--여정2 끝-->
                 <!--탑승객 수-->
@@ -127,6 +133,7 @@
                             </div>
                             <!--여정1 끝-->
                             <!--여정2-->
+                            <th:block th:each="memid, i : ${reserveApiResponse1}" th:if="${i.count} % 2 == 0">
                             <div class="jour2_wrap">
                                 <p class="flight">여정 2 [[${reserveApiResponse1[0].reSchName}]]</p>
                                 <div class="area2_wrap area_wrap">
@@ -142,6 +149,7 @@
                                     <p class="detail detail2 cursor">View Flight Details</p>
                                 </div>
                             </div>
+                            </th:block>
                             <!--여정2 끝-->
                             <div class="tot">
                                 <p class="txt">총 운임</p>
@@ -284,7 +292,7 @@
                             <td class="borderT">총 운임</td>
                             <td class="borderT">
                                 <div class="td_wrap">
-                                    <span class="cul">KRW</span><span class="price optPrice">55610</span>
+                                    <span class="cul">KRW</span><span class="price optPrice"></span>
                                 </div>
                             </td>
                         </tr>
@@ -293,7 +301,7 @@
                             <td>
                                 <div class="td_wrap">
                                     <span class="cul">KRW</span>
-                                    <span class="price">8,000</span>
+                                    <span class="price"></span>
                                     <span class="arrow">
                                                 <img src="/userpage/lib/img/arr_bott.png" alt="아래"
                                                      class="arr_bott arr_bott4 cursor"><img src="/userpage/lib/img/arr_top.png"
@@ -318,10 +326,10 @@
                                         </tr>
                                         <tr>
                                             <td c><span class="name">[[${opt1.reFirstName}]]/[[${opt1.reLastName}]]</span></td>
-                                            <td>31A(지니패스트)</td>
+                                            <td></td>
                                             <td>
                                                 <div class="td_wrap">
-                                                    <span class="cul">KRW</span><span class="price"></span>
+                                                    <span class="cul">KRW</span><span class="price" th:if="${opt1.reSeatPrice} != ' '" th:text="${opt1.reSeatPrice}"></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -334,7 +342,7 @@
                             <td>
                                 <div class="td_wrap">
                                     <span class="cul">KRW</span>
-                                    <span class="price">48,000</span>
+                                    <span class="price" id="bagPriceT">0</span>
                                     <span class="arrow">
                                                 <img src="/userpage/lib/img/arr_bott.png" alt="아래"
                                                      class="arr_bott arr_bott5 cursor"><img src="/userpage/lib/img/arr_top.png"
@@ -358,10 +366,12 @@
                                         </tr>
                                         <tr>
                                             <td><span class="name">[[${opt2.reFirstName}]]/[[${opt2.reLastName}]]</span></td>
-                                            <td>10KG</td>
+                                            <td class="bgst" th:if="${opt2.reBaggageidx} != null" th:value="${opt2.reBaggageidx}"></td>
                                             <td>
                                                 <div class="td_wrap">
-                                                    <span class="cul">KRW</span><span class="price">107,000</span>
+                                                    <span class="cul">KRW</span>
+                                                    <span class="price bgPrice" th:value="${opt2.reBaggageidx}">
+                                                    </span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -374,7 +384,7 @@
                             <td>
                                 <div class="td_wrap">
                                     <span class="cul">KRW</span>
-                                    <span class="price">2,610</span>
+                                    <span class="price incPriceT">0</span>
                                     <span class="arrow">
                                              <img src="/userpage/lib/img/arr_bott.png" alt="아래"
                                                   class="arr_bott arr_bott6 cursor"><img src="/userpage/lib/img/arr_top.png"
@@ -398,11 +408,11 @@
                                         </tr>
                                         <tr>
                                             <td><span class="name">[[${opt3.reFirstName}]]/[[${opt3.reLastName}]]</span></td>
-                                            <td>(표준형)</td>
+                                            <td class="insType" th:if="${opt3.reInsuranceidx} != ''" th:class="issu" th:value="${opt3.reInsuranceidx}"></td>
                                             <td>
-                                                <div class="td_wrap">
-                                                    <span class="cul">KRW</span><span class="price"></span>
-                                                </div>
+                                                <span class="cul">KRW</span>
+                                                <span th:if="${opt3.reInsuranceidx} != ''" class="price insPrice" th:value="${opt3.reInsuranceidx}">
+                                                    </span>
                                             </td>
                                         </tr>
                                 </table>
@@ -1234,6 +1244,7 @@
     </div>
     <!--모달 1끝-->
     <!--모달 2-->
+    <th:block th:each="memid, i : ${reserveApiResponse1}" th:if="${i.count} % 2 == 0">
     <div class="modal_flight_info2 modal_flight_info">
         <div class="modal_flight_title">
             <span class="tit">항공편 안내</span>
@@ -1243,7 +1254,7 @@
             <p class="cont_P">
             <ul>
                 <li>
-                    <구간 1>
+                    <구간 2>
                 </li>
                 <li>편명 : [[${reserveApiResponse1[1].reSchName}]]</li>
                 <li>출발 : [[${reserveApiResponse1[1].reSchStartTime}]][[${reserveApiResponse1[1].reSchDepPoint}]]</li>
@@ -1255,6 +1266,7 @@
             </p>
         </div>
     </div>
+    </th:block>
     <!--모달 2끝-->
     <div class="modal"></div>
     <!-- 푸터 -->

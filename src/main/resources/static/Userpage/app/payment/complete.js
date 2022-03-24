@@ -175,7 +175,7 @@ $(function () {
 
     let date = new Date();
     let week = new Array('일', '월', '화', '수', '목', '금', '토');
-    let today = date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).toString().slice(-2) + "-" + ("0" + date.getDay()).toString().slice(-2) + " (" + week[date.getDay()] +")";
+    let today = date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).toString().slice(-2) + "-" + (date.getDay()).toString().slice(-2) + " (" + week[date.getDay()] +")";
     console.log("00"+date.getDay());
 
     $('#today, #reserDay').text(today);
