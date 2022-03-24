@@ -326,4 +326,13 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
         return Header.OK(ReserveApiResponse);
     }
 
+    public Header<List<ReserveApiResponse>> reservation(Long reUserindex){
+        List<TbReservation> tbReservations = tbReservationRepository.findByReUserindexOrderByReSchStartTimeAsc(reUserindex);
+        List<ReserveApiResponse> ReserveApiResponse = tbReservations.stream()
+                .map(user -> responseReservation(user))
+                .collect(Collectors.toList());
+        return Header.OK(ReserveApiResponse);
+    }
+
+
 }

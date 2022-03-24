@@ -1908,7 +1908,8 @@ public class PageController {
             model.addAttribute("str", (String) session.getAttribute("name"));
             return new ModelAndView("/adminpage/pages/reservation/rs_sch")
                     .addObject("code", "rs_sch")
-                    .addObject("menuList", menuService.getadminMenu());
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("reservation", menuService.adminReservationMenu());
         }else{
             return new ModelAndView("/adminpage/pages/admin_login");
         }
@@ -1921,7 +1922,8 @@ public class PageController {
             model.addAttribute("str", (String) session.getAttribute("name"));
             return new ModelAndView("/adminpage/pages/reservation/rs_user_info")
                     .addObject("code", "rs_user_info")
-                    .addObject("menuList", menuService.getadminMenu());
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("reservation", menuService.adminReservationMenu());
         }else{
             return new ModelAndView("/adminpage/pages/admin_login");
         }
@@ -1934,7 +1936,8 @@ public class PageController {
             model.addAttribute("str", (String) session.getAttribute("name"));
             return new ModelAndView("/adminpage/pages/reservation/rs_user")
                     .addObject("code", "rs_user")
-                    .addObject("menuList", menuService.getadminMenu());
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("reservation", menuService.adminReservationMenu());
         }else{
             return new ModelAndView("/adminpage/pages/admin_login");
         }
@@ -2511,8 +2514,6 @@ public class PageController {
         HttpSession session = request.getSession();
         if((String) session.getAttribute("name") != null) {
             model.addAttribute("str", (String) session.getAttribute("name"));
-            Header<List<QnaApiResponse>> qnaApiResponsesList = qnaApiLogicService.getQnaList();
-            model.addAttribute("qnaApiResponsesList", qnaApiResponsesList.getData());
             return new ModelAndView("/adminpage/pages/inquiry/qna_main")
                     .addObject("code", "qna_main")
                     .addObject("menuList", menuService.getadminMenu())
