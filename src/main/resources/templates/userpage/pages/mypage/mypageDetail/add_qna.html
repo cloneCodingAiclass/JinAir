@@ -272,34 +272,7 @@
 </div>
 <!--wrap 끝-->
 <!--퀵 메뉴-->
-<div class="quickmanu">
-    <div class="quickmanuwrapper">
-        <a href="/index.html">
-            <div class="quick1 quickbox">예약하기</div>
-        </a>
-        <a href="/UserPage/index/mypage/Mypage_main.html">
-            <div class="quick2 quickbox">예약조회</div>
-        </a>
-        <a href="/UserPage/reservation/flight_info/flight.html">
-            <div class="quick3 quickbox">출도작 조회</div>
-        </a>
-        <a href="/UserPage/reservation/LCCpage/lcc.html">
-            <div class="quick4 quickbox">최저가 조회</div>
-        </a>
-        <a href="/UserPage/index/mypage/Mypage_point.html">
-            <div class="quick5 quickbox">마이포인트</div>
-        </a>
-        <a href="/UserPage/index/mypage/faq_list.html">
-            <div class="quick6 quickbox">FAQ</div>
-        </a>
-        <a href="/UserPage/index/mypage/add_qna.html">
-            <div class="quick7 quickbox">고객의 말씀</div>
-        </a>
-        <a href="#" class="quick_topback">
-            <div class="quicktop">TOP</div>
-        </a>
-    </div>
-</div>
+<div th:replace="userpage/fragment/quickmenu :: quickmenu"></div>
 <!--퀵 메뉴 끝-->
 <div class="pointInfo_modal" style="display: none;">
     <div class="title">

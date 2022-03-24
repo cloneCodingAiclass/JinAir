@@ -36,7 +36,7 @@ public class BaggageApiController implements CrudInterface<BaggageApiRequest, Ba
     }
 
     @Override
-    @GetMapping("{id}") // http://localhost:8080/api/optional/baggage/{id} (get)
+    @GetMapping("/{id}") // http://localhost:8080/api/optional/baggage/{id} (get)
     public Header<BaggageApiResponse> read(@PathVariable(name = "id") Long id) {
         return baggageApiLogicService.read(id);
     }

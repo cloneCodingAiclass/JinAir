@@ -217,7 +217,53 @@ $(() => {
             sel_coupon.sel_coupon = response.data;
         })
     }
+    bagList();
+    function bagList(){
+        let BagPriceT = 0;
+        $('.baggageIndex').each(function (i){
+            let bagidx = $('.baggageIndex').eq(i).attr("value");
+            let bgst = $('.bgst').eq(i).attr("value");
+            let bgPrice = $('.bgPrice').eq(i).attr("value")
+            $.get("/api/optional/baggage/"+bagidx, function (response) {
+                let price = response.data.bgPrice;
+                let standard = response.data.bgStandard;
+                if(bgst == bagidx || bgPrice == bagidx){
+                    $('.bgst').eq(i).text(standard.toLocaleString());
+                    $('.bgPrice').eq(i).text(price.toLocaleString());
+                }
+                BagPriceT += price;
+                $('#bagPriceT').text(Math.ceil(BagPriceT).toLocaleString());
+            });
+        });
+    }
 
+    insList();
+    function insList(){
+        let isPriceT = 0;
+        $('.insuranceIndex').each(function (i) {
+            let ins = $('.insuranceIndex').eq(i).attr("value");
+            let insPirce = $('.insPrice').eq(i).attr("value");
+            let issu = $('.issu').eq(i).attr("value");
+            $.get("/api/optional/insurance/" + ins, function (response) {
+                let isPrice = response.data.isPrice;
+                let isType = response.data.isType;
+                if(insPirce == ins || ins == issu){
+                    $('.insPrice').eq(i).text(isPrice.toLocaleString());
+                    $('.issu').eq(i).text(isType.toLocaleString());
+                }
+                isPriceT += isPrice;
+                $('.incPriceT').text(Math.ceil(isPriceT).toLocaleString());
+            });
+        })
+    }
+
+    seatList();
+    function seatList() {
+        let seatPrice = 0;
+        $('.seatNum').each(function (i) {
+            $.get("/api/seatDetail")
+        })
+    };
 });
 
 

@@ -110,22 +110,90 @@ $(function () {
     });
 
     // ALL
-    searchStart();
-    function searchStart(){
-        $.get("/api/qna/list", function(response){
+    searchStart(0);
+    function searchStart(page){
+        $.get("/api/qna/list?page="+page, function(response){
             // 검색 데이터
             itemList.itemList = response.data;
 
+            console.dir(response);
+
+            let lastPage = response.pagination.totalPages;
+            let str = "";
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
+            }
+            $("#showPage").html(str);
+            if(page == 0) {
+                $(".firstPage1").css("visibility", "hidden");
+            }
+            if(page == lastPage-1) {
+                $(".lastPage1").css("visibility", "hidden");
+            }
+            $(".pageNum").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+page+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            if (lastPage != 0) {
+                str += "<td class='firstPage1'><<</td>";
+            }
+            if (lastPage != 0){
+                str += "<td class='lastPage1'>>></td>";
+            }
+            $("#showPage").on('click', '.firstPage1', function(){
+                searchStart(0);
+            });
+            $("#showPage").on('click', '.lastPage1', function(){
+                searchStart(lastPage-1);
+            });
         });
     }
 
 
     // 카테로리
-    function asd(a){
-        $.get("/api/qna/listdetail/"+a, function(response){
+    function asd(a, page){
+        $.get("/api/qna/listdetail/"+a+ "?page=" + page, function(response){
             // 검색 데이터
             itemList.itemList = response.data;
 
+            let lastPage = response.pagination.totalPages;
+            let str = "";
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pageNum2' id="+i+">" + (i+1) + "</td>";
+            }
+            $("#showPage").html(str);
+            if(page == 0) {
+                $(".firstPage2").css("visibility", "hidden");
+            }
+            if(page == lastPage-1) {
+                $(".lastPage2").css("visibility", "hidden");
+            }
+            $(".pageNum2").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+page+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            if (lastPage != 0) {
+                str += "<td class='firstPage1'><<</td>";
+            }
+            if (lastPage != 0){
+                str += "<td class='lastPage1'>>></td>";
+            }
+            $("#showPage").on('click', '.firstPage1', function(){
+                asd(a, 0);
+            });
+            $("#showPage").on('click', '.lastPage1', function(){
+                asd(a, lastPage-1);
+            });
         });
     }
     $('select').on('change', function (){
@@ -157,5 +225,12 @@ $(function () {
             alert('검색어를 확인해주세요.');
         }
     });
+
+    $("#showPage").on('click', '.pageNum', function(){
+        let pageId = this.id;
+        console.log(pageId);
+        searchStart(pageId);
+    });
+
 
 });

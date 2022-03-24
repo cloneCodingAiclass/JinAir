@@ -48,4 +48,5 @@ public class ReserveApiRequest {
     private String reEmail; // 탑승자 이메일
     private String reHpNation;  // 탑승자 휴대폰 국가번호
     private String reHp; // 탑승자 휴대전화
+    private LocalDateTime reRegdate; // 예약 등록일
 }

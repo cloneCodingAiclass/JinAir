@@ -32,7 +32,7 @@
                                         </select>
                                     </td>
                                     <td class="user_name"><textarea id="faqTitle" class="editTitle">{{tableBoard.faqTitle}}</textarea></td>
-                                    <td id="faqRegdate">{{tableBoard.faqRegdate.substr(0,10)}}</td>
+                                    <td id="faqRegdate">{{tableBoard.faqRegdate}}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="3"><textarea id="faqContent">{{tableBoard.faqContent}}</textarea></td>
@@ -40,9 +40,9 @@
                             </table>
                         </div>
                         <div class="contents_bottom">
-                            <div class="faq_btn_add">                        
+                            <div class="faq_btn_add">
                                 <input type="button" value="취소" onclick="history.back()">
-                                <input type="button" value="수정완료" class="btn_edit" onclick="editBtn()" >
+                                <input type="button" value="수정완료" class="btn_edit" onclick="editBtn()">
                             </div>
                         </div>
                     </div>
@@ -52,8 +52,8 @@
                 <div class="edit_info">
                     <p>게시글을 수정하시겠습니까?</p>
                     <div class="edit_modal">
-                        <input type="button" value="취소" class="btn_cancel">
-                        <input type="button" value="수정" id="update">
+                        <input type="button" value="취소" class="btn_cancel" style="cursor: pointer">
+                        <input type="button" value="수정" id="update" style="cursor: pointer">
                     </div>
                 </div>
             </div>

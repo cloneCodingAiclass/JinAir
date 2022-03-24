@@ -169,6 +169,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .reEmail(tbReservation.getReEmail())
                 .reHpNation(tbReservation.getReHpNation())
                 .reHp(tbReservation.getReHp())
+                .reRegdate(tbReservation.getReRegdate())
                 .build();
         return Header.OK(reserveApiResponse);
     }
@@ -205,6 +206,7 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .reEmail(tbReservation.getReEmail())
                 .reHpNation(tbReservation.getReHpNation())
                 .reHp(tbReservation.getReHp())
+                .reRegdate(tbReservation.getReRegdate())
                 .build();
         return reserveApiResponse;
     }
@@ -327,5 +329,14 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .collect(Collectors.toList());
         return Header.OK(ReserveApiResponse);
     }
+
+    public Header<List<ReserveApiResponse>> reservation(Long reUserindex){
+        List<TbReservation> tbReservations = tbReservationRepository.findByReUserindexOrderByReSchStartTimeAsc(reUserindex);
+        List<ReserveApiResponse> ReserveApiResponse = tbReservations.stream()
+                .map(user -> responseReservation(user))
+                .collect(Collectors.toList());
+        return Header.OK(ReserveApiResponse);
+    }
+
 
 }

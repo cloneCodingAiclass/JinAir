@@ -36,7 +36,7 @@ public class InsuranceApiController implements CrudInterface<InsuranceApiRequest
     }
 
     @Override
-    @GetMapping("{id}") // http://localhost:8080/api/optional/insurance/{id} (get)
+    @GetMapping("/{id}") // http://localhost:8080/api/optional/insurance/{id} (get)
     public Header<InsuranceApiResponse> read(@PathVariable(name = "id") Long id) {
         return insuranceApiLogicService.read(id);
     }

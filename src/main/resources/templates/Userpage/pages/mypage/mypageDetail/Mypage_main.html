@@ -45,44 +45,46 @@
                         <li class="old_booking">지난예약</li>
                     </ul>
                 </div>
-                <div class="booking_list">
-                    <div class="detailTbl">
-                        <p class="short">
-                            <strong>예약일</strong>
-                            <span class="cont">시간</span></p>
-                        <p class="short"><strong>예약번호</strong>
-                            <span class="cont" id="{{:pnrNumber}}">번호</span></p>
-                        <p class="short ctar">
-                            <strong>예약상태</strong>
-                            <span class="cont">진행중</span></p>
-                        <p class="long">
-                            <strong>여정<br><span class="tripType"></span></strong>
-                            <span class="cont line">
-                                <span class="tit">여정
-                                    <strong>LJ301</strong>
+                <div id="itemList">
+                    <div class="booking_list">
+                        <div class="detailTbl">
+                            <p class="short">
+                                <strong>예약</strong>
+                                <span class="cont"></span></p>
+                            <p class="short"><strong>예약번호</strong>
+                                <span class="cont" id="{{:pnrNumber}}">번호</span></p>
+                            <p class="short ctar">
+                                <strong>예약상태</strong>
+                                <span class="cont">진행중</span></p>
+                            <p class="long">
+                                <strong>여정<br><span class="tripType"></span></strong>
+                                <span class="cont line">
+                                    <span class="tit">여정
+                                        <strong>LJ301</strong>
+                                    </span>
+                                    <span>
+                                        <strong>제주</strong>
+                                        <span id="bp{{:depSegment.pnrNumber}}{{:depSegment.flightSegmentGroupID}}">[출발] 2022-10-25(화) 06:05</span>
+                                    </span>
+                                    <span class="arrow">
+                                        <img src="/userpage/lib/img/right_arrow.PNG" alt="에서">
+                                    </span>
+                                    <span>
+                                        <strong>서울</strong>
+                                        <span id="op{{:depSegment.pnrNumber}}{{:depSegment.flightSegmentGroupID}}">[도착] 2022-10-25(화) 06:05</span>
+                                    </span>
+                                    <span id="st{{:depSegment.pnrNumber}}{{:depSegment.flightSegmentGroupID}}"
+                                        class="infoTxt"></span>
                                 </span>
-                                <span>
-                                    <strong>제주</strong>
-                                    <span id="bp{{:depSegment.pnrNumber}}{{:depSegment.flightSegmentGroupID}}">[출발] 2022-10-25(화) 06:05</span>
+                            </p>
+                            <p class="long">
+                                <strong>탑승객수</strong>
+                                <span class="cont">1 명</span>
+                                <span class="btn">
+                                    <a name="btnDetail" href="/pages/index/mypageGetReservationDetail">상세조회</a>
                                 </span>
-                                <span class="arrow">
-                                    <img src="/userpage/lib/img/right_arrow.PNG" alt="에서">
-                                </span>
-                                <span>
-                                    <strong>서울</strong>
-                                    <span id="op{{:depSegment.pnrNumber}}{{:depSegment.flightSegmentGroupID}}">[도착] 2022-10-25(화) 06:05</span>
-                                </span>
-                                <span id="st{{:depSegment.pnrNumber}}{{:depSegment.flightSegmentGroupID}}"
-                                    class="infoTxt"></span>
-                            </span>
-                        </p>
-                        <p class="long">
-                            <strong>탑승객수</strong>
-                            <span class="cont">1 명</span>
-                            <span class="btn">
-                                <a name="btnDetail" href="/pages/index/mypageGetReservationDetail">상세조회</a>
-                            </span>
-                        </p>
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="old_booking_list">

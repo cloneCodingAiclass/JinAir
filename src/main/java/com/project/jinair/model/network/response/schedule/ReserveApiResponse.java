@@ -52,6 +52,7 @@ public class ReserveApiResponse {
     private String reEmail; // 탑승자 이메일
     private String reHpNation;  // 탑승자 휴대폰 국가번호
     private String reHp; // 탑승자 휴대전화
+    private LocalDateTime reRegdate; // 예약 등록일
 
     // 여러 좌석을 예매시
     private List<ScheduleApiResponse> scheduleApiResponseList;
