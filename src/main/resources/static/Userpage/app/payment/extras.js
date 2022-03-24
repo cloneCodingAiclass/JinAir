@@ -1159,7 +1159,8 @@ $(function () {
   let seat_price = 0;
   let bagg_price = 0;
   let finalTotalPrice = 0;
-  let baggIndex = [personNumber];
+  let baggIndex1 = [personNumber];
+  let baggIndex2 = [personNumber];
   let insIndex = [personNumber];
   let jourPrice1 = [personNumber];
   let jourPrice2 = [personNumber];
@@ -1177,7 +1178,7 @@ $(function () {
     for (let i = 0; i < personNumber; i++) {
       seatNumArr1[i] = "";seatNumArr2[i] = "";seatPriceArr1[i] = 0;seatPriceArr2[i] = 0;baggArr1[i] = "";baggArr2[i] = "";
       baggPriceArr1[i] = 0;baggPriceArr2[i] = 0;insArr[i] = "";insPriceArr[i] = 0;seatTypeArr1[i] = "";seatTypeArr2[i] = "";
-      flightArr[i] = "";jourPrice1[i] = 0;jourPrice2[i] = 0; insIndex[i] = 0; baggIndex[i] = 0;
+      flightArr[i] = "";jourPrice1[i] = 0;jourPrice2[i] = 0;
 
 
       seatNumArr1[i] = $("#seat_num1_" + i).val();
@@ -1189,10 +1190,9 @@ $(function () {
       baggPriceArr1[i] = Number($("#bagg_price1_" + i).text());
       baggPriceArr2[i] = Number($("#bagg_price2_" + i).text());
 
-      if ($("#ins_check_" + i).is(":checked")) {
+      if ($("#ins_check_" + i).is(":checked") && $("#agree_check0, #agree_check1, #agree_check2").is(":checked")) {
         insArr[i] = $("#select_product_" + i + " option:selected").text();
         insPriceArr[i] = Number($("#select_product_"+i).val());
-        console.log("보험ㅇ룡료뇨오러ㅏ농러낭ㄹ.ㄴ다ㅓㄴㅇ" + i + " : " + insPriceArr[i]);
       } else {
         delete insArr[i];
         delete insPriceArr[i];
@@ -1237,29 +1237,44 @@ $(function () {
         delete seatTypeArr2[i]
       }
     }
+    for (let i = 0; i < personNumber; i++) {
+      if (i % 2 == 0) {
+        jourPrice1[i] += beforeTotArr[i];
+        console.log("구간1 이전 총금액" + jourPrice1[i])
+      } else {
+        jourPrice2[i] += beforeTotArr[i];
+        console.log("구간2 이전 총금액" + jourPrice2[i])
+      }
+    }
     // 부가서비스 옵션 총 금액 계산
     for (let i = 0; i < personNumber; i++) {
       if(seatNumArr1[i] != null && typeof seatNumArr1[i] != "undefined") {
         total_price += seatPriceArr1[i];
         seat_price += seatPriceArr1[i];
         jourPrice1[i] += seatPriceArr1[i];
+        console.log("좌석1 금액 : " + seatPriceArr1[i])
+        console.log("여정1 좌석 금액 플러스" + jourPrice1[i] + "원")
       }
       if (seatNumArr2 != null && typeof seatNumArr2[i] != "undefined") {
         total_price += seatPriceArr2[i];
         seat_price += seatPriceArr2[i];
-        jourPrice2[i] += seatPriceArr1[i];
+        jourPrice2[i] += seatPriceArr2[i];
+        console.log("좌석2 금액 : " + seatPriceArr2[i])
+        console.log("여정2 좌석 금액 플러스" + jourPrice2[i] + "원")
       }
       if(baggArr1[i] != null && typeof baggArr1[i] != "undefined") {
         total_price += baggPriceArr1[i];
         bagg_price += baggPriceArr1[i];
-        console.log("수하물 1 금액: " + baggPriceArr1[i])
-        jourPrice1[i] += Number(baggPriceArr1[i]);
+        jourPrice1[i] += baggPriceArr1[i];
+        console.log("수하물1 금액 : " + baggPriceArr1[i])
+        console.log("여정1 좌석 금액 플러스" + jourPrice1[i] + "원")
       }
-      if (baggArr2 != null && typeof baggArr2[i] != "undefined") {
+      if (baggArr2[i] != null && typeof baggArr2[i] != "undefined") {
         total_price += baggPriceArr2[i];
         bagg_price += baggPriceArr2[i];
-        console.log("수하물 2 금액: " + baggPriceArr2[i])
-        jourPrice2[i] += Number(baggPriceArr2[i]);
+          jourPrice2[i] += baggPriceArr2[i-1];
+          console.log("수하물2 금액 : " + baggPriceArr2[i-1])
+          console.log("여정2 좌석 금액 플러스" + jourPrice2[i] + "원")
       }
     }
     if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
@@ -1268,47 +1283,40 @@ $(function () {
 
 
     for (let i = 0; i < personNumber; i++) {
-      if (baggArr1[i] == '초과수하물 5KG(+KRW 8,000)') {baggIndex[i] = Number(13);}
-      else if(baggArr1[i] == '10KG(+KRW 16,000)') {baggIndex[i] = Number(20);}
-      else if(baggArr1[i] == '15KG(+KRW 24,000)') {baggIndex[i] = Number(21);}
-      else if(baggArr1[i] == '20KG(+KRW 32,000)') {baggIndex[i] = Number(22);}
-      if (insArr[i] == '실속형') {insIndex[i] = Number(1);}
-      else if(insArr[i] == '표준형') {insIndex[i] = Number(2);}
-      else if(insArr[i] == '고급형') {insIndex[i] = Number(3);}
+      insIndex[i] = 0;
+      baggIndex1[i] = 0;
+      baggIndex2[i] = 0;
+      if (baggArr1[i] == '5KG(+KRW 8,000)') {baggIndex1[i] = Number(13);}
+      else if(baggArr1[i] == '10KG(+KRW 16,000)') {baggIndex1[i] = Number(20);}
+      else if(baggArr1[i] == '15KG(+KRW 24,000)') {baggIndex1[i] = Number(21);}
+      else if(baggArr1[i] == '20KG(+KRW 32,000)') {baggIndex1[i] = Number(22);}
+      else {delete baggIndex1[i]}
+      if (baggArr2[i] == '5KG(+KRW 8,000)') {baggIndex2[i] = Number(13);}
+      else if(baggArr2[i] == '10KG(+KRW 16,000)') {baggIndex2[i] = Number(20);}
+      else if(baggArr2[i] == '15KG(+KRW 24,000)') {baggIndex2[i] = Number(21);}
+      else if(baggArr2[i] == '20KG(+KRW 32,000)') {baggIndex2[i] = Number(22);}
+      else {delete baggIndex2[i]}
+      if (insArr[i] == '실속형') {insIndex[i] = Number(1); jourPrice1[i] += Number(1970);jourPrice2[i] += Number(1970) }
+      else if(insArr[i] == '표준형') {insIndex[i] = Number(2); jourPrice1[i] += Number(3660);jourPrice2[i] += Number(3660) }
+      else if(insArr[i] == '고급형') {insIndex[i] = Number(3); jourPrice1[i] += Number(7040);jourPrice2[i] += Number(7040) }
+      else {delete insIndex[i]; jourPrice1[i] += Number(0); jourPrice2[i] += Number(0);}
     }
 
-    for (let i = 0; i < personNumber; i++) {
-      console.log("수하물번홍ㅇㅇㅇㅇㅇㅇ" +i + " : " + baggIndex[i])
-      console.log("보험 번홍ㅇㅇㅇㅇㅇ" +i + " : " + insIndex[i])
-      console.log("좌석 번홍ㅇㅇㅇㅇ" +i + " : " + seatNumArr1[i])
-      console.log("인덱스 번홍ㅇㅇㅇㅇ" +i + " : " + indexArr[i])
-    }
+
 
     // 항공 운임금액
     $(".flight_price").each(function() {
       flightPrice += Number($(this).val());
     })
 
-    for (let i = 0; i < $(".flight_price").length; i++) {
-      flightArr[i] = Number($(this).val());
-      if (i % 2 == 0) {
-        jourPrice1[i] += flightArr[i]
-      } else if(i % 2 != 0) {
-        jourPrice2[i] += flightArr[i]
-      }
-    }
-
     for (let i = 0; i < personNumber; i++) {
-      console.log("구간1좌석가격" + i + " : " + seatPriceArr1[i])
-      console.log("구간2좌석가격" + i + " : " + seatPriceArr2[i])
-      console.log("보험" + i + " : " + insPriceArr[i])
-      console.log("구간1수하물가격" + i + " : " + baggPriceArr1[i])
-      console.log("구간2수하물가격" + i + " : " + baggPriceArr2[i])
-      console.log("운임금액" + i + " : " + flightArr[i])
-      console.log("여정1 총금액 " + i + " : " + jourPrice1[i])
-      console.log("여정2 총금액 " + i + " : " + jourPrice2[i])
-      console.log("-------------------------------------")
-
+      console.log("🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔")
+      if (i % 2 == 0) {
+        console.log(i + "의여정 1 총 금액" + jourPrice1[i])
+      } else {
+        console.log(i + "의여정 2 총 금액" + jourPrice2[i])
+      }
+      console.log("🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔")
     }
 
     $("#flightPrice").html(flightPrice.toLocaleString("ko-KR"));
@@ -1318,13 +1326,6 @@ $(function () {
       flightTax = Number(4000*personNumber/2);
     } else {
       flightTax = Number(8000*personNumber/2);
-      for (let i = 0; i < personNumber; i++) {
-        if (i % 2 == 0) {
-          jourPrice1[i] += flightTax/2
-        } else if(i % 2 != 0) {
-          jourPrice2[i] += flightTax/2
-        }
-      }
     }
     $("#flightTax").html(flightTax.toLocaleString("ko-KR"));
     // 유류할증료
@@ -1333,13 +1334,6 @@ $(function () {
       flightCharge = Number(5000*personNumber/2);
     } else {
       flightCharge = Number(10000*personNumber/2);
-      for (let i = 0; i < personNumber; i++) {
-        if (i % 2 == 0) {
-          jourPrice1[i] += flightCharge/2
-        } else if(i % 2 != 0) {
-          jourPrice2[i] += flightCharge/2
-        }
-      }
 
     }
     $("#flightCharge").html(flightCharge.toLocaleString("ko-KR"));
@@ -1365,93 +1359,172 @@ $(function () {
 
   $("#optional_ok").click( () => {
     if(href[5] == 'oneway') {
-      onewayData();
+      for (let i = 0; i < personNumber; i++) {
+        if(i % 2 == 0) {
+          onewayData(i);
+        }
+      }
+      location.href="/pages/payment/oneway"
     } else if(href[5] == 'multiway') {
-      multiwayData()
+      for (let i = 0; i < personNumber; i++) {
+        if(i % 2 == 0) {
+          multiwayData1(i)
+        } else {
+          multiwayData2(i)
+        }
+      }
+      location.href="/pages/payment/multiway"
     } else if(href[5] == 'twoway') {
-      towayData();
+      for (let i = 0; i < personNumber; i++) {
+        if(i % 2 == 0) {
+          towayData1(i)
+        } else {
+          towayData2(i)
+        }
+      }
+      location.href="/pages/payment/twoway"
     }
   })
+
+  let beforeTotArr = [personNumber];
+  for(let i = 0; i < personNumber; i++) {
+    let idx = indexArr[i];
+    getTotal(i, idx);
+  }
+  function getTotal(i, idx){
+    console.log("index : " + idx);
+    $.get("/api/reservation/"+idx, function (response) {
+      console.dir(response);
+      beforeTotArr[i] = response.data.reTotal;
+      console.log("이전 총 금액:" + beforeTotArr[i]);
+    })
+  }
 
 
   let jsonData = new Array();
   function onewayData() {
-    for (let i = 0; i < personNumber; i++) {
-      if (i % 2 == 0) {
         let finalarr = new Object();
         finalarr.reIndex = indexArr[i];
         finalarr.reSeatDetail = seatNumArr1[i];
         finalarr.reBaggageidx = Number(baggIndex[i]);
         finalarr.reInsuranceidx = Number(insIndex[i]);
-        finalarr.reTotal = finalTotalPrice;
+        finalarr.reTotal = jourPrice1[i];
         jsonData.push(finalarr);
-      }}
+
       $.ajax({
         url : "/api/reservation/paymentsUpdate",
         type : "PUT",
         data : JSON.stringify(jsonData),
         dataType : "text",
         contentType : "application/json",
-        success(jsonData) {
-          location.href = "/pages/payment/oneway"
-        },
-        error(error) {
-          alert(error);
-        }
+        // success(jsonData) {
+        //   location.href = "/pages/payment/oneway"
+        // },
+        // error(error) {
+        //   alert(error);
+        // }
       });
   }
 
   let jsonData2 = new Array();
-  function multiwayData() {
+  function multiwayData1(i) {
     for (let i = 0; i < personNumber; i++) {
-      let finalarr2 = new Object();
-      finalarr2.reIndex = indexArr[i];
-      finalarr2.reSeatDetail = seatNumArr1[i];
-      finalarr2.reBaggageidx = Number(baggIndex[i]);
-      finalarr2.reInsuranceidx = Number(insIndex[i]);
-      finalarr2.reTotal = finalTotalPrice;
-      jsonData2.push(finalarr2);
-    }
+        let finalarr2 = new Object();
+        finalarr2.reIndex = indexArr[i];
+        finalarr2.reSeatDetail = seatNumArr1[i];
+        finalarr2.reBaggageidx = Number(baggIndex1[i]);
+        finalarr2.reInsuranceidx = Number(insIndex[i]);
+        finalarr2.reTotal = finalTotalPrice;
+        jsonData2.push(finalarr2);
     $.ajax({
       url : "/api/reservation/paymentsUpdate",
       type : "PUT",
       data : JSON.stringify(jsonData2),
       dataType : "text",
       contentType : "application/json",
-      success(jsonData2) {
-        location.href = "/pages/payment/multiway"
-      },
-      error(error) {
-        alert(error);
-      }
+      // success(jsonData2) {
+      //   location.href = "/pages/payment/multiway"
+      // },
+      // error(error) {
+      //   alert(error);
+      // }
     });
-  }
-  let jsonData3 = new Array();
-  function towayData() {
-    for (let i = 0; i < personNumber; i++) {
-      let finalarr2 = new Object();
-        finalarr2.reIndex = indexArr[i];
-        finalarr2.reSeatDetail = seatNumArr1[i];
-        finalarr2.reBaggageidx = Number(baggIndex[i]);
-        finalarr2.reInsuranceidx = Number(insIndex[i]);
-        finalarr2.reTotal = finalTotalPrice;
-      jsonData3.push(finalarr2);
     }
-    $.ajax({
-      url : "/api/reservation/paymentsUpdate",
-      type : "PUT",
-      data : JSON.stringify(jsonData3),
-      dataType : "text",
-      contentType : "application/json",
-      success(jsonData3) {
-        location.href = "/pages/payment/toway"
-      },
-      error(error) {
-        alert(error);
-      }
-    });
   }
 
+  let jsonData3 = new Array();
+  function multiwayData2(i) {
+    for (let i = 0; i < personNumber; i++) {
+        let finalarr3 = new Object();
+        finalarr3.reIndex = indexArr[i];
+        finalarr3.reSeatDetail = seatNumArr2[i];
+        finalarr3.reBaggageidx = Number(baggIndex2[i-1]);
+        finalarr3.reInsuranceidx = Number(insIndex[i-1]);
+        finalarr3.reTotal = jourPrice2[i];
+        jsonData3.push(finalarr3);
+      $.ajax({
+        url : "/api/reservation/paymentsUpdate",
+        type : "PUT",
+        data : JSON.stringify(jsonData3),
+        dataType : "text",
+        contentType : "application/json",
+      //   success(jsonData3) {
+      //     location.href = "/pages/payment/multiway"
+      //   },
+      //   error(error) {
+      //     alert(error);
+      //   }
+      });
+    }
+  }
+
+  let jsonData4 = new Array();
+  function towayData1(i) {
+        let finalarr4 = new Object();
+        finalarr4.reIndex = indexArr[i];
+        finalarr4.reSeatDetail = seatNumArr1[i];
+        finalarr4.reBaggageidx = Number(baggIndex1[i]);
+        finalarr4.reInsuranceidx = Number(insIndex[i]);
+        finalarr4.reTotal = jourPrice1[i];
+        jsonData4.push(finalarr4);
+      $.ajax({
+        url : "/api/reservation/paymentsUpdate",
+        type : "PUT",
+        data : JSON.stringify(jsonData4),
+        dataType : "text",
+        contentType : "application/json",
+        // success(jsonData4) {
+        //   location.href = "/pages/payment/twoway"
+        // },
+        // error(error) {
+        //   alert(error);
+        // }
+      });
+  }
+
+  let jsonData5 = new Array();
+  function towayData2(i) {
+        let finalarr5 = new Object();
+        finalarr5.reIndex = indexArr[i];
+        finalarr5.reSeatDetail = seatNumArr2[i];
+        finalarr5.reBaggageidx = Number(baggIndex2[i-1]);
+        finalarr5.reInsuranceidx = Number(insIndex[i-1]);
+        finalarr5.reTotal = jourPrice2[i];
+        jsonData5.push(finalarr5);
+      $.ajax({
+        url : "/api/reservation/paymentsUpdate",
+        type : "PUT",
+        data : JSON.stringify(jsonData5),
+        dataType : "text",
+        contentType : "application/json",
+        // success(jsonData5) {
+        //   location.href = "/pages/payment/twoway"
+        // },
+        // error(error) {
+        //   alert(error);
+        // }
+      });
+  }
 
 
   // /*부가서비스 신청내역 끝*/
@@ -1593,7 +1666,6 @@ $(function () {
           option_table_body2[i] += '<p class="txt" id="modal_option_ins_' + i + '">여행보험 (' + insArr[i] + ')</p></div></td>'
           option_table_body2[i] += '<td class="left" id="modal_option_ins_price_' + i + '">KRW ' + insPriceArr[i].toLocaleString('ko-KR') + '</td></tr>'
         }
-        console.log("보험ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ" + "insArr[" + i + "]" + " : " + insArr[i] + insPriceArr[i])
 
       }
     }
