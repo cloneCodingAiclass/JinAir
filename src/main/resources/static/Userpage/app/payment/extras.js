@@ -1359,28 +1359,30 @@ $(function () {
 
   $("#optional_ok").click( () => {
     if(href[5] == 'oneway') {
-      onewayData();
+      for (let i = 0; i < personNumber; i++) {
+        if(i % 2 == 0) {
+          onewayData(i);
+        }
+      }
       location.href="/pages/payment/oneway"
     } else if(href[5] == 'multiway') {
       for (let i = 0; i < personNumber; i++) {
         if(i % 2 == 0) {
           multiwayData1(i)
-          location.href="/pages/payment/multiway"
         } else {
           multiwayData2(i)
-          location.href="/pages/payment/multiway"
         }
       }
+      location.href="/pages/payment/multiway"
     } else if(href[5] == 'twoway') {
       for (let i = 0; i < personNumber; i++) {
         if(i % 2 == 0) {
           towayData1(i)
-          location.href="/pages/payment/toway"
         } else {
           towayData2(i)
-          location.href="/pages/payment/toway"
         }
       }
+      location.href="/pages/payment/twoway"
     }
   })
 
@@ -1401,16 +1403,14 @@ $(function () {
 
   let jsonData = new Array();
   function onewayData() {
-    for (let i = 0; i < personNumber; i++) {
-      if (i % 2 == 0) {
         let finalarr = new Object();
         finalarr.reIndex = indexArr[i];
         finalarr.reSeatDetail = seatNumArr1[i];
         finalarr.reBaggageidx = Number(baggIndex[i]);
         finalarr.reInsuranceidx = Number(insIndex[i]);
-        finalarr.reTotal = finalTotalPrice;
+        finalarr.reTotal = jourPrice1[i];
         jsonData.push(finalarr);
-      }
+
       $.ajax({
         url : "/api/reservation/paymentsUpdate",
         type : "PUT",
@@ -1424,7 +1424,6 @@ $(function () {
         //   alert(error);
         // }
       });
-    }
   }
 
   let jsonData2 = new Array();
