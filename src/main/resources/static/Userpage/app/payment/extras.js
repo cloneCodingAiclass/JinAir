@@ -605,6 +605,35 @@ $(function () {
   cookies = cookies.slice(0, -1); // /api/reservation
   let indexArr = cookies.split(",")
 
+  // 항공기 번호별 화면구성
+  let type1 = $("#type1").val();
+  let type2 = $("#type2").val();
+  console.log(type1)
+  console.log(type2)
+  //
+  // if (type1 == 'B737-800') {
+  //   $("#seat_info_view1").replace("userpage/pages/payment/seat_info/B737-800-info1 :: B737-800-info1");
+  //   $("#seat_view1").replace("userpage/pages/payment/select_seat/B737-800-1 :: B737-800-1");
+  // } else if (type1 == 'B737-900') {
+  //   $("#seat_info_view1").replace("userpage/pages/payment/seat_info/B737-800-info2 :: B737-800-info2");
+  //   $("#seat_view1").replace("userpage/pages/payment/select_seat/B737-900-1 :: B737-900-1");
+  // } else if (type1 == 'B777-200ER') {
+  //   $("#seat_info_view1").replace("userpage/pages/payment/seat_info/B737-800-info2 :: B737-800-info2");
+  //   $("#seat_view1").replace("userpage/pages/payment/select_seat/B777-200ER-1 :: B777-200ER-1");
+  // }
+  //
+  // if (type2 == 'B737-800') {
+  //   $("#seat_info_view2").replace("userpage/pages/payment/seat_info/B737-800-info2 :: B737-800-info2");
+  //   $("#seat_view2").replace("userpage/pages/payment/select_seat/B737-800-2 :: B737-800-2");
+  // } else if (type2 == 'B737-900') {
+  //   $("#seat_info_view2").replace("userpage/pages/payment/seat_info/B737-800-info2 :: B737-800-info2");
+  //   $("#seat_view2").replace("userpage/pages/payment/select_seat/B737-900-2 :: B737-900-2");
+  // } else if (type2 == 'B777-200ER') {
+  //   $("#seat_info_view2").replace("userpage/pages/payment/seat_info/B737-800-info2 :: B737-800-info2");
+  //   $("#seat_view2").replace("userpage/pages/payment/select_seat/B777-200ER-2 :: B777-200ER-2");
+  // }
+  //
+
   // multiway
   for (let i = 0; i < indexArr.length; i++) {
     // 좌석번호 구간1
@@ -735,8 +764,8 @@ $(function () {
     totalChecked--;
   });
 
-  let price1 = '8000';let price2 = '5000';let price3 = '9000';let price4 = '7000';let price5 = '3000';
-  let price6 = '1000';let pricePlus = "10000";let priceBiz = '13000'
+  let price1 = '9000';let price2 = '5000';let price3 = '7000';let price4 = '7000';let price5 = '3000';
+  let price6 = '1000';let pricePlus = "10000";let priceBiz = '15000'
 
   $(".select_seat_wrap .box1").siblings().text(price1);
   $(".select_seat_wrap .box2").siblings().text(price2);
@@ -1286,15 +1315,15 @@ $(function () {
       insIndex[i] = 0;
       baggIndex1[i] = 0;
       baggIndex2[i] = 0;
-      if (baggArr1[i] == '5KG(+KRW 8,000)') {baggIndex1[i] = Number(13);}
-      else if(baggArr1[i] == '10KG(+KRW 16,000)') {baggIndex1[i] = Number(20);}
-      else if(baggArr1[i] == '15KG(+KRW 24,000)') {baggIndex1[i] = Number(21);}
-      else if(baggArr1[i] == '20KG(+KRW 32,000)') {baggIndex1[i] = Number(22);}
+      if (baggArr1[i] == '5KG(+KRW 8,000)') {baggIndex1[i] = Number(11);}
+      else if(baggArr1[i] == '10KG(+KRW 16,000)') {baggIndex1[i] = Number(18);}
+      else if(baggArr1[i] == '15KG(+KRW 24,000)') {baggIndex1[i] = Number(19);}
+      else if(baggArr1[i] == '20KG(+KRW 32,000)') {baggIndex1[i] = Number(20);}
       else {delete baggIndex1[i]}
-      if (baggArr2[i] == '5KG(+KRW 8,000)') {baggIndex2[i] = Number(13);}
-      else if(baggArr2[i] == '10KG(+KRW 16,000)') {baggIndex2[i] = Number(20);}
-      else if(baggArr2[i] == '15KG(+KRW 24,000)') {baggIndex2[i] = Number(21);}
-      else if(baggArr2[i] == '20KG(+KRW 32,000)') {baggIndex2[i] = Number(22);}
+      if (baggArr2[i] == '5KG(+KRW 8,000)') {baggIndex2[i] = Number(11);}
+      else if(baggArr2[i] == '10KG(+KRW 16,000)') {baggIndex2[i] = Number(18);}
+      else if(baggArr2[i] == '15KG(+KRW 24,000)') {baggIndex2[i] = Number(19);}
+      else if(baggArr2[i] == '20KG(+KRW 32,000)') {baggIndex2[i] = Number(20);}
       else {delete baggIndex2[i]}
       if (insArr[i] == '실속형') {insIndex[i] = Number(1); jourPrice1[i] += Number(1970);jourPrice2[i] += Number(1970) }
       else if(insArr[i] == '표준형') {insIndex[i] = Number(2); jourPrice1[i] += Number(3660);jourPrice2[i] += Number(3660) }
@@ -1410,6 +1439,7 @@ $(function () {
         finalarr.reBaggageidx = Number(baggIndex1[i]);
         finalarr.reInsuranceidx = Number(insIndex[i]);
         finalarr.reTotal = jourPrice1[i];
+        finalarr.reSeatPrice = seatPriceArr1[i];
         jsonData.push(finalarr);
 
       $.ajax({
@@ -1437,6 +1467,7 @@ $(function () {
         finalarr2.reBaggageidx = Number(baggIndex1[i]);
         finalarr2.reInsuranceidx = Number(insIndex[i]);
         finalarr2.reTotal = finalTotalPrice;
+        finalarr2.reSeatPrice = seatPriceArr1[i];
         jsonData2.push(finalarr2);
     $.ajax({
       url : "/api/reservation/paymentsUpdate",
@@ -1464,6 +1495,7 @@ $(function () {
         finalarr3.reBaggageidx = Number(baggIndex2[i-1]);
         finalarr3.reInsuranceidx = Number(insIndex[i-1]);
         finalarr3.reTotal = jourPrice2[i];
+        finalarr3.reSeatPrice = seatPriceArr2[i];
         jsonData3.push(finalarr3);
       $.ajax({
         url : "/api/reservation/paymentsUpdate",
@@ -1490,6 +1522,7 @@ $(function () {
         finalarr4.reBaggageidx = Number(baggIndex1[i]);
         finalarr4.reInsuranceidx = Number(insIndex[i]);
         finalarr4.reTotal = jourPrice1[i];
+        finalarr4.reSeatPrice = seatPriceArr1[i];
         jsonData4.push(finalarr4);
       $.ajax({
         url : "/api/reservation/paymentsUpdate",
@@ -1497,12 +1530,6 @@ $(function () {
         data : JSON.stringify(jsonData4),
         dataType : "text",
         contentType : "application/json",
-        // success(jsonData4) {
-        //   location.href = "/pages/payment/twoway"
-        // }
-        // error(error) {
-        //   alert(error);
-        // }
       });
   }
 
@@ -1515,6 +1542,7 @@ $(function () {
         finalarr5.reBaggageidx = Number(baggIndex2[i-1]);
         finalarr5.reInsuranceidx = Number(insIndex[i-1]);
         finalarr5.reTotal = jourPrice2[i];
+        finalarr5.reSeatPrice = seatPriceArr2[i];
         jsonData5.push(finalarr5);
       $.ajax({
         url : "/api/reservation/paymentsUpdate",

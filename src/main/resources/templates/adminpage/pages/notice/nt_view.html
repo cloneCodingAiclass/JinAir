@@ -12,27 +12,27 @@
         <div id="container">
             <div th:replace="/adminpage/fragment/leftmenu :: leftmenu(${code}, ${menuList})"></div>
             <div class="contents">
-                <div class="con_wrap" id="notiView">
+                <div class="con_wrap" id="noticeView">
                     <div class="search">
                         <p class="title">공지사항 목록(상세)</p>
                     </div>
                     <table>
                         <tr>
-                            <th style="text-align: left;" id="ntTitle">{{ notiView.noTitle }}</th>
-                            <th>등록일 {{ notiView.noRegdate.substr(0, 10) }}</th>
+                            <th style="text-align: left;" id="ntTitle">{{ noticeView.noTitle }}</th>
+                            <th>등록일 {{ noticeView.noRegdate.substr(0, 10) }}</th>
                         </tr>
                         <tr>
                             <td colspan="2" style="text-align: right; padding-right: 20px; padding-top: 0.5%; font-size: 12px">첨부파일 [
-                                <a :href=`/api/notify/download/${notiView.noIndex}` download="">{{ notiView.noFileOriname }}</a>
+                                <a :href=`/api/notify/download/${noticeView.noIndex}` download="">{{ noticeView.noFileOriname }}</a>
                              ]</td>
                         </tr>
                         <tr>
-                            <td colspan="2" ><textarea style="resize: none;" readonly>{{ notiView.noContents }}</textarea></td>
+                            <td colspan="2" ><textarea style="resize: none;" readonly>{{ noticeView.noContents }}</textarea></td>
                         </tr>
                     </table>
                     <div class="footer">
-                        <a :href=`/pages/admin/nt_modify/${notiView.noIndex}` class="btn_notice btn_write"><input type="button" value="수정"></a>
-                        <a href="" class="btn_notice btn_delete"><input type="button" value="삭제" class="modal_btn"></a>
+                        <a :href=`/pages/admin/nt_modify/${noticeView.noIndex}` class="btn_notice btn_write"><input type="button" value="수정"></a>
+                        <span  class="btn_notice btn_delete"><input type="button" value="삭제" class="modal_btn"></span>
                         <a href="/pages/admin/notice" class="btn_notice btn_list"><input type="button" value="목록"></a>
                     </div>
                 </div>

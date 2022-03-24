@@ -115,7 +115,6 @@ $(function () {
         if ( $("#ntTitle").val().length == 0 || $("#ntContent").val().length == 0 ) {
             alert('내용을 입력하세요.');
         } else {
-            writing();
             location.href = `/pages/admin/notice`;
         }
     })

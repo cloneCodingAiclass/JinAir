@@ -116,11 +116,10 @@ $(function () {
             notiList.notiList = response.data;
             let lastPage = response.pagination.totalPages;
             let str = "";
-                str += "<td class='firstPage1'><<</td>";
+
             for (let i = 0; i < lastPage; i++) {
-                str += "<td class='pages' id="+i+">" + (i+1) + "</td>";
+                str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
             }
-                str += "<td class='lastPage1'>>></td>";
             $("#showPage").html(str);
             if(page == 0) {
                 $(".firstPage1").css("visibility", "hidden");
@@ -128,7 +127,7 @@ $(function () {
             if(page == lastPage-1) {
                 $(".lastPage1").css("visibility", "hidden");
             }
-            $(".pages").css({
+            $(".pageNum").css({
                 "background-color" : "#fff",
                 "color" : "#444",
                 "cursor" : "pointer"
@@ -137,10 +136,16 @@ $(function () {
                 "background-color" : "#661e43",
                 "color" : "white"
             });
-            $(document).on('click', '.firstPage1', function(){
+            if (lastPage != 0) {
+                str += "<td class='firstPage1'><<</td>";
+            }
+            if (lastPage != 0){
+                str += "<td class='lastPage1'>>></td>";
+            }
+            $("#showPage").on('click', '.firstPage1', function(){
                 list(0);
             });
-            $(document).on('click', '.lastPage1', function(){
+            $("#showPage").on('click', '.lastPage1', function(){
                 list(lastPage-1);
             });
         })

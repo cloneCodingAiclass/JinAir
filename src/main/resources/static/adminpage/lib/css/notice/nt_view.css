@@ -19,6 +19,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 235px auto 0;
 }
 
 .modal_container > .modal p{

@@ -7,6 +7,9 @@ import com.project.jinair.model.network.request.info.AirplaneApiRequest;
 import com.project.jinair.model.network.response.info.AirplaneApiResponse;
 import com.project.jinair.service.info.AirplaneApiService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,8 +48,8 @@ public class AirplaneApiController implements CrudInterface<AirplaneApiRequest, 
     }
 
     @GetMapping("/list") // http://localhost:8080/api/airplane
-    public Header<List<AirplaneApiResponse>> findAll(){
-        return airplaneApiService.search();
+    public Header<List<AirplaneApiResponse>> findAll(@PageableDefault(sort = {"apIndex"}, direction = Sort.Direction.DESC) Pageable pageable){
+        return airplaneApiService.search(pageable);
     }
 
     @GetMapping("/list/{type}")

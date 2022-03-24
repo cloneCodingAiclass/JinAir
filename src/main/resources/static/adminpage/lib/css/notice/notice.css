@@ -74,7 +74,6 @@
     background-color: #F2F2F2;
     border-bottom: 1px solid #ccc;
 }
-
 .footer{
     margin-top: 40px;
     width: 100%;
@@ -91,30 +90,15 @@
     font-weight: bolder;
 }
 .footer table td{
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 40px;
     border: 1px solid rgb(187, 187, 187);
     background-color: #fff;
     padding-top: 2px;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+    font-size: 18px;
 }
 
-/*.footer table td:nth-child(1){*/
-/*    background-color: rgb(102, 30, 67);*/
-/*}*/
-/*.footer table td:nth-child(1) > a{*/
-/*    color:white*/
-/*}*/
-/*#showPage > .pages:hover{*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*#showPage > .pages:active {*/
-/*    background-color: #661e43;*/
-/*    color: #fff;*/
-/*}*/
-
-.footer > .notice_write{ 
+.footer > .notice_write{
     display: inline;
     float: right;
     position: relative;
@@ -132,8 +116,13 @@
     cursor: pointer;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
+.pages {
+    background-color : #fff;
+    color : #444;
+    cursor : pointer;
+}
 
-.showPage > td:hover {
+#showPage > td:hover {
     background-color: #BDD600;
     color: white;
 }

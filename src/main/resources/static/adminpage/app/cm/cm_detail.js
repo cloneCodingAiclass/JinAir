@@ -119,10 +119,21 @@ $(function () {
     couponResult(idx);
 
     function search(index){
-        console.log("index : " + index);
         $.get("/api/user/"+index, function (response){
             console.dir(response);
             memberDetail.memberDetail = response.data;
+            if(response.data.memEmailIsagree == 'True'){
+                $('#isEmailAgree').text('동의')
+            }else{
+                $('#isEmailAgree').text('미동의')
+            }
+            if(response.data.memSnsIsagree == 'True'){
+                $('#isSnsAgree').text('동의')
+            }else{
+                $('#isSnsAgree').text('미동의')
+            }
+            let regDate = response.data.memRegdate.replace('T', '/')
+            $('#regDate').text(regDate)
         })
     }
 
@@ -133,6 +144,10 @@ $(function () {
             for(let i = 0; i < response.data.length; i++){
                 let point = response.data[i].poPoint;
                 sum += point;
+            }
+            if( sum < 1){
+                $('#point').val('-');
+            }else {
                 $('#point').val(sum.toLocaleString('ko-KR'));
             }
         })

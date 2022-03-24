@@ -3,10 +3,13 @@ package com.project.jinair.service.info;
 import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.info.TbAirplane;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.info.AirplaneApiRequest;
 import com.project.jinair.model.network.response.info.AirplaneApiResponse;
 import com.project.jinair.repository.TbAirplaneRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -88,13 +91,20 @@ public class AirplaneApiService implements CrudInterface<AirplaneApiRequest, Air
         return airplaneApiResponse;
     }
 
-    public Header<List<AirplaneApiResponse>> search() {
-        List<TbAirplane> tbAirplane = tbAirplaneRepository.findAll();
+    public Header<List<AirplaneApiResponse>> search(Pageable pageable) {
+        Page<TbAirplane> tbAirplane = tbAirplaneRepository.findAll(pageable);
         List<AirplaneApiResponse> airplaneApiResponseList = tbAirplane.stream()
                 .map(users -> responseAirplane(users))
                 .collect(Collectors.toList());
 
-        return Header.OK(airplaneApiResponseList);
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbAirplane.getTotalPages())
+                .totalElements(tbAirplane.getTotalElements())
+                .currentPage(tbAirplane.getNumber())
+                .currentElements(tbAirplane.getNumberOfElements())
+                .build();
+
+        return Header.OK(airplaneApiResponseList, pagination);
     }
 
     public Header<List<AirplaneApiResponse>> typeList(String type) {

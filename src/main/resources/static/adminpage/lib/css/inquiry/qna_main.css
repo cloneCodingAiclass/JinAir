@@ -220,7 +220,7 @@
     align-items: center;
 }
 .btn_user_container .btn_user_info{
-    width: 100px;
+    width: 150px;
     height: 30px;
     background-color: white;
     border: 3px solid #BDD600;
@@ -228,14 +228,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 0.8rem;
+    font-size: 18px;
+    font-weight: 900;
 }
 .user_container{
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    left: 0; right: 0; top: 0; bottom: 0;
+    display: none;
+    margin: 235px auto 0;
+    z-index: 999;
 }
 .user_container .user_info{
     width: 400px;
