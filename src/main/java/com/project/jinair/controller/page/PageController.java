@@ -981,18 +981,24 @@ public class PageController {
         HttpSession session = request.getSession();
         ArrayList arrrr = new ArrayList<>();
 
+        // 처음 진입할때
         for(int i = 0; i < myCookies.length; i++) {
             if(myCookies[i].getValue().equals("reIndex")){
                 ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf(myCookies[i].getName())).getData();
                 if(reserveApiResponse.getReStatus() != null){
                     arrrr.add(reserveApiResponse);
                 }
+                // 쿠키의 name를 받아 value의 값을 complete로 변경하여 다른 페이지를 진입해도 쿠키가 지워지지 않음.
+                Cookie myCookie = new Cookie(String.valueOf(reserveApiResponse.getReIndex()), "reIndex");
+                myCookie.setMaxAge(5);
+                myCookie.setPath("/");
+                response.addCookie(myCookie);
             }
         }
+
+        model.addAttribute("reserveApiResponse1", arrrr);
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
-            model.addAttribute("reserveApiResponse1", arrrr);
         }else{
             model.addAttribute("loginURL", "/userpage/fragment/menu");
         }

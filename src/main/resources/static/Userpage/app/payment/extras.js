@@ -1286,15 +1286,15 @@ $(function () {
       insIndex[i] = 0;
       baggIndex1[i] = 0;
       baggIndex2[i] = 0;
-      if (baggArr1[i] == '5KG(+KRW 8,000)') {baggIndex1[i] = Number(13);}
-      else if(baggArr1[i] == '10KG(+KRW 16,000)') {baggIndex1[i] = Number(20);}
-      else if(baggArr1[i] == '15KG(+KRW 24,000)') {baggIndex1[i] = Number(21);}
-      else if(baggArr1[i] == '20KG(+KRW 32,000)') {baggIndex1[i] = Number(22);}
+      if (baggArr1[i] == '5KG(+KRW 8,000)') {baggIndex1[i] = Number(11);}
+      else if(baggArr1[i] == '10KG(+KRW 16,000)') {baggIndex1[i] = Number(18);}
+      else if(baggArr1[i] == '15KG(+KRW 24,000)') {baggIndex1[i] = Number(19);}
+      else if(baggArr1[i] == '20KG(+KRW 32,000)') {baggIndex1[i] = Number(20);}
       else {delete baggIndex1[i]}
-      if (baggArr2[i] == '5KG(+KRW 8,000)') {baggIndex2[i] = Number(13);}
-      else if(baggArr2[i] == '10KG(+KRW 16,000)') {baggIndex2[i] = Number(20);}
-      else if(baggArr2[i] == '15KG(+KRW 24,000)') {baggIndex2[i] = Number(21);}
-      else if(baggArr2[i] == '20KG(+KRW 32,000)') {baggIndex2[i] = Number(22);}
+      if (baggArr2[i] == '5KG(+KRW 8,000)') {baggIndex2[i] = Number(11);}
+      else if(baggArr2[i] == '10KG(+KRW 16,000)') {baggIndex2[i] = Number(18);}
+      else if(baggArr2[i] == '15KG(+KRW 24,000)') {baggIndex2[i] = Number(19);}
+      else if(baggArr2[i] == '20KG(+KRW 32,000)') {baggIndex2[i] = Number(20);}
       else {delete baggIndex2[i]}
       if (insArr[i] == '실속형') {insIndex[i] = Number(1); jourPrice1[i] += Number(1970);jourPrice2[i] += Number(1970) }
       else if(insArr[i] == '표준형') {insIndex[i] = Number(2); jourPrice1[i] += Number(3660);jourPrice2[i] += Number(3660) }
@@ -1402,11 +1402,12 @@ $(function () {
 
 
   let jsonData = new Array();
-  function onewayData() {
+  function onewayData(i) {
         let finalarr = new Object();
         finalarr.reIndex = indexArr[i];
+        finalarr.reStatus = "Progress";
         finalarr.reSeatDetail = seatNumArr1[i];
-        finalarr.reBaggageidx = Number(baggIndex[i]);
+        finalarr.reBaggageidx = Number(baggIndex1[i]);
         finalarr.reInsuranceidx = Number(insIndex[i]);
         finalarr.reTotal = jourPrice1[i];
         jsonData.push(finalarr);
@@ -1418,7 +1419,7 @@ $(function () {
         dataType : "text",
         contentType : "application/json",
         // success(jsonData) {
-        //   location.href = "/pages/payment/oneway"
+        //   location.href="/pages/payment/oneway"
         // },
         // error(error) {
         //   alert(error);
@@ -1431,6 +1432,7 @@ $(function () {
     for (let i = 0; i < personNumber; i++) {
         let finalarr2 = new Object();
         finalarr2.reIndex = indexArr[i];
+        finalarr2.reStatus = "Progress";
         finalarr2.reSeatDetail = seatNumArr1[i];
         finalarr2.reBaggageidx = Number(baggIndex1[i]);
         finalarr2.reInsuranceidx = Number(insIndex[i]);
@@ -1444,7 +1446,7 @@ $(function () {
       contentType : "application/json",
       // success(jsonData2) {
       //   location.href = "/pages/payment/multiway"
-      // },
+      // }
       // error(error) {
       //   alert(error);
       // }
@@ -1457,6 +1459,7 @@ $(function () {
     for (let i = 0; i < personNumber; i++) {
         let finalarr3 = new Object();
         finalarr3.reIndex = indexArr[i];
+        finalarr3.reStatus = "Progress";
         finalarr3.reSeatDetail = seatNumArr2[i];
         finalarr3.reBaggageidx = Number(baggIndex2[i-1]);
         finalarr3.reInsuranceidx = Number(insIndex[i-1]);
@@ -1468,9 +1471,9 @@ $(function () {
         data : JSON.stringify(jsonData3),
         dataType : "text",
         contentType : "application/json",
-      //   success(jsonData3) {
-      //     location.href = "/pages/payment/multiway"
-      //   },
+        // success(jsonData3) {
+        //   location.href = "/pages/payment/multiway"
+        // }
       //   error(error) {
       //     alert(error);
       //   }
@@ -1482,6 +1485,7 @@ $(function () {
   function towayData1(i) {
         let finalarr4 = new Object();
         finalarr4.reIndex = indexArr[i];
+        finalarr4.reStatus = "Progress";
         finalarr4.reSeatDetail = seatNumArr1[i];
         finalarr4.reBaggageidx = Number(baggIndex1[i]);
         finalarr4.reInsuranceidx = Number(insIndex[i]);
@@ -1495,7 +1499,7 @@ $(function () {
         contentType : "application/json",
         // success(jsonData4) {
         //   location.href = "/pages/payment/twoway"
-        // },
+        // }
         // error(error) {
         //   alert(error);
         // }
@@ -1506,6 +1510,7 @@ $(function () {
   function towayData2(i) {
         let finalarr5 = new Object();
         finalarr5.reIndex = indexArr[i];
+        finalarr5.reStatus = "Progress";
         finalarr5.reSeatDetail = seatNumArr2[i];
         finalarr5.reBaggageidx = Number(baggIndex2[i-1]);
         finalarr5.reInsuranceidx = Number(insIndex[i-1]);
@@ -1519,7 +1524,7 @@ $(function () {
         contentType : "application/json",
         // success(jsonData5) {
         //   location.href = "/pages/payment/twoway"
-        // },
+        // }
         // error(error) {
         //   alert(error);
         // }
