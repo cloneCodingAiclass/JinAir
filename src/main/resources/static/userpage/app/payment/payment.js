@@ -1,5 +1,11 @@
 // reIndex 정보 가져오기
 $(() => {
+    insList();
+    bagList();
+
+    let isR = $('.incPriceT').text().replace(/,/g, "");
+    let bagR = $('#bagPriceT').text().replace(/,/g, "");
+
     let str = $(location).attr('href').split('/');
     let priceT = 0;
 
@@ -39,14 +45,6 @@ $(() => {
     let priceSum = priceT + oilT + taxT;
     $('.priceSum').text(Math.ceil(priceSum).toLocaleString());
 
-    // 운임료 구하기
-    let optPrice = $('.optPrice').text();
-
-    // 총 운임료
-    let price = Number(priceSum) + Number(optPrice);
-
-    $('#pPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
-    $('#totalPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
 
     // 쿠폰 디스카운트 요금 더하기기
     $('#checkBut').on('click', function (){
@@ -217,7 +215,7 @@ $(() => {
             sel_coupon.sel_coupon = response.data;
         })
     }
-    bagList();
+
     function bagList(){
         let BagPriceT = 0;
         $('.baggageIndex').each(function (i){
@@ -237,7 +235,6 @@ $(() => {
         });
     }
 
-    insList();
     function insList(){
         let isPriceT = 0;
         $('.insuranceIndex').each(function (i) {
@@ -256,15 +253,22 @@ $(() => {
             });
         })
     }
+    let seatT = 0;
+    $('.priceOpt').each(function (i){
+        let val = $('.priceOpt').eq(i).attr("value");
+        $('.priceOpt').eq(i).text(val.toLocaleString());
+        seatT += Number(val);
+    });
+    $('.seatT').text(seatT.toLocaleString());
 
-    seatList();
-    function seatList() {
-        let seatPrice = 0;
-        $('.seatNum').each(function (i) {
-            $.get("/api/seatDetail")
-        })
-    };
+    let seatR = $('.seatT').text().replace(/,/g, "");
+    let result = Number(seatR) + Number(isR) + Number(bagR);
+    $('.optPrice').text(result.toLocaleString())
+    alert($('#bagPriceT').text().replace(/,/g, ""))
+
+    // 총 운임료
+    let price = Number(priceSum) + Number(result);
+
+    $('#pPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
+    $('#totalPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
 });
-
-
-
