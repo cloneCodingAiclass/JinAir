@@ -4,9 +4,6 @@
 <!-- head.html -->
 <div th:replace="userpage/fragment/head :: head"></div>
     <link rel="stylesheet" href="/userpage/lib/css/mypage/Mypage_getReservationDetail.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="/userpage/app/mypage/Mypage_main.js"></script>
     <script src="/userpage/app/mypage/Mypage_getReservationDetail.js"></script>
 <body>
     <ul class="skipnavi">
@@ -20,9 +17,9 @@
         <!--header 끝-->
         <!--container-->
         <div id="container">
+            <input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
             <div class="mypage_main w_1160">
                 <div class="mypage_menu">
-                    <input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
                     <p>마이<br>페이지</p>
                     <ul>
                         <li class="booking"><a href="/pages/index/mypageMain">예약조회/변경/취소</a></li>
