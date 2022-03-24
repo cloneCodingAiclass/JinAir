@@ -1782,7 +1782,8 @@ public class PageController {
             model.addAttribute("str", (String) session.getAttribute("name"));
             return new ModelAndView("/adminpage/pages/schedule/sc_resultinfo")
                     .addObject("code", "sc_resultinfo")
-                    .addObject("menuList", menuService.getadminMenu());
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("schedule", menuService.adminScheduleMenu());
         }else{
             return new ModelAndView("/adminpage/pages/admin_login");
         }
