@@ -1,8 +1,13 @@
 // reIndex 정보 가져오기
 $(() => {
+    insList();
+    bagList();
+
+    let isR = $('.incPriceT').text().replace(/,/g, "");
+    let bagR = $('#bagPriceT').text().replace(/,/g, "");
+
     let str = $(location).attr('href').split('/');
     let priceT = 0;
-    let resultOpt = 0; // 부가서비스 금액
 
     // 날짜 자르기
     let spst1 = $('#spanStart1').attr("value").split("T");
@@ -40,11 +45,6 @@ $(() => {
     let priceSum = priceT + oilT + taxT;
     $('.priceSum').text(Math.ceil(priceSum).toLocaleString());
 
-    // 총 운임료
-    let price = Number(priceSum) + Number(resultOpt);
-
-    $('#pPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
-    $('#totalPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
 
     // 쿠폰 디스카운트 요금 더하기기
     $('#checkBut').on('click', function (){
@@ -216,9 +216,6 @@ $(() => {
         })
     }
 
-
-
-    bagList();
     function bagList(){
         let BagPriceT = 0;
         $('.baggageIndex').each(function (i){
@@ -236,10 +233,8 @@ $(() => {
                 $('#bagPriceT').text(Math.ceil(BagPriceT).toLocaleString());
             });
         });
-        resultOpt += BagPriceT;
     }
 
-    insList();
     function insList(){
         let isPriceT = 0;
         $('.insuranceIndex').each(function (i) {
@@ -252,25 +247,28 @@ $(() => {
                 if(insPirce == ins || ins == issu){
                     $('.insPrice').eq(i).text(isPrice.toLocaleString());
                     $('.issu').eq(i).text(isType.toLocaleString());
-                    resultOpt += isPrice;
                 }
                 isPriceT += isPrice;
                 $('.incPriceT').text(Math.ceil(isPriceT).toLocaleString());
             });
         })
-        resultOpt += isPriceT;
     }
     let seatT = 0;
     $('.priceOpt').each(function (i){
         let val = $('.priceOpt').eq(i).attr("value");
         $('.priceOpt').eq(i).text(val.toLocaleString());
         seatT += Number(val);
-        resultOpt += Number(val);
     });
     $('.seatT').text(seatT.toLocaleString());
-    $('.optPrice').text(resultOpt.toLocaleString())
 
+    let seatR = $('.seatT').text().replace(/,/g, "");
+    let result = Number(seatR) + Number(isR) + Number(bagR);
+    $('.optPrice').text(result.toLocaleString())
+    alert($('#bagPriceT').text().replace(/,/g, ""))
+
+    // 총 운임료
+    let price = Number(priceSum) + Number(result);
+
+    $('#pPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
+    $('#totalPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
 });
-
-
-
