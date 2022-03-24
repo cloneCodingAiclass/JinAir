@@ -144,7 +144,13 @@ $(() => {
     el : '#itemList1',
     data : {
       itemList1 : {},
-      preNum : 1000
+      itemList2 : {},
+      preNum : 1000,
+      seatsNum : [],
+      seatsPrice : [],
+      seatsPrice1 : [],
+      seatsPrice2 : [],
+      koreaprice : []
     },
     methods:{
       crr_open : function (){
@@ -152,19 +158,22 @@ $(() => {
         $("body").css("overflow", "hidden");
       },
       price_wrap1 : function (index){
-          if(this.preNum == index){
-            $(`.price_wrap1${index}`).css({"color":"white"})
-            $(`.price_wrap1${index}`).css({"backgroundColor":"#661e43"})
-            $(`.price_wrap2${this.preNum}`).css({"color":"black"})
-            $(`.price_wrap2${this.preNum}`).css({"backgroundColor":"white"})
-            $(`.price_wrap3${this.preNum}`).css({"color":"black"})
-            $(`.price_wrap3${this.preNum}`).css({"backgroundColor":"white"})
+        if($(`.date_price1${index}`).html() == '예약마감'){
+
+        }else {
+          if (this.preNum == index) {
+            $(`.price_wrap1${index}`).css({"color": "white"})
+            $(`.price_wrap1${index}`).css({"backgroundColor": "#661e43"})
+            $(`.price_wrap2${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap2${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap3${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap3${this.preNum}`).css({"backgroundColor": "white"})
             this.preNum = 1000
             $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
             $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
             $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
-            $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
-            $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+            $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0, 10) + " [" + itemList1.itemList1[index].schStartTime.substr(11, 5) + "]");
+            $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0, 10) + " [" + itemList1.itemList1[index].schArrivalDate.substr(11, 5) + "]");
 
             price($(`.price_wrap1${index}`).children('.date_price').html(),
                 itemList1.itemList1[index].schAirplaneType,
@@ -178,25 +187,25 @@ $(() => {
               top: $('.air_list2_wrap').offset().top - 90,
               behavior: 'smooth'
             });
-          }else{
-            $(`.price_wrap1${index}`).css({"color":"white"})
-            $(`.price_wrap1${index}`).css({"backgroundColor":"#661e43"})
-            $(`.price_wrap2${index}`).css({"color":"black"})
-            $(`.price_wrap2${index}`).css({"backgroundColor":"white"})
-            $(`.price_wrap3${index}`).css({"color":"black"})
-            $(`.price_wrap3${index}`).css({"backgroundColor":"white"})
-            $(`.price_wrap1${this.preNum}`).css({"color":"black"})
-            $(`.price_wrap1${this.preNum}`).css({"backgroundColor":"white"})
-            $(`.price_wrap2${this.preNum}`).css({"color":"black"})
-            $(`.price_wrap2${this.preNum}`).css({"backgroundColor":"white"})
-            $(`.price_wrap3${this.preNum}`).css({"color":"black"})
-            $(`.price_wrap3${this.preNum}`).css({"backgroundColor":"white"})
+          } else {
+            $(`.price_wrap1${index}`).css({"color": "white"})
+            $(`.price_wrap1${index}`).css({"backgroundColor": "#661e43"})
+            $(`.price_wrap2${index}`).css({"color": "black"})
+            $(`.price_wrap2${index}`).css({"backgroundColor": "white"})
+            $(`.price_wrap3${index}`).css({"color": "black"})
+            $(`.price_wrap3${index}`).css({"backgroundColor": "white"})
+            $(`.price_wrap1${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap1${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap2${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap2${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap3${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap3${this.preNum}`).css({"backgroundColor": "white"})
             this.preNum = index;
             $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
             $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
             $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
-            $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
-            $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+            $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0, 10) + " [" + itemList1.itemList1[index].schStartTime.substr(11, 5) + "]");
+            $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0, 10) + " [" + itemList1.itemList1[index].schArrivalDate.substr(11, 5) + "]");
 
             price($(`.price_wrap1${index}`).children('.date_price').html(),
                 itemList1.itemList1[index].schAirplaneType,
@@ -211,127 +220,136 @@ $(() => {
               behavior: 'smooth'
             });
           }
+        }
       },
       price_wrap2 : function (index){
-        if(this.preNum == index){
-          $(`.price_wrap2${index}`).css({"color":"white"})
-          $(`.price_wrap2${index}`).css({"backgroundColor":"#661e43"})
-          $(`.price_wrap1${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap1${this.preNum}`).css({"backgroundColor":"white"})
-          $(`.price_wrap3${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap3${this.preNum}`).css({"backgroundColor":"white"})
-          this.preNum = 1000
-          $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
-          $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
-          $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
-          $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
-          $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+        if($(`.date_price2${index}`).html() == '예약마감'){
 
-          price($(`.price_wrap2${index}`).children('.date_price').html(),
-              itemList1.itemList1[index].schAirplaneType,
-              itemList1.itemList1[index].schAirplaneName,
-              itemList1.itemList1[index].schStartTime,
-              itemList1.itemList1[index].schArrivalDate,
-              itemList1.itemList1[index].schDeparturePoint,
-              itemList1.itemList1[index].schArrivalPoint,
-          );
-          window.scrollTo({
-            top: $('.air_list2_wrap').offset().top - 90,
-            behavior: 'smooth'
-          });
-        }else{
-          $(`.price_wrap2${index}`).css({"color":"white"})
-          $(`.price_wrap2${index}`).css({"backgroundColor":"#661e43"})
-          $(`.price_wrap1${index}`).css({"color":"black"})
-          $(`.price_wrap1${index}`).css({"backgroundColor":"white"})
-          $(`.price_wrap3${index}`).css({"color":"black"})
-          $(`.price_wrap3${index}`).css({"backgroundColor":"white"})
-          $(`.price_wrap1${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap1${this.preNum}`).css({"backgroundColor":"white"})
-          $(`.price_wrap2${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap2${this.preNum}`).css({"backgroundColor":"white"})
-          $(`.price_wrap3${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap3${this.preNum}`).css({"backgroundColor":"white"})
-          this.preNum = index
-          $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
-          $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
-          $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
-          $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
-          $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
-
-          price($(`.price_wrap2${index}`).children('.date_price').html(),
-              itemList1.itemList1[index].schAirplaneType,
-              itemList1.itemList1[index].schAirplaneName,
-              itemList1.itemList1[index].schStartTime,
-              itemList1.itemList1[index].schArrivalDate,
-              itemList1.itemList1[index].schDeparturePoint,
-              itemList1.itemList1[index].schArrivalPoint,
-          );
-          window.scrollTo({
-            top: $('.air_list2_wrap').offset().top - 90,
-            behavior: 'smooth'
-          });
-         }
-        },
-      price_wrap3 : function (index){
-        if(this.preNum == index){
-          $(`.price_wrap3${index}`).css({"color": "white"})
-          $(`.price_wrap3${index}`).css({"backgroundColor": "#661e43"})
-          $(`.price_wrap1${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap1${this.preNum}`).css({"backgroundColor":"white"})
-          $(`.price_wrap2${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap2${this.preNum}`).css({"backgroundColor":"white"})
-          this.preNum = 1000
-          $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
-          $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
-          $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
-          $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
-          $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
-
-          price($(`.price_wrap3${index}`).children('.date_price').html(),
-              itemList1.itemList1[index].schAirplaneType,
-              itemList1.itemList1[index].schAirplaneName,
-              itemList1.itemList1[index].schStartTime,
-              itemList1.itemList1[index].schArrivalDate,
-              itemList1.itemList1[index].schDeparturePoint,
-              itemList1.itemList1[index].schArrivalPoint,
-          );
-          window.scrollTo({
-            top: $('.air_list2_wrap').offset().top - 90,
-            behavior: 'smooth'
-          });
         }else {
-          $(`.price_wrap3${index}`).css({"color": "white"})
-          $(`.price_wrap3${index}`).css({"backgroundColor": "#661e43"})
-          $(`.price_wrap1${index}`).css({"color": "black"})
-          $(`.price_wrap1${index}`).css({"backgroundColor": "white"})
-          $(`.price_wrap2${index}`).css({"color": "black"})
-          $(`.price_wrap2${index}`).css({"backgroundColor": "white"})
-          $(`.price_wrap1${this.preNum}`).css({"color": "black"})
-          $(`.price_wrap1${this.preNum}`).css({"backgroundColor": "white"})
-          $(`.price_wrap2${this.preNum}`).css({"color": "black"})
-          $(`.price_wrap2${this.preNum}`).css({"backgroundColor": "white"})
-          $(`.price_wrap3${this.preNum}`).css({"color": "black"})
-          $(`.price_wrap3${this.preNum}`).css({"backgroundColor": "white"})
-          this.preNum = index
-          $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
-          $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
-          $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
-          $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
-          $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+          if (this.preNum == index) {
+            $(`.price_wrap2${index}`).css({"color": "white"})
+            $(`.price_wrap2${index}`).css({"backgroundColor": "#661e43"})
+            $(`.price_wrap1${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap1${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap3${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap3${this.preNum}`).css({"backgroundColor": "white"})
+            this.preNum = 1000
+            $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
+            $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+            $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+            $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0, 10) + " [" + itemList1.itemList1[index].schStartTime.substr(11, 5) + "]");
+            $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0, 10) + " [" + itemList1.itemList1[index].schArrivalDate.substr(11, 5) + "]");
 
-          price($(`.price_wrap3${index}`).children('.date_price').html(),
-              itemList1.itemList1[index].schAirplaneType,
-              itemList1.itemList1[index].schAirplaneName,
-              itemList1.itemList1[index].schStartTime,
-              itemList1.itemList1[index].schArrivalDate,
-              itemList1.itemList1[index].schDeparturePoint,
-              itemList1.itemList1[index].schArrivalPoint,
-          );
-          window.scrollTo({
-            top: $('.air_list2_wrap').offset().top - 90,
-            behavior: 'smooth'
-          });
+            price($(`.price_wrap2${index}`).children('.date_price').html(),
+                itemList1.itemList1[index].schAirplaneType,
+                itemList1.itemList1[index].schAirplaneName,
+                itemList1.itemList1[index].schStartTime,
+                itemList1.itemList1[index].schArrivalDate,
+                itemList1.itemList1[index].schDeparturePoint,
+                itemList1.itemList1[index].schArrivalPoint,
+            );
+            window.scrollTo({
+              top: $('.air_list2_wrap').offset().top - 90,
+              behavior: 'smooth'
+            });
+          } else {
+            $(`.price_wrap2${index}`).css({"color": "white"})
+            $(`.price_wrap2${index}`).css({"backgroundColor": "#661e43"})
+            $(`.price_wrap1${index}`).css({"color": "black"})
+            $(`.price_wrap1${index}`).css({"backgroundColor": "white"})
+            $(`.price_wrap3${index}`).css({"color": "black"})
+            $(`.price_wrap3${index}`).css({"backgroundColor": "white"})
+            $(`.price_wrap1${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap1${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap2${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap2${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap3${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap3${this.preNum}`).css({"backgroundColor": "white"})
+            this.preNum = index
+            $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
+            $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+            $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+            $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0, 10) + " [" + itemList1.itemList1[index].schStartTime.substr(11, 5) + "]");
+            $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0, 10) + " [" + itemList1.itemList1[index].schArrivalDate.substr(11, 5) + "]");
+
+            price($(`.price_wrap2${index}`).children('.date_price').html(),
+                itemList1.itemList1[index].schAirplaneType,
+                itemList1.itemList1[index].schAirplaneName,
+                itemList1.itemList1[index].schStartTime,
+                itemList1.itemList1[index].schArrivalDate,
+                itemList1.itemList1[index].schDeparturePoint,
+                itemList1.itemList1[index].schArrivalPoint,
+            );
+            window.scrollTo({
+              top: $('.air_list2_wrap').offset().top - 90,
+              behavior: 'smooth'
+            });
+          }
+        }
+       },
+      price_wrap3 : function (index) {
+        if($(`.date_price3${index}`).html() == '예약마감'){
+
+        }else {
+          if (this.preNum == index) {
+            $(`.price_wrap3${index}`).css({"color": "white"})
+            $(`.price_wrap3${index}`).css({"backgroundColor": "#661e43"})
+            $(`.price_wrap1${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap1${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap2${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap2${this.preNum}`).css({"backgroundColor": "white"})
+            this.preNum = 1000
+            $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
+            $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+            $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+            $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0, 10) + " [" + itemList1.itemList1[index].schStartTime.substr(11, 5) + "]");
+            $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0, 10) + " [" + itemList1.itemList1[index].schArrivalDate.substr(11, 5) + "]");
+
+            price($(`.price_wrap3${index}`).children('.date_price').html(),
+                itemList1.itemList1[index].schAirplaneType,
+                itemList1.itemList1[index].schAirplaneName,
+                itemList1.itemList1[index].schStartTime,
+                itemList1.itemList1[index].schArrivalDate,
+                itemList1.itemList1[index].schDeparturePoint,
+                itemList1.itemList1[index].schArrivalPoint,
+            );
+            window.scrollTo({
+              top: $('.air_list2_wrap').offset().top - 90,
+              behavior: 'smooth'
+            });
+          } else {
+            $(`.price_wrap3${index}`).css({"color": "white"})
+            $(`.price_wrap3${index}`).css({"backgroundColor": "#661e43"})
+            $(`.price_wrap1${index}`).css({"color": "black"})
+            $(`.price_wrap1${index}`).css({"backgroundColor": "white"})
+            $(`.price_wrap2${index}`).css({"color": "black"})
+            $(`.price_wrap2${index}`).css({"backgroundColor": "white"})
+            $(`.price_wrap1${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap1${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap2${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap2${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap3${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap3${this.preNum}`).css({"backgroundColor": "white"})
+            this.preNum = index
+            $('#flight1').html(itemList1.itemList1[index].schAirplaneName);
+            $('#dep_area1').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+            $('#arr_are1').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+            $('#dep_date1').html(itemList1.itemList1[index].schStartTime.substr(0, 10) + " [" + itemList1.itemList1[index].schStartTime.substr(11, 5) + "]");
+            $('#arr_date1').html(itemList1.itemList1[index].schArrivalDate.substr(0, 10) + " [" + itemList1.itemList1[index].schArrivalDate.substr(11, 5) + "]");
+
+            price($(`.price_wrap3${index}`).children('.date_price').html(),
+                itemList1.itemList1[index].schAirplaneType,
+                itemList1.itemList1[index].schAirplaneName,
+                itemList1.itemList1[index].schStartTime,
+                itemList1.itemList1[index].schArrivalDate,
+                itemList1.itemList1[index].schDeparturePoint,
+                itemList1.itemList1[index].schArrivalPoint,
+            );
+            window.scrollTo({
+              top: $('.air_list2_wrap').offset().top - 90,
+              behavior: 'smooth'
+            });
+          }
         }
       }
     }
@@ -342,7 +360,12 @@ $(() => {
     el : '#itemList2',
     data : {
       itemList2 : {},
-      preNum : 1000
+      preNum : 1000,
+      seatsNum : [],
+      seatsPrice : [],
+      seatsPrice1 : [],
+      seatsPrice2 : [],
+      koreaprice : []
     },
     methods:{
       crr_open : function (){
@@ -350,186 +373,198 @@ $(() => {
         $("body").css("overflow", "hidden");
       },
       price_wrap4 : function (index){
-        if(this.preNum == index){
-          $(`.price_wrap4${index}`).css({"color":"white"})
-          $(`.price_wrap4${index}`).css({"backgroundColor":"#661e43"})
-          $(`.price_wrap5${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap5${this.preNum}`).css({"backgroundColor":"white"})
-          $(`.price_wrap6${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap6${this.preNum}`).css({"backgroundColor":"white"})
-          this.preNum = 1000
-          $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
-          $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
-          $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
-          $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
-          $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+        if($(`.date_price4${index}`).html() == '예약마감'){
 
-          pricee($(`.price_wrap4${index}`).children('.date_price').html(),
-              itemList2.itemList2[index].schAirplaneType,
-              itemList2.itemList2[index].schAirplaneName,
-              itemList2.itemList2[index].schStartTime,
-              itemList2.itemList2[index].schArrivalDate,
-              itemList2.itemList2[index].schDeparturePoint,
-              itemList2.itemList2[index].schArrivalPoint,
-          );
-          window.scrollTo({
-            top: $('.fare_wrap').offset().top - 120,
-            behavior: 'smooth'
-          });
-        }else{
-          $(`.price_wrap4${index}`).css({"color":"white"})
-          $(`.price_wrap4${index}`).css({"backgroundColor":"#661e43"})
-          $(`.price_wrap5${index}`).css({"color":"black"})
-          $(`.price_wrap5${index}`).css({"backgroundColor":"white"})
-          $(`.price_wrap6${index}`).css({"color":"black"})
-          $(`.price_wrap6${index}`).css({"backgroundColor":"white"})
-          $(`.price_wrap4${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap4${this.preNum}`).css({"backgroundColor":"white"})
-          $(`.price_wrap5${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap5${this.preNum}`).css({"backgroundColor":"white"})
-          $(`.price_wrap6${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap6${this.preNum}`).css({"backgroundColor":"white"})
-          this.preNum = index
-          $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
-          $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
-          $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
-          $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
-          $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+        }else {
+          if (this.preNum == index) {
+            $(`.price_wrap4${index}`).css({"color": "white"})
+            $(`.price_wrap4${index}`).css({"backgroundColor": "#661e43"})
+            $(`.price_wrap5${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap5${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap6${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap6${this.preNum}`).css({"backgroundColor": "white"})
+            this.preNum = 1000
+            $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
+            $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+            $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+            $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0, 10) + " [" + itemList1.itemList1[index].schStartTime.substr(11, 5) + "]");
+            $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0, 10) + " [" + itemList1.itemList1[index].schArrivalDate.substr(11, 5) + "]");
 
-          pricee($(`.price_wrap4${index}`).children('.date_price').html(),
-              itemList2.itemList2[index].schAirplaneType,
-              itemList2.itemList2[index].schAirplaneName,
-              itemList2.itemList2[index].schStartTime,
-              itemList2.itemList2[index].schArrivalDate,
-              itemList2.itemList2[index].schDeparturePoint,
-              itemList2.itemList2[index].schArrivalPoint,
-          );
-          window.scrollTo({
-            top: $('.fare_wrap').offset().top - 120,
-            behavior: 'smooth'
-          });
+            pricee($(`.price_wrap4${index}`).children('.date_price').html(),
+                itemList2.itemList2[index].schAirplaneType,
+                itemList2.itemList2[index].schAirplaneName,
+                itemList2.itemList2[index].schStartTime,
+                itemList2.itemList2[index].schArrivalDate,
+                itemList2.itemList2[index].schDeparturePoint,
+                itemList2.itemList2[index].schArrivalPoint,
+            );
+            window.scrollTo({
+              top: $('.fare_wrap').offset().top - 120,
+              behavior: 'smooth'
+            });
+          } else {
+            $(`.price_wrap4${index}`).css({"color": "white"})
+            $(`.price_wrap4${index}`).css({"backgroundColor": "#661e43"})
+            $(`.price_wrap5${index}`).css({"color": "black"})
+            $(`.price_wrap5${index}`).css({"backgroundColor": "white"})
+            $(`.price_wrap6${index}`).css({"color": "black"})
+            $(`.price_wrap6${index}`).css({"backgroundColor": "white"})
+            $(`.price_wrap4${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap4${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap5${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap5${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap6${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap6${this.preNum}`).css({"backgroundColor": "white"})
+            this.preNum = index
+            $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
+            $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+            $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+            $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0, 10) + " [" + itemList1.itemList1[index].schStartTime.substr(11, 5) + "]");
+            $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0, 10) + " [" + itemList1.itemList1[index].schArrivalDate.substr(11, 5) + "]");
+
+            pricee($(`.price_wrap4${index}`).children('.date_price').html(),
+                itemList2.itemList2[index].schAirplaneType,
+                itemList2.itemList2[index].schAirplaneName,
+                itemList2.itemList2[index].schStartTime,
+                itemList2.itemList2[index].schArrivalDate,
+                itemList2.itemList2[index].schDeparturePoint,
+                itemList2.itemList2[index].schArrivalPoint,
+            );
+            window.scrollTo({
+              top: $('.fare_wrap').offset().top - 120,
+              behavior: 'smooth'
+            });
+          }
         }
       },
       price_wrap5 : function (index){
-        if(this.preNum == index){
-          $(`.price_wrap5${index}`).css({"color":"white"})
-          $(`.price_wrap5${index}`).css({"backgroundColor":"#661e43"})
-          $(`.price_wrap4${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap4${this.preNum}`).css({"backgroundColor":"white"})
-          $(`.price_wrap6${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap6${this.preNum}`).css({"backgroundColor":"white"})
-          this.preNum = 1000
-          $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
-          $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
-          $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
-          $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
-          $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+        if($(`.date_price5${index}`).html() == '예약마감'){
 
-          pricee($(`.price_wrap5${index}`).children('.date_price').html(),
-              itemList2.itemList2[index].schAirplaneType,
-              itemList2.itemList2[index].schAirplaneName,
-              itemList2.itemList2[index].schStartTime,
-              itemList2.itemList2[index].schArrivalDate,
-              itemList2.itemList2[index].schDeparturePoint,
-              itemList2.itemList2[index].schArrivalPoint,
-          );
-          window.scrollTo({
-            top: $('.fare_wrap').offset().top - 120,
-            behavior: 'smooth'
-          });
-        }else{
-          $(`.price_wrap5${index}`).css({"color":"white"})
-          $(`.price_wrap5${index}`).css({"backgroundColor":"#661e43"})
-          $(`.price_wrap4${index}`).css({"color":"black"})
-          $(`.price_wrap4${index}`).css({"backgroundColor":"white"})
-          $(`.price_wrap6${index}`).css({"color":"black"})
-          $(`.price_wrap6${index}`).css({"backgroundColor":"white"})
-          $(`.price_wrap4${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap4${this.preNum}`).css({"backgroundColor":"white"})
-          $(`.price_wrap5${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap5${this.preNum}`).css({"backgroundColor":"white"})
-          $(`.price_wrap6${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap6${this.preNum}`).css({"backgroundColor":"white"})
-          this.preNum = index
-          $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
-          $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
-          $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
-          $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
-          $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+        }else {
+          if (this.preNum == index) {
+            $(`.price_wrap5${index}`).css({"color": "white"})
+            $(`.price_wrap5${index}`).css({"backgroundColor": "#661e43"})
+            $(`.price_wrap4${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap4${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap6${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap6${this.preNum}`).css({"backgroundColor": "white"})
+            this.preNum = 1000
+            $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
+            $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+            $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+            $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0, 10) + " [" + itemList1.itemList1[index].schStartTime.substr(11, 5) + "]");
+            $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0, 10) + " [" + itemList1.itemList1[index].schArrivalDate.substr(11, 5) + "]");
 
-          pricee($(`.price_wrap5${index}`).children('.date_price').html(),
-              itemList2.itemList2[index].schAirplaneType,
-              itemList2.itemList2[index].schAirplaneName,
-              itemList2.itemList2[index].schStartTime,
-              itemList2.itemList2[index].schArrivalDate,
-              itemList2.itemList2[index].schDeparturePoint,
-              itemList2.itemList2[index].schArrivalPoint,
-          );
-          window.scrollTo({
-            top: $('.fare_wrap').offset().top - 120,
-            behavior: 'smooth'
-          });
+            pricee($(`.price_wrap5${index}`).children('.date_price').html(),
+                itemList2.itemList2[index].schAirplaneType,
+                itemList2.itemList2[index].schAirplaneName,
+                itemList2.itemList2[index].schStartTime,
+                itemList2.itemList2[index].schArrivalDate,
+                itemList2.itemList2[index].schDeparturePoint,
+                itemList2.itemList2[index].schArrivalPoint,
+            );
+            window.scrollTo({
+              top: $('.fare_wrap').offset().top - 120,
+              behavior: 'smooth'
+            });
+          } else {
+            $(`.price_wrap5${index}`).css({"color": "white"})
+            $(`.price_wrap5${index}`).css({"backgroundColor": "#661e43"})
+            $(`.price_wrap4${index}`).css({"color": "black"})
+            $(`.price_wrap4${index}`).css({"backgroundColor": "white"})
+            $(`.price_wrap6${index}`).css({"color": "black"})
+            $(`.price_wrap6${index}`).css({"backgroundColor": "white"})
+            $(`.price_wrap4${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap4${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap5${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap5${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap6${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap6${this.preNum}`).css({"backgroundColor": "white"})
+            this.preNum = index
+            $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
+            $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+            $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+            $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0, 10) + " [" + itemList1.itemList1[index].schStartTime.substr(11, 5) + "]");
+            $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0, 10) + " [" + itemList1.itemList1[index].schArrivalDate.substr(11, 5) + "]");
+
+            pricee($(`.price_wrap5${index}`).children('.date_price').html(),
+                itemList2.itemList2[index].schAirplaneType,
+                itemList2.itemList2[index].schAirplaneName,
+                itemList2.itemList2[index].schStartTime,
+                itemList2.itemList2[index].schArrivalDate,
+                itemList2.itemList2[index].schDeparturePoint,
+                itemList2.itemList2[index].schArrivalPoint,
+            );
+            window.scrollTo({
+              top: $('.fare_wrap').offset().top - 120,
+              behavior: 'smooth'
+            });
+          }
         }
       },
-      price_wrap6 : function (index){
-        if(this.preNum == index){
-          $(`.price_wrap6${index}`).css({"color": "white"})
-          $(`.price_wrap6${index}`).css({"backgroundColor": "#661e43"})
-          $(`.price_wrap4${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap4${this.preNum}`).css({"backgroundColor":"white"})
-          $(`.price_wrap5${this.preNum}`).css({"color":"black"})
-          $(`.price_wrap5${this.preNum}`).css({"backgroundColor":"white"})
-          this.preNum = 1000
-          $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
-          $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
-          $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
-          $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
-          $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+      price_wrap6 : function (index) {
+        if ($(`.date_price3${index}`).html() == '예약마감') {
 
-          pricee($(`.price_wrap6${index}`).children('.date_price').html(),
-              itemList2.itemList2[index].schAirplaneType,
-              itemList2.itemList2[index].schAirplaneName,
-              itemList2.itemList2[index].schStartTime,
-              itemList2.itemList2[index].schArrivalDate,
-              itemList2.itemList2[index].schDeparturePoint,
-              itemList2.itemList2[index].schArrivalPoint,
-          );
-          window.scrollTo({
-            top: $('.fare_wrap').offset().top - 120,
-            behavior: 'smooth'
-          });
-        }else {
-          $(`.price_wrap6${index}`).css({"color": "white"})
-          $(`.price_wrap6${index}`).css({"backgroundColor": "#661e43"})
-          $(`.price_wrap4${index}`).css({"color": "black"})
-          $(`.price_wrap4${index}`).css({"backgroundColor": "white"})
-          $(`.price_wrap5${index}`).css({"color": "black"})
-          $(`.price_wrap5${index}`).css({"backgroundColor": "white"})
-          $(`.price_wrap4${this.preNum}`).css({"color": "black"})
-          $(`.price_wrap4${this.preNum}`).css({"backgroundColor": "white"})
-          $(`.price_wrap5${this.preNum}`).css({"color": "black"})
-          $(`.price_wrap5${this.preNum}`).css({"backgroundColor": "white"})
-          $(`.price_wrap6${this.preNum}`).css({"color": "black"})
-          $(`.price_wrap6${this.preNum}`).css({"backgroundColor": "white"})
-          this.preNum = index
-          $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
-          $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
-          $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
-          $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0,10) + " ["+ itemList1.itemList1[index].schStartTime.substr(11,5) +"]");
-          $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0,10) + " ["+ itemList1.itemList1[index].schArrivalDate.substr(11,5) +"]");
+        } else {
+          if (this.preNum == index) {
+            $(`.price_wrap6${index}`).css({"color": "white"})
+            $(`.price_wrap6${index}`).css({"backgroundColor": "#661e43"})
+            $(`.price_wrap4${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap4${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap5${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap5${this.preNum}`).css({"backgroundColor": "white"})
+            this.preNum = 1000
+            $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
+            $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+            $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+            $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0, 10) + " [" + itemList1.itemList1[index].schStartTime.substr(11, 5) + "]");
+            $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0, 10) + " [" + itemList1.itemList1[index].schArrivalDate.substr(11, 5) + "]");
 
-          pricee($(`.price_wrap6${index}`).children('.date_price').html(),
-              itemList2.itemList2[index].schAirplaneType,
-              itemList2.itemList2[index].schAirplaneName,
-              itemList2.itemList2[index].schStartTime,
-              itemList2.itemList2[index].schArrivalDate,
-              itemList2.itemList2[index].schDeparturePoint,
-              itemList2.itemList2[index].schArrivalPoint,
-          );
-          window.scrollTo({
-            top: $('.fare_wrap').offset().top - 120,
-            behavior: 'smooth'
-          });
+            pricee($(`.price_wrap6${index}`).children('.date_price').html(),
+                itemList2.itemList2[index].schAirplaneType,
+                itemList2.itemList2[index].schAirplaneName,
+                itemList2.itemList2[index].schStartTime,
+                itemList2.itemList2[index].schArrivalDate,
+                itemList2.itemList2[index].schDeparturePoint,
+                itemList2.itemList2[index].schArrivalPoint,
+            );
+            window.scrollTo({
+              top: $('.fare_wrap').offset().top - 120,
+              behavior: 'smooth'
+            });
+          } else {
+            $(`.price_wrap6${index}`).css({"color": "white"})
+            $(`.price_wrap6${index}`).css({"backgroundColor": "#661e43"})
+            $(`.price_wrap4${index}`).css({"color": "black"})
+            $(`.price_wrap4${index}`).css({"backgroundColor": "white"})
+            $(`.price_wrap5${index}`).css({"color": "black"})
+            $(`.price_wrap5${index}`).css({"backgroundColor": "white"})
+            $(`.price_wrap4${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap4${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap5${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap5${this.preNum}`).css({"backgroundColor": "white"})
+            $(`.price_wrap6${this.preNum}`).css({"color": "black"})
+            $(`.price_wrap6${this.preNum}`).css({"backgroundColor": "white"})
+            this.preNum = index
+            $('#flight2').html(itemList1.itemList1[index].schAirplaneName);
+            $('#dep_area2').html("[출발]" + itemList1.itemList1[index].schDeparturePoint);
+            $('#arr_are2').html("[도착]" + itemList1.itemList1[index].schArrivalPoint);
+            $('#dep_date2').html(itemList1.itemList1[index].schStartTime.substr(0, 10) + " [" + itemList1.itemList1[index].schStartTime.substr(11, 5) + "]");
+            $('#arr_date2').html(itemList1.itemList1[index].schArrivalDate.substr(0, 10) + " [" + itemList1.itemList1[index].schArrivalDate.substr(11, 5) + "]");
+
+            pricee($(`.price_wrap6${index}`).children('.date_price').html(),
+                itemList2.itemList2[index].schAirplaneType,
+                itemList2.itemList2[index].schAirplaneName,
+                itemList2.itemList2[index].schStartTime,
+                itemList2.itemList2[index].schArrivalDate,
+                itemList2.itemList2[index].schDeparturePoint,
+                itemList2.itemList2[index].schArrivalPoint,
+            );
+            window.scrollTo({
+              top: $('.fare_wrap').offset().top - 120,
+              behavior: 'smooth'
+            });
+          }
         }
       }
     }
@@ -545,9 +580,118 @@ $(() => {
       success: function (response) {
         let dataJson = JSON.parse(response)
         itemList1.itemList1 = dataJson.data;
+        itemList1.seatsPrice = [];
+        itemList1.seatsPrice1 = [];
+        itemList1.seatsPrice2 = [];
+        itemList1.seatsNum = [];
+        itemList1.koreaprice = [];
+        for(let i = 0 ; i < itemList1.itemList1.length ; i++){
+          $(`.price_wrap1${i}`).css({"color": "black"})
+          $(`.price_wrap1${i}`).css({"backgroundColor": "white"})
+          $(`.price_wrap2${i}`).css({"color": "black"})
+          $(`.price_wrap2${i}`).css({"backgroundColor": "white"})
+          $(`.price_wrap3${i}`).css({"color": "black"})
+          $(`.price_wrap3${i}`).css({"backgroundColor": "white"})
+          seatNum1(itemList1.itemList1[i].schDeparturePoint, itemList1.itemList1[i].schArrivalPoint, itemList1.itemList1[i].schStartTime , i);
+        }
       }
     })
   }
+  function seatNum1(a, b, c, i){
+    $.post({
+      url: "/api/reservation/go",
+      data: "schDeparturePoint=" + a + "&schArrivalPoint=" + b + "&goDateSelectOptt=" + c,
+      dataType: "text",
+      success: function (response) {
+        let dataJson1 = JSON.parse(response)
+        if(dataJson1.data == 0){
+          if(itemList1.itemList1[i].schAirplaneType == 'B777-200ER'){
+            itemList1.koreaprice.push('KRW');
+            itemList1.seatsPrice.push(Number(itemList1.itemList1[i].schBasicPrice).toLocaleString('ko-KR'));
+            itemList1.seatsPrice1.push((Number(itemList1.itemList1[i].schBasicPrice)*1.6).toLocaleString('ko-KR'));
+            itemList1.seatsPrice2.push((Number(itemList1.itemList1[i].schBasicPrice)*2.6).toLocaleString('ko-KR'));
+            itemList1.seatsNum.push(`잔여 ${Number(393)} 석!`);
+          }else if(itemList1.itemList1[i].schAirplaneType == 'B737-800'){
+            itemList1.koreaprice.push('KRW');
+            itemList1.seatsPrice.push(Number(itemList1.itemList1[i].schBasicPrice).toLocaleString('ko-KR'));
+            itemList1.seatsPrice1.push((Number(itemList1.itemList1[i].schBasicPrice)*1.6).toLocaleString('ko-KR'));
+            itemList1.seatsPrice2.push((Number(itemList1.itemList1[i].schBasicPrice)*2.6).toLocaleString('ko-KR'));
+            itemList1.seatsNum.push(`잔여 ${Number(189)} 석!`);
+          }else if(itemList1.itemList1[i].schAirplaneType == 'B737-900'){
+            itemList1.koreaprice.push('KRW');
+            itemList1.seatsPrice.push(Number(itemList1.itemList1[i].schBasicPrice).toLocaleString('ko-KR'));
+            itemList1.seatsPrice1.push((Number(itemList1.itemList1[i].schBasicPrice)*1.6).toLocaleString('ko-KR'));
+            itemList1.seatsPrice2.push((Number(itemList1.itemList1[i].schBasicPrice)*2.6).toLocaleString('ko-KR'));
+            itemList1.seatsNum.push(`잔여 ${Number(188)} 석!`);
+          }
+        }else{
+          itemList1.itemList2 = dataJson1.data;
+          if(itemList1.itemList2[0].reAirplainType == 'B777-200ER'){
+            if((Number(393) - Number(itemList1.itemList2.length)) <= 0){
+              itemList1.koreaprice.push('');
+              itemList1.seatsPrice.push('예약마감');
+              itemList1.seatsPrice1.push('예약마감');
+              itemList1.seatsPrice2.push('예약마감');
+              itemList1.seatsNum.push('')
+              $(`.price_wrap1${i}`).css({"color": "#444"})
+              $(`.price_wrap1${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+              $(`.price_wrap2${i}`).css({"color": "#444"})
+              $(`.price_wrap2${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+              $(`.price_wrap3${i}`).css({"color": "#444"})
+              $(`.price_wrap3${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+            }else{
+              itemList1.koreaprice.push('KRW');
+              itemList1.seatsPrice.push((Number(itemList1.itemList1[i].schBasicPrice)).toLocaleString('ko-KR'));
+              itemList1.seatsPrice1.push((Number(itemList1.itemList1[i].schBasicPrice)*1.6).toLocaleString('ko-KR'));
+              itemList1.seatsPrice2.push((Number(itemList1.itemList1[i].schBasicPrice)*2.6).toLocaleString('ko-KR'));
+              itemList1.seatsNum.push(`잔여 ${(Number(393) - Number(itemList1.itemList2.length))} 석!`)
+            }
+          }else if(itemList1.itemList2[0].reAirplainType == 'B737-800'){
+            if((Number(189) - Number(itemList1.itemList2.length)) <= 0){
+              itemList1.koreaprice.push('');
+              itemList1.seatsPrice.push('예약마감');
+              itemList1.seatsPrice1.push('예약마감');
+              itemList1.seatsPrice2.push('예약마감');
+              itemList1.seatsNum.push('')
+              $(`.price_wrap1${i}`).css({"color": "#444"})
+              $(`.price_wrap1${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+              $(`.price_wrap2${i}`).css({"color": "#444"})
+              $(`.price_wrap2${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+              $(`.price_wrap3${i}`).css({"color": "#444"})
+              $(`.price_wrap3${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+            }else{
+              itemList1.koreaprice.push('KRW');
+              itemList1.seatsPrice.push((Number(itemList1.itemList1[i].schBasicPrice)).toLocaleString('ko-KR'));
+              itemList1.seatsPrice1.push((Number(itemList1.itemList1[i].schBasicPrice)*1.6).toLocaleString('ko-KR'));
+              itemList1.seatsPrice2.push((Number(itemList1.itemList1[i].schBasicPrice)*2.6).toLocaleString('ko-KR'));
+              itemList1.seatsNum.push(`잔여 ${(Number(189) - Number(itemList1.itemList2.length))} 석!`)
+            }
+          }else if(itemList1.itemList2[0].reAirplainType == 'B737-900') {
+            if ((Number(188) - Number(itemList1.itemList2.length)) <= 0) {
+              itemList1.koreaprice.push('');
+              itemList1.seatsPrice.push('예약마감');
+              itemList1.seatsPrice1.push('예약마감');
+              itemList1.seatsPrice2.push('예약마감');
+              itemList1.seatsNum.push('')
+              $(`.price_wrap1${i}`).css({"color": "#444"})
+              $(`.price_wrap1${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+              $(`.price_wrap2${i}`).css({"color": "#444"})
+              $(`.price_wrap2${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+              $(`.price_wrap3${i}`).css({"color": "#444"})
+              $(`.price_wrap3${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+            } else {
+              itemList1.koreaprice.push('KRW');
+              itemList1.seatsPrice.push((Number(itemList1.itemList1[i].schBasicPrice)).toLocaleString('ko-KR'));
+              itemList1.seatsPrice1.push((Number(itemList1.itemList1[i].schBasicPrice)*1.6).toLocaleString('ko-KR'));
+              itemList1.seatsPrice2.push((Number(itemList1.itemList1[i].schBasicPrice)*2.6).toLocaleString('ko-KR'));
+              itemList1.seatsNum.push(`잔여 ${(Number(188) - Number(itemList1.itemList2.length))} 석!`)
+            }
+          }
+        }
+      }
+    })
+  }
+
   // 구간2
   function comeSearch(schDeparturePoint, schArrivalPoint, comeDateSelectOptt){
     $.post({
@@ -557,10 +701,120 @@ $(() => {
       success: function (response) {
         let dataJson = JSON.parse(response)
         itemList2.itemList2 = dataJson.data;
+        itemList2.seatsPrice = [];
+        itemList2.seatsPrice1 = [];
+        itemList2.seatsPrice2 = [];
+        itemList2.seatsNum = [];
+        itemList2.koreaprice = [];
+        for(let i = 0 ; i < itemList2.itemList2.length ; i++){
+          $(`.price_wrap4${i}`).css({"color": "black"})
+          $(`.price_wrap4${i}`).css({"backgroundColor": "white"})
+          $(`.price_wrap5${i}`).css({"color": "black"})
+          $(`.price_wrap5${i}`).css({"backgroundColor": "white"})
+          $(`.price_wrap6${i}`).css({"color": "black"})
+          $(`.price_wrap6${i}`).css({"backgroundColor": "white"})
+          seatNum2(itemList2.itemList2[i].schDeparturePoint, itemList2.itemList2[i].schArrivalPoint, itemList2.itemList2[i].schStartTime , i);
+        }
+      }
+    })
+  }
+  function seatNum2(a, b, c, i){
+    $.post({
+      url: "/api/reservation/go",
+      data: "schDeparturePoint=" + a + "&schArrivalPoint=" + b + "&goDateSelectOptt=" + c,
+      dataType: "text",
+      success: function (response) {
+        let dataJson1 = JSON.parse(response)
+        if(dataJson1.data == 0){
+          if(itemList2.itemList2[i].schAirplaneType == 'B777-200ER'){
+            itemList2.koreaprice.push('KRW');
+            itemList2.seatsPrice.push(Number(itemList2.itemList2[i].schBasicPrice).toLocaleString('ko-KR'));
+            itemList2.seatsPrice1.push((Number(itemList2.itemList2[i].schBasicPrice)*1.6).toLocaleString('ko-KR'));
+            itemList2.seatsPrice2.push((Number(itemList2.itemList2[i].schBasicPrice)*2.6).toLocaleString('ko-KR'));
+            itemList2.seatsNum.push(`잔여 ${Number(393)} 석!`);
+          }else if(itemList2.itemList2[i].schAirplaneType == 'B737-800'){
+            itemList2.koreaprice.push('KRW');
+            itemList2.seatsPrice.push(Number(itemList2.itemList2[i].schBasicPrice).toLocaleString('ko-KR'));
+            itemList2.seatsPrice1.push((Number(itemList2.itemList2[i].schBasicPrice)*1.6).toLocaleString('ko-KR'));
+            itemList2.seatsPrice2.push((Number(itemList2.itemList2[i].schBasicPrice)*2.6).toLocaleString('ko-KR'));
+            itemList2.seatsNum.push(`잔여 ${Number(189)} 석!`);
+          }else if(itemList2.itemList2[i].schAirplaneType == 'B737-900'){
+            itemList2.koreaprice.push('KRW');
+            itemList2.seatsPrice.push(Number(itemList2.itemList2[i].schBasicPrice).toLocaleString('ko-KR'));
+            itemList2.seatsPrice1.push((Number(itemList2.itemList2[i].schBasicPrice)*1.6).toLocaleString('ko-KR'));
+            itemList2.seatsPrice2.push((Number(itemList2.itemList2[i].schBasicPrice)*2.6).toLocaleString('ko-KR'));
+            itemList2.seatsNum.push(`잔여 ${Number(188)} 석!`);
+          }
+        }else{
+          itemList2.itemList3 = dataJson1.data;
+          if(itemList2.itemList3[0].reAirplainType == 'B777-200ER'){
+            if((Number(393) - Number(itemList2.itemList3.length)) <= 0){
+              itemList2.koreaprice.push('');
+              itemList2.seatsPrice.push('예약마감');
+              itemList2.seatsPrice1.push('예약마감');
+              itemList2.seatsPrice2.push('예약마감');
+              itemList2.seatsNum.push('')
+              $(`.price_wrap4${i}`).css({"color": "#444"})
+              $(`.price_wrap4${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+              $(`.price_wrap5${i}`).css({"color": "#444"})
+              $(`.price_wrap5${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+              $(`.price_wrap6${i}`).css({"color": "#444"})
+              $(`.price_wrap6${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+            }else{
+              itemList2.koreaprice.push('KRW');
+              itemList2.seatsPrice.push((Number(itemList2.itemList2[i].schBasicPrice)).toLocaleString('ko-KR'));
+              itemList2.seatsPrice1.push((Number(itemList2.itemList2[i].schBasicPrice)*1.6).toLocaleString('ko-KR'));
+              itemList2.seatsPrice2.push((Number(itemList2.itemList2[i].schBasicPrice)*2.6).toLocaleString('ko-KR'));
+              itemList2.seatsNum.push(`잔여 ${(Number(393) - Number(itemList2.itemList3.length))} 석!`)
+            }
+          }else if(itemList2.itemList3[0].reAirplainType == 'B737-800'){
+            if((Number(189) - Number(itemList2.itemList3.length)) <= 0){
+              itemList2.koreaprice.push('');
+              itemList2.seatsPrice.push('예약마감');
+              itemList2.seatsPrice1.push('예약마감');
+              itemList2.seatsPrice2.push('예약마감');
+              itemList2.seatsNum.push('')
+              $(`.price_wrap4${i}`).css({"color": "#444"})
+              $(`.price_wrap4${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+              $(`.price_wrap5${i}`).css({"color": "#444"})
+              $(`.price_wrap5${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+              $(`.price_wrap6${i}`).css({"color": "#444"})
+              $(`.price_wrap6${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+            }else{
+              itemList2.koreaprice.push('KRW');
+              itemList2.seatsPrice.push((Number(itemList2.itemList2[i].schBasicPrice)).toLocaleString('ko-KR'));
+              itemList2.seatsPrice1.push((Number(itemList2.itemList2[i].schBasicPrice)*1.6).toLocaleString('ko-KR'));
+              itemList2.seatsPrice2.push((Number(itemList2.itemList2[i].schBasicPrice)*2.6).toLocaleString('ko-KR'));
+              itemList2.seatsNum.push(`잔여 ${(Number(189) - Number(itemList2.itemList3.length))} 석!`)
+            }
+          }else if(itemList2.itemList3[0].reAirplainType == 'B737-900') {
+            if ((Number(188) - Number(itemList2.itemList3.length)) <= 0) {
+              itemList2.koreaprice.push('');
+              itemList2.seatsPrice.push('예약마감');
+              itemList2.seatsPrice1.push('예약마감');
+              itemList2.seatsPrice2.push('예약마감');
+              itemList2.seatsNum.push('')
+              $(`.price_wrap4${i}`).css({"color": "#444"})
+              $(`.price_wrap4${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+              $(`.price_wrap5${i}`).css({"color": "#444"})
+              $(`.price_wrap5${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+              $(`.price_wrap6${i}`).css({"color": "#444"})
+              $(`.price_wrap6${i}`).css({"backgroundColor": "rgba(168, 165, 165, 0.2)"})
+            } else {
+              itemList2.koreaprice.push('KRW');
+              itemList2.seatsPrice.push((Number(itemList2.itemList2[i].schBasicPrice)).toLocaleString('ko-KR'));
+              itemList2.seatsPrice1.push((Number(itemList2.itemList2[i].schBasicPrice)*1.6).toLocaleString('ko-KR'));
+              itemList2.seatsPrice2.push((Number(itemList2.itemList2[i].schBasicPrice)*2.6).toLocaleString('ko-KR'));
+              itemList2.seatsNum.push(`잔여 ${(Number(188) - Number(itemList2.itemList3.length))} 석!`)
+            }
+          }
+        }
       }
     })
   }
 
+
+  // 기본 세팅
   if(str[5] == 'twoway'){
       $('.date3').html($('#goDateSelectOptt').val());
       $('.dating3').html($('#comeDateSelectOptt').val());
