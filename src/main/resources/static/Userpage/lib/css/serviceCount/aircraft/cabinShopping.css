@@ -431,7 +431,7 @@ p.jini_sub{
     height: 400px;
     background: url("/userpage/lib/img/img_jini_store.jpg") no-repeat;
 }
-.jini_left > input[type="button"]{
+.jini_left > a > input[type="button"]{
     width: 283px;
     height: 60px;
     cursor: pointer;
