@@ -1360,25 +1360,25 @@ $(function () {
   $("#optional_ok").click( () => {
     if(href[5] == 'oneway') {
       onewayData();
-      location.href="pages/payment/oneway"
+      location.href="/pages/payment/oneway"
     } else if(href[5] == 'multiway') {
       for (let i = 0; i < personNumber; i++) {
         if(i % 2 == 0) {
           multiwayData1(i)
-          location.href="pages/payment/multiway"
+          location.href="/pages/payment/multiway"
         } else {
           multiwayData2(i)
-          location.href="pages/payment/multiway"
+          location.href="/pages/payment/multiway"
         }
       }
     } else if(href[5] == 'twoway') {
       for (let i = 0; i < personNumber; i++) {
         if(i % 2 == 0) {
           towayData1(i)
-          location.href="pages/payment/toway"
+          location.href="/pages/payment/toway"
         } else {
           towayData2(i)
-          location.href="pages/payment/toway"
+          location.href="/pages/payment/toway"
         }
       }
     }
