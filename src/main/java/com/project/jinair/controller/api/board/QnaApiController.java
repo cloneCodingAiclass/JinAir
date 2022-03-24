@@ -9,6 +9,9 @@ import com.project.jinair.model.network.response.board.QnaApiResponse;
 import com.project.jinair.model.network.response.payment.PointApiResponse;
 import com.project.jinair.service.board.QnaApiLogicService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,28 +41,34 @@ public class QnaApiController implements CrudInterface<QnaApiRequest, QnaApiResp
     }
 */
 
+    // 전체 리스트 출력
     @GetMapping("/list")
-    public Header<List<QnaApiResponse>> List() {
-        return qnaApiLogicService.getQnaList();
+    public Header<List<QnaApiResponse>> List(@PageableDefault(size = 10, sort = {"qnaIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        return qnaApiLogicService.getQnaList(pageable);
     }
+
+    // 타입에 따른 리스트 출력
     @GetMapping("/listdetail/{a}")
-    public Header<List<QnaApiResponse>> List(@PathVariable QnaType a) {
-        return qnaApiLogicService.getQnaList(a);
+    public Header<List<QnaApiResponse>> List(@PathVariable QnaType a, @PageableDefault(size = 10, sort = {"qnaIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        return qnaApiLogicService.getQnaList(a, pageable);
     }
 
+    // 사용자에 따른 리스트
     @GetMapping("/myqnalist/{id}")
-    public Header<List<QnaApiResponse>> myQnaList(@PathVariable Long id) {
-        return qnaApiLogicService.myQnaList(id);
+    public Header<List<QnaApiResponse>> myQnaList(@PathVariable Long id, @PageableDefault(size = 10, sort = {"qnaIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        return qnaApiLogicService.myQnaList(id, pageable);
     }
 
+    // 미답변 리스트
     @GetMapping("/list/NotComplete")
-    public Header<List<QnaApiResponse>> ListUnComplete() {
-        return qnaApiLogicService.getQnaLists();
+    public Header<List<QnaApiResponse>> ListUnComplete(@PageableDefault(size = 10, sort = {"qnaIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        return qnaApiLogicService.getQnaLists(pageable);
     }
 
+    // 검색
     @GetMapping("/listsearch/{a}")
-    public Header<List<QnaApiResponse>> Listsearch(@PathVariable String a) {
-        return qnaApiLogicService.getQnaList(a);
+    public Header<List<QnaApiResponse>> Listsearch(@PathVariable String a, @PageableDefault(size = 10, sort = {"qnaIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        return qnaApiLogicService.getQnaList(a, pageable);
     }
 
     @Override

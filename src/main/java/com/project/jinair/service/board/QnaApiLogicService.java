@@ -7,6 +7,7 @@ import com.project.jinair.model.entity.member.TbMember;
 import com.project.jinair.model.enumclass.QnaStatus;
 import com.project.jinair.model.enumclass.QnaType;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.board.QnaApiRequest;
 import com.project.jinair.model.network.response.board.QnaApiResponse;
 //import com.project.jinair.repository.MemJoinQnaRepository;
@@ -14,6 +15,8 @@ import com.project.jinair.repository.MemberRepository;
 import com.project.jinair.repository.TbQnaRepository;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -33,44 +36,80 @@ public class QnaApiLogicService implements CrudInterface<QnaApiRequest, QnaApiRe
     private final MemberRepository memberRepository;
 
     // 게시판 리스트
-    public Header<List<QnaApiResponse>> getQnaList() {
-        List<TbQna> tbQna = tbQnaRepository.findAll(Sort.by(Sort.Direction.ASC, "QnaIndex"));
+    public Header<List<QnaApiResponse>> getQnaList(Pageable pageable) {
+        Page<TbQna> tbQna = tbQnaRepository.findAll(pageable);
         List<QnaApiResponse> qnaApiResponseList = tbQna.stream()
                 .map(user -> responseQna(user))
                 .collect(Collectors.toList());
-        return Header.OK(qnaApiResponseList);
+
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbQna.getTotalPages())
+                .totalElements(tbQna.getTotalElements())
+                .currentPage(tbQna.getNumber())
+                .currentElements(tbQna.getNumberOfElements())
+                .build();
+        return Header.OK(qnaApiResponseList, pagination);
     }
 
-    public Header<List<QnaApiResponse>> getQnaList(QnaType a) {
-        List<TbQna> tbQna = tbQnaRepository.findByQnaType(a);
+    // 타입에 따른 리스트
+    public Header<List<QnaApiResponse>> getQnaList(QnaType a, Pageable pageable) {
+        Page<TbQna> tbQna = tbQnaRepository.findByQnaType(a, pageable);
         List<QnaApiResponse> qnaApiResponseList = tbQna.stream()
                 .map(user -> responseQna(user))
                 .collect(Collectors.toList());
-        return Header.OK(qnaApiResponseList);
+
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbQna.getTotalPages())
+                .totalElements(tbQna.getTotalElements())
+                .currentPage(tbQna.getNumber())
+                .currentElements(tbQna.getNumberOfElements())
+                .build();
+        return Header.OK(qnaApiResponseList, pagination);
     }
 
-    public Header<List<QnaApiResponse>> getQnaLists() {
-        List<TbQna> tbQna = tbQnaRepository.findByQnaIsans(QnaStatus.NotComplete);
+    // 미답변 목록
+    public Header<List<QnaApiResponse>> getQnaLists(Pageable pageable) {
+        Page<TbQna> tbQna = tbQnaRepository.findByQnaIsans(QnaStatus.NotComplete, pageable);
         List<QnaApiResponse> qnaApiResponseList = tbQna.stream()
                 .map(user -> responseQna(user))
                 .collect(Collectors.toList());
-        return Header.OK(qnaApiResponseList);
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbQna.getTotalPages())
+                .totalElements(tbQna.getTotalElements())
+                .currentPage(tbQna.getNumber())
+                .currentElements(tbQna.getNumberOfElements())
+                .build();
+        return Header.OK(qnaApiResponseList, pagination);
     }
 
-    public Header<List<QnaApiResponse>> getQnaList(String a) {
-        List<TbQna> tbQna = tbQnaRepository.findByQnaTitleContaining(a);
+    // 타이틀 검색
+    public Header<List<QnaApiResponse>> getQnaList(String a, Pageable pageable) {
+        Page<TbQna> tbQna = tbQnaRepository.findByQnaTitleContaining(a, pageable);
         List<QnaApiResponse> qnaApiResponseList = tbQna.stream()
                 .map(user -> responseQna(user))
                 .collect(Collectors.toList());
-        return Header.OK(qnaApiResponseList);
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbQna.getTotalPages())
+                .totalElements(tbQna.getTotalElements())
+                .currentPage(tbQna.getNumber())
+                .currentElements(tbQna.getNumberOfElements())
+                .build();
+        return Header.OK(qnaApiResponseList, pagination);
     }
 
-    public Header<List<QnaApiResponse>> myQnaList(Long id) {
-        List<TbQna> tbQna = tbQnaRepository.findByQnaUserindex(id);
+    // 사용자에 따른 목록
+    public Header<List<QnaApiResponse>> myQnaList(Long id, Pageable pageable) {
+        Page<TbQna> tbQna = tbQnaRepository.findByQnaUserindex(id, pageable);
         List<QnaApiResponse> qnaApiResponseList = tbQna.stream()
                 .map(user -> responseQna(user))
                 .collect(Collectors.toList());
-        return Header.OK(qnaApiResponseList);
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbQna.getTotalPages())
+                .totalElements(tbQna.getTotalElements())
+                .currentPage(tbQna.getNumber())
+                .currentElements(tbQna.getNumberOfElements())
+                .build();
+        return Header.OK(qnaApiResponseList, pagination);
     }
 
 
