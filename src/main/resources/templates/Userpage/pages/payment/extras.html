@@ -14,7 +14,7 @@
     <input type="hidden" name="" class="type" th:id="type1"
            th:value="${reserveApiResponse[0].reAirplainType}">
     <input type="hidden" name="" class="type" th:id="type2"
-           th:value="${reserveApiResponse[1].reAirplainType}" th:if="${reserveApiResponse[1].reAirplainType != null}">
+           th:value="${reserveApiResponse[1].reAirplainType}" th:if="${reserveApiResponse[1] != null}">
 </div>
 <ul class="skipnavi">
     <!--책갈피 역할-->
@@ -40,9 +40,9 @@
                         </div>
                         <div class="trip_area fs20">
                             <span class="dep_area" id="go_area1" th:text="${reserveApiResponse[0].reSchDepPoint}">서울/김포(GMP)</span>
-                            <span class="sm_ft" id="godate">[출발] <span th:text="${reserveApiResponse[0].reSchStartTime}"></span></span>
+                            <span class="sm_ft">[출발] [[${reserveApiResponse[0].reSchStartTime}]]</span>
                             <span class="arr_area" id="arr_area1" th:text="${reserveApiResponse[0].reSchArrPoint}">제주(CJU)</span>
-                            <span class="sm_ft">[도착]  <span th:text="${reserveApiResponse[0].reSchEndTime}"></span></span>
+                            <span class="sm_ft">[도착] [[${reserveApiResponse[0].reSchEndTime}]]</span>
                         </div>
                     </div>
                     <!--여정1 끝-->
@@ -53,16 +53,16 @@
                         </div>
                         <div class="trip_area fs20">
                             <span class="dep_area" th:text="${reserveApiResponse[1].reSchDepPoint}">제주(CJU)</span>
-                            <span class="sm_ft">[출발] 2022-02-19(토) 16:00 </span>
+                            <span class="sm_ft">[출발] [[${reserveApiResponse[1].reSchStartTime}]]</span>
                             <span class="arr_area" th:text="${reserveApiResponse[1].reSchArrPoint}">서울/김포(GMP)</span>
-                            <span class="sm_ft">[도착] 2022-02-19(토)17:10</span>
+                            <span class="sm_ft">[도착] [[${reserveApiResponse[1].reSchEndTime}]]</span>
                         </div>
                     </div>
                     <!--여정2 끝-->
                     <!--탑승객 수-->
                     <div class="nop">
                         <p>탑승객수</p>
-                        <p class="fs20" id="person_cnt">성인 1</p>
+                        <p class="fs20" id="person_cnt">[[${reserveApiResponse[0].rePeopleType}]]</p>
                     </div>
                     <!--탑승객 수 끝-->
                     <!--수정버튼-->
@@ -157,14 +157,16 @@
                                 </label>
                             </div>
                             </th:block>
-                        </div>
+                        </div><!-- th:id="'info1_' + ${i1.index}">-->
                         <!-- 좌석 정보 랩-->
                         <!-- 좌석 정보랩 1 -->
-                        <div th:replace="userpage/pages/payment/seat_info/B777-200ER-info1 :: B777-200ER-info1"
-                             id="seat_info1"></div>
+                        <!-- 좌석 정보랩 1 -->
+<!--                        <div th:replace="'userpage/pages/payment/seat_info/'+${reserveApiResponse[0].reAirplaneType}+'-info1 :: '+${reserveApiResponse[0].reAirplaneType}+'-info1'" id="seat_info_view1"></div>-->
+                        <div th:replace="userpage/pages/payment/seat_info/B737-800-info1 :: B737-800-info1" id="seat_info_view1"></div>
                         <!-- 좌석 정보랩 1 끝 -->
                         <!-- 좌석 선택랩 1 -->
-                        <div th:replace="userpage/pages/payment/select_seat/B777-200ER-1 :: B777-200ER-1"></div>
+                        <div th:replace="userpage/pages/payment/select_seat/B737-800-1 :: B737-800-1" id="seat_view1"></div>
+<!--                        <div th:replace="'userpage/pages/payment/seat_info/'+${reserveApiResponse[0].reAirplaneType}+'-1 :: '+${reserveApiResponse[0].reAirplaneType}+'-1'" id="seat_view1"></div>-->
                         <!-- 좌석 선택랩 1 끝 -->
                         <!--탑승객 정보 랩2-->
                         <div class="passenger_info_wrap passenger_info_wrap2" id="passenger_info_2">
@@ -193,11 +195,13 @@
                         </div>
                         <!--탑승객 정보 랩2 끝-->
                         <!-- 좌석 정보랩 2 -->
-                        <div th:replace="userpage/pages/payment/seat_info/B737-900-info2 :: B737-900-info2"
-                             id="seat_info2"></div>
+<!--                        <div th:replace="'userpage/pages/payment/seat_info/'+${reserveApiResponse[1].reAirplaneType}+'-info2 :: '+$reserveApiResponse[1].reAirplaneType}+'-info2'" id="seat_info_view2"></div>-->
+                        <div th:replace="userpage/pages/payment/seat_info/B737-800-info2 :: B737-800-info2" id="seat_info_view2"></div>
                         <!-- 좌석 정보랩 2 끝 -->
                         <!-- 좌석 선택랩 2 -->
-                        <div th:replace="userpage/pages/payment/select_seat/B737-900-2 :: B737-900-2"></div>
+                        <div th:replace="userpage/pages/payment/select_seat/B737-800-2 :: B737-800-2" id="seat_view2"></div>
+<!--                        <div th:replace="'userpage/pages/payment/seat_info/'+${reserveApiResponse[1].reAirplaneType}+'-2 :: '+${reserveApiResponse[1].reAirplaneType}+'-2'" id="seat_view2"></div>-->
+
                         <!-- 좌석 선택랩 2 끝 -->
                     </div>
                     <!--서비스 컨텐츠 끝-->
@@ -402,9 +406,9 @@
                                                 <td class="normal"><label th:for="'check_ins_'+${i6.index}">
                                                     <input type="checkbox" class="ins_check" th:name="'check_ins_'+${i6.index}" th:id="'ins_check_'+${i6.index}">
                                                     <span th:id="'name'+${i6.index}">[[${passengerInfo6.reFirstName}]]/[[${passengerInfo6.reLastName}]]</span></label></td>
-                                                <td class="normal">여</td>
+                                                <td class="normal">[[${passengerInfo6.reGender}]]</td>
                                                 <td class="normal bir_date">
-                                                    <input type="text" value="19970924" class="birth" th:id="'ins_birth_'+${i6.index}" readOnly></td>
+                                                    <input type="text" th:value="${passengerInfo6.reBirth}" class="birth" th:id="'ins_birth_'+${i6.index}" readOnly></td>
                                                 <td class="normal">5,000만원</td>
                                                 <td class="normal">1,970</td>
                                                 <td class="normal">7,000만원</td>

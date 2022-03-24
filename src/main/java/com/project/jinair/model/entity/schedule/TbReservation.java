@@ -43,6 +43,7 @@ public class TbReservation {
     private Long reInsuranceidx;
     private Long reScheduleidx;
     private String reSeatDetail;    // 예약 좌석
+    private Long  reSeatPrice; // 예약 좌석 금액
     private Long reTotal;           // 전체 금액
     private Long reSchBasicPrice;   // 기본 금액
     private String reSchDepPoint;   // 출발지
