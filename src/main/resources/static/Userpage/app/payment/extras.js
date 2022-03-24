@@ -1364,6 +1364,7 @@ $(function () {
           onewayData(i);
         }
       }
+      location.href="/pages/payment/oneway"
     } else if(href[5] == 'multiway') {
       for (let i = 0; i < personNumber; i++) {
         if(i % 2 == 0) {
@@ -1372,7 +1373,7 @@ $(function () {
           multiwayData2(i)
         }
       }
-      // location.href="/pages/payment/multiway"
+      location.href="/pages/payment/multiway"
     } else if(href[5] == 'twoway') {
       for (let i = 0; i < personNumber; i++) {
         if(i % 2 == 0) {
@@ -1381,7 +1382,7 @@ $(function () {
           towayData2(i)
         }
       }
-      // location.href="/pages/payment/twoway"
+      location.href="/pages/payment/twoway"
     }
   })
 
@@ -1416,9 +1417,9 @@ $(function () {
         data : JSON.stringify(jsonData),
         dataType : "text",
         contentType : "application/json",
-        success(jsonData) {
-          location.href="/pages/payment/oneway"
-        },
+        // success(jsonData) {
+        //   location.href="/pages/payment/oneway"
+        // },
         // error(error) {
         //   alert(error);
         // }
@@ -1441,9 +1442,9 @@ $(function () {
       data : JSON.stringify(jsonData2),
       dataType : "text",
       contentType : "application/json",
-      success(jsonData2) {
-        location.href = "/pages/payment/multiway"
-      }
+      // success(jsonData2) {
+      //   location.href = "/pages/payment/multiway"
+      // }
       // error(error) {
       //   alert(error);
       // }
@@ -1467,9 +1468,9 @@ $(function () {
         data : JSON.stringify(jsonData3),
         dataType : "text",
         contentType : "application/json",
-        success(jsonData3) {
-          location.href = "/pages/payment/multiway"
-        }
+        // success(jsonData3) {
+        //   location.href = "/pages/payment/multiway"
+        // }
       //   error(error) {
       //     alert(error);
       //   }
@@ -1492,9 +1493,9 @@ $(function () {
         data : JSON.stringify(jsonData4),
         dataType : "text",
         contentType : "application/json",
-        success(jsonData4) {
-          location.href = "/pages/payment/twoway"
-        }
+        // success(jsonData4) {
+        //   location.href = "/pages/payment/twoway"
+        // }
         // error(error) {
         //   alert(error);
         // }
@@ -1516,9 +1517,9 @@ $(function () {
         data : JSON.stringify(jsonData5),
         dataType : "text",
         contentType : "application/json",
-        success(jsonData5) {
-          location.href = "/pages/payment/twoway"
-        }
+        // success(jsonData5) {
+        //   location.href = "/pages/payment/twoway"
+        // }
         // error(error) {
         //   alert(error);
         // }
