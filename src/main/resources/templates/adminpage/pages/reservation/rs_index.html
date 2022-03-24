@@ -20,7 +20,8 @@
                     <form action="./rs_result.html">
                         <table>
                             <tr>
-                                <th>항공편 명</th>
+                                <th>항공기타입</th>
+                                <th>항공기명</th>
                                 <th>출발일</th>
                                 <th>도착일</th>
                                 <th>출발지</th>
@@ -30,27 +31,25 @@
                                 </th>
                             </tr>
                             <tr>
-                                <td><input type="text" class="searchbox yelgcolor" placeholder="(예)001, 세자리"></td>
-                                <td><input type="date" name="start_date" id="start_date" class="searchbox yelgcolor" required></td>
-                                <td><input type="date" name="end_date" id="end_date" class="searchbox yelgcolor" required/></td>
                                 <td>
-                                    <select name="from_place" class="searchbox">
-                                        <option value="">선택</option>
-                                        <option value="GMP">GMP</option>
-                                        <option value="CJU">CJU</option>
-                                        <option value="USN">USN</option>
-                                        <option value="TAE">TAE</option>
-                                        <option value="ICN">ICN</option>
-                                    </select>
+                                    <select id="aptype" class="searchbox" ></select>
+                                    <input type="button" value="조회" id="findApName">
                                 </td>
                                 <td>
-                                    <select value="to_place" class="searchbox">
+                                    <select id="apname" class="searchbox" >
+                                        <option selected disabled>필수 선택</option>
+                                    </select>
+                                </td>
+                                <td><input type="date" name="start_date" id="start_date" class="searchbox yelgcolor" required></td>
+                                <td><input type="date" name="end_date" id="end_date" class="searchbox yelgcolor" required/></td>
+                                <td id="itemList">
+                                    <select name="from_place" class="searchbox" id="departure_point">
+                                        <option value="">선택</option>
+                                    </select>
+                                </td>
+                                <td id="itemList1">
+                                    <select value="to_place" class="searchbox" id="arrive_point">
                                         <option>선택</option>
-                                        <option value="GMP">GMP</option>
-                                        <option value="CJU">CJU</option>
-                                        <option value="USN">USN</option>
-                                        <option value="TAE">TAE</option>
-                                        <option value="ICN">ICN</option>
                                     </select>
                                 </td>
                             </tr>
