@@ -108,14 +108,54 @@ $(function () {
         }
     });
 
-    searchStart();
+    searchStart(0);
 
-    function searchStart(){
-        $.get("/api/airplane/list", function(response){
+    function searchStart(page){
+        $.get("/api/airplane/list?page=" + page, function(response){
             console.dir(response);
             itemList.itemList = response.data;
+
+            let lastPage = response.pagination.totalPages;
+            let str = "";
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
+            }
+            $("#showPage").html(str);
+            if(page == 0) {
+                $(".firstPage1").css("visibility", "hidden");
+            }
+            if(page == lastPage-1) {
+                $(".lastPage1").css("visibility", "hidden");
+            }
+            $(".pageNum").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+page+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            if (lastPage != 0) {
+                str += "<td class='firstPage1'><<</td>";
+            }
+            if (lastPage != 0){
+                str += "<td class='lastPage1'>>></td>";
+            }
+            $("#showPage").on('click', '.firstPage1', function(){
+                searchStart(0);
+            });
+            $("#showPage").on('click', '.lastPage1', function(){
+                searchStart(lastPage-1);
+            });
         })
     };
+
+    $("#showPage").on('click', '.pageNum', function(){
+        let pageId = this.id;
+        console.log(pageId);
+        searchStart(pageId);
+    });
 
     function register(){
         let aptype = document.getElementById("apType").value;
@@ -143,8 +183,12 @@ $(function () {
     }
 
     $('#regist').click( () =>{
-       register();
-       location.href='/pages/admin/airplane';
+        if(!document.getElementById("apType").value || !document.getElementById("apName").value || !document.getElementById("apSeatSum").value){
+            alert('입력을 확인해주세요')
+        }else{
+            register();
+            location.href='/pages/admin/airplane';
+        }
     })
 });
 
