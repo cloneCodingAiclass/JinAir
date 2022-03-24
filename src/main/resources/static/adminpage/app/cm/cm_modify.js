@@ -182,7 +182,6 @@ $(function () {
             $("#memIndex").text(response.data.memIndex);
             $("#userid").text(response.data.memUserid);
             $("#userpw").text(response.data.memUserpw);
-            $("#regdate").text(response.data.memRegdate);
             $("#zipcode").val(response.data.memZipcode);
             $("#address1").val(response.data.memAddress1);
             $("#address2").val(response.data.memAddress2);
@@ -237,6 +236,8 @@ $(function () {
                 }
             }
 
+            let regDate = response.data.memRegdate.replace('T', '/')
+            $('#regDate').text(regDate)
         })
     }
 
@@ -272,9 +273,20 @@ $(function () {
     }
 
     $("#update").click( () => {
-        updating();
-        location.href = `/pages/admin/cm_list/cm_detail/${idx}`;
-        console.dir(jsonData);
+        if(!$("#zipcode").val()
+            || !$("#address1").val()
+            || !$("#address2").val()
+            || !$("#address3").val()
+            || !$("#email").val()
+            || !$("#birth").val()
+            || !$("#hp").val()
+        ){
+            alert('입력을 확인해주세요')
+        }
+        else{
+            updating();
+            location.href = `/pages/admin/cm_list/cm_detail/${idx}`;
+        }
     })
 
     point(idx);
@@ -286,6 +298,10 @@ $(function () {
             for(let i = 0; i < response.data.length; i++){
                 let point = response.data[i].poPoint;
                 sum += point;
+            }
+            if( sum < 1){
+                $('#point').val('-');
+            }else {
                 $('#point').val(sum.toLocaleString('ko-KR'));
             }
         })
