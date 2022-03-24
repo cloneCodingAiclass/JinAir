@@ -2515,8 +2515,6 @@ public class PageController {
         HttpSession session = request.getSession();
         if((String) session.getAttribute("name") != null) {
             model.addAttribute("str", (String) session.getAttribute("name"));
-            Header<List<QnaApiResponse>> qnaApiResponsesList = qnaApiLogicService.getQnaList();
-            model.addAttribute("qnaApiResponsesList", qnaApiResponsesList.getData());
             return new ModelAndView("/adminpage/pages/inquiry/qna_main")
                     .addObject("code", "qna_main")
                     .addObject("menuList", menuService.getadminMenu())
