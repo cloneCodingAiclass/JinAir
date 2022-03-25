@@ -92,7 +92,9 @@ $(() => {
                 finalarr.reStatus = "PaymentFinished";
                 finalarr.reInsuranceidx = insuranceIndex;
                 finalarr.reBaggageidx = baggage;
-                final.push(finalarr);
+                finalarr.reSeatDetail = $('.seatNum').eq(i).attr("id");
+                finalarr.reSeatPrice =  $('.seatNum').eq(i).attr("value");
+                        final.push(finalarr);
             });
 
             $.ajax({
