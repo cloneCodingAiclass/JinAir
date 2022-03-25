@@ -3,6 +3,7 @@
     width: 88%;
     margin-left: 50px;
     margin-top: 50px;
+    overflow: auto;
 }
 
 /* title */

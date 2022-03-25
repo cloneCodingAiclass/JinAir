@@ -94,22 +94,6 @@ $(function () {
         $('.nav6').parent().siblings().find('li').css({"display":"none"});
     })
 
-    // function writing(){
-    //     jsonData = {
-    //         data : {
-    //             noTitle : $("#ntTitle").val(),
-    //             noFile : $("#ntFile").val(),
-    //             noContents : $("#ntContent").val()
-    //         }
-    //     }
-    //     $.ajax({
-    //         url : "/api/notify/",
-    //         type : "POST",
-    //         data : JSON.stringify(jsonData),
-    //         dataType : "text",
-    //         contentType : "application/json"
-    //     });
-    // }
 
     $("#writeNoti").on('click', () => {
         if ( !$("#ntTitle").val() || !$("#ntContent").val() || !$('#ex_file').val()) {
