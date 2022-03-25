@@ -367,7 +367,7 @@
                                 <td class="borderT">총 운임</td>
                                 <td class="borderT">
                                     <div class="td_wrap">
-                                        <span class="cul">KRW</span><span class="price">55,610</span>
+                                        <span class="cul">KRW</span><span class="price subFinalprice"></span>
                                     </div>
                                 </td>
                             </tr>
@@ -429,7 +429,7 @@
                                 <td>
                                     <div class="td_wrap">
                                         <span class="cul">KRW</span>
-                                        <span class="price">48,000</span>
+                                        <span class="price BaggPrice"></span>
                                         <span class="arrow">
                                             <img src="/userpage/lib/img/arr_bott.png" alt="아래"
                                                  class="arr_bott arr_bott5 cursor"><img src="/userpage/lib/img/arr_top.png"
@@ -453,10 +453,11 @@
                                         </tr>
                                         <tr th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
                                             <td><span class="name">[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
-                                            <td>10KG</td>
+                                            <input type="hidden" th:value="${dto.reBaggageidx}" th:class="'reBaggageidx1'+${i.index}">
+                                            <td th:class="'bagg1KG'+${i.index}"></td>
                                             <td>
                                                 <div class="td_wrap">
-                                                    <span class="cul">KRW</span><span class="price">107,000</span>
+                                                    <span class="cul">KRW</span><span class="price" th:class="'bagg1P'+${i.index}"></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -467,10 +468,11 @@
                                         </tr>
                                         <tr class="ifOnewayD" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 1">
                                             <td><span class="name">[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
-                                            <td>10KG</td>
+                                            <input type="hidden" th:value="${dto.reBaggageidx}" th:class="'reBaggageidx2'+${i.index}">
+                                            <td th:class="'bagg2KG'+${i.index}"></td>
                                             <td>
                                                 <div class="td_wrap">
-                                                    <span class="cul">KRW</span><span class="price">77,900</span>
+                                                    <span class="cul">KRW</span><span class="price" th:class="'bagg2P'+${i.index}"></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -482,7 +484,7 @@
                                 <td>
                                     <div class="td_wrap">
                                         <span class="cul">KRW</span>
-                                        <span class="price">2,610</span>
+                                        <span class="price InsuPrice"></span>
                                         <span class="arrow">
                                             <img src="/userpage/lib/img/arr_bott.png" alt="아래"
                                                  class="arr_bott arr_bott6 cursor"><img src="/userpage/lib/img/arr_top.png"
@@ -506,10 +508,11 @@
                                         </tr>
                                         <tr th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
                                             <td><span class="name">[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
-                                            <td>(표준형)</td>
+                                            <input type="hidden" th:value="${dto.reInsuranceidx}" th:class="'reInsuranceidx1'+${i.index}">
+                                            <td th:class="'Insu1Tp'+${i.index}"></td>
                                             <td>
                                                 <div class="td_wrap">
-                                                    <span class="cul">KRW</span><span class="price">77,900</span>
+                                                    <span class="cul">KRW</span><span class="price" th:class="'Insu1P'+${i.index}"></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -520,10 +523,11 @@
                                         </tr>
                                         <tr class="ifOnewayD" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 1">
                                             <td><span class="name">[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
-                                            <td>(표준형)</td>
+                                            <input type="hidden" th:value="${dto.reInsuranceidx}" th:class="'reInsuranceidx2'+${i.index}">
+                                            <td th:class="'Insu2Tp'+${i.index}"></td>
                                             <td>
                                                 <div class="td_wrap">
-                                                    <span class="cul">KRW</span><span class="price">77,900</span>
+                                                    <span class="cul">KRW</span><span class="price" th:class="'Insu2P'+${i.index}"></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -550,7 +554,7 @@
                             </tr>
                             <tr>
                                 <th>결제금액</th>
-                                <td>KRW 164,200</td>
+                                <td>KRW <span class="realPayPrice"></span></td>
                                 <td colspan="2">
                                     <button>
                                         <img src="/userpage/lib/img/printer.png" alt="프린터">
