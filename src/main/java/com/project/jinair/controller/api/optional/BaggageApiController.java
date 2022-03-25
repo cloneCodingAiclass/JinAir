@@ -4,9 +4,12 @@ import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.Optional.BaggageApiRequest;
 import com.project.jinair.model.network.response.Optional.BaggageApiResponse;
+import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
 import com.project.jinair.service.optional.BaggageApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/optional/baggage")
@@ -66,4 +69,6 @@ public class BaggageApiController implements CrudInterface<BaggageApiRequest, Ba
     public Header<BaggageApiResponse> delete(@PathVariable(name="id") Long id) {
         return baggageApiLogicService.delete(id);
     }
+
+
 }
