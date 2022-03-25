@@ -111,11 +111,9 @@ $(function () {
     //     });
     // }
 
-    $("#writeNoti").click( () => {
-        if ( $("#ntTitle").val().length == 0 || $("#ntContent").val().length == 0 ) {
-            alert('내용을 입력하세요.');
-        } else {
-            location.href = `/pages/admin/notice`;
+    $("#writeNoti").on('click', () => {
+        if ( !$("#ntTitle").val() || !$("#ntContent").val() || !$('#ex_file').val()) {
+            alert('모든 내용을 입력하세요.');
         }
     })
 

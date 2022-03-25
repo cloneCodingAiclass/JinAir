@@ -119,10 +119,10 @@ $(function () {
     $("#writeFaq").click( () => {
         if ( $("#faqTitle").val().length == 0 || $("#faqContent").val().length == 0 ) {
             alert('내용을 입력하세요.');
-            location.href= history.back();
         } else {
+            alert('등록 완료')
             writing();
-            location.href = `/pages/admin/faq_main`;
+            location.href='/pages/admin/faq_main'
         }
 
     })

@@ -188,41 +188,80 @@ $(function () {
             if (lastPage != 0){
                 str += "<td class='lastPage1'>>></td>";
             }
-            $("#showPage").on('click', '.firstPage1', function(){
+            $("#showPage").on('click', '.firstPage2', function(){
                 asd(a, 0);
             });
-            $("#showPage").on('click', '.lastPage1', function(){
+            $("#showPage").on('click', '.lastPage2', function(){
                 asd(a, lastPage-1);
             });
         });
     }
+
     $('select').on('change', function (){
         if($(this).val()=="기내홈쇼핑"){
-            asd("HomeShopping");
+            asd("HomeShopping", 0);
         }else if($(this).val()=="칭송"){
-            asd("Praise");
+            asd("Praise", 0);
         }else if($(this).val()=="불만"){
-            asd("Complaint");
+            asd("Complaint", 0);
         }else if($(this).val()=="문의요청"){
-            asd("Inquiry");
+            asd("Inquiry", 0);
         }else if($(this).val()=="제언"){
-            asd("Proposal");
+            asd("Proposal", 0);
         }else{
-            searchStart();
+            searchStart(0);
         }
     });
 
+
+
+
     // 검색어로 찾기
-    function searchQna(searchQna){
-        $.get("/api/qna/listsearch/"+searchQna, function(response){
+    function searchQna(searchQna, page){
+        $.get("/api/qna/listsearch/"+searchQna + "?page=" + page, function(response){
             // 검색 데이터
             itemList.itemList = response.data;
+
+            let lastPage = response.pagination.totalPages;
+            let str = "";
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pageNum3' id="+i+">" + (i+1) + "</td>";
+            }
+            $("#showPage").html(str);
+            if(page == 0) {
+                $(".firstPage3").css("visibility", "hidden");
+            }
+            if(page == lastPage-1) {
+                $(".lastPage3").css("visibility", "hidden");
+            }
+            $(".pageNum3").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+page+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            if (lastPage != 0) {
+                str += "<td class='firstPage3'><<</td>";
+            }
+            if (lastPage != 0){
+                str += "<td class='lastPage3'>>></td>";
+            }
+            $("#showPage").on('click', '.firstPage3', function(){
+                asd(searchQna, 0);
+            });
+            $("#showPage").on('click', '.lastPage3', function(){
+                asd(searchQna, lastPage-1);
+            });
         });
     }
     $('.btn_searchQna').on('click', function (){
-        searchQna($('.searchQna').val());
         if ( $('.searchQna').val().length == 0){
             alert('검색어를 확인해주세요.');
+        }else {
+            searchQna($('.searchQna').val(), 0);
         }
     });
 
@@ -232,5 +271,27 @@ $(function () {
         searchStart(pageId);
     });
 
+    $("#showPage").on('click', '.pageNum2', function(){
+        let pageId = this.id;
+        $('select').on('change', function (){
+            if($(this).val()=="기내홈쇼핑"){
+                asd("HomeShopping", pageId);
+            }else if($(this).val()=="칭송"){
+                asd("Praise", pageId);
+            }else if($(this).val()=="불만"){
+                asd("Complaint", pageId);
+            }else if($(this).val()=="문의요청"){
+                asd("Inquiry", pageId);
+            }else if($(this).val()=="제언"){
+                asd("Proposal", pageId);
+            }else{
+                searchStart(pageId);
+            }
+        });
+    });
 
+    $("#showPage").on('click', '.pageNum3', function(){
+        let pageId = this.id;
+        searchQna($('.searchQna').val(), pageId);
+    });
 });

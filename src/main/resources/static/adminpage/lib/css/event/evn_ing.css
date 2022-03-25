@@ -118,7 +118,6 @@
     display: inline;
     float: right;
     position: relative;
-    bottom: 30px;
 }
 .footer > .notice_write > input{
     text-align: center;
