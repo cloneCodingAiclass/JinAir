@@ -196,6 +196,7 @@ $(function () {
             });
         });
     }
+
     $('select').on('change', function (){
         if($(this).val()=="기내홈쇼핑"){
             asd("HomeShopping", 0);
@@ -211,6 +212,9 @@ $(function () {
             searchStart(0);
         }
     });
+
+
+
 
     // 검색어로 찾기
     function searchQna(searchQna, page){
@@ -267,5 +271,27 @@ $(function () {
         searchStart(pageId);
     });
 
+    $("#showPage").on('click', '.pageNum2', function(){
+        let pageId = this.id;
+        $('select').on('change', function (){
+            if($(this).val()=="기내홈쇼핑"){
+                asd("HomeShopping", pageId);
+            }else if($(this).val()=="칭송"){
+                asd("Praise", pageId);
+            }else if($(this).val()=="불만"){
+                asd("Complaint", pageId);
+            }else if($(this).val()=="문의요청"){
+                asd("Inquiry", pageId);
+            }else if($(this).val()=="제언"){
+                asd("Proposal", pageId);
+            }else{
+                searchStart(pageId);
+            }
+        });
+    });
 
+    $("#showPage").on('click', '.pageNum3', function(){
+        let pageId = this.id;
+        searchQna($('.searchQna').val(), pageId);
+    });
 });

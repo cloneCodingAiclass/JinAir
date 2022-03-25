@@ -305,7 +305,6 @@ $(function () {
 
     function list(page){
         $.get("/api/faq/list?page="+page, function(response){
-            console.dir(response);
 
             pagination = response.pagination;
 
@@ -360,10 +359,11 @@ $(function () {
         })
     };
 
-    console.dir(tableBoard1);
-
-
-
+    $("#showPage").on('click', '.pageNum', function(){
+        let pageId = this.id;
+        console.log(pageId);
+        list(pageId);
+    });
 
 
 
