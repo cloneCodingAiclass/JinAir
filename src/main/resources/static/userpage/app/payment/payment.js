@@ -2,10 +2,6 @@
 $(() => {
     insList();
     bagList();
-
-    let isR = $('.incPriceT').text().replace(/,/g, "");
-    let bagR = $('#bagPriceT').text().replace(/,/g, "");
-
     let str = $(location).attr('href').split('/');
     let priceT = 0;
 
@@ -85,6 +81,8 @@ $(() => {
             let final = new Array();
             $('.cookies').each(function (i) {
                 let reIndex = $('.cookies').eq(i).attr("value");
+                let baggage = $('.baggageIndex').eq(i).attr("value");
+                let insuranceIndex = $('.insuranceIndex').eq(i).attr("value");
                 let finalarr = new Object();
                 finalarr.reIndex = reIndex;
                 finalarr.reTotal = price;
@@ -92,7 +90,11 @@ $(() => {
                 finalarr.reReserNum = reserNum;
                 finalarr.reExtraSale = $('#sel_coupon option:selected').attr("value2");
                 finalarr.reStatus = "PaymentFinished";
-                final.push(finalarr);
+                finalarr.reInsuranceidx = insuranceIndex;
+                finalarr.reBaggageidx = baggage;
+                finalarr.reSeatDetail = $('.seatNum').eq(i).attr("id");
+                finalarr.reSeatPrice =  $('.seatNum').eq(i).attr("value");
+                        final.push(finalarr);
             });
 
             $.ajax({
@@ -238,6 +240,7 @@ $(() => {
             let bgst = $('.bgst').eq(i).attr("value");
             let bgPrice = $('.bgPrice').eq(i).attr("value")
             $.get("/api/optional/baggage/"+bagidx, function (response) {
+                console.log(response)
                 let price = response.data.bgPrice;
                 let standard = response.data.bgStandard;
                 if(bgst == bagidx || bgPrice == bagidx){
@@ -270,13 +273,28 @@ $(() => {
     }
     let seatT = 0;
     $('.priceOpt').each(function (i){
-        let val = $('.priceOpt').eq(i).attr("value");
-        $('.priceOpt').eq(i).text(val.toLocaleString());
-        seatT += Number(val);
+        let seatId = $('.seatNum').eq(i).attr("value2");
+        console.log(seatId)
+        let val = $('.priceOpt').eq(i).attr("id");
+        console.log(val)
+        if(seatId == val){
+            let seatPrice = $('.seatNum').eq(i).attr("value");
+            $('.priceOpt').eq(i).text(seatPrice.toLocaleString());
+            seatT += Number(seatPrice);
+        }
     });
     $('.seatT').text(seatT.toLocaleString());
 
+
+    let isR = $('.incPriceT').text();
+    console.log("ddddddddddddddddddddddd")
+    console.log(isR)
+    let bagR = $('#bagPriceT').html();
+    console.log("ddddddddddddddddddddddd")
+    console.log(bagR)
     let seatR = $('.seatT').text().replace(/,/g, "");
+    console.log(seatR)
+
     let result = Number(seatR) + Number(isR) + Number(bagR);
     $('.optPrice').text(result.toLocaleString())
 
@@ -285,4 +303,6 @@ $(() => {
 
     $('#pPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
     $('#totalPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
+
+
 });

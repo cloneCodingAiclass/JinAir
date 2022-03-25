@@ -20,6 +20,7 @@ public interface TbReservationRepository extends JpaRepository<TbReservation, Lo
     List<TbReservation> findFirstByReReserNum(String a);
     List<TbReservation> findByReUserindexAndReSchStartTimeGreaterThanOrderByReSchStartTimeAsc(Long reUserindex, LocalDateTime local);
     List<TbReservation> findByReUserindexAndReSchStartTimeLessThanOrderByReSchStartTimeAsc(Long reUserindex, LocalDateTime local);
+    Optional<TbReservation> findByReIndex(Long id);
 
 
 }
