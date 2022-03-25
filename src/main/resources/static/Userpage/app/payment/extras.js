@@ -550,6 +550,7 @@ $(function () {
         $(".insCheckBox").prop("checked", false)
         $("#agree1").prop("checked", false)
         $("#agree2").prop("checked", false)
+        isinsjoin = false;
       }
     }
   })
@@ -1483,12 +1484,6 @@ $(function () {
     })
   }
 
-  function getReserveSeat1() { // /{reSchName}/{reStartDate}
-    $.get("/api/reservation/"+airplane1+startdate1, function (response) {
-      console.dir(response);
-    })
-  }
-
 
   // 결제정보 전송
   let jsonData = new Array();
@@ -1630,10 +1625,11 @@ $(function () {
 
 
   // /*부가서비스 신청내역 끝*/
-
+let isinsjoin = false;
   $(".ins_join_butt").on("click", function () {
     optionTotalPrice(personNumber)
     confirmOptional()
+    isinsjoin = true;
     if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
       $("#modal_service_app_wrap").fadeIn();
       $(".modal_join_ins").fadeIn();
@@ -1762,7 +1758,7 @@ $(function () {
             }
         }
         // 보험
-        if (insArr[i] != null && $("#agree_check0, #agree_check1, #agree_check2").is(":checked")) {
+        if (insArr[i] != null && $("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked") && isinsjoin == true) {
           option_table_body2[i] += '<tr><td class="b_r">전 구간</td>'
           option_table_body2[i] += '<td><div class="item_wrap1"><p class="img img_ins"></p>'
           option_table_body2[i] += '<p class="txt" id="modal_option_ins_' + i + '">여행보험 (' + insArr[i] + ')</p></div></td>'
