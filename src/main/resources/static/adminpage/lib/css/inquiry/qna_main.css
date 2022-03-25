@@ -309,6 +309,9 @@
     color: white;
 }
 
-.firstPage1, .firstPage2, .lastPage1, .lastPage2 {
+.firstPage1, .firstPage2, firstPage3, .lastPage1, .lastPage2, .lastPage3 {
+    cursor: pointer;
+}
+.firstPage1, .firstPage2, firstPage3, .lastPage1, .lastPage2, .lastPage3 {
     cursor: pointer;
 }

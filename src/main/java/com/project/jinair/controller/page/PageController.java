@@ -2500,7 +2500,8 @@ public class PageController {
             model.addAttribute("str", (String) session.getAttribute("name"));
             return new ModelAndView("/adminpage/pages/inquiry/faq_edit")
                     .addObject("code", "faq_edit")
-                    .addObject("menuList", menuService.getadminMenu());
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("inquiry", menuService.adminQnaMenu());
         }else{
             return new ModelAndView("/adminpage/pages/admin_login");
         }
@@ -2513,7 +2514,8 @@ public class PageController {
             model.addAttribute("str", (String) session.getAttribute("name"));
             return new ModelAndView("/adminpage/pages/inquiry/faq_write")
                     .addObject("code", "faq_write")
-                    .addObject("menuList", menuService.getadminMenu());
+                    .addObject("menuList", menuService.getadminMenu())
+                    .addObject("inquiry", menuService.adminQnaMenu());
         }else{
             return new ModelAndView("/adminpage/pages/admin_login");
         }
