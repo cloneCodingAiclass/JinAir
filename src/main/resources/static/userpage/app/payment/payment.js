@@ -11,13 +11,9 @@ $(() => {
 
     // 날짜 자르기
     let spst1 = $('#spanStart1').attr("value").split("T");
-    let spst2 = $('#spanStart2').attr("value").split("T");
     let spend1 = $('#spanEnd1').attr("value").split("T");
-    let spend2 = $('#spanEnd2').attr("value").split("T");
     $('#spanStart1, #goArea1').text(" " + spst1[0] + " " + spst1[1]);
     $('#spanEnd1, #arrArea1').text(" " + spend1[0] + " " + spend1[1]);
-    $('#spanStart2, #goArea2').text(" " + spst2[0] + " " + spst2[1]);
-    $('#spanEnd2, #arrArea2').text(" " + spend2[0] + " " + spend2[1]);
 
     $('.areaPrice').each(function (i){
         let price = Number($('.areaPrice').eq(i).attr("value"));
@@ -140,6 +136,16 @@ $(() => {
             $(".arrow_up_img").css("display", "none");
             $(".trip_info2").slideUp(200);
         });
+        let spst2 = $('#spanStart2').attr("value").split("T");
+        let spend2 = $('#spanEnd2').attr("value").split("T");
+        $('#spanStart2, #goArea2').text(" " + spst2[0] + " " + spst2[1]);
+        $('#spanEnd2, #arrArea2').text(" " + spend2[0] + " " + spend2[1]);
+
+        let b = $(".detail2").offset().top - 30;
+        let y = $(".detail2").offset().left + 30;
+
+        $(".modal_flight_info2").css("top", b);
+        $(".modal_flight_info2").css("left", y);
     }else if (str[5] == 'twoway') {
         // 여행 타입에 따른 값, 클릭이벤트 변경
         $('#triptype1, #triptype2, #tripinfo1, #tripinfo2').text('왕복');
@@ -155,6 +161,15 @@ $(() => {
             $(".arrow_up_img").css("display", "none");
             $(".trip_info2").slideUp(200);
         });
+        let spst2 = $('#spanStart2').attr("value").split("T");
+        let spend2 = $('#spanEnd2').attr("value").split("T");
+        $('#spanStart2, #goArea2').text(" " + spst2[0] + " " + spst2[1]);
+        $('#spanEnd2, #arrArea2').text(" " + spend2[0] + " " + spend2[1]);
+        let b = $(".detail2").offset().top - 30;
+        let y = $(".detail2").offset().left + 30;
+
+        $(".modal_flight_info2").css("top", b);
+        $(".modal_flight_info2").css("left", y);
     }else{
         alert("잘못된 경로입니다.");
         history.back();
@@ -264,7 +279,6 @@ $(() => {
     let seatR = $('.seatT').text().replace(/,/g, "");
     let result = Number(seatR) + Number(isR) + Number(bagR);
     $('.optPrice').text(result.toLocaleString())
-    alert($('#bagPriceT').text().replace(/,/g, ""))
 
     // 총 운임료
     let price = Number(priceSum) + Number(result);
