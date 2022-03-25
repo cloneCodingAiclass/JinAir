@@ -345,10 +345,8 @@ $(function () {
 
   /*스크롤시 따라다니는 영역 */
   $(window).scroll(function () {
-    let x = $(".seat_info_wrap1").offset().left + 30;
-    let i = $(".seat_info_wrap2").offset().left + 30;
-    console.log($(".select_comp").offset().left)
-
+    let x = $(".service_menu_wrap ").offset().left + 465;
+    let i = $(".seat_info_view2").offset().left + 30;
     if (x == 30) {
       $(".seat_map").css("top", "0px");
       $(".seat_info_wrap").css("top", "0px");
@@ -509,7 +507,6 @@ $(function () {
           str7 += '</div>'
         }
       }  $("#modal_ins_people").html(str7);
-      console.log($("#modal_ins_people").html());
     } else {
       $("#modal_agree_wrap").fadeIn();
     }
@@ -553,6 +550,7 @@ $(function () {
         $(".insCheckBox").prop("checked", false)
         $("#agree1").prop("checked", false)
         $("#agree2").prop("checked", false)
+        isinsjoin = false;
       }
     }
   })
@@ -608,31 +606,43 @@ $(function () {
   // 항공기 번호별 화면구성
   let type1 = $("#type1").val();
   let type2 = $("#type2").val();
-  console.log(type1)
-  console.log(type2)
-  //
-  // if (type1 == 'B737-800') {
-  //   $("#seat_info_view1").replace("userpage/pages/payment/seat_info/B737-800-info1 :: B737-800-info1");
-  //   $("#seat_view1").replace("userpage/pages/payment/select_seat/B737-800-1 :: B737-800-1");
-  // } else if (type1 == 'B737-900') {
-  //   $("#seat_info_view1").replace("userpage/pages/payment/seat_info/B737-800-info2 :: B737-800-info2");
-  //   $("#seat_view1").replace("userpage/pages/payment/select_seat/B737-900-1 :: B737-900-1");
-  // } else if (type1 == 'B777-200ER') {
-  //   $("#seat_info_view1").replace("userpage/pages/payment/seat_info/B737-800-info2 :: B737-800-info2");
-  //   $("#seat_view1").replace("userpage/pages/payment/select_seat/B777-200ER-1 :: B777-200ER-1");
-  // }
-  //
-  // if (type2 == 'B737-800') {
-  //   $("#seat_info_view2").replace("userpage/pages/payment/seat_info/B737-800-info2 :: B737-800-info2");
-  //   $("#seat_view2").replace("userpage/pages/payment/select_seat/B737-800-2 :: B737-800-2");
-  // } else if (type2 == 'B737-900') {
-  //   $("#seat_info_view2").replace("userpage/pages/payment/seat_info/B737-800-info2 :: B737-800-info2");
-  //   $("#seat_view2").replace("userpage/pages/payment/select_seat/B737-900-2 :: B737-900-2");
-  // } else if (type2 == 'B777-200ER') {
-  //   $("#seat_info_view2").replace("userpage/pages/payment/seat_info/B737-800-info2 :: B737-800-info2");
-  //   $("#seat_view2").replace("userpage/pages/payment/select_seat/B777-200ER-2 :: B777-200ER-2");
-  // }
-  //
+  console.log("타입1 : " + type1)
+  console.log("타입2 : " + type2)
+
+  if (type1 == 'B737-800') {
+    $(".seat_info_view1").not("#seat_info_view1-1").css("display", "none");
+    $("#seat_info_view1-1").css("display", "block");
+    $(".seat_view1").not("#seat_view1-1").css("display", "none");
+    $("#seat_view1-1").css("display", "block");
+  } else if (type1 == 'B737-900') {
+    $(".seat_info_view1").not("#seat_info_view1-2").css("display", "none");
+    $("#seat_info_view1-2").css("display", "block");
+    $(".seat_view1").not("#seat_view1-2").css("display", "none");
+    $("#seat_view1-2").css("display", "block");
+  } else {
+    $(".seat_info_view1").not("#seat_info_view1-3").css("display", "none");
+    $("#seat_info_view1-3").css("display", "block");
+    $(".seat_view1").not("#seat_view1-3").css("display", "none");
+    $("#seat_view1-3").css("display", "block");
+  }
+
+  if (type2 == 'B737-800') {
+    $(".seat_info_view2").not("#seat_info_view2-1").css("display", "none");
+    $("#seat_info_view2-1").css("display", "block");
+    $(".seat_view2").not("#seat_view2-1").css("display", "none");
+    $("#seat_view2-1").css("display", "block");
+  } else if (type2 == 'B737-900') {
+    $(".seat_info_view2").not("#seat_info_view2-2").css("display", "none");
+    $("#seat_info_view2-2").css("display", "block");
+    $(".seat_view2").not("#seat_view2-2").css("display", "none");
+    $("#seat_view2-2").css("display", "block");
+  } else {
+    $(".seat_info_view2").not("#seat_info_view2-3").css("display", "none");
+    $("#seat_info_view2-3").css("display", "block");
+    $(".seat_view2").not("#seat_view2-3").css("display", "none");
+    $("#seat_view2-3").css("display", "block");
+  }
+
 
   // multiway
   for (let i = 0; i < indexArr.length; i++) {
@@ -722,6 +732,8 @@ $(function () {
       firstFlightTax = Number(8000*personNumber/2);
     }
     $("#flightTax").html(firstFlightTax.toLocaleString("ko-KR"));
+    $("#flight_tax").html($("#flightTax").html());
+
     // 유류할증료
     let firstFlightCharge = 0;
     if(href[5] == 'oneway') {
@@ -741,10 +753,10 @@ $(function () {
   $(".passenger_info_wrap1 p.select_seat_num1 span.close").on('click', function () {
     radio = $(this).parents(".passenger_info1");
     let i = radio.val();
-    console.log(radio);
     $('input:checkbox[value="' + i + '"]').prop("checked", false);
     radio.find(".seat_num1").val("");
     radio.find(".price1").text("");
+    radio2.find(".hid_price1").html("");
     radio.find(".seat_P1").css("visibility", "hidden");
     radio.find(".checkPerson").val("");
     radio.val("");
@@ -754,10 +766,10 @@ $(function () {
   $(".passenger_info_wrap2 p.select_seat_num2 span.close").on('click', function () {
     radio2 = $(this).parents(".passenger_info2");
     let i = radio2.val();
-    console.log(radio2);
     $('input:checkbox[value="' + i + '"]').prop("checked", false);
     radio2.find(".seat_num2").val("");
     radio2.find(".price2").text("");
+    radio2.find(".hid_price2").html("");
     radio2.find(".seat_P2").css("visibility", "hidden");
     radio2.find(".checkPerson2").val("");
     radio2.val("");
@@ -828,7 +840,6 @@ $(function () {
   }
 
   function changeRadio() {
-    console.log("실행됨")
     for(let i = 0; i < $(".checkPerson").length * 2; i++) {
       if (i % 2 == 0) {
         if ($("#person_" + i + "").val() == 'on' || $("#person_" + i + "").val().length == 0) {
@@ -842,7 +853,6 @@ $(function () {
   }
 
   function changeRadio2() {
-    console.log("실행됨")
     for(let i = 1; i < $(".checkPerson2").length * 2; i++) {
       if (i % 2 != 0) {
         if ($("#person2_" + i + "").val() == 'on' || $("#person2_" + i + "").val().length == 0) {
@@ -850,8 +860,6 @@ $(function () {
           radio2 = $("#person2_" + i + "").parents(".passenger_info2");
           borderChange2(radio2);
           break;
-        } else {
-          console.log($("#seat_num2_" +i).val());
         }
       }
     }
@@ -864,7 +872,9 @@ $(function () {
       $(this).addClass('prop'); // 체크값 구별하기 위한 클래스 추가
       radio.find(".seat_num1").val(num);
       radio.find(".price").html(price);
-      radio.find(".seat_P1").css("visibility", "visible")
+      radio.find(".hid_price1").html(price);
+      radio.find(".price").html(Number(price).toLocaleString('ko-KR'));
+      radio.find(".seat_P1").css("visibility", "visible");
       radio.val(num);
       radio.find(".checkPerson").val(num);
       radio.addClass('check');
@@ -885,6 +895,7 @@ $(function () {
         radio = a.parents(".passenger_info1");
         radio.find(".seat_num1").val("");
         radio.find(".price").html("");
+        radio.find(".hid_price1").html("");
         radio.find(".seat_P1").css("visibility", "hidden")
         radio.val("");
         borderChange(radio);
@@ -896,6 +907,7 @@ $(function () {
       $(this).prop("checked", false);
       radio.find(".seat_num1").val("");
       radio.find(".price").html("");
+      radio.find(".hid_price1").html("");
       radio.find(".seat_P1").css("visibility", "hidden")
       radio.val("");
       radio.find(".checkPerson").val("");
@@ -905,7 +917,6 @@ $(function () {
     else if(radio.val() != $(this).val() && $(this).hasClass('prop')) { // radio 값과 체크박스의 값이 같지 않고, 체크박스가 선택되어있을 때
       let thisVal2 = $(this).val();
       let a = $("input:radio[name ='selectPerson']:input[value='" + thisVal2 + "']");
-      console.log($(i));
       if (a.val() == $(this).val()) {
         $(this).attr("disabled", false);
         $(this).removeClass('prop')
@@ -913,6 +924,7 @@ $(function () {
         radio = a.find('.passenger_info1');
         radio.find(".seat_num1").val("");
         radio.find(".price").html("");
+        radio.find(".hid_price1").html("");
         radio.find(".checkPerson").val("");
         radio.find(".seat_P1").css("visibility", "hidden")
         radio.val("");
@@ -930,14 +942,14 @@ $(function () {
       $(this).prop("checked", true);
       $(this).addClass('prop'); // 체크값 구별하기 위한 클래스 추가
       radio2.find(".seat_num2").val(num2);
-      radio2.find(".price2").html(price2);
+      radio2.find(".price2").html(Number(price2).toLocaleString('ko-KR'));
+      radio2.find(".hid_price2").html(price2);
       radio2.find(".seat_P2").css("visibility", "visible")
       radio2.val(num2);
       radio2.find(".checkPerson2").val(num2);
       radio2.addClass('check');
       radio2.prop("checked", false);
       changeRadio2(radio2);
-      console.log("dddddd" + radio2.val().length);
     }
     else if(radio2.val().length != 0 && $(this).hasClass('prop') == false) { // radio 에 값이 있고 체크박스가 미체크 일 시
       $(this).prop("checked", false); // 여러개 중복 방지.
@@ -953,6 +965,7 @@ $(function () {
         radio2 = a2.parents(".passenger_info2");
         radio2.find(".seat_num2").val("");
         radio2.find(".price2").html("");
+        radio2.find(".hid_price2").html("");
         radio2.find(".seat_P2").css("visibility", "hidden")
         radio2.val("");
         borderChange2(radio2);
@@ -964,6 +977,7 @@ $(function () {
       $(this).prop("checked", false);
       radio2.find(".seat_num2").val("");
       radio2.find(".price2").html("");
+      radio2.find(".hid_price2").html("");
       radio2.find(".seat_P2").css("visibility", "hidden")
       radio2.val("");
       radio2.find(".checkPerson2").val("");
@@ -973,7 +987,6 @@ $(function () {
     else if(radio2.val() != $(this).val() && $(this).hasClass('prop')) { // radio 값과 체크박스의 값이 같지 않고, 체크박스가 선택되어있을 때
       let thisVal = $(this).val();
       let a2 = $("input:radio[name ='selectPerson2']:input[value='" + thisVal + "']");
-      console.log($(i));
       if (a2.val() == $(this).val()) {
         $(this).attr("disabled", false);
         $(this).removeClass('prop')
@@ -981,6 +994,7 @@ $(function () {
         radio2 = a2.find('.passenger_info2');
         radio2.find(".seat_num2").val("");
         radio2.find(".price").html("");
+        radio2.find(".hid_price2").html("");
         radio2.find(".checkPerson2").val("");
         radio2.find(".seat_P2").css("visibility", "hidden")
         radio2.val("");
@@ -1018,24 +1032,32 @@ $(function () {
       $('#select_bagg1_' + i + '').text($('#bagg1_'+i).val());
       $("#cur1_" + i).css("display", "inline-block");
       $("#bagg_price1_" + i).text("");
+      $("#hid_bagg_price1_" + i).text("")
       $("#bagg_close1_" + i).css("display", "block");
       if ($('#bagg1_'+i +'').val() == "5KG(+KRW 8,000)") {
-        $("#bagg_price1_" + i).text("8000");
+        $("#bagg_price1_" + i).text("8,000");
+        $("#hid_bagg_price1_" + i).text("8000")
       } else if ($('#bagg1_'+i +'').val() == "10KG(+KRW 16,000)") {
-        $("#bagg_price1_" + i).text("16000");
+        $("#bagg_price1_" + i).text("16,000");
+        $("#hid_bagg_price1_" + i).text("16000")
       } else if ($('#bagg1_'+i +'').val() == "15KG(+KRW 24,000)") {
-        $("#bagg_price1_" + i).text("24000");
+        $("#bagg_price1_" + i).text("24,000");
+        $("#hid_bagg_price1_" + i).text("24000")
       } else if ($('#bagg1_'+i +'').val() == "20KG(+KRW 32,000)") {
-        $("#bagg_price1_" + i).text("32000");
+        $("#bagg_price1_" + i).text("32,000");
+        $("#hid_bagg_price1_" + i).text("32000")
       } else {
         $("#cur1_" + i).css("display", "none");
         $("#bagg_price1_" + i).text("");
+        $("#hid_bagg_price1_" + i).text("");
         $("#bagg_close1_" + i).css("display", "none");
       }
+      console.log($("#hid_bagg_price1_" + i).text())
     });
     $("#bagg_close1_" + i).on("click", function() {
       $("#cur1_" + i).css("display", "none");
       $("#bagg_price1_" + i).text("");
+      $("#hid_bagg_price1_" + i).text("")
       $('#select_bagg1_' + i + '').text("");
       $("#bagg_close1_" + i).css("display", "none");
       $('#bagg1_'+i).val('').prop("selected", true);
@@ -1052,26 +1074,33 @@ $(function () {
       $('#select_bagg2_' + i2 + '').text($('#bagg2_'+i2).val());
       $("#cur2_" + i2).css("display", "inline-block");
       $("#bagg_price2_" + i2).text("");
+      $("#hid_bagg_price2_" + i2).text("")
       $("#bagg_close2_" + i2).css("display", "block");
       if ($('#bagg2_'+i2 +'').val() == "5KG(+KRW 8,000)") {
-        $("#bagg_price2_" + i2).text("8000");
+        $("#bagg_price2_" + i2).text("8,000");
+        $("#hid_bagg_price2_" + i2).text("8000")
       } else if ($('#bagg2_'+i2 +'').val() == "10KG(+KRW 16,000)") {
-        $("#bagg_price2_" + i2).text("16000");
+        $("#bagg_price2_" + i2).text("16,000");
+        $("#hid_bagg_price2_" + i2).text("16000")
       } else if ($('#bagg2_'+i2 +'').val() == "15KG(+KRW 24,000)") {
-        $("#bagg_price2_" + i2).text("24000");
+        $("#bagg_price2_" + i2).text("24,000");
+        $("#hid_bagg_price2_" + i2).text("24000")
       } else if ($('#bagg2_'+i2 +'').val() == "20KG(+KRW 32,000)") {
-        $("#bagg_price2_" + i2).text("32000");
+        $("#bagg_price2_" + i2).text("32,000");
+        $("#hid_bagg_price2_" + i2).text("32000")
       } else {
         $("#cur2_" + i2).css("display", "none");
         $("#bagg_price2_" + i2).text("");
+        $("#hid_bagg_price2_" + i2).text("")
         $("#bagg_close2_" + i2).css("display", "none");
       }
-      console.log(i2 + "::::::" + $("#bagg_price2_" + i2).text());
+      console.log($("#hid_bagg_price2_" + i2).text())
     });
     $("#bagg_close2_" + i2).on("click", function() {
       $("#cur2_" + i2).css("display", "none");
       $("#bagg_price2_" + i2).text("");
       $('#select_bagg2_' + i2 + '').text("");
+      $("#hid_bagg_price2_" + i2).text("")
       $("#bagg_close2_" + i2).css("display", "none");
       $('#bagg2_'+i2).val('').prop("selected", true);
     })
@@ -1212,12 +1241,12 @@ $(function () {
 
       seatNumArr1[i] = $("#seat_num1_" + i).val();
       seatNumArr2[i] = $("#seat_num2_" + i).val();
-      seatPriceArr1[i] = Number($("#price1_" + i).text());
-      seatPriceArr2[i] = Number($("#price2_" + i).text());
+      seatPriceArr1[i] = Number($("#hid_price1_" + i).text());
+      seatPriceArr2[i] = Number($("#hid_price2_" + i).text());
       baggArr1[i] = $("#select_bagg1_" + i).text();
       baggArr2[i] = $("#select_bagg2_" + i).text();
-      baggPriceArr1[i] = Number($("#bagg_price1_" + i).text());
-      baggPriceArr2[i] = Number($("#bagg_price2_" + i).text());
+      baggPriceArr1[i] = Number($("#hid_bagg_price1_" + i).text());
+      baggPriceArr2[i] = Number($("#hid_bagg_price2_" + i).text());
 
       if ($("#ins_check_" + i).is(":checked") && $("#agree_check0, #agree_check1, #agree_check2").is(":checked")) {
         insArr[i] = $("#select_product_" + i + " option:selected").text();
@@ -1269,10 +1298,8 @@ $(function () {
     for (let i = 0; i < personNumber; i++) {
       if (i % 2 == 0) {
         jourPrice1[i] += beforeTotArr[i];
-        console.log("구간1 이전 총금액" + jourPrice1[i])
       } else {
         jourPrice2[i] += beforeTotArr[i];
-        console.log("구간2 이전 총금액" + jourPrice2[i])
       }
     }
     // 부가서비스 옵션 총 금액 계산
@@ -1281,29 +1308,21 @@ $(function () {
         total_price += seatPriceArr1[i];
         seat_price += seatPriceArr1[i];
         jourPrice1[i] += seatPriceArr1[i];
-        console.log("좌석1 금액 : " + seatPriceArr1[i])
-        console.log("여정1 좌석 금액 플러스" + jourPrice1[i] + "원")
       }
       if (seatNumArr2 != null && typeof seatNumArr2[i] != "undefined") {
         total_price += seatPriceArr2[i];
         seat_price += seatPriceArr2[i];
         jourPrice2[i] += seatPriceArr2[i];
-        console.log("좌석2 금액 : " + seatPriceArr2[i])
-        console.log("여정2 좌석 금액 플러스" + jourPrice2[i] + "원")
       }
       if(baggArr1[i] != null && typeof baggArr1[i] != "undefined") {
         total_price += baggPriceArr1[i];
         bagg_price += baggPriceArr1[i];
         jourPrice1[i] += baggPriceArr1[i];
-        console.log("수하물1 금액 : " + baggPriceArr1[i])
-        console.log("여정1 좌석 금액 플러스" + jourPrice1[i] + "원")
       }
       if (baggArr2[i] != null && typeof baggArr2[i] != "undefined") {
         total_price += baggPriceArr2[i];
         bagg_price += baggPriceArr2[i];
           jourPrice2[i] += baggPriceArr2[i-1];
-          console.log("수하물2 금액 : " + baggPriceArr2[i-1])
-          console.log("여정2 좌석 금액 플러스" + jourPrice2[i] + "원")
       }
     }
     if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
@@ -1338,17 +1357,8 @@ $(function () {
       flightPrice += Number($(this).val());
     })
 
-    for (let i = 0; i < personNumber; i++) {
-      console.log("🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔")
-      if (i % 2 == 0) {
-        console.log(i + "의여정 1 총 금액" + jourPrice1[i])
-      } else {
-        console.log(i + "의여정 2 총 금액" + jourPrice2[i])
-      }
-      console.log("🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔")
-    }
-
     $("#flightPrice").html(flightPrice.toLocaleString("ko-KR"));
+    $("#flight_price").html($("#flightPrice").html());
     // 세금
     let flightTax = 0;
     if (href[5] == 'oneway') {
@@ -1366,6 +1376,8 @@ $(function () {
 
     }
     $("#flightCharge").html(flightCharge.toLocaleString("ko-KR"));
+    $("#flight_charge").html($("#flightCharge").html());
+
     finalTotalPrice = total_price + flightPrice + flightTax + flightCharge
     $("#modal_tot_price").html(finalTotalPrice.toLocaleString("ko-KR"));
 
@@ -1390,7 +1402,9 @@ $(function () {
     if(href[5] == 'oneway') {
       for (let i = 0; i < personNumber; i++) {
         if(i % 2 == 0) {
-          onewayData(i);
+          onewayData1(i);
+        } else {
+          onewayData2(i);
         }
       }
       location.href="/pages/payment/oneway"
@@ -1415,23 +1429,65 @@ $(function () {
     }
   })
 
+
   let beforeTotArr = [personNumber];
+  let totBagicPrice1 = 0;
+  let totBagicPrice2 = 0;
+
   for(let i = 0; i < personNumber; i++) {
     let idx = indexArr[i];
     getTotal(i, idx);
   }
+
   function getTotal(i, idx){
-    console.log("index : " + idx);
     $.get("/api/reservation/"+idx, function (response) {
       console.dir(response);
       beforeTotArr[i] = response.data.reTotal;
-      console.log("이전 총 금액:" + beforeTotArr[i]);
+      if(i % 2 == 0) {
+        totBagicPrice1 += Number(response.data.reSchBasicPrice);
+      } else {
+        totBagicPrice2 += Number(response.data.reSchBasicPrice);
+      }
     })
   }
 
 
+  // 예약된 자석 불러오기
+
+  let airplane1;
+  let airplane2;
+  let startdate1;
+  let startdate2;
+
+  for(let i = 0; i < 2; i++) {
+    let idx = indexArr[i];
+    getInfo(i, idx);
+  }
+
+  function getInfo(i, idx){
+    $.get("/api/reservation/"+idx, function (response) {
+      console.dir(response);
+      if(i % 2 == 0) {
+        airplane1 = response.data.reAirplainType;
+        startdate1 = response.data.reSchStartTime.substring(0,10);
+        console.log("비행기 1번 " + airplane1);
+        console.log("시작일 1번 " + startdate1);
+        // getReserveSeat1(airplane1, startdate1);
+        getReserveSeat1()
+      } else {
+        airplane2 = response.data.reAirplainType;
+        startdate2 = response.data.reSchStartTime.substring(0,10);
+        console.log("비행기 2번 " + airplane2);
+        console.log("시작일 2번 " + startdate2);
+        // getReserveSeat1(airplane2, startdate2);
+      }
+    })
+  }
+
+
+  // 결제정보 전송
   let jsonData = new Array();
-  function onewayData(i) {
+  function onewayData1(i) {
         let finalarr = new Object();
         finalarr.reIndex = indexArr[i];
         finalarr.reStatus = "Progress";
@@ -1439,9 +1495,8 @@ $(function () {
         finalarr.reBaggageidx = Number(baggIndex1[i]);
         finalarr.reInsuranceidx = Number(insIndex[i]);
         finalarr.reTotal = jourPrice1[i];
-        finalarr.reSeatPrice = seatPriceArr1[i];
+        finalarr.reSeatPrice = Number(seatPriceArr1[i]);
         jsonData.push(finalarr);
-
       $.ajax({
         url : "/api/reservation/paymentsUpdate",
         type : "PUT",
@@ -1449,6 +1504,21 @@ $(function () {
         dataType : "text",
         contentType : "application/json",
       });
+  }
+
+  let jsonData1 = new Array();
+  function onewayData2(i) {
+    let finalarr1 = new Object();
+    finalarr1.reIndex = indexArr[i];
+    finalarr1.reStatus = "Progress";
+    jsonData1.push(finalarr1);
+    $.ajax({
+      url : "/api/reservation/paymentsUpdate",
+      type : "PUT",
+      data : JSON.stringify(jsonData1),
+      dataType : "text",
+      contentType : "application/json",
+    });
   }
 
   let jsonData2 = new Array();
@@ -1461,7 +1531,7 @@ $(function () {
         finalarr2.reBaggageidx = Number(baggIndex1[i]);
         finalarr2.reInsuranceidx = Number(insIndex[i]);
         finalarr2.reTotal = finalTotalPrice;
-        finalarr2.reSeatPrice = seatPriceArr1[i];
+        finalarr2.reSeatPrice = Number(seatPriceArr1[i]);
         jsonData2.push(finalarr2);
     $.ajax({
       url : "/api/reservation/paymentsUpdate",
@@ -1489,7 +1559,7 @@ $(function () {
         finalarr3.reBaggageidx = Number(baggIndex2[i-1]);
         finalarr3.reInsuranceidx = Number(insIndex[i-1]);
         finalarr3.reTotal = jourPrice2[i];
-        finalarr3.reSeatPrice = seatPriceArr2[i];
+        finalarr3.reSeatPrice = Number(seatPriceArr2[i]);
         jsonData3.push(finalarr3);
       $.ajax({
         url : "/api/reservation/paymentsUpdate",
@@ -1516,7 +1586,7 @@ $(function () {
         finalarr4.reBaggageidx = Number(baggIndex1[i]);
         finalarr4.reInsuranceidx = Number(insIndex[i]);
         finalarr4.reTotal = jourPrice1[i];
-        finalarr4.reSeatPrice = seatPriceArr1[i];
+        finalarr4.reSeatPrice = Number(seatPriceArr1[i]);
         jsonData4.push(finalarr4);
       $.ajax({
         url : "/api/reservation/paymentsUpdate",
@@ -1536,7 +1606,7 @@ $(function () {
         finalarr5.reBaggageidx = Number(baggIndex2[i-1]);
         finalarr5.reInsuranceidx = Number(insIndex[i-1]);
         finalarr5.reTotal = jourPrice2[i];
-        finalarr5.reSeatPrice = seatPriceArr2[i];
+        finalarr5.reSeatPrice = Number(seatPriceArr2[i]);
         jsonData5.push(finalarr5);
       $.ajax({
         url : "/api/reservation/paymentsUpdate",
@@ -1555,10 +1625,11 @@ $(function () {
 
 
   // /*부가서비스 신청내역 끝*/
-
+let isinsjoin = false;
   $(".ins_join_butt").on("click", function () {
     optionTotalPrice(personNumber)
     confirmOptional()
+    isinsjoin = true;
     if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
       $("#modal_service_app_wrap").fadeIn();
       $(".modal_join_ins").fadeIn();
@@ -1687,7 +1758,7 @@ $(function () {
             }
         }
         // 보험
-        if (insArr[i] != null && $("#agree_check0, #agree_check1, #agree_check2").is(":checked")) {
+        if (insArr[i] != null && $("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked") && isinsjoin == true) {
           option_table_body2[i] += '<tr><td class="b_r">전 구간</td>'
           option_table_body2[i] += '<td><div class="item_wrap1"><p class="img img_ins"></p>'
           option_table_body2[i] += '<p class="txt" id="modal_option_ins_' + i + '">여행보험 (' + insArr[i] + ')</p></div></td>'
@@ -1818,7 +1889,6 @@ $(() => {
   })
 
   $(".modal_notice_wrap .close").on('click', () => {
-    console.log(block)
     block.find(".seat_P").css("display", "none");
     block.find(".seat_num").html("");
     $("#modal_notice_wrap").fadeOut();
@@ -2386,10 +2456,6 @@ function submit() {
     iChildCount = parseInt($('.oneway_wrap').find('strong[name=childPaxCnt]').text()), // 소아
     iInfantCount = parseInt($('.multi_wrap').find('strong[name=infantPaxCnt]').text()); // 유아
 
-  console.log(iAdultCount);
-  console.log(iChildCount);
-  console.log(iInfantCount)
-
   if (iAdultCount > 0 && iChildCount > 0 && iInfantCount > 0) {
     $("strong[name=person_num]").text('성인 ' + iAdultCount + ' 소아 ' + iChildCount + ' 유아 ' + iInfantCount);
   } else if (iAdultCount > 0 && iChildCount > 0) {
@@ -2589,8 +2655,6 @@ function updateTrip() {
   let go1 = $("#go_area1").text();
   let arr1 = $("#arr_area1").text();
   let godate = $("#godate").text();
-
-  console.log(go1, arr1, godate);
 
   $(".person_num").text(person);
   $(".go_default").attr("value", go1);

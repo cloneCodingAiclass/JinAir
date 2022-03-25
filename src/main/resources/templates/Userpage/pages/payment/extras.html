@@ -55,7 +55,7 @@
                             <span class="dep_area" th:text="${reserveApiResponse[1].reSchDepPoint}">제주(CJU)</span>
                             <span class="sm_ft">[출발] [[${reserveApiResponse[1].reSchStartTime}]]</span>
                             <span class="arr_area" th:text="${reserveApiResponse[1].reSchArrPoint}">서울/김포(GMP)</span>
-                            <span class="sm_ft">[도착] [[${reserveApiResponse[1].reSchEndTime}]]</span>
+                            <span class="sm_ft">[도착] [[${reserveApiResponse[0].reSchEndTime}]]</span>
                         </div>
                     </div>
                     <!--여정2 끝-->
@@ -151,6 +151,7 @@
                                     <p class='select_seat_price' th:id="'seat_price1_'+${i1.index}">
                                         <span class='seat_P seat_P1'>KRW</span>
                                         <span class='price price1' th:id="'price1_'+${i1.index}"></span>
+                                        <input type="hidden" class='hid_price hid_price1' th:id="'hid_price1_'+${i1.index}">
                                     </p>
                                     <input type='radio' name='selectPerson' class='checkPerson'
                                            th:id="'person_'+${i1.index}">
@@ -160,13 +161,28 @@
                         </div><!-- th:id="'info1_' + ${i1.index}">-->
                         <!-- 좌석 정보 랩-->
                         <!-- 좌석 정보랩 1 -->
-                        <!-- 좌석 정보랩 1 -->
-<!--                        <div th:replace="'userpage/pages/payment/seat_info/'+${reserveApiResponse[0].reAirplaneType}+'-info1 :: '+${reserveApiResponse[0].reAirplaneType}+'-info1'" id="seat_info_view1"></div>-->
-                        <div th:replace="userpage/pages/payment/seat_info/B737-800-info1 :: B737-800-info1" id="seat_info_view1"></div>
+                        <!--                        <div th:replace="'userpage/pages/payment/seat_info/'+${reserveApiResponse[0].reAirplaneType}+'-info1 :: '+${reserveApiResponse[0].reAirplaneType}+'-info1'" id="seat_info_view1"></div>-->
+                        <div id="seat_info_view1-1" class="seat_info_view1" >
+                            <div th:replace="userpage/pages/payment/seat_info/B737-800-info1 :: B737-800-info1"></div>
+                        </div>
+                        <div id="seat_info_view1-2" class="seat_info_view1" >
+                            <div th:replace="userpage/pages/payment/seat_info/B737-900-info1 :: B737-900-info1"></div>
+                        </div>
+                        <div id="seat_info_view1-3" class="seat_info_view1" >
+                            <div th:replace="userpage/pages/payment/seat_info/B777-200ER-info1 :: B777-200ER-info1"></div>
+                        </div>
                         <!-- 좌석 정보랩 1 끝 -->
                         <!-- 좌석 선택랩 1 -->
-                        <div th:replace="userpage/pages/payment/select_seat/B737-800-1 :: B737-800-1" id="seat_view1"></div>
-<!--                        <div th:replace="'userpage/pages/payment/seat_info/'+${reserveApiResponse[0].reAirplaneType}+'-1 :: '+${reserveApiResponse[0].reAirplaneType}+'-1'" id="seat_view1"></div>-->
+                        <div id="seat_view1-1" class="seat_view1" >
+                        <div th:replace="userpage/pages/payment/select_seat/B737-800-1 :: B737-800-1"></div>
+                        </div>
+                        <div id="seat_view1-2" class="seat_view1">
+                            <div th:replace="userpage/pages/payment/select_seat/B737-900-1 :: B737-900-1"></div>
+                        </div>
+                        <div id="seat_view1-3" class="seat_view1">
+                            <div th:replace="userpage/pages/payment/select_seat/B777-200ER-1 :: B777-200ER-1"></div>
+                        </div>
+                        <!--                        <div th:replace="'userpage/pages/payment/seat_info/'+${reserveApiResponse[0].reAirplaneType}+'-1 :: '+${reserveApiResponse[0].reAirplaneType}+'-1'" id="seat_view1"></div>-->
                         <!-- 좌석 선택랩 1 끝 -->
                         <!--탑승객 정보 랩2-->
                         <div class="passenger_info_wrap passenger_info_wrap2" id="passenger_info_2">
@@ -186,6 +202,7 @@
                                     <p class='select_seat_price select_seat_price2' th:id="'seat_price2_'+${i2.index}">
                                         <span class='seat_P seat_P2'>KRW</span>
                                         <span class='price price2' th:id="'price2_'+${i2.index}"></span>
+                                        <input type="hidden" class='hid_price hid_price2' th:id="'hid_price2_'+${i2.index}">
                                     </p>
                                     <input type='radio' name='selectPerson2' class='checkPerson2'
                                            th:id="'person2_'+${i2.index}">
@@ -195,13 +212,26 @@
                         </div>
                         <!--탑승객 정보 랩2 끝-->
                         <!-- 좌석 정보랩 2 -->
-<!--                        <div th:replace="'userpage/pages/payment/seat_info/'+${reserveApiResponse[1].reAirplaneType}+'-info2 :: '+$reserveApiResponse[1].reAirplaneType}+'-info2'" id="seat_info_view2"></div>-->
-                        <div th:replace="userpage/pages/payment/seat_info/B737-800-info2 :: B737-800-info2" id="seat_info_view2"></div>
+                        <div id="seat_info_view2-1" class="seat_info_view2" >
+                            <div th:replace="userpage/pages/payment/seat_info/B737-800-info2 :: B737-800-info2"></div>
+                        </div>
+                        <div id="seat_info_view2-2" class="seat_info_view2" >
+                            <div th:replace="userpage/pages/payment/seat_info/B737-900-info2 :: B737-900-info2"></div>
+                        </div>
+                        <div id="seat_info_view2-3" class="seat_info_view2" >
+                            <div th:replace="userpage/pages/payment/seat_info/B777-200ER-info2 :: B777-200ER-info2"></div>
+                        </div>
                         <!-- 좌석 정보랩 2 끝 -->
                         <!-- 좌석 선택랩 2 -->
-                        <div th:replace="userpage/pages/payment/select_seat/B737-800-2 :: B737-800-2" id="seat_view2"></div>
-<!--                        <div th:replace="'userpage/pages/payment/seat_info/'+${reserveApiResponse[1].reAirplaneType}+'-2 :: '+${reserveApiResponse[1].reAirplaneType}+'-2'" id="seat_view2"></div>-->
-
+                        <div id="seat_view2-1" class="seat_view2" >
+                            <div th:replace="userpage/pages/payment/select_seat/B737-800-2 :: B737-800-2"></div>
+                        </div>
+                        <div id="seat_view2-2" class="seat_view2">
+                            <div th:replace="userpage/pages/payment/select_seat/B737-900-2 :: B737-900-2"></div>
+                        </div>
+                        <div id="seat_view2-3" class="seat_view2">
+                            <div th:replace="userpage/pages/payment/select_seat/B777-200ER-2 :: B777-200ER-2"></div>
+                        </div>
                         <!-- 좌석 선택랩 2 끝 -->
                     </div>
                     <!--서비스 컨텐츠 끝-->
@@ -234,6 +264,7 @@
                             </p>
                             <p class='bot_bagg_price bot_bagg_price1'><span class='cur' th:id="'cur1_'+${i3.index}">KRW</span>
                                 <span class='price bagg_price' th:id="'bagg_price1_'+${i3.index}"></span></p>
+                                <input type="hidden" th:id="'hid_bagg_price1_'+${i3.index}">
                             <p class='section2 section'><img src='/userpage/lib/img/airplane2.png' alt='비행기'>구간2</p>
 
                             <p class='select_bagg_price select_bagg_price2' th:id = "'select_bagg_price2_'+${i3.index}">
@@ -242,6 +273,7 @@
                             </p>
                             <p class='bot_bagg_price bot_bagg_price2'><span class='cur' th:id="'cur2_'+${i3.index}">KRW</span>
                                 <span class='price bagg_price' th:id="'bagg_price2_'+${i3.index}"></span></p>
+                                <input type="hidden" th:id="'hid_bagg_price2_'+${i3.index}">
                             </div>
                         </div>
                         <!--탑승객 정보 랩 끝-->
@@ -1578,19 +1610,19 @@
                                             <col width="40%">
                                         </colgroup>
                                         <tr><th colspan="2"><p class="title">항공운임</p>
-                                                <p><span>KRW</span><span id="flight_price">215,000</span></p></th></tr>
+                                                <p><span>KRW</span><span id="flight_price"></span></p></th></tr>
                                         <tr><td colspan="2">구간 1 : GMP-CJU</td><td></td></tr>
-                                        <tr><td class="per">성인 1</td><td>70,000</td></tr>
+                                        <tr><td class="per">[[${reserveApiResponse[0].rePeopleType}]]</td><td id="bagicPrice1">70,000</td></tr>
                                         <tr><td colspan="2">구간 2 : CJU-GMP</td></tr>
-                                        <tr><td class="per">성인 1</td><td>145,000</td></tr>
+                                        <tr><td class="per">[[${reserveApiResponse[0].rePeopleType}]]</td><td id="bagicPrice2">145,000</td></tr>
                                         <tr><th colspan="2"><p class="title">유류할증료</p>
-                                            <p><span>KRW</span>11,000</p></th></tr>
+                                            <p><span>KRW</span><span id="flight_charge"></span></p></th></tr>
                                         <tr><td colspan="2">구간 1 : GMP-CJU</td><td></td></tr>
                                         <tr><td class="per">성인 1</td><td>5,500</td></tr>
                                         <tr><td colspan="2">구간 2 : CJU-GMP</td></tr>
                                         <tr><td class="per">성인 1</td><td>5,500</td></tr>
                                         <tr><th colspan="2"><p class="title">세금</p>
-                                                <p><span>KRW</span>8,000</p></th></tr>
+                                            <p><span>KRW</span><span id="flight_tax">8,000</span></p></th></tr>
                                         <tr><td colspan="2">구간 1 : GMP-CJU</td><td></td></tr>
                                         <tr><td class="per">성인 1<span class="cursor det det1">자세히 보기<span class="ar">
                                             </span></span></td><td class="seb">4,000</td></tr>
