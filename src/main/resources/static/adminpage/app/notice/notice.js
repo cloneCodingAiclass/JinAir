@@ -149,7 +149,13 @@ $(function () {
                 list(lastPage-1);
             });
         })
-    };
+    }
+
+    $("#showPage").on('click', '.pageNum', function(){
+        let pageId = this.id;
+        console.log(pageId);
+        list(pageId);
+    });
 
 
 
@@ -197,21 +203,12 @@ $(function () {
 
     $(document).on('click', '#searchNoti', function(){
         searchStr = $('#searchText').val();
-        searchNoti(searchStr, 0);
-        if ( searchStr.length == 0){
+        if (!searchStr){
             alert('검색어를 확인해주세요.');
+        }else {
             searchNoti(searchStr, 0);
         }
-    });
 
-    $(document).on('click', '.pages', function(){
-        let pageId = this.id;
-        list(pageId);
-    });
-
-    $(document).on('click', '.pagesS', function(){
-        let pageId2 = this.id;
-        searchNoti(searchStr, pageId2);
     });
 
 
