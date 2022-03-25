@@ -242,11 +242,11 @@ $(function () {
             }
         });
     }
-
+//--------------------------------------------------------------------------------------
     // 정보
-    let reIndex1 = $('#reIndex1').val();
-    let reTripKind = $('#reTripKind').val()
-    let rePeopleType = $('#rePeopleType').val()
+    let reIndex1 = $('#reIndex1').val(); // 여정1 예약 번호
+    let reTripKind = $('#reTripKind').val() // 여정1 운항타입
+    let rePeopleType = $('#rePeopleType').val() // 여정1 탑승구성
 
     let inonesoo = rePeopleType.split(' ');
     let modiAdult = 0;
@@ -275,14 +275,108 @@ $(function () {
     totalNum = modiAdult + modiChild + modiBaby;
     let endIdx = Number(totalNum*2) + Number(reIndex1) -1
 
-
-
-
-
-
-    if(reTripKind == '편도'){
-        $('.ifOnewayD').css('display', 'none');
+    for(let i = 0 ; i < totalNum*2 ; i++){
+        let num = $(`.reBirth${i}`).text().substr(0,4);
+        if(2022 - Number(num) > 13){
+            $(`.rePeopleType${i}`).html('성인')
+        }else if(2022 - Number(num) > 2){
+            $(`.rePeopleType${i}`).html('소아')
+        }else{
+            $(`.rePeopleType${i}`).html('유아')
+        }
     }
+
+
+    // 구간1
+    function searchStart(){
+        $.get("/api/reservation/"+reIndex1, function(response){
+            $('.trip1BP').html(response.data.reSchBasicPrice.toLocaleString('ko-KR'))
+        });
+    }
+    // 구간2
+    function searchStart2(){
+        $.get("/api/reservation/"+(Number(reIndex1)+1), function(response){
+            $('.trip2BP').html(response.data.reSchBasicPrice.toLocaleString('ko-KR'))
+        });
+    }
+    function searchStart3(){
+        $.get("/api/reservation/"+reIndex1, function(response){
+            $('.planePrice').html((Number(response.data.reSchBasicPrice) * totalNum).toLocaleString('ko-KR'));          // 항공운임
+            $('.finalPrice').html(((Number(response.data.reSchBasicPrice)+5000+4000) * totalNum).toLocaleString('ko-KR'));  // 총운임
+            $('.oilPrice').html((5000 * totalNum).toLocaleString('ko-KR')); // 유류할증료
+            $('.taxPrice').html((4000 * totalNum).toLocaleString('ko-KR')); // 세금
+            let seat1PP = 0;
+            for(let i =  0 ; i < totalNum*2 ; i+=2){
+                if($(`.seat1D${i}`).html() == ''){
+                    $(`.seat1D${i}`).html('');
+                    $(`.seat1P${i}`).html(0);
+                }else{
+                    let seat1P = Number($(`.seat1P${i}`).html());
+                    seat1PP += seat1P;
+                }
+            }
+            $('.seatPrice').text((seat1PP).toLocaleString('ko-KR'))
+        });
+    }
+    function searchStart4(){
+        $.get("/api/reservation/"+reIndex1, function(response){
+            $.get("/api/reservation/"+(Number(reIndex1)+1), function(response1){
+                $('.planePrice').html(((Number(response.data.reSchBasicPrice)+Number(response1.data.reSchBasicPrice)) * totalNum).toLocaleString('ko-KR'));
+                $('.finalPrice').html(((Number(response.data.reSchBasicPrice) + Number(response1.data.reSchBasicPrice) +10000+8000) * totalNum).toLocaleString('ko-KR'));
+                $('.oilPrice').html((10000 * totalNum).toLocaleString('ko-KR')); // 유류할증료
+                $('.taxPrice').html((8000 * totalNum).toLocaleString('ko-KR')); // 세금
+                let seat1PP = 0;
+                let seat2PP = 0;
+                for(let i =  0 ; i < totalNum*2 ; i+=2){
+                    if($(`.seat1D${i}`).html() == ''){
+                        $(`.seat1D${i}`).html('');
+                        $(`.seat1P${i}`).html(0);
+                    }else{
+                        let seat1P = Number($(`.seat1P${i}`).html());
+                        seat1PP += seat1P;
+                    }
+                }
+                for(let i =  1 ; i < totalNum*2 ; i+=2){
+                    if($(`.seat2D${i}`).html() == ''){
+                        $(`.seat2D${i}`).html('');
+                        $(`.seat2P${i}`).html(0);
+                    }else{
+                        let seat2P = Number($(`.seat2P${i}`).html());
+                        seat2PP += seat2P;
+                    }
+                }
+                $('.seatPrice').text((seat1PP + seat2PP).toLocaleString('ko-KR'))
+            });
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+    if($('#reTripKind').val() == '편도'){
+        $('.ifOnewayD').css('display', 'none');
+        searchStart();
+        searchStart3();
+    }else{
+        searchStart();
+        searchStart2();
+        searchStart4();
+    }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -416,6 +510,7 @@ $(function () {
     });
 
 });
+
 
 
 function hidePopupLayer() {
