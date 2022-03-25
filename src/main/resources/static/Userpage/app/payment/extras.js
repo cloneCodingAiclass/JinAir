@@ -1579,41 +1579,44 @@ $(function () {
 
   let jsonData4 = new Array();
   function towayData1(i) {
-        let finalarr4 = new Object();
-        finalarr4.reIndex = indexArr[i];
-        finalarr4.reStatus = "Progress";
-        finalarr4.reSeatDetail = seatNumArr1[i];
-        finalarr4.reBaggageidx = Number(baggIndex1[i]);
-        finalarr4.reInsuranceidx = Number(insIndex[i]);
-        finalarr4.reTotal = jourPrice1[i];
-        finalarr4.reSeatPrice = Number(seatPriceArr1[i]);
-        jsonData4.push(finalarr4);
+    for (let i = 0; i < personNumber; i++) {
+      let finalarr4 = new Object();
+      finalarr4.reIndex = indexArr[i];
+      finalarr4.reStatus = "Progress";
+      finalarr4.reSeatDetail = seatNumArr1[i];
+      finalarr4.reBaggageidx = Number(baggIndex1[i]);
+      finalarr4.reInsuranceidx = Number(insIndex[i]);
+      finalarr4.reTotal = jourPrice1[i];
+      finalarr4.reSeatPrice = Number(seatPriceArr1[i]);
+      jsonData4.push(finalarr4);
       $.ajax({
-        url : "/api/reservation/paymentsUpdate",
-        type : "PUT",
-        data : JSON.stringify(jsonData4),
-        dataType : "text",
-        contentType : "application/json",
+        url: "/api/reservation/paymentsUpdate",
+        type: "PUT",
+        data: JSON.stringify(jsonData4),
+        dataType: "text",
+        contentType: "application/json",
       });
+    }
   }
 
   let jsonData5 = new Array();
   function towayData2(i) {
-        let finalarr5 = new Object();
-        finalarr5.reIndex = indexArr[i];
-        finalarr5.reStatus = "Progress";
-        finalarr5.reSeatDetail = seatNumArr2[i];
-        finalarr5.reBaggageidx = Number(baggIndex2[i-1]);
-        finalarr5.reInsuranceidx = Number(insIndex[i-1]);
-        finalarr5.reTotal = jourPrice2[i];
-        finalarr5.reSeatPrice = Number(seatPriceArr2[i]);
-        jsonData5.push(finalarr5);
+    for (let i = 0; i < personNumber; i++) {
+      let finalarr5 = new Object();
+      finalarr5.reIndex = indexArr[i];
+      finalarr5.reStatus = "Progress";
+      finalarr5.reSeatDetail = seatNumArr2[i];
+      finalarr5.reBaggageidx = Number(baggIndex2[i - 1]);
+      finalarr5.reInsuranceidx = Number(insIndex[i - 1]);
+      finalarr5.reTotal = jourPrice2[i];
+      finalarr5.reSeatPrice = Number(seatPriceArr2[i]);
+      jsonData5.push(finalarr5);
       $.ajax({
-        url : "/api/reservation/paymentsUpdate",
-        type : "PUT",
-        data : JSON.stringify(jsonData5),
-        dataType : "text",
-        contentType : "application/json",
+        url: "/api/reservation/paymentsUpdate",
+        type: "PUT",
+        data: JSON.stringify(jsonData5),
+        dataType: "text",
+        contentType: "application/json",
         // success(jsonData5) {
         //   location.href = "/pages/payment/twoway"
         // }
@@ -1621,6 +1624,7 @@ $(function () {
         //   alert(error);
         // }
       });
+    }
   }
 
 
