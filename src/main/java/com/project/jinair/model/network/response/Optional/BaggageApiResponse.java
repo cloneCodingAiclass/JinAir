@@ -18,6 +18,7 @@ public class BaggageApiResponse {
     private BigDecimal bgPrice;
     private String bgNation;
     private String bgStandard;
+
 //    @Enumerated(EnumType.STRING)
 //    private ApplyStatus bgStatus;
 }

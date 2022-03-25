@@ -3,6 +3,7 @@ package com.project.jinair.model.entity.schedule;
 import com.project.jinair.model.entity.member.TbMember;
 import com.project.jinair.model.enumclass.PaymentStatus;
 import com.project.jinair.model.enumclass.UserStatus;
+import com.project.jinair.model.network.response.info.SeatDetailApiResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,6 +13,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -26,7 +28,6 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Builder
 public class TbReservation {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_reservation_idx")
@@ -67,4 +68,5 @@ public class TbReservation {
     private String reHp; // 탑승자 휴대전화
     @CreatedDate
     private LocalDateTime reRegdate; // 예약 등록일
+
 }

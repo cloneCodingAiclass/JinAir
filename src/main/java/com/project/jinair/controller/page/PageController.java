@@ -6,6 +6,8 @@ import com.project.jinair.model.enumclass.LostStatus;
 import com.project.jinair.model.enumclass.QnaStatus;
 import com.project.jinair.model.enumclass.QnaType;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.response.Optional.BaggageApiResponse;
+import com.project.jinair.model.network.response.Optional.InsuranceApiResponse;
 import com.project.jinair.model.network.response.board.*;
 import com.project.jinair.model.network.response.member.MemberApiResponse;
 import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
@@ -14,6 +16,8 @@ import com.project.jinair.service.MenuService;
 import com.project.jinair.service.board.*;
 import com.project.jinair.service.member.AdminApiLoginService;
 import com.project.jinair.service.member.MemberApiLogicService;
+import com.project.jinair.service.optional.BaggageApiLogicService;
+import com.project.jinair.service.optional.InsuranceApiLogicService;
 import com.project.jinair.service.reservation.ReservationApiLogicService;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -33,8 +37,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/pages")
@@ -75,6 +78,12 @@ public class PageController {
 
     @Autowired
     ScListApiController scListApiService;
+
+    @Autowired
+    BaggageApiLogicService baggageApiLogicService;
+
+    @Autowired
+    InsuranceApiLogicService insuranceApiLogicService;
 
     // 사용자 인덱스
     @RequestMapping("/index")
@@ -955,17 +964,32 @@ public class PageController {
 
         HttpSession session = request.getSession();
         ArrayList arrrr = new ArrayList<>();
+        ArrayList baggage = new ArrayList<>();
+        ArrayList insurance = new ArrayList<>();
 
         for(int i = 0; i < myCookies.length; i++) {
-            if(myCookies[i].getValue().equals("reIndex")){
-                long idx = Long.valueOf(myCookies[i].getName());
+            if (myCookies[i].getValue().equals("reIndex")) {
+                List list = new ArrayList();
                 ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf(myCookies[i].getName())).getData();
-                if(reserveApiResponse.getReStatus() != null){
+                BaggageApiResponse baggageApiResponse = baggageApiLogicService.read(reserveApiResponse.getReBaggageidx()).getData();
+                InsuranceApiResponse insuranceApiResponse = insuranceApiLogicService.read(reserveApiResponse.getReBaggageidx()).getData();
+                System.out.println(reserveApiResponse);
+                if (reserveApiResponse.getReStatus() != null) {
                     arrrr.add(reserveApiResponse);
+                }
+                if (reserveApiResponse.getReBaggageidx() != null) {
+                    baggage.add(baggageApiResponse);
+                }
+                if (reserveApiResponse.getReInsuranceidx() != null) {
+                    insurance.add(insuranceApiResponse);
                 }
             }
         }
-
+        System.out.println(arrrr);
+        System.out.println(baggage);
+        System.out.println(insurance);
+        model.addAttribute("baggage", baggage);
+        model.addAttribute("insurance", insurance);
         model.addAttribute("reserveApiResponse1", arrrr);
         if (session.getAttribute("memberApiResponse") != null) {
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
@@ -975,7 +999,7 @@ public class PageController {
         return new ModelAndView("/userpage/pages/payment/payReservation")
                 .addObject("code", "payReservation");
     }
-    // 사용자 예약 취소
+        // 사용자 예약 취소
     @RequestMapping("/cancel")
     public ModelAndView cancel(HttpServletRequest request, HttpServletResponse response, Model model){
         HttpSession session = request.getSession();
