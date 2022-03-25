@@ -109,7 +109,8 @@ $(() => {
     let itemDetail = new Vue({
         el : '#itemDetail',
         data : {
-            itemDetail : {}
+            itemDetail : {},
+
         }
     })
 
@@ -119,6 +120,7 @@ $(() => {
         $.get("/api/lost/"+index, function (response){
             itemDetail.itemDetail = response.data;
             $("#item_isfind_btn").val(response.data.losIsfind)
+            console.log(response.data.losIsfind);
         })
     }
 
@@ -133,6 +135,7 @@ $(() => {
 
     $(document).on("click", '#item_isfind_btn', function (){
         $("#modal_isfind").fadeIn(200);
+
     })
 
     $(".complete").on('click', function (){
@@ -171,6 +174,10 @@ $(() => {
         alert('변경 완료');
         $("#modal_isfind").fadeOut(200);
         location.reload();
+    })
+
+    $('body').on("click", function (){
+        $("#modal_isfind").fadeOut(200);
     })
 
 })

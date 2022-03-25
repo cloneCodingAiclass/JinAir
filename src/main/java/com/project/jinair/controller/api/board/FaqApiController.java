@@ -26,13 +26,13 @@ public class FaqApiController implements CrudInterface<FaqApiRequest, FaqApiResp
         return faqApiLogicService.getFaqList(id);
     }
     @GetMapping("/typeSearch/{id}")
-    public Header<List<FaqApiResponse>> Typesearch(@PathVariable(name = "id") String id, @PageableDefault(sort = {"faqIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+    public Header<List<FaqApiResponse>> Typesearch(@PathVariable(name = "id") String id, @PageableDefault(size = 10, sort = {"faqIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
         return faqApiLogicService.getFaqType(id, pageable);
     }
 
     // 게시판 리스트
     @GetMapping("/list")
-    public Header<List<FaqApiResponse>> findAll(@PageableDefault(sort = {"faqIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
+    public Header<List<FaqApiResponse>> findAll(@PageableDefault(size = 10, sort = {"faqIndex"}, direction = Sort.Direction.DESC) Pageable pageable) {
         return faqApiLogicService.search(pageable);
     }
 
