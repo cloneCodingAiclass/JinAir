@@ -33,6 +33,9 @@
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
     border: 3px solid #BDD600;
 }
+#container > .contents .faq_check_box li a{
+    cursor: pointer;
+}
 #container > .contents .faq_check_box li:nth-child(1){
     background-color: white;
     border: 3px solid #BDD600;
@@ -117,33 +120,44 @@
 }
 
 /* 페이지 버튼 css */
-#button{
-    display: flex;
-    justify-content: center;
+.footer{
+    margin-top: 40px;
     width: 100%;
+    height: 30px;
 }
-
-#button .pageButton{
-    width: 20px;
-    height: 20px;
-    border: 1px solid #888888;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
-    background-color: #F2F2F2;
+.footer > .center{
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin: 5px;
-    font-weight: 700;
-    font-size: 15px;
-    border-collapse: collapse;
+}
+.footer table{
+    display: inline-block;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bolder;
+}
+.footer table td{
+    width: 35px;
+    height: 40px;
+    border: 1px solid rgb(187, 187, 187);
+    background-color: #fff;
+    padding-top: 2px;
+    font-size: 18px;
 }
 
-#button .pageButton:hover{
-    background-color: rgb(124,0,72);
+.pages {
+    background-color : #fff;
+    color : #444;
+    cursor : pointer;
+}
+
+#showPage > td:hover {
+    background-color: #BDD600;
     color: white;
+}
+
+.firstPage1, .firstPage2, firstPage3, .lastPage1, .lastPage2, .lastPage3 {
     cursor: pointer;
 }
-
-.buttonList{
-    width: 100%;
+.firstPage1, .firstPage2, firstPage3, .lastPage1, .lastPage2, .lastPage3 {
+    cursor: pointer;
 }

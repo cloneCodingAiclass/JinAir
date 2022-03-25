@@ -191,9 +191,7 @@ $(function () {
     couponResult(memIndex);
 
     function couponResult(memIndex) {
-        console.log(memIndex);
         $.get("/api/userCoupon/list/" + memIndex, function (response) {
-            console.dir(response);
             let coupon;
             if (response == "") {
                 coupon = 0;
@@ -214,7 +212,6 @@ $(function () {
                 let point = response.data[i].poPoint;
                 sum += point;
             }
-            console.log(sum)
             $('#point').text(sum);
         })
     }
@@ -246,23 +243,53 @@ $(function () {
         });
     }
 
+    // 정보
+    let reIndex1 = $('#reIndex1').val();
+    let reTripKind = $('#reTripKind').val()
+    let rePeopleType = $('#rePeopleType').val()
+
+    let inonesoo = rePeopleType.split(' ');
+    let modiAdult = 0;
+    let modiChild = 0;
+    let modiBaby = 0;
+    let totalNum = 0;
+    if(inonesoo.length == 2){
+        if(inonesoo[0] == '소아'){
+            modiChild = Number(inonesoo[1])
+        }else if(inonesoo[0] == '성인'){
+            modiAdult = Number(inonesoo[1])
+        }
+    }else if(inonesoo.length == 4){
+        if(inonesoo[2] == '유아'){
+            modiAdult = Number(inonesoo[1]);
+            modiBaby = Number(inonesoo[3]);
+        }else if(inonesoo[2] == '소아'){
+            modiAdult = Number(inonesoo[1]);
+            modiChild = Number(inonesoo[3])
+        }
+    }else if(inonesoo.length == 6){
+        modiAdult = Number(inonesoo[1]);
+        modiChild = Number(inonesoo[3])
+        modiBaby = Number(inonesoo[5]);
+    }
+    totalNum = modiAdult + modiChild + modiBaby;
+    let endIdx = Number(totalNum*2) + Number(reIndex1) -1
 
 
 
 
-    $('.modal').hide();
-    $("li[class *= 'open']").on('click', function (e) {
-        e.stopPropagation();
-        $('.modal').fadeIn(200);
-    })
-    $(".nav_all").on('click', function (e) {
-        e.stopPropagation();
-        $('.modal').fadeOut(200);
-    })
-    $("body").on('click', function (e) {
-        e.stopPropagation();
-        $('.modal').fadeOut(200);
-    })
+
+
+    if(reTripKind == '편도'){
+        $('.ifOnewayD').css('display', 'none');
+    }
+
+
+
+
+
+
+
     $('.infoboxli1').click(function () {
         $('.infoboxli1').css('background-color', '#661E43');
         $('.infoboxli1').css('color', 'white');
@@ -934,29 +961,5 @@ $(() => {
     $(".btn_cancel").on("click", function () {
         $(".modal_container").fadeOut(200);
     });
-
-    let memIndex = $('#memid').val();
-
-    pointResult(memIndex);
-
-    function pointResult(index){
-        let sum = 0;
-        $.get("/api/point/user/"+index, function (response){
-            for(let i = 0; i < response.data.length; i++){
-                let point = response.data[i].poPoint;
-                sum += point;
-                $('#point').val(sum.toLocaleString('ko-KR'));
-            }
-        })
-    }
-
-    couponResult(memIndex);
-
-    function couponResult(index) {
-        $.get("/api/userCoupon/list/" + index, function (response) {
-            console.dir(response);
-            document.getElementById("coupon").innerHTML = response + "장";
-        });
-    }
 });
 

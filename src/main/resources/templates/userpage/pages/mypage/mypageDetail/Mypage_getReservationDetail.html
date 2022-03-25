@@ -18,6 +18,9 @@
         <!--container-->
         <div id="container">
             <input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
+            <input type="hidden" id="reIndex1" th:value="${reserveApiResponse[0].reIndex}">
+            <input type="hidden" id="reTripKind" th:value="${reserveApiResponse[0].reTripKind}">
+            <input type="hidden" id="rePeopleType" th:value="${reserveApiResponse[0].rePeopleType}">
             <div class="mypage_main w_1160">
                 <div class="mypage_menu">
                     <p>마이<br>페이지</p>
@@ -44,51 +47,51 @@
                     <table>
                         <tr>
                             <th>예약일</th>
-                            <td>2022-01-29(토)</td>
+                            <td th:text="${#strings.substring(reserveApiResponse[0].reRegdate,0, 10)}"></td>
                             <th>예약번호</th>
-                            <td>ZN882R</td>
+                            <td th:text="${reserveApiResponse[0].reReserNum}"></td>
                         </tr>
                         <tr>
                             <th>상태</th>
                             <td>확약</td>
-                            <th>탑승객수</th>
-                            <td><span id="person_cnt">성인 1</span>명</td>
+                            <th>탑승객</th>
+                            <td><span id="person_cnt" th:text="${reserveApiResponse[0].rePeopleType}"></span></td>
                         </tr>
                         <tr>
                             <th>
                                 여정1
-                                <p>LJ309</p>
+                                <p th:text="${reserveApiResponse[0].reSchName}"></p>
                             </th>
                             <td colspan="3" class="info">
                                 <div class="in_bl">
-                                    <span id="go_area1">서울/김포(GMP)</span>
-                                    <p id="godate">[출발]2022-10-25(화) 06:05</p>
+                                    <span id="go_area1" th:text="${reserveApiResponse[0].reSchDepPoint}"></span>
+                                    <p id="godate">[출발]<span th:text="${#strings.substring(reserveApiResponse[0].reSchStartTime,0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse[0].reSchStartTime,11, 16)}"></span>]</p>
                                 </div>
                                 <span class="arrow">
                                     <img src="/userpage/lib/img/right_arrow.PNG" alt="에서">
                                 </span>
                                 <div class="in_bl">
-                                    <span id="arr_area1">제주(CJU)</span>
-                                    <p>[도착]2022-10-25(화) 07:20</p>
+                                    <span id="arr_area1" th:text="${reserveApiResponse[0].reSchArrPoint}"></span>
+                                    <p>[도착]<span th:text="${#strings.substring(reserveApiResponse[0].reSchEndTime,0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse[0].reSchEndTime,11, 16)}"></span>]</p>
                                 </div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="ifOnewayD">
                             <th>
                                 여정2
-                                <p>LJ309</p>
+                                <p th:text="${reserveApiResponse[1].reSchName}"></p>
                             </th>
                             <td colspan="3" class="info">
                                 <div class="in_bl">
-                                    <span>제주(CJU)</span>
-                                    <p>[출발]2022-10-25(화) 06:05</p>
+                                    <span th:text="${reserveApiResponse[1].reSchDepPoint}"></span>
+                                    <p>[출발]<span th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime,0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime,11, 16)}"></span>]</p>
                                 </div>
                                 <span class="arrow">
                                     <img src="/userpage/lib/img/right_arrow.PNG" alt="에서">
                                 </span>
                                 <div class="in_bl">
-                                    <span>서울/김포(GMP)</span>
-                                    <p>[도착]2022-10-25(화) 07:20</p>
+                                    <span th:text="${reserveApiResponse[1].reSchArrPoint}"></span>
+                                    <p>[도착]<span th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime,0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime,11, 16)}"></span>]</p>
                                 </div>
                             </td>
                         </tr>
@@ -107,8 +110,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>김사과</td>
+                            <tr class="memberDetail" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
+                                <td>[[${dto.reFirstName}]][[${dto.reLastName}]]</td>
                                 <td>성인</td>
                                 <td>여</td>
                                 <td>2000-10-11</td>
@@ -165,11 +168,11 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr class="ifOnewayD">
                                         <td>구간 1 : GMP-CJU</td>
                                         <td></td>
                                     </tr>
-                                    <tr>
+                                    <tr class="ifOnewayD">
                                         <td><span class="name">유/영은</span></td>
                                         <td>
                                             <div class="td_wrap">
@@ -213,11 +216,11 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr class="ifOnewayD">
                                         <td>구간 1 : GMP-CJU</td>
                                         <td></td>
                                     </tr>
-                                    <tr>
+                                    <tr class="ifOnewayD">
                                         <td><span class="name">유/영은</span></td>
                                         <td>
                                             <div class="td_wrap">
@@ -261,11 +264,11 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr class="ifOnewayD">
                                         <td>구간 1 : GMP-CJU</td>
                                         <td></td>
                                     </tr>
-                                    <tr>
+                                    <tr class="ifOnewayD">
                                         <td><span class="name">유/영은</span></td>
                                         <td>
                                             <div class="td_wrap">
@@ -284,7 +287,7 @@
                         <li class="infoboxli1">
                             여정 1 : GMP - CJU
                         </li>
-                        <li class="infoboxli2">
+                        <li class="infoboxli2 ifOnewayD">
                             여정 2 : CJU - GMP
                         </li>
                     </ul>
@@ -405,6 +408,20 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        <tr class="ifOnewayD">
+                                            <td>구간 2 : GMP-CJU</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr class="ifOnewayD">
+                                            <td c><span class="name">유/영은</span></td>
+                                            <td>31A(지니패스트)</td>
+                                            <td>
+                                                <div class="td_wrap">
+                                                    <span class="cul">KRW</span><span class="price">107,000</span>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </td>
                             </tr>
@@ -444,12 +461,12 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr class="ifOnewayD">
                                             <td>구간 1 : GMP-CJU</td>
                                             <td></td>
                                             <td></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="ifOnewayD">
                                             <td><span class="name">유/영은</span></td>
                                             <td>10KG</td>
                                             <td>
@@ -489,6 +506,20 @@
                                             <td></td>
                                         </tr>
                                         <tr>
+                                            <td><span class="name">유/영은</span></td>
+                                            <td>(표준형)</td>
+                                            <td>
+                                                <div class="td_wrap">
+                                                    <span class="cul">KRW</span><span class="price">77,900</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="ifOnewayD">
+                                            <td>구간 2 : GMP-CJU</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr class="ifOnewayD">
                                             <td><span class="name">유/영은</span></td>
                                             <td>(표준형)</td>
                                             <td>
