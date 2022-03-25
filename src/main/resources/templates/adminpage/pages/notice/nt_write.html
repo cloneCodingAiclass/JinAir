@@ -5,8 +5,8 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/notice/nt_write.css">
-<script src="/adminpage/app/notice/nt_write.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="/adminpage/app/notice/nt_write.js"></script>
 <!-- head.html 끝-->
 <body>
 <form class="file-upload" method="post" th:action="@{/pages/admin/nt_file/upload}" enctype="multipart/form-data">
@@ -42,7 +42,7 @@
                     </table>
                     <div class="footer">
                         <a href="/pages/admin/notice" class="btn_notice btn_cancel"><input type="button" value="취소"></a>
-                        <a class="btn_notice btn_add"><input type="submit" value="등록" id="writeNoti"></a>
+                        <span class="btn_notice btn_add"><input type="submit" value="등록" id="writeNoti"></span>
                     </div>
                 </div>
             </div>
@@ -50,5 +50,4 @@
     </div>
 </form>
 </body>
-<script src="/adminpage/app/inquiry/nt_write.js"></script>
 </html>
