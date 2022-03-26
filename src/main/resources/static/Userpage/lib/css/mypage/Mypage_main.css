@@ -651,6 +651,7 @@ body{
     top: 0;
     align-items: center;
     text-align: center;
+    z-index: 100;
 }
 .mypage_main .mypage_menu p{
     width: 100px;

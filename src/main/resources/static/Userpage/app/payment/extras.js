@@ -614,16 +614,22 @@ $(function () {
     $("#seat_info_view1-1").css("display", "block");
     $(".seat_view1").not("#seat_view1-1").css("display", "none");
     $("#seat_view1-1").css("display", "block");
+    $(".seat_info_view1").remove("#seat_info_view1-2, #seat_info_view1-3");
+    $(".seat_view1").remove("#seat_view1-2, #seat_view1-3");
   } else if (type1 == 'B737-900') {
     $(".seat_info_view1").not("#seat_info_view1-2").css("display", "none");
     $("#seat_info_view1-2").css("display", "block");
     $(".seat_view1").not("#seat_view1-2").css("display", "none");
     $("#seat_view1-2").css("display", "block");
+    $(".seat_info_view1").remove("#seat_info_view1-1, #seat_info_view1-3");
+    $(".seat_view1").remove("#seat_view1-1, #seat_view1-3");
   } else {
     $(".seat_info_view1").not("#seat_info_view1-3").css("display", "none");
     $("#seat_info_view1-3").css("display", "block");
     $(".seat_view1").not("#seat_view1-3").css("display", "none");
     $("#seat_view1-3").css("display", "block");
+    $(".seat_info_view1").remove("#seat_info_view1-1, #seat_info_view1-2");
+    $(".seat_view1").remove("#seat_view1-1, #seat_view1-2");
   }
 
   if (type2 == 'B737-800') {
@@ -631,27 +637,27 @@ $(function () {
     $("#seat_info_view2-1").css("display", "block");
     $(".seat_view2").not("#seat_view2-1").css("display", "none");
     $("#seat_view2-1").css("display", "block");
+    $(".seat_info_view2").remove("#seat_info_view2-2, #seat_info_view2-3");
+    $(".seat_view2").remove("#seat_view2-2, #seat_view2-3");
   } else if (type2 == 'B737-900') {
     $(".seat_info_view2").not("#seat_info_view2-2").css("display", "none");
     $("#seat_info_view2-2").css("display", "block");
     $(".seat_view2").not("#seat_view2-2").css("display", "none");
     $("#seat_view2-2").css("display", "block");
+    $(".seat_info_view2").remove("#seat_info_view2-1, #seat_info_view2-3");
+    $(".seat_view2").remove("#seat_view2-1, #seat_view2-3");
   } else {
     $(".seat_info_view2").not("#seat_info_view2-3").css("display", "none");
     $("#seat_info_view2-3").css("display", "block");
     $(".seat_view2").not("#seat_view2-3").css("display", "none");
     $("#seat_view2-3").css("display", "block");
+    $(".seat_info_view2").remove("#seat_info_view2-1, #seat_info_view2-2");
+    $(".seat_view2").remove("#seat_view2-1, #seat_view2-2");
   }
 
 
   // multiway
-  for (let i = 0; i < indexArr.length; i++) {
-    // 좌석번호 구간1
-    // 좌석번호 구간2
-    // 수하물 선택 구간1
-    // 수하물 선택 구간2
-    // 보험
-  }
+
 
   let href = $(location).attr('href').split('/');
 
@@ -1441,7 +1447,6 @@ $(function () {
 
   function getTotal(i, idx){
     $.get("/api/reservation/"+idx, function (response) {
-      console.dir(response);
       beforeTotArr[i] = response.data.reTotal;
       if(i % 2 == 0) {
         totBagicPrice1 += Number(response.data.reSchBasicPrice);
@@ -1452,10 +1457,10 @@ $(function () {
   }
 
 
-  // 예약된 자석 불러오기
+  // 예약된 좌석 불러오기
 
-  let airplane1;
-  let airplane2;
+  let airplane1 = "";
+  let airplane2 = "";
   let startdate1;
   let startdate2;
 
@@ -1466,20 +1471,148 @@ $(function () {
 
   function getInfo(i, idx){
     $.get("/api/reservation/"+idx, function (response) {
-      console.dir(response);
       if(i % 2 == 0) {
-        airplane1 = response.data.reAirplainType;
-        startdate1 = response.data.reSchStartTime.substring(0,10);
+        airplane1 = response.data.reSchName;
+        startdate1 = response.data.reSchStartTime;
         console.log("비행기 1번 " + airplane1);
         console.log("시작일 1번 " + startdate1);
-        // getReserveSeat1(airplane1, startdate1);
-        getReserveSeat1()
+        findSeat1(response.data.reSchName, response.data.reSchStartTime)
       } else {
-        airplane2 = response.data.reAirplainType;
-        startdate2 = response.data.reSchStartTime.substring(0,10);
+        airplane2 = response.data.reSchName;
+        startdate2 = response.data.reSchStartTime;
         console.log("비행기 2번 " + airplane2);
         console.log("시작일 2번 " + startdate2);
-        // getReserveSeat1(airplane2, startdate2);
+        findSeat2(response.data.reSchName, response.data.reSchStartTime)
+      }
+    })
+  }
+
+
+  // 조건으로 찾기
+  let Data1;
+  let seatArr1 = [];
+  function findSeat1(airplane, startdate1) {
+    Data1 = {
+      data : {
+        reSchName : airplane,
+        reSchStartTime : startdate1
+      }
+    }
+    $.post({
+      url: "/api/reservation/list/seat",
+      data : JSON.stringify(Data1),
+      dateType: 'text',
+      contentType : "application/json",
+      success : function(response){
+        console.dir(response);
+        for(let i = 0; i < response.data.length; i++) {
+          seatArr1[i] = "";
+          seatArr1[i] = response.data[i].reSeatDetail;
+          // console.log(seatArr1[i]);
+        }
+        seat1();
+      }
+    });
+  }
+
+  let Data2;
+  let seatArr2 = [];
+  function findSeat2(airplane, startdate1) {
+    Data2 = {
+      data : {
+        reSchName : airplane,
+        reSchStartTime : startdate1
+      }
+    }
+    $.post({
+      url: "/api/reservation/list/seat",
+      data : JSON.stringify(Data2),
+      dateType: 'text',
+      contentType : "application/json",
+      success : function(response){
+        for(let i = 0; i < response.data.length; i++) {
+          seatArr2[i] = "";
+          seatArr2[i] = response.data[i].reSeatDetail;
+          // console.log(seatArr2[i]);
+        }
+        seat2();
+      }
+    });
+  }
+
+
+  // 구간 1 마감 좌석
+  function seat1() {
+    $(".SSC").each(function(index){
+      console.log(index + " : " + $(this).attr("id"));
+      let id = seatArr1[index];
+      for (let i = 0; i < seatArr1.length; i++) {
+        if ($(this).attr("id") == seatArr1[i]) {
+          let label = $(this).next();
+          if (label.hasClass("box1")) {
+            label.removeClass('box1')
+            label.addClass("box7");
+          } else if (label.hasClass("box2")){
+            label.removeClass('box2')
+            label.addClass("box7");
+          } else if (label.hasClass("box3")){
+            label.removeClass('box3')
+            label.addClass("box7");
+          } else if (label.hasClass("box4")){
+            label.removeClass('box4')
+            label.addClass("box7");
+          } else if (label.hasClass("box5")){
+            label.removeClass('box5')
+            label.addClass("box7");
+          } else if (label.hasClass("box6")){
+            label.removeClass('box6')
+            label.addClass("box7");
+          } else if (label.hasClass("boxBiz")){
+            label.removeClass('boxBiz')
+            label.addClass("box8");
+          } else if (label.hasClass("boxPlus")){
+            label.removeClass('boxPlus')
+            label.addClass("box8");
+          }
+        }
+      }
+    })
+  }
+  // 구간 2 마감 좌석
+  function seat2() {
+    $(".SSC2").each(function(index){
+      console.log(index + " : " + $(this).attr("id"));
+      let id = seatArr1[index];
+      let thisid = "2_"+$(this).attr("id");
+      for (let i = 0; i < seatArr1.length; i++) {
+        if (thisid == seatArr1[i]) {
+          let label = $(this).next();
+          if (label.hasClass("box1")) {
+            label.removeClass('box1')
+            label.addClass("box7");
+          } else if (label.hasClass("box2")){
+            label.removeClass('box2')
+            label.addClass("box7");
+          } else if (label.hasClass("box3")){
+            label.removeClass('box3')
+            label.addClass("box7");
+          } else if (label.hasClass("box4")){
+            label.removeClass('box4')
+            label.addClass("box7");
+          } else if (label.hasClass("box5")){
+            label.removeClass('box5')
+            label.addClass("box7");
+          } else if (label.hasClass("box6")){
+            label.removeClass('box6')
+            label.addClass("box7");
+          } else if (label.hasClass("boxBiz")){
+            label.removeClass('boxBiz')
+            label.addClass("box8");
+          } else if (label.hasClass("boxPlus")){
+            label.removeClass('boxPlus')
+            label.addClass("box8");
+          }
+        }
       }
     })
   }
@@ -1523,7 +1656,6 @@ $(function () {
 
   let jsonData2 = new Array();
   function multiwayData1(i) {
-    for (let i = 0; i < personNumber; i++) {
         let finalarr2 = new Object();
         finalarr2.reIndex = indexArr[i];
         finalarr2.reStatus = "Progress";
@@ -1539,19 +1671,11 @@ $(function () {
       data : JSON.stringify(jsonData2),
       dataType : "text",
       contentType : "application/json",
-      // success(jsonData2) {
-      //   location.href = "/pages/payment/multiway"
-      // }
-      // error(error) {
-      //   alert(error);
-      // }
     });
-    }
   }
 
   let jsonData3 = new Array();
   function multiwayData2(i) {
-    for (let i = 0; i < personNumber; i++) {
         let finalarr3 = new Object();
         finalarr3.reIndex = indexArr[i];
         finalarr3.reStatus = "Progress";
@@ -1567,60 +1691,49 @@ $(function () {
         data : JSON.stringify(jsonData3),
         dataType : "text",
         contentType : "application/json",
-        // success(jsonData3) {
-        //   location.href = "/pages/payment/multiway"
-        // }
-      //   error(error) {
-      //     alert(error);
-      //   }
       });
-    }
   }
 
   let jsonData4 = new Array();
   function towayData1(i) {
-        let finalarr4 = new Object();
-        finalarr4.reIndex = indexArr[i];
-        finalarr4.reStatus = "Progress";
-        finalarr4.reSeatDetail = seatNumArr1[i];
-        finalarr4.reBaggageidx = Number(baggIndex1[i]);
-        finalarr4.reInsuranceidx = Number(insIndex[i]);
-        finalarr4.reTotal = jourPrice1[i];
-        finalarr4.reSeatPrice = Number(seatPriceArr1[i]);
-        jsonData4.push(finalarr4);
+      let finalarr4 = new Object();
+      finalarr4.reIndex = indexArr[i];
+      finalarr4.reStatus = "Progress";
+      finalarr4.reSeatDetail = seatNumArr1[i];
+      finalarr4.reBaggageidx = Number(baggIndex1[i]);
+      finalarr4.reInsuranceidx = Number(insIndex[i]);
+      finalarr4.reTotal = jourPrice1[i];
+      finalarr4.reSeatPrice = Number(seatPriceArr1[i]);
+      jsonData4.push(finalarr4);
       $.ajax({
-        url : "/api/reservation/paymentsUpdate",
-        type : "PUT",
-        data : JSON.stringify(jsonData4),
-        dataType : "text",
-        contentType : "application/json",
+        url: "/api/reservation/paymentsUpdate",
+        type: "PUT",
+        data: JSON.stringify(jsonData4),
+        dataType: "text",
+        contentType: "application/json",
       });
+
   }
 
   let jsonData5 = new Array();
   function towayData2(i) {
-        let finalarr5 = new Object();
-        finalarr5.reIndex = indexArr[i];
-        finalarr5.reStatus = "Progress";
-        finalarr5.reSeatDetail = seatNumArr2[i];
-        finalarr5.reBaggageidx = Number(baggIndex2[i-1]);
-        finalarr5.reInsuranceidx = Number(insIndex[i-1]);
-        finalarr5.reTotal = jourPrice2[i];
-        finalarr5.reSeatPrice = Number(seatPriceArr2[i]);
-        jsonData5.push(finalarr5);
+      let finalarr5 = new Object();
+      finalarr5.reIndex = indexArr[i];
+      finalarr5.reStatus = "Progress";
+      finalarr5.reSeatDetail = seatNumArr2[i];
+      finalarr5.reBaggageidx = Number(baggIndex2[i - 1]);
+      finalarr5.reInsuranceidx = Number(insIndex[i - 1]);
+      finalarr5.reTotal = jourPrice2[i];
+      finalarr5.reSeatPrice = Number(seatPriceArr2[i]);
+      jsonData5.push(finalarr5);
       $.ajax({
-        url : "/api/reservation/paymentsUpdate",
-        type : "PUT",
-        data : JSON.stringify(jsonData5),
-        dataType : "text",
-        contentType : "application/json",
-        // success(jsonData5) {
-        //   location.href = "/pages/payment/twoway"
-        // }
-        // error(error) {
-        //   alert(error);
-        // }
+        url: "/api/reservation/paymentsUpdate",
+        type: "PUT",
+        data: JSON.stringify(jsonData5),
+        dataType: "text",
+        contentType: "application/json",
       });
+
   }
 
 

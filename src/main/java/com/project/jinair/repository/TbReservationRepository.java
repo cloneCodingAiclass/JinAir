@@ -15,11 +15,13 @@ public interface TbReservationRepository extends JpaRepository<TbReservation, Lo
     Optional<TbReservation> findByReUserindexAndReStatus(Long id, PaymentStatus paymentStatus);
     List<TbReservation> findAllByReUserindexAndReStatus(Long id, PaymentStatus paymentStatus);
     List<TbReservation> findAllByReIndexBetween(Long startIdx, Long endIdx);
-//    List<TbReservation> findAllByReIndexBetweenAndReIndexOdd(Long startIdx, Long endIdx);
+    List<TbReservation> findAllByReIndexBetweenAndReSchStartTimeGreaterThan(Long startIdx, Long endIdx, LocalDateTime reSchStartTime);
     List<TbReservation> findByReSchDepPointAndReSchArrPointAndReSchStartTime(String reSchDepPoint, String reSchArrPoint, LocalDateTime reSchStartTime);
     List<TbReservation> findFirstByReReserNum(String a);
     List<TbReservation> findByReUserindexAndReSchStartTimeGreaterThanOrderByReSchStartTimeAsc(Long reUserindex, LocalDateTime local);
     List<TbReservation> findByReUserindexAndReSchStartTimeLessThanOrderByReSchStartTimeAsc(Long reUserindex, LocalDateTime local);
-
+    Optional<TbReservation> findByReIndex(Long id);
+    List<TbReservation> findByReSchNameAndReSchStartTime(String reSchName, LocalDateTime reSchStartTime);
+    Optional<TbReservation> findByReSchName(String reSchName);
 
 }

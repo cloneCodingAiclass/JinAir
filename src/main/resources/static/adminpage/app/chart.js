@@ -1,6 +1,9 @@
 $(function () {
-    visit();
-})
+    timer = setInterval( function () {
+        visit();
+        }, 6000);
+
+});
 
 
 let itemlist = [];
@@ -10,21 +13,8 @@ function visit() {
             data.forEach(num => {
                 itemlist.push(num)
             })
-        }).then(setTimeout(1000))
-    // $.get({
-    //     url: "",
-    //     dataType: "text",
-    //     success: function (response) {
-    //         for(i = 0; )
-    //         let result = JSON.parse(response);
-    //         itemlist.push(result)
-    //         console.dir(result);
-    //     }
-    // });
-}
-
-
-
+        })
+};
 var today = new Date();
 var year = today.getFullYear();
 var month = today.getMonth();
@@ -60,9 +50,8 @@ const data = {
             lineTension : 0.3,
             fill: true,
             data: itemlist
-        }
-    ]
-};
+        }]
+    }
 const config = {
     type: 'line',
     data: data,
