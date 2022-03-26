@@ -98,7 +98,7 @@ $(function () {
 
 $(()=> {
     $("#writeNoti").on('click', () => {
-        if ( !$("#ntTitle").val() || !$("#ntContent").val() || !$('#ex_file').val()) {
+        if ( !$("#ntTitle").val() || !$("#ntContent").val()) {
             alert('모든 내용을 입력하세요.');
         }
     })

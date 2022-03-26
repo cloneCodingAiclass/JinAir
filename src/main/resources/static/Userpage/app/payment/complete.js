@@ -2,7 +2,6 @@
 
 $(function () {
     // 예약 인원수 확인
-
     let cupo = $('.sale').attr("value");
     coupon(cupo);
 
@@ -175,7 +174,7 @@ $(function () {
 
     let date = new Date();
     let week = new Array('일', '월', '화', '수', '목', '금', '토');
-    let today = date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).toString().slice(-2) + "-" + (date.getDay()).toString().slice(-2) + " (" + week[date.getDay()] +")";
+    let today = date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).toString().slice(-2) + "-" + ("00" + date.getDate()).toString().slice(-2) + " (" + week[date.getDay()] +")";
     console.log("00"+date.getDay());
 
     $('#today, #reserDay').text(today);
@@ -185,7 +184,4 @@ $(function () {
     $('#totalPrice').text(" " + Math.ceil(money).toLocaleString() + "원");
 
     // 적립 데이터 확인
-
-
-
 });
