@@ -144,20 +144,32 @@
     font-size: 18px;
 }
 
-.pages {
-    background-color : #fff;
-    color : #444;
-    cursor : pointer;
-}
 
-#showPage > td:hover {
-    background-color: #BDD600;
+#footer {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#footer .pageButton{
+    display: flex;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #888888;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+    background-color: #F2F2F2;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    font-weight: 700;
+    font-size: 15px;
+    border-collapse: collapse;
+}
+#footer .pageButton:hover{
+    background-color: rgb(124,0,72);
     color: white;
-}
-
-.firstPage1, .firstPage2, firstPage3, .lastPage1, .lastPage2, .lastPage3 {
-    cursor: pointer;
-}
-.firstPage1, .firstPage2, firstPage3, .lastPage1, .lastPage2, .lastPage3 {
     cursor: pointer;
 }

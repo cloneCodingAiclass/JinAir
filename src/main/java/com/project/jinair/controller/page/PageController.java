@@ -374,27 +374,6 @@ public class PageController {
                 .addObject("code", "faq_list");
     }
 
-
-    @RequestMapping("/index/mypageCancelService")
-    public ModelAndView mypageCancelService(HttpServletResponse response, HttpServletRequest request, Model model) {
-        Cookie[] myCookies = request.getCookies();
-        for(int i = 0; i < myCookies.length; i++) {
-            if(myCookies[i].getValue().equals("reIndex")){
-                reservationApiLogicService.delete(Long.valueOf(myCookies[i].getName()));
-                expiredCookie(response, myCookies[i].getName());
-            }
-        }
-        HttpSession session = request.getSession();
-        if(session.getAttribute("memberApiResponse") != null){
-            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
-            return new ModelAndView("/userpage/pages/mypage/mypageDetail/faq_list")
-                    .addObject("code", "faq_list");
-        }else{
-            return new ModelAndView("/userpage/pages/index/error")
-                    .addObject("code", "add_qna");
-        }
-    }
     @RequestMapping("/index/mypageCoupons")
     public ModelAndView mypageCoupons(HttpServletResponse response, HttpServletRequest request, Model model) {
         Cookie[] myCookies = request.getCookies();
@@ -454,6 +433,26 @@ public class PageController {
                 .addObject("code", "jinair");
     }
 
+    @RequestMapping("/index/mypageMain")
+    public ModelAndView mypageMain(HttpServletResponse response, HttpServletRequest request, Model model) {
+        Cookie[] myCookies = request.getCookies();
+        for(int i = 0; i < myCookies.length; i++) {
+            if(myCookies[i].getValue().equals("reIndex")){
+                reservationApiLogicService.delete(Long.valueOf(myCookies[i].getName()));
+                expiredCookie(response, myCookies[i].getName());
+            }
+        }
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_main")
+                    .addObject("code", "Mypage_main");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
+    }
     @RequestMapping("/index/mypageGetReservationDetail/{reIndex}")
     public ModelAndView mypageGetReservationDetail(HttpServletResponse response, HttpServletRequest request,
                                                    Model model, @PathVariable(name="reIndex") Long reIndex) {
@@ -500,26 +499,6 @@ public class PageController {
                     .addObject("code", "add_qna");
         }
     }
-    @RequestMapping("/index/mypageMain")
-    public ModelAndView mypageMain(HttpServletResponse response, HttpServletRequest request, Model model) {
-        Cookie[] myCookies = request.getCookies();
-        for(int i = 0; i < myCookies.length; i++) {
-            if(myCookies[i].getValue().equals("reIndex")){
-                reservationApiLogicService.delete(Long.valueOf(myCookies[i].getName()));
-                expiredCookie(response, myCookies[i].getName());
-            }
-        }
-        HttpSession session = request.getSession();
-        if(session.getAttribute("memberApiResponse") != null){
-            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
-            return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_main")
-                    .addObject("code", "Mypage_main");
-        }else{
-            return new ModelAndView("/userpage/pages/index/error")
-                    .addObject("code", "add_qna");
-        }
-    }
     @RequestMapping("/index/mypagePoint")
     public ModelAndView mypagePoint(HttpServletResponse response, HttpServletRequest request, Model model) {
         Cookie[] myCookies = request.getCookies();
@@ -541,6 +520,125 @@ public class PageController {
         }
 
     }
+
+    // 사용자 예약 취소
+    @RequestMapping("/cancel/{reIndex}")
+    public ModelAndView cancel(HttpServletRequest request, HttpServletResponse response, Model model
+            , @PathVariable(name="reIndex") Long reIndex){
+        Cookie[] myCookies = request.getCookies();
+        for(int i = 0; i < myCookies.length; i++) {
+            if(myCookies[i].getValue().equals("reIndex")){
+                reservationApiLogicService.delete(Long.valueOf(myCookies[i].getName()));
+                expiredCookie(response, myCookies[i].getName());
+            }
+        }
+
+        List reserveApiResponse;
+        String people;
+        people = reservationApiLogicService.read(reIndex).getData().getRePeopleType();
+
+        String[] person = people.split(" ");
+        int personNum;
+        if(person.length == 6){
+            personNum = Integer.parseInt(person[1]) + Integer.parseInt(person[3]) + Integer.parseInt(person[5]);
+        }else if(person.length == 4){
+            personNum = Integer.parseInt(person[1]) + Integer.parseInt(person[3]);
+        }else{
+            personNum = Integer.parseInt(person[1]);
+        }
+        reserveApiResponse = reservationApiLogicService.find(reIndex, Long.valueOf(personNum)*2+reIndex -1).getData();
+        model.addAttribute("reserveApiResponse", reserveApiResponse);
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
+            return new ModelAndView("/userpage/pages/payment/cancel_booking")
+                    .addObject("code", "faq_list");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
+    }
+    // 사용자 예약 취소
+    @RequestMapping("/cancelMd/{reIndex}")
+    public ModelAndView cancelMd(HttpServletRequest request, HttpServletResponse response, Model model
+            , @PathVariable(name="reIndex") Long reIndex){
+        Cookie[] myCookies = request.getCookies();
+        for(int i = 0; i < myCookies.length; i++) {
+            if(myCookies[i].getValue().equals("reIndex")){
+                reservationApiLogicService.delete(Long.valueOf(myCookies[i].getName()));
+                expiredCookie(response, myCookies[i].getName());
+            }
+        }
+
+        List reserveApiResponse;
+        String people;
+        people = reservationApiLogicService.read(reIndex).getData().getRePeopleType();
+
+        String[] person = people.split(" ");
+        int personNum;
+        if(person.length == 6){
+            personNum = Integer.parseInt(person[1]) + Integer.parseInt(person[3]) + Integer.parseInt(person[5]);
+        }else if(person.length == 4){
+            personNum = Integer.parseInt(person[1]) + Integer.parseInt(person[3]);
+        }else{
+            personNum = Integer.parseInt(person[1]);
+        }
+        reserveApiResponse = reservationApiLogicService.findCancel(reIndex, Long.valueOf(personNum)*2+reIndex -1).getData();
+        model.addAttribute("reserveApiResponse", reserveApiResponse);
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
+            return new ModelAndView("/userpage/pages/payment/cancel_booking_md")
+                    .addObject("code", "faq_list");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
+    }
+    // 사용자 예약 취소 완료
+    @RequestMapping("/cancel/complete")
+    public ModelAndView cancelComplete(HttpServletRequest request, HttpServletResponse response, Model model) {
+        Cookie[] myCookies = request.getCookies();
+        for(int i = 0; i < myCookies.length; i++) {
+            if(myCookies[i].getValue().equals("reIndex")){
+                reservationApiLogicService.delete(Long.valueOf(myCookies[i].getName()));
+                expiredCookie(response, myCookies[i].getName());
+            }
+        }
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
+            return new ModelAndView("/userpage/pages/payment/completePayment")
+                    .addObject("code", "faq_list");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
+    }
+    @RequestMapping("/index/mypageCancelService")
+    public ModelAndView mypageCancelService(HttpServletResponse response, HttpServletRequest request, Model model) {
+        Cookie[] myCookies = request.getCookies();
+        for(int i = 0; i < myCookies.length; i++) {
+            if(myCookies[i].getValue().equals("reIndex")){
+                reservationApiLogicService.delete(Long.valueOf(myCookies[i].getName()));
+                expiredCookie(response, myCookies[i].getName());
+            }
+        }
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/faq_list")
+                    .addObject("code", "faq_list");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
+    }
+
     @RequestMapping("/index/mypageQna")
     public ModelAndView mypageQna(HttpServletResponse response, HttpServletRequest request, Model model) {
         Cookie[] myCookies = request.getCookies();
@@ -999,30 +1097,7 @@ public class PageController {
         return new ModelAndView("/userpage/pages/payment/payReservation")
                 .addObject("code", "payReservation");
     }
-        // 사용자 예약 취소
-    @RequestMapping("/cancel")
-    public ModelAndView cancel(HttpServletRequest request, HttpServletResponse response, Model model){
-        HttpSession session = request.getSession();
-        if(session.getAttribute("memberApiResponse") != null){
-            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-        }else{
-            model.addAttribute("loginURL", "/userpage/fragment/menu");
-        }
-        return new ModelAndView("/userpage/pages/payment/cancel_booking")
-                .addObject("code", "cancel_booking");
-    }
-    // 사용자 예약 취소 완료
-    @RequestMapping("/cancel/complete")
-    public ModelAndView cancelComplete(HttpServletRequest request, HttpServletResponse response, Model model) {
-        HttpSession session = request.getSession();
-        if(session.getAttribute("memberApiResponse") != null){
-            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-        }else{
-            model.addAttribute("loginURL", "/userpage/fragment/menu");
-        }
-        return new ModelAndView("/userpage/pages/payment/completePayment")
-                .addObject("code", "completePayment");
-    }
+
     // 사용자 결제 완료
     @RequestMapping("/complete")
     public ModelAndView complete(HttpServletRequest request, HttpServletResponse response, Model model) {

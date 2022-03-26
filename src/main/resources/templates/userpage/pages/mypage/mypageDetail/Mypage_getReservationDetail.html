@@ -20,6 +20,8 @@
             <input type="hidden" id="reIndex1" th:value="${reserveApiResponse[0].reIndex}">
             <input type="hidden" id="reTripKind" th:value="${reserveApiResponse[0].reTripKind}">
             <input type="hidden" id="rePeopleType" th:value="${reserveApiResponse[0].rePeopleType}">
+            <input type="hidden" id="reSchStartTime" th:value="${reserveApiResponse[0].reSchStartTime}">
+            <input type="hidden" id="reSchStartTime2" th:value="${reserveApiResponse[1].reSchStartTime}">
             <div class="mypage_main w_1160">
                 <div class="mypage_menu">
                     <p>마이<br>페이지</p>
@@ -111,10 +113,10 @@
                         <tbody>
                             <tr class="memberDetail" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
                                 <td>[[${dto.reFirstName}]][[${dto.reLastName}]]</td>
-                                <td th:class="'rePeopleType'+${i.index}">성인</td>
-                                <td th:text="${dto.reGender}">여</td>
+                                <td th:class="'rePeopleType'+${i.index}"></td>
+                                <td th:text="${dto.reGender}"></td>
                                 <td th:class="'reBirth'+${i.index}">[[${dto.reBirth}]]</td>
-                                <td th:text="${dto.reNation}">한국 (REPUBLIC OF KOREA)</td>
+                                <td th:text="${dto.reNation}"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -569,7 +571,7 @@
                         <p class="modal_text reser_cancel_btn">항공권 취소/환불</p>
                         <p class="modal_text sub_service_btn">부가서비스 구매/취소</p>
                         <p class="modal_text trip_btn">여행보험 가입</p>
-                        <p><a href="Mypage_main.html">처음으로</a></p>
+                        <p><a href="/pages/index/mypageMain">처음으로</a></p>
                     </div>
                 </div>
             </div>
@@ -608,36 +610,11 @@
                     <li>- 예약 변경 시 운임 규정에 따라 수수료가 발생할 수 있습니다.</li>
                     <li>초과수하물을 제외한 부가서비스는 자동 취소되오니 다시 구매하여 주시기 바랍니다. (취소 기한 내에만 환불 가능)</li>
                     <li>여정 변경 시 기존에 신청한 자동체크인 서비스도 함께 취소됩니다.</li>
-                    <li>가족할인/기업우대 등의 추가할인을 받으신 이후 예약을 분리하는 경우에는 할인 조건 미충족으로 인해 예약변경이 불가하거나 수속 시 추가 금액이 징수 될 수 있습니다.</li>
+                    <li>가족할인/기업우대 등의 추가할인을 받으신 이후 예약을 분리하는 경우에는</li>
+                    <li>할인 조건 미충족으로 인해 예약변경이 불가하거나 수속 시 추가 금액이 징수 될 수 있습니다.</li>
                     <li>일부 승객 선택 시 예약이 분리되어 진행됩니다.</li>
                 </ul>
-                <p>* 예약을 변경하고자 하는 인원 및 여정을 선택해주십시오.</p>
                 <div class="modal_table">
-                    <table class="bbsList">
-                        <thead>
-                            <tr>
-                                <th scope="col"><input type="checkbox" name="people" id="peopleAll1" class="peopleAll">
-                                </th>
-                                <th scope="col"><label for="peopleAll1">승객명</label></th>
-                                <th scope="col"><input type="checkbox" name="trip" id="tripAll1" class="tripAll"></th>
-                                <th scope="col"><label for="tripAll1">여정</label></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row"><input type="checkbox" class="people_name"></th>
-                                <td scope="col">라/승현</td>
-                                <th scope="row"><input type="checkbox" class="trip_name"></th>
-                                <td scope="col">서울/김포(GMP) - 제주(CJU)</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><input type="checkbox" class="people_name"></th>
-                                <td scope="col"></td>
-                                <th scope="row"><input type="checkbox" class="trip_name"></th>
-                                <td scope="col">제주(CJU) - 서울/김포(GMP)</td>
-                            </tr>
-                        </tbody>
-                    </table>
                     <div class="modal_btn">
                         <p class="change_ticket">항공권 변경</p>
                         <p class="btn_cancel">취소</p>
@@ -667,33 +644,7 @@
                     <li>* 사전좌석지정/초과수하물/번들 : 출발 24시간 이내 환불 불가</li>
                     <li>* 기내식/유상판매 : 72시간 이내 환불 불가</li>
                 </ul>
-                <p>* 환불하고자 하는 승객 및 여정을 선택해 주십시오.</p>
                 <div class="modal_table">
-                    <table class="bbsList">
-                        <thead>
-                            <tr>
-                                <th scope="col"><input type="checkbox" name="people" id="peopleAll2" class="peopleAll">
-                                </th>
-                                <th scope="col"><label for="peopleAll2">승객명</label></th>
-                                <th scope="col"><input type="checkbox" name="trip" id="tripAll2" class="tripAll"></th>
-                                <th scope="col"><label for="tripAll2">여정</label></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row"><input type="checkbox" class="people_name"></th>
-                                <td scope="col">라/승현</td>
-                                <th scope="row"><input type="checkbox" class="trip_name"></th>
-                                <td scope="col">서울/김포(GMP) - 제주(CJU)</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><input type="checkbox" class="people_name"></th>
-                                <td scope="col"></td>
-                                <th scope="row"><input type="checkbox" class="trip_name"></th>
-                                <td scope="col">제주(CJU) - 서울/김포(GMP)</td>
-                            </tr>
-                        </tbody>
-                    </table>
                     <div class="modal_btn">
                         <p class="next_ticket">다음</p>
                         <p class="btn_cancel">취소</p>
@@ -772,7 +723,7 @@
                     <li>- 제3항에 따라 보험회사에 보험료를 직접 납부한 경우, 회원은 계약자의 권리를 행사할 수 있습니다.</li>
                     <li>- 보험계약에 관한 세부내용은 보험회사가 제공하는 보험약관에 따릅니다.</li>
                 </ul>
-                <input type="checkbox" id="check1" class="check1" c><label for="check1">동의</label>
+                <input type="checkbox" id="check1" class="check1"><label for="check1">동의</label>
                 <div class="nth2h2">
                     <h2>단체 여행보험계약의 체결 및 이행을 위한 개인정보 제3자 제공</h2>
                     <ul>

@@ -5,6 +5,7 @@ import com.project.jinair.model.enumclass.PaymentStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.schedule.ReserveApiRequest;
 import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
+import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import com.project.jinair.service.reservation.ReservationApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -89,11 +90,22 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
         return reservationApiLogicService.find(startIdx, endIdx);
     }
 
-//    @GetMapping("/listnotnull/{startIdx}/{endIdx}") // http://localhost:8080/api/reservation/listNotNull
-//    public Header<List<ReserveApiResponse>> listNotNull(
-//            @PathVariable(name = "startIdx") Long startIdx, @PathVariable(name = "endIdx") Long endIdx) {
-//        return reservationApiLogicService.listNotNull(startIdx, endIdx);
-//    }
+    @GetMapping("/listCancel/{startIdx}/{endIdx}") // http://localhost:8080/api/reservation/list
+    public Header<List<ReserveApiResponse>> findCancel(
+            @PathVariable(name = "startIdx") Long startIdx, @PathVariable(name = "endIdx") Long endIdx) {
+        return reservationApiLogicService.findCancel(startIdx, endIdx);
+    }
+
+    @PostMapping("/list/seat")
+    public Header<List<ReserveApiResponse>> findseat(
+            @RequestBody  Header<ReserveApiRequest> request)
+    {
+        System.out.println(request);
+        return reservationApiLogicService.findseat(request);
+    }
+
+
+
 
     @Override
     @PostMapping("")
@@ -152,6 +164,10 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     @PutMapping("/updating2")
     public void updating2(@RequestBody Header<ReserveApiRequest> request) {
         reservationApiLogicService.updating2(request);
+    }
+    @PutMapping("/updating3")
+    public void updating3(@RequestBody Header<ReserveApiRequest> request) {
+        reservationApiLogicService.updating3(request);
     }
 
 

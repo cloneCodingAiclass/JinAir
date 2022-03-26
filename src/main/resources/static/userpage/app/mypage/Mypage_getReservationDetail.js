@@ -494,36 +494,95 @@ $(function () {
 
 
 
-
-
-
-
-
-
-
     if($('#reTripKind').val() == '편도'){
         $('.ifOnewayD').css('display', 'none');
         searchStart();
         searchStart3();
+
+        let today = new Date();
+        let year = today.getFullYear();
+        let month = ('0' + (today.getMonth() + 1)).slice(-2);
+        let day = ('0' + today.getDate()).slice(-2);
+        let hours = ('0' + today.getHours()).slice(-2);
+        let minutes = ('0' + today.getMinutes()).slice(-2);
+        let seconds = ('0' + today.getSeconds()).slice(-2);
+        let dates = new Date(year, month, day, hours, minutes, seconds);           // 현재 시각
+
+        let years = $('#reSchStartTime').val().substr(0, 4)
+        let months = $('#reSchStartTime').val().substr(5, 2)
+        let days = $('#reSchStartTime').val().substr(8, 2)
+        let hourss = $('#reSchStartTime').val().substr(11, 2)
+        let minutess = $('#reSchStartTime').val().substr(14, 2)
+        let secondss = $('#reSchStartTime').val().substr(17, 2)
+        let datess = new Date(years, months, days, hourss, minutess, secondss);     // 스케줄
+
+        if(dates > datess){
+            $('.modal_text').css('display', 'none');
+        }
+
+            /* 항공권 취소 */
+        $('.reser_cancel_btn').click(function () {
+            $('.reser_cancel').css('display', 'flex');
+            $('.reser_cancel').fadeIn(200);
+            $('.next_ticket').click(function () {
+                location.href = "/pages/cancel/"+reIndex1;
+            });
+        });
+
     }else{
         searchStart();
         searchStart2();
         searchStart4();
+
+        let today = new Date();
+        let year = today.getFullYear();
+        let month = ('0' + (today.getMonth() + 1)).slice(-2);
+        let day = ('0' + today.getDate()).slice(-2);
+        let hours = ('0' + today.getHours()).slice(-2);
+        let minutes = ('0' + today.getMinutes()).slice(-2);
+        let seconds = ('0' + today.getSeconds()).slice(-2);
+        let dates = new Date(year, month, day, hours, minutes, seconds);           // 현재 시각
+
+        let years = $('#reSchStartTime').val().substr(0, 4)
+        let months = $('#reSchStartTime').val().substr(5, 2)
+        let days = $('#reSchStartTime').val().substr(8, 2)
+        let hourss = $('#reSchStartTime').val().substr(11, 2)
+        let minutess = $('#reSchStartTime').val().substr(14, 2)
+        let secondss = $('#reSchStartTime').val().substr(17, 2)
+        let datess = new Date(years, months, days, hourss, minutess, secondss);     // 스케줄
+
+        let years2 = $('#reSchStartTime2').val().substr(0, 4)
+        let months2 = $('#reSchStartTime2').val().substr(5, 2)
+        let days2 = $('#reSchStartTime2').val().substr(8, 2)
+        let hourss2 = $('#reSchStartTime2').val().substr(11, 2)
+        let minutess2 = $('#reSchStartTime2').val().substr(14, 2)
+        let secondss2 = $('#reSchStartTime2').val().substr(17, 2)
+        let datess2 = new Date(years2, months2, days2, hourss2, minutess2, secondss2);     // 스케줄
+
+        if(dates > datess && dates > datess2){
+            $('.modal_text').css('display', 'none');
+        }
+
+        if(dates < datess){             // 지난 스케줄이 아닌 경우
+            /* 항공권 취소 */
+            $('.reser_cancel_btn').click(function () {
+                $('.reser_cancel').css('display', 'flex');
+                $('.reser_cancel').fadeIn(200);
+                $('.next_ticket').click(function () {
+                    location.href = "/pages/cancel/"+reIndex1;
+                });
+            });
+        }else{                          // 지난 스케줄이 하나라도 있는 경우
+            /* 항공권 취소 */
+            $('.reser_cancel_btn').click(function () {
+                $('.reser_cancel').css('display', 'flex');
+                $('.reser_cancel').fadeIn(200);
+                $('.next_ticket').click(function () {
+                    location.href = "/pages/cancelMd/"+reIndex1;
+                });
+            });
+        }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     $('.infoboxli1').click(function () {
@@ -548,41 +607,13 @@ $(function () {
         $('.reser_change').css('display', 'flex');
         $('.reser_change').fadeIn(200);
         $('.change_ticket').click(function () {
-            let tripcheck = $('.trip_name').is(':checked');
-            let peoplecheck = $('.people_name').is(':checked');
-
-            if (!tripcheck || !peoplecheck) {
-                $('.false_modal').css('display', 'flex');
-                $('.confirm_btn').click(function () {
-                    $('.false_modal').css('display', 'none');
-                });
-            } else {
-                alert('넘어가자');
-
-            }
+            alert('넘어가자');
             $('.btn_cancel').click(function () {
                 $('.reser_change').hide();
             })
         });
     });
-    /* 항공권 취소 */
-    $('.reser_cancel_btn').click(function () {
-        $('.reser_cancel').css('display', 'flex');
-        $('.reser_cancel').fadeIn(200);
-        $('.next_ticket').click(function () {
-            let tripcheck = $('.trip_name').is(':checked');
-            let peoplecheck = $('.people_name').is(':checked');
 
-            if (!tripcheck || !peoplecheck) {
-                $('.false_modal').css('display', 'flex');
-                $('.confirm_btn').click(function () {
-                    $('.false_modal').css('display', 'none');
-                });
-            } else {
-                location.href = '/UserPage/payment/cancel_booking.html'
-            }
-        });
-    });
 
     /* 부가서비스 */
     $('.sub_service_btn').click(function () {
@@ -593,7 +624,7 @@ $(function () {
         location.href = "/UserPage/payment/extras.html";
     })
     $('.cancel_service').click(function () {
-        location.href = "/UserPage/index/mypage/Mypage_cancel_service.html";
+        location.href = "/pages/index/mypageCancelService";
     })
     /* 공통 버튼 */
     $('.btn_cancel').click(function () {
@@ -640,7 +671,7 @@ $(function () {
                     $('.trip_false_modal').hide();
                 });
             } else {
-                location.href = "https://ec.aceinsurance.co.kr/"
+                location.href = "https://travel.assistcard.co.kr/main/app/app_wrt.php?siteCode=MU1UTw=="
             }
         })
     });
