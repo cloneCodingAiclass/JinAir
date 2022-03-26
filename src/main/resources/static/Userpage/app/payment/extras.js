@@ -614,16 +614,22 @@ $(function () {
     $("#seat_info_view1-1").css("display", "block");
     $(".seat_view1").not("#seat_view1-1").css("display", "none");
     $("#seat_view1-1").css("display", "block");
+    $(".seat_info_view1").remove("#seat_info_view1-2, #seat_info_view1-3");
+    $(".seat_view1").remove("#seat_view1-2, #seat_view1-3");
   } else if (type1 == 'B737-900') {
     $(".seat_info_view1").not("#seat_info_view1-2").css("display", "none");
     $("#seat_info_view1-2").css("display", "block");
     $(".seat_view1").not("#seat_view1-2").css("display", "none");
     $("#seat_view1-2").css("display", "block");
+    $(".seat_info_view1").remove("#seat_info_view1-1, #seat_info_view1-3");
+    $(".seat_view1").remove("#seat_view1-1, #seat_view1-3");
   } else {
     $(".seat_info_view1").not("#seat_info_view1-3").css("display", "none");
     $("#seat_info_view1-3").css("display", "block");
     $(".seat_view1").not("#seat_view1-3").css("display", "none");
     $("#seat_view1-3").css("display", "block");
+    $(".seat_info_view1").remove("#seat_info_view1-1, #seat_info_view1-2");
+    $(".seat_view1").remove("#seat_view1-1, #seat_view1-2");
   }
 
   if (type2 == 'B737-800') {
@@ -631,27 +637,27 @@ $(function () {
     $("#seat_info_view2-1").css("display", "block");
     $(".seat_view2").not("#seat_view2-1").css("display", "none");
     $("#seat_view2-1").css("display", "block");
+    $(".seat_info_view2").remove("#seat_info_view2-2, #seat_info_view2-3");
+    $(".seat_view2").remove("#seat_view2-2, #seat_view2-3");
   } else if (type2 == 'B737-900') {
     $(".seat_info_view2").not("#seat_info_view2-2").css("display", "none");
     $("#seat_info_view2-2").css("display", "block");
     $(".seat_view2").not("#seat_view2-2").css("display", "none");
     $("#seat_view2-2").css("display", "block");
+    $(".seat_info_view2").remove("#seat_info_view2-1, #seat_info_view2-3");
+    $(".seat_view2").remove("#seat_view2-1, #seat_view2-3");
   } else {
     $(".seat_info_view2").not("#seat_info_view2-3").css("display", "none");
     $("#seat_info_view2-3").css("display", "block");
     $(".seat_view2").not("#seat_view2-3").css("display", "none");
     $("#seat_view2-3").css("display", "block");
+    $(".seat_info_view2").remove("#seat_info_view2-1, #seat_info_view2-2");
+    $(".seat_view2").remove("#seat_view2-1, #seat_view2-2");
   }
 
 
   // multiway
-  for (let i = 0; i < indexArr.length; i++) {
-    // 좌석번호 구간1
-    // 좌석번호 구간2
-    // 수하물 선택 구간1
-    // 수하물 선택 구간2
-    // 보험
-  }
+
 
   let href = $(location).attr('href').split('/');
 
@@ -1499,15 +1505,12 @@ $(function () {
       contentType : "application/json",
       success : function(response){
         console.dir(response);
-        console.log(response.data.reSeatDetail);
         for(let i = 0; i < response.data.length; i++) {
+          seatArr1[i] = "";
           seatArr1[i] = response.data[i].reSeatDetail;
-          console.log(seatArr1[i])
+          // console.log(seatArr1[i]);
         }
-        seatList1.seatList1 = response.data.reSeatDetail;
-        alert("성공")
-      }, error : function() {
-        alert("실패")
+        seat1();
       }
     });
   }
@@ -1527,45 +1530,92 @@ $(function () {
       dateType: 'text',
       contentType : "application/json",
       success : function(response){
-        console.dir(response);
-        seatList2.seatList2 = response.data.reSeatDetail;
         for(let i = 0; i < response.data.length; i++) {
+          seatArr2[i] = "";
           seatArr2[i] = response.data[i].reSeatDetail;
-          console.log(seatArr2[i])
+          // console.log(seatArr2[i]);
         }
-        alert("성공")
-      }, error : function() {
-        alert("실패")
+        seat2();
       }
     });
   }
 
-  // 구간 1 마감 좌석
 
-  // 구간 2 마감 좌석
-  for (let i = 0; i < seatArr2.length; i++) {
-      let box = seatArr2[i];
-      for (let i = 0; i < $(".SSC2").length; i++) {
-        if ($(this).attr("id") == "2_"+box+"") {
-          alert(box);
+  // 구간 1 마감 좌석
+  function seat1() {
+    $(".SSC").each(function(index){
+      console.log(index + " : " + $(this).attr("id"));
+      let id = seatArr1[index];
+      for (let i = 0; i < seatArr1.length; i++) {
+        if ($(this).attr("id") == seatArr1[i]) {
+          let label = $(this).next();
+          if (label.hasClass("box1")) {
+            label.removeClass('box1')
+            label.addClass("box7");
+          } else if (label.hasClass("box2")){
+            label.removeClass('box2')
+            label.addClass("box7");
+          } else if (label.hasClass("box3")){
+            label.removeClass('box3')
+            label.addClass("box7");
+          } else if (label.hasClass("box4")){
+            label.removeClass('box4')
+            label.addClass("box7");
+          } else if (label.hasClass("box5")){
+            label.removeClass('box5')
+            label.addClass("box7");
+          } else if (label.hasClass("box6")){
+            label.removeClass('box6')
+            label.addClass("box7");
+          } else if (label.hasClass("boxBiz")){
+            label.removeClass('boxBiz')
+            label.addClass("box8");
+          } else if (label.hasClass("boxPlus")){
+            label.removeClass('boxPlus')
+            label.addClass("box8");
+          }
         }
       }
+    })
   }
-
-
-  let seatList1 = new Vue({
-    el : '#seatList1',
-    data : {
-      seatList1 : {}
-    }
-  })
-
-  let seatList2 = new Vue({
-    el : '#seatList2',
-    data : {
-      seatList2 : {}
-    }
-  })
+  // 구간 2 마감 좌석
+  function seat2() {
+    $(".SSC2").each(function(index){
+      console.log(index + " : " + $(this).attr("id"));
+      let id = seatArr1[index];
+      let thisid = "2_"+$(this).attr("id");
+      for (let i = 0; i < seatArr1.length; i++) {
+        if (thisid == seatArr1[i]) {
+          let label = $(this).next();
+          if (label.hasClass("box1")) {
+            label.removeClass('box1')
+            label.addClass("box7");
+          } else if (label.hasClass("box2")){
+            label.removeClass('box2')
+            label.addClass("box7");
+          } else if (label.hasClass("box3")){
+            label.removeClass('box3')
+            label.addClass("box7");
+          } else if (label.hasClass("box4")){
+            label.removeClass('box4')
+            label.addClass("box7");
+          } else if (label.hasClass("box5")){
+            label.removeClass('box5')
+            label.addClass("box7");
+          } else if (label.hasClass("box6")){
+            label.removeClass('box6')
+            label.addClass("box7");
+          } else if (label.hasClass("boxBiz")){
+            label.removeClass('boxBiz')
+            label.addClass("box8");
+          } else if (label.hasClass("boxPlus")){
+            label.removeClass('boxPlus')
+            label.addClass("box8");
+          }
+        }
+      }
+    })
+  }
 
 
   // 결제정보 전송
