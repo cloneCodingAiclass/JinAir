@@ -137,13 +137,9 @@ $(function () {
 
   let a = $(".detail1").offset().top - 30;
   let x = $(".detail1").offset().left + 30;
-  let b = $(".detail2").offset().top - 30;
-  let y = $(".detail2").offset().left + 30;
 
-  $(".modal_flight_info1").css("top", a);
-  $(".modal_flight_info2").css("top", b);
   $(".modal_flight_info1").css("left", x);
-  $(".modal_flight_info2").css("left", y);
+  $(".modal_flight_info1").css("top", a);
 
   /*여정 및 운임정보 끝*/
 
