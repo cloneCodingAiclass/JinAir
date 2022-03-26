@@ -4,6 +4,8 @@
 <!-- head -->
 <div th:replace="userpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/userpage/lib/css/payment/payReservation.css"/>
+<script src="/userpage/app/payment/payReservation.js"></script>
+<script src="/userpage/app/payment/payment.js"></script>
 <!-- head 끝 -->
 <body>
 <div>
@@ -11,7 +13,7 @@
     <input type="hidden" class="memid" th:each="memid, i : ${reserveApiResponse1}" th:if="${memid.reUserindex} != null and ${i.count} % 2 != 0" th:value="${memid.reUserindex}">
     <input type="hidden" class="insuranceIndex" th:each="insuranceIndex : ${reserveApiResponse1}" th:if="${insuranceIndex.reInsuranceidx} != null" th:id="${insuranceIndex.reIndex}" th:value="${insuranceIndex.reInsuranceidx}">
     <input type="hidden" class="baggageIndex" th:each="baggageIndex : ${reserveApiResponse1}" th:if="${baggageIndex.reBaggageidx} != null" th:id="${baggageIndex.reIndex}" th:value="${baggageIndex.reBaggageidx}">
-    <input type="hidden" class="seatNum" th:each="seat : ${reserveApiResponse1}" th:if="${seat.reIndex} != null" th:id="${seat.reSeatDetail}" th:value="${seat.reSeatPrice}" th:value2="${seat.reIndex}">
+    <input type="hidden" class="seatNum" th:each="seat : ${reserveApiResponse1}" th:if="${seat.reIndex} != null" th:id="${seat.reSeatDetail}" th:value="${seat.reSeatPrice}">
 </div>
 <ul class="skipnavi">
     <!--책갈피 역할-->
@@ -322,13 +324,11 @@
                                             <td></td>
                                         </tr>
                                         <tr>
-                                            <td><span class="name">[[${opt1.reFirstName}]]/[[${opt1.reLastName}]]</span></td>
+                                            <td c><span class="name">[[${opt1.reFirstName}]]/[[${opt1.reLastName}]]</span></td>
                                             <td></td>
                                             <td>
                                                 <div class="td_wrap">
-                                                    <span class="cul">KRW</span>
-                                                    <span class="price priceOpt" th:if="${opt1.reSeatPrice} != null" th:id="${opt1.reIndex}"></span>
-                                                    <span class="price" th:if="${opt1.reSeatPrice} == null" th:text="0"></span>
+                                                    <span class="cul">KRW</span><span class="price priceOpt" th:if="${opt1.reSeatPrice} != null" th:value="${opt1.reSeatPrice}"><span class="price" th:if="${opt1.reSeatPrice} == null" th:text="0"></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -366,12 +366,10 @@
                                         <tr>
                                             <td><span class="name">[[${opt2.reFirstName}]]/[[${opt2.reLastName}]]</span></td>
                                             <td class="bgst" th:if="${opt2.reBaggageidx} != null" th:value="${opt2.reBaggageidx}"></td>
-                                            <td class="bgst" th:if="${opt2.reBaggageidx} == null"></td>
                                             <td>
                                                 <div class="td_wrap">
                                                     <span class="cul">KRW</span>
                                                     <span class="price bgPrice" th:id="${opt2.reBaggageidx}">
-                                                    <span class="price" th:if="${opt2.reBaggageidx} == null" th:text="0"></span>
                                                     </span>
                                                 </div>
                                             </td>
@@ -409,12 +407,11 @@
                                         </tr>
                                         <tr>
                                             <td><span class="name">[[${opt3.reFirstName}]]/[[${opt3.reLastName}]]</span></td>
-                                            <td class="insType" th:if="${opt3.reInsuranceidx} != null" th:class="issu" th:value="${opt3.reInsuranceidx}"></td>
-                                            <td class="insType" th:if="${opt3.reInsuranceidx} == null" th:class="issu"></td>
+                                            <td class="insType" th:if="${opt3.reInsuranceidx} != ''" th:class="issu" th:value="${opt3.reInsuranceidx}"></td>
                                             <td>
                                                 <span class="cul">KRW</span>
-                                                <span th:if="${opt3.reInsuranceidx} != null" class="price insPrice" th:value="${opt3.reInsuranceidx}"></span>
-                                                <span th:if="${opt3.reInsuranceidx} == null" class="price insPrice" th:text="0"></span>
+                                                <span th:if="${opt3.reInsuranceidx} != ''" class="price insPrice" th:value="${opt3.reInsuranceidx}">
+                                                    </span>
                                             </td>
                                         </tr>
                                 </table>
@@ -2325,6 +2322,5 @@
     </div>
 </div>
 </body>
-<script src="/userpage/app/payment/payReservation.js"></script>
-<script src="/userpage/app/payment/payment.js"></script>
+
 </html>
