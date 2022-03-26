@@ -17,7 +17,7 @@ public interface TbReservationRepository extends JpaRepository<TbReservation, Lo
     Optional<TbReservation> findByReUserindexAndReStatus(Long id, PaymentStatus paymentStatus);
     List<TbReservation> findAllByReUserindexAndReStatus(Long id, PaymentStatus paymentStatus);
     List<TbReservation> findAllByReIndexBetween(Long startIdx, Long endIdx);
-//    List<TbReservation> findAllByReIndexBetweenAndReIndexOdd(Long startIdx, Long endIdx);
+    List<TbReservation> findAllByReIndexBetweenAndReSchStartTimeGreaterThan(Long startIdx, Long endIdx, LocalDateTime reSchStartTime);
     List<TbReservation> findByReSchDepPointAndReSchArrPointAndReSchStartTime(String reSchDepPoint, String reSchArrPoint, LocalDateTime reSchStartTime);
     List<TbReservation> findFirstByReReserNum(String a);
     List<TbReservation> findByReUserindexAndReSchStartTimeGreaterThanOrderByReSchStartTimeAsc(Long reUserindex, LocalDateTime local);
@@ -27,6 +27,5 @@ public interface TbReservationRepository extends JpaRepository<TbReservation, Lo
     Optional<TbReservation> findByReSchName(String reSchName);
 
     Page<TbReservation> findByReAirplainTypeAndReSchNameAndReSchStartTimeAndReSchDepPointAndReSchArrPoint(String airType, String airName, LocalDateTime StartTime, String startPoint, String ArrivePoint, Pageable pageable);
-
 
 }
