@@ -35,13 +35,6 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
         return Header.OK(ReserveApiResponse);
     }
 
-//    public Header<List<ReserveApiResponse>> listNotNull(Long startIdx, Long endIdx){
-//        List<TbReservation> tbReservations = tbReservationRepository.findAllByReIndexBetweenAndReIndexOdd(startIdx, endIdx);
-//        List<ReserveApiResponse> ReserveApiResponse = tbReservations.stream()
-//                .map(user -> responseReservation(user))
-//                .collect(Collectors.toList());
-//        return Header.OK(ReserveApiResponse);
-//    }
 
     public Header<List<ReserveApiResponse>> findseat(Header<ReserveApiRequest> request){
         ReserveApiRequest reserveApiRequest = request.getData();
@@ -252,7 +245,6 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
 
     public ReserveApiResponse paymentsUpdate(List<ReserveApiRequest> request) {
 
-        System.out.println(request);
         int size = request.size();
 
         for (int i = 0; i < size; i++) {
@@ -267,9 +259,6 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
             Long reBaggageidx = request.get(i).getReBaggageidx();
             Long reInsuranceidx = request.get(i).getReInsuranceidx();
             Long reSeatPrice = request.get(i).getReSeatPrice();
-
-            System.out.println(reBaggageidx);
-            System.out.println(reInsuranceidx);
 
             reservation.ifPresent(
                     selectPay -> {

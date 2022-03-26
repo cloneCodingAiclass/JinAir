@@ -248,6 +248,8 @@ $(() => {
                     $('.bgPrice').eq(i).text(bgsum.toLocaleString());
                     bgTotal += Number(response.data.bgPrice);
                     $('#bagPriceT').text(bgTotal.toLocaleString());
+                }else{
+                    console.log("null");
                 }
             })
         });
@@ -262,6 +264,8 @@ $(() => {
                     $('.issu').eq(i).text(isType);
                     insT += Number(response.data.isPrice);
                     $('.incPriceT').text(insT.toLocaleString());
+                }else{
+                    console.log("null");
                 }
             });
         })
@@ -273,31 +277,66 @@ $(() => {
                 let seatPrice = $('.seatNum').eq(i).attr("value");
                 $('.priceOpt').eq(i).text(seatPrice.toLocaleString());
                 seatT += Number(seatPrice);
+            }else{
+                console.log("null");
             }
         });
         $('.seatT').text(seatT.toLocaleString());
-        let seatTF = 0;
         let insTF = 0;
         let bgTotalF = 0;
         $('.cookies').each(function (i) {
             let bagidx = $('.baggageIndex').eq(i).attr("value");
-            $.get("/api/optional/baggage/" + bagidx, function (response) {
-                if(response.data.bgPrice != null){
-                    bgTotalF += Number(response.data.bgPrice);
-                }
-                let ins = $('.insuranceIndex').eq(i).attr("value");
+            let ins = $('.insuranceIndex').eq(i).attr("value");
+            if(bagidx != null && ins != null){
+                $.get("/api/optional/baggage/" + bagidx, function (response) {
+                    if(response.data.bgPrice != null){
+                        bgTotalF += Number(response.data.bgPrice);
+                    }else{
+                        console.log("null");
+                    }
+                    $.get("/api/optional/insurance/" + ins, function (response) {
+                        if(response.data.isPrice != null){
+                            insTF += Number(response.data.isPrice);
+                        }else{
+                            console.log("null");
+                        }
+                        $('.optPrice').text((bgTotalF + insTF + seatT).toLocaleString());
+                        let price = Number(priceSum + bgTotalF + insTF + seatT);
+                        $('#pPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
+                        $('#totalPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
+                    })
+                })
+            }else if(bagidx == null && ins != null){
                 $.get("/api/optional/insurance/" + ins, function (response) {
                     if(response.data.isPrice != null){
                         insTF += Number(response.data.isPrice);
-                }
-                    $('.optPrice').text((bgTotalF + insTF + seatT).toLocaleString());
-
-                    let price = Number(priceSum + bgTotalF + insTF + seatT);
+                    }else{
+                        console.log("null");
+                    }
+                    $('.optPrice').text((insTF + seatT).toLocaleString());
+                    let price = Number(priceSum+ insTF + seatT);
                     $('#pPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
                     $('#totalPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
-            })
+                })
+            }else if((bagidx != null && ins == null)) {
+                $.get("/api/optional/baggage/" + bagidx, function (response) {
+                    if (response.data.bgPrice != null) {
+                        bgTotalF += Number(response.data.bgPrice);
+                    } else {
+                        console.log("null");
+                    }
+                    $('.optPrice').text((bgTotalF + seatT).toLocaleString());
+                    let price = Number(priceSum + bgTotalF + seatT);
+                    $('#pPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
+                    $('#totalPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
+                })
+            }else if(bagidx == null && ins == null) {
+                $('.optPrice').text((seatT).toLocaleString());
+                let price = Number(priceSum);
+                $('#pPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
+                $('#totalPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
+            }
         })
-    })
     };
 
     });

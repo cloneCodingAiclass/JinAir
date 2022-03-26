@@ -326,7 +326,9 @@
                                             <td></td>
                                             <td>
                                                 <div class="td_wrap">
-                                                    <span class="cul">KRW</span><span class="price priceOpt" th:if="${opt1.reSeatPrice} != null" th:id="${opt1.reIndex}"></span><span class="price" th:if="${opt1.reSeatPrice} == null" th:text="0"></span>
+                                                    <span class="cul">KRW</span>
+                                                    <span class="price priceOpt" th:if="${opt1.reSeatPrice} != null" th:id="${opt1.reIndex}"></span>
+                                                    <span class="price" th:if="${opt1.reSeatPrice} == null" th:text="0"></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -364,10 +366,12 @@
                                         <tr>
                                             <td><span class="name">[[${opt2.reFirstName}]]/[[${opt2.reLastName}]]</span></td>
                                             <td class="bgst" th:if="${opt2.reBaggageidx} != null" th:value="${opt2.reBaggageidx}"></td>
+                                            <td class="bgst" th:if="${opt2.reBaggageidx} == null"></td>
                                             <td>
                                                 <div class="td_wrap">
                                                     <span class="cul">KRW</span>
                                                     <span class="price bgPrice" th:id="${opt2.reBaggageidx}">
+                                                    <span class="price" th:if="${opt2.reBaggageidx} == null" th:text="0"></span>
                                                     </span>
                                                 </div>
                                             </td>
@@ -406,6 +410,7 @@
                                         <tr>
                                             <td><span class="name">[[${opt3.reFirstName}]]/[[${opt3.reLastName}]]</span></td>
                                             <td class="insType" th:if="${opt3.reInsuranceidx} != null" th:class="issu" th:value="${opt3.reInsuranceidx}"></td>
+                                            <td class="insType" th:if="${opt3.reInsuranceidx} == null" th:class="issu"></td>
                                             <td>
                                                 <span class="cul">KRW</span>
                                                 <span th:if="${opt3.reInsuranceidx} != null" class="price insPrice" th:value="${opt3.reInsuranceidx}"></span>

@@ -492,15 +492,6 @@ $(function () {
         });
     }
 
-
-
-
-
-
-
-
-
-
     if($('#reTripKind').val() == '편도'){
         $('.ifOnewayD').css('display', 'none');
         searchStart();
@@ -510,20 +501,6 @@ $(function () {
         searchStart2();
         searchStart4();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     $('.infoboxli1').click(function () {
@@ -548,18 +525,7 @@ $(function () {
         $('.reser_change').css('display', 'flex');
         $('.reser_change').fadeIn(200);
         $('.change_ticket').click(function () {
-            let tripcheck = $('.trip_name').is(':checked');
-            let peoplecheck = $('.people_name').is(':checked');
-
-            if (!tripcheck || !peoplecheck) {
-                $('.false_modal').css('display', 'flex');
-                $('.confirm_btn').click(function () {
-                    $('.false_modal').css('display', 'none');
-                });
-            } else {
-                alert('넘어가자');
-
-            }
+            alert('넘어가자');
             $('.btn_cancel').click(function () {
                 $('.reser_change').hide();
             })
@@ -570,17 +536,7 @@ $(function () {
         $('.reser_cancel').css('display', 'flex');
         $('.reser_cancel').fadeIn(200);
         $('.next_ticket').click(function () {
-            let tripcheck = $('.trip_name').is(':checked');
-            let peoplecheck = $('.people_name').is(':checked');
-
-            if (!tripcheck || !peoplecheck) {
-                $('.false_modal').css('display', 'flex');
-                $('.confirm_btn').click(function () {
-                    $('.false_modal').css('display', 'none');
-                });
-            } else {
-                location.href = '/UserPage/payment/cancel_booking.html'
-            }
+            location.href = "/pages/cancel/"+reIndex1;
         });
     });
 
@@ -593,7 +549,7 @@ $(function () {
         location.href = "/UserPage/payment/extras.html";
     })
     $('.cancel_service').click(function () {
-        location.href = "/UserPage/index/mypage/Mypage_cancel_service.html";
+        location.href = "/pages/index/mypageCancelService";
     })
     /* 공통 버튼 */
     $('.btn_cancel').click(function () {
@@ -640,7 +596,7 @@ $(function () {
                     $('.trip_false_modal').hide();
                 });
             } else {
-                location.href = "https://ec.aceinsurance.co.kr/"
+                location.href = "https://travel.assistcard.co.kr/main/app/app_wrt.php?siteCode=MU1UTw=="
             }
         })
     });

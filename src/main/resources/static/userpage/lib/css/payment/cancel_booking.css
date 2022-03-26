@@ -1333,6 +1333,7 @@ select, input {
     display: none;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 .false_modal .false_modal_box{
     background-color: white;

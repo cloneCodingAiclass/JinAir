@@ -94,16 +94,15 @@ $(function () {
         $('.nav6').parent().siblings().find('li').css({"display":"none"});
     })
 
+});
 
+$(()=> {
     $("#writeNoti").on('click', () => {
         if ( !$("#ntTitle").val() || !$("#ntContent").val() || !$('#ex_file').val()) {
             alert('모든 내용을 입력하세요.');
         }
     })
 
-});
-
-$(()=> {
     $('#ex_file').on('change', function(){
         $('.filetext').val($('#ex_file').val());
     });
