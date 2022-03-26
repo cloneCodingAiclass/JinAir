@@ -492,15 +492,6 @@ $(function () {
         });
     }
 
-
-
-
-
-
-
-
-
-
     if($('#reTripKind').val() == '편도'){
         $('.ifOnewayD').css('display', 'none');
         searchStart();
@@ -510,20 +501,6 @@ $(function () {
         searchStart2();
         searchStart4();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     $('.infoboxli1').click(function () {
@@ -640,7 +617,7 @@ $(function () {
                     $('.trip_false_modal').hide();
                 });
             } else {
-                location.href = "https://ec.aceinsurance.co.kr/"
+                location.href = "https://travel.assistcard.co.kr/main/app/app_wrt.php?siteCode=MU1UTw=="
             }
         })
     });
