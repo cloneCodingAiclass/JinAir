@@ -9,6 +9,7 @@ import com.project.jinair.repository.TbInsuranceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
@@ -73,5 +74,9 @@ public class InsuranceApiLogicService implements CrudInterface<InsuranceApiReque
                 .isPrice(tbInsurance.getIsPrice())
                 .build();
         return insuranceApiResponse;
+    }
+
+    public BigDecimal search(Long id) {
+        return tbInsuranceRepository.findByIsIndex(id).get().getIsPrice();
     }
 }

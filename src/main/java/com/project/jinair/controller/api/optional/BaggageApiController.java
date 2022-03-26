@@ -9,6 +9,7 @@ import com.project.jinair.service.optional.BaggageApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -70,5 +71,10 @@ public class BaggageApiController implements CrudInterface<BaggageApiRequest, Ba
         return baggageApiLogicService.delete(id);
     }
 
+
+    @GetMapping("search/{id}") // http://localhost:8080/api/optional/baggage/search/{id} (get)
+    public BigDecimal search(@PathVariable(name = "id") Long id) {
+        return baggageApiLogicService.search(id);
+    }
 
 }

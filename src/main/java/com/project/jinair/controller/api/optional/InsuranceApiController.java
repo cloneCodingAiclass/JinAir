@@ -8,6 +8,8 @@ import com.project.jinair.service.optional.InsuranceApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping("/api/optional/insurance")
 @RequiredArgsConstructor
@@ -65,5 +67,10 @@ public class InsuranceApiController implements CrudInterface<InsuranceApiRequest
     @DeleteMapping("{id}")
     public Header<InsuranceApiResponse> delete(@PathVariable(name="id") Long id) {
         return insuranceApiLogicService.delete(id);
+    }
+
+    @GetMapping("/search/{id}") // http://localhost:8080/api/optional/insurance/{id} (get)
+    public BigDecimal search(@PathVariable(name = "id") Long id) {
+        return insuranceApiLogicService.search(id);
     }
 }

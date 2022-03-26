@@ -222,44 +222,102 @@ $(function () {
             $('.seatPrice').text((seat1PP).toLocaleString('ko-KR'))
 
             // 초과 수하물
-            let Bagg1PP = 0;
             for(let i =  0 ; i < totalNum ; i++){
                 if($(`.reBaggageidx1${i}`).val() == ''){
-
+                    $(`.bagg1KG${i}`).text('');
+                    $(`.bagg1P${i}`).text(0);
                 }else{
                     $.get("/api/optional/baggage/"+$(`.reBaggageidx1${i}`).val(), function(response){
                         $(`.bagg1KG${i}`).text(response.data.bgStandard);
                         $(`.bagg1P${i}`).text(response.data.bgPrice);
-                        Bagg1PP += Number(response.data.bgPrice);
-                        $('.BaggPrice').text((Bagg1PP).toLocaleString('ko-KR'));
                     });
                 }
             }
 
             // 보험
-            let Isur1PP = 0;
-            let Bagg2PP = 0;
             for(let i =  0 ; i < totalNum ; i++){
                 if($(`.reInsuranceidx1${i}`).val() == ''){
-
+                    $(`.Insu1Tp${i}`).text('');
+                    $(`.Insu1P${i}`).text(0);
                 }else{
                     $.get("/api/optional/insurance/"+$(`.reInsuranceidx1${i}`).val(), function(response){
                         $(`.Insu1Tp${i}`).text(response.data.isType);
                         $(`.Insu1P${i}`).text(response.data.isPrice);
-                        Isur1PP += Number(response.data.isPrice);
-                        $('.InsuPrice').text((Isur1PP).toLocaleString('ko-KR'));
-                        $.get("/api/optional/baggage/"+$(`.reBaggageidx1${i}`).val(), function(response){
-                            $(`.bagg1KG${i}`).text(response.data.bgStandard);
-                            $(`.bagg1P${i}`).text(response.data.bgPrice);
-                            Bagg2PP += Number(response.data.bgPrice);
-                            $('.BaggPrice').text((Bagg2PP).toLocaleString('ko-KR'));
-                            $('.subFinalprice').text((Isur1PP + Bagg2PP + seat1PP).toLocaleString('ko-KR'));
-                            $('.realPayPrice').text((Isur1PP + Bagg2PP + seat1PP + finalPrice).toLocaleString('ko-KR'));
-                            $('.realExchangePrice').text((Isur1PP + Bagg2PP + seat1PP + finalPrice - 2000).toLocaleString('ko-KR'));
-                        });
                     });
                 }
             }
+
+            // 전체 가격 찍어주기
+            function callData(i){
+                let m = 0;
+                $.ajax({
+                    url: "/api/optional/baggage/search/"+i,
+                    data : {id : i},
+                    async :false,
+                    type: "get",
+                    dataType: "text",
+                    success : function(response){
+                        m = response;
+                        console.log(m)
+                    }
+                })
+                return m;
+            }
+            function callData1(i){
+                let m = 0;
+                $.ajax({
+                    url: "/api/optional/insurance/search/"+i,
+                    data : {id : i},
+                    async :false,
+                    type: "get",
+                    dataType: "text",
+                    success : function(response){
+                        m = response;
+                        console.log(m)
+                    }
+                })
+                return m;
+            }
+
+            let BaggPP = [];
+            let IsurPP = [];
+            for(let i =  0 ; i < totalNum ; i++){
+                if(!$(`.reBaggageidx1${i}`).val()){
+                    BaggPP.push(0)
+                }else{
+                    BaggPP.push(callData($(`.reBaggageidx1${i}`).val()));
+                }
+            }
+            let BaggPPP = 0;
+            for(let i = 0 ; i < BaggPP.length; i++){
+                BaggPPP += Number(BaggPP[i]);
+            }
+            $('.BaggPrice').text(BaggPPP.toLocaleString('ko-KR'))
+
+            for(let i =  0 ; i < totalNum ; i++){
+                if(!$(`.reInsuranceidx1${i}`).val()){
+                    IsurPP.push(0)
+                }else{
+                    IsurPP.push(callData1($(`.reInsuranceidx1${i}`).val()));
+                }
+            }
+            let IsurPPP = 0;
+            for(let i = 0 ; i < IsurPP.length; i++){
+                IsurPPP += Number(IsurPP[i]);
+            }
+            $('.InsuPrice').text(IsurPPP.toLocaleString('ko-KR'))
+
+            let price = 0;
+            for(let i = 0 ; i < BaggPP.length; i++){
+                price += Number(BaggPP[i]);
+            }
+            for(let i = 0 ; i < IsurPP.length; i++){
+                price += Number(IsurPP[i]);
+            }
+            $('.subFinalprice').text((price + seat1PP).toLocaleString('ko-KR'));
+            $('.realPayPrice').text((price + seat1PP + finalPrice).toLocaleString('ko-KR'));
+            $('.realExchangePrice').text((price + seat1PP + finalPrice - 2000).toLocaleString('ko-KR'));
+
         });
     }
 

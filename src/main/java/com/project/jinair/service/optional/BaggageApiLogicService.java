@@ -9,6 +9,7 @@ import com.project.jinair.repository.TbBaggageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
@@ -69,7 +70,7 @@ public class BaggageApiLogicService implements CrudInterface<BaggageApiRequest, 
         }).orElseGet(() -> Header.ERROR("데이터 없음"));
     }
 
-    private BaggageApiResponse response(TbBaggage tbBaggage){
+    private BaggageApiResponse response(TbBaggage tbBaggage) {
         BaggageApiResponse baggageApiResponse = BaggageApiResponse.builder()
                 .bgIndex(tbBaggage.getBgIndex())
                 .bgType(tbBaggage.getBgType())
@@ -78,5 +79,9 @@ public class BaggageApiLogicService implements CrudInterface<BaggageApiRequest, 
                 .bgStandard(tbBaggage.getBgStandard())
                 .build();
         return baggageApiResponse;
+    }
+
+    public BigDecimal search(Long id) {
+        return tbBaggageRepository.findByBgIndex(id).get().getBgPrice();
     }
 }

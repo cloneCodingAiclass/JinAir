@@ -631,7 +631,7 @@ public class PageController {
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
             model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
-            return new ModelAndView("/userpage/pages/mypage/mypageDetail/faq_list")
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_cancel_service")
                     .addObject("code", "faq_list");
         }else{
             return new ModelAndView("/userpage/pages/index/error")
