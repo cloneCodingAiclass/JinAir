@@ -233,7 +233,6 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
 
     public ReserveApiResponse paymentsUpdate(List<ReserveApiRequest> request) {
 
-        System.out.println(request);
         int size = request.size();
 
         for (int i = 0; i < size; i++) {
@@ -248,9 +247,6 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
             Long reBaggageidx = request.get(i).getReBaggageidx();
             Long reInsuranceidx = request.get(i).getReInsuranceidx();
             Long reSeatPrice = request.get(i).getReSeatPrice();
-
-            System.out.println(reBaggageidx);
-            System.out.println(reInsuranceidx);
 
             reservation.ifPresent(
                     selectPay -> {
