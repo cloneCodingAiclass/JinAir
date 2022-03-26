@@ -1,7 +1,5 @@
 // reIndex 정보 가져오기
 $(() => {
-    insList();
-    bagList();
     let str = $(location).attr('href').split('/');
     let priceT = 0;
 
@@ -11,7 +9,7 @@ $(() => {
     $('#spanStart1, #goArea1').text(" " + spst1[0] + " " + spst1[1]);
     $('#spanEnd1, #arrArea1').text(" " + spend1[0] + " " + spend1[1]);
 
-    $('.areaPrice').each(function (i){
+    $('.areaPrice').each(function (i) {
         let price = Number($('.areaPrice').eq(i).attr("value"));
         priceT += price;
         $('.areaPrice').eq(i).text(Math.ceil(price).toLocaleString());
@@ -22,13 +20,13 @@ $(() => {
     let tax = 5000;
     let taxT = 0;
     // 유류 할증료
-    $('.oil').each(function (i){
+    $('.oil').each(function (i) {
         $('.oil').eq(i).text(oil.toLocaleString());
         oilT += oil;
     })
     $('.oilT').text(oilT.toLocaleString());
 
-    $('.tax').each(function (i){
+    $('.tax').each(function (i) {
         $('.tax').eq(i).text(oil.toLocaleString());
         taxT += tax;
     })
@@ -39,39 +37,39 @@ $(() => {
 
 
     // 쿠폰 디스카운트 요금 더하기기
-    $('#checkBut').on('click', function (){
-        let optval = $('#sel_coupon option:selected').val();            // 디스카운트율
-        console.log(optval);
+    $('#checkBut').on('click', function () {
+        let price = Number($('#pPrice').text().replace(/,/g, ""));
 
-        let dis = price * (optval*0.01);
+        let optval = $('#sel_coupon option:selected').val();            // 디스카운트율
+
+        let dis = price * (optval * 0.01);
         $('#disC').text(Math.ceil(dis).toLocaleString('ko-KR'));
-        let tot = price-dis;
+        let tot = price - dis;
 
         $('#totalPrice').text(Math.ceil(tot).toLocaleString('ko-KR'));
     });
-    console.log(str[5])
 
-    $(".birthD").each(function (i){
+    $(".birthD").each(function (i) {
         let age = $('.birthD').eq(i).attr("value");
         let resultAge = 2022 - age.substr(0, 4);
 
         console.log(age)
         console.log(resultAge)
         let result = "";
-        if(resultAge > 13){
+        if (resultAge > 13) {
             result = "성인";
             $('.birthD').eq(i).html(result);
-        }else if(resultAge < 13){
+        } else if (resultAge < 13) {
             result = "소아"
             $('.birthD').eq(i).html(result);
-        }else if(resultAge < 12){
+        } else if (resultAge < 12) {
             result = "유아"
             $('.birthD').eq(i).html(result);
         }
     })
     // 예약 번호 출력
     let reserNum = "";
-    for(let i = 0; i < 6; i++){
+    for (let i = 0; i < 6; i++) {
         let ranstr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         reserNum += ranstr.charAt(Math.floor(Math.random() * ranstr.length))
     }
@@ -80,6 +78,7 @@ $(() => {
         if ($("#modal_fare_rules #checkBox2").is(":checked")) {
             let final = new Array();
             $('.cookies').each(function (i) {
+                let price = Number($('#totalPrice').text().replace(/,/g, ""));
                 let reIndex = $('.cookies').eq(i).attr("value");
                 let baggage = $('.baggageIndex').eq(i).attr("value");
                 let insuranceIndex = $('.insuranceIndex').eq(i).attr("value");
@@ -93,8 +92,8 @@ $(() => {
                 finalarr.reInsuranceidx = insuranceIndex;
                 finalarr.reBaggageidx = baggage;
                 finalarr.reSeatDetail = $('.seatNum').eq(i).attr("id");
-                finalarr.reSeatPrice =  $('.seatNum').eq(i).attr("value");
-                        final.push(finalarr);
+                finalarr.reSeatPrice = $('.seatNum').eq(i).attr("value");
+                final.push(finalarr);
             });
 
             $.ajax({
@@ -106,24 +105,24 @@ $(() => {
                 async: false,
                 success: function (final) {
                     location.href = "/pages/pay/" + reserNum;
-                },error(error) {
+                }, error(error) {
                     console.log('error')
                     console.dir(error)
                 }
             });
 
             $("#modal_fare_rules").fadeOut();
-        }else {
+        } else {
             $("#modal_fare_rules > .modal_conf_ok_wrap").fadeIn();
         }
     });
-    if (str[5] == 'oneway'){
+    if (str[5] == 'oneway') {
         // 여행 타입에 따른 값, 클릭이벤트 변경
         $('#triptype1, #tripinfo1').text('편도');
         $('.arrow_img, .jour2_wrap, .multiway').css('display', "none");
         $('.fare_info').css('height', '140px');
 
-    }else if (str[5] == 'multiway') {
+    } else if (str[5] == 'multiway') {
         // 여행 타입에 따른 값, 클릭이벤트 변경
         $('#triptype1, #triptype2, #tripinfo1, #tripinfo2').text('다구간');
         $('.jour2_wrap, .multiway').css('display', "flex");
@@ -148,7 +147,7 @@ $(() => {
 
         $(".modal_flight_info2").css("top", b);
         $(".modal_flight_info2").css("left", y);
-    }else if (str[5] == 'twoway') {
+    } else if (str[5] == 'twoway') {
         // 여행 타입에 따른 값, 클릭이벤트 변경
         $('#triptype1, #triptype2, #tripinfo1, #tripinfo2').text('왕복');
         $('.jour2_wrap, .multiway').css('display', "flex");
@@ -172,7 +171,7 @@ $(() => {
 
         $(".modal_flight_info2").css("top", b);
         $(".modal_flight_info2").css("left", y);
-    }else{
+    } else {
         alert("잘못된 경로입니다.");
         history.back();
     }
@@ -182,7 +181,7 @@ $(() => {
     $("#modal_fare_rules").hide();
     $("#modal_fare_rules .modal_conf_ok_wrap").hide();
 
-        /* 운송제한품목 체크 후 결제 이동*/
+    /* 운송제한품목 체크 후 결제 이동*/
     $(".butt_pay").on("click", () => {
         let checkbox_wrap = $('#modal_checkbox').is(':checked');
         if (checkbox_wrap) {
@@ -203,106 +202,102 @@ $(() => {
     })
     $("#modal_fare_rules .butt_canc, #modal_fare_rules .close").on("click",
         () => {
-           $("#modal_fare_rules").fadeOut();
-                $("body").css("overflow", "scroll");
-    });
+            $("#modal_fare_rules").fadeOut();
+            $("body").css("overflow", "scroll");
+        });
 
     $(".modal_conf_ok_wrap .butt_conf").on("click", () => {
         $("#modal_fare_rules .modal_conf_ok_wrap").fadeOut();
     });
 
     let sel_coupon = new Vue({
-        el : '#sel_coupon',
-        data : {
-            sel_coupon : {}
+        el: '#sel_coupon',
+        data: {
+            sel_coupon: {}
         }
     })
 
     let memIndex;
-    $('.memid').each(function (i){
+    $('.memid').each(function (i) {
         memIndex = $('.memid').eq(i).attr("value");
         console.log(memIndex);
     });
 
     couponList(memIndex);
 
-    function couponList(memIndex){
-        $.get("/api/userCoupon/couponList/"+memIndex+"/Unused", function (response){
+    function couponList(memIndex) {
+        $.get("/api/userCoupon/couponList/" + memIndex + "/Unused", function (response) {
             console.dir(response);
             sel_coupon.sel_coupon = response.data;
         })
     }
 
-    function bagList(){
-        let BagPriceT = 0;
-        $('.baggageIndex').each(function (i){
-            let bagidx = $('.baggageIndex').eq(i).attr("value");
-            let bgst = $('.bgst').eq(i).attr("value");
-            let bgPrice = $('.bgPrice').eq(i).attr("value")
-            $.get("/api/optional/baggage/"+bagidx, function (response) {
-                console.log(response)
-                let price = response.data.bgPrice;
-                let standard = response.data.bgStandard;
-                if(bgst == bagidx || bgPrice == bagidx){
-                    $('.bgst').eq(i).text(standard.toLocaleString());
-                    $('.bgPrice').eq(i).text(price.toLocaleString());
-                }
-                BagPriceT += price;
-                $('#bagPriceT').text(Math.ceil(BagPriceT).toLocaleString());
-            });
-        });
-    }
+    let total = 0;
+    let isPriceT = 0;
 
-    function insList(){
-        let isPriceT = 0;
+    searchList();
+    function searchList() {
+        let bgTotal = 0;
+        $('.baggageIndex').each(function (i) {
+            let bagidx = $('.baggageIndex').eq(i).attr("value");
+            $.get("/api/optional/baggage/" + bagidx, function (response) {
+                if (response.data.bgPrice != null) {
+                    let bgsum = Number(response.data.bgPrice);
+                    let standard = response.data.bgStandard;
+                    $('.bgst').eq(i).text(standard);
+                    $('.bgPrice').eq(i).text(bgsum.toLocaleString());
+                    bgTotal += Number(response.data.bgPrice);
+                    $('#bagPriceT').text(bgTotal.toLocaleString());
+                }
+            })
+        });
+        let insT = 0;
         $('.insuranceIndex').each(function (i) {
             let ins = $('.insuranceIndex').eq(i).attr("value");
-            let insPirce = $('.insPrice').eq(i).attr("value");
-            let issu = $('.issu').eq(i).attr("value");
             $.get("/api/optional/insurance/" + ins, function (response) {
-                let isPrice = response.data.isPrice;
-                let isType = response.data.isType;
-                if(insPirce == ins || ins == issu){
+                if (response.data.isPrice != null) {
+                    let isPrice = Number(response.data.isPrice);
+                    let isType = response.data.isType;
                     $('.insPrice').eq(i).text(isPrice.toLocaleString());
-                    $('.issu').eq(i).text(isType.toLocaleString());
+                    $('.issu').eq(i).text(isType);
+                    insT += Number(response.data.isPrice);
+                    $('.incPriceT').text(insT.toLocaleString());
                 }
-                isPriceT += isPrice;
-                $('.incPriceT').text(Math.ceil(isPriceT).toLocaleString());
             });
         })
-    }
-    let seatT = 0;
-    $('.priceOpt').each(function (i){
-        let seatId = $('.seatNum').eq(i).attr("value2");
-        console.log(seatId)
-        let val = $('.priceOpt').eq(i).attr("id");
-        console.log(val)
-        if(seatId == val){
-            let seatPrice = $('.seatNum').eq(i).attr("value");
-            $('.priceOpt').eq(i).text(seatPrice.toLocaleString());
-            seatT += Number(seatPrice);
-        }
+        let seatT = 0;
+        $('.priceOpt').each(function (i) {
+            let seatId = $('.seatNum').eq(i).attr("value2");
+            let val = $('.priceOpt').eq(i).attr("id");
+            if (seatId == val) {
+                let seatPrice = $('.seatNum').eq(i).attr("value");
+                $('.priceOpt').eq(i).text(seatPrice.toLocaleString());
+                seatT += Number(seatPrice);
+            }
+        });
+        $('.seatT').text(seatT.toLocaleString());
+        let seatTF = 0;
+        let insTF = 0;
+        let bgTotalF = 0;
+        $('.cookies').each(function (i) {
+            let bagidx = $('.baggageIndex').eq(i).attr("value");
+            $.get("/api/optional/baggage/" + bagidx, function (response) {
+                if(response.data.bgPrice != null){
+                    bgTotalF += Number(response.data.bgPrice);
+                }
+                let ins = $('.insuranceIndex').eq(i).attr("value");
+                $.get("/api/optional/insurance/" + ins, function (response) {
+                    if(response.data.isPrice != null){
+                        insTF += Number(response.data.isPrice);
+                }
+                    $('.optPrice').text((bgTotalF + insTF + seatT).toLocaleString());
+
+                    let price = Number(priceSum + bgTotalF + insTF + seatT);
+                    $('#pPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
+                    $('#totalPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
+            })
+        })
+    })
+    };
+
     });
-    $('.seatT').text(seatT.toLocaleString());
-
-
-    let isR = $('.incPriceT').text();
-    console.log("ddddddddddddddddddddddd")
-    console.log(isR)
-    let bagR = $('#bagPriceT').html();
-    console.log("ddddddddddddddddddddddd")
-    console.log(bagR)
-    let seatR = $('.seatT').text().replace(/,/g, "");
-    console.log(seatR)
-
-    let result = Number(seatR) + Number(isR) + Number(bagR);
-    $('.optPrice').text(result.toLocaleString())
-
-    // 총 운임료
-    let price = Number(priceSum) + Number(result);
-
-    $('#pPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
-    $('#totalPrice').text(Math.ceil(price).toLocaleString('ko-KR'));
-
-
-});
