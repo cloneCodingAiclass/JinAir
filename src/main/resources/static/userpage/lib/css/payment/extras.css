@@ -961,6 +961,17 @@ body{
     border: 3px solid #636363;
 }
 
+.SSC:checked + .box8 {
+    padding: 0px;
+    font-size: 40px;
+    height: 33px !important;
+    background-image: url('/userpage/lib/img/none_select.png');
+    background-repeat: no-repeat;
+    background-size: 200%;
+    background-position: center;
+    border: 3px solid #636363;
+}
+
 .SSC2:checked + .seat_sel {
     background: url("/userpage/lib/img/check.png");
     background-repeat: no-repeat;
@@ -998,6 +1009,17 @@ body{
     background-image: url('/userpage/lib/img/none_select.png');
     background-repeat: no-repeat;
     background-size: 130%;
+    background-position: center;
+    border: 3px solid #636363;
+}
+
+.SSC2:checked + .box8 {
+    padding: 0px;
+    height: 33px !important;
+    font-size: 40px;
+    background-image: url('/userpage/lib/img/none_select.png');
+    background-repeat: no-repeat;
+    background-size: 200%;
     background-position: center;
     border: 3px solid #636363;
 }
@@ -1073,7 +1095,18 @@ body{
     border: 3px solid #636363;
 }
 
-.box7 {
+.service_content .box8 {
+    padding: 0px;
+    height: 33px !important;
+    font-size: 40px;
+    background-image: url('/userpage/lib/img/none_select.png');
+    background-repeat: no-repeat;
+    background-size: 200%;
+    background-position: center;
+    border: 3px solid #636363;
+}
+
+.box7, .box8 {
     pointer-events: none;
 }
 
@@ -1356,10 +1389,6 @@ body{
     margin-top: 70px !important;
 }
 
-
-
-    /* .select_seat_wrap .select_seat .box7 {
-    } */
 
 .select_seat_wrap .select_comp {
     position: fixed;

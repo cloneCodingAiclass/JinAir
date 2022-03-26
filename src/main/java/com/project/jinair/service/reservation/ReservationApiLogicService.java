@@ -4,10 +4,14 @@ import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.schedule.TbReservation;
 import com.project.jinair.model.enumclass.PaymentStatus;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.schedule.ReserveApiRequest;
 import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
 import com.project.jinair.repository.TbReservationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -395,5 +399,34 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
         return Header.OK(ReserveApiResponse);
     }
 
+    public Header<List<ReserveApiResponse>> list(Pageable pageable){
+        Page<TbReservation> tbReservationList = tbReservationRepository.findAll(pageable);
+        List<ReserveApiResponse> reserveApiResponseList = tbReservationList.stream()
+                .map(re -> responseReservation(re))
+                .collect(Collectors.toList());
 
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbReservationList.getTotalPages())
+                .totalElements(tbReservationList.getTotalElements())
+                .currentPage(tbReservationList.getNumber())
+                .currentElements(tbReservationList.getNumberOfElements())
+                .build();
+
+        return Header.OK(reserveApiResponseList, pagination);
+    }
+
+    public Header<List<ReserveApiResponse>> searchForUser(String airType, String airName, String startTime, String startPoint, String arrivePoint, Pageable pageable){
+        Page<TbReservation> tbReservationList = tbReservationRepository.findByReAirplainTypeAndReSchNameAndReSchStartTimeAndReSchDepPointAndReSchArrPoint(airType, airName, LocalDateTime.parse(startTime), startPoint, arrivePoint, pageable);
+        List<ReserveApiResponse> reserveApiResponseList = tbReservationList.stream()
+                .map(re -> responseReservation(re))
+                .collect(Collectors.toList());
+
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbReservationList.getTotalPages())
+                .totalElements(tbReservationList.getTotalElements())
+                .currentPage(tbReservationList.getNumber())
+                .currentElements(tbReservationList.getNumberOfElements())
+                .build();
+        return Header.OK(reserveApiResponseList, pagination);
+    }
 }

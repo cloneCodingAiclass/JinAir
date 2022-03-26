@@ -136,7 +136,7 @@
                         <div class="passenger_info_wrap passenger_info_wrap1" id="passenger_info_1">
                             <th:block th:each="passengerInfo1, i : ${reserveApiResponse}" th:if="${i.count % 2 != 0}">
                             <div class='passenger_info passenger_info1'>
-                                <h3>탑승객 <span th:if="${i.count == 0}" th:id="'info1_' + ${i.index}">안녕</span>
+                                <h3>탑승객 <span th:if="${i.count == 1}" th:id="'info1_' + ${i.index}" th:text="1"></span>
                                     <span th:if="${i.count > 1}" th:id="'info1_' + ${i.index}">[[${i.count-1}]]</span></h3>
                                 <label th:for="'person_'+${i.index}">
                                     <img src='/userpage/lib/img/ico-person.png' alt='탑승객'>
@@ -1596,41 +1596,7 @@
                                     <tr><td class="price_tit" id="option_ins"></td>
                                         <td class="price" id="option_ins_price"></td></tr>
                                     <tr><td><p class="plus cursor">
-                                            더보기<img src="/userpage/lib/img/curr.PNG" alt="" class="plus_2">
-                                            <img src="/userpage/lib/img/min.PNG" alt="" class="minus_2"></p></td></tr>
                                 </table>
-                                <div class="modal_price_info_wrap">
-                                    <table>
-                                        <colgroup>
-                                            <col width="60%">
-                                            <col width="40%">
-                                        </colgroup>
-                                        <tr><th colspan="2"><p class="title">항공운임</p>
-                                            <p><span>KRW</span><span id="seat_price">215,000</span></p></th></tr>
-                                        <tr><td colspan="2">구간 1 : GMP-CJU</td><td></td></tr>
-                                        <tr><td class="per">성인 1</td><td>70,000</td></tr>
-                                        <tr><td colspan="2">구간 2 : CJU-GMP</td></tr>
-                                        <tr><td class="per">성인 1</td><td>145,000</td></tr>
-                                        <tr><th colspan="2"><p class="bagg_price">유류할증료</p>
-                                            <p><span>KRW</span>11,000</p></th></tr>
-                                        <tr><td colspan="2">구간 1 : GMP-CJU</td><td></td></tr>
-                                        <tr><td class="per">성인 1</td><td>5,500</td></tr>
-                                        <tr><td colspan="2">구간 2 : CJU-GMP</td></tr>
-                                        <tr><td class="per">성인 1</td><td>5,500</td></tr>
-                                        <tr><th colspan="2"><p class="ins_price">세금</p>
-                                            <p><span>KRW</span>8,000</p></th></tr>
-                                        <tr><td colspan="2">구간 1 : GMP-CJU</td><td></td></tr>
-                                        <tr><td class="per">성인 1<span class="cursor det det1">자세히 보기<span class="ar">
-                                            </span></span></td><td class="seb">4,000</td></tr>
-                                        <tr><td class="detD detD1" colspan="2"></td></tr>
-                                        <tr><td colspan="2">구간 2 : CJU-GMP</td></tr>
-                                        <tr><td class="per">성인 1<span class="cursor det det2">자세히 보기<span class="ar">
-                                            </span></span></td><td class="seb">4,000</td></tr>
-                                        <tr><td class="detD detD2" colspan="2"></td></tr>
-                                        <tr><td colspan="2" class="cur">국제선 한국 출발 세금(BP)에는 국제여객공항이용료,
-                                            출국납부금,<br/>국제빈곤퇴치기여금이 포함되어 있습니다.</td></tr>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                     </div>

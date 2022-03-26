@@ -723,6 +723,7 @@ body{
     text-align: center;
     background-color: #BDD600;
     font-weight: 700;
+    cursor: pointer;
 }
 .btnTypeB,
 #pwChangeCancel{

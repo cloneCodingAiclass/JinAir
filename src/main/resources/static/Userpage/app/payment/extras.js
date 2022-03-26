@@ -766,7 +766,6 @@ $(function () {
     radio.find(".seat_P1").css("visibility", "hidden");
     radio.find(".checkPerson").val("");
     radio.val("");
-    totalChecked--;
 
   });
   $(".passenger_info_wrap2 p.select_seat_num2 span.close").on('click', function () {
@@ -779,7 +778,6 @@ $(function () {
     radio2.find(".seat_P2").css("visibility", "hidden");
     radio2.find(".checkPerson2").val("");
     radio2.val("");
-    totalChecked--;
   });
 
   let price1 = '9000';let price2 = '5000';let price3 = '7000';let price4 = '7000';let price5 = '3000';
@@ -1390,14 +1388,25 @@ $(function () {
     if (seat_price > 0) {
       $("#option_price_list #option_seat").html("사전좌석지정")
       $("#option_price_list #option_seat_price").html(seat_price.toLocaleString('ko-KR'))
-    } if (bagg_price > 0) {
+    }  else {
+      $("#option_price_list #option_seat").remove();
+      $("#option_price_list #option_seat").parent().remove();
+      $("#option_price_list #option_seat_price").remove();
+    }
+    if (bagg_price > 0) {
       $("#option_price_list #option_bagg").html("초과수하물")
       $("#option_price_list #option_bagg_price").html(bagg_price.toLocaleString('ko-KR'))
-    } if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
+    }  else {
+      $("#option_price_list #option_bagg").remove();
+      $("#option_price_list #option_bagg").parent().remove();
+      $("#option_price_list #option_bagg_price").remove();
+    }
+    if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
         $("#option_price_list #option_ins").html("보험료")
         $("#option_price_list #option_ins_price").html(ins_totalPrice.toLocaleString('ko-KR'))
       } else {
         $("#option_price_list #option_ins").remove();
+      $("#option_price_list #option_ins").parent().remove();
         $("#option_price_list #option_ins_price").remove();
       }
   }
@@ -1442,7 +1451,9 @@ $(function () {
 
   for(let i = 0; i < personNumber; i++) {
     let idx = indexArr[i];
-    getTotal(i, idx);
+    if (i % 2 == 0) {
+      getTotal(i, idx);
+    }
   }
 
   function getTotal(i, idx){
@@ -1474,14 +1485,10 @@ $(function () {
       if(i % 2 == 0) {
         airplane1 = response.data.reSchName;
         startdate1 = response.data.reSchStartTime;
-        console.log("비행기 1번 " + airplane1);
-        console.log("시작일 1번 " + startdate1);
         findSeat1(response.data.reSchName, response.data.reSchStartTime)
       } else {
         airplane2 = response.data.reSchName;
         startdate2 = response.data.reSchStartTime;
-        console.log("비행기 2번 " + airplane2);
-        console.log("시작일 2번 " + startdate2);
         findSeat2(response.data.reSchName, response.data.reSchStartTime)
       }
     })
@@ -1517,11 +1524,11 @@ $(function () {
 
   let Data2;
   let seatArr2 = [];
-  function findSeat2(airplane, startdate1) {
+  function findSeat2(airplane, startdate2) {
     Data2 = {
       data : {
         reSchName : airplane,
-        reSchStartTime : startdate1
+        reSchStartTime : startdate2
       }
     }
     $.post({
@@ -1543,9 +1550,7 @@ $(function () {
 
   // 구간 1 마감 좌석
   function seat1() {
-    $(".SSC").each(function(index){
-      console.log(index + " : " + $(this).attr("id"));
-      let id = seatArr1[index];
+    $(".SSC").each(function(){
       for (let i = 0; i < seatArr1.length; i++) {
         if ($(this).attr("id") == seatArr1[i]) {
           let label = $(this).next();
@@ -1580,12 +1585,14 @@ $(function () {
   }
   // 구간 2 마감 좌석
   function seat2() {
-    $(".SSC2").each(function(index){
-      console.log(index + " : " + $(this).attr("id"));
-      let id = seatArr1[index];
-      let thisid = "2_"+$(this).attr("id");
-      for (let i = 0; i < seatArr1.length; i++) {
-        if (thisid == seatArr1[i]) {
+    for (let i = 0; i < seatArr2.length; i++) {
+      if (seatArr2[i] != null) {}
+      seatArr2[i] = "2_" + String(seatArr1[i]);
+      console.log(i + " : " + seatArr2[i])
+    }
+    $(".SSC2").each(function(){
+      for (let i = 0; i < seatArr2.length; i++) {
+        if ($(this).attr("id") == seatArr2[i]) {
           let label = $(this).next();
           if (label.hasClass("box1")) {
             label.removeClass('box1')
@@ -1740,9 +1747,9 @@ $(function () {
   // /*부가서비스 신청내역 끝*/
 let isinsjoin = false;
   $(".ins_join_butt").on("click", function () {
+    isinsjoin = true;
     optionTotalPrice(personNumber)
     confirmOptional()
-    isinsjoin = true;
     if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
       $("#modal_service_app_wrap").fadeIn();
       $(".modal_join_ins").fadeIn();
@@ -1752,7 +1759,13 @@ let isinsjoin = false;
 
   // 보험 안내사항 확인 눌렀을 시 체크박스 확인
   $("#modal_insurance_info_wrap .butt_ok").on("click", function () {
-    let isCheck = $(".insCheckBox").length;
+    let isCheck = 0;
+    for (let i = 0; i < $(".ins_check").length; i++) {
+      if ($("#ins_check_"+i).is(":checked")) {
+        isCheck += 1;
+      }
+      console.log(isCheck);
+    }
     let is = 0;
     for (let i = 0; i < $(".insCheckBox").length * 2; i++) {
       if ($("#check_ins_" + i).is(":checked")) {
@@ -1871,7 +1884,7 @@ let isinsjoin = false;
             }
         }
         // 보험
-        if (insArr[i] != null && $("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked") && isinsjoin == true) {
+        if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked") && isinsjoin == true) {
           option_table_body2[i] += '<tr><td class="b_r">전 구간</td>'
           option_table_body2[i] += '<td><div class="item_wrap1"><p class="img img_ins"></p>'
           option_table_body2[i] += '<p class="txt" id="modal_option_ins_' + i + '">여행보험 (' + insArr[i] + ')</p></div></td>'

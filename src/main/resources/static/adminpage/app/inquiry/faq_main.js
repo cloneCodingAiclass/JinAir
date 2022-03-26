@@ -98,100 +98,61 @@ $(function () {
         $('.nav7').siblings('li').eq(1).find('a').css({"color": "#BDD600"});
     });
     $('#board').css({"display" : "block"});
-    $('#board1').css({"display" : "none"});
-    $('#board2').css({"display" : "none"});
-    $('#board3').css({"display" : "none"});
-    $('#board4').css({"display" : "none"});
-    $('#board5').css({"display" : "none"});
-    $('.tab').on('click', function (){
-        $('#board').css({"display" : "block"});
-        $('#checkBox').css({"background-color" : "#fff"});
-        $('#board1').css({"display" : "none"});
-        $('#checkBox1').css({"background-color" : "#BDD600"});
-        $('#board2').css({"display" : "none"});
-        $('#checkBox2').css({"background-color" : "#BDD600"});
-        $('#board3').css({"display" : "none"});
-        $('#checkBox3').css({"background-color" : "#BDD600"});
-        $('#board4').css({"display" : "none"});
-        $('#checkBox4').css({"background-color" : "#BDD600"});
-        $('#board5').css({"display" : "none"});
-        $('#checkBox5').css({"background-color" : "#BDD600"});
-    });
-    $('.tab1').on('click', function (){
-        $('#board').css({"display" : "none"});
-        $('#checkBox').css({"background-color" : "#BDD600"});
-        $('#board1').css({"display" : "block"});
+    $('#faq1').on('click', function (){
         $('#checkBox1').css({"background-color" : "#fff"});
-        $('#board2').css({"display" : "none"});
         $('#checkBox2').css({"background-color" : "#BDD600"});
-        $('#board3').css({"display" : "none"});
         $('#checkBox3').css({"background-color" : "#BDD600"});
-        $('#board4').css({"display" : "none"});
         $('#checkBox4').css({"background-color" : "#BDD600"});
-        $('#board5').css({"display" : "none"});
         $('#checkBox5').css({"background-color" : "#BDD600"});
+        $('#checkBox6').css({"background-color" : "#BDD600"});
     });
-    $('.tab2').on('click', function (){
-        $('#board').css({"display" : "none"});
-        $('#checkBox').css({"background-color" : "#BDD600"});
-        $('#board1').css({"display" : "none"});
+    $('#faq2').on('click', function (){
         $('#checkBox1').css({"background-color" : "#BDD600"});
-        $('#board2').css({"display" : "block"});
         $('#checkBox2').css({"background-color" : "#fff"});
-        $('#board3').css({"display" : "none"});
         $('#checkBox3').css({"background-color" : "#BDD600"});
-        $('#board4').css({"display" : "none"});
         $('#checkBox4').css({"background-color" : "#BDD600"});
-        $('#board5').css({"display" : "none"});
         $('#checkBox5').css({"background-color" : "#BDD600"});
+        $('#checkBox6').css({"background-color" : "#BDD600"});
     });
-    $('.tab3').on('click', function (){
-        $('#board').css({"display" : "none"});
-        $('#checkBox').css({"background-color" : "#BDD600"});
-        $('#board1').css({"display" : "none"});
+    $('#faq3').on('click', function (){
         $('#checkBox1').css({"background-color" : "#BDD600"});
-        $('#board2').css({"display" : "none"});
         $('#checkBox2').css({"background-color" : "#BDD600"});
-        $('#board3').css({"display" : "block"});
         $('#checkBox3').css({"background-color" : "#fff"});
-        $('#board4').css({"display" : "none"});
         $('#checkBox4').css({"background-color" : "#BDD600"});
-        $('#board5').css({"display" : "none"});
         $('#checkBox5').css({"background-color" : "#BDD600"});
+        $('#checkBox6').css({"background-color" : "#BDD600"});
     });
-    $('.tab4').on('click', function (){
-        $('#board').css({"display" : "none"});
-        $('#checkBox').css({"background-color" : "#BDD600"});
-        $('#board1').css({"display" : "none"});
+    $('#faq4').on('click', function (){
         $('#checkBox1').css({"background-color" : "#BDD600"});
-        $('#board2').css({"display" : "none"});
         $('#checkBox2').css({"background-color" : "#BDD600"});
-        $('#board3').css({"display" : "none"});
         $('#checkBox3').css({"background-color" : "#BDD600"});
-        $('#board4').css({"display" : "block"});
         $('#checkBox4').css({"background-color" : "#fff"});
-        $('#board5').css({"display" : "none"});
         $('#checkBox5').css({"background-color" : "#BDD600"});
+        $('#checkBox6').css({"background-color" : "#BDD600"});
     });
-    $('.tab5').on('click', function (){
-        $('#board').css({"display" : "none"});
-        $('#checkBox').css({"background-color" : "#BDD600"});
-        $('#board1').css({"display" : "none"});
+    $('#faq5').on('click', function (){
         $('#checkBox1').css({"background-color" : "#BDD600"});
-        $('#board2').css({"display" : "none"});
         $('#checkBox2').css({"background-color" : "#BDD600"});
-        $('#board3').css({"display" : "none"});
         $('#checkBox3').css({"background-color" : "#BDD600"});
-        $('#board4').css({"display" : "none"});
         $('#checkBox4').css({"background-color" : "#BDD600"});
-        $('#board5').css({"display" : "block"});
         $('#checkBox5').css({"background-color" : "#fff"});
+        $('#checkBox6').css({"background-color" : "#BDD600"});
     });
+    $('#faq6').on('click', function (){
+        $('#checkBox1').css({"background-color" : "#BDD600"});
+        $('#checkBox2').css({"background-color" : "#BDD600"});
+        $('#checkBox3').css({"background-color" : "#BDD600"});
+        $('#checkBox4').css({"background-color" : "#BDD600"});
+        $('#checkBox5').css({"background-color" : "#BDD600"});
+        $('#checkBox6').css({"background-color" : "#fff"});
+    });
+
 
 
 });
 
 (function ($) {
+    let indexBtn = [];
 
 
     // let tableBoard1 = new Vue({
@@ -201,86 +162,12 @@ $(function () {
     //     }
     //
     // });
-    let tableBoard = new Vue({
-        el : '#tableBoard',
+    let faqList = new Vue({
+        el : '#faqList',
         data : {
-            tableBoard : {}
+            faqList : {}
         }
     })
-
-    let tableBoard1 = new Vue({
-        el : '#tableBoard1',
-        data : {
-            tableBoard1 : {}
-        },
-        methods: {
-            tableBoard1By: function (faqType){
-                return this.tableBoard1.filter(function (board){
-                    return board.faqType == faqType;
-                });
-            }
-        }
-
-    });
-
-    let tableBoard2 = new Vue({
-        el : '#tableBoard2',
-        data : {
-            tableBoard2 : {}
-        },
-        methods: {
-            tableBoard2By: function (faqType){
-                return this.tableBoard2.filter(function (board){
-                    return board.faqType == faqType;
-                });
-            }
-        }
-
-    });
-
-    let tableBoard3 = new Vue({
-        el : '#tableBoard3',
-        data : {
-            tableBoard3 : {}
-        },
-        methods: {
-            tableBoard3By: function (faqType){
-                return this.tableBoard3.filter(function (board){
-                    return board.faqType == faqType;
-                });
-            }
-        }
-
-    });
-
-    let tableBoard4 = new Vue({
-        el : '#tableBoard4',
-        data : {
-            tableBoard4 : {}
-        },
-        methods: {
-            tableBoard4By: function (faqType){
-                return this.tableBoard4.filter(function (board){
-                    return board.faqType == faqType;
-                });
-            }
-        }
-
-    });
-    let tableBoard5 = new Vue({
-        el : '#tableBoard5',
-        data : {
-            tableBoard5 : {}
-        },
-        methods: {
-            tableBoard5By: function (faqType){
-                return this.tableBoard5.filter(function (board){
-                    return board.faqType == faqType;
-                });
-            }
-        }
-
-    });
 
     let pagination = {
         totalPages : 0,
@@ -288,8 +175,6 @@ $(function () {
         currentPage : 0,
         currentElements : 0
     };
-
-
 
     let showPage = new Vue({
         el : '#showPage',
@@ -306,6 +191,7 @@ $(function () {
     function list(page){
         $.get("/api/faq/list?page="+page, function(response){
 
+            indexBtn = [];
             pagination = response.pagination;
 
             showPage.totalPages = pagination.currentPage;
@@ -313,47 +199,31 @@ $(function () {
 
             // 전체 페이지
             showPage.showPage = pagination.data;
-            tableBoard.tableBoard = response.data;
-            tableBoard1.tableBoard1 = response.data;
-            tableBoard2.tableBoard2 = response.data;
-            tableBoard3.tableBoard3 = response.data;
-            tableBoard4.tableBoard4 = response.data;
-            tableBoard5.tableBoard5 = response.data;
+            faqList.faqList = response.data;
+
+            for(let i = 0; i < response.data.length; i++){
+                $.get('/api/faq/view/'+ response.data[i].faqIndex, function (){
+
+                })
+
+            }
 
 
-            let lastPage = response.pagination.totalPages;
-            let str = "";
-            for (let i = 0; i < lastPage; i++) {
-                str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
+            let url = "";
+            let NumberPage = 0;
+            let last = pagination.totalPages;
+
+            for(NumberPage; NumberPage < last; NumberPage++){
+                url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
             }
-            $("#showPage").html(str);
-            if(page == 0) {
-                $(".firstPage1").css("visibility", "hidden");
-            }
-            if(page == lastPage-1) {
-                $(".lastPage1").css("visibility", "hidden");
-            }
-            $(".pageNum").css({
-                "background-color" : "#fff",
-                "color" : "#444",
-                "cursor" : "pointer"
-            });
-            $("#"+page+"").css({
-                "background-color" : "#661e43",
-                "color" : "white"
-            });
-            if (lastPage != 0) {
-                str += "<td class='firstPage1'><<</td>";
-            }
-            if (lastPage != 0){
-                str += "<td class='lastPage1'>>></td>";
-            }
-            $("#showPage").on('click', '.firstPage1', function(){
-                list(0);
-            });
-            $("#showPage").on('click', '.lastPage1', function(){
-                list(lastPage-1);
-            });
+            document.getElementById("footer").innerHTML = url;
+
+
+
+            $(".pageButton").on('click', function (){
+                page = $(this).attr('id');
+                list(page);
+            })
 
 
         })
@@ -372,12 +242,7 @@ $(function () {
     // 검색어 데이터
     function searchFaq(searchFaq){
         $.get("/api/faq/listsearch/"+searchFaq, function(response){
-            tableBoard.tableBoard = response.data;
-            tableBoard1.tableBoard1 = response.data;
-            tableBoard2.tableBoard2 = response.data;
-            tableBoard3.tableBoard3 = response.data;
-            tableBoard4.tableBoard4 = response.data;
-            tableBoard5.tableBoard5 = response.data;
+            faqList.faqList = response.data;
         });
     }
 
@@ -386,6 +251,61 @@ $(function () {
         if ( $('#searchText').val().length == 0){
             alert('검색어를 확인해주세요.');
         }
+    });
+
+    function Type(type, page){
+        $.get("/api/faq/typeSearch/"+type+"?page="+page, function(response){
+
+
+            faqList.faqList = response.data;
+
+            pagination = response.pagination;
+
+            showPage.totalElements = pagination.currentPage;
+            showPage.currentPage = pagination.currentPage;
+
+
+            let url = "";
+            let NumberPage = 0;
+            let last = pagination.totalPages;
+
+
+            for(NumberPage; NumberPage < last; NumberPage++){
+                url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
+            }
+            document.getElementById("footer").innerHTML = url;
+
+            console.log(NumberPage)
+
+            $(".pageButton").on('click', function (){
+                page = $(this).attr('id');
+                Type(type, page);
+            })
+
+
+
+
+        });
+    }
+    $('#faq1').on('click', function () {
+        list();
+        list();
+    });
+
+    $('#faq2').on('click', function () {
+        Type($('#faq2').attr("value"));
+    });
+    $('#faq3').on('click', function () {
+        Type($('#faq3').attr("value"));
+    });
+    $('#faq4').on('click', function () {
+        Type($('#faq4').attr("value"));
+    });
+    $('#faq5').on('click', function () {
+        Type($('#faq5').attr("value"));
+    });
+    $('#faq6').on('click', function () {
+        Type($('#faq6').attr("value"));
     });
 
 
