@@ -86,12 +86,6 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
         return reservationApiLogicService.find(startIdx, endIdx);
     }
 
-//    @GetMapping("/listnotnull/{startIdx}/{endIdx}") // http://localhost:8080/api/reservation/listNotNull
-//    public Header<List<ReserveApiResponse>> listNotNull(
-//            @PathVariable(name = "startIdx") Long startIdx, @PathVariable(name = "endIdx") Long endIdx) {
-//        return reservationApiLogicService.listNotNull(startIdx, endIdx);
-//    }
-
     @Override
     @PostMapping("")
     public Header<ReserveApiResponse> create(@RequestBody Header<ReserveApiRequest> request) {

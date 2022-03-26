@@ -3,10 +3,7 @@
       xmlns:th="http://www.thymeleaf.org/">
 <!-- head.html -->
     <div th:replace="userpage/fragment/head :: head"></div>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/userpage/lib/css/payment/cancel_booking.css">
-    <script src="/userpage/app/mypage/Mypage_main.js"></script>
     <script src="/userpage/app/payment/cancel_booking.js"></script>
 
 <body>
@@ -21,6 +18,10 @@
         <!--header 끝-->
         <!--container-->
         <div id="container">
+            <input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
+            <input type="hidden" id="reIndex1" th:value="${reserveApiResponse[0].reIndex}">
+            <input type="hidden" id="reTripKind" th:value="${reserveApiResponse[0].reTripKind}">
+            <input type="hidden" id="rePeopleType" th:value="${reserveApiResponse[0].rePeopleType}">
             <div class="mypage_main w_1160">
                 <h2 class="total_text">환불정보</h2>
                 <div class="totalPrice_main">
@@ -28,7 +29,7 @@
                         <span>기존 총 운임</span>
                         <p>
                             <span class="unit">KRW</span>
-                            <strong>239,000</strong>
+                            <strong class="realPayPrice"></strong>
                         </p>
                     </div>
                     <div class="totalPrice_box">
@@ -42,7 +43,7 @@
                         <span>최종 환불금액</span>
                         <p>
                             <span class="unit">KRW</span>
-                            <strong>237,000</strong>
+                            <strong class="realExchangePrice"></strong>
                         </p>
                     </div>
                 </div>
@@ -66,12 +67,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>김사과</td>
-                                <td>성인</td>
-                                <td>여</td>
-                                <td>2000-10-11</td>
-                                <td>한국 (REPUBLIC OF KOREA)</td>
+                            <tr th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
+                                <td>[[${dto.reFirstName}]][[${dto.reLastName}]]</td>
+                                <td th:class="'rePeopleType'+${i.index}"></td>
+                                <td th:text="${dto.reGender}"></td>
+                                <td th:class="'reBirth'+${i.index}">[[${dto.reBirth}]]</td>
+                                <td th:text="${dto.reNation}"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -83,38 +84,38 @@
                         <p class="tit">왕복</p>
                         <div class="jour_wrap">
                             <div class="jour1_wrap">
-                                <p class="flight">여정 1 LJ307</p>
+                                <p class="flight">여정 1 <span th:text="${reserveApiResponse[0].reSchName}"></span></p>
                                 <div class="area1_wrap area_wrap">
                                     <div class="depart">
-                                        <p class="area">서울/김포(GMP)</p>
-                                        <p class="time">[출발] 2022-02-24(목) 09:40</p>
+                                        <p class="area" th:text="${reserveApiResponse[0].reSchDepPoint}"></p>
+                                        <p class="time">[출발] <span th:text="${#strings.substring(reserveApiResponse[0].reSchStartTime,0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse[0].reSchStartTime,11, 16)}"></span>]</p>
                                     </div>
                                     <p class="arrow"><img src="/userpage/lib/img/right_arrow.PNG" alt=""></p>
                                     <div class="arr">
-                                        <p class="area">제주(CJU)</p>
-                                        <p class="time">[도착] 2022-02-24(목) 10:50</p>
+                                        <p class="area" th:text="${reserveApiResponse[0].reSchArrPoint}"></p>
+                                        <p class="time">[도착] <span th:text="${#strings.substring(reserveApiResponse[0].reSchEndTime,0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse[0].reSchEndTime,11, 16)}"></span>]</p>
                                     </div>
                                     <p class="detail detail1 cursor">View Flight Details</p>
                                 </div>
                             </div>
-                            <div class="jour2_wrap">
-                                <p class="flight">여정 2 LJ304</p>
+                            <div class="jour2_wrap ifOnewayD">
+                                <p class="flight">여정 2 <span th:text="${reserveApiResponse[1].reSchName}"></span></p>
                                 <div class="area2_wrap area_wrap">
                                     <div class="depart">
-                                        <p class="area">제주(CJU)</p>
-                                        <p class="time">[출발] 2022-02-26(토) 07:50</p>
+                                        <p class="area" th:text="${reserveApiResponse[1].reSchDepPoint}"></p>
+                                        <p class="time">[출발] <span th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime,0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime,11, 16)}"></span>]</p>
                                     </div>
                                     <p class="arrow"><img src="/userpage/lib/img/right_arrow.PNG" alt=""></p>
                                     <div class="arr">
-                                        <p class="area">서울/김포(GMP)</p>
-                                        <p class="time">[도착] 2022-02-26(토) 09:05</p>
+                                        <p class="area" th:text="${reserveApiResponse[1].reSchArrPoint}"></p>
+                                        <p class="time">[도착] <span th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime,0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime,11, 16)}"></span>]</p>
                                     </div>
                                     <p class="detail detail2 cursor">View Flight Details</p>
                                 </div>
                             </div>
                             <div class="tot">
                                 <p class="txt">총 운임</p>
-                                <p class="price_wrap"><span class="cul">KRW</span><span class="price">203,900</span></p>
+                                <p class="price_wrap"><span class="cul">KRW</span><span class="price finalPrice">203,900</span></p>
                             </div>
                         </div>
                     </div>
@@ -128,7 +129,7 @@
                             <td>
                                 <div class="td_wrap">
                                     <span class="cul">KRW</span>
-                                    <span class="price">184,900</span>
+                                    <span class="price planePrice"></span>
                                     <span class="arrow">
                                         <img src="/userpage/lib/img/arr_bott.png" alt="아래" class="arr_bott arr_bott1 cursor">
                                         <img src="/userpage/lib/img/arr_top.png" alt="위" class="arr_top arr_top1 cursor">
@@ -144,26 +145,26 @@
                                         <col width="15%">
                                     </colgroup>
                                     <tr>
-                                        <td>구간 1 : GMP-CJU</td>
+                                        <td>구간 1 : <span th:text="${reserveApiResponse[0].reSchDepPoint}"></span> - <span th:text="${reserveApiResponse[0].reSchArrPoint}"></span></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <td><span class="name">유/영은</span></td>
+                                    <tr th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
+                                        <td><span class="name">[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
                                         <td>
                                             <div class="td_wrap">
-                                                <span class="cul">KRW</span><span class="price">107,000</span>
+                                                <span class="cul">KRW</span><span class="price" th:class="trip1BP"></span>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>구간 1 : GMP-CJU</td>
+                                    <tr class="ifOnewayD">
+                                        <td>구간 2 : <span th:text="${reserveApiResponse[1].reSchDepPoint}"></span> - <span th:text="${reserveApiResponse[1].reSchArrPoint}"></span></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <td><span class="name">유/영은</span></td>
+                                    <tr class="ifOnewayD" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 1">
+                                        <td><span class="name">[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
                                         <td>
                                             <div class="td_wrap">
-                                                <span class="cul">KRW</span><span class="price">77,900</span>
+                                                <span class="cul">KRW</span><span class="price" th:class="trip2BP"></span>
                                             </div>
                                         </td>
                                     </tr>
@@ -175,7 +176,7 @@
                             <td>
                                 <div class="td_wrap">
                                     <span class="cul">KRW</span>
-                                    <span class="price">11,000</span>
+                                    <span class="price oilPrice"></span>
                                     <span class="arrow">
                                         <img src="/userpage/lib/img/arr_bott.png" alt="아래" class="arr_bott arr_bott2 cursor">
                                         <img src="/userpage/lib/img/arr_top.png" alt="위" class="arr_top arr_top2 cursor">
@@ -191,26 +192,26 @@
                                         <col width="15%">
                                     </colgroup>
                                     <tr>
-                                        <td>구간 1 : GMP-CJU</td>
+                                        <td>구간 1 : <span th:text="${reserveApiResponse[0].reSchDepPoint}"></span> - <span th:text="${reserveApiResponse[0].reSchArrPoint}"></span></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <td><span class="name">유/영은</span></td>
+                                    <tr th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
+                                        <td><span class="name" >[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
                                         <td>
                                             <div class="td_wrap">
-                                                <span class="cul">KRW</span><span class="price">107,000</span>
+                                                <span class="cul">KRW</span><span class="price">5,000</span>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>구간 1 : GMP-CJU</td>
+                                    <tr class="ifOnewayD">
+                                        <td>구간 2 : <span th:text="${reserveApiResponse[1].reSchDepPoint}"></span> - <span th:text="${reserveApiResponse[1].reSchArrPoint}"></span></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <td><span class="name">유/영은</span></td>
+                                    <tr class="ifOnewayD" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 1">
+                                        <td><span class="name">[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
                                         <td>
                                             <div class="td_wrap">
-                                                <span class="cul">KRW</span><span class="price">77,900</span>
+                                                <span class="cul">KRW</span><span class="price">5,000</span>
                                             </div>
                                         </td>
                                     </tr>
@@ -222,7 +223,7 @@
                             <td>
                                 <div class="td_wrap">
                                     <span class="cul">KRW</span>
-                                    <span class="price">8,000</span>
+                                    <span class="price taxPrice"></span>
                                     <span class="arrow">
                                         <img src="/userpage/lib/img/arr_bott.png" alt="아래" class="arr_bott arr_bott3 cursor">
                                         <img src="/userpage/lib/img/arr_top.png" alt="위" class="arr_top arr_top3 cursor">
@@ -238,26 +239,26 @@
                                         <col width="15%">
                                     </colgroup>
                                     <tr>
-                                        <td>구간 1 : GMP-CJU</td>
+                                        <td>구간 1 : <span th:text="${reserveApiResponse[0].reSchDepPoint}"></span> - <span th:text="${reserveApiResponse[0].reSchArrPoint}"></span></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <td><span class="name">유/영은</span></td>
+                                    <tr th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
+                                        <td><span class="name">[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
                                         <td>
                                             <div class="td_wrap">
-                                                <span class="cul">KRW</span><span class="price">107,000</span>
+                                                <span class="cul">KRW</span><span class="price">4,000</span>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>구간 1 : GMP-CJU</td>
+                                    <tr class="ifOnewayD">
+                                        <td>구간 2 : <span th:text="${reserveApiResponse[1].reSchDepPoint}"></span> - <span th:text="${reserveApiResponse[1].reSchArrPoint}"></span></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <td><span class="name">유/영은</span></td>
+                                    <tr class="ifOnewayD" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 1">
+                                        <td><span class="name">[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
                                         <td>
                                             <div class="td_wrap">
-                                                <span class="cul">KRW</span><span class="price">77,900</span>
+                                                <span class="cul">KRW</span><span class="price">4,000</span>
                                             </div>
                                         </td>
                                     </tr>
@@ -278,7 +279,7 @@
                             <td class="borderT">총 운임</td>
                             <td class="borderT">
                                 <div class="td_wrap">
-                                    <span class="cul">KRW</span><span class="price">55,610</span>
+                                    <span class="cul">KRW</span><span class="price subFinalprice"></span>
                                 </div>
                             </td>
                         </tr>
@@ -287,7 +288,7 @@
                             <td>
                                 <div class="td_wrap">
                                     <span class="cul">KRW</span>
-                                    <span class="price">8,000</span>
+                                    <span class="price seatPrice"></span>
                                     <span class="arrow">
                                         <img src="/userpage/lib/img/arr_bott.png" alt="아래" class="arr_bott arr_bott4 cursor">
                                         <img src="/userpage/lib/img/arr_top.png" alt="위" class="arr_top arr_top4 cursor">
@@ -304,16 +305,30 @@
                                         <col width="15%">
                                     </colgroup>
                                     <tr>
-                                        <td>구간 1 : GMP-CJU</td>
+                                        <td>구간 1 : <span th:text="${reserveApiResponse[0].reSchDepPoint}"></span> - <span th:text="${reserveApiResponse[0].reSchArrPoint}"></span></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <td><span class="name">유/영은</span></td>
-                                        <td>31A(지니패스트)</td>
+                                    <tr th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
+                                        <td><span class="name">[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
+                                        <td th:class="'seat1D'+${i.index}">[[${dto.reSeatDetail}]]</td>
                                         <td>
                                             <div class="td_wrap">
-                                                <span class="cul">KRW</span><span class="price">107,000</span>
+                                                <span class="cul">KRW</span><span class="price" th:class="'seat1P'+${i.index}">[[${dto.reSeatPrice}]]</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="ifOnewayD">
+                                        <td>구간 2 : <span th:text="${reserveApiResponse[1].reSchDepPoint}"></span> - <span th:text="${reserveApiResponse[1].reSchArrPoint}"></span></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="ifOnewayD" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 1">
+                                        <td><span class="name">[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
+                                        <td th:class="'seat2D'+${i.index}">[[${dto.reSeatDetail}]]</td>
+                                        <td>
+                                            <div class="td_wrap">
+                                                <span class="cul">KRW</span><span class="price" th:class="'seat2P'+${i.index}">[[${dto.reSeatPrice}]]</span>
                                             </div>
                                         </td>
                                     </tr>
@@ -325,7 +340,7 @@
                             <td>
                                 <div class="td_wrap">
                                     <span class="cul">KRW</span>
-                                    <span class="price">48,000</span>
+                                    <span class="price BaggPrice"></span>
                                     <span class="arrow">
                                         <img src="/userpage/lib/img/arr_bott.png" alt="아래" class="arr_bott arr_bott5 cursor">
                                         <img src="/userpage/lib/img/arr_top.png" alt="위" class="arr_top arr_top5 cursor">
@@ -342,30 +357,32 @@
                                         <col width="15%">
                                     </colgroup>
                                     <tr>
-                                        <td>구간 1 : GMP-CJU</td>
+                                        <td>구간 1 : <span th:text="${reserveApiResponse[0].reSchDepPoint}"></span> - <span th:text="${reserveApiResponse[0].reSchArrPoint}"></span></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <td><span class="name">유/영은</span></td>
-                                        <td>10KG</td>
+                                    <tr th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
+                                        <td><span class="name">[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
+                                        <input type="hidden" th:value="${dto.reBaggageidx}" th:class="'reBaggageidx1'+${i.index}">
+                                        <td th:class="'bagg1KG'+${i.index}"></td>
                                         <td>
                                             <div class="td_wrap">
-                                                <span class="cul">KRW</span><span class="price">107,000</span>
+                                                <span class="cul">KRW</span><span class="price" th:class="'bagg1P'+${i.index}"></span>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>구간 1 : GMP-CJU</td>
+                                    <tr class="ifOnewayD">
+                                        <td>구간 2 : <span th:text="${reserveApiResponse[1].reSchDepPoint}"></span> - <span th:text="${reserveApiResponse[1].reSchArrPoint}"></span></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <td><span class="name">유/영은</span></td>
-                                        <td>10KG</td>
+                                    <tr class="ifOnewayD" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 1">
+                                        <td><span class="name">[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
+                                        <input type="hidden" th:value="${dto.reBaggageidx}" th:class="'reBaggageidx2'+${i.index}">
+                                        <td th:class="'bagg2KG'+${i.index}"></td>
                                         <td>
                                             <div class="td_wrap">
-                                                <span class="cul">KRW</span><span class="price">77,900</span>
+                                                <span class="cul">KRW</span><span class="price" th:class="'bagg2P'+${i.index}"></span>
                                             </div>
                                         </td>
                                     </tr>
@@ -377,7 +394,7 @@
                             <td>
                                 <div class="td_wrap">
                                     <span class="cul">KRW</span>
-                                    <span class="price">2,610</span>
+                                    <span class="price InsuPrice"></span>
                                     <span class="arrow">
                                         <img src="/userpage/lib/img/arr_bott.png" alt="아래" class="arr_bott arr_bott6 cursor">
                                         <img src="/userpage/lib/img/arr_top.png" alt="위" class="arr_top arr_top6 cursor">
@@ -394,16 +411,32 @@
                                         <col width="15%">
                                     </colgroup>
                                     <tr>
-                                        <td>구간 1 : GMP-CJU</td>
+                                        <td>구간 1 : <span th:text="${reserveApiResponse[0].reSchDepPoint}"></span> - <span th:text="${reserveApiResponse[0].reSchArrPoint}"></span></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <td><span class="name">유/영은</span></td>
-                                        <td>(표준형)</td>
+                                    <tr th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
+                                        <td><span class="name">[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
+                                        <input type="hidden" th:value="${dto.reInsuranceidx}" th:class="'reInsuranceidx1'+${i.index}">
+                                        <td th:class="'Insu1Tp'+${i.index}"></td>
                                         <td>
                                             <div class="td_wrap">
-                                                <span class="cul">KRW</span><span class="price">77,900</span>
+                                                <span class="cul">KRW</span><span class="price" th:class="'Insu1P'+${i.index}"></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="ifOnewayD">
+                                        <td>구간 2 : <span th:text="${reserveApiResponse[1].reSchDepPoint}"></span> - <span th:text="${reserveApiResponse[1].reSchArrPoint}"></span></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="ifOnewayD" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 1">
+                                        <td><span class="name">[[${dto.reFirstName}]]/[[${dto.reLastName}]]</span></td>
+                                        <input type="hidden" th:value="${dto.reInsuranceidx}" th:class="'reInsuranceidx2'+${i.index}">
+                                        <td th:class="'Insu2Tp'+${i.index}"></td>
+                                        <td>
+                                            <div class="td_wrap">
+                                                <span class="cul">KRW</span><span class="price" th:class="'Insu2P'+${i.index}"></span>
                                             </div>
                                         </td>
                                     </tr>
@@ -436,12 +469,11 @@
                 <li>
                     구간 1
                 </li>
-                <li>편명 : LJ309</li>
-                <li>출발 : 2022-02-24(목) 08:05 서울/김포(GMP)</li>
-                <li>도착 : 2022-02-24(목) 09:15 제주(CJU)</li>
-                <li>비행시간 : 01h 10m</li>
+                <li>편명 : <span th:text="${reserveApiResponse[0].reSchName}"></span></li>
+                <li>출발 : <span th:text="${#strings.substring(reserveApiResponse[0].reSchStartTime,0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse[0].reSchStartTime,11, 16)}"></span>] <span th:text="${reserveApiResponse[0].reSchDepPoint}"></span></li>
+                <li>도착 : <span th:text="${#strings.substring(reserveApiResponse[0].reSchEndTime,0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse[0].reSchEndTime,11, 16)}"></span>] <span th:text="${reserveApiResponse[0].reSchArrPoint}"></span></li>
                 <li>대기시간 : 00h 00m</li>
-                <li>A/C 타입 : B737-800</li>
+                <li>A/C 타입 : <span th:text="${reserveApiResponse[0].reAirplainType}"></span></li>
             </ul>
             </div>
         </div>
@@ -457,12 +489,11 @@
             <div class="cont_P">
                 <ul>
                     <li>구간 2</li>
-                    <li>편명 : LJ309</li>
-                    <li>출발 : 2022-02-24(목) 08:05 서울/김포(GMP)</li>
-                    <li>도착 : 2022-02-24(목) 09:15 제주(CJU)</li>
-                    <li>비행시간 : 01h 10m</li>
+                    <li>편명 : <span th:text="${reserveApiResponse[1].reSchName}"></span></li>
+                    <li>출발 : <span th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime,0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime,11, 16)}"></span>] <span th:text="${reserveApiResponse[1].reSchDepPoint}"></span></li>
+                    <li>도착 : <span th:text="${#strings.substring(reserveApiResponse[1].reSchEndTime,0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse[1].reSchEndTime,11, 16)}"></span>] <span th:text="${reserveApiResponse[1].reSchArrPoint}"></span></li>
                     <li>대기시간 : 00h 00m</li>
-                    <li>A/C 타입 : B737-800</li>
+                    <li>A/C 타입 : <span th:text="${reserveApiResponse[1].reAirplainType}"></span></li>
                 </ul>
             </div>
         </div>
@@ -472,7 +503,7 @@
         <div class="false_modal_box">
             <p>예약변경 및 취소할 탑승객 및 여정을 선택하십시오.</p>
             <div class="modal_btn">
-                <p class="confirm_btn">확인</p>
+                <p class="confirm_btnn">확인</p>
             </div>
         </div>
     </div>
