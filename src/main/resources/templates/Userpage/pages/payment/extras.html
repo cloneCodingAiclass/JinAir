@@ -134,27 +134,27 @@
                     <div class="service_content">
                         <!--탑승객 정보 랩-->
                         <div class="passenger_info_wrap passenger_info_wrap1" id="passenger_info_1">
-                            <th:block th:each="passengerInfo1, i1 : ${reserveApiResponse}" th:if="${i1.count % 2 != 0}">
+                            <th:block th:each="passengerInfo1, i : ${reserveApiResponse}" th:if="${i.count % 2 != 0}">
                             <div class='passenger_info passenger_info1'>
-                                <h3>탑승객 <span th:if="${i1.count == 1}" th:id="'info1_' + ${i1.index}">[[${i1.count}]]</span>
-                                    <span th:if="${i1.count > 1}" th:id="'info1_' + ${i1.index}">[[${i1.count-2}]]</span></h3>
-                                <label th:for="'person_'+${i1.index}">
+                                <h3>탑승객 <span th:if="${i.count == 0}" th:id="'info1_' + ${i.index}">안녕</span>
+                                    <span th:if="${i.count > 1}" th:id="'info1_' + ${i.index}">[[${i.count-1}]]</span></h3>
+                                <label th:for="'person_'+${i.index}">
                                     <img src='/userpage/lib/img/ico-person.png' alt='탑승객'>
-                                    <span class='cursor' th:id="'person_name'+${i1.index}">[[${passengerInfo1.reFirstName}]]/[[${passengerInfo1.reLastName}]]</span>
+                                    <span class='cursor' th:id="'person_name'+${i.index}">[[${passengerInfo1.reFirstName}]]/[[${passengerInfo1.reLastName}]]</span>
                                 </label>
-                                <label th:for="'person_'+${i1.index}" class='label'>
+                                <label th:for="'person_'+${i.index}" class='label'>
                                     <p class='select_seat_num select_seat_num1'>
                                         <input type='text' class='seat_num seat_num1 cursor'
-                                               th:id="'seat_num1_'+${i1.index}" readonly>
+                                               th:id="'seat_num1_'+${i.index}" readonly>
                                         <span class='close cursor'>x</span>
                                     </p>
-                                    <p class='select_seat_price' th:id="'seat_price1_'+${i1.index}">
+                                    <p class='select_seat_price' th:id="'seat_price1_'+${i.index}">
                                         <span class='seat_P seat_P1'>KRW</span>
-                                        <span class='price price1' th:id="'price1_'+${i1.index}"></span>
-                                        <input type="hidden" class='hid_price hid_price1' th:id="'hid_price1_'+${i1.index}">
+                                        <span class='price price1' th:id="'price1_'+${i.index}"></span>
+                                        <input type="hidden" class='hid_price hid_price1' th:id="'hid_price1_'+${i.index}">
                                     </p>
                                     <input type='radio' name='selectPerson' class='checkPerson'
-                                           th:id="'person_'+${i1.index}">
+                                           th:id="'person_'+${i.index}">
                                 </label>
                             </div>
                             </th:block>
