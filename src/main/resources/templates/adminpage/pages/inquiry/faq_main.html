@@ -22,12 +22,12 @@
                     </div>
                     <div class="contents_top">
                         <div class="faq_check_box">
-                                <li id="checkBox"><a class="tab">전체</a></li>
-                                <li id="checkBox1"><a class="tab1">항공권 예매</a></li>
-                                <li id="checkBox2"><a class="tab2">할인 제도</a></li>
-                                <li id="checkBox3"><a class="tab3">수하물</a></li>
-                                <li id="checkBox4"><a class="tab4">기내 서비스</a></li>
-                                <li id="checkBox5"><a class="tab5">기타</a></li>
+                                <li id="checkBox1"><a id="faq1" value="전체">전체</a></li>
+                                <li id="checkBox2"><a id="faq2" value="항공권 예매">항공권 예매</a></li>
+                                <li id="checkBox3"><a id="faq3" value="할인 제도">할인 제도</a></li>
+                                <li id="checkBox4"><a id="faq4" value="수하물">수하물</a></li>
+                                <li id="checkBox5"><a id="faq5" value="기내 서비스">기내 서비스</a></li>
+                                <li id="checkBox6"><a id="faq6" value="기타">기타</a></li>
                         </div>
                         <div class="btn_top">
                             <input type="text" placeholder="검색어를 입력하세요." id="searchText" >
@@ -35,83 +35,13 @@
                         </div>
                     </div>
                     <div class="contents_main" id="board">
-                        <table id="tableBoard">
+                        <table id="faqList">
                             <tr>
                                 <td>번호</td>
                                 <td>제목</td>
                                 <td>등록일</td>
                             </tr>
-                            <tr v-for="faq in tableBoard">
-                                <td>{{faq.faqIndex}}</td>
-                                <td><a :href=`/pages/admin/faq_view/${faq.faqIndex}`>{{faq.faqTitle}}</a></td>
-                                <td>{{faq.faqRegdate.substr(0,10)}}</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="contents_main" id="board1" >
-                        <table id="tableBoard1">
-                            <tr>
-                                <td>번호</td>
-                                <td>제목</td>
-                                <td>등록일</td>
-                            </tr>
-                            <tr v-for="faq in tableBoard1By('항공권 예매')">
-                                <td>{{faq.faqIndex}}</td>
-                                <td><a :href=`/pages/admin/faq_view/${faq.faqIndex}`>{{faq.faqTitle}}</a></td>
-                                <td>{{faq.faqRegdate.substr(0,10)}}</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="contents_main" id="board2">
-                        <table id="tableBoard2">
-                            <tr>
-                                <td>번호</td>
-                                <td>제목</td>
-                                <td>등록일</td>
-                            </tr>
-                            <tr v-for="faq in tableBoard2By('할인 제도')">
-                                <td>{{faq.faqIndex}}</td>
-                                <td><a :href=`/pages/admin/faq_view/${faq.faqIndex}`>{{faq.faqTitle}}</a></td>
-                                <td>{{faq.faqRegdate.substr(0,10)}}</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="contents_main" id="board3">
-                        <table id="tableBoard3">
-                            <tr>
-                                <td>번호</td>
-                                <td>제목</td>
-                                <td>등록일</td>
-                            </tr>
-                            <tr v-for="faq in tableBoard3By('수하물')">
-                                <td>{{faq.faqIndex}}</td>
-                                <td><a :href=`/pages/admin/faq_view/${faq.faqIndex}`>{{faq.faqTitle}}</a></td>
-                                <td>{{faq.faqRegdate.substr(0,10)}}</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="contents_main" id="board4">
-                        <table id="tableBoard4">
-                            <tr>
-                                <td>번호</td>
-                                <td>제목</td>
-                                <td>등록일</td>
-                            </tr>
-                            <tr v-for="faq in tableBoard4By('기내 서비스')">
-                                <td>{{faq.faqIndex}}</td>
-                                <td><a :href=`/pages/admin/faq_view/${faq.faqIndex}`>{{faq.faqTitle}}</a></td>
-                                <td>{{faq.faqRegdate.substr(0,10)}}</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="contents_main" id="board5">
-                        <table id="tableBoard5">
-                            <tr>
-                                <td>번호</td>
-                                <td>제목</td>
-                                <td>등록일</td>
-                            </tr>
-                            <tr v-for="faq in tableBoard5By('기타')">
+                            <tr v-for="(faq, i) in faqList">
                                 <td>{{faq.faqIndex}}</td>
                                 <td><a :href=`/pages/admin/faq_view/${faq.faqIndex}`>{{faq.faqTitle}}</a></td>
                                 <td>{{faq.faqRegdate.substr(0,10)}}</td>
@@ -123,9 +53,7 @@
                         <div class="footer">
                             <div class="center">
                                 <table>
-                                    <tr id="showPage">
-
-                                    </tr>
+                                    <tr id="footer"></tr>
                                 </table>
                             </div>
                         </div>

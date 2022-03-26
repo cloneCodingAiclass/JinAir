@@ -91,62 +91,6 @@ $(function () {
             $('.quick_faq > ul > li').not(this).removeClass('check');
         });
     });
-    $("#board").css({"display" : "block"});
-    $("#board1").css({"display" : "none"});
-    $("#board2").css({"display" : "none"});
-    $("#board3").css({"display" : "none"});
-    $("#board4").css({"display" : "none"});
-    $("#board5").css({"display" : "none"});
-
-
-    $(".faq1").click(function (){
-        $("#board").css({"display" : "block"});
-        $("#board1").css({"display" : "none"});
-        $("#board2").css({"display" : "none"});
-        $("#board3").css({"display" : "none"});
-        $("#board4").css({"display" : "none"});
-        $("#board5").css({"display" : "none"});
-    })
-    $(".faq2").click(function (){
-        $("#board").css({"display" : "none"});
-        $("#board1").css({"display" : "block"});
-        $("#board2").css({"display" : "none"});
-        $("#board3").css({"display" : "none"});
-        $("#board4").css({"display" : "none"});
-        $("#board5").css({"display" : "none"});
-    })
-    $(".faq3").click(function (){
-        $("#board").css({"display" : "none"});
-        $("#board1").css({"display" : "none"});
-        $("#board2").css({"display" : "block"});
-        $("#board3").css({"display" : "none"});
-        $("#board4").css({"display" : "none"});
-        $("#board5").css({"display" : "none"});
-    })
-    $(".faq4").click(function (){
-        $("#board").css({"display" : "none"});
-        $("#board1").css({"display" : "none"});
-        $("#board2").css({"display" : "none"});
-        $("#board3").css({"display" : "block"});
-        $("#board4").css({"display" : "none"});
-        $("#board5").css({"display" : "none"});
-    })
-    $(".faq5").click(function (){
-        $("#board").css({"display" : "none"});
-        $("#board1").css({"display" : "none"});
-        $("#board2").css({"display" : "none"});
-        $("#board3").css({"display" : "none"});
-        $("#board4").css({"display" : "block"});
-        $("#board5").css({"display" : "none"});
-    })
-    $(".faq6").click(function (){
-        $("#board").css({"display" : "none"});
-        $("#board1").css({"display" : "none"});
-        $("#board2").css({"display" : "none"});
-        $("#board3").css({"display" : "none"});
-        $("#board4").css({"display" : "none"});
-        $("#board5").css({"display" : "block"});
-    })
 
 });
 (function ($) {

@@ -4,10 +4,14 @@ import com.project.jinair.ifs.CrudInterface;
 import com.project.jinair.model.entity.schedule.TbReservation;
 import com.project.jinair.model.enumclass.PaymentStatus;
 import com.project.jinair.model.network.Header;
+import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.schedule.ReserveApiRequest;
 import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
 import com.project.jinair.repository.TbReservationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -29,6 +33,17 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
 
     public Header<List<ReserveApiResponse>> find(Long startIdx, Long endIdx){
         List<TbReservation> tbReservations = tbReservationRepository.findAllByReIndexBetween(startIdx, endIdx);
+        List<ReserveApiResponse> ReserveApiResponse = tbReservations.stream()
+                .map(user -> responseReservation(user))
+                .collect(Collectors.toList());
+        return Header.OK(ReserveApiResponse);
+    }
+
+    public Header<List<ReserveApiResponse>> findCancel(Long startIdx, Long endIdx){
+        LocalDateTime now = LocalDateTime.now(); // 현재시간 구하는 객체, 2022-03-13T11:17:21.211432100
+        String strNow = String.valueOf(now).substring(0,19); // 2022-03-13T11:17:21
+        LocalDateTime local = LocalDateTime.parse(strNow); // 타입변환
+        List<TbReservation> tbReservations = tbReservationRepository.findAllByReIndexBetweenAndReSchStartTimeGreaterThan(startIdx, endIdx, local);
         List<ReserveApiResponse> ReserveApiResponse = tbReservations.stream()
                 .map(user -> responseReservation(user))
                 .collect(Collectors.toList());
@@ -131,7 +146,8 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                     reserve.setReEmail(reserveApiRequest.getReEmail());
                     reserve.setReHpNation(reserveApiRequest.getReHpNation());
                     reserve.setReHp(reserveApiRequest.getReHp());
-
+                    reserve.setReSeatDetail(reserveApiRequest.getReSeatDetail());
+                    reserve.setReSeatPrice(reserveApiRequest.getReSeatPrice());
                     return reserve;
                 })
                 .map(reserve -> tbReservationRepository.save(reserve))
@@ -331,6 +347,19 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 }
         );
     }
+
+    public void updating3(Header<ReserveApiRequest> request) {
+        ReserveApiRequest reserveApiRequest = request.getData();
+        Optional<TbReservation> reservation = tbReservationRepository.findById(reserveApiRequest.getReIndex());
+        reservation.ifPresent(
+                select ->{
+                    select.setReIndex(reserveApiRequest.getReIndex());
+                    select.setReTripKind(reserveApiRequest.getReTripKind());
+                    tbReservationRepository.save(select);
+                }
+        );
+    }
+
     public Header<List<ReserveApiResponse>> go(String schDeparturePoint, String schArrivalPoint, String goDateSelectOptt){
         LocalDateTime searchDaystr1 = LocalDateTime.parse((goDateSelectOptt));
         List<TbReservation> tbReservations = tbReservationRepository.findByReSchDepPointAndReSchArrPointAndReSchStartTime(schDeparturePoint, schArrivalPoint, searchDaystr1);
@@ -370,5 +399,34 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
         return Header.OK(ReserveApiResponse);
     }
 
+    public Header<List<ReserveApiResponse>> list(Pageable pageable){
+        Page<TbReservation> tbReservationList = tbReservationRepository.findAll(pageable);
+        List<ReserveApiResponse> reserveApiResponseList = tbReservationList.stream()
+                .map(re -> responseReservation(re))
+                .collect(Collectors.toList());
 
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbReservationList.getTotalPages())
+                .totalElements(tbReservationList.getTotalElements())
+                .currentPage(tbReservationList.getNumber())
+                .currentElements(tbReservationList.getNumberOfElements())
+                .build();
+
+        return Header.OK(reserveApiResponseList, pagination);
+    }
+
+    public Header<List<ReserveApiResponse>> searchForUser(String airType, String airName, String startTime, String startPoint, String arrivePoint, Pageable pageable){
+        Page<TbReservation> tbReservationList = tbReservationRepository.findByReAirplainTypeAndReSchNameAndReSchStartTimeAndReSchDepPointAndReSchArrPoint(airType, airName, LocalDateTime.parse(startTime), startPoint, arrivePoint, pageable);
+        List<ReserveApiResponse> reserveApiResponseList = tbReservationList.stream()
+                .map(re -> responseReservation(re))
+                .collect(Collectors.toList());
+
+        Pagination pagination = Pagination.builder()
+                .totalPages(tbReservationList.getTotalPages())
+                .totalElements(tbReservationList.getTotalElements())
+                .currentPage(tbReservationList.getNumber())
+                .currentElements(tbReservationList.getNumberOfElements())
+                .build();
+        return Header.OK(reserveApiResponseList, pagination);
+    }
 }

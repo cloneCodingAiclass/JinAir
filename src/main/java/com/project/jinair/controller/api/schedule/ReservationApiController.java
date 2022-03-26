@@ -8,6 +8,9 @@ import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
 import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import com.project.jinair.service.reservation.ReservationApiLogicService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -81,17 +84,17 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
         return day;
     }
 
-    @GetMapping("/list/{startIdx}/{endIdx}") // http://localhost:8080/api/reservation/list
+    @GetMapping("/list/{startIdx}/{endIdx}") // http://localhost:8080/api/reservation/list/{startIdx}/{endIdx}
     public Header<List<ReserveApiResponse>> findAll(
             @PathVariable(name = "startIdx") Long startIdx, @PathVariable(name = "endIdx") Long endIdx) {
         return reservationApiLogicService.find(startIdx, endIdx);
     }
 
-//    @GetMapping("/listnotnull/{startIdx}/{endIdx}") // http://localhost:8080/api/reservation/listNotNull
-//    public Header<List<ReserveApiResponse>> listNotNull(
-//            @PathVariable(name = "startIdx") Long startIdx, @PathVariable(name = "endIdx") Long endIdx) {
-//        return reservationApiLogicService.listNotNull(startIdx, endIdx);
-//    }
+    @GetMapping("/listCancel/{startIdx}/{endIdx}") // http://localhost:8080/api/reservation/list
+    public Header<List<ReserveApiResponse>> findCancel(
+            @PathVariable(name = "startIdx") Long startIdx, @PathVariable(name = "endIdx") Long endIdx) {
+        return reservationApiLogicService.findCancel(startIdx, endIdx);
+    }
 
     @PostMapping("/list/seat")
     public Header<List<ReserveApiResponse>> findseat(
@@ -162,6 +165,10 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     public void updating2(@RequestBody Header<ReserveApiRequest> request) {
         reservationApiLogicService.updating2(request);
     }
+    @PutMapping("/updating3")
+    public void updating3(@RequestBody Header<ReserveApiRequest> request) {
+        reservationApiLogicService.updating3(request);
+    }
 
 
     // 출발지, 도착지, 가는날 조회
@@ -188,5 +195,24 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
         return reservationApiLogicService.oldReservation(reUserindex);
     }
 
+    // 전체 예약 리스트
+    @GetMapping("/list")
+    public Header<List<ReserveApiResponse>> list(@PageableDefault(size = 10, sort = {"reIndex"}, direction = Sort.Direction.DESC)Pageable pageable){
+        return reservationApiLogicService.list(pageable);
+    }
+
+    // 항공기 타입, 항공기 이름, 출발날짜, 출발시간, 출발지, 도착지
+    @PostMapping("/searchForUser")
+    public Header<List<ReserveApiResponse>> searchForUser(
+            @RequestParam(value = "airType", required = false) String airType,
+            @RequestParam(value = "airName", required = false) String airName,
+            @RequestParam(value = "startTime", required = false) String startTime,
+            @RequestParam(value = "startPoint", required = false) String startPoint,
+            @RequestParam(value = "arrivePoint", required = false) String arrivePoint,
+            @PageableDefault(size = 10, sort = {"reIndex"}, direction = Sort.Direction.DESC)Pageable pageable
+    ){
+        System.out.println(airType + airName + startTime + startPoint + arrivePoint);
+        return reservationApiLogicService.searchForUser(airType, airName, startTime, startPoint, arrivePoint, pageable);
+    }
 
 }

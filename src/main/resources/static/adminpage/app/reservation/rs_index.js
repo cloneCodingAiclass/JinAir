@@ -102,11 +102,23 @@ $(function () {
 
 $(() => {
     document.getElementById('start_date').valueAsDate = new Date();
-    document.getElementById('end_date').valueAsDate = new Date();
 });
 
 
 $(()=> {
+
+    // 24시간 표시
+    $(document).ready(function (){
+        $('input.timepicker').timepicker({
+            timeFormat: "HH:mm",
+            interval: 30,
+            startTime : '00:00',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        })
+    })
+
     airplaneType();
 
     // 항공기 타입 데이터 목록
@@ -238,5 +250,44 @@ $(()=> {
     })
     $(".uncomplete").on('click', () => {
         $("#modal_iscancel").fadeOut();
+    })
+
+    let resList = new Vue({
+        el : '#resList',
+        data : {
+            resList : {}
+        },
+        methods:{
+        }
+    });
+    $('#searchBtn').on('click', function (){
+        let aptype = $('#aptype').find('option:selected').val();
+        let apname = $('#apname').find('option:selected').val();
+        let startTime = $('#start_date').val() + 'T' + $('#starttime').val() + ':00';
+        let startPoint = $('#departure_point').find('option:selected').val();
+        let arrivePoint = $('#arrive_point').find('option:selected').val();
+        $.post({
+            url: "/api/reservation/searchForUser",
+            data: "airType=" + aptype + "&airName=" + apname + "&startTime=" + startTime + "&startPoint=" + startPoint + "&arrivePoint=" + arrivePoint,
+            dataType: "text",
+            success: function (response){
+                let jsonData = JSON.parse(response)
+                console.dir(jsonData)
+                $('#airplaneName').text(jsonData.data[0].reSchName)
+                let startdate = jsonData.data[0].reSchStartTime.substr(0, 10)
+                $('#landingDate').text(startdate)
+                let starttime = jsonData.data[0].reSchStartTime.substr(11, 5)
+                $('#landingTime').text(starttime)
+                $('#landingPoint').text(jsonData.data[0].reSchDepPoint)
+                $('#arrPoint').text(jsonData.data[0].reSchArrPoint)
+                let endtime = jsonData.data[0].reSchEndTime.substr(0, 10)
+                $('#arrTime').text(endtime)
+
+
+                resList.resList = jsonData.data;
+            }
+
+        })
+        console.log($('#start_date').val() + 'T' + $('#starttime').val() + ':00')
     })
 })
