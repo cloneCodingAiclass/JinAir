@@ -291,12 +291,12 @@ $(function () {
                 let jsonData1;
                 jsonData1 = {
                     data : {
-                        reIndex: i+1,
+                        reIndex: i-1,
                         reTripKind : "편도"
                     }
                 }
                 $.ajax({
-                    url: "/api/reservation",
+                    url: "/api/reservation/updating3",
                     data: JSON.stringify(jsonData1),
                     method: "PUT",
                     dataType: "text",

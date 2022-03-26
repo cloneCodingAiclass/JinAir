@@ -343,6 +343,19 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 }
         );
     }
+
+    public void updating3(Header<ReserveApiRequest> request) {
+        ReserveApiRequest reserveApiRequest = request.getData();
+        Optional<TbReservation> reservation = tbReservationRepository.findById(reserveApiRequest.getReIndex());
+        reservation.ifPresent(
+                select ->{
+                    select.setReIndex(reserveApiRequest.getReIndex());
+                    select.setReTripKind(reserveApiRequest.getReTripKind());
+                    tbReservationRepository.save(select);
+                }
+        );
+    }
+
     public Header<List<ReserveApiResponse>> go(String schDeparturePoint, String schArrivalPoint, String goDateSelectOptt){
         LocalDateTime searchDaystr1 = LocalDateTime.parse((goDateSelectOptt));
         List<TbReservation> tbReservations = tbReservationRepository.findByReSchDepPointAndReSchArrPointAndReSchStartTime(schDeparturePoint, schArrivalPoint, searchDaystr1);
