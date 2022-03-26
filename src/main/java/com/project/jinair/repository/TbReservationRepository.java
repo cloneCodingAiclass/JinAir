@@ -2,6 +2,8 @@ package com.project.jinair.repository;
 
 import com.project.jinair.model.entity.schedule.TbReservation;
 import com.project.jinair.model.enumclass.PaymentStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +23,8 @@ public interface TbReservationRepository extends JpaRepository<TbReservation, Lo
     List<TbReservation> findByReUserindexAndReSchStartTimeGreaterThanOrderByReSchStartTimeAsc(Long reUserindex, LocalDateTime local);
     List<TbReservation> findByReUserindexAndReSchStartTimeLessThanOrderByReSchStartTimeAsc(Long reUserindex, LocalDateTime local);
     Optional<TbReservation> findByReIndex(Long id);
+
+    Page<TbReservation> findByReAirplainTypeAndReSchNameAndReSchStartTimeAndReSchDepPointAndReSchArrPoint(String airType, String airName, LocalDateTime StartTime, String startPoint, String ArrivePoint, Pageable pageable);
 
 
 }
