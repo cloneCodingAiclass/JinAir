@@ -417,15 +417,32 @@ $(function () {
         let confirmcheck = $('#check').is(':checked');
         if(confirmcheck){
             for(let i = Number(reIndex1) ; i <= endIdx ; i++){
+                // $.ajax({
+                //     url: "/api/reservation/"+i,
+                //     data: "id=" + i,
+                //     method: "DELETE",
+                //     dataType: "text",
+                //     success: function (response) {
+                //         location.href="/pages/cancel/complete"
+                //     }
+                // })
+                let jsonData;
+                jsonData = {
+                    data : {
+                        reIndex: i,
+                    }
+                }
                 $.ajax({
-                    url: "/api/reservation/"+i,
-                    data: "id=" + i,
-                    method: "DELETE",
+                    url: "/api/reservation",
+                    data: JSON.stringify(jsonData),
+                    method: "PUT",
                     dataType: "text",
+                    contentType : "application/json",
                     success: function (response) {
                         location.href="/pages/cancel/complete"
                     }
                 })
+
             }
         }else{
             $('.false_modal').fadeIn(200);

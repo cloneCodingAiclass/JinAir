@@ -100,6 +100,6 @@ $(function () {
         $('.bbsbox2').css('display', 'block');
     });
     $('.btn').click(function(){
-        location.href='/index.html'
+        location.href='/pages/index'
     })
 });
