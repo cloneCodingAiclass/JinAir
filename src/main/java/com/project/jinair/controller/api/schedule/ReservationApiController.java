@@ -5,6 +5,7 @@ import com.project.jinair.model.enumclass.PaymentStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.request.schedule.ReserveApiRequest;
 import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
+import com.project.jinair.model.network.response.schedule.ScheduleApiResponse;
 import com.project.jinair.service.reservation.ReservationApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -91,6 +92,17 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
 //            @PathVariable(name = "startIdx") Long startIdx, @PathVariable(name = "endIdx") Long endIdx) {
 //        return reservationApiLogicService.listNotNull(startIdx, endIdx);
 //    }
+
+    @PostMapping("/list/seat")
+    public Header<List<ReserveApiResponse>> findseat(
+            @RequestBody  Header<ReserveApiRequest> request)
+    {
+        System.out.println(request);
+        return reservationApiLogicService.findseat(request);
+    }
+
+
+
 
     @Override
     @PostMapping("")

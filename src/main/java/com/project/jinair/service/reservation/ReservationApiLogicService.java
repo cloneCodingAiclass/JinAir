@@ -9,6 +9,7 @@ import com.project.jinair.model.network.response.schedule.ReserveApiResponse;
 import com.project.jinair.repository.TbReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -41,6 +42,17 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
 //                .collect(Collectors.toList());
 //        return Header.OK(ReserveApiResponse);
 //    }
+
+    public Header<List<ReserveApiResponse>> findseat(Header<ReserveApiRequest> request){
+        ReserveApiRequest reserveApiRequest = request.getData();
+        List<TbReservation> tbReservations = tbReservationRepository.findByReSchNameAndReSchStartTime(reserveApiRequest.getReSchName(), reserveApiRequest.getReSchStartTime());
+        List<ReserveApiResponse> ReserveApiResponse = tbReservations.stream()
+                .map(user -> responseReservation(user))
+                .collect(Collectors.toList());
+        return Header.OK(ReserveApiResponse);
+    }
+
+
 
     @Override
     public Header<ReserveApiResponse> create(Header<ReserveApiRequest> request) {

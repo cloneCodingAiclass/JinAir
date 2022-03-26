@@ -1441,7 +1441,6 @@ $(function () {
 
   function getTotal(i, idx){
     $.get("/api/reservation/"+idx, function (response) {
-      console.dir(response);
       beforeTotArr[i] = response.data.reTotal;
       if(i % 2 == 0) {
         totBagicPrice1 += Number(response.data.reSchBasicPrice);
@@ -1452,10 +1451,10 @@ $(function () {
   }
 
 
-  // 예약된 자석 불러오기
+  // 예약된 좌석 불러오기
 
-  let airplane1;
-  let airplane2;
+  let airplane1 = "";
+  let airplane2 = "";
   let startdate1;
   let startdate2;
 
@@ -1466,23 +1465,107 @@ $(function () {
 
   function getInfo(i, idx){
     $.get("/api/reservation/"+idx, function (response) {
-      console.dir(response);
       if(i % 2 == 0) {
-        airplane1 = response.data.reAirplainType;
-        startdate1 = response.data.reSchStartTime.substring(0,10);
+        airplane1 = response.data.reSchName;
+        startdate1 = response.data.reSchStartTime;
         console.log("비행기 1번 " + airplane1);
         console.log("시작일 1번 " + startdate1);
-        // getReserveSeat1(airplane1, startdate1);
-        getReserveSeat1()
+        findSeat1(response.data.reSchName, response.data.reSchStartTime)
       } else {
-        airplane2 = response.data.reAirplainType;
-        startdate2 = response.data.reSchStartTime.substring(0,10);
+        airplane2 = response.data.reSchName;
+        startdate2 = response.data.reSchStartTime;
         console.log("비행기 2번 " + airplane2);
         console.log("시작일 2번 " + startdate2);
-        // getReserveSeat1(airplane2, startdate2);
+        findSeat2(response.data.reSchName, response.data.reSchStartTime)
       }
     })
   }
+
+
+  // 조건으로 찾기
+  let Data1;
+  let seatArr1 = [];
+  function findSeat1(airplane, startdate1) {
+    Data1 = {
+      data : {
+        reSchName : airplane,
+        reSchStartTime : startdate1
+      }
+    }
+    $.post({
+      url: "/api/reservation/list/seat",
+      data : JSON.stringify(Data1),
+      dateType: 'text',
+      contentType : "application/json",
+      success : function(response){
+        console.dir(response);
+        console.log(response.data.reSeatDetail);
+        for(let i = 0; i < response.data.length; i++) {
+          seatArr1[i] = response.data[i].reSeatDetail;
+          console.log(seatArr1[i])
+        }
+        seatList1.seatList1 = response.data.reSeatDetail;
+        alert("성공")
+      }, error : function() {
+        alert("실패")
+      }
+    });
+  }
+
+  let Data2;
+  let seatArr2 = [];
+  function findSeat2(airplane, startdate1) {
+    Data2 = {
+      data : {
+        reSchName : airplane,
+        reSchStartTime : startdate1
+      }
+    }
+    $.post({
+      url: "/api/reservation/list/seat",
+      data : JSON.stringify(Data2),
+      dateType: 'text',
+      contentType : "application/json",
+      success : function(response){
+        console.dir(response);
+        seatList2.seatList2 = response.data.reSeatDetail;
+        for(let i = 0; i < response.data.length; i++) {
+          seatArr2[i] = response.data[i].reSeatDetail;
+          console.log(seatArr2[i])
+        }
+        alert("성공")
+      }, error : function() {
+        alert("실패")
+      }
+    });
+  }
+
+  // 구간 1 마감 좌석
+
+  // 구간 2 마감 좌석
+  for (let i = 0; i < seatArr2.length; i++) {
+      let box = seatArr2[i];
+      for (let i = 0; i < $(".SSC2").length; i++) {
+        if ($(this).attr("id") == "2_"+box+"") {
+          alert(box);
+        }
+      }
+  }
+
+
+  let seatList1 = new Vue({
+    el : '#seatList1',
+    data : {
+      seatList1 : {}
+    }
+  })
+
+  let seatList2 = new Vue({
+    el : '#seatList2',
+    data : {
+      seatList2 : {}
+    }
+  })
 
 
   // 결제정보 전송
@@ -1523,7 +1606,6 @@ $(function () {
 
   let jsonData2 = new Array();
   function multiwayData1(i) {
-    for (let i = 0; i < personNumber; i++) {
         let finalarr2 = new Object();
         finalarr2.reIndex = indexArr[i];
         finalarr2.reStatus = "Progress";
@@ -1539,19 +1621,11 @@ $(function () {
       data : JSON.stringify(jsonData2),
       dataType : "text",
       contentType : "application/json",
-      // success(jsonData2) {
-      //   location.href = "/pages/payment/multiway"
-      // }
-      // error(error) {
-      //   alert(error);
-      // }
     });
-    }
   }
 
   let jsonData3 = new Array();
   function multiwayData2(i) {
-    for (let i = 0; i < personNumber; i++) {
         let finalarr3 = new Object();
         finalarr3.reIndex = indexArr[i];
         finalarr3.reStatus = "Progress";
@@ -1567,19 +1641,11 @@ $(function () {
         data : JSON.stringify(jsonData3),
         dataType : "text",
         contentType : "application/json",
-        // success(jsonData3) {
-        //   location.href = "/pages/payment/multiway"
-        // }
-      //   error(error) {
-      //     alert(error);
-      //   }
       });
-    }
   }
 
   let jsonData4 = new Array();
   function towayData1(i) {
-    for (let i = 0; i < personNumber; i++) {
       let finalarr4 = new Object();
       finalarr4.reIndex = indexArr[i];
       finalarr4.reStatus = "Progress";
@@ -1596,12 +1662,11 @@ $(function () {
         dataType: "text",
         contentType: "application/json",
       });
-    }
+
   }
 
   let jsonData5 = new Array();
   function towayData2(i) {
-    for (let i = 0; i < personNumber; i++) {
       let finalarr5 = new Object();
       finalarr5.reIndex = indexArr[i];
       finalarr5.reStatus = "Progress";
@@ -1617,14 +1682,8 @@ $(function () {
         data: JSON.stringify(jsonData5),
         dataType: "text",
         contentType: "application/json",
-        // success(jsonData5) {
-        //   location.href = "/pages/payment/twoway"
-        // }
-        // error(error) {
-        //   alert(error);
-        // }
       });
-    }
+
   }
 
 
