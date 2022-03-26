@@ -72,7 +72,7 @@
     margin: 20px;
     text-align: center;
 }
-.modal_main_id .btn input[type="submit"]{
+.modal_main_id .btn input[class="btn_confirm"]{
     width: 150px;
     height: 50px;
     background-color:#BDD600;
@@ -81,7 +81,7 @@
     font-weight: 700;
     cursor: pointer;
 }
-.modal_main_id .btn input[type="button"]{
+.modal_main_id .btn input[class="btn_cancel"]{
     width: 150px;
     height: 50px;
     background-color:white;
@@ -130,7 +130,7 @@
     margin: 20px;
     text-align: center;
 }
-.modal_main_pw .btn input[type="submit"]{
+.modal_main_pw .btn input[class="btn_confirm"]{
     width: 150px;
     height: 50px;
     background-color:#BDD600;
@@ -139,7 +139,7 @@
     font-weight: 700;
     cursor: pointer;
 }
-.modal_main_pw .btn input[type="button"]{
+.modal_main_pw .btn input[class="btn_cancel"]{
     width: 150px;
     height: 50px;
     background-color:white;
