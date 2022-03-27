@@ -76,7 +76,7 @@
                                 <td>구간 1</td>
                                 <td>여행보험</td>
                                 <td>[[${dto.reFirstName}]]/[[${dto.reLastName}]]</td>
-                                <input type="hidden" th:value="${dto.reInsuranceidx}">
+                                <input type="hidden" th:value="${dto.reInsuranceidx}" th:class="'reInsuranceidx1'+${i.index}">
                                 <div>
                                     <td>
                                         <input type="checkbox" th:class="'Insu1C'+${i.index}">
