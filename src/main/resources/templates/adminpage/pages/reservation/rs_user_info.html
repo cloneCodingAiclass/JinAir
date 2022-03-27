@@ -4,7 +4,7 @@
 <!-- head.html -->
 <div th:replace="/adminpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/adminpage/lib/css/reservation/rs_user_info.css">
-<script src="/adminpage/app/reservation/rs_sch.js"></script>
+<script src="/adminpage/app/reservation/rs_userInfo.js"></script>
 <!-- head.html 끝-->
 <body>
 <div id="wrap">
@@ -14,7 +14,7 @@
         <div class="contents">
             <div class="contwrap">
                 <div class="search">
-                    <p class="title">운항편(LJ438) 예약자 상세정보</p>
+                    <p class="title">운항편 예약자 상세정보</p>
                 </div>
                 <div class="searchwrap">
                     <!-- 예약자 리스트 -->
@@ -29,7 +29,7 @@
                                 <col width="150">
                             </colgroup>
                             <tr class="table_tit">
-                                <th>운항편</th>
+                                <th>항공기명</th>
                                 <th>출발 일자</th>
                                 <th>출발지</th>
                                 <th>출발 시간</th>
@@ -37,12 +37,12 @@
                                 <th>도착 시간</th>
                             </tr>
                             <tr>
-                                <td>LJ438</td>
-                                <td>2022-01-30</td>
-                                <td>서울/김포(GMP)</td>
-                                <td>08:20</td>
-                                <td>제주(CJU)</td>
-                                <td>09:10</td>
+                                <td id="airplaneName"></td>
+                                <td id="landingDate"></td>
+                                <td id="landingPoint"></td>
+                                <td id="landingTime"></td>
+                                <td id="arrPoint"></td>
+                                <td id="arrTime"></td>
                             </tr>
                         </table>
                         <table>
@@ -54,82 +54,79 @@
                             </colgroup>
                             <tr>
                                 <th>예약 번호</th>
-                                <td class="lefttd">11Q37D</td>
+                                <td class="lefttd" id="resCode"></td>
                                 <th>이메일</th>
-                                <td colspan="3">yeon@naver.com</td>
+                                <td colspan="3" id="userEmail"></td>
                             </tr>
                             <tr>
                                 <th class="firstN">성명(KOR)</th>
-                                <td class="lefttd"><b class="kfirstN">김</b>연경</td>
+                                <td class="lefttd" id="userKorName"></td>
                                 <th>연락처</th>
-                                <td colspan="3">010-1345-8679</td>
+                                <td colspan="3" id="userHp"></td>
                             </tr>
                             <tr>
                                 <th class="firstN">성명(ENG)</th>
-                                <td class="lefttd"><b class="efirstN">KIM</b>YEONKYONG</td>
+                                <td class="lefttd" id="userEngName"></td>
                                 <th>성인/소아/유아</th>
-                                <td colspan="3">성인</td>
+                                <td colspan="3" id="personType"></td>
                             </tr>
                             <tr>
                                 <th>성별</th>
                                 <td class="lefttd">
-                                    남자<input type="radio" name="gender" class="radio" value="y">
-                                    여자<input type="radio" name="gender" class="radio" value="n" checked>
+                                    남자<input type="radio" name="gender" id="male" class="radio" value="남자">
+                                    여자<input type="radio" name="gender" id="female" class="radio" value="여자">
                                 </td>
-                                <th>반려동물 동승 여부</th>
+                                <th>자동체크인</th>
                                 <td colspan="3">
-                                    탑승<input type="radio" name="petC" class="radio" value="y">
-                                    미탑승<input type="radio" name="petC" class="radio" value="n" checked>
+                                    신청<input type="radio" name="checkin" class="radio" value="True" checked>
+                                    미신청<input type="radio" name="checkin" class="radio" value="False">
                                 </td>
                             </tr>
                             <tr>
                                 <th>생년월일</th>
-                                <td class="lefttd">19650325</td>
-                                <th>자동체크인</th>
+                                <td class="lefttd" id="userBirth"></td>
+                                <th>회원여부</th>
                                 <td colspan="3">
-                                    신청<input type="radio" name="checkin" class="radio" value="y">
-                                    미신청<input type="radio" name="checkin" class="radio" value="n" checked>
+                                    회원<input type="radio" name="memberC" id="True" class="radio" value="True">
+                                    비회원<input type="radio" name="memberC" id="False" class="radio" value="False" checked>
                                 </td>
                             </tr>
                             <tr>
                                 <th>국적</th>
-                                <td class="lefttd">한국(REPUBLIC OF KOREA)</td>
-                                <th>회원여부</th>
+                                <td class="lefttd" id="rePassport"></td>
+                                <th>개인정보 동의 여부</th>
                                 <td colspan="3">
-                                    회원<input type="radio" name="memberC" class="radio" value="y">
-                                    비회원<input type="radio" name="memberC" class="radio" value="n" checked>
+                                    동의<input type="radio" name="agreeC" class="radio" value="True" checked>
+                                    비동의<input type="radio" name="agreeC" class="radio" value="False">
                                 </td>
                             </tr>
                             <tr>
                                 <th>거주국가</th>
-                                <td class="lefttd">한국(REPUBLIC OF KOREA)</td>
-                                <th>개인정보 동의 여부</th>
-                                <td colspan="3">
-                                    동의<input type="radio" name="agreeC" class="radio" value="y" checked>
-                                    비동의<input type="radio" name="agreeC" class="radio" value="n">
-                                </td>
+                                <td class="lefttd" id="reNation"></td>
+                                <th>아이디</th>
+                                <td colspan="3" id="userId"></td>
                             </tr>
                             <tr>
                                 <th>우편번호</th>
-                                <td class="lefttd">06236</td>
-                                <th>아이디</th>
-                                <td colspan="3">1996-10-22</td>
+                                <td class="lefttd" id="userZipcode"></td>
+                                <th>결제수단</th>
+                                <td colspan="3" id="payType">카드</td>
                             </tr>
                             <tr>
                                 <th>주소</th>
-                                <td class="lefttd">서울특별시 강남구 테헤란로 146</td>
-                                <th>결제수단</th>
-                                <td colspan="3">카드</td>
+                                <td class="lefttd" id="address1"></td>
+                                <th>예약취소 수단</th>
+                                <td colspan="3" id="refundType">결제 카드</td>
                             </tr>
                             <tr>
                                 <th>상세주소</th>
-                                <td class="lefttd">503호 (포레스트 인 역삼)</td>
+                                <td class="lefttd" id="address2"></td>
                                 <th>예약취소 수단</th>
-                                <td colspan="3">결제 카드</td>
+                                <td colspan="3" id="payCompleteDate">결제날짜</td>
                             </tr>
                         </table>
                         <div class="btnarea">
-                            <input type="button" value="목록" class="cancbutt golist" onclick="history.back()">
+                            <input type="button" value="목록" class="cancbutt golist" onclick="location.href = '/pages/admin/rsIndex'">
                             <input type="button" value="예약취소" class="cancbutt">
                         </div>
                     </div>
@@ -142,7 +139,7 @@
 
                 <div>
                     <button class="modal_iscancel_btn uncomplete">취소</button>
-                    <a href="./rs_user.html"><button class="modal_iscancel_btn complete">예약취소</button></a>
+                    <button class="modal_iscancel_btn complete" id="resDelete">예약취소</button>
                 </div>
             </div>
         </div>

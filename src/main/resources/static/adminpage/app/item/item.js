@@ -213,11 +213,16 @@ $(() =>{
             let lastPage = response.pagination.totalPages;
 
             let str = "";
-            str += "<td class='firstPage1'><<</td>";
+            if (lastPage != 0) {
+                str += "<td class='firstPage1'><<</td>";
+            }
             for (let i = 0; i < lastPage; i++) {
                 str += "<td class='pages' id="+i+">" + (i+1) + "</td>";
             }
-            str += "<td class='lastPage1'>>></td>";
+
+            if (lastPage != 0) {
+                str += "<td class='lastPage1'>>></td>";
+            }
             $("#showPage").html(str);
             if(page == 0) {
                 $(".firstPage1").css("visibility", "hidden");
@@ -242,19 +247,30 @@ $(() =>{
             });
         })
     }
+    let airplanee = "";
+    let airport = "";
+    let type = "";
+    let start = "";
+    let end = "";
 
     $("#btn_search").on('click', function (){
         if($("#item_list").find('option:selected').val() == '필수 선택'){
             alert('입력을 확인해주세요');
         }else {
-            search($("#airplane_list").find('option:selected').val(), $("#arrival_airport_list").find('option:selected').val(), $("#item_list").find('option:selected').val(), $("#item_start_date").val() + "T00:00:00", $("#item_end_date").val() + "T00:00:00");
+            airplanee = $("#airplane_list").find('option:selected').val()
+            airport = $("#arrival_airport_list").find('option:selected').val()
+            type = $("#item_list").find('option:selected').val()
+            start = $("#item_start_date").val() + "T00:00:00"
+            end = $("#item_end_date").val() + "T00:00:00";
+            // search($("#airplane_list").find('option:selected').val(), $("#arrival_airport_list").find('option:selected').val(), $("#item_list").find('option:selected').val(), $("#item_start_date").val() + "T00:00:00", $("#item_end_date").val() + "T00:00:00");
+            search(0, airplanee, airport, type, start, end);
         }
     })
 
-    function search(airplane, airport, type, start, end){
+    function search(page, airplanee, airport, type, start, end){
         $.post({
-            url: "/api/lost/search",
-            data : "losAirplane=" + airplane + "&losAirport=" + airport + "&losType=" + type + "&start=" + start + "&end=" + end,
+            url: "/api/lost/search?page="+page,
+            data : "losAirplane=" + airplanee + "&losAirport=" + airport + "&losType=" + type + "&start=" + start + "&end=" + end,
             dataType : 'text',
             success : function(response){
                 console.dir(response)
@@ -265,20 +281,24 @@ $(() =>{
 
                 let lastPage = dataJson.pagination.totalPages;
 
-                let str = "";
-                str += "<td class='firstPage1'><<</td>";
-                for (let i = 0; i < lastPage; i++) {
-                    str += "<td class='pages' id="+i+">" + (i+1) + "</td>";
+                let str2 = "";
+                if (lastPage != 0) {
+                    str2 += "<td class='firstPage2'><<</td>";
                 }
-                str += "<td class='lastPage1'>>></td>";
-                $("#showPage").html(str);
+                for (let i = 0; i < lastPage; i++) {
+                    str2 += "<td class='pagesS' id="+i+">" + (i+1) + "</td>";
+                }
+                if (lastPage != 0) {
+                    str2 += "<td class='lastPage2'>>></td>";
+                }
+                $("#showPage").html(str2);
                 if(page == 0) {
-                    $(".firstPage1").css("visibility", "hidden");
+                    $(".firstPage2").css("visibility", "hidden");
                 }
                 if(page == lastPage-1) {
-                    $(".lastPage1").css("visibility", "hidden");
+                    $(".lastPage2").css("visibility", "hidden");
                 }
-                $(".pages").css({
+                $(".pagesS").css({
                     "background-color" : "#fff",
                     "color" : "#444",
                     "cursor" : "pointer"
@@ -287,11 +307,11 @@ $(() =>{
                     "background-color" : "#661e43",
                     "color" : "white"
                 });
-                $(document).on('click', '.firstPage1', function(){
-                    list(0);
+                $(document).on('click', '.firstPage2', function(){
+                    search(0, airplanee, airport, type, start, end);
                 });
-                $(document).on('click', '.lastPage1', function(){
-                    list(lastPage-1);
+                $(document).on('click', '.lastPage2', function(){
+                    search(lastPage, airplanee, airport, type, start, end);
                 });
             }
         })
@@ -305,7 +325,7 @@ $(() =>{
 
     $(document).on('click', '.pagesS', function(){
         let pageId2 = this.id;
-        searchNoti(searchStr, pageId2);
+        search(pageId2, airplanee, airport, type, start, end);
     });
 
 

@@ -260,34 +260,85 @@ $(()=> {
         methods:{
         }
     });
+
+    let aptype
+    let apname
+    let startTime
+    let startPoint
+    let arrivePoint
+
     $('#searchBtn').on('click', function (){
-        let aptype = $('#aptype').find('option:selected').val();
-        let apname = $('#apname').find('option:selected').val();
-        let startTime = $('#start_date').val() + 'T' + $('#starttime').val() + ':00';
-        let startPoint = $('#departure_point').find('option:selected').val();
-        let arrivePoint = $('#arrive_point').find('option:selected').val();
+        $('.rs_list').css({'display' : 'block'});
+        aptype = $('#aptype').find('option:selected').val();
+        apname = $('#apname').find('option:selected').val();
+        startTime = $('#start_date').val() + 'T' + $('#starttime').val() + ':00';
+        startPoint = $('#departure_point').find('option:selected').val();
+        arrivePoint = $('#arrive_point').find('option:selected').val();
         $.post({
             url: "/api/reservation/searchForUser",
             data: "airType=" + aptype + "&airName=" + apname + "&startTime=" + startTime + "&startPoint=" + startPoint + "&arrivePoint=" + arrivePoint,
             dataType: "text",
-            success: function (response){
-                let jsonData = JSON.parse(response)
-                console.dir(jsonData)
-                $('#airplaneName').text(jsonData.data[0].reSchName)
-                let startdate = jsonData.data[0].reSchStartTime.substr(0, 10)
-                $('#landingDate').text(startdate)
-                let starttime = jsonData.data[0].reSchStartTime.substr(11, 5)
-                $('#landingTime').text(starttime)
-                $('#landingPoint').text(jsonData.data[0].reSchDepPoint)
-                $('#arrPoint').text(jsonData.data[0].reSchArrPoint)
-                let endtime = jsonData.data[0].reSchEndTime.substr(0, 10)
-                $('#arrTime').text(endtime)
-
-
-                resList.resList = jsonData.data;
+            success: function (response) {
+                list(response, 0)
             }
-
         })
-        console.log($('#start_date').val() + 'T' + $('#starttime').val() + ':00')
     })
+
+    function list(response, page){
+        let jsonData = JSON.parse(response)
+        console.dir(jsonData)
+        $('#airplaneType').text(jsonData.data[0].reAirplainType)
+        $('#airplaneName').text(jsonData.data[0].reSchName)
+        let startdate = jsonData.data[0].reSchStartTime.substr(0, 10)
+        $('#landingDate').text(startdate)
+        let starttime = jsonData.data[0].reSchStartTime.substr(11, 5)
+        $('#landingTime').text(starttime)
+        $('#landingPoint').text(jsonData.data[0].reSchDepPoint)
+        $('#arrPoint').text(jsonData.data[0].reSchArrPoint)
+        let endtime = jsonData.data[0].reSchEndTime.substr(0, 10)
+        $('#arrTime').text(endtime)
+
+        resList.resList = jsonData.data
+
+        let lastPage = jsonData.pagination.totalPages;
+        let str = "";
+
+        for (let i = 0; i < lastPage; i++) {
+            str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
+        }
+        $("#showPage").html(str);
+        if(page == 0) {
+            $(".firstPage1").css("visibility", "hidden");
+        }
+        if(page == lastPage-1) {
+            $(".lastPage1").css("visibility", "hidden");
+        }
+        $(".pageNum").css({
+            "background-color" : "#fff",
+            "color" : "#444",
+            "cursor" : "pointer"
+        });
+        $("#"+page+"").css({
+            "background-color" : "#661e43",
+            "color" : "white"
+        });
+        if (lastPage != 0) {
+            str += "<td class='firstPage1'><<</td>";
+        }
+        if (lastPage != 0){
+            str += "<td class='lastPage1'>>></td>";
+        }
+        $("#showPage").on('click', '.firstPage1', function(){
+            list(response, 0);
+        });
+        $("#showPage").on('click', '.lastPage1', function(){
+            list(response, lastPage-1);
+        });
+    }
+
+    $("#showPage").on('click', '.pageNum', function(){
+        let pageId = this.id;
+        console.log(pageId);
+        list(pageId);
+    });
 })

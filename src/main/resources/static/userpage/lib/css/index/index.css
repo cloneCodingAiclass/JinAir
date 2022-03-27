@@ -339,6 +339,7 @@ body {
 #container #reservation .bonus {
     margin-top: 30px;
     width: auto;
+    cursor: pointer;
 }
 #container #reservation .person_layerbtn{
     min-width: 90px;
@@ -538,6 +539,7 @@ body {
 #container #reservation .bonus {
     vertical-align: bottom;
     width: 200px;
+    cursor: pointer;
 }
 #container #reservation .bonus img {
     vertical-align: middle;
@@ -1256,7 +1258,7 @@ body {
     margin: 20px 0 0 0;
     text-align: center;
 }
-.bonus_modal .modal_main .btn input[type="submit"]{
+.bonus_modal .modal_main .btn input[class="btn_agree"]{
     width: 150px;
     height: 50px;
     background-color:#BDD600;
