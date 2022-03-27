@@ -735,40 +735,63 @@ option {
     font-size: 20px;
     line-height: 1.4em;
 }
-.tblScroll{
+.tblScroll {
     border-top: 1px solid #000;
     border-bottom: 1px solid #000;
+    table-layout: fixed;
 }
-.paging {
-    margin-top: 60px;
+
+.tblScroll td {
+    height: 130px!important;
+}
+
+.tblScroll td img {
+    width: 80px;
+    height: 100px;
+}
+
+.footer1{
+    margin-top: 40px;
+    width: 100%;
+    height: 30px;
+}
+.footer1 > .center{
+    display: flex;
+    justify-content: center;
+}
+.footer1 table{
+    width: auto;
+    display: inline-block;
     text-align: center;
+    font-size: 12px;
+    font-weight: bolder;
 }
-.paging li {
-    display: inline-block;
-    font-size: 15px;
-    color: #000;
-    vertical-align: middle;
+.footer1 table td{
+    width: 35px;
+    height: 40px;
+    border: 1px solid rgb(187, 187, 187);
+    background-color: #fff;
+    padding-top: 2px;
+    font-size: 18px;
+    margin: 5px;
+    border: none;
 }
-.paging li strong {
-    display: inline-block;
-    width: 38px;
-    height: 38px;
-    border: 1px solid #661e43;
-    color: #fff;
-    line-height: 38px;
-    background: #661e43;
+
+.pages {
+    background-color : #fff;
+    color : #444;
+    cursor : pointer;
 }
-.paging li a {
-    display: inline-block;
-    width: 38px;
-    height: 38px;
-    border: 1px solid #b8b8b8;
-    line-height: 38px;
+
+#showPage > td:hover {
+    background-color: #BDD600;
+    color: white;
 }
-a:link {
-    color: #555;
-    text-decoration: none;
+
+.firstPage1, .firstPage2, .lastPage1, .lastPage2 {
+    cursor: pointer;
 }
+
 
 /*푸터*/
 #footerCont {

@@ -885,209 +885,21 @@
                             method="post">
                             <input type="hidden" name="_csrf" value="2d3f8206-602c-46ee-b256-cc7df7a87c71"/>
                             <div class="lostSrch">
-                                <p class="tit vt">항공편명</p>
-                                <p class="stit">LJ</p>
-                                <input
-                                    type="text"
-                                    id="fltNo"
-                                    name="fltNo"
-                                    value=""
-                                    class="onlyNum m_onlyNum"
-                                    maxlength="3"
-                                    placeholder="(예) 001, 세자리 숫자"
-                                    title="항공편명">
-                                <p class="tit vt">도착지 공항</p>
-                                <select id="arvApo" name="arvApo" title="도착지 공항 선택">
-                                    <option value="">전체</option>
-
-                                    <option value="KWJ">
-                                        광주공항지점
-                                    </option>
-
-                                    <option value="KUV">
-                                        군산공항지점
-                                    </option>
-
-                                    <option value="GMP">
-                                        김포공항지점
-                                    </option>
-
-                                    <option value="TAE">
-                                        대구공항지점
-                                    </option>
-
-                                    <option value="PUS">
-                                        부산공항지점
-                                    </option>
-
-                                    <option value="HIN">
-                                        사천공항지점
-                                    </option>
-
-                                    <option value="RSU">
-                                        여수공항지점
-                                    </option>
-
-                                    <option value="USN">
-                                        울산공항지점
-                                    </option>
-
-                                    <option value="WJU">
-                                        원주공항지점
-                                    </option>
-
-                                    <option value="ICN">
-                                        인천공항지점
-                                    </option>
-
-                                    <option value="CJU">
-                                        제주공항지점
-                                    </option>
-
-                                    <option value="CJJ">
-                                        청주공항지점
-                                    </option>
-
-                                    <option value="KPO">
-                                        포항공항지점
-                                    </option>
-
-                                    <option value="GUM">
-                                        괌지점
-                                    </option>
-
-                                    <option value="KKJ">
-                                        기타큐슈지점
-                                    </option>
-
-                                    <option value="DAD">
-                                        다낭지점
-                                    </option>
-
-                                    <option value="NRT">
-                                        도쿄/나리타지점
-                                    </option>
-
-                                    <option value="MFM">
-                                        마카오지점
-                                    </option>
-
-                                    <option value="BKK">
-                                        방콕지점
-                                    </option>
-
-                                    <option value="VTE">
-                                        비엔티안지점
-                                    </option>
-
-                                    <option value="CTS">
-                                        삿포로지점
-                                    </option>
-
-                                    <option value="PVG">
-                                        상하이/푸동지점
-                                    </option>
-
-                                    <option value="CEB">
-                                        세부지점
-                                    </option>
-
-                                    <option value="XIY">
-                                        시안지점
-                                    </option>
-
-                                    <option value="KIX">
-                                        오사카/간사이지점
-                                    </option>
-
-                                    <option value="OKA">
-                                        오키나와지점
-                                    </option>
-
-                                    <option value="JHB">
-                                        조호르바루지점
-                                    </option>
-
-                                    <option value="KLO">
-                                        칼리보지점
-                                    </option>
-
-                                    <option value="CNS">
-                                        케언즈지점
-                                    </option>
-
-                                    <option value="BKI">
-                                        코타키나발루지점
-                                    </option>
-
-                                    <option value="CRK">
-                                        클락지점
-                                    </option>
-
-                                    <option value="TPE">
-                                        타이베이/타오위안지점
-                                    </option>
-
-                                    <option value="HKT">
-                                        푸껫지점
-                                    </option>
-
-                                    <option value="HAN">
-                                        하노이지점
-                                    </option>
-
-                                    <option value="HNL">
-                                        호놀룰루지점
-                                    </option>
-
-                                    <option value="HKG">
-                                        홍콩지점
-                                    </option>
-
-                                    <option value="FUK">
-                                        후쿠오카지점
-                                    </option>
-
-                                </select>&nbsp;
-                                <p class="tit vt">물품유형</p>
-                                <select name='itemType' id='itemType'>
-                                    <option value=''>전체</option>
-                                    <option value='B'>가방</option>
-                                    <option value='OE'>기타 전자제품</option>
-                                    <option value='NT'>노트북/태블릿</option>
-                                    <option value='CG'>담배</option>
-                                    <option value='BK'>도서</option>
-                                    <option value='H'>모자</option>
-                                    <option value='BL'>베개/담요</option>
-                                    <option value='W'>시계</option>
-                                    <option value='FD'>식품</option>
-                                    <option value='SH'>신발</option>
-                                    <option value='GL'>안경/선글라스</option>
-                                    <option value='AC'>액세서리</option>
-                                    <option value='CL'>의류</option>
-                                    <option value='EH'>이어폰/휴대폰</option>
-                                    <option value='DR'>주류</option>
-                                    <option value='P'>지갑</option>
-                                    <option value='C'>화장품</option>
-                                    <option value='HP'>휴대폰</option>
-                                    <option value='ETC'>기타</option>
+                                <p class="tit vt">항공편명 </p>
+                                <p class="stit"></p>
+                                <select name="fltNo" id="fltNo">
                                 </select>
+                                <p class="tit vt">도착지 공항</p>
+                                <select id="arvApo" name="arvApo" title="도착지 공항 선택"></select>&nbsp;
+                                <p class="tit vt">물품유형</p>
+                                <select name='itemType' id='itemType'></select>
                                 <div class="date">
                                     <p class="tit">검색기간</p>
                                     <p class="calendar">
-                                        <input
-                                            type="date"
-                                            id="fromDt"
-                                            name="fromDt"
-                                            title="시작날짜">&nbsp;
+                                        <input type="date" name="fromDt" id="fromDt" value="연도-월-일" required >
                                         </p>
                                     <p class="calendar">
-                                        <input
-                                            type="date"
-                                            id="toDt"
-                                            name="toDt"
-                                            title="종료날짜">&nbsp;
-                                        </p>
+                                        <input type="date" name="toDt" id="toDt" value="연도-월-일" required >
                                 </div>
                             </div>
                         </form>
@@ -1104,13 +916,14 @@
                             <table class="bbsList tblScroll">
                                 <caption>관리번호, 이미지, 물품유형, 습득일자, 항공편명, 보관장소, 유실물 발송 신청순으로 나타낸 유실물 조회결과 목록표입니다.</caption>
                                 <colgroup>
-                                    <col width="">
-                                    <col width="">
+                                    <col width="10%">
                                     <col width="18%">
-                                    <col width="">
-                                    <col width="">
+                                    <col width="13%">
                                     <col width="18%">
-                                    <col width="13%"></colgroup>
+                                    <col width="20%">
+                                    <col width="15%">
+                                    <col width="16%">
+                                </colgroup>
                                 <thead>
                                     <tr>
                                         <th scope="col">관리번호</th>
@@ -1122,362 +935,33 @@
                                         <th scope="col">유실물 수령 신청</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td class="mngNo">22PUS00049</td>
+                                <tbody id="lostList">
+                                    <tr v-for="dto in lostList">
+                                        <td class="mngNo">{{dto.losIndex}}</td>
+                                        <td><p class="lostThumb">
+                                                <img :src=`/upload/${dto.losImgName}` alt="이미지">
+                                        </p></td>
+                                        <td>{{dto.losType}}</td>
+                                        <td>{{dto.losAirplane}}</td>
+                                        <td>{{dto.losArrivedate.substr(0,10)}}</td>
+                                        <td>{{dto.losAirportArea}}</td>
                                         <td>
-                                            <p class="lostThumb">
-                                                <a class="img" style="cursor: pointer;">
-
-                                                    <img
-                                                        src="//files.jinair.com/prd/2022/0210/thumbnail/d275ac9134394c87a2f9a331a467b3a72.jpg"
-                                                        data-origin-src="//files.jinair.com/prd/2022/0210/d275ac9134394c87a2f9a331a467b3a72"
-                                                        alt="lj504lb.jpg"
-                                                        onerror="this.src='//images.jinair.com/images/ready/default.jpg';"></a>
-                                            </p>
-                                        </td>
-                                        <td>담배</td>
-                                        <td>LJ504</td>
-                                        <td>2022-02-10</td>
-                                        <td>
-
-                                            부산공항지점
-
-                                        </td>
-                                        <td>
-                                            <a
-                                                class="btnTypeA btnListReq"
-                                                data-mng-no="22PUS00049"
-                                                data-click-area="서비스-공항서비스-수하물-기내유실물찾기"
-                                                data-click-name="유실물 수령 신청 확인">확인</a>
+                                            <a class="btnTypeA btnListReq" data-mng-no="22PUS00049" data-click-area="서비스-공항서비스-수하물-기내유실물찾기" data-click-name="유실물 수령 신청 확인">확인</a>
                                         </td>
                                     </tr>
-
-                                    <tr>
-                                        <td class="mngNo">22CJU00330</td>
-                                        <td>
-                                            <p class="lostThumb">
-                                                <a class="img" style="cursor: pointer;">
-
-                                                    <img
-                                                        src="//files.jinair.com/prd/2022/0210/thumbnail/51fcb9dd421749cebb6015415c7a72262.jpg"
-                                                        data-origin-src="//files.jinair.com/prd/2022/0210/51fcb9dd421749cebb6015415c7a72262"
-                                                        alt="KakaoTalk_20220210_130352602.jpg"
-                                                        onerror="this.src='//images.jinair.com/images/ready/default.jpg';"></a>
-                                            </p>
-                                        </td>
-                                        <td>식품</td>
-                                        <td>LJ553</td>
-                                        <td>2022-02-10</td>
-                                        <td>
-
-                                            제주공항지점
-
-                                        </td>
-                                        <td>
-                                            <a
-                                                class="btnTypeA btnListReq"
-                                                data-mng-no="22CJU00330"
-                                                data-click-area="서비스-공항서비스-수하물-기내유실물찾기"
-                                                data-click-name="유실물 수령 신청 확인">확인</a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="mngNo">22GMP00199</td>
-                                        <td>
-                                            <p class="lostThumb">
-                                                <a class="img" style="cursor: pointer;">
-
-                                                    <img
-                                                        src="//files.jinair.com/prd/2022/0210/thumbnail/247f3b0730a54e91a63eeaff2d08b9c32.jpg"
-                                                        data-origin-src="//files.jinair.com/prd/2022/0210/247f3b0730a54e91a63eeaff2d08b9c32"
-                                                        alt="54324701-9733-41DE-821A-321E0037F5E0.jpg"
-                                                        onerror="this.src='//images.jinair.com/images/ready/default.jpg';"></a>
-                                            </p>
-                                        </td>
-                                        <td>이어폰/휴대폰</td>
-                                        <td>LJ344</td>
-                                        <td>2022-02-10</td>
-                                        <td>
-
-                                            김포공항지점
-
-                                        </td>
-                                        <td>
-                                            <a
-                                                class="btnTypeA btnListReq"
-                                                data-mng-no="22GMP00199"
-                                                data-click-area="서비스-공항서비스-수하물-기내유실물찾기"
-                                                data-click-name="유실물 수령 신청 확인">확인</a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="mngNo">22CJU00329</td>
-                                        <td>
-                                            <p class="lostThumb">
-                                                <a class="img" style="cursor: pointer;">
-
-                                                    <img
-                                                        src="//files.jinair.com/prd/2022/0210/thumbnail/eee6c608e41d4b5fbff70735ba7463c61.jpeg"
-                                                        data-origin-src="//files.jinair.com/prd/2022/0210/eee6c608e41d4b5fbff70735ba7463c61"
-                                                        alt="FA810DA1-C4E8-4253-9B87-6DEB8B098FDA.jpeg"
-                                                        onerror="this.src='//images.jinair.com/images/ready/default.jpg';"></a>
-                                            </p>
-                                        </td>
-                                        <td>기타</td>
-                                        <td>LJ583</td>
-                                        <td>2022-02-10</td>
-                                        <td>
-
-                                            제주공항지점
-
-                                        </td>
-                                        <td>
-                                            <a
-                                                class="btnTypeA btnListReq"
-                                                data-mng-no="22CJU00329"
-                                                data-click-area="서비스-공항서비스-수하물-기내유실물찾기"
-                                                data-click-name="유실물 수령 신청 확인">확인</a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="mngNo">22PUS00048</td>
-                                        <td>
-                                            <p class="lostThumb">
-                                                <a class="img" style="cursor: pointer;">
-
-                                                    <img
-                                                        src="//files.jinair.com/prd/2022/0210/thumbnail/981840fd7d02412fb00987cd9e2195e22.jpg"
-                                                        data-origin-src="//files.jinair.com/prd/2022/0210/981840fd7d02412fb00987cd9e2195e22"
-                                                        alt="KakaoTalk_20220210_103319539.jpg"
-                                                        onerror="this.src='//images.jinair.com/images/ready/default.jpg';"></a>
-                                            </p>
-                                        </td>
-                                        <td>도서</td>
-                                        <td>LJ341</td>
-                                        <td>2022-02-10</td>
-                                        <td>
-
-                                            부산공항지점
-
-                                        </td>
-                                        <td>
-                                            <a
-                                                class="btnTypeA btnListReq"
-                                                data-mng-no="22PUS00048"
-                                                data-click-area="서비스-공항서비스-수하물-기내유실물찾기"
-                                                data-click-name="유실물 수령 신청 확인">확인</a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="mngNo">22GMP00198</td>
-                                        <td>
-                                            <p class="lostThumb">
-                                                <a class="img" style="cursor: pointer;">
-
-                                                    <img
-                                                        src="//files.jinair.com/prd/2022/0210/thumbnail/b24745905bc84eaf9035e99bee97601e2.jpg"
-                                                        data-origin-src="//files.jinair.com/prd/2022/0210/b24745905bc84eaf9035e99bee97601e2"
-                                                        alt="35646A7B-6209-487B-9140-5174AF67A624.jpg"
-                                                        onerror="this.src='//images.jinair.com/images/ready/default.jpg';"></a>
-                                            </p>
-                                        </td>
-                                        <td>의류</td>
-                                        <td>LJ332</td>
-                                        <td>2022-02-09</td>
-                                        <td>
-
-                                            김포공항지점
-
-                                        </td>
-                                        <td>
-                                            <a
-                                                class="btnTypeA btnListReq"
-                                                data-mng-no="22GMP00198"
-                                                data-click-area="서비스-공항서비스-수하물-기내유실물찾기"
-                                                data-click-name="유실물 수령 신청 확인">확인</a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="mngNo">22GMP00197</td>
-                                        <td>
-                                            <p class="lostThumb">
-                                                <a class="img" style="cursor: pointer;">
-
-                                                    <img
-                                                        src="//files.jinair.com/prd/2022/0210/thumbnail/c71760f9afae4fab9d5f9f8b6b50426f2.jpg"
-                                                        data-origin-src="//files.jinair.com/prd/2022/0210/c71760f9afae4fab9d5f9f8b6b50426f2"
-                                                        alt="903DAF6A-AAD4-4F0D-9FC8-D1A8B2E1EF17.jpg"
-                                                        onerror="this.src='//images.jinair.com/images/ready/default.jpg';"></a>
-                                            </p>
-                                        </td>
-                                        <td>액세서리</td>
-                                        <td>LJ302</td>
-                                        <td>2022-02-10</td>
-                                        <td>
-
-                                            김포공항지점
-
-                                        </td>
-                                        <td>
-                                            <a
-                                                class="btnTypeA btnListReq"
-                                                data-mng-no="22GMP00197"
-                                                data-click-area="서비스-공항서비스-수하물-기내유실물찾기"
-                                                data-click-name="유실물 수령 신청 확인">확인</a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="mngNo">22GMP00196</td>
-                                        <td>
-                                            <p class="lostThumb">
-                                                <a class="img" style="cursor: pointer;">
-
-                                                    <img
-                                                        src="//files.jinair.com/prd/2022/0210/thumbnail/098bf650b6484712b2e3038f2c5423672.jpg"
-                                                        data-origin-src="//files.jinair.com/prd/2022/0210/098bf650b6484712b2e3038f2c5423672"
-                                                        alt="A981D776-8A36-4686-82A1-20C8D48958ED.jpg"
-                                                        onerror="this.src='//images.jinair.com/images/ready/default.jpg';"></a>
-                                            </p>
-                                        </td>
-                                        <td>이어폰/휴대폰</td>
-                                        <td>LJ302</td>
-                                        <td>2022-02-10</td>
-                                        <td>
-
-                                            김포공항지점
-
-                                        </td>
-                                        <td>
-                                            <a
-                                                class="btnTypeA btnListReq"
-                                                data-mng-no="22GMP00196"
-                                                data-click-area="서비스-공항서비스-수하물-기내유실물찾기"
-                                                data-click-name="유실물 수령 신청 확인">확인</a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="mngNo">22ICN00004</td>
-                                        <td>
-                                            <p class="lostThumb">
-                                                <a class="img" style="cursor: pointer;">
-
-                                                    <img
-                                                        src="//files.jinair.com/prd/2022/0210/thumbnail/350da6d632f140fab5fdde531f4a46a42.jpg"
-                                                        data-origin-src="//files.jinair.com/prd/2022/0210/350da6d632f140fab5fdde531f4a46a42"
-                                                        alt="사진업로드불가물품.JPG"
-                                                        onerror="this.src='//images.jinair.com/images/ready/default.jpg';"></a>
-                                            </p>
-                                        </td>
-                                        <td>지갑</td>
-                                        <td>LJ702</td>
-                                        <td>2022-02-09</td>
-                                        <td>
-
-                                            인천공항지점
-
-                                        </td>
-                                        <td>
-                                            <a
-                                                class="btnTypeA btnListReq"
-                                                data-mng-no="22ICN00004"
-                                                data-click-area="서비스-공항서비스-수하물-기내유실물찾기"
-                                                data-click-name="유실물 수령 신청 확인">확인</a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="mngNo">22CJU00328</td>
-                                        <td>
-                                            <p class="lostThumb">
-                                                <a class="img" style="cursor: pointer;">
-
-                                                    <img
-                                                        src="//files.jinair.com/prd/2022/0210/thumbnail/98c692ca4fc84a3f8ad2a1eff3d275b82.jpeg"
-                                                        data-origin-src="//files.jinair.com/prd/2022/0210/98c692ca4fc84a3f8ad2a1eff3d275b82"
-                                                        alt="9AB90898-37EB-439A-BEA3-C0159967473D.jpeg"
-                                                        onerror="this.src='//images.jinair.com/images/ready/default.jpg';"></a>
-                                            </p>
-                                        </td>
-                                        <td>기타</td>
-                                        <td>LJ331</td>
-                                        <td>2022-02-09</td>
-                                        <td>
-
-                                            제주공항지점
-
-                                        </td>
-                                        <td>
-                                            <a
-                                                class="btnTypeA btnListReq"
-                                                data-mng-no="22CJU00328"
-                                                data-click-area="서비스-공항서비스-수하물-기내유실물찾기"
-                                                data-click-name="유실물 수령 신청 확인">확인</a>
-                                        </td>
-                                    </tr>
-
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <ul class="paging">
-                        <li>
-                            <strong>1</strong>
-                        </li>
-                        <li>
-                            <a
-                                href="/ready/baggage?directID=baggage4&?page=2&listSize=10&pageSize=10&fromDt=20220128&toDt=20220210">2</a>
-                        </li>
-                        <li>
-                            <a
-                                href="/ready/baggage?directID=baggage4&?page=3&listSize=10&pageSize=10&fromDt=20220128&toDt=20220210">3</a>
-                        </li>
-                        <li>
-                            <a
-                                href="/ready/baggage?directID=baggage4&?page=4&listSize=10&pageSize=10&fromDt=20220128&toDt=20220210">4</a>
-                        </li>
-                        <li>
-                            <a
-                                href="/ready/baggage?directID=baggage4&?page=5&listSize=10&pageSize=10&fromDt=20220128&toDt=20220210">5</a>
-                        </li>
-                        <li>
-                            <a
-                                href="/ready/baggage?directID=baggage4&?page=6&listSize=10&pageSize=10&fromDt=20220128&toDt=20220210">6</a>
-                        </li>
-                        <li>
-                            <a
-                                href="/ready/baggage?directID=baggage4&?page=7&listSize=10&pageSize=10&fromDt=20220128&toDt=20220210">7</a>
-                        </li>
-                        <li>
-                            <a
-                                href="/ready/baggage?directID=baggage4&?page=8&listSize=10&pageSize=10&fromDt=20220128&toDt=20220210">8</a>
-                        </li>
-                        <li>
-                            <a
-                                href="/ready/baggage?directID=baggage4&?page=9&listSize=10&pageSize=10&fromDt=20220128&toDt=20220210">9</a>
-                        </li>
-                        <li>
-                            <a
-                                href="/ready/baggage?directID=baggage4&?page=10&listSize=10&pageSize=10&fromDt=20220128&toDt=20220210">10</a>
-                        </li>
-                        <li class='btnR'>
-                            <a
-                                href="/ready/baggage?directID=baggage4&?page=11&listSize=10&pageSize=10&fromDt=20220128&toDt=20220210"><img src="/userpage/lib/img/baggahe3_img1.PNG" alt=""></a>
-                        </li>
-                        <li class='btnR2'>
-                            <a
-                                href="/ready/baggage?directID=baggage4&?page=20&listSize=10&pageSize=10&fromDt=20220128&toDt=20220210"><img src="/userpage/lib/img/baggahe3_img2.PNG" alt=""></a>
-                        </li>
+                    <div class="footer1">
+                        <div class="center">
+                            <table>
+                                <tr id="showPage">
 
-                    </ul>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         <!-- 푸터-->

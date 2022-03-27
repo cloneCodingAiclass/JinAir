@@ -618,8 +618,9 @@ public class PageController {
                     .addObject("code", "add_qna");
         }
     }
-    @RequestMapping("/index/mypageCancelService")
-    public ModelAndView mypageCancelService(HttpServletResponse response, HttpServletRequest request, Model model) {
+    @RequestMapping("/index/mypageCancelService/{reIndex}")
+    public ModelAndView mypageCancelService(HttpServletResponse response, HttpServletRequest request, Model model
+            , @PathVariable(name="reIndex") Long reIndex) {
         Cookie[] myCookies = request.getCookies();
         for(int i = 0; i < myCookies.length; i++) {
             if(myCookies[i].getValue().equals("reIndex")){
@@ -627,6 +628,21 @@ public class PageController {
                 expiredCookie(response, myCookies[i].getName());
             }
         }
+        List reserveApiResponse;
+        String people;
+        people = reservationApiLogicService.read(reIndex).getData().getRePeopleType();
+
+        String[] person = people.split(" ");
+        int personNum;
+        if(person.length == 6){
+            personNum = Integer.parseInt(person[1]) + Integer.parseInt(person[3]) + Integer.parseInt(person[5]);
+        }else if(person.length == 4){
+            personNum = Integer.parseInt(person[1]) + Integer.parseInt(person[3]);
+        }else{
+            personNum = Integer.parseInt(person[1]);
+        }
+        reserveApiResponse = reservationApiLogicService.find(reIndex, Long.valueOf(personNum)*2+reIndex -1).getData();
+        model.addAttribute("reserveApiResponse", reserveApiResponse);
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");

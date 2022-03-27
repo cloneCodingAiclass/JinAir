@@ -21,7 +21,7 @@
             <input type="hidden" id="reTripKind" th:value="${reserveApiResponse[0].reTripKind}">
             <input type="hidden" id="rePeopleType" th:value="${reserveApiResponse[0].rePeopleType}">
             <input type="hidden" id="reSchStartTime" th:value="${reserveApiResponse[0].reSchStartTime}">
-        <input type="hidden" id="reSchStartTime2" th:value="${reserveApiResponse[1].reSchStartTime}">
+            <input type="hidden" id="reSchStartTime2" th:value="${reserveApiResponse[1].reSchStartTime}">
             <div class="mypage_main w_1160">
                 <div class="mypage_menu">
                     <p>마이<br>페이지</p>
@@ -595,7 +595,7 @@
                     <p>비밀번호 입력 <input type="password"></p>
                     <div class="btn">
                         <input type="button" class="btn_agree" value="확인"
-                            onclick="location.href='/UserPage/index/mypage/Mypage_edit.html'">
+                            onclick="location.href='/pages/index/mypageEdit'">
                         <input type="button" class="btn_cancel" value="취소">
                     </div>
                 </div>

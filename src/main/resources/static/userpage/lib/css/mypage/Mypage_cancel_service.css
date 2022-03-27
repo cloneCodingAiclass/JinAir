@@ -288,7 +288,7 @@ body{
 /* 서브 네비 끝 */
 /* contents */
 #container{
-    height: 1000px;
+    height: auto;
 }
 
 /*푸터*/
@@ -725,7 +725,7 @@ header{
     font-size: 1rem;
 }
 .cancel_choice table tbody{
-    height: 70px;
+    height: auto;
     text-align: center;
     font-weight: 600;
 }
@@ -733,6 +733,9 @@ header{
     height: 70px;
     border-top: 1px solid #eaeaea;
     border-right: 1px solid #eaeaea;
+}
+.cancel_choice table tbody td{
+    height: 70px;
 }
 .cancel_choice table tbody tr td img{
     object-fit: cover;
@@ -826,6 +829,7 @@ header{
     align-items: center;
     font-size: 1rem;
     font-weight: bold;
+    margin-bottom: 100px;
 }
 .final_btn > div{
     display: flex;

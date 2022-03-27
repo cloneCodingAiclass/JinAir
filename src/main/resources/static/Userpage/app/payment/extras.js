@@ -1762,14 +1762,17 @@ let isinsjoin = false;
     for (let i = 0; i < $(".ins_check").length; i++) {
       if ($("#ins_check_"+i).is(":checked")) {
         isCheck += 1;
+        console.log("첫번째 체크박스 : " + isCheck)
       }
     }
     let is = 0;
-    for (let i = 0; i < $(".insCheckBox").length * 2; i++) {
+    for (let i = 0; i < $(".ins_check").length; i++) {
       if ($("#check_ins_" + i).is(":checked")) {
         is += 1;
+        console.log("첫번째 체크박스 : " + isCheck)
       }
     }
+    console.log("두번째 체크박스 : " + isCheck)
     if (isCheck == is) {
       $("#modal_insurance_info_wrap").fadeOut();
       $("#agree_check1").prop("checked", true);
