@@ -616,7 +616,7 @@
                 </ul>
                 <div class="modal_table">
                     <div class="modal_btn">
-                        <p class="change_ticket">항공권 변경</p>
+                        <p class="change_ticket" onclick="change_ticket()">항공권 변경</p>
                         <p class="btn_cancel">취소</p>
                     </div>
                 </div>
@@ -763,99 +763,17 @@
                     <table class="modal_table">
                         <tr>
                             <td>
-                                <div class="person_type in_bl">
+                                <div class="person_type w_120 in_bl">
                                     <div class="person_layerbtn">
-                                        <strong class="person_num" name="person_num">성인 1</strong>
+                                        <strong class="person_num" name="person_num" th:text="${reserveApiResponse[0].rePeopleType}"></strong>
                                     </div>
-                                    <ul class="person_pop_layer in_bl">
-                                        <li>
-                                            <div class="w_180 in_bl">
-                                                <input type="hidden" value="1" class="adultPaxCnt">
-                                                <strong class="num_font" name="adultPaxCnt">1</strong>
-                                                <span role="person-type-option" class="person_type1 person_font">성인
-                                                </span>
-                                            </div>
-                                            <div class="person_btn in_bl">
-                                                <a href="javascript://" name="adultPaxCntDown"
-                                                    onclick="fnSetPaxCountDown('ADULT', this);"><img
-                                                        src="//images.jinair.com/images/btn/btn_minus.png" alt="-"></a>
-                                                <a href="javascript://" name="adultPaxCntUp"
-                                                    onclick="fnSetPaxCountUp('ADULT', this);"><img
-                                                        src="//images.jinair.com/images/btn/btn_plus.png" alt="+"></a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="w_180 in_bl">
-                                                <input type="hidden" value="0" class="childPaxCnt">
-                                                <strong class="num_font" name="childPaxCnt">0</strong>
-                                                <span role="person-type-option" class="person_type2 person_font">소아
-                                                </span>
-                                                <button class="child_info_btn">
-                                                    <img src="./index_img/ico_question.png" alt="질문">
-                                                </button>
-                                                <div class="child_modal">
-                                                    <p>소아<em>(탑승일 기준)</em></p>
-                                                    <ul>
-                                                        <li>[국내선] 만 2세 - 만 13세 미만</li>
-                                                        <li>[국제선] 만 2세 - 만 12세 미만</li>
-                                                    </ul>
-                                                    <span class="des">* 국내선의 경우 각 구간별 탑승일 기준으로 나이 계산,<br>국제선의 경우 첫구간 탑승일
-                                                        기준으로 나이 계산
-                                                        <br>* 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="person_btn in_bl">
-                                                <a href="javascript://" onclick="fnSetPaxCountDown('CHILD',this);"
-                                                    class="disable"><img
-                                                        src="//images.jinair.com/images/btn/btn_minus.png" alt="-"></a>
-                                                <a href="javascript://" onclick="fnSetPaxCountUp('CHILD',this);"><img
-                                                        src="//images.jinair.com/images/btn/btn_plus.png" alt="+"></a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="w_180 in_bl">
-                                                <input type="hidden" value="0" class="infantPaxCnt">
-                                                <strong class="num_font" name="infantPaxCnt">0</strong>
-                                                <span role="person-type-option" class="person_type3 person_font">유아
-                                                </span>
-                                                <button class="baby_info_btn">
-                                                    <img src="./index_img/ico_question.png" alt="질문">
-                                                </button>
-                                                <div class="infant_modal">
-                                                    <p>유아<em>(탑승일 기준)</em></p>
-                                                    <ul>
-                                                        <li>[국내선] 생후 7일 이상 - 만 2세 미만</li>
-                                                        <li>[국제선] 생후 7일 이상 - 만 2세 미만</li>
-                                                    </ul>
-                                                    <span class="des">* 국내선의 경우 각 구간별 탑승일 기준으로 나이 계산,<br>국제선의 경우 첫구간 탑승일
-                                                        기준으로 나이 계산
-                                                        <br>* 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="person_btn in_bl">
-                                                <a href="javascript://" name="infantPaxCntDown"
-                                                    onclick="fnSetPaxCountDown('INFANT',this);" class="disable"><img
-                                                        src="//images.jinair.com/images/btn/btn_minus.png" alt="-"></a>
-                                                <a href="javascript://" name="infantPaxCntUp"
-                                                    onclick="fnSetPaxCountUp('INFANT',this);"><img
-                                                        src="//images.jinair.com/images/btn/btn_plus.png" alt="+"></a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="submit_btn">
-                                                <a href="javascript://" onclick="submit()">확인</a>
-                                            </div>
-                                        </li>
-                                    </ul>
                                 </div>
                             </td>
                             <td>
                                 <div class="go_select in_bl">
                                     <div class="go_layerbtn">
-                                        <span class="go_select_opt"><input type="text" value="출발지" readonly
-                                                class="go_select_optt go_default"></span>
+                                    <span class="go_select_opt"><input type="text" value="출발지" readonly
+                                                                       class="go_select_optt go_default"></span>
                                     </div>
                                     <div class="go_layer">
                                         <div class="KOR in_bl">
@@ -928,10 +846,10 @@
                             <td>
                                 <div class="arrive_select in_bl">
                                     <div class="arrive_layerbtn">
-                                        <span class="arrive_select_opt">
-                                            <input type="text" value="도착지" readonly
-                                                class="arrive_select_optt arrive_default">
-                                        </span>
+                                    <span class="arrive_select_opt">
+                                        <input type="text" value="도착지" readonly
+                                               class="arrive_select_optt arrive_default">
+                                    </span>
                                     </div>
                                     <div class="arrive_layer">
                                         <div class="KOR in_bl">
@@ -1008,16 +926,16 @@
                             <td>
                                 <div class="go_date in_bl">
                                     <div class="go_date_layerbtn">
-                                        <span class="go_date_select_opt"><input type="text" value="가는날" readonly
-                                                class="go_date_select_optt go_date_default"></span>
+                                    <span class="go_date_select_opt"><input type="text" value="가는날" readonly
+                                                                            class="go_date_select_optt go_date_default"></span>
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="come_date in_bl">
                                     <div class="come_date_layerbtn">
-                                        <span class="come_date_select_opt"><input type="text" value="오는날" readonly
-                                                class="come_date_select_optt"></span>
+                                    <span class="come_date_select_opt"><input type="text" value="오는날" readonly
+                                                                              class="come_date_select_optt"></span>
                                     </div>
                                 </div>
                             </td>
@@ -1029,99 +947,17 @@
                     <table class="modal_table">
                         <tr>
                             <td>
-                                <div class="person_type in_bl">
+                                <div class="person_type w_120 in_bl">
                                     <div class="person_layerbtn">
-                                        <strong class="person_num" name="person_num">성인 1</strong>
+                                        <strong class="person_num" name="person_num" th:text="${reserveApiResponse[0].rePeopleType}"></strong>
                                     </div>
-                                    <ul class="person_pop_layer in_bl">
-                                        <li>
-                                            <div class="w_180 in_bl">
-                                                <input type="hidden" value="1" class="adultPaxCnt">
-                                                <strong class="num_font" name="adultPaxCnt">1</strong>
-                                                <span role="person-type-option" class="person_type1 person_font">성인
-                                                </span>
-                                            </div>
-                                            <div class="person_btn in_bl">
-                                                <a href="javascript://" name="adultPaxCntDown"
-                                                    onclick="fnSetPaxCountDown('ADULT', this);"><img
-                                                        src="//images.jinair.com/images/btn/btn_minus.png" alt="-"></a>
-                                                <a href="javascript://" name="adultPaxCntUp"
-                                                    onclick="fnSetPaxCountUp('ADULT', this);"><img
-                                                        src="//images.jinair.com/images/btn/btn_plus.png" alt="+"></a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="w_180 in_bl">
-                                                <input type="hidden" value="0" class="childPaxCnt">
-                                                <strong class="num_font" name="childPaxCnt">0</strong>
-                                                <span role="person-type-option" class="person_type2 person_font">소아
-                                                </span>
-                                                <button class="child_info_btn">
-                                                    <img src="./index_img/ico_question.png" alt="질문">
-                                                </button>
-                                                <div class="child_modal">
-                                                    <p>소아<em>(탑승일 기준)</em></p>
-                                                    <ul>
-                                                        <li>[국내선] 만 2세 - 만 13세 미만</li>
-                                                        <li>[국제선] 만 2세 - 만 12세 미만</li>
-                                                    </ul>
-                                                    <span class="des">* 국내선의 경우 각 구간별 탑승일 기준으로 나이 계산,<br>국제선의 경우 첫구간 탑승일
-                                                        기준으로 나이 계산
-                                                        <br>* 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="person_btn in_bl">
-                                                <a href="javascript://" onclick="fnSetPaxCountDown('CHILD',this);"
-                                                    class="disable"><img
-                                                        src="//images.jinair.com/images/btn/btn_minus.png" alt="-"></a>
-                                                <a href="javascript://" onclick="fnSetPaxCountUp('CHILD',this);"><img
-                                                        src="//images.jinair.com/images/btn/btn_plus.png" alt="+"></a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="w_180 in_bl">
-                                                <input type="hidden" value="0" class="infantPaxCnt">
-                                                <strong class="num_font" name="infantPaxCnt">0</strong>
-                                                <span role="person-type-option" class="person_type3 person_font">유아
-                                                </span>
-                                                <button class="baby_info_btn">
-                                                    <img src="./index_img/ico_question.png" alt="질문">
-                                                </button>
-                                                <div class="infant_modal">
-                                                    <p>유아<em>(탑승일 기준)</em></p>
-                                                    <ul>
-                                                        <li>[국내선] 생후 7일 이상 - 만 2세 미만</li>
-                                                        <li>[국제선] 생후 7일 이상 - 만 2세 미만</li>
-                                                    </ul>
-                                                    <span class="des">* 국내선의 경우 각 구간별 탑승일 기준으로 나이 계산,<br>국제선의 경우 첫구간 탑승일
-                                                        기준으로 나이 계산
-                                                        <br>* 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="person_btn in_bl">
-                                                <a href="javascript://" name="infantPaxCntDown"
-                                                    onclick="fnSetPaxCountDown('INFANT',this);" class="disable"><img
-                                                        src="//images.jinair.com/images/btn/btn_minus.png" alt="-"></a>
-                                                <a href="javascript://" name="infantPaxCntUp"
-                                                    onclick="fnSetPaxCountUp('INFANT',this);"><img
-                                                        src="//images.jinair.com/images/btn/btn_plus.png" alt="+"></a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="submit_btn">
-                                                <a href="javascript://" onclick="submit()">확인</a>
-                                            </div>
-                                        </li>
-                                    </ul>
                                 </div>
                             </td>
                             <td>
                                 <div class="go_select in_bl">
                                     <div class="go_layerbtn">
-                                        <span class="go_select_opt"><input type="text" value="출발지" readonly
-                                                class="go_select_optt go_default"></span>
+                                    <span class="go_select_opt"><input type="text" value="출발지" readonly
+                                                                       class="go_select_optt go_default"></span>
                                     </div>
                                     <div class="go_layer">
                                         <div class="KOR in_bl">
@@ -1194,10 +1030,10 @@
                             <td>
                                 <div class="arrive_select in_bl">
                                     <div class="arrive_layerbtn">
-                                        <span class="arrive_select_opt">
-                                            <input type="text" value="도착지" readonly
-                                                class="arrive_select_optt arrive_default">
-                                        </span>
+                                    <span class="arrive_select_opt">
+                                        <input type="text" value="도착지" readonly
+                                               class="arrive_select_optt arrive_default">
+                                    </span>
                                     </div>
                                     <div class="arrive_layer">
                                         <div class="KOR in_bl">
@@ -1274,8 +1110,8 @@
                             <td>
                                 <div class="go_date2 in_bl">
                                     <div class="go_date_layerbtn">
-                                        <span class="go_date_select_opt"><input type="text" value="가는날" readonly
-                                                class="go_date_select_optt go_date_default"></span>
+                                    <span class="go_date_select_opt"><input type="text" value="가는날" readonly
+                                                                            class="go_date_select_optt go_date_default"></span>
                                     </div>
                                 </div>
                             </td>
@@ -1289,92 +1125,10 @@
                     <table class="modal_table">
                         <tr>
                             <td>
-                                <div class="person_type in_bl">
+                                <div class="person_type w_120 in_bl">
                                     <div class="person_layerbtn">
-                                        <strong class="person_num" name="person_num">성인 1</strong>
+                                        <strong class="person_num" name="person_num" th:text="${reserveApiResponse[0].rePeopleType}"></strong>
                                     </div>
-                                    <ul class="person_pop_layer in_bl">
-                                        <li>
-                                            <div class="w_180 in_bl">
-                                                <input type="hidden" value="1" class="adultPaxCnt">
-                                                <strong class="num_font" name="adultPaxCnt">1</strong>
-                                                <span role="person-type-option" class="person_type1 person_font">성인
-                                                </span>
-                                            </div>
-                                            <div class="person_btn in_bl">
-                                                <a href="javascript://" name="adultPaxCntDown"
-                                                    onclick="fnSetPaxCountDown('ADULT', this);"><img
-                                                        src="//images.jinair.com/images/btn/btn_minus.png" alt="-"></a>
-                                                <a href="javascript://" name="adultPaxCntUp"
-                                                    onclick="fnSetPaxCountUp('ADULT', this);"><img
-                                                        src="//images.jinair.com/images/btn/btn_plus.png" alt="+"></a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="w_180 in_bl">
-                                                <input type="hidden" value="0" class="childPaxCnt">
-                                                <strong class="num_font" name="childPaxCnt">0</strong>
-                                                <span role="person-type-option" class="person_type2 person_font">소아
-                                                </span>
-                                                <button class="child_info_btn">
-                                                    <img src="./index_img/ico_question.png" alt="질문">
-                                                </button>
-                                                <div class="child_modal">
-                                                    <p>소아<em>(탑승일 기준)</em></p>
-                                                    <ul>
-                                                        <li>[국내선] 만 2세 - 만 13세 미만</li>
-                                                        <li>[국제선] 만 2세 - 만 12세 미만</li>
-                                                    </ul>
-                                                    <span class="des">* 국내선의 경우 각 구간별 탑승일 기준으로 나이 계산,<br>국제선의 경우 첫구간 탑승일
-                                                        기준으로 나이 계산
-                                                        <br>* 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="person_btn in_bl">
-                                                <a href="javascript://" onclick="fnSetPaxCountDown('CHILD',this);"
-                                                    class="disable"><img
-                                                        src="//images.jinair.com/images/btn/btn_minus.png" alt="-"></a>
-                                                <a href="javascript://" onclick="fnSetPaxCountUp('CHILD',this);"><img
-                                                        src="//images.jinair.com/images/btn/btn_plus.png" alt="+"></a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="w_180 in_bl">
-                                                <input type="hidden" value="0" class="infantPaxCnt">
-                                                <strong class="num_font" name="infantPaxCnt">0</strong>
-                                                <span role="person-type-option" class="person_type3 person_font">유아
-                                                </span>
-                                                <button class="baby_info_btn">
-                                                    <img src="./index_img/ico_question.png" alt="질문">
-                                                </button>
-                                                <div class="infant_modal">
-                                                    <p>유아<em>(탑승일 기준)</em></p>
-                                                    <ul>
-                                                        <li>[국내선] 생후 7일 이상 - 만 2세 미만</li>
-                                                        <li>[국제선] 생후 7일 이상 - 만 2세 미만</li>
-                                                    </ul>
-                                                    <span class="des">* 국내선의 경우 각 구간별 탑승일 기준으로 나이 계산,<br>국제선의 경우 첫구간 탑승일
-                                                        기준으로 나이 계산
-                                                        <br>* 탑승 수속 시 생년월일 확인 가능한 서류 지참 필수
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="person_btn in_bl">
-                                                <a href="javascript://" name="infantPaxCntDown"
-                                                    onclick="fnSetPaxCountDown('INFANT',this);" class="disable"><img
-                                                        src="//images.jinair.com/images/btn/btn_minus.png" alt="-"></a>
-                                                <a href="javascript://" name="infantPaxCntUp"
-                                                    onclick="fnSetPaxCountUp('INFANT',this);"><img
-                                                        src="//images.jinair.com/images/btn/btn_plus.png" alt="+"></a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="submit_btn">
-                                                <a href="javascript://" onclick="submit()">확인</a>
-                                            </div>
-                                        </li>
-                                    </ul>
                                 </div>
                             </td>
                             <td></td>
@@ -1384,8 +1138,8 @@
                             <td>
                                 <div class="go_select in_bl">
                                     <div class="go_layerbtn">
-                                        <span class="go_select_opt"><input type="text" value="출발지" readonly
-                                                class="go_select_optt"></span>
+                                    <span class="go_select_opt"><input type="text" value="출발지" readonly
+                                                                       class="go_select_optt"></span>
                                     </div>
                                     <div class="go_layer">
                                         <div class="KOR in_bl">
@@ -1458,9 +1212,9 @@
                             <td>
                                 <div class="arrive_select in_bl">
                                     <div class="arrive_layerbtn">
-                                        <span class="arrive_select_opt">
-                                            <input type="text" value="도착지" readonly class="arrive_select_optt">
-                                        </span>
+                                    <span class="arrive_select_opt">
+                                        <input type="text" value="도착지" readonly class="arrive_select_optt">
+                                    </span>
                                     </div>
                                     <div class="arrive_layer">
                                         <div class="KOR in_bl">
@@ -1534,8 +1288,8 @@
                             <td>
                                 <div class="go_date2 in_bl">
                                     <div class="go_date_layerbtn">
-                                        <span class="go_date_select_opt"><input type="text" value="가는날" readonly
-                                                class="go_date_select_optt"></span>
+                                    <span class="go_date_select_opt"><input type="text" value="가는날" readonly
+                                                                            class="go_date_select_optt"></span>
                                     </div>
                                 </div>
                             </td>
@@ -1545,8 +1299,8 @@
                             <td>
                                 <div class="go_select in_bl">
                                     <div class="go_layerbtn2">
-                                        <span class="go_select_opt2"> <input type="text" value="출발지" readonly
-                                                class="go_select_optt2"></span>
+                                    <span class="go_select_opt2"> <input type="text" value="출발지" readonly
+                                                                         class="go_select_optt2"></span>
                                     </div>
                                     <div class="go_layer2">
                                         <div class="KOR in_bl">
@@ -1619,8 +1373,8 @@
                             <td>
                                 <div class="arrive_select2 in_bl">
                                     <div class="arrive_layerbtn2">
-                                        <span class="arrive_select_opt2"><input type="text" value="도착지" readonly
-                                                class="arrive_select_optt2"></span>
+                                    <span class="arrive_select_opt2"><input type="text" value="도착지" readonly
+                                                                            class="arrive_select_optt2"></span>
                                     </div>
                                     <div class="arrive_layer2">
                                         <div class="KOR in_bl">
@@ -1694,8 +1448,8 @@
                             <td>
                                 <div class="go_date3 in_bl">
                                     <div class="go_date_layerbtn2">
-                                        <span class="go_date_select_opt2"> <input type="text" value="가는날" readonly
-                                                class="go_date_select_optt2"></span>
+                                    <span class="go_date_select_opt2"> <input type="text" value="가는날" readonly
+                                                                              class="go_date_select_optt2"></span>
                                     </div>
                                 </div>
                             </td>
@@ -1703,7 +1457,7 @@
                     </table>
                 </div>
                 <div class="update_submit">
-                    <a href="/UserPage/payment/getAvailabilityList.html" onclick="">조회</a>
+                    <a onclick="modification()">조회</a>
                 </div>
             </div>
         </div>
@@ -1728,11 +1482,11 @@
                 </table>
                 <div class="calinner">
                     <div class="calscroll">
-                        <iframe src="/userpage/lib/img/cal.html" frameborder="0" id="ifm"></iframe>
+                        <iframe src="/pages/index/cal" frameborder="0" id="ifm"></iframe>
                     </div>
                 </div>
             </div>
-            <div class="x_box"><img src="../index_img/image-removebg-preview.png" alt=""></div>
+            <div class="x_box"><img src="/userpage/lib/img/image-removebg-preview.png" alt=""></div>
         </div>
         <div class="cal2">
             <div class="calwrapper">
@@ -1753,11 +1507,11 @@
                 </table>
                 <div class="calinner">
                     <div class="calscroll">
-                        <iframe src="/userpage/lib/img/onewaycal.html" frameborder="0" id="ifm1"></iframe>
+                        <iframe src="/pages/index/onewaycal" frameborder="0" id="ifm1"></iframe>
                     </div>
                 </div>
             </div>
-            <div class="x_box"><img src="../index_img/image-removebg-preview.png" alt=""></div>
+            <div class="x_box"><img src="/userpage/lib/img/image-removebg-preview.png" alt=""></div>
         </div>
         <div class="cal3">
             <div class="calwrapper">
@@ -1778,13 +1532,12 @@
                 </table>
                 <div class="calinner">
                     <div class="calscroll">
-                        <iframe src="/userpage/lib/img/multical.html" frameborder="0" id="ifm2"></iframe>
+                        <iframe src="/pages/index/multical" frameborder="0" id="ifm2"></iframe>
                     </div>
                 </div>
             </div>
-            <div class="x_box"><img src="../index_img/image-removebg-preview.png" alt=""></div>
+            <div class="x_box"><img src="/userpage/lib/img/image-removebg-preview.png" alt=""></div>
         </div>
-    </div>
 </body>
 <script src="/userpage/app/mypage/Mypage_getReservationDetail.js"></script>
 </html>
