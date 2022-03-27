@@ -14,7 +14,7 @@
             <div class="contents_box">
                 <div id="itemadd_title">유실물 등록</div>
                 <div id="itemadd_contents">
-                    <form th:action="@{/pages/admin/item/itemadd/file}" id="form" method="post" enctype="multipart/form-data">
+                    <form th:action="@{/pages/admin/item/itemadd/file}" method="post" enctype="multipart/form-data">
                         <table>
                             <tr>
                                 <td>항공편</td>
@@ -51,7 +51,7 @@
                         </table>
                         <div id="form_btn">
                             <a href="/pages/admin/item"><input type="button" value="목록" /></a>
-                            <input type="button" id="createBtn" value="등록"/>
+                            <input type="submit" id="createBtn" value="등록"/>
                         </div>
                     </form>
                 </div>
