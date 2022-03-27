@@ -231,4 +231,16 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
         return reservationApiLogicService.searchForUser(airType, airName, startTime, startPoint, arrivePoint, pageable);
     }
 
+    // 예약 코드, 예약자 명 검색
+    @PostMapping("/searchOfCode")
+    public Header<List<ReserveApiResponse>> searchOfCode(
+            @RequestParam(value = "resCode")String resCode,
+            @RequestParam(value = "firstName")String firstName,
+            @RequestParam(value = "lastName")String lastName
+    ){
+        System.out.println(resCode + firstName + lastName);
+        return reservationApiLogicService.searchOfCode(resCode, firstName, lastName);
+    }
+
+
 }

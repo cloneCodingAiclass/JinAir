@@ -248,7 +248,11 @@ $(function () {
                             let point = response3.data[j].poPoint;
                             sum += point;
                         }
-                        $(`#totalPoint${i}`).text(sum);
+                        if(sum < 0){
+                            $(`#totalPoint${i}`).text(0);
+                        }else{
+                            $(`#totalPoint${i}`).text(sum);
+                        }
                     })
                 }
 
