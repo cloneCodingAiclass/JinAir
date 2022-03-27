@@ -400,6 +400,12 @@ $(function () {
     // 포인트 차감 로직
     let necessary = '';
     $('.coupon_add').on('click', function (e){
+        if(weekday == ''){
+            weekday = '평일';
+        }
+        if(tripType == ''){
+            tripType = '편도';
+        }
         if(weekday == '평일' && tripType == '편도'){
             necessary = 100;
         }else if(weekday == '평일' && tripType == '왕복'){
