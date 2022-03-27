@@ -725,7 +725,7 @@ $(function () {
         location.href = "/UserPage/payment/extras.html";
     })
     $('.cancel_service').click(function () {
-        location.href = "/pages/index/mypageCancelService";
+        location.href = "/pages/index/mypageCancelService/"+reIndex1;
     })
     /* 공통 버튼 */
     $('.btn_cancel').click(function () {

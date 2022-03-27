@@ -19,6 +19,9 @@
         <div id="container">
             <div class="mypage_main">
                 <input type="hidden" id="memid" th:value="${memberApiResponse.memIndex}">
+                <input type="hidden" id="reIndex1" th:value="${reserveApiResponse[0].reIndex}">
+                <input type="hidden" id="reTripKind" th:value="${reserveApiResponse[0].reTripKind}">
+                <input type="hidden" id="rePeopleType" th:value="${reserveApiResponse[0].rePeopleType}">
                 <div class="mypage_menu">
                     <p>마이<br>페이지</p>
                     <ul>
@@ -36,26 +39,99 @@
                 <div class="cancel_choice">
                     <table>
                         <thead>
-                            <th colspan="3">라승현</th>
+                            <th colspan="6">신청된 부가서비스</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th>구간 1</th>
+                            <tr th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
+                                <td>구간 1</td>
+                                <td>사전좌석지정</td>
+                                <td>[[${dto.reFirstName}]]/[[${dto.reLastName}]]</td>
                                 <div>
                                     <td>
-                                        <input type="checkbox">
-                                        <img src="/userpage/lib/img/chair.png">
-                                        <span>사전좌석지정 30C</span>
+                                        <input type="checkbox" th:class="'seat1C'+${i.index}">
                                     </td>
-                                    <td>KRW 5,000</td>
+                                    <td>
+                                        <span th:class="'seat1D'+${i.index}">[[${dto.reSeatDetail}]]</span>
+                                    </td>
+                                    <td>KRW <span th:class="'seat1P'+${i.index}">[[${dto.reSeatPrice}]]</span></td>
+                                </div>
+                            </tr>
+                            <tr class="ifOnewayD" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 1">
+                                <td>구간 2</td>
+                                <td>사전좌석지정</td>
+                                <td>[[${dto.reFirstName}]]/[[${dto.reLastName}]]</td>
+                                <div>
+                                    <td>
+                                        <input type="checkbox" th:class="'seat2C'+${i.index}">
+                                    </td>
+                                    <td>
+                                        <span th:class="'seat2D'+${i.index}">[[${dto.reSeatDetail}]]</span>
+                                    </td>
+                                    <td>KRW <span th:class="'seat2P'+${i.index}">[[${dto.reSeatPrice}]]</span></td>
+                                </div>
+                            </tr>
+                            <tr th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
+                                <td>구간 1</td>
+                                <td>초과수하물</td>
+                                <td>[[${dto.reFirstName}]]/[[${dto.reLastName}]]</td>
+                                <input type="hidden" th:value="${dto.reBaggageidx}" th:class="'reBaggageidx1'+${i.index}">
+                                <div>
+                                    <td>
+                                        <input type="checkbox" th:class="'bagg1C'+${i.index}">
+                                    </td>
+                                    <td>
+                                        <span th:class="'bagg1KG'+${i.index}"></span>
+                                    </td>
+                                    <td>KRW <span class="price" th:class="'bagg1P'+${i.index}"></span></td>
+                                </div>
+                            </tr>
+                            <tr class="ifOnewayD" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 1">
+                                <td>구간 2</td>
+                                <td>초과수하물</td>
+                                <td>[[${dto.reFirstName}]]/[[${dto.reLastName}]]</td>
+                                <input type="hidden" th:value="${dto.reBaggageidx}" th:class="'reBaggageidx2'+${i.index}">
+                                <div>
+                                    <td>
+                                        <input type="checkbox" th:class="'bagg2C'+${i.index}">
+                                    </td>
+                                    <td>
+                                        <span th:class="'bagg2KG'+${i.index}"></span>
+                                    </td>
+                                    <td>KRW <span class="price" th:class="'bagg2P'+${i.index}"></span></td>
+                                </div>
+                            </tr>
+                            <tr th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
+                                <td>구간 1</td>
+                                <td>여행보험</td>
+                                <td>[[${dto.reFirstName}]]/[[${dto.reLastName}]]</td>
+                                <input type="hidden" th:value="${dto.reInsuranceidx}" th:class="'reInsuranceidx1'+${i.index}">
+                                <div>
+                                    <td>
+                                        <input type="checkbox" th:class="'Insu1C'+${i.index}">
+                                    </td>
+                                    <td>
+                                        <span th:class="'Insu1Tp'+${i.index}"></span>
+                                    </td>
+                                    <td>KRW <span class="price" th:class="'Insu1P'+${i.index}"></span></td>
+                                </div>
+                            </tr>
+                            <tr class="ifOnewayD" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 1">
+                                <td>구간 2</td>
+                                <td>여행보험</td>
+                                <td>[[${dto.reFirstName}]]/[[${dto.reLastName}]]</td>
+                                <input type="hidden" th:value="${dto.reInsuranceidx}" th:class="'reInsuranceidx2'+${i.index}">
+                                <div>
+                                    <td>
+                                        <input type="checkbox" th:class="'Insu2C'+${i.index}">
+                                    </td>
+                                    <td>
+                                        <span th:class="'Insu2Tp'+${i.index}"></span>
+                                    </td>
+                                    <td>KRW <span class="price" th:class="'Insu2P'+${i.index}"></span></td>
                                 </div>
                             </tr>
                         </tbody>
                     </table>
-                    <div class="btn">
-                        <p class="confirm_btn cursor">확인</p>
-                        <p class="cancel_btn cursor">취소</p>
-                    </div>
                 </div>
                 <div class="refund_info">
                     <div class="totalPrice_main">
@@ -63,7 +139,7 @@
                             <span>기존 결제금액</span>
                             <p>
                                 <span class="unit">현금/카드</span>
-                                <strong>KRW 5,000</strong>
+                                <strong>KRW <span th:class="paymentPrice"></span></strong>
                             </p>
                         </div>
                         <div class="totalPrice_box">
@@ -113,7 +189,7 @@
                 <p>고객님의 개인정보를 소중하게 보호하려고 노력하고 있으며,<br>회원님의 동의 없이는 회원정보를 제공하지 않습니다.</p>
                 <p>비밀번호 입력 <input type="password"></p>
                 <div class="btn">
-                    <input type="button" class="btn_agree" value="확인" onclick="location.href='/UserPage/index/mypage/Mypage_edit.html'">
+                    <input type="button" class="btn_agree" value="확인">
                     <input type="button" class="btn_cancel" value="취소">
                 </div>
             </div>
