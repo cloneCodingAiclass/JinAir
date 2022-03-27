@@ -40,9 +40,9 @@
                         </div>
                         <div class="trip_area fs20">
                             <span class="dep_area area" id="go_area1" th:text="${reserveApiResponse[0].reSchDepPoint}">서울/김포(GMP)</span>
-                            <span class="sm_ft">[출발] <span th:text="${#strings.substring(reserveApiResponse[0].reSchStartTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[0].reSchStartTime, 11, 16)}+']'"></span>
+                            <span class="sm_ft">[출발] <span th:text="${#strings.substring(reserveApiResponse[0].reSchStartTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[0].reSchStartTime, 11, 16)}+']'"></span></span>
                             <span class="arr_area area" id="arr_area1" th:text="${reserveApiResponse[0].reSchArrPoint}">제주(CJU)</span>
-                            <span class="sm_ft">[도착] <span th:text="${#strings.substring(reserveApiResponse[0].reSchEndTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[0].reSchStartTime, 11, 16)}+']'"></span>
+                            <span class="sm_ft">[도착] <span th:text="${#strings.substring(reserveApiResponse[0].reSchEndTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[0].reSchEndTime, 11, 16)}+']'"></span></span>
                         </div>
                     </div>
                     <!--여정1 끝-->
@@ -55,7 +55,7 @@
                             <span class="dep_area area" th:text="${reserveApiResponse[1].reSchDepPoint}">제주(CJU)</span>
                             <span class="sm_ft">[출발] <span th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[1].reSchStartTime, 11, 16)}+']'"></span>
                             <span class="arr_area area" th:text="${reserveApiResponse[1].reSchArrPoint}">서울/김포(GMP)</span>
-                            <span class="sm_ft">[도착] <span th:text="${#strings.substring(reserveApiResponse[1].reSchEndTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[1].reSchStartTime, 11, 16)}+']'"></span>
+                            <span class="sm_ft">[도착] <span th:text="${#strings.substring(reserveApiResponse[1].reSchEndTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[1].reSchEndTime, 11, 16)}+']'"></span>
                         </div>
                     </div>
                     <!--여정2 끝-->
