@@ -39,10 +39,10 @@
                             <p class="cursor arrow_img arrow_up_img"></p>
                         </div>
                         <div class="trip_area fs20">
-                            <span class="dep_area" id="go_area1" th:text="${reserveApiResponse[0].reSchDepPoint}">서울/김포(GMP)</span>
-                            <span class="sm_ft">[출발] [[${reserveApiResponse[0].reSchStartTime}]]</span>
-                            <span class="arr_area" id="arr_area1" th:text="${reserveApiResponse[0].reSchArrPoint}">제주(CJU)</span>
-                            <span class="sm_ft">[도착] [[${reserveApiResponse[0].reSchEndTime}]]</span>
+                            <span class="dep_area area" id="go_area1" th:text="${reserveApiResponse[0].reSchDepPoint}">서울/김포(GMP)</span>
+                            <span class="sm_ft">[출발] <span th:text="${#strings.substring(reserveApiResponse[0].reSchStartTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[0].reSchStartTime, 11, 16)}+']'"></span>
+                            <span class="arr_area area" id="arr_area1" th:text="${reserveApiResponse[0].reSchArrPoint}">제주(CJU)</span>
+                            <span class="sm_ft">[도착] <span th:text="${#strings.substring(reserveApiResponse[0].reSchEndTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[0].reSchStartTime, 11, 16)}+']'"></span>
                         </div>
                     </div>
                     <!--여정1 끝-->
@@ -52,10 +52,10 @@
                             <p><span>왕복</span> 여정2</p>
                         </div>
                         <div class="trip_area fs20">
-                            <span class="dep_area" th:text="${reserveApiResponse[1].reSchDepPoint}">제주(CJU)</span>
-                            <span class="sm_ft">[출발] [[${reserveApiResponse[1].reSchStartTime}]]</span>
-                            <span class="arr_area" th:text="${reserveApiResponse[1].reSchArrPoint}">서울/김포(GMP)</span>
-                            <span class="sm_ft">[도착] [[${reserveApiResponse[0].reSchEndTime}]]</span>
+                            <span class="dep_area area" th:text="${reserveApiResponse[1].reSchDepPoint}">제주(CJU)</span>
+                            <span class="sm_ft">[출발] <span th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[1].reSchStartTime, 11, 16)}+']'"></span>
+                            <span class="arr_area area" th:text="${reserveApiResponse[1].reSchArrPoint}">서울/김포(GMP)</span>
+                            <span class="sm_ft">[도착] <span th:text="${#strings.substring(reserveApiResponse[1].reSchEndTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[1].reSchStartTime, 11, 16)}+']'"></span>
                         </div>
                     </div>
                     <!--여정2 끝-->
@@ -1490,10 +1490,10 @@
                                     <col width="40%">
                                     <col width="60%">
                                 </colgroup>
-                                <tr><td class="dep_area area">[출발]서울/김포(GMP)</td>
-                                    <td class="dep_date date">2022-02-09(수) 20:20</td></tr>
-                                <tr><td class="arr_area area">[도착]제주(CJU)</td>
-                                    <td class="arr_date date">2022-02-09(수) 21:30</td></tr>
+                                <tr><td class="dep_area area">[출발] <span th:text="${reserveApiResponse[0].reSchDepPoint}"></span></td>
+                                    <td class="dep_date date" th:text="${#strings.substring(reserveApiResponse[0].reSchStartTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[0].reSchStartTime, 11, 16)}+']'">2022-02-09(수) 20:20</td></tr>
+                                <tr><td class="arr_area area">[도착] <span th:text="${reserveApiResponse[0].reSchArrPoint}"></span></td>
+                                    <td class="arr_date date" th:text="${#strings.substring(reserveApiResponse[0].reSchEndTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[0].reSchEndTime, 11, 16)}+']'">2022-02-09(수) 21:30</td></tr>
                             </table>
                         </div>
                         <div class="jour2">
@@ -1504,10 +1504,10 @@
                                     <col width="40%">
                                     <col width="60%">
                                 </colgroup>
-                                <tr><td class="dep_area area">[출발]제주(CJU)</td>
-                                    <td class="dep_date date">2022-02-12(토) 16:00</td></tr>
-                                <tr><td class="arr_area area">[도착]서울/김포(GMP)</td>
-                                    <td class="arr_date date">2022-02-12(토) 17:10</td></tr>
+                                <tr><td class="dep_area area">[출발] <span th:text="${reserveApiResponse[1].reSchDepPoint}"></span></td>
+                                    <td class="dep_date date" th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[1].reSchStartTime, 11, 16)}+']'">2022-02-09(수) 20:20</td></tr>
+                                <tr><td class="arr_area area">[도착] <span th:text="${reserveApiResponse[1].reSchArrPoint}"></span></td>
+                                    <td class="arr_date date" th:text="${#strings.substring(reserveApiResponse[1].reSchEndTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[1].reSchEndTime, 11, 16)}+']'">2022-02-09(수) 21:30</td></tr>
                             </table>
                         </div>
                     </div>

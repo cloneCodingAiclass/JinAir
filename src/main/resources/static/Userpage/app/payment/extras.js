@@ -546,7 +546,6 @@ $(function () {
   $("#check_ins_0").change(function() {
     for (let i = 0; i < personNumber; i++) {
       if ($("#check_ins_0").is(':checked')) {
-        alert("dㅇㅇㅇㅇ")
         $("#modal_ins_people_0").css("background-color", "rgb(0, 173, 239)");
         $("#modal_ins_people_0").css("color", "#fff");
         $(this).parent().css("background-color", "rgb(0, 173, 239)")
@@ -556,7 +555,6 @@ $(function () {
         $("#modal_ins_people_" + i + "").css("background-color", "#fff");
         $("#modal_ins_people_" + i + "").css("color", "rgb(0, 173, 239)");
         // changeBackground2($("#modal_ins_people_" + i))
-
       }
     }
   })
@@ -614,8 +612,6 @@ $(function () {
   // 항공기 번호별 화면구성
   let type1 = $("#type1").val();
   let type2 = $("#type2").val();
-  console.log("타입1 : " + type1)
-  console.log("타입2 : " + type2)
 
   if (type1 == 'B737-800') {
     $(".seat_info_view1").not("#seat_info_view1-1").css("display", "none");
@@ -1064,7 +1060,6 @@ $(function () {
         $("#hid_bagg_price1_" + i).text("");
         $("#bagg_close1_" + i).css("display", "none");
       }
-      console.log($("#hid_bagg_price1_" + i).text())
     });
     $("#bagg_close1_" + i).on("click", function() {
       $("#cur1_" + i).css("display", "none");
@@ -1106,7 +1101,6 @@ $(function () {
         $("#hid_bagg_price2_" + i2).text("")
         $("#bagg_close2_" + i2).css("display", "none");
       }
-      console.log($("#hid_bagg_price2_" + i2).text())
     });
     $("#bagg_close2_" + i2).on("click", function() {
       $("#cur2_" + i2).css("display", "none");
@@ -1519,11 +1513,9 @@ $(function () {
       dateType: 'text',
       contentType : "application/json",
       success : function(response){
-        console.dir(response);
         for(let i = 0; i < response.data.length; i++) {
           seatArr1[i] = "";
           seatArr1[i] = response.data[i].reSeatDetail;
-          // console.log(seatArr1[i]);
         }
         seat1();
       }
@@ -1548,7 +1540,6 @@ $(function () {
         for(let i = 0; i < response.data.length; i++) {
           seatArr2[i] = "";
           seatArr2[i] = response.data[i].reSeatDetail;
-          // console.log(seatArr2[i]);
         }
         seat2();
       }
@@ -1596,7 +1587,6 @@ $(function () {
     for (let i = 0; i < seatArr2.length; i++) {
       if (seatArr2[i] != null) {}
       seatArr2[i] = "2_" + String(seatArr1[i]);
-      console.log(i + " : " + seatArr2[i])
     }
     $(".SSC2").each(function(){
       for (let i = 0; i < seatArr2.length; i++) {
@@ -1773,7 +1763,6 @@ let isinsjoin = false;
       if ($("#ins_check_"+i).is(":checked")) {
         isCheck += 1;
       }
-      console.log(isCheck);
     }
     let is = 0;
     for (let i = 0; i < $(".insCheckBox").length * 2; i++) {

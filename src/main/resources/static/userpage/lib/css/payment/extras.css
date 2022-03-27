@@ -404,6 +404,10 @@ body{
     display: inline-block;
 }
 
+.area {
+    font-size: 20px;
+}
+
 .trip_info > .trip_area span.sm_ft, .trip_info2 > .trip_area span.sm_ft {
     font-size: 14px;
     vertical-align: middle;
