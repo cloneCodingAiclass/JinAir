@@ -1904,6 +1904,7 @@ let isinsjoin = false;
     optionTotalPrice(personNumber);
     confirmOptional();
     $("#modal_service_app_wrap").fadeIn();
+    $("#modal_service_app_wrap").css("display", "flex")
   });
 
   // 부가서비스신청 최종확인 끝
@@ -2212,6 +2213,7 @@ $(() => {
   $(".ins_join_butt").on("click", () => {
     if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
       $("#modal_service_app_wrap").fadeIn();
+      $("#modal_service_app_wrap").css("display", "flex")
     }
     else {
       $("#modal_conf_check").fadeIn();
@@ -2230,6 +2232,7 @@ $(() => {
   $("#addmodal_autoCheck_noti .add_modal_butt_ok, #addmodal_autoCheck_noti .add_modal_butt_canc, #addmodal_autoCheck_noti .tit_close").on("click", () => {
     $("#addmodal_autoCheck_noti").fadeOut();
     $("#modal_service_app_wrap").fadeIn();
+    $("#modal_service_app_wrap").css("display", "flex")
     $("auto_check").prop(":checked", false);
   })
 
