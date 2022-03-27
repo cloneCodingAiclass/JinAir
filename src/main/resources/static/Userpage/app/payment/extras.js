@@ -1745,14 +1745,16 @@ $(function () {
   // /*부가서비스 신청내역 끝*/
 let isinsjoin = false;
   $(".ins_join_butt").on("click", function () {
-    isinsjoin = true;
     optionTotalPrice(personNumber)
     confirmOptional()
     if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
       $("#modal_service_app_wrap").fadeIn();
       $("#modal_service_app_wrap").css("display", "flex")
       $(".modal_join_ins").fadeIn();
-    }
+    } else {
+        $("#modal_conf_check").fadeIn();
+        $("#modal_conf_check").css("display", "flex")
+      }
   });
 
 
@@ -1769,15 +1771,16 @@ let isinsjoin = false;
     for (let i = 0; i < $(".ins_check").length; i++) {
       if ($("#check_ins_" + i).is(":checked")) {
         is += 1;
-        console.log("첫번째 체크박스 : " + isCheck)
+        console.log("두번째 체크박스 : " + is)
       }
     }
-    console.log("두번째 체크박스 : " + isCheck)
     if (isCheck == is) {
       $("#modal_insurance_info_wrap").fadeOut();
       $("#agree_check1").prop("checked", true);
+      isinsjoin = true;
     } else {
       $("#modal_insurance_info_wrap .modal_agree2").fadeIn();
+      isinsjoin = false;
     }
 
   })
@@ -1886,7 +1889,7 @@ let isinsjoin = false;
             }
         }
         // 보험
-        if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked") && isinsjoin == true) {
+        if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked") && isinsjoin == true && insPriceArr[i] != undefined) {
           option_table_body2[i] += '<tr><td class="b_r">전 구간</td>'
           option_table_body2[i] += '<td><div class="item_wrap1"><p class="img img_ins"></p>'
           option_table_body2[i] += '<p class="txt" id="modal_option_ins_' + i + '">여행보험 (' + insArr[i] + ')</p></div></td>'
@@ -2212,17 +2215,17 @@ $(() => {
   $(".modal_join_ins").hide();
   $("#addmodal_autoCheck_noti").hide();
   $("#modal_conf_check").hide();
-
-  $(".ins_join_butt").on("click", () => {
-    if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
-      $("#modal_service_app_wrap").fadeIn();
-      $("#modal_service_app_wrap").css("display", "flex")
-    }
-    else {
-      $("#modal_conf_check").fadeIn();
-      $("#modal_conf_check").css("display", "flex")
-    }
-  });
+  //
+  // $(".ins_join_butt").on("click", () => {
+  //   if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
+  //     $("#modal_service_app_wrap").fadeIn();
+  //     $("#modal_service_app_wrap").css("display", "flex")
+  //   }
+  //   else {
+  //     $("#modal_conf_check").fadeIn();
+  //     $("#modal_conf_check").css("display", "flex")
+  //   }
+  // });
 
   $("#modal_conf_check input.cursor").on("click", () => {
     $("#modal_conf_check").fadeOut();
@@ -2584,141 +2587,40 @@ function fnSetPaxCountUp(strPaxType, obj) {
   }
 }
 
-function submit1() {
-  console.log("작동");
-  var iAdultCount = parseInt(
-          $(".person_pop_layer1").find("strong[name=adultPaxCnt]").text()
-      ),
-      iChildCount = parseInt(
-          $(".person_pop_layer1").find("strong[name=childPaxCnt]").text()
-      ),
-      iInfantCount = parseInt(
-          $(".person_pop_layer1").find("strong[name=infantPaxCnt]").text()
-      );
+function submit() {
+
+  var
+    iAdultCount = parseInt($('.round_wrap').find('strong[name=adultPaxCnt]').text()), // 성인
+    iChildCount = parseInt($('.oneway_wrap').find('strong[name=childPaxCnt]').text()), // 소아
+    iInfantCount = parseInt($('.multi_wrap').find('strong[name=infantPaxCnt]').text()); // 유아
 
   if (iAdultCount > 0 && iChildCount > 0 && iInfantCount > 0) {
-    $("strong[name=person_num]").text(
-        "성인 " + iAdultCount + " 소아 " + iChildCount + " 유아 " + iInfantCount
-    );
+    $("strong[name=person_num]").text('성인 ' + iAdultCount + ' 소아 ' + iChildCount + ' 유아 ' + iInfantCount);
   } else if (iAdultCount > 0 && iChildCount > 0) {
-    $("strong[name=person_num]").text(
-        "성인 " + iAdultCount + " 소아 " + iChildCount
-    );
+    $("strong[name=person_num]").text('성인 ' + iAdultCount + ' 소아 ' + iChildCount);
   } else if (iAdultCount > 0 && iInfantCount > 0) {
-    $("strong[name=person_num]").text(
-        "성인 " + iAdultCount + " 유아 " + iInfantCount
-    );
+    $("strong[name=person_num]").text('성인 ' + iAdultCount + ' 유아 ' + iInfantCount);
   } else if (iAdultCount > 0) {
-    $("strong[name=person_num]").text("성인 " + iAdultCount);
+    $("strong[name=person_num]").text('성인 ' + iAdultCount);
   } else if (iChildCount > 0) {
-    $("strong[name=person_num]").text("소아 " + iChildCount);
+    $("strong[name=person_num]").text('소아 ' + iChildCount);
   }
 
   // 중요. 확인 버튼 누를 때 성인, 소아, 유아의 수를 input:hidden에 넣음
   // 아무것도 선택 안할 경우 .adultPaxCnt의 default값 : 1로 지정
-  $(".adultPaxCnt").val(iAdultCount);
-  $(".childPaxCnt").val(iChildCount);
-  $(".infantPaxCnt").val(iInfantCount);
+  $('.adultPaxCnt').val(iAdultCount);
+  $('.childPaxCnt').val(iChildCount);
+  $('.infantPaxCnt').val(iInfantCount);
 
-  $(".person_layerbtn").css({ color: "rgb(0, 0, 0)" });
-  $(".person_down_img").css({ display: "inline-block" });
-  $(".person_up_img").css({ display: "none" });
-  $(".person_pop_layer").slideUp(50);
 
-  $(".go_layerbtn").css({ color: "rgb(145, 0, 70)" });
-  $(".go_select_opt").addClass("on");
-  $(".go_layer").slideDown("fast");
-}
+  $(".person_layerbtn").css({ "color": "rgb(0, 0, 0)" });
+  $(".person_down_img").css({ "display": "inline-block" });
+  $(".person_up_img").css({ "display": "none" });
+  $('.person_pop_layer').slideUp(50);
 
-function submit2() {
-  console.log("작동");
-  var iAdultCount = parseInt(
-          $(".person_pop_layer2").find("strong[name=adultPaxCnt]").text()
-      ),
-      iChildCount = parseInt(
-          $(".person_pop_layer2").find("strong[name=childPaxCnt]").text()
-      ),
-      iInfantCount = parseInt(
-          $(".person_pop_layer2").find("strong[name=infantPaxCnt]").text()
-      );
 
-  if (iAdultCount > 0 && iChildCount > 0 && iInfantCount > 0) {
-    $("strong[name=person_num]").text(
-        "성인 " + iAdultCount + " 소아 " + iChildCount + " 유아 " + iInfantCount
-    );
-  } else if (iAdultCount > 0 && iChildCount > 0) {
-    $("strong[name=person_num]").text(
-        "성인 " + iAdultCount + " 소아 " + iChildCount
-    );
-  } else if (iAdultCount > 0 && iInfantCount > 0) {
-    $("strong[name=person_num]").text(
-        "성인 " + iAdultCount + " 유아 " + iInfantCount
-    );
-  } else if (iAdultCount > 0) {
-    $("strong[name=person_num]").text("성인 " + iAdultCount);
-  } else if (iChildCount > 0) {
-    $("strong[name=person_num]").text("소아 " + iChildCount);
-  }
-
-  // 중요. 확인 버튼 누를 때 성인, 소아, 유아의 수를 input:hidden에 넣음
-  // 아무것도 선택 안할 경우 .adultPaxCnt의 default값 : 1로 지정
-  $(".adultPaxCnt").val(iAdultCount);
-  $(".childPaxCnt").val(iChildCount);
-  $(".infantPaxCnt").val(iInfantCount);
-
-  $(".person_layerbtn").css({ color: "rgb(0, 0, 0)" });
-  $(".person_down_img").css({ display: "inline-block" });
-  $(".person_up_img").css({ display: "none" });
-  $(".person_pop_layer").slideUp(50);
-
-  $(".go_layerbtn").css({ color: "rgb(145, 0, 70)" });
-  $(".go_select_opt").addClass("on");
-  $(".go_layer").slideDown("fast");
-}
-
-function submit3() {
-  console.log("작동");
-  var iAdultCount = parseInt(
-          $(".person_pop_layer3").find("strong[name=adultPaxCnt]").text()
-      ),
-      iChildCount = parseInt(
-          $(".person_pop_layer3").find("strong[name=childPaxCnt]").text()
-      ),
-      iInfantCount = parseInt(
-          $(".person_pop_layer3").find("strong[name=infantPaxCnt]").text()
-      );
-
-  if (iAdultCount > 0 && iChildCount > 0 && iInfantCount > 0) {
-    $("strong[name=person_num]").text(
-        "성인 " + iAdultCount + " 소아 " + iChildCount + " 유아 " + iInfantCount
-    );
-  } else if (iAdultCount > 0 && iChildCount > 0) {
-    $("strong[name=person_num]").text(
-        "성인 " + iAdultCount + " 소아 " + iChildCount
-    );
-  } else if (iAdultCount > 0 && iInfantCount > 0) {
-    $("strong[name=person_num]").text(
-        "성인 " + iAdultCount + " 유아 " + iInfantCount
-    );
-  } else if (iAdultCount > 0) {
-    $("strong[name=person_num]").text("성인 " + iAdultCount);
-  } else if (iChildCount > 0) {
-    $("strong[name=person_num]").text("소아 " + iChildCount);
-  }
-
-  // 중요. 확인 버튼 누를 때 성인, 소아, 유아의 수를 input:hidden에 넣음
-  // 아무것도 선택 안할 경우 .adultPaxCnt의 default값 : 1로 지정
-  $(".adultPaxCnt").val(iAdultCount);
-  $(".childPaxCnt").val(iChildCount);
-  $(".infantPaxCnt").val(iInfantCount);
-
-  $(".person_layerbtn").css({ color: "rgb(0, 0, 0)" });
-  $(".person_down_img").css({ display: "inline-block" });
-  $(".person_up_img").css({ display: "none" });
-  $(".person_pop_layer").slideUp(50);
-
-  $(".go_layerbtn").css({ color: "rgb(145, 0, 70)" });
-  $(".go_select_opt").addClass("on");
+  $(".go_layerbtn").css({ "color": "rgb(145, 0, 70)" });
+  $(".go_select_opt").addClass('on');
   $(".go_layer").slideDown("fast");
 }
 
@@ -2741,237 +2643,6 @@ $(function () {
     });
   });
 });
-
-
-function updateTrip() {
-  let person = $("#person_cnt").text();
-  let go1 = $("#go_area1").text();
-  let arr1 = $("#arr_area1").text();
-
-  $(".person_num").text(person);
-  $(".go_default").attr("value", go1);
-  $(".arrive_default").attr("value", arr1);
-}
-
-function modification() {
-  let inonesoo = $('.person_num').html().split(' ');
-  let modiAdult = 0;
-  let modiChild = 0;
-  let modiBaby = 0;
-  if(inonesoo.length == 2){
-    if(inonesoo[0] == '소아'){
-      modiChild = Number(inonesoo[1])
-    }else if(inonesoo[0] == '성인'){
-      modiAdult = Number(inonesoo[1])
-    }
-  }else if(inonesoo.length == 4){
-    if(inonesoo[2] == '유아'){
-      modiAdult = Number(inonesoo[1]);
-      modiBaby = Number(inonesoo[3]);
-    }else if(inonesoo[2] == '소아'){
-      modiAdult = Number(inonesoo[1]);
-      modiChild = Number(inonesoo[3])
-    }
-  }else if(inonesoo.length == 6){
-    modiAdult = Number(inonesoo[1]);
-    modiChild = Number(inonesoo[3])
-    modiBaby = Number(inonesoo[5]);
-  }
-
-
-  if($('input[type="radio"][name="tripType"]:checked').val() == "왕복"){
-
-    if($('.go_date_select_optt').val()=="가는날" || $('.come_date_select_optt').val()=="오는날"){
-      alert('입력하신 내용을 확인해주세요');
-    }else{
-      let f = document.createElement('form');
-
-      let obj1;
-      obj1 = document.createElement('input');
-      obj1.setAttribute('type', 'hidden');
-      obj1.setAttribute('name', 'schDeparturePoint');
-      obj1.setAttribute('value', $('.go_select_optt').val());
-      f.appendChild(obj1);
-
-      let obj2;
-      obj2 = document.createElement('input');
-      obj2.setAttribute('type', 'hidden');
-      obj2.setAttribute('name', 'schArrivalPoint');
-      obj2.setAttribute('value', $('.arrive_select_optt').val());
-      f.appendChild(obj2);
-
-      let obj3;
-      obj3 = document.createElement('input');
-      obj3.setAttribute('type', 'hidden');
-      obj3.setAttribute('name', 'goDateSelectOptt');
-      obj3.setAttribute('value', $('.go_date_select_optt').val());
-      f.appendChild(obj3);
-
-      let obj4;
-      obj4 = document.createElement('input');
-      obj4.setAttribute('type', 'hidden');
-      obj4.setAttribute('name', 'comeDateSelectOptt');
-      obj4.setAttribute('value', $('.come_date_select_optt').val());
-      f.appendChild(obj4);
-
-      let obj5;
-      obj5 = document.createElement('input');
-      obj5.setAttribute('type', 'hidden');
-      obj5.setAttribute('name', 'AdultNumber');
-      obj5.setAttribute('value', modiAdult);
-      f.appendChild(obj5);
-
-      let obj6;
-      obj6 = document.createElement('input');
-      obj6.setAttribute('type', 'hidden');
-      obj6.setAttribute('name', 'ChildNumber');
-      obj6.setAttribute('value', modiChild);
-      f.appendChild(obj6);
-
-      let obj7;
-      obj7 = document.createElement('input');
-      obj7.setAttribute('type', 'hidden');
-      obj7.setAttribute('name', 'InfantNumber');
-      obj7.setAttribute('value', modiBaby);
-      f.appendChild(obj7);
-
-      f.setAttribute('method', 'post');
-      f.setAttribute('action', '/pages/getAvailabilityList/twoway');
-      document.body.appendChild(f);
-      f.submit();
-    }
-  }else if($('input[type="radio"][name="tripType"]:checked').val() == "편도") {
-    if($('.go_date_select_optt').val()=="가는날"){
-      alert('입력하신 내용을 확인해주세요');
-    }else{
-      let f = document.createElement('form');
-
-      let obj1;
-      obj1 = document.createElement('input');
-      obj1.setAttribute('type', 'hidden');
-      obj1.setAttribute('name', 'schDeparturePoint');
-      obj1.setAttribute('value', $('.go_select_optt').val());
-      f.appendChild(obj1);
-
-      let obj2;
-      obj2 = document.createElement('input');
-      obj2.setAttribute('type', 'hidden');
-      obj2.setAttribute('name', 'schArrivalPoint');
-      obj2.setAttribute('value', $('.arrive_select_optt').val());
-      f.appendChild(obj2);
-
-      let obj3;
-      obj3 = document.createElement('input');
-      obj3.setAttribute('type', 'hidden');
-      obj3.setAttribute('name', 'goDateSelectOptt');
-      obj3.setAttribute('value', $('.go_date_select_optt').val());
-      f.appendChild(obj3);
-
-      let obj4;
-      obj4 = document.createElement('input');
-      obj4.setAttribute('type', 'hidden');
-      obj4.setAttribute('name', 'AdultNumber');
-      obj4.setAttribute('value', modiAdult);
-      f.appendChild(obj4);
-
-      let obj5;
-      obj5 = document.createElement('input');
-      obj5.setAttribute('type', 'hidden');
-      obj5.setAttribute('name', 'ChildNumber');
-      obj5.setAttribute('value', modiChild);
-      f.appendChild(obj5);
-
-      let obj6;
-      obj6 = document.createElement('input');
-      obj6.setAttribute('type', 'hidden');
-      obj6.setAttribute('name', 'InfantNumber');
-      obj6.setAttribute('value', modiBaby);
-      f.appendChild(obj6);
-
-      f.setAttribute('method', 'post');
-      f.setAttribute('action', '/pages/getAvailabilityList/oneway');
-      document.body.appendChild(f);
-      f.submit();
-    }
-  }else if($('input[type="radio"][name="tripType"]:checked').val() == "다구간") {
-    if($('.go_select_optt').val()=="출발지" || $('.arrive_select_optt').val()=="도착지" ||
-        $('.go_date_select_optt').val()=="가는날" || $('.go_select_optt2').val()=="출발지" ||
-        $('.arrive_select_optt2').val()=="도착지" || $('.go_date_select_optt2').val()=="가는날"){
-      alert('입력하신 내용을 확인해주세요');
-    }else{
-      let f = document.createElement('form');
-
-      let obj1;
-      obj1 = document.createElement('input');
-      obj1.setAttribute('type', 'hidden');
-      obj1.setAttribute('name', 'schDeparturePoint');
-      obj1.setAttribute('value', $('.go_select_optt').val());
-      f.appendChild(obj1);
-
-      let obj2;
-      obj2 = document.createElement('input');
-      obj2.setAttribute('type', 'hidden');
-      obj2.setAttribute('name', 'schArrivalPoint');
-      obj2.setAttribute('value', $('.arrive_select_optt').val());
-      f.appendChild(obj2);
-
-      let obj3;
-      obj3 = document.createElement('input');
-      obj3.setAttribute('type', 'hidden');
-      obj3.setAttribute('name', 'goDateSelectOptt');
-      obj3.setAttribute('value', $('.go_date_select_optt').val());
-      f.appendChild(obj3);
-
-      let obj4;
-      obj4 = document.createElement('input');
-      obj4.setAttribute('type', 'hidden');
-      obj4.setAttribute('name', 'schDeparturePoint1');
-      obj4.setAttribute('value', $('.go_select_optt2').val());
-      f.appendChild(obj4);
-
-      let obj5;
-      obj5 = document.createElement('input');
-      obj5.setAttribute('type', 'hidden');
-      obj5.setAttribute('name', 'schArrivalPoint1');
-      obj5.setAttribute('value', $('.arrive_select_optt2').val());
-      f.appendChild(obj5);
-
-      let obj6;
-      obj6 = document.createElement('input');
-      obj6.setAttribute('type', 'hidden');
-      obj6.setAttribute('name', 'goDateSelectOptt1');
-      obj6.setAttribute('value', $('.go_date_select_optt2').val());
-      f.appendChild(obj6);
-
-      let obj7;
-      obj7 = document.createElement('input');
-      obj7.setAttribute('type', 'hidden');
-      obj7.setAttribute('name', 'AdultNumber');
-      obj7.setAttribute('value', modiAdult);
-      f.appendChild(obj7);
-
-      let obj8;
-      obj8 = document.createElement('input');
-      obj8.setAttribute('type', 'hidden');
-      obj8.setAttribute('name', 'ChildNumber');
-      obj8.setAttribute('value', modiChild);
-      f.appendChild(obj8);
-
-      let obj9;
-      obj9 = document.createElement('input');
-      obj9.setAttribute('type', 'hidden');
-      obj9.setAttribute('name', 'InfantNumber');
-      obj9.setAttribute('value', modiBaby);
-      f.appendChild(obj9);
-
-      f.setAttribute('method', 'post');
-      f.setAttribute('action', '/pages/getAvailabilityList/multiway');
-      document.body.appendChild(f);
-      f.submit();
-    }
-  }
-}
-
 
 function comewhatday() {
   $(".whatday").html("오는날");
@@ -3117,6 +2788,18 @@ $(() => {
   });
 });
 
+function updateTrip() {
+  let person = $("#person_cnt").text();
+  let go1 = $("#go_area1").text();
+  let arr1 = $("#arr_area1").text();
+  let godate = $("#godate").text();
+
+  $(".person_num").text(person);
+  $(".go_default").attr("value", go1);
+  $(".arrive_default").attr("value", arr1);
+  $(".go_date_default").attr("value", godate);
+
+}
 
 
 
