@@ -48,7 +48,7 @@
                     <div class="schedule">
                         <p><span id="triptype2"></span> 여정2</p>
                     </div>
-                    <th:block th:each="memid, i : ${reserveApiResponse1}" th:if="${i.count} % 2 == 0">
+                    <th:block th:if="${reserveApiResponse1[1].reIndex} != null">
                         <div class="trip_area fs20">
                             <p class="dep_area" id="go_area2">[[${reserveApiResponse1[1].reSchDepPoint}]] <span>[출발]</span><span id="goArea2"></span></p>
                             <p class="arr_area" id="arr_area2">[[${reserveApiResponse1[1].reSchArrPoint}]] <span>[도착]</span><span id="arrArea2"></span></p>
@@ -132,7 +132,7 @@
                             </div>
                             <!--여정1 끝-->
                             <!--여정2-->
-                            <th:block th:each="memid, i : ${reserveApiResponse1}" th:if="${i.count} % 2 == 0">
+                            <th:block th:if="${reserveApiResponse1[1].reIndex} != null">
                             <div class="jour2_wrap">
                                 <p class="flight">여정 2 [[${reserveApiResponse1[0].reSchName}]]</p>
                                 <div class="area2_wrap area_wrap">
