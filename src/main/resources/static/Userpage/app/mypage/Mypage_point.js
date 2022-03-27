@@ -400,6 +400,12 @@ $(function () {
     // 포인트 차감 로직
     let necessary = '';
     $('.coupon_add').on('click', function (e){
+        if(weekday == ''){
+            weekday = '평일';
+        }
+        if(tripType == ''){
+            tripType = '편도';
+        }
         if(weekday == '평일' && tripType == '편도'){
             necessary = 100;
         }else if(weekday == '평일' && tripType == '왕복'){
@@ -512,7 +518,6 @@ $(function () {
             }
 
             document.getElementById("coupon").innerHTML = coupon;
-            document.getElementById("resultCoupon").innerHTML = coupon;
         });
     }
 
@@ -524,7 +529,11 @@ $(function () {
                 let point = response.data[i].poPoint;
                 sum += point;
             }
-            $('#point').text(sum);
+            if( sum < 0){
+                $('#point').text('0');
+            }else {
+                $('#point').text(sum.toLocaleString('ko-KR'));
+            }
         })
     }
 

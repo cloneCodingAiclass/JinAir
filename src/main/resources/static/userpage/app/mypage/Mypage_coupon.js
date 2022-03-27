@@ -140,8 +140,11 @@ $(function () {
                 let point = response.data[i].poPoint;
                 sum += point;
             }
-            console.log(sum)
-            $('#point').text(sum);
+            if( sum < 0){
+                $('#point').text('0');
+            }else {
+                $('#point').text(sum.toLocaleString('ko-KR'));
+            }
         })
     }
 
@@ -266,13 +269,10 @@ $(function () {
         }else if($('#codeNum2').val().toUpperCase() == ""){
             couponCode = $('#codeNum1').val().toUpperCase();
         }
-        console.log(couponCode);
         let codeStr = couponCode.replace(/[0-9]/g, "");
         let codeNum = couponCode.replace(/[^0-9]/g, "");
         $.get("/api/coupon/searchStr/" + codeStr, function(response){
             let code = response.data[0];
-            console.log(code);
-
             if(typeof code == "undefined"){
                 alert("올바른 쿠폰 정보가 아닙니다.")
                 e.stopPropagation();
@@ -331,13 +331,7 @@ $(function () {
         })
 
     }
-
-
-
-
 });
-
-
 function hidePopupLayer(){
     $('.confirm_modal1', parent.document).fadeOut(200);
     $('body', parent.document).css('overflow', '');
