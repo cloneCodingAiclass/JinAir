@@ -328,7 +328,8 @@
                                             <td></td>
                                             <td>
                                                 <div class="td_wrap">
-                                                    <span class="cul">KRW</span><span class="price priceOpt" th:if="${opt1.reSeatPrice} != null" th:value="${opt1.reSeatPrice}"><span class="price" th:if="${opt1.reSeatPrice} == null" th:text="0"></span>
+                                                    <span class="cul">KRW</span><span class="price priceOpt" th:if="${opt1.reSeatPrice} != null" th:value="${opt1.reSeatPrice}">
+                                                    <span class="price" th:if="${opt1.reSeatPrice} == null" th:text="0"></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -366,11 +367,11 @@
                                         <tr>
                                             <td><span class="name">[[${opt2.reFirstName}]]/[[${opt2.reLastName}]]</span></td>
                                             <td class="bgst" th:if="${opt2.reBaggageidx} != null" th:value="${opt2.reBaggageidx}"></td>
+                                            <td class="bgst" th:if="${opt2.reBaggageidx} == null"></td>
                                             <td>
                                                 <div class="td_wrap">
                                                     <span class="cul">KRW</span>
-                                                    <span class="price bgPrice" th:id="${opt2.reBaggageidx}">
-                                                    </span>
+                                                    <span class="price bgPrice" th:id="${opt2.reBaggageidx}"></span>
                                                 </div>
                                             </td>
                                         </tr>
