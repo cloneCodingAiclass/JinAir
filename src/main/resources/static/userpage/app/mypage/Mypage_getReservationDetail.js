@@ -639,6 +639,15 @@ $(function () {
             location.href = "/pages/index/mypageCancelService/"+reIndex1;
         })
 
+        // 항공권 수정 편도
+        $("input:radio[name='tripType'][value='편도']").attr('checked', true);
+        $("input:radio[name='tripType'][value='편도']").attr('disabled', true);
+        $("input:radio[name='tripType'][value='왕복']").attr('disabled', true);
+        $("input:radio[name='tripType'][value='다구간']").attr('disabled', true);
+        $(".round_wrap").css("display", "none");
+        $(".oneway_wrap").css("display", "block");
+        $(".multi_wrap").css("display", "none");
+        $(".edit_jour_wrap").css("height", "450px");
 
     }else{
         searchStart();
@@ -688,6 +697,12 @@ $(function () {
             $('.cancel_service').click(function () {
                 location.href = "/pages/index/mypageCancelService/"+reIndex1;
             })
+
+            // 항공권 수정 편도
+            $("input:radio[name='tripType'][value='왕복']").attr('checked', true);
+            $("input:radio[name='tripType'][value='편도']").attr('disabled', true);
+
+
         }else{                          // 지난 스케줄이 하나라도 있는 경우
             /* 항공권 취소 */
             $('.reser_cancel_btn').click(function () {
@@ -702,6 +717,15 @@ $(function () {
             $('.cancel_service').click(function () {
                 location.href = "/pages/index/mypageCancelServiceMD/"+reIndex1;
             })
+            // 항공권 수정 편도
+            $("input:radio[name='tripType'][value='편도']").attr('checked', true);
+            $("input:radio[name='tripType'][value='편도']").attr('disabled', true);
+            $("input:radio[name='tripType'][value='왕복']").attr('disabled', true);
+            $("input:radio[name='tripType'][value='다구간']").attr('disabled', true);
+            $(".round_wrap").css("display", "none");
+            $(".oneway_wrap").css("display", "block");
+            $(".multi_wrap").css("display", "none");
+            $(".edit_jour_wrap").css("height", "450px");
         }
     }
 
@@ -728,7 +752,7 @@ $(function () {
         $('.reser_change').css('display', 'flex');
         $('.reser_change').fadeIn(200);
         $('.change_ticket').click(function () {
-            alert('넘어가자');
+            $("#modal_edit_jour_wrap").css("display", "block");
             $('.btn_cancel').click(function () {
                 $('.reser_change').hide();
             })
@@ -839,41 +863,7 @@ $(() => {
     });
 });
 
-//person-layer
-$(() => {
-    $(".person_layerbtn").on("click", function (e) {
-        e.stopPropagation();
-        $(".person_layerbtn").css({ color: "rgb(145, 0, 70)" });
-        $(".person_down_img").css({ display: "none" });
-        $(".person_up_img").css({ display: "inline-block" });
-        $(".person_pop_layer").slideDown("fast");
 
-        // 예약 관련 레이어 닫기
-        e.stopPropagation();
-        $(".go_layerbtn").css({ color: "rgb(0, 0, 0)" });
-        $(".go_down_img").css({ display: "inline-block" });
-        $(".go_up_img").css({ display: "none" });
-        $(".go_layer").slideUp(50);
-
-        e.stopPropagation();
-        $(".go_layerbtn2").css({ color: "rgb(0, 0, 0)" });
-        $(".go_down_img2").css({ display: "inline-block" });
-        $(".go_up_img2").css({ display: "none" });
-        $(".go_layer2").slideUp(50);
-
-        e.stopPropagation();
-        $(".arrive_layerbtn").css({ color: "rgb(0, 0, 0)" });
-        $(".arrive_down_img").css({ display: "inline-block" });
-        $(".arrive_up_img").css({ display: "none" });
-        $(".arrive_layer").slideUp(50);
-
-        e.stopPropagation();
-        $(".arrive_layerbtn2").css({ color: "rgb(0, 0, 0)" });
-        $(".arrive_down_img2").css({ display: "inline-block" });
-        $(".arrive_up_img2").css({ display: "none" });
-        $(".arrive_layer2").slideUp(50);
-    });
-});
 
 // go-layer
 $(() => {
@@ -884,13 +874,6 @@ $(() => {
         $(".go_layerbtn").css({ color: "rgb(145, 0, 70)" });
         $(".go_select_opt").addClass("on");
         $(".go_layer").slideDown("fast");
-
-        // 사람 수 선택 닫기
-        e.stopPropagation();
-        $(".person_layerbtn").css({ color: "rgb(0, 0, 0)" });
-        $(".person_down_img").css({ display: "inline-block" });
-        $(".person_up_img").css({ display: "none" });
-        $(".person_pop_layer").slideUp(50);
 
         // 도착지1 레이어 닫기
         e.stopPropagation();
@@ -919,13 +902,6 @@ $(() => {
         $(".go_layerbtn2").css({ color: "rgb(145, 0, 70)" });
         $(".go_select_opt2").addClass("on");
         $(".go_layer2").slideDown("fast");
-
-        // 사람 수 선택 닫기
-        e.stopPropagation();
-        $(".person_layerbtn").css({ color: "rgb(0, 0, 0)" });
-        $(".person_down_img").css({ display: "inline-block" });
-        $(".person_up_img").css({ display: "none" });
-        $(".person_pop_layer").slideUp(50);
 
         // 도착지2 레이어 닫기
         e.stopPropagation();
@@ -956,13 +932,6 @@ $(() => {
         $(".arrive_select_opt").addClass("on");
         $(".arrive_layer").slideDown("fast");
 
-        // 사람 수 선택 닫기
-        e.stopPropagation();
-        $(".person_layerbtn").css({ color: "rgb(0, 0, 0)" });
-        $(".person_down_img").css({ display: "inline-block" });
-        $(".person_up_img").css({ display: "none" });
-        $(".person_pop_layer").slideUp(50);
-
         // 출발지1 레이어 닫기
         e.stopPropagation();
         $(".go_layerbtn").css({ color: "rgb(0, 0, 0)" });
@@ -988,13 +957,6 @@ $(() => {
         $(".arrive_layerbtn2").css({ color: "rgb(145, 0, 70)" });
         $(".arrive_select_opt2").addClass("on");
         $(".arrive_layer2").slideDown("fast");
-
-        // 사람 수 선택 닫기
-        e.stopPropagation();
-        $(".person_layerbtn").css({ color: "rgb(0, 0, 0)" });
-        $(".person_down_img").css({ display: "inline-block" });
-        $(".person_up_img").css({ display: "none" });
-        $(".person_pop_layer").slideUp(50);
 
         // 출발지2 레이어 닫기
         e.stopPropagation();
@@ -1027,12 +989,6 @@ $(() => {
         $(".go_select_opt").removeClass("on");
         $(".go_layer").slideUp(50);
 
-        // 사람 수 선택 닫기
-        $(".person_layerbtn").css({ color: "rgb(0, 0, 0)" });
-        $(".person_down_img").css({ display: "inline-block" });
-        $(".person_up_img").css({ display: "none" });
-        $(".person_pop_layer").slideUp(50);
-
         $(".go_layerbtn2").css({ color: "rgb(0, 0, 0)" });
         $(".go_select_opt2").removeClass("on");
         $(".go_layer2").slideUp(50);
@@ -1047,164 +1003,6 @@ $(() => {
     });
 });
 
-function fnSetPaxCountDown(strPaxType, obj) {
-    var btnParent = $(obj).parents("ul");
-
-    var //
-        iAdultCount = parseInt(
-            $(btnParent).find("strong[name=adultPaxCnt]").text()
-        ),
-        iChildCount = parseInt(
-            $(btnParent).find("strong[name=childPaxCnt]").text()
-        ),
-        iInfantCount = parseInt(
-            $(btnParent).find("strong[name=infantPaxCnt]").text()
-        ),
-        iPaxCount = iAdultCount + iChildCount;
-
-    switch (strPaxType) {
-        case "ADULT":
-            --iAdultCount;
-            if (iAdultCount >= 0) {
-                --iPaxCount;
-            }
-
-            if (iInfantCount > iAdultCount) {
-                iInfantCount = iAdultCount;
-            }
-
-            if (iAdultCount <= 0) {
-                iAdultCount = 0;
-                iInfantCount = 0;
-            }
-            $("strong[name=adultPaxCnt]").text(iAdultCount);
-            $("strong[name=infantPaxCnt]").text(iInfantCount);
-            break;
-        case "CHILD":
-            --iChildCount;
-            if (iChildCount >= 0) {
-                --iPaxCount;
-            }
-            if (iChildCount <= 0) {
-                iChildCount = 0;
-            }
-
-            $("strong[name=childPaxCnt]").text(iChildCount);
-            break;
-        case "INFANT":
-            --iInfantCount;
-            if (iInfantCount <= 0) {
-                iInfantCount = 0;
-            }
-
-            $("strong[name=infantPaxCnt]").text(iInfantCount);
-            break;
-    }
-}
-
-function fnSetPaxCountUp(strPaxType, obj) {
-    var btnParent = $(obj).parents("ul");
-
-    var //
-        iAdultCount = parseInt(
-            $(btnParent).find("strong[name=adultPaxCnt]").text()
-        ),
-        iChildCount = parseInt(
-            $(btnParent).find("strong[name=childPaxCnt]").text()
-        ),
-        iInfantCount = parseInt(
-            $(btnParent).find("strong[name=infantPaxCnt]").text()
-        ),
-        iPaxCount = iAdultCount + iChildCount;
-
-    // Count 증감
-    switch (strPaxType) {
-        case "ADULT":
-            ++iAdultCount;
-            ++iPaxCount;
-            $("strong[name=adultPaxCnt]").text(iAdultCount);
-            break;
-        case "CHILD":
-            ++iChildCount;
-            ++iPaxCount;
-            $("strong[name=childPaxCnt]").text(iChildCount);
-            break;
-        case "INFANT":
-            ++iInfantCount;
-            if (iInfantCount > iAdultCount) {
-                alert("소아는 성인을 넘을 수 없음");
-                break;
-            }
-            $("strong[name=infantPaxCnt]").text(iInfantCount);
-            break;
-    }
-}
-
-function submit() {
-    console.log("작동");
-    var iAdultCount = parseInt(
-            $(".person_pop_layer").find("strong[name=adultPaxCnt]").text()
-        ),
-        iChildCount = parseInt(
-            $(".person_pop_layer").find("strong[name=childPaxCnt]").text()
-        ),
-        iInfantCount = parseInt(
-            $(".person_pop_layer").find("strong[name=infantPaxCnt]").text()
-        );
-
-    if (iAdultCount > 0 && iChildCount > 0 && iInfantCount > 0) {
-        $("strong[name=person_num]").text(
-            "성인 " + iAdultCount + " 소아 " + iChildCount + " 유아 " + iInfantCount
-        );
-    } else if (iAdultCount > 0 && iChildCount > 0) {
-        $("strong[name=person_num]").text(
-            "성인 " + iAdultCount + " 소아 " + iChildCount
-        );
-    } else if (iAdultCount > 0 && iInfantCount > 0) {
-        $("strong[name=person_num]").text(
-            "성인 " + iAdultCount + " 소아 " + iInfantCount
-        );
-    } else if (iAdultCount > 0) {
-        $("strong[name=person_num]").text("성인 " + iAdultCount);
-    } else if (iChildCount > 0) {
-        $("strong[name=person_num]").text("소아 " + iChildCount);
-    }
-
-    // 중요. 확인 버튼 누를 때 성인, 소아, 유아의 수를 input:hidden에 넣음
-    // 아무것도 선택 안할 경우 .adultPaxCnt의 default값 : 1로 지정
-    $(".adultPaxCnt").val(iAdultCount);
-    $(".childPaxCnt").val(iChildCount);
-    $(".infantPaxCnt").val(iInfantCount);
-
-    $(".person_layerbtn").css({ color: "rgb(0, 0, 0)" });
-    $(".person_down_img").css({ display: "inline-block" });
-    $(".person_up_img").css({ display: "none" });
-    $(".person_pop_layer").slideUp(50);
-
-    $(".go_layerbtn").css({ color: "rgb(145, 0, 70)" });
-    $(".go_select_opt").addClass("on");
-    $(".go_layer").slideDown("fast");
-}
-
-$(function () {
-    $(".infant_modal").hide();
-    $(".baby_info_btn").click(function () {
-        $(".child_modal").hide();
-        $(".infant_modal").fadeIn(200);
-        $(".infant_modal").click(function () {
-            $(".infant_modal").fadeOut(200);
-        });
-    });
-
-    $(".child_modal").hide();
-    $(".infant_modal").hide();
-    $(".child_info_btn").click(function () {
-        $(".child_modal").fadeIn(200);
-        $(".child_modal").click(function () {
-            $(".child_modal").fadeOut(200);
-        });
-    });
-});
 
 function comewhatday() {
     $(".whatday").html("오는날");
@@ -1350,3 +1148,226 @@ $(() => {
     });
 });
 
+function change_ticket(){
+
+}
+
+
+function modification() {
+    let inonesoo = $('.person_num').html().split(' ');
+    let modiAdult = 0;
+    let modiChild = 0;
+    let modiBaby = 0;
+    if(inonesoo.length == 2){
+        if(inonesoo[0] == '소아'){
+            modiChild = Number(inonesoo[1])
+        }else if(inonesoo[0] == '성인'){
+            modiAdult = Number(inonesoo[1])
+        }
+    }else if(inonesoo.length == 4){
+        if(inonesoo[2] == '유아'){
+            modiAdult = Number(inonesoo[1]);
+            modiBaby = Number(inonesoo[3]);
+        }else if(inonesoo[2] == '소아'){
+            modiAdult = Number(inonesoo[1]);
+            modiChild = Number(inonesoo[3])
+        }
+    }else if(inonesoo.length == 6){
+        modiAdult = Number(inonesoo[1]);
+        modiChild = Number(inonesoo[3])
+        modiBaby = Number(inonesoo[5]);
+    }
+
+
+    if($('input[type="radio"][name="tripType"]:checked').val() == "왕복"){
+
+        if($('.go_date_select_optt').val()=="가는날" || $('.come_date_select_optt').val()=="오는날"){
+            alert('입력하신 내용을 확인해주세요');
+        }else{
+            let f = document.createElement('form');
+
+            let obj1;
+            obj1 = document.createElement('input');
+            obj1.setAttribute('type', 'hidden');
+            obj1.setAttribute('name', 'schDeparturePoint');
+            obj1.setAttribute('value', $('.go_select_optt').val());
+            f.appendChild(obj1);
+
+            let obj2;
+            obj2 = document.createElement('input');
+            obj2.setAttribute('type', 'hidden');
+            obj2.setAttribute('name', 'schArrivalPoint');
+            obj2.setAttribute('value', $('.arrive_select_optt').val());
+            f.appendChild(obj2);
+
+            let obj3;
+            obj3 = document.createElement('input');
+            obj3.setAttribute('type', 'hidden');
+            obj3.setAttribute('name', 'goDateSelectOptt');
+            obj3.setAttribute('value', $('.go_date_select_optt').val());
+            f.appendChild(obj3);
+
+            let obj4;
+            obj4 = document.createElement('input');
+            obj4.setAttribute('type', 'hidden');
+            obj4.setAttribute('name', 'comeDateSelectOptt');
+            obj4.setAttribute('value', $('.come_date_select_optt').val());
+            f.appendChild(obj4);
+
+            let obj5;
+            obj5 = document.createElement('input');
+            obj5.setAttribute('type', 'hidden');
+            obj5.setAttribute('name', 'AdultNumber');
+            obj5.setAttribute('value', modiAdult);
+            f.appendChild(obj5);
+
+            let obj6;
+            obj6 = document.createElement('input');
+            obj6.setAttribute('type', 'hidden');
+            obj6.setAttribute('name', 'ChildNumber');
+            obj6.setAttribute('value', modiChild);
+            f.appendChild(obj6);
+
+            let obj7;
+            obj7 = document.createElement('input');
+            obj7.setAttribute('type', 'hidden');
+            obj7.setAttribute('name', 'InfantNumber');
+            obj7.setAttribute('value', modiBaby);
+            f.appendChild(obj7);
+
+            f.setAttribute('method', 'post');
+            f.setAttribute('action', '/pages/getAvailabilityList/twoway');
+            document.body.appendChild(f);
+            f.submit();
+        }
+    }else if($('input[type="radio"][name="tripType"]:checked').val() == "편도") {
+        if($('.go_date_select_optt').val()=="가는날"){
+            alert('입력하신 내용을 확인해주세요');
+        }else{
+            let f = document.createElement('form');
+
+            let obj1;
+            obj1 = document.createElement('input');
+            obj1.setAttribute('type', 'hidden');
+            obj1.setAttribute('name', 'schDeparturePoint');
+            obj1.setAttribute('value', $('.go_select_optt').val());
+            f.appendChild(obj1);
+
+            let obj2;
+            obj2 = document.createElement('input');
+            obj2.setAttribute('type', 'hidden');
+            obj2.setAttribute('name', 'schArrivalPoint');
+            obj2.setAttribute('value', $('.arrive_select_optt').val());
+            f.appendChild(obj2);
+
+            let obj3;
+            obj3 = document.createElement('input');
+            obj3.setAttribute('type', 'hidden');
+            obj3.setAttribute('name', 'goDateSelectOptt');
+            obj3.setAttribute('value', $('.go_date_select_optt').val());
+            f.appendChild(obj3);
+
+            let obj4;
+            obj4 = document.createElement('input');
+            obj4.setAttribute('type', 'hidden');
+            obj4.setAttribute('name', 'AdultNumber');
+            obj4.setAttribute('value', modiAdult);
+            f.appendChild(obj4);
+
+            let obj5;
+            obj5 = document.createElement('input');
+            obj5.setAttribute('type', 'hidden');
+            obj5.setAttribute('name', 'ChildNumber');
+            obj5.setAttribute('value', modiChild);
+            f.appendChild(obj5);
+
+            let obj6;
+            obj6 = document.createElement('input');
+            obj6.setAttribute('type', 'hidden');
+            obj6.setAttribute('name', 'InfantNumber');
+            obj6.setAttribute('value', modiBaby);
+            f.appendChild(obj6);
+
+            f.setAttribute('method', 'post');
+            f.setAttribute('action', '/pages/getAvailabilityList/oneway');
+            document.body.appendChild(f);
+            f.submit();
+        }
+    }else if($('input[type="radio"][name="tripType"]:checked').val() == "다구간") {
+        if($('.go_select_optt').val()=="출발지" || $('.arrive_select_optt').val()=="도착지" ||
+            $('.go_date_select_optt').val()=="가는날" || $('.go_select_optt2').val()=="출발지" ||
+            $('.arrive_select_optt2').val()=="도착지" || $('.go_date_select_optt2').val()=="가는날"){
+            alert('입력하신 내용을 확인해주세요');
+        }else{
+            let f = document.createElement('form');
+
+            let obj1;
+            obj1 = document.createElement('input');
+            obj1.setAttribute('type', 'hidden');
+            obj1.setAttribute('name', 'schDeparturePoint');
+            obj1.setAttribute('value', $('.go_select_optt').val());
+            f.appendChild(obj1);
+
+            let obj2;
+            obj2 = document.createElement('input');
+            obj2.setAttribute('type', 'hidden');
+            obj2.setAttribute('name', 'schArrivalPoint');
+            obj2.setAttribute('value', $('.arrive_select_optt').val());
+            f.appendChild(obj2);
+
+            let obj3;
+            obj3 = document.createElement('input');
+            obj3.setAttribute('type', 'hidden');
+            obj3.setAttribute('name', 'goDateSelectOptt');
+            obj3.setAttribute('value', $('.go_date_select_optt').val());
+            f.appendChild(obj3);
+
+            let obj4;
+            obj4 = document.createElement('input');
+            obj4.setAttribute('type', 'hidden');
+            obj4.setAttribute('name', 'schDeparturePoint1');
+            obj4.setAttribute('value', $('.go_select_optt2').val());
+            f.appendChild(obj4);
+
+            let obj5;
+            obj5 = document.createElement('input');
+            obj5.setAttribute('type', 'hidden');
+            obj5.setAttribute('name', 'schArrivalPoint1');
+            obj5.setAttribute('value', $('.arrive_select_optt2').val());
+            f.appendChild(obj5);
+
+            let obj6;
+            obj6 = document.createElement('input');
+            obj6.setAttribute('type', 'hidden');
+            obj6.setAttribute('name', 'goDateSelectOptt1');
+            obj6.setAttribute('value', $('.go_date_select_optt2').val());
+            f.appendChild(obj6);
+
+            let obj7;
+            obj7 = document.createElement('input');
+            obj7.setAttribute('type', 'hidden');
+            obj7.setAttribute('name', 'AdultNumber');
+            obj7.setAttribute('value', modiAdult);
+            f.appendChild(obj7);
+
+            let obj8;
+            obj8 = document.createElement('input');
+            obj8.setAttribute('type', 'hidden');
+            obj8.setAttribute('name', 'ChildNumber');
+            obj8.setAttribute('value', modiChild);
+            f.appendChild(obj8);
+
+            let obj9;
+            obj9 = document.createElement('input');
+            obj9.setAttribute('type', 'hidden');
+            obj9.setAttribute('name', 'InfantNumber');
+            obj9.setAttribute('value', modiBaby);
+            f.appendChild(obj9);
+
+            f.setAttribute('method', 'post');
+            f.setAttribute('action', '/pages/getAvailabilityList/multiway');
+            document.body.appendChild(f);
+            f.submit();
+        }
+    }
+}
