@@ -44,8 +44,6 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
 
         Long result = (Long) em.createQuery("select sum(p.poPoint) from TbPoint p where p.poUserindex = " + tbMember.getData().getMemIndex()).getSingleResult();
 
-        System.out.println(result);
-
         if (result > price){
             TbUsercoupon tbUsercoupon = TbUsercoupon.builder()
                     .ucType(usercouponApiRequest.getUcType())
