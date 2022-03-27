@@ -649,6 +649,7 @@ body{
     top: 0;
     align-items: center;
     text-align: center;
+    z-index: 50;
 }
 .mypage_main .mypage_menu p{
     width: 100px;
@@ -1039,7 +1040,7 @@ table.bbsList td:last-child, thead tr th:last-child{
     height: auto;
     background-color: #fff;
     border: 1px solid rgb(0, 0, 0, 0.2);
-    z-index: 10;
+    z-index: 5;
     text-align: left;
 }
 #container .flex_container .go_layer div {
@@ -1086,7 +1087,7 @@ table.bbsList td:last-child, thead tr th:last-child{
     height: auto;
     background-color: #fff;
     border: 1px solid rgb(0, 0, 0, 0.2);
-    z-index: 10;
+    z-index: 5;
     text-align: left;
 }
 #container .flex_container .arrive_layer div {
@@ -1134,7 +1135,7 @@ table.bbsList td:last-child, thead tr th:last-child{
     height: auto;
     background-color: #fff;
     border: 1px solid rgb(0, 0, 0, 0.2);
-    z-index: 10;
+    z-index: 5;
     text-align: left;
 }
 #container .flex_container .go_date_select div {
@@ -1181,7 +1182,7 @@ table.bbsList td:last-child, thead tr th:last-child{
     height: auto;
     background-color: #fff;
     border: 1px solid rgb(0, 0, 0, 0.2);
-    z-index: 10;
+    z-index: 5;
     text-align: left;
 }
 #container .flex_container .come_date_select div {
