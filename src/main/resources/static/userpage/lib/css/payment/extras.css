@@ -4532,6 +4532,7 @@ td.cur::before {
     border: 3px solid #bdd600;
     font-size: 22px;
     font-weight: bold;
+    cursor: pointer;
 }
 .update_submit a::before {
     content: "";

@@ -98,12 +98,22 @@ $(function () {
 
 $(()=> {
     $("#writeNoti").on('click', () => {
-        if ( !$("#ntTitle").val() || !$("#ntContent").val()) {
-            alert('모든 내용을 입력하세요.');
+        if(check()) {
+            $("#form").submit();
+            alert('등록완료');
+            location.href = '/pages/admin/notice';
         }
     })
+    function check() {
+        if ( !$("#ntTitle").val() || !$("#ntContent").val()) {
+            alert('모든 내용을 입력하세요.');
+            return false;
+        }
+        return true;
+    }
 
     $('#ex_file').on('change', function(){
         $('.filetext').val($('#ex_file').val());
     });
+
 });

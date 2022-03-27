@@ -144,6 +144,7 @@ $(() => {
 
             console.log(arr);
 
+
             for (let i = 0; i < arr.length; i++){
                 let a = arr[i];
                 let option = document.createElement('option');
@@ -191,9 +192,23 @@ $(() => {
     //     });
     // }
     $("#createBtn").click(() => {
-        //insert();
-        alert('등록완료');
+        if(check()) {
+            $("#form").submit();
+            alert('등록완료');
+            location.href = '/pages/admin/item';
+        }
     })
 
+    function check() {
+        if($("#item_list").find('option:selected').val() == '필수 선택') {
+            alert("물품유형을 선택해주세요.");
+            return false;
+        }
+        if($("#item_img").val().length == 0) {
+            alert("이미지를 선택해주세요.");
+            return false;
+        }
+        return true;
+    }
 
 });
