@@ -189,7 +189,7 @@ $(function () {
             contentType : "application/json",
             success(coupon){
                 alert("등록이 완료되었습니다.");
-                location.reload()
+                location.href = `/pages/admin/usecouponlist`;
             },
             error(error){
                 alert("등록에 실패했습니다.")
@@ -200,13 +200,33 @@ $(function () {
 });
 
 $(()=> {
-    $(".coupon_btn").on('click', () => {
-        $("#modal_isfind").css('display', 'flex');
-        $("#modal_isfind").fadeIn();
-    })
     $(".complete").on('click', () => {
         $("#modal_isfind").css('display', 'none');
         $("#modal_isfind").fadeOut();
+    })
+    $(".coupon_btn").on('click', () => {
+        let str = $('#startDate').val().split('-');
+        let strrr = str[0] + str[1] + str[2];
+        let str1 = $('#endDate').val().split('-');
+        let strrr1 = str1[0] + str1[1] + str1[2];
+        let sC = $('#startCode').val();
+        let eC = $('#endCode').val();
+
+
+        if($('#title').val().length <= 0) {
+            alert("쿠폰명을 입력하세요");
+        }else if($('#discount').val().length <=0) {
+            alert("할인율이 입력 되지 않았습니다");
+        }else if(strrr > strrr1) {
+            alert('이벤트 시작일이 종료일을 넘을 수 없습니다.');
+        }else if(strrr == 'undefinedundefined' || strrr1 == 'undefinedundefined'){
+            alert('이벤트 시작 또는 종료 일자를 입력해주세요');
+        }else if($('#startCode').val().length <=0 || $('#endCode').val().length <=0){
+            alert('시작 또는 종료 코드를 입력하세요');
+        }else{
+            $("#modal_isfind").css('display', 'flex');
+            $("#modal_isfind").fadeIn();
+        }
     })
     $(".uncomplete").on('click', () => {
         $("#modal_isfind").css('display', 'none');
