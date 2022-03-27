@@ -232,9 +232,6 @@ $(() => {
         })
     }
 
-    let total = 0;
-    let isPriceT = 0;
-
     searchList();
     function searchList() {
         let bgTotal = 0;
@@ -338,5 +335,4 @@ $(() => {
             }
         })
     };
-
-    });
+});

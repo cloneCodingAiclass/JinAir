@@ -404,6 +404,10 @@ body{
     display: inline-block;
 }
 
+.area {
+    font-size: 20px;
+}
+
 .trip_info > .trip_area span.sm_ft, .trip_info2 > .trip_area span.sm_ft {
     font-size: 14px;
     vertical-align: middle;
@@ -692,7 +696,7 @@ body{
     /*display: flex;*/
     /*flex-wrap: nowrap;*/
     margin-top: 25px;
-    margin-left: 15px;
+    /*margin-left: 15px;*/
     /*align-items: flex-start;*/
 }
 
@@ -705,6 +709,10 @@ body{
 .service_content .passenger_info_wrap .passenger_info img {
     height: 50px;
     margin-right: 20px;
+}
+
+.passenger_info1 img, .passenger_info2 img{
+    margin-right: 16.3px !important;
 }
 
 .service_content .passenger_info_wrap .passenger_info span {
@@ -972,6 +980,17 @@ body{
     border: 3px solid #636363;
 }
 
+ .SSC:checked + .box9 {
+     padding: 0px;
+     font-size: 40px;
+     height: 54px !important;
+     background-image: url('/userpage/lib/img/none_select.png');
+     background-repeat: no-repeat;
+     background-size: 250%;
+     background-position: center;
+     border: 3px solid #636363;
+ }
+
 .SSC2:checked + .seat_sel {
     background: url("/userpage/lib/img/check.png");
     background-repeat: no-repeat;
@@ -1020,6 +1039,17 @@ body{
     background-image: url('/userpage/lib/img/none_select.png');
     background-repeat: no-repeat;
     background-size: 200%;
+    background-position: center;
+    border: 3px solid #636363;
+}
+
+.SSC2:checked + .box9 {
+    padding: 0px;
+    height: 54px !important;
+    font-size: 40px;
+    background-image: url('/userpage/lib/img/none_select.png');
+    background-repeat: no-repeat;
+    background-size: 250%;
     background-position: center;
     border: 3px solid #636363;
 }
@@ -1106,7 +1136,18 @@ body{
     border: 3px solid #636363;
 }
 
-.box7, .box8 {
+.service_content .box9 {
+    padding: 0px;
+    height: 54px !important;
+    font-size: 40px;
+    background-image: url('/userpage/lib/img/none_select.png');
+    background-repeat: no-repeat;
+    background-size: 250%;
+    background-position: center;
+    border: 3px solid #636363;
+}
+
+.box7, .box8, .box9 {
     pointer-events: none;
 }
 
@@ -2103,7 +2144,7 @@ h3 > span {
 
 /*무료 수하물/기내식 안내*/
 #modal_free_wrap {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
@@ -2117,7 +2158,7 @@ h3 > span {
 .modal_free_wrap {
     width: 650px;
     height: 90%;
-    margin: 0 auto 30px;
+    /*margin: 0 auto 30px;*/
     background-color: #fff;
     z-index: 800;
 }
@@ -2139,7 +2180,7 @@ h3 > span {
 .modal_free_wrap .modal_title .close {
     position: absolute;
     right: 20px;
-    top: 5px;
+    top: 25px;
 }
 
 .modal_free_wrap .modal_content_wrap {
@@ -2439,7 +2480,7 @@ h3 > span {
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     left: 0; right: 0; top: 0; bottom: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 800;
@@ -2480,7 +2521,7 @@ h3 > span {
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     left: 0; right: 0; top: 0; bottom: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 800;
@@ -2716,7 +2757,7 @@ table .pointer {
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     left: 0; right: 0; top: 0; bottom: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 800;
@@ -2889,14 +2930,10 @@ h2 {
 }
 
 #modal_agree_wrap .modal_agree_confirm {
-    position: absolute;
-    top: 400px;
-    left: 50%;
-    transform: translate(-50%);
+    position: relative;
     width: 350px;
     height: 200px;
     padding: 30px;
-    margin: auto;
     background-color: #fff;
     border: 1px solid #661e43;
     font-weight: bold;
@@ -2951,9 +2988,11 @@ h2 {
 }
 
 #modal_service_app_wrap .modal_service_app_wrap {
+    position: relative;
     width: 1000px;
     height: 800px;
-    margin: 30px auto;
+    /*margin-top: 50px;*/
+    /*margin: 30px auto;*/
     background-color: #fff;
 }
 

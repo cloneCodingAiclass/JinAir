@@ -6,7 +6,7 @@
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/userpage/lib/css/payment/extras.css">
-<script src="/userpage/app/payment/extras.js"></script>
+<script src="/userpage/app/payment/extras.js?ver=1"></script>
 <body>
 <div>
     <input type="hidden" name="" th:each="i : ${reserveApiResponse}" class="cookies" th:id="${i.reIndex}"
@@ -39,10 +39,10 @@
                             <p class="cursor arrow_img arrow_up_img"></p>
                         </div>
                         <div class="trip_area fs20">
-                            <span class="dep_area" id="go_area1" th:text="${reserveApiResponse[0].reSchDepPoint}">서울/김포(GMP)</span>
-                            <span class="sm_ft">[출발] [[${reserveApiResponse[0].reSchStartTime}]]</span>
-                            <span class="arr_area" id="arr_area1" th:text="${reserveApiResponse[0].reSchArrPoint}">제주(CJU)</span>
-                            <span class="sm_ft">[도착] [[${reserveApiResponse[0].reSchEndTime}]]</span>
+                            <span class="dep_area area" id="go_area1" th:text="${reserveApiResponse[0].reSchDepPoint}">서울/김포(GMP)</span>
+                            <span class="sm_ft">[출발] <span th:text="${#strings.substring(reserveApiResponse[0].reSchStartTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[0].reSchStartTime, 11, 16)}+']'"></span>
+                            <span class="arr_area area" id="arr_area1" th:text="${reserveApiResponse[0].reSchArrPoint}">제주(CJU)</span>
+                            <span class="sm_ft">[도착] <span th:text="${#strings.substring(reserveApiResponse[0].reSchEndTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[0].reSchStartTime, 11, 16)}+']'"></span>
                         </div>
                     </div>
                     <!--여정1 끝-->
@@ -52,10 +52,10 @@
                             <p><span>왕복</span> 여정2</p>
                         </div>
                         <div class="trip_area fs20">
-                            <span class="dep_area" th:text="${reserveApiResponse[1].reSchDepPoint}">제주(CJU)</span>
-                            <span class="sm_ft">[출발] [[${reserveApiResponse[1].reSchStartTime}]]</span>
-                            <span class="arr_area" th:text="${reserveApiResponse[1].reSchArrPoint}">서울/김포(GMP)</span>
-                            <span class="sm_ft">[도착] [[${reserveApiResponse[0].reSchEndTime}]]</span>
+                            <span class="dep_area area" th:text="${reserveApiResponse[1].reSchDepPoint}">제주(CJU)</span>
+                            <span class="sm_ft">[출발] <span th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[1].reSchStartTime, 11, 16)}+']'"></span>
+                            <span class="arr_area area" th:text="${reserveApiResponse[1].reSchArrPoint}">서울/김포(GMP)</span>
+                            <span class="sm_ft">[도착] <span th:text="${#strings.substring(reserveApiResponse[1].reSchEndTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[1].reSchStartTime, 11, 16)}+']'"></span>
                         </div>
                     </div>
                     <!--여정2 끝-->
@@ -324,8 +324,12 @@
                 <div class="service_content_wrap service_content_wrap3">
                     <!--서비스 타이틀3-->
                     <div class="service_title1">
-                        <div class="section1"><a href="#" class="checkBox_1"></a>구간1 : 서울/김포(GMP)-제주(CJU)</div>
-                        <div class="section2"><a href="#" class="checkBox_1"></a>구간2 : 제주(CJU)-서울/김포(GMP)</div>
+                        <div class="section1"><a href="#" class="checkBox_1"></a>
+                            구간1 : <span th:text="${reserveApiResponse[0].reSchDepPoint}">서울/김포(GMP)</span>-<span th:text="${reserveApiResponse[0].reSchArrPoint}">서울/김포(GMP)</span>
+                        </div>
+                        <div class="section2"><a href="#" class="checkBox_1" th:if="${reserveApiResponse[1].reStatus != null}"></a>
+                            구간2 : <span th:text="${reserveApiResponse[1].reSchDepPoint}">서울/김포(GMP)</span>-<span th:text="${reserveApiResponse[1].reSchArrPoint}">서울/김포(GMP)</span>
+                        </div>
                     </div>
                     <!--서비스 타이틀 끝-->
                     <!--서비스 컨텐츠3-->
@@ -394,7 +398,7 @@
                                         <li class="font_col">여행 예정인 국가 중 보험 인수 제한 국가가 포함되어 있을 경우 보험 가입이 불가능 합니다.
                                         </li>
                                     </ul>
-                                    <a href="/extras/restricted" target="_blank">
+                                    <a href="/pages/extras/restricted" target="_blank">
                                         <div class="limit cursor">보험인수 제한 국가</div>
                                     </a>
                                     <hr>
@@ -1323,8 +1327,8 @@
                                 </li>
                             </ul>
                             <p style="font-weight: bold; font-size: 15px;">* 참고</p>
-                            <p><a href="../serviceCount/airport/baggage/baggage.html" target='_blank'>수하물 안내</a><a
-                                    href="../index/mypage/faq_list.html" target='_blank'>자주 묻는 질문(FAQ)</a></p>
+                            <p><a href="/pages/index/baggage" target='_blank'>수하물 안내</a><a
+                                    href="/pages/index/faqList" target='_blank'>자주 묻는 질문(FAQ)</a></p>
                         </div>
                         <div class="modal_content2">
                             <h3>무료 기내식</h3>
@@ -1418,9 +1422,8 @@
                                     </li>
                                 </ul>
                                 <p style="font-weight: bold; font-size: 15px;">* 참고</p>
-                                <p><a :href="/pages/index/baggage"
-                                      target='_blank'>지니키친(사전주문기내식)</a><a :href="/pages/index/faqList"
-                                                                          target='_blank'>자주 묻는 질문(FAQ)</a></p>
+                                <p><a href="/pages/index/airlineFood" target='_blank' class="cursor">지니키친(사전주문기내식)</a>
+                                    <a href="/pages/index/faqList" target='_blank' class="cursor">자주 묻는 질문(FAQ)</a></p>
                             </div>
                         </div>
                     </div>
@@ -1487,10 +1490,10 @@
                                     <col width="40%">
                                     <col width="60%">
                                 </colgroup>
-                                <tr><td class="dep_area area">[출발]서울/김포(GMP)</td>
-                                    <td class="dep_date date">2022-02-09(수) 20:20</td></tr>
-                                <tr><td class="arr_area area">[도착]제주(CJU)</td>
-                                    <td class="arr_date date">2022-02-09(수) 21:30</td></tr>
+                                <tr><td class="dep_area area">[출발] <span th:text="${reserveApiResponse[0].reSchDepPoint}"></span></td>
+                                    <td class="dep_date date" th:text="${#strings.substring(reserveApiResponse[0].reSchStartTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[0].reSchStartTime, 11, 16)}+']'">2022-02-09(수) 20:20</td></tr>
+                                <tr><td class="arr_area area">[도착] <span th:text="${reserveApiResponse[0].reSchArrPoint}"></span></td>
+                                    <td class="arr_date date" th:text="${#strings.substring(reserveApiResponse[0].reSchEndTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[0].reSchEndTime, 11, 16)}+']'">2022-02-09(수) 21:30</td></tr>
                             </table>
                         </div>
                         <div class="jour2">
@@ -1501,10 +1504,10 @@
                                     <col width="40%">
                                     <col width="60%">
                                 </colgroup>
-                                <tr><td class="dep_area area">[출발]제주(CJU)</td>
-                                    <td class="dep_date date">2022-02-12(토) 16:00</td></tr>
-                                <tr><td class="arr_area area">[도착]서울/김포(GMP)</td>
-                                    <td class="arr_date date">2022-02-12(토) 17:10</td></tr>
+                                <tr><td class="dep_area area">[출발] <span th:text="${reserveApiResponse[1].reSchDepPoint}"></span></td>
+                                    <td class="dep_date date" th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[1].reSchStartTime, 11, 16)}+']'">2022-02-09(수) 20:20</td></tr>
+                                <tr><td class="arr_area area">[도착] <span th:text="${reserveApiResponse[1].reSchArrPoint}"></span></td>
+                                    <td class="arr_date date" th:text="${#strings.substring(reserveApiResponse[1].reSchEndTime, 0, 10)}+ '['+${#strings.substring(reserveApiResponse[1].reSchEndTime, 11, 16)}+']'">2022-02-09(수) 21:30</td></tr>
                             </table>
                         </div>
                     </div>

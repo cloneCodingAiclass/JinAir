@@ -68,7 +68,7 @@
                 </div>
                 <div class="btn">
                     <a href="/pages/index/addQna">고객의 말씀(Q&A)</a>
-                    <a href="/pages/index/faq_list">FAQ 바로가기</a>
+                    <a href="/pages/index/faqList">FAQ 바로가기</a>
                 </div>
             </div>
         </div>
@@ -80,6 +80,7 @@
 </div>
 <!--wrap 끝-->
 <!--퀵 메뉴-->
+<div th:replace="userpage/fragment/quickmenu :: quickmenu"></div>
 <!--퀵 메뉴 끝-->
 <div class="modal">
 </div>
@@ -90,7 +91,7 @@
         </div>
         <div class="pwcheck_box">
             <p>고객님의 개인정보를 소중하게 보호하려고 노력하고 있으며,<br>회원님의 동의 없이는 회원정보를 제공하지 않습니다.</p>
-            <p>비밀번호 입력 <input type="password"></p>
+            <p>비밀번호 입력 <input type="password" class="pass"></p>
             <div class="btn">
                 <input type="submit" class="btn_agree" value="확인" onclick="location.href='/pages/index/mypageEdit'">
                 <input type="button" class="btn_cancel" value="취소">

@@ -509,6 +509,7 @@ $(function () {
       }  $("#modal_ins_people").html(str7);
     } else {
       $("#modal_agree_wrap").fadeIn();
+      $("#modal_agree_wrap").css("display", "flex")
     }
   })
   $("#modal_agree_wrap input").on("click", function () {
@@ -517,6 +518,7 @@ $(function () {
 
   $(".insContent2 .noti").on("click", function () {
     $("#modal_insurance_info_wrap").fadeIn();
+    $("#modal_insurance_info_wrap").css("display", "flex")
     $("body").css("overflow", "hidden");
 
   })
@@ -526,20 +528,6 @@ $(function () {
     str7 = "";
   })
 
-  $(".insCheckBox").change(function() {
-    for (let i = 0; i < personNumber; i++) {
-      if ($("#check_ins_" + i).is(':checked')) {
-        $("#modal_ins_people_" + i).css("background-color", "rgb(0, 173, 239)");
-        $("#modal_ins_people_" + i).css("color", "#fff");
-        // changeBackground1($("#modal_ins_people_" + i))
-      } else {
-        $("#modal_ins_people_" + i + "").css("background-color", "#fff");
-        $("#modal_ins_people_" + i + "").css("color", "rgb(0, 173, 239)");
-        // changeBackground2($("#modal_ins_people_" + i))
-
-      }
-    }
-  })
 
   $(".ins_check").change(function() {
     for (let i = 0; i < personNumber; i++) {
@@ -551,6 +539,22 @@ $(function () {
         $("#agree1").prop("checked", false)
         $("#agree2").prop("checked", false)
         isinsjoin = false;
+      }
+    }
+  })
+
+  $("#check_ins_0").change(function() {
+    for (let i = 0; i < personNumber; i++) {
+      if ($("#check_ins_0").is(':checked')) {
+        $("#modal_ins_people_0").css("background-color", "rgb(0, 173, 239)");
+        $("#modal_ins_people_0").css("color", "#fff");
+        $(this).parent().css("background-color", "rgb(0, 173, 239)")
+        $(this).parent().css("color", "#fff");
+        // changeBackground1($("#modal_ins_people_" + i))
+      } else {
+        $("#modal_ins_people_" + i + "").css("background-color", "#fff");
+        $("#modal_ins_people_" + i + "").css("color", "rgb(0, 173, 239)");
+        // changeBackground2($("#modal_ins_people_" + i))
       }
     }
   })
@@ -589,6 +593,8 @@ $(function () {
     $(".insContent1").css("display", "block");
     $(".insContent2").css("display", "none");
   })
+
+
   /*보험가입 페이지 끝 */
 
   // 탑승객 수
@@ -606,8 +612,6 @@ $(function () {
   // 항공기 번호별 화면구성
   let type1 = $("#type1").val();
   let type2 = $("#type2").val();
-  console.log("타입1 : " + type1)
-  console.log("타입2 : " + type2)
 
   if (type1 == 'B737-800') {
     $(".seat_info_view1").not("#seat_info_view1-1").css("display", "none");
@@ -780,7 +784,7 @@ $(function () {
     radio2.val("");
   });
 
-  let price1 = '9000';let price2 = '5000';let price3 = '7000';let price4 = '7000';let price5 = '3000';
+  let price1 = '9000';let price2 = '5000';let price3 = '9000';let price4 = '7000';let price5 = '3000';
   let price6 = '1000';let pricePlus = "10000";let priceBiz = '15000'
 
   $(".select_seat_wrap .box1").siblings().text(price1);
@@ -1056,7 +1060,6 @@ $(function () {
         $("#hid_bagg_price1_" + i).text("");
         $("#bagg_close1_" + i).css("display", "none");
       }
-      console.log($("#hid_bagg_price1_" + i).text())
     });
     $("#bagg_close1_" + i).on("click", function() {
       $("#cur1_" + i).css("display", "none");
@@ -1098,7 +1101,6 @@ $(function () {
         $("#hid_bagg_price2_" + i2).text("")
         $("#bagg_close2_" + i2).css("display", "none");
       }
-      console.log($("#hid_bagg_price2_" + i2).text())
     });
     $("#bagg_close2_" + i2).on("click", function() {
       $("#cur2_" + i2).css("display", "none");
@@ -1409,6 +1411,7 @@ $(function () {
       $("#option_price_list #option_ins").parent().remove();
         $("#option_price_list #option_ins_price").remove();
       }
+    $('body').css("overflow", "hidden");
   }
 
 
@@ -1511,11 +1514,9 @@ $(function () {
       dateType: 'text',
       contentType : "application/json",
       success : function(response){
-        console.dir(response);
         for(let i = 0; i < response.data.length; i++) {
           seatArr1[i] = "";
           seatArr1[i] = response.data[i].reSeatDetail;
-          // console.log(seatArr1[i]);
         }
         seat1();
       }
@@ -1540,7 +1541,6 @@ $(function () {
         for(let i = 0; i < response.data.length; i++) {
           seatArr2[i] = "";
           seatArr2[i] = response.data[i].reSeatDetail;
-          // console.log(seatArr2[i]);
         }
         seat2();
       }
@@ -1574,7 +1574,7 @@ $(function () {
             label.addClass("box7");
           } else if (label.hasClass("boxBiz")){
             label.removeClass('boxBiz')
-            label.addClass("box8");
+            label.addClass("box9");
           } else if (label.hasClass("boxPlus")){
             label.removeClass('boxPlus')
             label.addClass("box8");
@@ -1588,7 +1588,6 @@ $(function () {
     for (let i = 0; i < seatArr2.length; i++) {
       if (seatArr2[i] != null) {}
       seatArr2[i] = "2_" + String(seatArr1[i]);
-      console.log(i + " : " + seatArr2[i])
     }
     $(".SSC2").each(function(){
       for (let i = 0; i < seatArr2.length; i++) {
@@ -1614,7 +1613,7 @@ $(function () {
             label.addClass("box7");
           } else if (label.hasClass("boxBiz")){
             label.removeClass('boxBiz')
-            label.addClass("box8");
+            label.addClass("box9");
           } else if (label.hasClass("boxPlus")){
             label.removeClass('boxPlus')
             label.addClass("box8");
@@ -1752,6 +1751,7 @@ let isinsjoin = false;
     confirmOptional()
     if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
       $("#modal_service_app_wrap").fadeIn();
+      $("#modal_service_app_wrap").css("display", "flex")
       $(".modal_join_ins").fadeIn();
     }
   });
@@ -1764,7 +1764,6 @@ let isinsjoin = false;
       if ($("#ins_check_"+i).is(":checked")) {
         isCheck += 1;
       }
-      console.log(isCheck);
     }
     let is = 0;
     for (let i = 0; i < $(".insCheckBox").length * 2; i++) {
@@ -1780,6 +1779,7 @@ let isinsjoin = false;
     }
 
   })
+
 
   $(".fix_bott .img").on("click", function() {
     optionTotalPrice(personNumber);
@@ -1905,6 +1905,7 @@ let isinsjoin = false;
     optionTotalPrice(personNumber);
     confirmOptional();
     $("#modal_service_app_wrap").fadeIn();
+    $("#modal_service_app_wrap").css("display", "flex")
   });
 
   // 부가서비스신청 최종확인 끝
@@ -1923,6 +1924,7 @@ let isinsjoin = false;
     $(".img2").css("display", "none");
     $(".img").css("display", "block");
     $("#modal_totP_wrap").fadeOut();
+    $('body').css("overflow", "scroll");
     $(".fix_modal").fadeOut();
   })
   $(".img2").on('click', () => {
@@ -1984,6 +1986,7 @@ $(() => {
   $('#modal_free_wrap').hide();
   $(".service_title2 .section1").on('click', () => {
     $("#modal_free_wrap").fadeIn();
+    $("#modal_free_wrap").css("display", "flex");
     $("body").css("overflow", "hidden");
   })
   $(".modal_free_wrap .close").on('click', () => {
@@ -2046,6 +2049,7 @@ $(() => {
 
   $("#agree_check1").on("click", function () {
     $("#modal_insurance_info_wrap").fadeIn();
+    $("#modal_insurance_info_wrap").css("display", "flex");
     if ($(".nameBox .checkbox").is(":checked")) {
       $(this).prop("checked", true);
     } else {
@@ -2167,6 +2171,7 @@ $(() => {
 
   $("#agree_check2").on("click", function () {
     $("#modal_agreement_wrap").fadeIn();
+    $("#modal_agreement_wrap").css("display", "flex")
     if ($("#agree1").is(":checked") && $("#agree2").is(":checked")) {
       $("#agree_check2").prop("checked", true);
     } else {
@@ -2210,9 +2215,11 @@ $(() => {
   $(".ins_join_butt").on("click", () => {
     if ($("#agree_check0").is(":checked") && $("#agree_check1").is(":checked") && $("#agree_check2").is(":checked")) {
       $("#modal_service_app_wrap").fadeIn();
+      $("#modal_service_app_wrap").css("display", "flex")
     }
     else {
       $("#modal_conf_check").fadeIn();
+      $("#modal_conf_check").css("display", "flex")
     }
   });
 
@@ -2227,6 +2234,7 @@ $(() => {
   $("#addmodal_autoCheck_noti .add_modal_butt_ok, #addmodal_autoCheck_noti .add_modal_butt_canc, #addmodal_autoCheck_noti .tit_close").on("click", () => {
     $("#addmodal_autoCheck_noti").fadeOut();
     $("#modal_service_app_wrap").fadeIn();
+    $("#modal_service_app_wrap").css("display", "flex")
     $("auto_check").prop(":checked", false);
   })
 
