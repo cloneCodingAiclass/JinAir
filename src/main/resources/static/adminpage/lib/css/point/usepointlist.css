@@ -88,38 +88,11 @@
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
 
-/*.footer table td:nth-child(1){*/
-/*    background-color: rgb(102, 30, 67);*/
-/*}*/
-/*.footer table td:nth-child(1) > a{*/
-/*    color:white*/
-/*}*/
-/*#showPage > .pages:hover{*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*#showPage > .pages:active {*/
-/*    background-color: #661e43;*/
-/*    color: #fff;*/
-/*}*/
-
 .footer > .notice_write{
     display: inline;
     float: right;
     position: relative;
     bottom: 30px;
-}
-.footer > .notice_write > input{
-    text-align: center;
-    width: 120px;
-    height: 30px;
-    border: none;
-    border-radius: 2px;
-    background-color: #BDD600;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
 
 .showPage > td:hover {

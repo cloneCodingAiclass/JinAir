@@ -179,24 +179,19 @@ $(function () {
             }
 
             let lastPage = response.pagination.totalPages;
-            let str2 = "";
-            str2 += "<td class='firstPage2'><<</td>";
-            for ( let i = 0; i < lastPage; i++ ) {
-                str2 += "<td class='pagesS' id="+i+">" + (i+1) + "</td>";
+            let str = "";
+
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
             }
-            str2 += "<td class='lastPage2'>>></td>";
-            $("#showPage").html(str2);
-            if ( page == 0 ) {
-                $(".firstPage2").css("visibility", "hidden");
+            $("#showPage").html(str);
+            if(page == 0) {
+                $(".firstPage1").css("visibility", "hidden");
             }
-            if ( page == lastPage-1 || response.totalElements != 0 ) {
-                $(".lastPage2").css("visibility", "hidden");
+            if(page == lastPage-1) {
+                $(".lastPage1").css("visibility", "hidden");
             }
-            if ( response.pagination.totalElements == 0 ) {
-                alert("검색결과가 없습니다.");
-                list(0);
-            }
-            $(".pagesS").css({
+            $(".pageNum").css({
                 "background-color" : "#fff",
                 "color" : "#444",
                 "cursor" : "pointer"
@@ -205,11 +200,17 @@ $(function () {
                 "background-color" : "#661e43",
                 "color" : "white"
             });
-            $(document).on('click', '.firstPage2', function(){
-                searchNoti(searchStr, 0);
+            if (lastPage != 0) {
+                str += "<td class='firstPage1'><<</td>";
+            }
+            if (lastPage != 0){
+                str += "<td class='lastPage1'>>></td>";
+            }
+            $("#showPage").on('click', '.firstPage1', function(){
+                list(0);
             });
-            $(document).on('click', '.lastPage2', function(){
-                searchNoti(searchStr, lastPage-1);
+            $("#showPage").on('click', '.lastPage1', function(){
+                list(lastPage-1);
             });
         })
     }
@@ -248,8 +249,9 @@ $(function () {
                             let point = response3.data[j].poPoint;
                             sum += point;
                         }
+                        console.log(sum)
                         if(sum < 0){
-                            $(`#totalPoint${i}`).text(0);
+                            $(`#totalPoint${i}`).text('0');
                         }else{
                             $(`#totalPoint${i}`).text(sum);
                         }
@@ -260,14 +262,10 @@ $(function () {
                     $.get(`/api/point/user/${idx}?page=` + page, function (response4){
                         if(response4.data[i].poPoint > 0){
                             // 적립 내역
-                            console.log('적립')
-                            console.log(response4.data[i].poPoint)
                             $(`#addPoint${i}`).text(response4.data[i].poPoint)
                             $(`#usePoint${i}`).text('-')
                         }else{
                             // 사용 내역
-                            console.log('사용')
-                            console.log(response4.data[i].poPoint)
                             $(`#addPoint${i}`).text('-')
                             $(`#usePoint${i}`).text(response4.data[i].poPoint)
                         }
@@ -303,23 +301,14 @@ $(function () {
                     "color" : "white"
                 });
                 $(document).on('click', '.firstPage2', function(){
-                    searchNoti(searchStr, 0);
+                    searchList(userid, 0);
                 });
                 $(document).on('click', '.lastPage2', function(){
-                    searchNoti(searchStr, lastPage-1);
+                    searchList(userid, lastPage-1);
                 });
             })
         })
     }
-
-    $(document).on('click', '#searchNoti', function(){
-        searchStr = $('#searchText').val();
-        searchNoti(searchStr, 0);
-        if ( searchStr.length == 0){
-            alert('검색어를 확인해주세요.');
-            searchNoti(searchStr, 0);
-        }
-    });
 
     $(document).on('click', '.pages', function(){
         let pageId = this.id;
@@ -327,8 +316,9 @@ $(function () {
     });
 
     $(document).on('click', '.pagesS', function(){
+        let userid = $('#userid').val();
         let pageId2 = this.id;
-        searchNoti(searchStr, pageId2);
+        searchList(userid, pageId2);
     });
 
 })(jQuery)
