@@ -1445,7 +1445,7 @@ body {
     width: 160px;
     height: 40px;
     border: 2px solid #BDD600;
-    padding: 12px;
+    padding: 10px;
     justify-content: center;
     cursor: pointer;
 }
@@ -1725,6 +1725,7 @@ body {
     margin-top: 25px;
     margin-right: 50px;
     width: 25px;
+    cursor: pointer;
   }
   .round_wrap,
   .oneway_wrap,
@@ -1749,8 +1750,7 @@ body {
   }
   /* 사람 수 */
   .person_layerbtn {
-    margin-right: 2px;
-    margin-left: 2px;
+    margin-left: -50px;
     width: 220px;
     height: 60px;
     background-color: #fff;
@@ -1768,12 +1768,8 @@ body {
     padding-top: 18px;
     width: 100%;
     text-align: left;
-    padding: 20px;
+    padding: 18px 30px 20px 20px;
     font-weight: bold;
-    padding-right: 30px;
-    background: url('/userpage/lib/img/down.png') no-repeat;
-    background-size: 10%;
-    background-position: 95% 45%;
   }
   .w_180 {
     width: 180px;
@@ -2186,6 +2182,7 @@ body {
     border: 3px solid #bdd600;
     font-size: 22px;
     font-weight: bold;
+      cursor: pointer;
   }
   .update_submit a::before {
     content: "";
