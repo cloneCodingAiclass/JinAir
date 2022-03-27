@@ -104,7 +104,7 @@
     width: 140px;
     text-indent: 0px;
 }
-#form_btn input[type="submit"] {
+#form_btn input#createBtn {
     background-color: #bdd600;
     cursor: pointer;
     font-weight: bold;
