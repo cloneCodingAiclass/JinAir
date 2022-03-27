@@ -134,7 +134,26 @@ $(function () {
         }
     })
 
+
+    couponResult(idx);
+
+    function couponResult(memIndex) {
+        console.log(memIndex);
+        $.get("/api/userCoupon/list/" + memIndex, function (response) {
+            console.dir(response);
+            let coupon;
+            if (response == "") {
+                coupon = 0;
+            } else {
+                coupon = response + "장";
+            }
+
+            document.getElementById("coupon").innerHTML = coupon;
+        });
+    }
+
     pointResult(idx);
+
 
     function pointResult(index){
         let sum = 0;
@@ -142,7 +161,11 @@ $(function () {
             for(let i = 0; i < response.data.length; i++){
                 let point = response.data[i].poPoint;
                 sum += point;
-                $('#point').val(sum.toLocaleString('ko-KR'));
+            }
+            if( sum < 0){
+                $('#point').text('0');
+            }else {
+                $('#point').text(sum.toLocaleString('ko-KR'));
             }
         })
     }

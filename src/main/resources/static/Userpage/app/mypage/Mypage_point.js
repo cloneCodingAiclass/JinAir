@@ -512,7 +512,6 @@ $(function () {
             }
 
             document.getElementById("coupon").innerHTML = coupon;
-            document.getElementById("resultCoupon").innerHTML = coupon;
         });
     }
 
@@ -524,7 +523,11 @@ $(function () {
                 let point = response.data[i].poPoint;
                 sum += point;
             }
-            $('#point').text(sum);
+            if( sum < 0){
+                $('#point').text('0');
+            }else {
+                $('#point').text(sum.toLocaleString('ko-KR'));
+            }
         })
     }
 

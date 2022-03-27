@@ -140,8 +140,11 @@ $(function () {
                 let point = response.data[i].poPoint;
                 sum += point;
             }
-            console.log(sum)
-            $('#point').text(sum);
+            if( sum < 0){
+                $('#point').val('0');
+            }else {
+                $('#point').val(sum.toLocaleString('ko-KR'));
+            }
         })
     }
 

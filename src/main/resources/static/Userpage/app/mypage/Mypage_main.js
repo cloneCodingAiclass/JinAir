@@ -203,7 +203,6 @@ $(function () {
                 coupon = response + "장";
             }
             document.getElementById("coupon").innerHTML = coupon;
-            document.getElementById("resultCoupon").innerHTML = coupon;
         });
     }
 
@@ -216,8 +215,11 @@ $(function () {
                 let point = response.data[i].poPoint;
                 sum += point;
             }
-            console.log(sum)
-            $('#point').text(sum);
+            if( sum < 0){
+                $('#point').text('0');
+            }else {
+                $('#point').text(sum.toLocaleString('ko-KR'));
+            }
         })
     }
     $('#passwordValue').on('keydown', function (key){
