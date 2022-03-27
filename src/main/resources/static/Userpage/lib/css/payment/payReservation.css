@@ -571,6 +571,7 @@ input {
   top: 0px;
   right: 0px;
   height: 250px;
+  display: none;
   background-color: #fff;
   border: 1px solid black;
   padding: 20px 30px;

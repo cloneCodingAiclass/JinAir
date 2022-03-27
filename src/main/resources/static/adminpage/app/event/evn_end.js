@@ -122,30 +122,54 @@ $(function () {
         }
     });
 
-    searchStart(0);
 
+    list(0);
 
-    $(document).on('click', '.asdff', function(){
-        searchStart($(this).children('.asd').html()-1);
-    })
-
-    function searchStart(index){
-        $.get("/api/event/list/EventEnd?page="+index, function(response){
-
-            indexBtn = [];
-            pagination = response.pagination;
-
-            // 전체 페이지
-            showPage.totalPages = pagination.totalPages;
-
-            showPage.totalElements = pagination.currentElements;
-
-            showPage.currentPage = pagination.currentPage + 1;
-
+    function list(page){
+        $.get("/api/event/list/EventEnd?page="+page, function(response){
+            console.dir(response);
             itemList.itemList = response.data;
+            let lastPage = response.pagination.totalPages;
+            let str = "";
 
-        });
+            if (lastPage != 0) {
+                str += "<td class='firstPage1'><<</td>";
+            }
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
+            }
+            if (lastPage != 0){
+                str += "<td class='lastPage1'>>></td>";
+            }
+            $("#showPage").html(str);
+            if(page == 0) {
+                $(".firstPage1").css("visibility", "hidden");
+            }
+            if(page == lastPage-1) {
+                $(".lastPage1").css("visibility", "hidden");
+            }
+            $(".pageNum").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+page+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            $("#showPage").on('click', '.firstPage1', function(){
+                list(0);
+            });
+            $("#showPage").on('click', '.lastPage1', function(){
+                list(lastPage-1);
+            });
+        })
     }
 
+    $("#showPage").on('click', '.pageNum', function(){
+        let pageId = this.id;
+        console.log(pageId);
+        list(pageId);
+    });
 
 });
