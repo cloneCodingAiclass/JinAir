@@ -3,8 +3,8 @@
       xmlns:th="http://www.thymeleaf.org/">
 <!-- head.html -->
 <div th:replace="userpage/fragment/head :: head"></div>
-    <link rel="stylesheet" href="/userpage/lib/css/mypage/Mypage_cancel_service.css">
-    <script src="/userpage/app/mypage/Mypage_cancel_service.js"></script>
+    <link rel="stylesheet" href="/userpage/lib/css/mypage/Mypage_cancel_serviceMD.css">
+    <script src="/userpage/app/mypage/Mypage_cancel_serviceMD.js"></script>
 <body>
     <ul class="skipnavi">
         <!--책갈피 역할-->
@@ -43,7 +43,7 @@
                             <th colspan="6">신청된 부가서비스</th>
                         </thead>
                         <tbody>
-                            <tr th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
+                            <tr th:each="dto, i : ${reserveApiResponse}">
                                 <td>구간 1</td>
                                 <td>사전좌석지정</td>
                                 <td>[[${dto.reFirstName}]]/[[${dto.reLastName}]]</td>
@@ -57,21 +57,7 @@
                                     <td>KRW <span th:class="'seat1P'+${i.index}">[[${dto.reSeatPrice}]]</span></td>
                                 </div>
                             </tr>
-                            <tr class="ifOnewayD" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 1">
-                                <td>구간 2</td>
-                                <td>사전좌석지정</td>
-                                <td>[[${dto.reFirstName}]]/[[${dto.reLastName}]]</td>
-                                <div>
-                                    <td>
-                                        <input type="checkbox" th:class="'seat2C'+${i.index}">
-                                    </td>
-                                    <td>
-                                        <span th:class="'seat2D'+${i.index}">[[${dto.reSeatDetail}]]</span>
-                                    </td>
-                                    <td>KRW <span th:class="'seat2P'+${i.index}">[[${dto.reSeatPrice}]]</span></td>
-                                </div>
-                            </tr>
-                            <tr th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
+                            <tr th:each="dto, i : ${reserveApiResponse}">
                                 <td>구간 1</td>
                                 <td>초과수하물</td>
                                 <td>[[${dto.reFirstName}]]/[[${dto.reLastName}]]</td>
@@ -86,26 +72,11 @@
                                     <td>KRW <span class="price" th:class="'bagg1P'+${i.index}"></span></td>
                                 </div>
                             </tr>
-                            <tr class="ifOnewayD" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 1">
-                                <td>구간 2</td>
-                                <td>초과수하물</td>
-                                <td>[[${dto.reFirstName}]]/[[${dto.reLastName}]]</td>
-                                <input type="hidden" th:value="${dto.reBaggageidx}" th:class="'reBaggageidx2'+${i.index}">
-                                <div>
-                                    <td>
-                                        <input type="checkbox" th:class="'bagg2C'+${i.index}">
-                                    </td>
-                                    <td>
-                                        <span th:class="'bagg2KG'+${i.index}"></span>
-                                    </td>
-                                    <td>KRW <span class="price" th:class="'bagg2P'+${i.index}"></span></td>
-                                </div>
-                            </tr>
-                            <tr th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 0">
+                            <tr th:each="dto, i : ${reserveApiResponse}">
                                 <td>구간 1</td>
                                 <td>여행보험</td>
                                 <td>[[${dto.reFirstName}]]/[[${dto.reLastName}]]</td>
-                                <input type="hidden" th:value="${dto.reInsuranceidx}" th:class="'reInsuranceidx1'+${i.index}">
+                                <input type="hidden" th:value="${dto.reInsuranceidx}">
                                 <div>
                                     <td>
                                         <input type="checkbox" th:class="'Insu1C'+${i.index}">
@@ -114,21 +85,6 @@
                                         <span th:class="'Insu1Tp'+${i.index}"></span>
                                     </td>
                                     <td>KRW <span class="price" th:class="'Insu1P'+${i.index}"></span></td>
-                                </div>
-                            </tr>
-                            <tr class="ifOnewayD" th:each="dto, i : ${reserveApiResponse}" th:if="${i.count}%2 != 1">
-                                <td>구간 2</td>
-                                <td>여행보험</td>
-                                <td>[[${dto.reFirstName}]]/[[${dto.reLastName}]]</td>
-                                <input type="hidden" th:value="${dto.reInsuranceidx}" th:class="'reInsuranceidx2'+${i.index}">
-                                <div>
-                                    <td>
-                                        <input type="checkbox" th:class="'Insu2C'+${i.index}">
-                                    </td>
-                                    <td>
-                                        <span th:class="'Insu2Tp'+${i.index}"></span>
-                                    </td>
-                                    <td>KRW <span class="price" th:class="'Insu2P'+${i.index}"></span></td>
                                 </div>
                             </tr>
                         </tbody>

@@ -630,6 +630,12 @@ $(function () {
             });
         });
 
+        // 부가 서비스 취소
+        $('.cancel_service').click(function () {
+            location.href = "/pages/index/mypageCancelService/"+reIndex1;
+        })
+
+
     }else{
         searchStart();
         searchStart2();
@@ -673,6 +679,11 @@ $(function () {
                     location.href = "/pages/cancel/"+reIndex1;
                 });
             });
+
+            // 부가 서비스 취소
+            $('.cancel_service').click(function () {
+                location.href = "/pages/index/mypageCancelService/"+reIndex1;
+            })
         }else{                          // 지난 스케줄이 하나라도 있는 경우
             /* 항공권 취소 */
             $('.reser_cancel_btn').click(function () {
@@ -682,6 +693,11 @@ $(function () {
                     location.href = "/pages/cancelMd/"+reIndex1;
                 });
             });
+
+            // 부가 서비스 취소
+            $('.cancel_service').click(function () {
+                location.href = "/pages/index/mypageCancelServiceMD/"+reIndex1;
+            })
         }
     }
 
@@ -724,9 +740,7 @@ $(function () {
     $('.add_service').click(function () {
         location.href = "/UserPage/payment/extras.html";
     })
-    $('.cancel_service').click(function () {
-        location.href = "/pages/index/mypageCancelService/"+reIndex1;
-    })
+
     /* 공통 버튼 */
     $('.btn_cancel').click(function () {
         $('.reser_change').hide();

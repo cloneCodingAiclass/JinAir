@@ -22,6 +22,7 @@
                 <input type="hidden" id="reIndex1" th:value="${reserveApiResponse[0].reIndex}">
                 <input type="hidden" id="reTripKind" th:value="${reserveApiResponse[0].reTripKind}">
                 <input type="hidden" id="rePeopleType" th:value="${reserveApiResponse[0].rePeopleType}">
+                <input type="hidden" id="reTotal" th:value="${reserveApiResponse[0].reTotal}">
                 <div class="mypage_menu">
                     <p>마이<br>페이지</p>
                     <ul>
@@ -153,7 +154,7 @@
                             <span>최종 환불금액</span>
                             <p>
                                 <span class="unit">현금/카드</span>
-                                <strong>KRW -5,000</strong>
+                                <strong>KRW <span th:class="lastPrice"></span></strong>
                             </p>
                         </div>
                     </div>

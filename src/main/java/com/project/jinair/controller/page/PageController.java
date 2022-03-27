@@ -655,6 +655,43 @@ public class PageController {
         }
     }
 
+    @RequestMapping("/index/mypageCancelServiceMD/{reIndex}")
+    public ModelAndView mypageCancelServiceMD(HttpServletResponse response, HttpServletRequest request, Model model
+            , @PathVariable(name="reIndex") Long reIndex) {
+        Cookie[] myCookies = request.getCookies();
+        for(int i = 0; i < myCookies.length; i++) {
+            if(myCookies[i].getValue().equals("reIndex")){
+                reservationApiLogicService.delete(Long.valueOf(myCookies[i].getName()));
+                expiredCookie(response, myCookies[i].getName());
+            }
+        }
+        List reserveApiResponse;
+        String people;
+        people = reservationApiLogicService.read(reIndex).getData().getRePeopleType();
+
+        String[] person = people.split(" ");
+        int personNum;
+        if(person.length == 6){
+            personNum = Integer.parseInt(person[1]) + Integer.parseInt(person[3]) + Integer.parseInt(person[5]);
+        }else if(person.length == 4){
+            personNum = Integer.parseInt(person[1]) + Integer.parseInt(person[3]);
+        }else{
+            personNum = Integer.parseInt(person[1]);
+        }
+        reserveApiResponse = reservationApiLogicService.findCancel(reIndex, Long.valueOf(personNum)*2+reIndex -1).getData();
+        model.addAttribute("reserveApiResponse", reserveApiResponse);
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            model.addAttribute("memberApiResponse", session.getAttribute("memberApiResponse"));
+            return new ModelAndView("/userpage/pages/mypage/mypageDetail/Mypage_cancel_serviceMD")
+                    .addObject("code", "faq_list");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "add_qna");
+        }
+    }
+
     @RequestMapping("/index/mypageQna")
     public ModelAndView mypageQna(HttpServletResponse response, HttpServletRequest request, Model model) {
         Cookie[] myCookies = request.getCookies();
@@ -2014,33 +2051,61 @@ public class PageController {
             return new ModelAndView("/adminpage/pages/admin_login");
         }
     }
-    // 운항별 예약자 조회 결과
-    @RequestMapping("/admin/rs_result")
-    public ModelAndView rsResult(HttpServletRequest request, Model model) {
+    //    // 운항별 예약자 조회 결과
+//    @RequestMapping("/admin/rs_result")
+//    public ModelAndView rsResult(HttpServletRequest request, Model model) {
+//        HttpSession session = request.getSession();
+//        if((String) session.getAttribute("name") != null) {
+//            model.addAttribute("str", (String) session.getAttribute("name"));
+//            return new ModelAndView("/adminpage/pages/reservation/rs_result")
+//                    .addObject("code", "rs_result")
+//                    .addObject("menuList", menuService.getadminMenu());
+//        }else{
+//            return new ModelAndView("/adminpage/pages/admin_login");
+//        }
+//    }
+    // 운항편 예약자 상세정보
+    @RequestMapping("/admin/rs_user_info/{id}")
+    public ModelAndView rsUserInfo(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         if((String) session.getAttribute("name") != null) {
             model.addAttribute("str", (String) session.getAttribute("name"));
-            return new ModelAndView("/adminpage/pages/reservation/rs_result")
-                    .addObject("code", "rs_result")
-                    .addObject("menuList", menuService.getadminMenu());
-        }else{
-            return new ModelAndView("/adminpage/pages/admin_login");
-        }
-    }
-    // 예약자 명 조회 결과
-    @RequestMapping("/admin/rs_sch_result")
-    public ModelAndView rsSchResult(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        if((String) session.getAttribute("name") != null) {
-            model.addAttribute("str", (String) session.getAttribute("name"));
-            return new ModelAndView("/adminpage/pages/reservation/rs_sch_result")
-                    .addObject("code", "rs_sch_result")
+            return new ModelAndView("/adminpage/pages/reservation/rs_user_info")
+                    .addObject("code", "rs_user_info")
                     .addObject("menuList", menuService.getadminMenu())
                     .addObject("reservation", menuService.adminReservationMenu());
         }else{
             return new ModelAndView("/adminpage/pages/admin_login");
         }
     }
+    //    // 운항편 예약자 조회
+//    @RequestMapping("/admin/rs_user")
+//    public ModelAndView rsUser(HttpServletRequest request, Model model) {
+//        HttpSession session = request.getSession();
+//        if((String) session.getAttribute("name") != null) {
+//            model.addAttribute("str", (String) session.getAttribute("name"));
+//            return new ModelAndView("/adminpage/pages/reservation/rs_user")
+//                    .addObject("code", "rs_user")
+//                    .addObject("menuList", menuService.getadminMenu())
+//                    .addObject("reservation", menuService.adminReservationMenu());
+//        }else{
+//            return new ModelAndView("/adminpage/pages/admin_login");
+//        }
+//    }
+//    // 예약자 명 조회 결과
+//    @RequestMapping("/admin/rs_sch_result")
+//    public ModelAndView rsSchResult(HttpServletRequest request, Model model) {
+//        HttpSession session = request.getSession();
+//        if((String) session.getAttribute("name") != null) {
+//            model.addAttribute("str", (String) session.getAttribute("name"));
+//            return new ModelAndView("/adminpage/pages/reservation/rs_sch_result")
+//                    .addObject("code", "rs_sch_result")
+//                    .addObject("menuList", menuService.getadminMenu())
+//                    .addObject("reservation", menuService.adminReservationMenu());
+//        }else{
+//            return new ModelAndView("/adminpage/pages/admin_login");
+//        }
+//    }
     // 예약자 명 조회
     @RequestMapping("/admin/rs_sch")
     public ModelAndView rsSch(HttpServletRequest request, Model model) {

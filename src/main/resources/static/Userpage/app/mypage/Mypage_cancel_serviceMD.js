@@ -132,7 +132,7 @@ $(function () {
     function searchStart3(){
         // 사전좌석 지정
         let seat1PP = 0;
-        for(let i =  0 ; i < totalNum*2 ; i+=2){
+        for(let i =  0 ; i < totalNum ; i++){
             if($(`.seat1D${i}`).html() == ''){
                 $(`.seat1D${i}`).html('-');
                 $(`.seat1P${i}`).html(0);
@@ -145,7 +145,7 @@ $(function () {
         $('.seatPrice').text((seat1PP).toLocaleString('ko-KR'))
 
         // 초과수하물
-        for(let i =  0 ; i < totalNum*2 ; i+=2){
+        for(let i =  0 ; i < totalNum ; i++){
             if($(`.reBaggageidx1${i}`).val() == ''){
                 $(`.bagg1KG${i}`).text('-');
                 $(`.bagg1P${i}`).text(0);
@@ -159,7 +159,7 @@ $(function () {
         }
 
         // 보험
-        for(let i =  0 ; i < totalNum*2 ; i+=2){
+        for(let i =  0 ; i < totalNum ; i++){
             if($(`.reInsuranceidx1${i}`).val() == ''){
                 $(`.Insu1Tp${i}`).text('-');
                 $(`.Insu1P${i}`).text(0);
@@ -206,7 +206,7 @@ $(function () {
 
         let BaggPP = [];
         let IsurPP = [];
-        for(let i =  0 ; i < totalNum*2 ; i+=2){
+        for(let i =  0 ; i < totalNum ; i++){
             if(!$(`.reBaggageidx1${i}`).val()){
                 BaggPP.push(0)
             }else{
@@ -219,7 +219,7 @@ $(function () {
         }
         $('.BaggPrice').text(BaggPPP.toLocaleString('ko-KR'))
 
-        for(let i =  0 ; i < totalNum*2 ; i+=2){
+        for(let i =  0 ; i < totalNum ; i++){
             if(!$(`.reInsuranceidx1${i}`).val()){
                 IsurPP.push(0)
             }else{
@@ -242,181 +242,14 @@ $(function () {
         $('.paymentPrice').text((price + seat1PP).toLocaleString('ko-KR'));
     }
 
-    function searchStart4(){
-        // 사전 좌석 지정
-        let seat1PP = 0;
-        let seat2PP = 0;
-        for(let i =  0 ; i < totalNum*2 ; i+=2){
-            if($(`.seat1D${i}`).html() == ''){
-                $(`.seat1D${i}`).html('-');
-                $(`.seat1P${i}`).html(0);
-                $(`.seat1C${i}`).attr('disabled', true);
-            }else{
-                let seat1P = Number($(`.seat1P${i}`).html());
-                seat1PP += seat1P;
-            }
-        }
-        for(let i =  1 ; i < totalNum*2 ; i+=2){
-            if($(`.seat2D${i}`).html() == ''){
-                $(`.seat2D${i}`).html('-');
-                $(`.seat2P${i}`).html(0);
-                $(`.seat2C${i}`).attr('disabled', true);
-            }else{
-                let seat2P = Number($(`.seat2P${i}`).html());
-                seat2PP += seat2P;
-            }
-        }
-        $('.seatPrice').text((seat1PP + seat2PP).toLocaleString('ko-KR'));
+    searchStart3();
+    $('.lastPrice').text(0)
 
-        // 초과수하물
-        for(let i =  0 ; i < totalNum*2 ; i+=2){
-            if($(`.reBaggageidx1${i}`).val() == ''){
-                $(`.bagg1KG${i}`).text('-');
-                $(`.bagg1P${i}`).text(0);
-                $(`.bagg1C${i}`).attr('disabled', true);
-            }else{
-                $.get("/api/optional/baggage/"+$(`.reBaggageidx1${i}`).val(), function(response){
-                    $(`.bagg1KG${i}`).text(response.data.bgStandard);
-                    $(`.bagg1P${i}`).text(response.data.bgPrice);
-                });
-            }
-        }
-        for(let i =  1 ; i < totalNum*2 ; i+=2){
-            if($(`.reBaggageidx2${i}`).val() == ''){
-                $(`.bagg2KG${i}`).text('-');
-                $(`.bagg2P${i}`).text(0);
-                $(`.bagg2C${i}`).attr('disabled', true);
-            }else{
-                $.get("/api/optional/baggage/"+$(`.reBaggageidx2${i}`).val(), function(response){
-                    $(`.bagg2KG${i}`).text(response.data.bgStandard);
-                    $(`.bagg2P${i}`).text(response.data.bgPrice);
-                });
-            }
-        }
-
-        // 보험
-        for(let i =  0 ; i < totalNum*2 ; i+=2){
-            if($(`.reInsuranceidx1${i}`).val() == ''){
-                $(`.Insu1Tp${i}`).text('-');
-                $(`.Insu1P${i}`).text(0);
-                $(`.Insu1C${i}`).attr('disabled', true);
-            }else{
-                $.get("/api/optional/insurance/"+$(`.reInsuranceidx1${i}`).val(), function(response){
-                    $(`.Insu1Tp${i}`).text(response.data.isType);
-                    $(`.Insu1P${i}`).text(response.data.isPrice);
-                });
-            }
-        }
-        for(let i =  1 ; i < totalNum*2 ; i+=2){
-            if($(`.reInsuranceidx2${i}`).val() == ''){
-                $(`.Insu2Tp${i}`).text('-');
-                $(`.Insu2P${i}`).text(0);
-                $(`.Insu2C${i}`).attr('disabled', true);
-            }else{
-                $.get("/api/optional/insurance/"+$(`.reInsuranceidx2${i}`).val(), function(response){
-                    $(`.Insu2Tp${i}`).text(response.data.isType);
-                    $(`.Insu2P${i}`).text(response.data.isPrice);
-                });
-            }
-        }
-
-        // 전체 가격 찍어주기
-        function callData(i){
-            let m = 0;
-            $.ajax({
-                url: "/api/optional/baggage/search/"+i,
-                data : {id : i},
-                async :false,
-                type: "get",
-                dataType: "text",
-                success : function(response){
-                    m = response;
-                }
-            })
-            return m;
-        }
-        function callData1(i){
-            let m = 0;
-            $.ajax({
-                url: "/api/optional/insurance/search/"+i,
-                data : {id : i},
-                async :false,
-                type: "get",
-                dataType: "text",
-                success : function(response){
-                    m = response;
-                }
-            })
-            return m;
-        }
-
-        let BaggPP = [];
-        let IsurPP = [];
-        for(let i =  0 ; i < totalNum*2 ; i+=2){
-            if(!$(`.reBaggageidx1${i}`).val()){
-                BaggPP.push(0)
-            }else{
-                BaggPP.push(callData($(`.reBaggageidx1${i}`).val()));
-            }
-        }
-        for(let i =  1 ; i < totalNum*2 ; i+=2){
-            if(!$(`.reBaggageidx2${i}`).val()){
-                BaggPP.push(0)
-            }else{
-                BaggPP.push(callData($(`.reBaggageidx2${i}`).val()));
-            }
-        }
-        let BaggPPP = 0;
-        for(let i = 0 ; i < BaggPP.length; i++){
-            BaggPPP += Number(BaggPP[i]);
-        }
-        $('.BaggPrice').text(BaggPPP.toLocaleString('ko-KR'))
-
-        for(let i =  0 ; i < totalNum*2 ; i+=2){
-            if(!$(`.reInsuranceidx1${i}`).val()){
-                IsurPP.push(0)
-            }else{
-                IsurPP.push(callData1($(`.reInsuranceidx1${i}`).val()));
-            }
-        }
-        for(let i =  1 ; i < totalNum*2 ; i+=2){
-            if(!$(`.reInsuranceidx2${i}`).val()){
-                IsurPP.push(0)
-            }else{
-                IsurPP.push(callData1($(`.reInsuranceidx2${i}`).val()));
-            }
-        }
-        let IsurPPP = 0;
-        for(let i = 0 ; i < IsurPP.length; i++){
-            IsurPPP += Number(IsurPP[i]);
-        }
-        $('.InsuPrice').text(IsurPPP.toLocaleString('ko-KR'))
-
-        let price = 0;
-        for(let i = 0 ; i < BaggPP.length; i++){
-            price += Number(BaggPP[i]);
-        }
-        for(let i = 0 ; i < IsurPP.length; i++){
-            price += Number(IsurPP[i]);
-        }
-        $('.paymentPrice').text((price + seat1PP + seat2PP).toLocaleString('ko-KR'));
-    }
-
-
-    if($('#reTripKind').val() == '편도') {
-        $('.ifOnewayD').css('display', 'none');
-        searchStart3();
-        $('.lastPrice').text(0)
-    }else{
-        searchStart4();
-        $('.lastPrice').text(0)
-
-    }
 
 
     // 가격
     let addPrice = 0;
-    for(let i =  0 ; i < totalNum*2 ; i+=2){
+    for(let i =  0 ; i < totalNum ; i++){
         $(`.seat1C${i}`).on('change', function (){        // 값이 변화했니?
             if($(`.seat1C${i}`).is(':checked')){
                 addPrice += Number($(`.seat1P${i}`).text())
@@ -445,35 +278,6 @@ $(function () {
             }
         })
     }
-    for(let i =  1 ; i < totalNum*2 ; i+=2){
-        $(`.seat2C${i}`).on('change', function (){        // 값이 변화했니?
-            if($(`.seat2C${i}`).is(':checked')){
-                addPrice += Number($(`.seat2P${i}`).text())
-                $('.lastPrice').text(addPrice.toLocaleString('ko-KR'))
-            }else{
-                addPrice -= Number($(`.seat2P${i}`).text())
-                $('.lastPrice').text(addPrice.toLocaleString('ko-KR'))
-            }
-        })
-        $(`.bagg2C${i}`).on('change', function (){        // 값이 변화했니?
-            if($(`.bagg2C${i}`).is(':checked')){
-                addPrice += Number($(`.bagg2P${i}`).text())
-                $('.lastPrice').text(addPrice.toLocaleString('ko-KR'))
-            }else{
-                addPrice -= Number($(`.bagg2P${i}`).text())
-                $('.lastPrice').text(addPrice.toLocaleString('ko-KR'))
-            }
-        })
-        $(`.Insu2C${i}`).on('change', function (){        // 값이 변화했니?
-            if($(`.Insu2C${i}`).is(':checked')){
-                addPrice += Number($(`.Insu2P${i}`).text())
-                $('.lastPrice').text(addPrice.toLocaleString('ko-KR'))
-            }else{
-                addPrice -= Number($(`.Insu2P${i}`).text())
-                $('.lastPrice').text(addPrice.toLocaleString('ko-KR'))
-            }
-        })
-    }
 
 
 
@@ -489,15 +293,12 @@ $(function () {
             });
         }else{
             if(!$('input[class *= "seat1C"]').is(':checked') &&
-                !$('input[class *= "seat2C"]').is(':checked') &&
                 !$('input[class *= "bagg1C"]').is(':checked') &&
-                !$('input[class *= "bagg2C"]').is(':checked') &&
-                !$('input[class *= "Insu1C"]').is(':checked') &&
-                !$('input[class *= "Insu2C"]').is(':checked')
+                !$('input[class *= "Insu1C"]').is(':checked')
             ){
                 alert('최소 하나 이상 선택해주세요.')
             }else{
-                for(let i =  0 ; i < totalNum*2 ; i+=2){
+                for(let i =  0 ; i < totalNum ; i++){
                     if($(`.seat1C${i}`).is(':checked')){
                         let jsonData;
                         jsonData = {
@@ -560,71 +361,9 @@ $(function () {
                         })
                     }
                 }
-                for(let i = 1 ; i < totalNum*2 ; i+=2){
-                    if($(`.seat2C${i}`).is(':checked')){
-                        let jsonData;
-                        jsonData = {
-                            data : {
-                                reIndex: Number(reIndex1) + i,
-                                reSeatDetail : "",
-                                reSeatPrice : ""
-                            }
-                        }
-                        $.ajax({
-                            url: "/api/reservation/seat",
-                            data: JSON.stringify(jsonData),
-                            method: "PUT",
-                            dataType: "text",
-                            async : false,
-                            contentType : "application/json",
-                            success: function (response) {
 
-                            }
-                        })
-                    }
-                    if($(`.bagg2C${i}`).is(':checked')){
-                        let jsonData;
-                        jsonData = {
-                            data : {
-                                reIndex: Number(reIndex1) + i,
-                                reBaggageidx : ""
-                            }
-                        }
-                        $.ajax({
-                            url: "/api/reservation/bagg",
-                            data: JSON.stringify(jsonData),
-                            method: "PUT",
-                            dataType: "text",
-                            async : false,
-                            contentType : "application/json",
-                            success: function (response) {
 
-                            }
-                        })
-                    }
-                    if($(`.Insu2C${i}`).is(':checked')){
-                        let jsonData;
-                        jsonData = {
-                            data : {
-                                reIndex: Number(reIndex1) + i,
-                                reInsuranceidx : ""
-                            }
-                        }
-                        $.ajax({
-                            url: "/api/reservation/insu",
-                            data: JSON.stringify(jsonData),
-                            method: "PUT",
-                            dataType: "text",
-                            async : false,
-                            contentType : "application/json",
-                            success: function (response) {
-
-                            }
-                        })
-                    }
-                }
-
-                for(let i =  reIndex1 ; i <= endIdx ; i++){
+                for(let i =  reIndex1 ; i <= endIdx ; i+=2){
                     let jsonData;
                     jsonData = {
                         data : {

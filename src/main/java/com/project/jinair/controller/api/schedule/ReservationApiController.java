@@ -169,6 +169,22 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     public void updating3(@RequestBody Header<ReserveApiRequest> request) {
         reservationApiLogicService.updating3(request);
     }
+    @PutMapping("/seat")
+    public void seat(@RequestBody Header<ReserveApiRequest> request) {
+        reservationApiLogicService.seat(request);
+    }
+    @PutMapping("/bagg")
+    public void bagg(@RequestBody Header<ReserveApiRequest> request) {
+        reservationApiLogicService.bagg(request);
+    }
+    @PutMapping("/insu")
+    public void insu(@RequestBody Header<ReserveApiRequest> request) {
+        reservationApiLogicService.insu(request);
+    }
+    @PutMapping("/retotal")
+    public void retotal(@RequestBody Header<ReserveApiRequest> request) {
+        reservationApiLogicService.retotal(request);
+    }
 
 
     // 출발지, 도착지, 가는날 조회

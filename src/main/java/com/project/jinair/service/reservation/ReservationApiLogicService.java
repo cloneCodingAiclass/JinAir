@@ -359,6 +359,51 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 }
         );
     }
+    public void seat(Header<ReserveApiRequest> request) {
+        ReserveApiRequest reserveApiRequest = request.getData();
+        Optional<TbReservation> reservation = tbReservationRepository.findById(reserveApiRequest.getReIndex());
+        reservation.ifPresent(
+                select ->{
+                    select.setReIndex(reserveApiRequest.getReIndex());
+                    select.setReSeatDetail(reserveApiRequest.getReSeatDetail());
+                    select.setReSeatPrice(reserveApiRequest.getReSeatPrice());
+                    tbReservationRepository.save(select);
+                }
+        );
+    }
+    public void bagg(Header<ReserveApiRequest> request) {
+        ReserveApiRequest reserveApiRequest = request.getData();
+        Optional<TbReservation> reservation = tbReservationRepository.findById(reserveApiRequest.getReIndex());
+        reservation.ifPresent(
+                select ->{
+                    select.setReIndex(reserveApiRequest.getReIndex());
+                    select.setReBaggageidx(reserveApiRequest.getReBaggageidx());
+                    tbReservationRepository.save(select);
+                }
+        );
+    }
+    public void insu(Header<ReserveApiRequest> request) {
+        ReserveApiRequest reserveApiRequest = request.getData();
+        Optional<TbReservation> reservation = tbReservationRepository.findById(reserveApiRequest.getReIndex());
+        reservation.ifPresent(
+                select ->{
+                    select.setReIndex(reserveApiRequest.getReIndex());
+                    select.setReInsuranceidx(reserveApiRequest.getReInsuranceidx());
+                    tbReservationRepository.save(select);
+                }
+        );
+    }
+    public void retotal(Header<ReserveApiRequest> request) {
+        ReserveApiRequest reserveApiRequest = request.getData();
+        Optional<TbReservation> reservation = tbReservationRepository.findById(reserveApiRequest.getReIndex());
+        reservation.ifPresent(
+                select ->{
+                    select.setReIndex(reserveApiRequest.getReIndex());
+                    select.setReTotal(reserveApiRequest.getReTotal());
+                    tbReservationRepository.save(select);
+                }
+        );
+    }
 
     public Header<List<ReserveApiResponse>> go(String schDeparturePoint, String schArrivalPoint, String goDateSelectOptt){
         LocalDateTime searchDaystr1 = LocalDateTime.parse((goDateSelectOptt));
