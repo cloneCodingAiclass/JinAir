@@ -2121,19 +2121,19 @@ public class PageController {
         }
     }
     // 운항편(LJ438) 예약자 상세정보
-    @RequestMapping("/admin/rs_user_info")
-    public ModelAndView rsUserInfo(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        if((String) session.getAttribute("name") != null) {
-            model.addAttribute("str", (String) session.getAttribute("name"));
-            return new ModelAndView("/adminpage/pages/reservation/rs_user_info")
-                    .addObject("code", "rs_user_info")
-                    .addObject("menuList", menuService.getadminMenu())
-                    .addObject("reservation", menuService.adminReservationMenu());
-        }else{
-            return new ModelAndView("/adminpage/pages/admin_login");
-        }
-    }
+//    @RequestMapping("/admin/rs_user_info")
+//    public ModelAndView rsUserInfo(HttpServletRequest request, Model model) {
+//        HttpSession session = request.getSession();
+//        if((String) session.getAttribute("name") != null) {
+//            model.addAttribute("str", (String) session.getAttribute("name"));
+//            return new ModelAndView("/adminpage/pages/reservation/rs_user_info")
+//                    .addObject("code", "rs_user_info")
+//                    .addObject("menuList", menuService.getadminMenu())
+//                    .addObject("reservation", menuService.adminReservationMenu());
+//        }else{
+//            return new ModelAndView("/adminpage/pages/admin_login");
+//        }
+//    }
     // 운항편(LJ438) 예약자 조회
     @RequestMapping("/admin/rs_user")
     public ModelAndView rsUser(HttpServletRequest request, Model model) {
