@@ -302,23 +302,6 @@ body {
 /* container */
 #container {
   width: 100%;
-  height: fit-content;
-}
-
-.cursor {
-  cursor: pointer;
-}
-
-.fs20 {
-  font-size: 20px;
-}
-
-.fcpup {
-  color: rgb(102, 30, 67);
-}
-
-.bb {
-  border-bottom: 1px solid rgb(102, 30, 67);
 }
 
 .cursor {
@@ -342,7 +325,6 @@ body {
   position: relative;
   top: 90px;
   margin: 0 auto;
-  height: auto;
 }
 
 /*여정*/
@@ -356,13 +338,12 @@ body {
   font-size: 14px;
   z-index: 50;
   background-color: #fff;
-  font-weight: 600;
 }
 
 .fix_trip_info > .trip_info,
 .trip_info2 {
   position: relative;
-  width: 730px;
+  width: 825px;
   padding: 25px;
   background-color: rgb(248, 248, 248);
   margin-right: 3px;
@@ -375,7 +356,7 @@ body {
 }
 
 #container > .contentswrap > .fix_trip_info > .nop {
-  width: 358px;
+  width: 350px;
   padding: 20px;
   background-color: rgb(248, 248, 248);
   margin-right: 3px;
@@ -389,6 +370,7 @@ body {
   border: none;
   font-weight: 600;
 }
+
 .trip_info > .schedule > .arrow_img {
   display: block;
   position: absolute;
@@ -410,8 +392,11 @@ body {
 .trip_info > .trip_area,
 .trip_info2 > .trip_area {
   display: flex;
+  font-weight: 600;
 }
-
+.person_cnt{
+  font-weight: 600;
+}
 .trip_info > .trip_area .arr_area::before,
 .trip_info2 > .trip_area .arr_area::before {
   content: " ";
@@ -455,11 +440,11 @@ body {
 }
 /*여정2 끝*/
 
-/*결제 헤더*/
+/*항공편 선택*/
 .select_wrap {
   position: relative;
   width: 100%;
-  top: 100px;
+  top: 130px;
   font-weight: 600;
 }
 
@@ -495,1465 +480,1127 @@ body {
   border-top: 1px solid rgba(168, 165, 165, 0.3);
 }
 
-/*결제 랩*/
+.select_wrap > .setP > .code {
+  display: flex;
+  width: 160px;
+  height: 40px;
+  background-color: #bdd600;
+  padding: 12px;
+  margin-right: 10px;
+}
 
-select,
-input {
+.select_wrap > .setP > .code > img {
+  width: 30px;
+  margin-left: 3px;
+}
+
+.select_wrap > .setP > .code p {
+  margin-top: 2px;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.select_wrap > .setP > #cul {
+  width: 140px;
+  padding: 10px 20px;
+  font-weight: 600;
+}
+
+/*결제통화부분*/
+#cul {
+  -webkit-appearance: none; /* for chrome */
+  -moz-appearance: none; /*for firefox*/
+  appearance: none;
+}
+
+#cul::-ms-expand {
+  display: none; /*for IE10,11*/
+}
+
+#cul {
+  background: url("/userpage/lib/img/down.png");
+  background-repeat: no-repeat;
+  background-size: 20%;
+  background-position: 95% 40%;
+  background-color: #fff;
+  margin-right: 10px;
+  border: 1px solid rgba(168, 165, 165, 0.5);
+}
+
+#cul:focus option {
+  border: 3em;
+}
+
+/*결제통화부분 끝*/
+
+.butt_ok {
+  width: 80px;
+  background-color: #fff;
+  border: 1px solid #bdd600;
+}
+/*항공편 선택 헤더 끝*/
+
+/*항공편 리스트*/
+.null_flight {
+  /*운항없음*/
+  background-color: rgb(170, 179, 194);
+}
+
+/*날짜선택*/
+.air_list_wrap {
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.air_list_wrap .arr_area::before, .air_list_wrap .arr_area1::before {
+  content: " ";
+  background-image: url("/userpage/lib/img/right_arrow.PNG");
+  background-size: 40px 16px;
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 16px;
+  display: inline-block;
+}
+
+.air_list_wrap > div > div > .list_tit {
+  display: flex;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.air_list_wrap > div > div > .list_tit p {
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+.air_list_wrap > div > div > .list_tit p.area {
+  font-weight: bold;
+}
+
+.air_list_wrap div.date_box {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.air_list_wrap div.date_box > div {
+  width: 150px;
+  height: 90px;
+  border: 1px solid rgba(168, 165, 165, 0.3);
+  padding: 20px 10px;
   cursor: pointer;
 }
 
-.pay_wrap {
-  width: 1180px;
-  height: 100%;
-  margin: 0 auto;
-  margin-top: 134px;
-  border-top: 1px solid rgba(168, 165, 165, 0.3);
-  padding: 20px 0;
+.air_list_wrap div.date_box > div > p.day {
+  display: inline-block;
+  font-size: 16px;
+  height: 30px;
 }
 
-/*.pay_wrap > div {*/
-/*  margin: 20px 0;*/
-/*}*/
-
-.pay_wrap > div > h2 {
-  padding-left: 20px;
-  color: black;
-  margin: 20px 0;
-}
-
-.pay_wrap > div > table {
-  margin-top: 20px;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.borderT {
-  border-top: 1px solid black !important;
-}
-.borderB {
-  border-bottom: 1px solid black !important;
-}
-
-/*탑승객 정보*/
-#container > .contentswrap > .pay_wrap > .passenger_wrap {
-  width: 100%;
-  height: auto;
-}
-
-#container > .contentswrap > .pay_wrap > .passenger_wrap table {
-  text-align: center;
-  font-size: 20px;
-  font-weight: 600;
-}
-
-#container > .contentswrap > .pay_wrap > .passenger_wrap > table th td {
-  border-right: 1px solid rgba(168, 165, 165, 0.3);
-  border-bottom: 1px solid rgba(168, 165, 165, 0.3);
-}
-
-#container > .contentswrap > .pay_wrap > .passenger_wrap table th:last-child,
-#container > .contentswrap > .pay_wrap > .passenger_wrap table td:last-child {
-  border-right: none;
-}
-
-#container > .contentswrap > .pay_wrap > .passenger_wrap table th {
-  line-height: 60px;
-  background-color: rgb(247, 247, 246);
-}
-
-#container > .contentswrap > .pay_wrap > .passenger_wrap table td {
-  height: 60px;
-}
-
-.modal_flight_info {
+.air_list_wrap div.date_box > p.sel_arrow {
   position: absolute;
-  width: 400px;
-  top: 0px;
-  right: 0px;
-  height: 250px;
-  display: none;
-  background-color: #fff;
-  border: 1px solid black;
-  padding: 20px 30px;
-  z-index: 100;
 }
 
-.modal_flight_info .modal_flight_title {
-  width: 100%;
+.air_list_wrap div.date_box > p.left_arrow {
+  top: 23px;
+  left: -30px;
+}
+
+.air_list_wrap div.date_box > p.right_arrow {
+  top: 23px;
+  right: -30px;
+}
+
+.air_list_wrap div.date_box > div > .price {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: flex-end;
 }
 
-.modal_flight_info .modal_flight_title .tit {
-  font-weight: bold;
-  margin: 10px 0;
+.air_list_wrap div.date_box > div > .price .date_price {
+  font-size: 20px;
 }
 
-.modal_flight_info .modal_flight_title img {
-  position: absolute;
-  filter: invert();
-  right: 15px;
-  top: 15px;
+.air_list_wrap div.date_box > div > .price > p.curr {
+  font-size: 12px;
+  margin-right: 5px;
 }
 
-.modal_flight_info .modal_flight_content {
-  font-weight: 600;
-  font-size: 13px;
-  line-height: 18px;
-}
-
-/*탑승객 정보 끝*/
-
-/*운임규정*/
-
-.fare_wrap table tr:last-child td {
-  border-bottom: 1px solid black;
-}
-
-.pay_wrap .fare_wrap {
-  width: 100%;
-  height: auto;
-  font-size: 15px;
-}
-
-.pay_wrap > .fare_wrap > .fare_info {
-  width: 100%;
-  height: 200px;
-  padding: 20px;
-  background-color: rgb(247, 247, 246);
-}
-
-.pay_wrap > .fare_wrap > .fare_info p.tit {
+.air_list_wrap div.date_box div.sel_date {
   background-color: rgb(102, 30, 67);
-  padding: 2px 5px;
   color: #fff;
-  width: 65px;
-  height: 20px;
-  font-size: 14px;
-  margin-bottom: 10px;
-  text-align: center;
-  font-weight: bold;
+  box-shadow: 1px 3px 3px rgb(170, 179, 194);
 }
 
-.pay_wrap > .fare_wrap > .fare_info .jour_wrap {
-  position: relative;
+/*날짜선택 끝*/
+.airplanename{
+  font-size: 18px;
+  font-weight: 900;
 }
-
-.pay_wrap > .fare_wrap > .fare_info .jour_wrap > div {
-  display: flex;
-  align-items: center;
-  height: 60px;
+.start_hour{
+  font-size: 26px;
+  font-weight: 900;
 }
-
-.pay_wrap > .fare_wrap > .fare_info .jour_wrap div p.flight {
-  width: 80px;
-  color: black;
-  font-weight: 600;
-  line-height: 25px;
+.start_area{
   font-size: 15px;
+  font-weight: 900;
+}
+.time, .type{
+  font-size: 13px;
+  font-weight: 900;
+}
+.curr, .seats{
+  font-size: 14px;
+  font-weight: 900;
+}
+.date_price{
+  font-size: 23px;
+  font-weight: 900;
 }
 
-.pay_wrap > .fare_wrap > .fare_info .jour_wrap div .area_wrap {
-  width: 800px;
+
+.list_wrap {
+  margin-top: 30px;
+}
+
+
+.list_wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1px solid black;
+  text-align: center;
+}
+
+.list_wrap table th {
+  line-height: 40px;
+  background-color: rgb(248, 248, 248);
+}
+
+.list_wrap table td {
+  height: 150px;
+  padding: 10px;
+  border-bottom: 0.5px solid black;
+}
+
+.list_wrap table.list1_table td {
+  height: 150px;
+  padding: 5px;
+  border-bottom: 0.5px solid black;
+}
+.list_wrap table.list2_table td {
+  height: 150px;
+  padding: 5px;
+  border-bottom: 0.5px solid black;
+}
+
+.list_wrap table td .type_wrap {
   display: flex;
+  background-color: #bdd600;
+  font-size: 12px;
+}
+/* 경로1 */
+.list_wrap table.list1_table .price_wrap {
+  width: 150px;
+  height: 110px;
+  border: 1px solid #f2f2f2;
+  padding-top: 30px;
+  cursor: pointer;
+}
+/* 경로2 */
+.list_wrap table.list2_table .price_wrap1 {
+  width: 150px;
+  height: 110px;
+  border: 1px solid #f2f2f2;
+  padding-top: 30px;
+  cursor: pointer;
+}
+.price_wrap.on {
+  background-color: #661e43;
+  color: white;
+}
+.price_wrap1.on1 {
+  background-color: #661e43;
+  color: white;
 }
 
-.pay_wrap > .fare_wrap > .fare_info .jour_wrap div .area_wrap > div {
-  /*depart arr*/
-  width: 250px;
-  margin-left: 20px;
+.list_wrap .price_wrap p {
+  display: block;
+  /* height: 15px; */
+}
+.list_wrap .price_wrap1 p {
+  display: block;
+  /* height: 15px; */
+}
+.list_wrap .price_wrap .date_price {
+  font-size: 23px;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+.list_wrap .price_wrap1 .date_price {
+  font-size: 23px;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+.list_wrap .curr {
+  font-size: 12px;
+  margin: 1px;
+  height: 10px;
+}
+.list_wrap .seats {
+  font-size: 14px;
+}
+.list_wrap div.none_seat {
+  background-color: rgba(168, 165, 165, 0.2);
+}
+.list_wrap div.none_seat,
+div.none_seat p {
+  color: #444 !important;
+  font-size: 20px !important;
 }
 
-.pay_wrap > .fare_wrap > .fare_info .jour_wrap div .area_wrap > div p.area {
-  font-size: 25px;
+/*항공편 리스트 1*/
+
+/*항공편 리스트 1 끝*/
+
+/*항공편 리스트 2*/
+
+/*항공편 리스트 2 끝*/
+
+/*항공편 선택 끝*/
+
+/*공지사항*/
+.noti_wrap {
+  position: relative;
+  top: 200px;
+  width: 1180px;
+  padding: 20px;
+  margin: 0 auto;
+  text-indent: -13px;
+}
+
+.noti_wrap > .noti > li {
+  line-height: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.noti_wrap > .noti > li::before {
+  content: " - ";
+}
+
+.noti_wrap > .noti > li a {
   font-weight: bold;
   color: black;
-  margin-bottom: 8px;
 }
 
-.pay_wrap > .fare_wrap > .fare_info .jour_wrap div .area_wrap > p.arrow {
-  width: 50px;
-  height: 15px;
-  display: flex;
-  align-items: flex-start;
+.noti_wrap > .noti > li a:hover {
+  color: rgb(102, 30, 67);
 }
 
-.pay_wrap > .fare_wrap > .fare_info .jour_wrap div .area_wrap > p.arrow img {
-  width: 100%;
-  height: 100%;
-}
+/*공지사항 끝*/
 
-.pay_wrap > .fare_wrap > .fare_info .jour_wrap div .area_wrap > p.detail {
-  font-size: 14px;
-  text-decoration: underline;
-}
-
-.pay_wrap > .fare_wrap > .fare_info .jour_wrap .tot {
-  position: absolute;
-  top: 0px;
-  right: 30px;
-  font-size: 25px;
-  font-weight: 600;
-  display: flex;
-  color: black;
-}
-
-.pay_wrap > .fare_wrap > .fare_info .jour_wrap .tot .txt {
-  margin-right: 30px;
-}
-
-.pay_wrap > .fare_wrap > .fare_info .jour_wrap .tot .price_wrap {
-  display: flex;
-  align-items: center;
-}
-
-.pay_wrap > .fare_wrap > .fare_info .jour_wrap .tot .cul {
-  font-size: 14px;
-  margin-right: 15px;
-  color: #444;
-}
-
-.pay_wrap > .fare_wrap > .fare_info_T {
-  width: 100%;
-  margin-top: 0px;
-  font-weight: 600;
-  table-layout: fixed;
-  text-align: left;
-  font-size: 18px;
-}
-
-.pay_wrap > .fare_wrap > .fare_info_T td {
-  height: 60px;
-  padding: 20px;
-  border-right: none;
-}
-
-.pay_wrap > .fare_wrap > .fare_info_T td:last-child {
-  text-align: right;
-}
-
-.pay_wrap > .fare_wrap > .fare_info_T td > .td_wrap {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  text-align: right;
-  justify-content: flex-end;
-}
-
-.pay_wrap > .fare_wrap > .fare_info_T > tr:last-child td {
-  border-bottom: none;
-  text-align: right;
-}
-
-.pay_wrap > .fare_wrap > .fare_info_T td .cul {
-  font-size: 14px;
-  margin-right: 15px;
-  color: #444;
-}
-
-.pay_wrap > .fare_wrap > .fare_info_T td .price {
-  color: black;
-  font-size: 20px;
-  margin-right: 5px;
-}
-
-.pay_wrap > .fare_wrap > .fare_info_T td img.arr_bott {
-  width: 25px;
-  height: 18px;
-  padding: 0;
-  margin: 0 10px;
-}
-
-.pay_wrap > .fare_wrap > .fare_info_T td img.arr_top {
-  width: 30px;
-  height: 25px;
-  display: none;
-  padding: 0;
-  margin: 0 10px;
-}
-
-.pay_wrap > .fare_wrap > .fare_info_T td span.arrow {
-  display: flex;
-}
-
-.pay_wrap > .fare_wrap > .fare_info_T td.detail_td {
-  width: 100%;
-  padding: 0px !important;
-  border-bottom: none;
-}
-
-.detail_T {
-  width: 100%;
-  background-color: rgb(247, 247, 246);
-  padding: 0px;
-  font-size: 16px;
-  color: #444;
-  border-collapse: collapse;
-  table-layout: fixed;
-}
-
-.detail_T td {
-  text-align: left;
-  border-bottom: 1px solid rgba(168, 165, 165, 0.3) !important;
-}
-
-.detail_T .price {
-  font-size: 18px !important;
-  color: #444 !important;
-}
-
-.detail_T td span.name::before {
-  content: " · ";
-}
-
-.detail_T td:last-child {
-  text-align: right;
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* .detail_T td:last-child> .td_wrap {
-      padding-right: 43px;
-  } 
-  */
-
-/*운임규정 끝*/
-
-/*부가서비스 확인*/
-.pay_wrap .service_wrap {
-  width: 100%;
-  margin-top: 100px;
-  height: auto;
-}
-
-.pay_wrap > .service_wrap > .service_T {
-  width: 100%;
-  margin-top: 0px;
-  font-weight: 600;
-  table-layout: fixed;
-  text-align: left;
-  font-size: 18px;
-}
-
-.pay_wrap > .service_wrap > .service_T .borderT {
-  height: 80px;
-  background-color: rgb(247, 247, 246);
-  font-size: 20px;
-  color: black;
-}
-
-.service_T .borderT .td_wrap {
-  padding-right: 43px !important;
-}
-
-.pay_wrap > .service_wrap > .service_T td {
-  height: 60px;
-  padding: 20px;
-  border-right: none;
-  border-bottom: 1px solid rgba(168, 165, 165, 0.3);
-}
-
-.pay_wrap > .service_wrap > .service_T td:last-child {
-  text-align: right;
-}
-
-.pay_wrap > .service_wrap > .service_T td > .td_wrap {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  text-align: right;
-  justify-content: flex-end;
-}
-
-.pay_wrap > .service_wrap > .service_T > tr:last-child td {
-  text-align: right;
-}
-
-.pay_wrap > .service_wrap > .service_T td .cul {
-  font-size: 14px;
-  margin-right: 15px;
-  color: #444;
-}
-
-.pay_wrap > .service_wrap > .service_T td .price {
-  color: black;
-  font-size: 20px;
-  margin-right: 5px;
-}
-
-.pay_wrap > .service_wrap > .service_T td img.arr_bott {
-  width: 25px;
-  height: 18px;
-  padding: 0;
-  margin: 0 10px;
-}
-
-.pay_wrap > .service_wrap > .service_T td img.arr_top {
-  width: 30px;
-  height: 25px;
-  display: none;
-  padding: 0;
-  margin: 0 10px;
-}
-
-.pay_wrap > .service_wrap > .service_T td span.arrow {
-  display: flex;
-}
-
-.pay_wrap > .service_wrap > .service_T td.detail_td {
-  width: 100%;
-  padding: 0px !important;
-  border-bottom: none;
-  /* display: none; */
-}
-
-.pay_wrap > .service_wrap .detail_T {
-  width: 100%;
+/*운임확인*/
+.fare_wrap {
   position: relative;
-  background-color: rgb(247, 247, 246);
-  padding: 0px;
-  font-size: 16px;
-  color: #444;
-  border-collapse: collapse;
-}
-
-.pay_wrap > .service_wrap .detail_T td {
-  text-align: left;
-  border-bottom: 1px solid rgba(168, 165, 165, 0.3);
-}
-
-.detail_T .price {
-  font-size: 18px !important;
-  color: #444 !important;
-}
-
-.detail_T td span.name::before {
-  content: " · ";
-}
-
-.detail_T td:last-child {
-  text-align: right;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.detail_T td:last-child > .td_wrap {
-  padding-right: 43px;
-}
-
-/*부가서비스 확인 끝*/
-
-/*할인*/
-.pay_wrap .discount_wrap {
-  width: 100%;
-  height: auto;
-  margin-top: 70px;
-}
-
-.pay_wrap .discount_wrap .discount_T {
-  width: 100%;
-  font-size: 20px;
-  font-weight: 600;
-  border: none;
-}
-
-.discount_title {
-  border-top: 1px solid black !important;
-}
-
-.discount_title td {
-  height: 90px !important;
-}
-
-.pay_wrap .discount_wrap .discount_T td {
+  top: 250px;
+  width: 1180px;
+  margin: 0 auto;
   padding: 20px;
-  border-bottom: 1px solid rgba(168, 165, 165, 0.3);
+  margin-bottom: 400px;
 }
 
-.pay_wrap .discount_wrap .discount_T td:last-child {
-  border-right: none;
+.fare_wrap .tit {
+  padding: 20px;
+  color: black;
 }
 
-.pay_wrap .discount_wrap .discount_T td.borderT {
-  height: 100px;
-}
-
-.pay_wrap .discount_wrap .discount_T td.borderT label {
-  margin-right: 10px;
-}
-
-.pay_wrap .discount_wrap .discount_title label input {
-  margin-right: 5px;
-  width: 25px;
-  height: 25px;
-  border: 1px solid rgba(128, 128, 128, 0.19);
-  background-color: rgb(247, 247, 246);
-  vertical-align: middle;
-}
-
-#sel_coupon {
-  width: 400px;
-  height: 60px;
+.fare_wrap table {
+  width: 100%;
+  text-align: left;
   padding: 10px;
+  border-collapse: collapse;
   font-size: 18px;
-  background-color: rgb(247, 247, 246);
-  border: 1px solid rgba(128, 128, 128, 0.19);
-  vertical-align: middle;
-  font-weight: 600;
+  border-top: 1px solid black;
+  font-weight: bold;
 }
 
-#sel_card {
-  width: 400px;
+.fare_wrap table .tot_price_wrap,
+.total_price_wrap {
+  /* text-align: right; */
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 30px;
+}
+
+.fare_wrap table tr {
   height: 60px;
-  padding: 10px;
-  font-size: 18px;
-  background-color: rgb(247, 247, 246);
-  border: 1px solid rgba(128, 128, 128, 0.19);
-  vertical-align: middle;
-  font-weight: 600;
 }
 
-.butt_apply {
-  width: 80px;
-  height: 60px;
-  background-color: #fff;
-  border: 1px solid #bdd600;
-  margin-left: 5px;
-  vertical-align: middle;
-  font-weight: 600;
+.fare_wrap table th {
+  line-height: 60px !important;
+  font-size: 20px;
+  background-color: rgb(248, 248, 248);
+  border-bottom: 0.5px solid black;
+  color: black;
 }
 
-.pay_wrap .discount_wrap .discount_T ul {
-  font-size: 18px;
-}
-
-.pay_wrap .discount_wrap .discount_T ul li {
-  line-height: 25px;
-  text-indent: -13px;
+.fare_wrap table th:first-child {
   padding-left: 10px;
 }
 
-.pay_wrap .discount_wrap .discount_T ul li::before {
-  content: " - ";
-}
-
-td p {
-  line-height: 25px;
-  font-size: 18px;
-  color: black;
-  font-weight: bold;
-}
-
-td p.link {
-  margin-top: 40px;
-}
-
-td p.link a {
-  color: rgb(0, 134, 210);
-  text-decoration: underline;
-}
-
-.discount_card {
-  display: none;
-}
-
-.discount_card .card {
-  display: none;
-}
-
-/*할인 끝*/
-
-/*결제정보*/
-
-.pay_wrap .pay_info_wrap {
-  margin-top: 70px;
-  width: 100%;
-  height: auto;
-  font-weight: 600;
-}
-
-.pay_wrap .pay_info_wrap .pay_info_T {
-  /* text-align: center; */
-  margin-bottom: 80px;
-}
-
-.pay_wrap .pay_info_wrap .pay_info_T td {
-  height: 190px;
-  border-top: 1px solid black;
-  background-color: rgb(247, 247, 246);
-  padding: 30px;
-}
-
-.pay_wrap .pay_info_wrap .pay_info_T td:last-child {
-  border-right: none;
-}
-
-.pay_wrap .pay_info_wrap .pay_info_T td p.tit {
-  margin-bottom: 30px;
-}
-
-.pay_wrap .pay_info_wrap .pay_info_T td .price_wrap {
-  font-size: 25px;
-  display: flex;
-  align-items: center;
-}
-
-.pay_wrap .pay_info_wrap .pay_info_T td .price_wrap span.cul {
-  font-size: 14px;
-  margin-right: 10px;
-}
-
-.pay_wrap .pay_info_wrap .pay_info_T td .price_wrap span.tot {
-  font-size: 35px;
-}
-
-/*결제정보 끝*/
-
-/*결제*/
-.pay_wrap .payment_wrap {
-  width: 100%;
-  height: auto;
-  font-weight: 600;
-}
-
-.pay_wrap .payment_wrap .payment_T {
-  width: 100%;
-  border-top: 1px solid black;
-}
-
-.pay_wrap .payment_wrap .payment_T td {
-  padding: 20px;
-  border-right: none;
-}
-
-.card_wrap {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.cardImg_wrap {
-  width: 230px;
-  height: 150px;
-  border-radius: 10px;
-  border: 2px solid #661e43;
-  background-color: #fff;
-  margin-right: 10px;
-}
-
-.cardImg_wrap1 {
-  margin-left: 10px;
-}
-
-.cardImg_wrap p.text {
-  display: block;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.cardImg1 {
-  width: 50%;
-  height: 80px;
-  background: url("/userpage/lib/img/card1.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: auto auto;
-  margin-top: 10%;
-}
-
-.cardImg1-2 {
-  width: 50%;
-  height: 80px;
-  background: url("/userpage/lib/img/card1-2.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: auto auto;
-  margin-top: 10%;
-}
-
-.cardImg2 {
-  width: 60%;
-  height: 80px;
-  background: url("/userpage/lib/img/card2.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  margin: auto auto;
-  margin-top: 20%;
-}
-
-.cardImg2-2 {
-  width: 60%;
-  height: 80px;
-  background: url("/userpage/lib/img/card-2.22.png.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  margin: auto auto;
-  margin-top: 20%;
-}
-
-.cardImg3 {
-  width: 40%;
-  height: 80px;
-  background: url("/userpage/lib/img/card3.png");
-  background-size: 85%;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: auto auto;
-  margin-top: 10%;
-}
-
-.cardImg3-2 {
-  width: 40%;
-  height: 80px;
-  background: url("/userpage/lib/img/card3-2.png");
-  background-size: 85%;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: auto auto;
-  margin-top: 10%;
-}
-
-.cardImg_wrap4 {
-  margin-left: 10px;
-}
-
-.cardImg4 {
-  width: 60%;
-  height: 80px;
-  background: url("/userpage/lib/img/card4.png");
-  background-size: 85%;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  margin: auto auto;
-  margin-top: 8%;
-}
-
-.pay_wrap .payment_wrap .payment_T select {
-  display: block;
-  width: 500px;
-  height: 70px;
-  margin: 20px 0;
-  padding: 20px;
-  font-size: 18px;
-  background-color: rgb(247, 247, 246);
-  border: 1px solid rgba(168, 165, 165, 0.3);
-  font-weight: bold;
-}
-
-.pay_wrap .payment_wrap .payment_T select:last-child {
-  margin-bottom: 0;
-}
-
-.pay_wrap .payment_wrap .payment_T label input[type="radio"] {
-  display: none;
-}
-
-.card_wrap2 {
-  width: 100%;
-  margin-left: 10px;
-}
-
-.card_wrap2 div {
-  margin-bottom: 10px;
-}
-
-.cardImg5 {
-  width: 70%;
-  height: 80px;
-  background: url("/userpage/lib/img/card5.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  margin: auto auto;
-  margin-top: 10%;
-}
-
-.cardImg5-2 {
-  width: 70%;
-  height: 80px;
-  background: url("/userpage/lib/img/card-5.22.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  margin: auto auto;
-  margin-top: 10%;
-}
-
-.cardImg6 {
-  width: 90%;
-  height: 120px;
-  background: url("/userpage/lib/img/card6.png");
-  background-size: 85%;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: auto auto;
-  margin-top: 8%;
-}
-
-.cardImg6-2 {
-  width: 90%;
-  height: 120px;
-  background: url("/userpage/lib/img/card-6.22.png.png");
-  background-size: 85%;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: auto auto;
-  margin-top: 8%;
-}
-
-.cardImg7 {
-  width: 70%;
-  height: 100px;
-  background: url("/userpage/lib/img/card7.png");
-  background-size: 85%;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: auto auto;
-  margin-top: 10%;
-}
-
-.cardImg7-2 {
-  width: 70%;
-  height: 100px;
-  background: url("/userpage/lib/img/card-7.22.png");
-  background-size: 85%;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: auto auto;
-  margin-top: 10%;
-}
-
-.cardImg8 {
-  width: 70%;
-  height: 80px;
-  background: url("/userpage/lib/img/card8.png");
-  background-size: 85%;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  margin: auto auto;
-  margin-top: 10%;
-}
-
-.cardImg8-2 {
-  width: 70%;
-  height: 80px;
-  background: url("/userpage/lib/img/card-8.22.png.png");
-  background-size: 85%;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  margin: auto auto;
-  margin-top: 10%;
-}
-
-.cardImg9 {
-  width: 70%;
-  height: 80px;
-  background: url("/userpage/lib/img/card9.png");
-  background-size: 85%;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  margin: auto auto;
-  margin-top: 8%;
-}
-
-.cardImg9-2 {
-  width: 70%;
-  height: 80px;
-  background: url("/userpage/lib/img/card-9-22.png.png");
-  background-size: 85%;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  margin: auto auto;
-  margin-top: 8%;
-}
-
-.cardImg10 {
-  width: 70%;
-  height: 80px;
-  background: url("/userpage/lib/img/card10.png");
-  background-size: 85%;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  margin: auto auto;
-  margin-top: 8%;
-}
-.cardImg10-2 {
-  width: 70%;
-  height: 80px;
-  background: url("/userpage/lib/img/card10-2.png");
-  background-size: 90%;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  margin: auto auto;
-  margin-top: 10%;
-}
-
-.easy td {
-  border-bottom: none !important;
-}
-
-.easy_more td {
-  border-top: none !important;
-}
-
-.sel_easy_more {
-  margin-top: 20px;
-  width: 500px;
+.fare_wrap table td {
   height: 60px;
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  font-weight: 600;
-  justify-content: space-between;
-  background-color: rgb(247, 247, 246);
+  border-bottom: 1px solid rgba(168, 165, 165, 0.3);
+  padding: 10px;
 }
 
-td > ul > li {
-  line-height: 25px;
+.tot_price_wrap {
+  height: 60.5px !important;
 }
 
-td > ul > li::before {
-  content: " - ";
-}
-
-.dis_int {
-  width: 200px;
-  height: 45px;
-  margin: 10px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
+.fare_wrap .tax {
+  display: inline-block;
+  margin-top: 30px;
+  margin-left: 15px;
   font-size: 14px;
+  font-weight: bold;
+}
+
+.fare_wrap .tax::before {
+  content: "*";
+  font-size: 8px;
+  vertical-align: top;
+}
+
+.fare_wrap .curr {
+  display: inline-block;
+  font-size: 10px;
+  margin-right: 15px;
+}
+
+.fare_wrap table .total_price {
+  font-size: 25px;
+}
+
+.next_butt {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  margin-top: 50px;
+  width: 200px;
+  height: 60px;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
   background-color: #bdd600;
+  cursor: pointer;
 }
 
-.pay_wrap .checkbox {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-  vertical-align: middle;
+/*운임확인 끝*/
+
+/*fix총액 확인*/
+
+.fix_bott_wrap {
+  position: absolute;
+  margin-top: 400px;
+  width: 100%;
+  height: 100px;
 }
 
-.checkbox_wrap {
-  border-bottom: none !important;
+.fix_bott {
+  width: 1180px;
+  left: 50%;
+  transform: translate(-50%);
+  margin: 0 auto;
+  height: 100px;
+  padding: 20px;
+  background-color: rgba(248, 248, 248, 0.5);
+  z-index: 500;
 }
 
-.butt_pay_wrap {
+.fix_bott table {
+  position: absolute;
+  right: 140px;
+  width: 400px;
+  border: 1px solid #BDD600;
+  border-collapse: collapse;
+}
+
+.fix_bott table td {
+  height: 60px;
+}
+
+.fix_bott table td.img {
+  background-image: url("/userpage/lib/img/up.png");
+  background-repeat: no-repeat;
+  background-size: 80%;
+  background-position: center;
+  background-color: #BDD600;
+  display: block;
+}
+
+.fix_bott table td.img2 {
+  background-image: url("/userpage/lib/img/down.png");
+  background-repeat: no-repeat;
+  background-size: 80%;
+  background-position: center;
+  background-color: #BDD600;
+  display: none;
+}
+
+.price_tit {
+  font-weight: bold;
+  background-color: #fff;
+  padding: 3px;
+}
+
+.price_tit span {
+  font-size: 12px;
+}
+
+.price_tit .price {
+  display: inline;
+  position: absolute;
+  right: 5px;
+  top: 20px;
+  padding-right: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  color: black
+}
+
+.fix_bott .fix_next_butt {
+  position: absolute;
+  width: 100px;
+  height: 60px;
+  right: 30px;
+  background-color: #BDD600;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+
+}
+/*총액 확인 모달*/
+.fix_modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 0px;
+  z-index: 500;
+  display: none;
+}
+
+#modal_totP_wrap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 800px;
+  z-index: 500;
+  display: none;
+}
+
+.modal_con_wrap {
+  position:absolute;
+  box-sizing: border-box;
+  width: 1180px;
+  height: 480px;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%);
+  padding-top: 40px;
+  background-color: #fff;
+  border-top: 3px solid #BDD600;
+  font-weight: 600;
+}
+
+.modal_con_wrap h2 {
+  color:rgb(102, 30, 67);
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.modal_con_wrap > .jour_wrap {
   display: flex;
-  border: none !important;
+  width: 100%;
+  height: 90px;
+  justify-content: center;
+  font-weight: 900;
+}
+
+.modal_con_wrap hr {
+  color: rgba(248, 248, 248, 0.5)
+}
+
+.jour_wrap h2, .jour_wrap .flight{
+  display: inline;
+  font-weight: 900;
+}
+
+.jour_wrap .jour_info_wrap{
+  margin-top: 8px;
+  font-size: 16px;
+  width: 500px;
+  font-weight: 900;
+  height: 20px !important;
+}
+
+.jour1 .jour_info_wrap {
+  margin-right: 60px;
+}
+
+.jour_info_wrap td {
+  padding: 3px;
+  height: 15px;
+}
+
+.jour_info_wrap .area {
+  text-align: left;
+}
+.jour_info_wrap .date {
+  text-align: right;
+}
+
+.info_wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+  font-size: 13px;
+  width: 100%;
+  height: 403px;
+}
+
+.info {
+  position: relative;
+  width: 500px;
+  height: 300px;
+  margin-right: 60px;
+}
+
+.info_table_wrap {
+  margin-top: 0px;
+  width: 500px;
+  height: 240px;
+  overflow: hidden;
+  background-color: rgb(248, 248, 248);
+}
+
+.App {
+  position: relative;
+  width: 500px;
   height: 300px;
 }
 
-.butt_pay {
+.info_wrap .price_info_wrap {
+  /* display: flex; */
+  width: 490px;
+  font-size: 16px;
+  height: 100px;
+  padding: 10px;
+  margin-bottom: 50px;
+  /* background-color: rgb(248, 248, 248); */
+}
+
+
+.info_wrap .price_info_wrap td {
+  height: 30px;
+}
+.info_wrap .price_info_wrap td:nth-child(1){
+  width: 250px;
+}
+.info_wrap .price_info_wrap td:nth-child(2){
+  width: 240px;
+}
+
+.info_wrap .price_info_wrap .price {
+  text-align: right;
+}
+
+
+.price_info_wrap .price_tit {
+  text-align: left;
+  background: none;
+  padding: 0px;
+}
+
+.table_title {
+  width: 100%;
+}
+
+.table_title .tit {
+  text-align: left;
+}
+
+
+.table_title .curr {
+  text-align: right;
+  padding-right: 15px;
+  font-size: 12px;
+}
+
+
+.mark::before {
+  content: " · ";
+}
+
+.plus {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  height: 20px;
+  color:rgb(102, 30, 67);
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 80px;
+  margin-left: 200px;
+}
+
+.plus_1 {
+  display: inline-block;
+  width: 34px;
+}
+
+.minus_1 {
+  width: 30px;
+  display: none;
+  margin-left: 2px;
+}
+
+.plus_2 {
+  display: inline-block;
+  width: 34px;
+}
+
+.minus_2 {
+  width: 30px;
+  display: none;
+  margin-left: 2px;
+}
+
+
+
+.close {
   position: absolute;
-  left: 50%;
-  width: 230px;
-  height: 60px;
-  background-color: #bdd600;
-  border: none;
-  transform: translate(-50%);
-  border: none !important;
-  font-size: 20px;
+  font-size: 2.3em;
+  top: 25px;
+  right: 30px;
+  cursor: pointer;
+}
+
+/*더보기*/
+.modal_price_info_wrap {
+  width: 100%;
+  height: 250px;
+  margin-top: 0px;
+}
+
+.modal_price_info_wrap table {
+  width: 100%;
+  position: relative;
+  background-color: rgb(248, 248, 248);
+  font-weight: bold;
+  border-collapse: collapse;
+}
+
+.modal_price_info_wrap th {
+  background-color: rgb(102, 30, 67);
+  text-align: left;
+  line-height: 40px;
+  padding-left: 20px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.modal_price_info_wrap td {
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(168, 168, 168, 0.5);
+  height: 45px;
+}
+
+.modal_price_info_wrap td:first-child {
+  padding:  0px 18px;
+}
+
+.modal_price_info_wrap td.seb {
+  text-align: right;
+  padding-right: 15px;
+}
+
+.modal_price_info_wrap td.per {
+  padding-left: 8px;
+}
+
+.modal_price_info_wrap td span.det {
+  float: right;
+}
+
+.modal_price_info_wrap td.per::before {
+  content: ' · ';
+}
+
+.modal_price_info_wrap p {
+  display: inline;
+  float: right;
+  margin-right: 10px;
+}
+
+.modal_price_info_wrap p.title {
+  float: left;
+}
+
+
+.modal_price_info_wrap th span {
+  font-size: 13px;
+  margin-right: 3px;
+}
+
+.modal_price_info_wrap tr:last-child {
+  font-weight: lighter;
+}
+
+.modal_price_info_wrap td > span.det {
+  font-size: 13px;
+  text-decoration: underline;
+  margin-left: 65px;
+  color: #444;
+}
+
+.modal_price_info_wrap td span > span {
+  text-decoration: none;
+}
+
+.ar {
+  text-decoration: none;
+}
+
+.ar::before {
+  font-size: 10px;
+  content: ' ∧ ';
+  text-decoration: none;
+}
+
+td.cur {
+  height: 80px;
+  font-size: 14px;
   font-weight: bold;
   color: #444;
 }
 
-/*항공기 위험물 안내 모달창*/
-#modal_restricted_items_wrap {
+td.cur::before {
+  content: ' * ';
+}
+
+
+.detD1 {
+  width: 100%;
+  height: 60px;
+  padding: 0px;
+  background-image: url("/userpage/lib/img/det.PNG");
+  background-size: 100%;
+  background-repeat: none;
+  background-color: rgb(248, 248, 248);
   display: none;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 800;
 }
 
-#modal_restricted_items_wrap .modal_restricted_items_wrap {
+.detD2 {
+  width: 100%;
+  height: 60px;
+  padding: 0px;
+  background-image: url("/userpage/lib/img/det.PNG");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-color: rgb(248, 248, 248);
   display: none;
-  width: 60%;
-  height: 800px;
-  margin: 30px auto;
-  background-color: #fff;
 }
 
-#modal_restricted_items_wrap .modal_restricted_items_wrap .modal_title {
-  position: relative;
-  padding: 20px;
-  font-size: 34px;
-  background-color: #661e43;
-  height: 80px;
+/*총액 확인 모달*/
+
+/*프로모션코드 입력 모달*/
+#modal_input_code_wrap {
+  position: absolute;
   width: 100%;
-  color: #fff;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#modal_restricted_items_wrap .modal_restricted_items_wrap .modal_contents {
-  padding: 30px 20px;
-  font-weight: 600;
-  overflow: scroll;
-  overflow-x: hidden;
-  width: 100%;
-  height: 720px;
-}
-
-#modal_restricted_items_wrap
-  .modal_restricted_items_wrap
-  .modal_contents
-  .top ul li {
-  line-height: 25px;
-}
-
-#modal_restricted_items_wrap
-  .modal_restricted_items_wrap
-  .modal_contents
-  .top
-  ul
-  li::before {
-  content: " - ";
-}
-
-#modal_restricted_items_wrap
-  .modal_restricted_items_wrap
-  .modal_contents
-  .detail_link {
-  background-color: #bdd600;
-  width: 150px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 20px 13px;
-  font-size: 14px;
-}
-
-.item_list_wrap {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.modal_contents .list {
-  width: 32%;
-  /* height: 300px; */
-  height: auto;
-  margin-bottom: 20px;
-  border: 1px solid rgba(168, 165, 165, 0.3);
-}
-.modal_contents .list > p {
-  padding: 20px;
-  background-color: rgb(247, 247, 246);
-  text-align: center;
-}
-
-.modal_contents > table {
-  border: none !important;
-  width: 100%;
-  height: 80%;
-  padding: 10px;
-}
-
-.list > table td {
-  border: none !important;
-  text-align: center;
-  word-break: keep-all;
-  vertical-align: top;
-}
-
-.list > table td p {
-  font-size: 15px;
-  line-height: 20px;
-}
-
-.modal_contents table td:first-child {
-  height: 60%;
-}
-
-.modal_contents table td:last-child {
-  height: 40%;
-}
-
-.modal_contents table td img {
-  width: 90%;
-  height: 140px;
-  margin-top: 10px;
-}
-
-.modal_checkbox_wrap {
-  display: flex;
-  align-items: center;
-}
-
-#modal_checkbox {
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-}
-
-.button_wrap {
-  width: 100%;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.button_wrap .butt {
-  margin-right: 10px;
-  width: 130px;
-  height: 40px;
-  background-color: #fff;
-  border: 1px solid #bdd600;
-}
-
-.button_wrap .butt_ok {
-  background-color: #bdd600;
-}
-
-.modal_conf_ok_wrap {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  left: 0;
-  right: 0;
+  height: 2000px;
+  background-color: rgba(0, 0, 0, 0.8);
   top: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  left: 0;
   z-index: 800;
-}
-
-.modal_conf_ok {
-  position: relative;
-  width: 300px;
-  padding: 30px;
-  height: 150px;
-  font-size: 14px;
-  background-color: #fff;
-  border: 1px solid black;
-  line-height: 20px;
-  font-weight: bold;
-}
-
-.modal_conf_ok p {
-  width: 100%;
-  margin-top: 25px;
-  display: flex;
-  justify-content: center;
-  font-weight: bold;
-}
-
-.modal_conf_ok p input {
-  width: 80px;
-  height: 40px;
-  border: none;
-  font-size: 14px;
-  background-color: #bdd600;
-  font-weight: 600;
-  font-weight: bold;
-}
-
-/*항공기 위험물 안내 모달창 끝*/
-
-/*운임 규정 안내 모달창*/
-/*항공기 위험물 안내 모달창*/
-#modal_fare_rules {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
   display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 800;
 }
 
-#modal_fare_rules .modal_fare_rules {
-  width: 600px;
-  height: 800px;
-  margin: 30px auto;
+#modal_input_code_wrap .modal_table_wrap {
+  width: 650px;
+  height: 300px;
+  margin: auto;
+  margin-top: 250px;
   background-color: #fff;
 }
 
-#modal_fare_rules .modal_fare_rules .modal_title {
+#modal_input_code_wrap .modal_input_code {
   width: 100%;
-  height: 80px;
-  padding: 20px 30px;
-  display: flex;
-  justify-content: space-between;
-  background-color: #661e43;
-  color: #fff;
-  font-size: 30px;
-  align-items: center;
-  font-weight: bold;
-}
-
-#modal_fare_rules .modal_fare_rules .modal_contents {
-  padding: 20px 30px;
-  font-size: 12px;
-  font-weight: bold;
-  overflow: scroll;
-  overflow-x: hidden;
-  width: 100%;
-  height: 720px;
-}
-
-#modal_fare_rules .modal_fare_rules .modal_contents h4 {
-  color: black;
-  width: 100%;
-  height: 30px;
-  display: flex;
-  align-items: flex-end;
-  margin: 10px 0;
-  font-size: 16px;
-}
-
-#modal_fare_rules .modal_fare_rules .modal_contents > table {
-  border-top: 1px solid black !important;
-  border-bottom: 1px solid black !important;
   border-collapse: collapse;
+  text-align: center;
 }
 
-#modal_fare_rules .modal_fare_rules .modal_contents > table th {
-  padding: 5px;
+#modal_input_code_wrap .modal_input_code th {
+  background-color: rgb(102, 30, 67);
+  color: white;
+  font-size: 2.3em;
   text-align: left;
-  border-right: 1px solid rgba(168, 165, 165, 0.3) !important;
-  border-bottom: 1px solid rgba(168, 165, 165, 0.3) !important;
+  padding: 30px;
 }
 
-#modal_fare_rules .modal_fare_rules .modal_contents > table td {
-  padding: 15px;
-  border-right: 1px solid rgba(168, 165, 165, 0.3) !important;
-  border-bottom: 1px solid rgba(168, 165, 165, 0.3) !important;
+#modal_input_code_wrap .modal_input_code td {
+  height: 85px;
+  background-color: #fff;
 }
 
-#modal_fare_rules .modal_fare_rules .modal_contents table td:last-child {
+#modal_input_code_wrap .modal_input_code .input_code {
+  box-sizing: border-box;
+  width: 80%;
+  height: 60px;
+  margin: 0 auto;
+  margin-top: 25px;
+  background-color: rgb(248, 248, 248);
+  border: 1px solid rgba(168, 165, 165, 0.5);
+  padding: 18px;
+  font-size: 18px;
+}
+
+#modal_input_code_wrap .modal_input_code .input_code::placeholder {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#modal_input_code_wrap .modal_input_code .input_ok {
+  width: 140px;
+  height: 45px;
+  background-color: #bdd600;
+  border: none;
+  margin-right: 10px;
+  font-weight: 600;
+}
+
+#modal_input_code_wrap .modal_input_code .input_cancel {
+  width: 140px;
+  height: 45px;
+  border: 1px solid #bdd600;
+  background-color: #fff;
+  font-weight: 600;
+}
+
+#modal_input_code_wrap .modal_input_code .close {
+  position: static;
+  display: inline-block;
+}
+
+#modal_input_code_wrap .modal_input_code .input_cancel {
+  font-size: inherit;
+}
+
+/*프로모션코드 입력 모달*/
+
+/*여행일정 수정 모달 끝*/
+
+/* 운임규정 모달 */
+.crr_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 500;
+  display: none;
+}
+.crr_modal .crr_box {
+  background-color: #fff;
+  width: 645px;
+  height: 660px;
+  margin: 50px auto 0;
+}
+.crr_modal .crr_box h3 {
+  display: inline-block;
+}
+.crr_modal .crr_box button.close_img {
+  margin-left: 390px;
+  margin-bottom: 20px;
+  vertical-align: middle;
+  background-color: transparent;
+  border: none;
+}
+.crr_modal .crr_box button img {
+  width: 26px;
+  height: 26px;
+}
+.crr_modal .crr_box .crr_title {
+  height: 80px;
+  background-color: #661e43;
+}
+.crr_modal .crr_box .crr_title h3 {
+  color: #fff;
+  font-size: 32px;
+  padding: 30px 50px 20px 30px;
+}
+.crr_contents {
+  overflow-y: scroll !important;
+}
+.crr_modal .crr_box .crr_kind > table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  width: 90%;
+  height: 50px;
+  margin-top: 15px;
+  line-height: 1.2;
+  font-size: 14px;
+  color: #444;
+  box-shadow: 5px 8px 5px rgb(150 150 150 / 40%);
+  border-top: 1px solid rgb(102, 30, 67);
+}
+.crr_modal .crr_box .crr_kind > table th {
+  border-spacing: 0px;
+  padding: 10px;
+  height: 100%;
+  width: 116px;
+  font-weight: bold;
+  vertical-align: middle;
+  text-align: center;
+}
+.crr_modal .crr_box .crr_kind > table th.kind_btn {
+  color: #fff;
+  background-color: #661e43;
+}
+.crr_modal .crr_box .crr_kind > table th.superlow_btn {
+  background-color: #fff;
+}
+.crr_modal .crr_box .crr_kind > table th.flex_btn {
+  background-color: #fff;
+}
+.crr_modal .crr_box .crr_kind > table th.jini_btn {
+  background-color: #fff;
+}
+.crr_modal .crr_box .crr_kind > table th.biz_btn {
+  background-color: #fff;
+}
+/* 운임종류 */
+.crr_modal .crr_box .crr_index {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.crr_modal .crr_box .crr_index .text {
+  text-align: right;
+  font-size: 14px;
+  color: #555;
+  padding: 10px;
+  margin-right: 20px;
+}
+.crr_modal .crr_box .crr_index .crr_table {
+  text-align: center;
+}
+.crr_modal .crr_box .crr_index .crr_table table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  color: #555;
+  width: 90%;
+  white-space: nowrap;
+}
+.crr_modal .crr_box .crr_index .crr_table table th {
+  background-color: #f2f2f2;
+  width: 90px;
+  height: 51px;
+  font-size: 16px;
+  border-top: 1px solid #000 !important;
+}
+.crr_modal .crr_box .crr_index .crr_table table th,
+.crr_modal .crr_box .crr_index .crr_table table td {
+  border: 0.5px solid rgb(153, 153, 153, 0.2);
+  vertical-align: middle;
+  padding: 5px;
+}
+.crr_modal .crr_box .crr_index .crr_table table th:first-child,
+.crr_modal .crr_box .crr_index .crr_table table td:first-child {
+  border-left: none;
+}
+.crr_modal .crr_box .crr_index .crr_table table th:last-child,
+.crr_modal .crr_box .crr_index .crr_table table td:last-child {
   border-right: none;
-  border-bottom: none;
 }
-
-#modal_fare_rules .modal_fare_rules .modal_contents table li {
-  line-height: 18px;
-  font-weight: 600;
+.crr_modal .crr_box .crr_index .crr_table table td {
+  font-weight: bold;
+  height: 50px;
+  text-align: center;
 }
-
-#modal_fare_rules .modal_fare_rules .modal_contents table li::before {
-  content: none;
-}
-#modal_fare_rules .modal_fare_rules .modal_contents table span {
-  font-weight: 600;
-}
-
-#modal_fare_rules .modal_fare_rules .modal_contents .bott {
-  margin-top: 20px;
+.crr_modal .crr_box .crr_index .crr_table table td.sub_tit {
   font-size: 14px;
 }
-
-#modal_fare_rules .modal_fare_rules .modal_contents .bott label {
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-}
-#modal_fare_rules .modal_fare_rules .modal_contents .bott label span {
-  margin-left: 20px;
-  font-size: 15px;
-}
-
-#modal_fare_rules .modal_fare_rules .modal_contents .bott label + p {
-  margin-left: 28px;
+.crr_modal .crr_box .crr_index .crr_table table td p {
   font-size: 13px;
 }
-
-#modal_fare_rules .modal_fare_rules .modal_contents .bott .butt_wrap {
-  width: 100%;
-  display: flex;
-  margin-top: 15px;
-  justify-content: center;
+.h_80 {
+  height: 80px !important;
 }
-
-#modal_fare_rules .modal_fare_rules .modal_contents .bott .butt_wrap input {
-  width: 100px;
-  height: 35px;
-  margin-right: 10px;
-  background-color: #fff;
-  border: 1px solid #bdd600;
-}
-
-#modal_fare_rules
-  .modal_fare_rules
-  .modal_contents
-  .bott
-  .butt_wrap
-  input.butt_ok {
-  background-color: #bdd600;
-}
-
-.checkBox, .checkBox2 {
-  width: 15px;
-  height: 15px;
-  margin-right: 8px;
-}
-
-/*운임 규정 안내 모달창 끝*/
-
-/*신용카드 무이자 할부 및 혜택 안내 모달창 */
-
-#modal_credit_int {
+/* 슈퍼 로우 */
+.crr_modal .crr_box .crr_superlow {
   display: none;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 800;
 }
-
-#modal_credit_int .modal_credit_int {
+/* 플렉스 */
+.crr_modal .crr_box .crr_flex {
   display: none;
-  width: 600px;
-  height: 800px;
-  margin: 30px auto;
-  background-color: #fff;
 }
-
-#modal_credit_int .modal_credit_int .modal_credit_title {
-  width: 100%;
-  height: 80px;
-  padding: 20px 30px;
-  display: flex;
-  justify-content: space-between;
-  background-color: #661e43;
-  color: #fff;
-  font-size: 30px;
-  align-items: center;
-  font-weight: bold;
+/* 지니 */
+.crr_modal .crr_box .crr_jini {
+  display: none;
 }
-
-#modal_credit_int .modal_credit_int .modal_credit_contents {
-  padding: 30px 10px 30px 20px;
-  font-weight: bold;
-  overflow: scroll;
-  overflow-x: hidden;
-  width: 100%;
-  height: 720px;
-  font-size: 16px;
+/* 지니비즈 */
+.crr_modal .crr_box .crr_biz {
+  display: none;
 }
-
-#modal_credit_int .modal_credit_int .modal_credit_contents table {
-  width: 100%;
-  text-align: center;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+/* 상세 내용 테이블 */
+.crr_box .detail_table {
   border-collapse: collapse;
-  font-size: 16px;
-  margin: 20px 0;
+  margin: 0 auto;
+  color: #555;
+  width: 90%;
+  margin-top: 30px;
 }
-
-#modal_credit_int .modal_credit_int .modal_credit_contents table th {
-  background-color: rgb(247, 247, 246);
-  line-height: 50px;
-  border-right: 1px solid rgba(168, 165, 165, 0.3);
+.crr_box .detail_table tr:first-child {
+  border-top: 1px solid #000;
 }
-
-#modal_credit_int .modal_credit_int .modal_credit_contents table th:last-child,
-td:last-child {
-  border-right: none;
+.crr_box .detail_table th {
+  text-align: left;
+  padding-left: 20px;
+  width: 25%;
+  font-size: 17px;
+  background-color: #f2f2f2;
+  border-bottom: 0.5px solid rgb(153, 153, 153, 0.2);
 }
-
-#modal_credit_int .modal_credit_int .modal_credit_contents table td {
-  height: 45px;
-  padding-top: 5px;
-  vertical-align: middle;
+.crr_box .detail_table td {
+  width: 75%;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 2;
+  border-bottom: 0.5px solid rgb(153, 153, 153, 0.2);
 }
-
-#modal_credit_int .modal_credit_int .modal_credit_contents .bott {
-  width: 100%;
-  line-height: 25px;
+/* 닫기 버튼 */
+.crr_modal .crr_box .close_btn {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
 }
-
-#modal_credit_int .modal_credit_int .modal_credit_contents .bott .bott_tit,
-#modal_credit_int .modal_credit_int .modal_credit_contents .bott ul li {
-  text-indent: -10px;
-  padding-left: 8px;
-}
-
-#modal_credit_int
-  .modal_credit_int
-  .modal_credit_contents
-  .bott
-  .bott_tit::before {
-  content: " ※ ";
-}
-
-#modal_credit_int .modal_credit_int .modal_credit_contents .bott ul li {
-  font-size: 14px;
-  line-height: 18px;
-}
-
-#modal_credit_int .modal_credit_int .modal_credit_contents .bott ul li::before {
-  content: " * ";
-}
-
-#modal_credit_int .modal_credit_int .modal_credit_contents .bott .butt_wrap {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-#modal_credit_int
-  .modal_credit_int
-  .modal_credit_contents
-  .bott
-  .butt_wrap
-  input {
-  width: 120px;
-  height: 35px;
+.crr_modal .crr_box .close_btn button {
+  width: 135px;
+  height: 42px;
   background-color: #fff;
-  border: 1px solid #bdd600;
-  font-weight: 600;
+  border: 2px solid #bdd600;
 }
-
-#modal_credit_int
-  .modal_credit_int
-  .modal_credit_contents
-  .bott
-  .butt_wrap
-  input.butt_ok_credit {
-  margin-right: 10px;
-  background-color: #bdd600;
-}
-
-/*신용카드 무이자 할부 및 혜택 안내 모달창 끝 */
-
-/*결제 끝*/
-
+/* 운임규정 모달 끝 */
 
 /*푸터*/
 #footerCont {
@@ -2213,19 +1860,6 @@ td:last-child {
   margin-top: 16px;
 }
 /*뉴스레터 끝*/
-
-/*모달*/
-.modal {
-  position: fixed;
-  background: rgba(0, 0, 0, 0.5);
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 /* ******************
     수정 모달 레이어 모음
@@ -2917,7 +2551,7 @@ td:last-child {
   justify-content: center;
   align-items: center;
 }
-.modal_container > .modals {
+.modal_container > .modals form {
   display: flex;
   justify-content: center;
 }
@@ -2930,40 +2564,4 @@ td:last-child {
   border: none;
   margin: 40px 10px 0;
   cursor: pointer;
-}
-
-.false_modal{
-  position: fixed;
-  background: rgba(0, 0, 0, 0.5);
-  left: 0; right: 0; top: 0; bottom: 0;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 101;
-}
-.false_modal .false_modal_box{
-  background-color: white;
-  width: 300px;
-  height: 150px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #661E43;
-  font-weight: 600;
-}
-.false_modal .false_modal_box .modal_btn p{
-  width: 100px;
-  height: 40px;
-  background-color:#BDD600;
-  border: 0;
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-right: 20px;
-  margin-top: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }

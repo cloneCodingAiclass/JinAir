@@ -1045,6 +1045,175 @@ public class PageController {
     }
 
 
+    // 사용자 항공권 예약 변경 getAvailabilityListMD 왕복
+    @PostMapping("/getAvailabilityListMD/twoway")
+    public ModelAndView getAvailabilityListMD(
+            HttpServletRequest request, Model model, HttpServletResponse response,
+            @RequestParam(value = "schDeparturePoint", required=false) String schDeparturePoint,
+            @RequestParam(value = "schArrivalPoint", required=false) String schArrivalPoint,
+            @RequestParam(value = "goDateSelectOptt", required=false) String goDateSelectOptt,
+            @RequestParam(value = "comeDateSelectOptt", required=false) String comeDateSelectOptt,
+            @RequestParam(value = "AdultNumber", required=false) Long AdultNumber,
+            @RequestParam(value = "ChildNumber", required=false) Long ChildNumber,
+            @RequestParam(value = "InfantNumber", required=false) Long InfantNumber,
+            @RequestParam(value = "reIndex1", required=false) Long reIndex1
+    ){
+        model.addAttribute("schDeparturePoint", schDeparturePoint);
+        model.addAttribute("schArrivalPoint", schArrivalPoint);
+        model.addAttribute("goDateSelectOptt", goDateSelectOptt);
+        model.addAttribute("comeDateSelectOptt", comeDateSelectOptt);
+        Long peopleNum = AdultNumber+ChildNumber+InfantNumber;
+        List reIndex = new ArrayList<>();
+
+        for(int i = 0 ; i < peopleNum*2 ; i ++){
+            reIndex.add(reIndex1+i);
+        }
+        model.addAttribute("reIndex", reIndex);
+
+        if(ChildNumber == 0){
+            if(InfantNumber == 0){
+                model.addAttribute("people", "성인 " + AdultNumber);
+            }else{
+                model.addAttribute("people", "성인 " + AdultNumber + " 유아 " + InfantNumber);
+            }
+        }else if(AdultNumber == 0){
+            model.addAttribute("people", "소아 " + ChildNumber);
+        }else if(InfantNumber == 0){
+            if(ChildNumber == 0){
+                model.addAttribute("people", "성인 " + AdultNumber);
+            }else if(AdultNumber == 0){
+                model.addAttribute("people", "소아 " + ChildNumber);
+            }else{
+                model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber);
+            }
+        }else{
+            model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber + " 유아 " + InfantNumber);
+        }
+
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/payment/getAvailabilityListMD")
+                    .addObject("code", "getAvailabilityList");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "getAvailabilityList");
+        }
+
+    }
+
+    // 사용자 항공권 예약 변경 getAvailabilityListMD 편도
+    @PostMapping("/getAvailabilityListMD/oneway")
+    public ModelAndView getAvailabilityListMD(
+            HttpServletRequest request, Model model, HttpServletResponse response,
+            @RequestParam(value = "schDeparturePoint", required=false) String schDeparturePoint,
+            @RequestParam(value = "schArrivalPoint", required=false) String schArrivalPoint,
+            @RequestParam(value = "goDateSelectOptt", required=false) String goDateSelectOptt,
+            @RequestParam(value = "AdultNumber", required=false) Long AdultNumber,
+            @RequestParam(value = "ChildNumber", required=false) Long ChildNumber,
+            @RequestParam(value = "InfantNumber", required=false) Long InfantNumber,
+            @RequestParam(value = "reIndex1", required=false) Long reIndex1
+    ){
+        model.addAttribute("schDeparturePoint", schDeparturePoint);
+        model.addAttribute("schArrivalPoint", schArrivalPoint);
+        model.addAttribute("goDateSelectOptt", goDateSelectOptt);
+        Long peopleNum = AdultNumber+ChildNumber+InfantNumber;
+        List reIndex = new ArrayList<>();
+
+        System.out.println(reIndex1);
+
+        for(int i = 0 ; i < peopleNum*2 ; i ++){
+            reIndex.add(reIndex1+i);
+        }
+        model.addAttribute("reIndex", reIndex);
+        if(ChildNumber == 0){
+            if(InfantNumber == 0){
+                model.addAttribute("people", "성인 " + AdultNumber);
+            }else{
+                model.addAttribute("people", "성인 " + AdultNumber + " 유아 " + InfantNumber);
+            }
+        }else if(AdultNumber == 0){
+            model.addAttribute("people", "소아 " + ChildNumber);
+        }else if(InfantNumber == 0){
+            if(ChildNumber == 0){
+                model.addAttribute("people", "성인 " + AdultNumber);
+            }else if(AdultNumber == 0){
+                model.addAttribute("people", "소아 " + ChildNumber);
+            }else{
+                model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber);
+            }
+        }else{
+            model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber + " 유아 " + InfantNumber);
+        }
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/payment/getAvailabilityListMD")
+                    .addObject("code", "getAvailabilityList");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "getAvailabilityList");
+        }
+    }
+
+    // 사용자 항공권 예약 변경 getAvailabilityListMD 다구간
+    @PostMapping("/getAvailabilityListMD/multiway")
+    public ModelAndView getAvailabilityListMD(
+            HttpServletRequest request, Model model, HttpServletResponse response,
+            @RequestParam(value = "schDeparturePoint", required=false) String schDeparturePoint,
+            @RequestParam(value = "schArrivalPoint", required=false) String schArrivalPoint,
+            @RequestParam(value = "goDateSelectOptt", required=false) String goDateSelectOptt,
+            @RequestParam(value = "schDeparturePoint1", required=false) String schDeparturePoint1,
+            @RequestParam(value = "schArrivalPoint1", required=false) String schArrivalPoint1,
+            @RequestParam(value = "goDateSelectOptt1", required=false) String goDateSelectOptt1,
+            @RequestParam(value = "AdultNumber", required=false) Long AdultNumber,
+            @RequestParam(value = "ChildNumber", required=false) Long ChildNumber,
+            @RequestParam(value = "InfantNumber", required=false) Long InfantNumber,
+            @RequestParam(value = "reIndex1", required=false) Long reIndex1
+    ){
+        model.addAttribute("schDeparturePoint", schDeparturePoint);
+        model.addAttribute("schArrivalPoint", schArrivalPoint);
+        model.addAttribute("goDateSelectOptt", goDateSelectOptt);
+        model.addAttribute("schDeparturePoint1", schDeparturePoint1);
+        model.addAttribute("schArrivalPoint1", schArrivalPoint1);
+        model.addAttribute("goDateSelectOptt1", goDateSelectOptt1);
+
+        Long peopleNum = AdultNumber+ChildNumber+InfantNumber;
+        List reIndex = new ArrayList<>();
+
+        for(int i = 0 ; i < peopleNum*2 ; i ++){
+            reIndex.add(reIndex1+i);
+        }
+        if(ChildNumber == 0){
+            if(InfantNumber == 0){
+                model.addAttribute("people", "성인 " + AdultNumber);
+            }else{
+                model.addAttribute("people", "성인 " + AdultNumber + " 유아 " + InfantNumber);
+            }
+        }else if(AdultNumber == 0){
+            model.addAttribute("people", "소아 " + ChildNumber);
+        }else if(InfantNumber == 0){
+            if(ChildNumber == 0){
+                model.addAttribute("people", "성인 " + AdultNumber);
+            }else if(AdultNumber == 0){
+                model.addAttribute("people", "소아 " + ChildNumber);
+            }else{
+                model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber);
+            }
+        }else{
+            model.addAttribute("people", "성인 " + AdultNumber + " 소아 " + ChildNumber + " 유아 " + InfantNumber);
+        }
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberApiResponse") != null){
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/payment/getAvailabilityListMD")
+                    .addObject("code", "getAvailabilityList");
+        }else{
+            return new ModelAndView("/userpage/pages/index/error")
+                    .addObject("code", "getAvailabilityList");
+        }
+    }
+
     // 사용자 항공권 예약 registerPassenger
     @RequestMapping("/registerPassenger")
     public ModelAndView registerPassenger(HttpServletRequest request, Model model){
