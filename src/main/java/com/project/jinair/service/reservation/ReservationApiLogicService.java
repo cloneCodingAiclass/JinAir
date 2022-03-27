@@ -474,4 +474,13 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .build();
         return Header.OK(reserveApiResponseList, pagination);
     }
+
+    public Header<List<ReserveApiResponse>> searchOfCode(String resCode, String firstName, String lasName){
+        List<TbReservation> tbReservation = tbReservationRepository.findByReReserNumAndReFirstNameAndReLastName(resCode, firstName, lasName);
+        List<ReserveApiResponse> tbReservationList = tbReservation.stream()
+                .map(res -> responseReservation(res))
+                .collect(Collectors.toList());
+
+        return Header.OK(tbReservationList);
+    }
 }
