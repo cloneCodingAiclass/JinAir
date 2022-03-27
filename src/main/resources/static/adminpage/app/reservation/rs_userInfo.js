@@ -142,7 +142,7 @@ $(() => {
             $('#landingTime').text(starttime)
             $('#landingPoint').text(response.data.reSchDepPoint)
             $('#arrPoint').text(response.data.reSchArrPoint)
-            let endtime = response.data.reSchEndTime.substr(0, 10)
+            let endtime = jsonData.data.reSchEndTime.substr(11, 5)
             $('#arrTime').text(endtime)
 
 
