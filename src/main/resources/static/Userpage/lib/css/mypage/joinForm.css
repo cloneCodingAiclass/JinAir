@@ -626,7 +626,7 @@ body{
 .joinForm_step .step1::after{
     content: "";
     margin-left: 172px;
-    top: 265px;
+    top: 252px;
     width: 26px;
     height: 70px;
     position: absolute;
@@ -645,7 +645,7 @@ body{
 .joinForm_step .step2::after{
     content: "";
     margin-left: 174px;
-    top: 265px;
+    top: 252px;
     width: 26px;
     height: 70px;
     position: absolute;
@@ -665,7 +665,7 @@ body{
 .joinForm_step .step3::after{
     content: "";
     margin-left: 147px;
-    top: 265px;
+    top: 252px;
     width: 26px;
     height: 70px;
     position: absolute;
