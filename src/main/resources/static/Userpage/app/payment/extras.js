@@ -519,12 +519,12 @@ $(function () {
   $(".insContent2 .noti").on("click", function () {
     $("#modal_insurance_info_wrap").fadeIn();
     $("#modal_insurance_info_wrap").css("display", "flex")
-    $("body").css("overflow", "hidden");
+    $('body').css("overflow", "hidden");
 
   })
   $("#modal_insurance_info_wrap .title .close").on("click", function () {
     $("#modal_insurance_info_wrap").fadeOut();
-    $("body").css("overflow", "scroll");
+    $('body').css("overflow", "scroll");
     str7 = "";
   })
 
@@ -1777,6 +1777,7 @@ let isinsjoin = false;
     if (isCheck == is) {
       $("#modal_insurance_info_wrap").fadeOut();
       $("#agree_check1").prop("checked", true);
+      $('body').css("overflow", "scroll");
       isinsjoin = true;
     } else {
       $("#modal_insurance_info_wrap .modal_agree2").fadeIn();
@@ -1910,6 +1911,7 @@ let isinsjoin = false;
     optionTotalPrice(personNumber);
     confirmOptional();
     $("#modal_service_app_wrap").fadeIn();
+    $('body').css("overflow", "hidden");
     $("#modal_service_app_wrap").css("display", "flex")
   });
 
@@ -2053,6 +2055,7 @@ $(() => {
 
   $("#agree_check1").on("click", function () {
     $("#modal_insurance_info_wrap").fadeIn();
+    $('body').css("overflow", "hidden");
     $("#modal_insurance_info_wrap").css("display", "flex");
     if ($(".nameBox .checkbox").is(":checked")) {
       $(this).prop("checked", true);
@@ -2176,6 +2179,7 @@ $(() => {
   $("#agree_check2").on("click", function () {
     $("#modal_agreement_wrap").fadeIn();
     $("#modal_agreement_wrap").css("display", "flex")
+    $('body').css("overflow", "hidden");
     if ($("#agree1").is(":checked") && $("#agree2").is(":checked")) {
       $("#agree_check2").prop("checked", true);
     } else {
@@ -2184,14 +2188,17 @@ $(() => {
   })
   $(".insContent2 .agree").on("click", function () {
     $("#modal_agreement_wrap").fadeIn();
+    $('body').css("overflow", "hidden");
   })
   $("#modal_agreement_wrap .close").on("click", function () {
     $("#modal_agreement_wrap").fadeOut();
+    $('body').css("overflow", "scroll");
   })
 
   $(".butt_agree").on("click", function () {
     if ($("#agree1").is(":checked") && $("#agree2").is(":checked")) {
       $("#modal_agreement_wrap").fadeOut();
+      $('body').css("overflow", "scroll");
       $("#agree_check2").prop("checked", true);
     } else {
       $("#modal_agreement_wrap #modal_agree").fadeIn();
@@ -2202,6 +2209,7 @@ $(() => {
   })
   $(".butt_canc, title close").on("click", function () {
     $("#modal_agreement_wrap").fadeOut();
+    $('body').css("overflow", "scroll");
   })
 
 })
@@ -2248,6 +2256,7 @@ $(() => {
 
   $("#modal_service_app_wrap .modal_butt_canc, #modal_service_app_wrap .tit_close").on("click", () => {
     $("#modal_service_app_wrap").fadeOut();
+    $('body').css("overflow", "scroll");
   })
 
 })

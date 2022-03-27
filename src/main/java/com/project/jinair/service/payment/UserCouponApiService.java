@@ -38,29 +38,34 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
     //일반 쿠폰 생성
     @Override
     public Header<UsercouponApiResponse> create(Header<UsercouponApiRequest> request) {
-        UsercouponApiRequest usercouponApiRequest = request.getData();
-        Header<MemberApiResponse> tbMember = memberApiLogicService.read(usercouponApiRequest.getUcUserindex());
-        Long price = usercouponApiRequest.getUcPrice();
+        try{
+            UsercouponApiRequest usercouponApiRequest = request.getData();
+            Header<MemberApiResponse> tbMember = memberApiLogicService.read(usercouponApiRequest.getUcUserindex());
+            Long price = usercouponApiRequest.getUcPrice();
 
-        Long result = (Long) em.createQuery("select sum(p.poPoint) from TbPoint p where p.poUserindex = " + tbMember.getData().getMemIndex()).getSingleResult();
+            Long result = (Long) em.createQuery("select sum(p.poPoint) from TbPoint p where p.poUserindex = " + tbMember.getData().getMemIndex()).getSingleResult();
 
-        if (result > price){
-            TbUsercoupon tbUsercoupon = TbUsercoupon.builder()
-                    .ucType(usercouponApiRequest.getUcType())
-                    .ucPrice(usercouponApiRequest.getUcPrice())
-                    .ucDesc(usercouponApiRequest.getUcDesc())
-                    .ucCode(usercouponApiRequest.getUcCode())
-                    .ucDiscount(usercouponApiRequest.getUcDiscount())
-                    .ucStartday(LocalDateTime.parse(usercouponApiRequest.getUcStartday()))
-                    .ucEndday(LocalDateTime.parse(usercouponApiRequest.getUcEndday()))
-                    .ucIsUse(usercouponApiRequest.getUcIsUse())
-                    .ucTotcoupon(usercouponApiRequest.getUcTotcoupon())
-                    .ucUserindex(tbMember.getData().getMemIndex())
-                    .build();
-            TbUsercoupon tbUsercoupon1 = tbUsercouponRepository.save(tbUsercoupon);
-            return response(tbUsercoupon1);
-        }else{
-            System.out.println("구매불가");
+            if (result > price){
+                TbUsercoupon tbUsercoupon = TbUsercoupon.builder()
+                        .ucType(usercouponApiRequest.getUcType())
+                        .ucPrice(usercouponApiRequest.getUcPrice())
+                        .ucDesc(usercouponApiRequest.getUcDesc())
+                        .ucCode(usercouponApiRequest.getUcCode())
+                        .ucDiscount(usercouponApiRequest.getUcDiscount())
+                        .ucStartday(LocalDateTime.parse(usercouponApiRequest.getUcStartday()))
+                        .ucEndday(LocalDateTime.parse(usercouponApiRequest.getUcEndday()))
+                        .ucIsUse(usercouponApiRequest.getUcIsUse())
+                        .ucTotcoupon(usercouponApiRequest.getUcTotcoupon())
+                        .ucUserindex(tbMember.getData().getMemIndex())
+                        .build();
+                TbUsercoupon tbUsercoupon1 = tbUsercouponRepository.save(tbUsercoupon);
+                return response(tbUsercoupon1);
+            }else{
+                System.out.println("구매불가");
+                Header.ERROR("포인트 부족");
+                return null;
+            }
+        }catch (NullPointerException n){
             Header.ERROR("포인트 부족");
             return null;
         }
