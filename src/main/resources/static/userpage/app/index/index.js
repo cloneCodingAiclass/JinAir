@@ -139,4 +139,7 @@ $(() => {
             },
         },
     });
+    $('.btn_agree').on("click", function (){
+        location.href = "/pages/index/mypageCoupons"
+    })
 });
