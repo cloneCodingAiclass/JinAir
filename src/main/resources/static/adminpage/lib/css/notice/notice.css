@@ -90,12 +90,12 @@
     font-weight: bolder;
 }
 .footer table td{
-    width: 35px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
     border: 1px solid rgb(187, 187, 187);
     background-color: #fff;
     padding-top: 2px;
-    font-size: 18px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
 
 .footer > .notice_write{
@@ -116,13 +116,8 @@
     cursor: pointer;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
-.pages {
-    background-color : #fff;
-    color : #444;
-    cursor : pointer;
-}
 
-#showPage > td:hover {
+.showPage > td:hover {
     background-color: #BDD600;
     color: white;
 }

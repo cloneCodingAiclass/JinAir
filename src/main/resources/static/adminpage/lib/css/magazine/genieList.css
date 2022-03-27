@@ -59,9 +59,8 @@
     background-color: #F2F2F2;
     border-bottom: 1px solid #ccc;
 }
-
 .footer{
-    margin-top: 15px;
+    margin-top: 40px;
     width: 100%;
     height: 30px;
 }
@@ -83,37 +82,15 @@
     padding-top: 2px;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
-.footer table td:nth-child(11){
-    background: url(../../img/right.png) center no-repeat;
-    background-color: #fff;
-    background-size: 21px;
-    cursor: pointer;
-}
-.footer table td:nth-child(12){
-    background: url(../../img/double_right.png) center no-repeat;
-    background-color: #fff;
-    background-size: 21px;
-    cursor: pointer;
-}
-.footer table td:nth-child(1){
-    background-color: rgb(124,0,72);
-}
-.footer table td:nth-child(1) > a{
-    color:white
-}
-.footer table td:hover{
-    background-color: #bdd600;
-}
-.footer table td:hover a{
-    color:white
-}
-.footer > .notice_write{ 
+
+.footer > .notice_write{
     display: inline;
     float: right;
     position: relative;
     bottom: 30px;
 }
 .footer > .notice_write > input{
+    text-align: center;
     width: 120px;
     height: 30px;
     border: none;
@@ -125,6 +102,14 @@
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
 
+.showPage > td:hover {
+    background-color: #BDD600;
+    color: white;
+}
+
+.firstPage1, .firstPage2, .lastPage1, .lastPage2 {
+    cursor: pointer;
+}
 
 /* 모달 */
 #modal_isfind {
@@ -168,4 +153,8 @@
 
 #modal_isfind > #modal_isfind_content button:hover {
     color: #fff;
+}
+
+.notice_write {
+    margin-top: 30px
 }
