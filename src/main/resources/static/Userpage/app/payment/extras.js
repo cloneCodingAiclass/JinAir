@@ -1411,7 +1411,6 @@ $(function () {
       $("#option_price_list #option_ins").parent().remove();
         $("#option_price_list #option_ins_price").remove();
       }
-    $('body').css("overflow", "hidden");
   }
 
 
@@ -1927,7 +1926,6 @@ let isinsjoin = false;
     $(".img2").css("display", "none");
     $(".img").css("display", "block");
     $("#modal_totP_wrap").fadeOut();
-    $('body').css("overflow", "scroll");
     $(".fix_modal").fadeOut();
   })
   $(".img2").on('click', () => {

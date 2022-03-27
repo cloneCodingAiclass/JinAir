@@ -84,6 +84,353 @@ $(function () {
         $('.modal').fadeOut(200);
     })
 
+
+    // ------------------------------------------------------------------------
+    // 정보
+    let reIndex1 = $('#reIndex1').val(); // 여정1 예약 번호
+    let reTripKind = $('#reTripKind').val() // 여정1 운항타입
+    let rePeopleType = $('#rePeopleType').val() // 여정1 탑승구성
+
+    let inonesoo = rePeopleType.split(' ');
+    let modiAdult = 0;
+    let modiChild = 0;
+    let modiBaby = 0;
+    let totalNum = 0;
+    if(inonesoo.length == 2){
+        if(inonesoo[0] == '소아'){
+            modiChild = Number(inonesoo[1])
+        }else if(inonesoo[0] == '성인'){
+            modiAdult = Number(inonesoo[1])
+        }
+    }else if(inonesoo.length == 4){
+        if(inonesoo[2] == '유아'){
+            modiAdult = Number(inonesoo[1]);
+            modiBaby = Number(inonesoo[3]);
+        }else if(inonesoo[2] == '소아'){
+            modiAdult = Number(inonesoo[1]);
+            modiChild = Number(inonesoo[3])
+        }
+    }else if(inonesoo.length == 6){
+        modiAdult = Number(inonesoo[1]);
+        modiChild = Number(inonesoo[3])
+        modiBaby = Number(inonesoo[5]);
+    }
+    totalNum = modiAdult + modiChild + modiBaby;
+    let endIdx = Number(totalNum*2) + Number(reIndex1) -1
+
+    for(let i = 0 ; i < totalNum*2 ; i++){
+        let num = $(`.reBirth${i}`).text().substr(0,4);
+        if(2022 - Number(num) > 13){
+            $(`.rePeopleType${i}`).html('성인')
+        }else if(2022 - Number(num) > 2){
+            $(`.rePeopleType${i}`).html('소아')
+        }else{
+            $(`.rePeopleType${i}`).html('유아')
+        }
+    }
+
+    function searchStart3(){
+        // 사전좌석 지정
+        let seat1PP = 0;
+        for(let i =  0 ; i < totalNum*2 ; i+=2){
+            if($(`.seat1D${i}`).html() == ''){
+                $(`.seat1D${i}`).html('-');
+                $(`.seat1P${i}`).html(0);
+            }else{
+                let seat1P = Number($(`.seat1P${i}`).html());
+                seat1PP += seat1P;
+            }
+        }
+        $('.seatPrice').text((seat1PP).toLocaleString('ko-KR'))
+
+        // 초과수하물
+        for(let i =  0 ; i < totalNum*2 ; i+=2){
+            if($(`.reBaggageidx1${i}`).val() == ''){
+                $(`.bagg1KG${i}`).text('-');
+                $(`.bagg1P${i}`).text(0);
+            }else{
+                $.get("/api/optional/baggage/"+$(`.reBaggageidx1${i}`).val(), function(response){
+                    $(`.bagg1KG${i}`).text(response.data.bgStandard);
+                    $(`.bagg1P${i}`).text(response.data.bgPrice);
+                });
+            }
+        }
+
+        // 보험
+        for(let i =  0 ; i < totalNum*2 ; i+=2){
+            if($(`.reInsuranceidx1${i}`).val() == ''){
+                $(`.Insu1Tp${i}`).text('-');
+                $(`.Insu1P${i}`).text(0);
+            }else{
+                $.get("/api/optional/insurance/"+$(`.reInsuranceidx1${i}`).val(), function(response){
+                    $(`.Insu1Tp${i}`).text(response.data.isType);
+                    $(`.Insu1P${i}`).text(response.data.isPrice);
+                });
+            }
+        }
+
+        // 전체 가격 찍어주기
+        function callData(i){
+            let m = 0;
+            $.ajax({
+                url: "/api/optional/baggage/search/"+i,
+                data : {id : i},
+                async :false,
+                type: "get",
+                dataType: "text",
+                success : function(response){
+                    m = response;
+                    console.log(m)
+                }
+            })
+            return m;
+        }
+        function callData1(i){
+            let m = 0;
+            $.ajax({
+                url: "/api/optional/insurance/search/"+i,
+                data : {id : i},
+                async :false,
+                type: "get",
+                dataType: "text",
+                success : function(response){
+                    m = response;
+                    console.log(m)
+                }
+            })
+            return m;
+        }
+
+        let BaggPP = [];
+        let IsurPP = [];
+        for(let i =  0 ; i < totalNum*2 ; i+=2){
+            if(!$(`.reBaggageidx1${i}`).val()){
+                BaggPP.push(0)
+            }else{
+                BaggPP.push(callData($(`.reBaggageidx1${i}`).val()));
+            }
+        }
+        let BaggPPP = 0;
+        for(let i = 0 ; i < BaggPP.length; i++){
+            BaggPPP += Number(BaggPP[i]);
+        }
+        $('.BaggPrice').text(BaggPPP.toLocaleString('ko-KR'))
+
+        for(let i =  0 ; i < totalNum*2 ; i+=2){
+            if(!$(`.reInsuranceidx1${i}`).val()){
+                IsurPP.push(0)
+            }else{
+                IsurPP.push(callData1($(`.reInsuranceidx1${i}`).val()));
+            }
+        }
+        let IsurPPP = 0;
+        for(let i = 0 ; i < IsurPP.length; i++){
+            IsurPPP += Number(IsurPP[i]);
+        }
+        $('.InsuPrice').text(IsurPPP.toLocaleString('ko-KR'))
+
+        let price = 0;
+        for(let i = 0 ; i < BaggPP.length; i++){
+            price += Number(BaggPP[i]);
+        }
+        for(let i = 0 ; i < IsurPP.length; i++){
+            price += Number(IsurPP[i]);
+        }
+        $('.paymentPrice').text((price + seat1PP).toLocaleString('ko-KR'));
+    }
+
+    function searchStart4(){
+        // 사전 좌석 지정
+        let seat1PP = 0;
+        let seat2PP = 0;
+        for(let i =  0 ; i < totalNum*2 ; i+=2){
+            if($(`.seat1D${i}`).html() == ''){
+                $(`.seat1D${i}`).html('-');
+                $(`.seat1P${i}`).html(0);
+            }else{
+                let seat1P = Number($(`.seat1P${i}`).html());
+                seat1PP += seat1P;
+            }
+        }
+        for(let i =  1 ; i < totalNum*2 ; i+=2){
+            if($(`.seat2D${i}`).html() == ''){
+                $(`.seat2D${i}`).html('-');
+                $(`.seat2P${i}`).html(0);
+            }else{
+                let seat2P = Number($(`.seat2P${i}`).html());
+                seat2PP += seat2P;
+            }
+        }
+        $('.seatPrice').text((seat1PP + seat2PP).toLocaleString('ko-KR'));
+
+        // 초과수하물
+        for(let i =  0 ; i < totalNum*2 ; i+=2){
+            if($(`.reBaggageidx1${i}`).val() == ''){
+                $(`.bagg1KG${i}`).text('-');
+                $(`.bagg1P${i}`).text(0);
+            }else{
+                $.get("/api/optional/baggage/"+$(`.reBaggageidx1${i}`).val(), function(response){
+                    $(`.bagg1KG${i}`).text(response.data.bgStandard);
+                    $(`.bagg1P${i}`).text(response.data.bgPrice);
+                });
+            }
+        }
+        for(let i =  1 ; i < totalNum*2 ; i+=2){
+            if($(`.reBaggageidx2${i}`).val() == ''){
+                $(`.bagg2KG${i}`).text('-');
+                $(`.bagg2P${i}`).text(0);
+            }else{
+                $.get("/api/optional/baggage/"+$(`.reBaggageidx2${i}`).val(), function(response){
+                    $(`.bagg2KG${i}`).text(response.data.bgStandard);
+                    $(`.bagg2P${i}`).text(response.data.bgPrice);
+                });
+            }
+        }
+
+        // 보험
+        for(let i =  0 ; i < totalNum*2 ; i+=2){
+            if($(`.reInsuranceidx1${i}`).val() == ''){
+                $(`.Insu1Tp${i}`).text('-');
+                $(`.Insu1P${i}`).text(0);
+            }else{
+                $.get("/api/optional/insurance/"+$(`.reInsuranceidx1${i}`).val(), function(response){
+                    $(`.Insu1Tp${i}`).text(response.data.isType);
+                    $(`.Insu1P${i}`).text(response.data.isPrice);
+                });
+            }
+        }
+        for(let i =  1 ; i < totalNum*2 ; i+=2){
+            if($(`.reInsuranceidx2${i}`).val() == ''){
+                $(`.Insu2Tp${i}`).text('-');
+                $(`.Insu2P${i}`).text(0);
+            }else{
+                $.get("/api/optional/insurance/"+$(`.reInsuranceidx2${i}`).val(), function(response){
+                    $(`.Insu2Tp${i}`).text(response.data.isType);
+                    $(`.Insu2P${i}`).text(response.data.isPrice);
+                });
+            }
+        }
+
+        // 전체 가격 찍어주기
+        function callData(i){
+            let m = 0;
+            $.ajax({
+                url: "/api/optional/baggage/search/"+i,
+                data : {id : i},
+                async :false,
+                type: "get",
+                dataType: "text",
+                success : function(response){
+                    m = response;
+                    console.log(m)
+                }
+            })
+            return m;
+        }
+        function callData1(i){
+            let m = 0;
+            $.ajax({
+                url: "/api/optional/insurance/search/"+i,
+                data : {id : i},
+                async :false,
+                type: "get",
+                dataType: "text",
+                success : function(response){
+                    m = response;
+                    console.log(m)
+                }
+            })
+            return m;
+        }
+
+        let BaggPP = [];
+        let IsurPP = [];
+        for(let i =  0 ; i < totalNum*2 ; i+=2){
+            if(!$(`.reBaggageidx1${i}`).val()){
+                BaggPP.push(0)
+            }else{
+                BaggPP.push(callData($(`.reBaggageidx1${i}`).val()));
+            }
+        }
+        for(let i =  1 ; i < totalNum*2 ; i+=2){
+            if(!$(`.reBaggageidx2${i}`).val()){
+                BaggPP.push(0)
+            }else{
+                BaggPP.push(callData($(`.reBaggageidx2${i}`).val()));
+            }
+        }
+        let BaggPPP = 0;
+        for(let i = 0 ; i < BaggPP.length; i++){
+            BaggPPP += Number(BaggPP[i]);
+        }
+        $('.BaggPrice').text(BaggPPP.toLocaleString('ko-KR'))
+
+        for(let i =  0 ; i < totalNum*2 ; i+=2){
+            if(!$(`.reInsuranceidx1${i}`).val()){
+                IsurPP.push(0)
+            }else{
+                IsurPP.push(callData1($(`.reInsuranceidx1${i}`).val()));
+            }
+        }
+        for(let i =  1 ; i < totalNum*2 ; i+=2){
+            if(!$(`.reInsuranceidx2${i}`).val()){
+                IsurPP.push(0)
+            }else{
+                IsurPP.push(callData1($(`.reInsuranceidx2${i}`).val()));
+            }
+        }
+        let IsurPPP = 0;
+        for(let i = 0 ; i < IsurPP.length; i++){
+            IsurPPP += Number(IsurPP[i]);
+        }
+        $('.InsuPrice').text(IsurPPP.toLocaleString('ko-KR'))
+
+        let price = 0;
+        for(let i = 0 ; i < BaggPP.length; i++){
+            price += Number(BaggPP[i]);
+        }
+        for(let i = 0 ; i < IsurPP.length; i++){
+            price += Number(IsurPP[i]);
+        }
+        $('.paymentPrice').text((price + seat1PP + seat2PP).toLocaleString('ko-KR'));
+    }
+
+
+    if($('#reTripKind').val() == '편도') {
+        $('.ifOnewayD').css('display', 'none');
+        searchStart3();
+    }else{
+        searchStart4();
+
+    }
+
+
+
+    $('input[class *= "seat1C"]').on('change', function (){        // 값이 변화했니?
+        // 이게 선택된거니?
+        if($('input[class *= "seat1C"]').is(':checked')){
+            for(let i =  0 ; i < totalNum*2 ; i+=2){
+                if($(`.seat1C${i}`).is(':checked')){
+                    alert(`버튼${i}입니다`)
+                }
+            }
+        }else{
+            // 선택된게 아니하면?
+
+        }
+    })
+
+
+
+
+
+
+
+
+
+
+
+
     $('.final_cancel').click(function(){
         let confirmcheck = $('.confirm_check').is(':checked');
 
@@ -93,8 +440,24 @@ $(function () {
                 $('.false_modal').css('display', 'none');
             });
         }else{
-            location.href='/UserPage/payment/completePayment.html'
+            if(!$('input[class *= "seat1C"]').is(':checked') &&
+                !$('input[class *= "seat2C"]').is(':checked') &&
+                !$('input[class *= "bagg1C"]').is(':checked') &&
+                !$('input[class *= "bagg2C"]').is(':checked') &&
+                !$('input[class *= "Insu1C"]').is(':checked') &&
+                !$('input[class *= "Insu2C"]').is(':checked')
+            ){
+                alert('최소 하나 이상 선택해주세요.')
+            }else{
+                location.href='/pages/cancel/complete'
+
+            }
+
         }
+    })
+
+    $('.cancel_btn').click(function(){
+        location.href='/pages/index/mypageGetReservationDetail/'+reIndex1;
     })
 
     $(window).scroll(function() {
