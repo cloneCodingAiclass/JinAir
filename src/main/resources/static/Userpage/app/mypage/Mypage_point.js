@@ -560,9 +560,11 @@ $(function () {
     function pointArr(index, page){
         $.get(`/api/point/user/${index}?page=` + page, function (response){
             if(response.data.length == 0){
+                $('#false').css("padding", "60px")
                 $('#false').css("display", "block")
                 $('#true').css("display", "none")
             }else {
+                $('#true').css("padding", "0")
                 $('#false').css("display", "none")
                 $('#true').css("display", "block")
             }
