@@ -141,9 +141,9 @@ $(function () {
                 sum += point;
             }
             if( sum < 0){
-                $('#point').val('0');
+                $('#point').text('0');
             }else {
-                $('#point').val(sum.toLocaleString('ko-KR'));
+                $('#point').text(sum.toLocaleString('ko-KR'));
             }
         })
     }
