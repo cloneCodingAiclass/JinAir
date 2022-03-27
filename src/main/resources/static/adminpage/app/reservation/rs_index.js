@@ -268,7 +268,6 @@ $(()=> {
     let arrivePoint
 
     $('#searchBtn').on('click', function (){
-        $('.rs_list').css({'display' : 'block'});
         aptype = $('#aptype').find('option:selected').val();
         apname = $('#apname').find('option:selected').val();
         startTime = $('#start_date').val() + 'T' + $('#starttime').val() + ':00';
@@ -277,6 +276,7 @@ $(()=> {
         if(!aptype || !apname || !startTime || !startPoint || !arrivePoint){
             alert('입력을 확인해주세요!')
         }else{
+            $('.rs_list').css({'display' : 'block'});
             $.post({
                 url: "/api/reservation/searchForUser",
                 data: "airType=" + aptype + "&airName=" + apname + "&startTime=" + startTime + "&startPoint=" + startPoint + "&arrivePoint=" + arrivePoint,
