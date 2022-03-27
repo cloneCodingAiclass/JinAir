@@ -203,7 +203,7 @@ $(function () {
         });
     }
 
-    pointResult(memIndex);
+    pointResult(memIndex)
 
     function pointResult(index){
         let sum = 0;
@@ -212,7 +212,11 @@ $(function () {
                 let point = response.data[i].poPoint;
                 sum += point;
             }
-            $('#point').text(sum);
+            if( sum < 0){
+                $('#point').text('0');
+            }else {
+                $('#point').text(sum.toLocaleString('ko-KR'));
+            }
         })
     }
     $('#passwordValue').on('keydown', function (key){
