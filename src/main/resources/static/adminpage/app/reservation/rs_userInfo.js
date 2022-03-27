@@ -213,14 +213,22 @@ $(() => {
     }
 
     // 예약 취소
-    // $('#resDelete').on('click', function (){
-    //     $.ajax({
-    //         url: "/api/reservation"+idx,
-    //         type: "DELETE",
-    //         success: function (){
-    //             alert('예약 취소 완료!');
-    //             location.href = '/pages/admin/rsIndex';
-    //         }
-    //     })
-    // })
+    let jsonData;
+    jsonData = {
+        data : {
+            reIndex: idx,
+        }
+    }
+    $('#resDelete').on('click', function (){
+        $.ajax({
+            url: "/api/reservation",
+            data: JSON.stringify(jsonData),
+            method: "PUT",
+            dataType: "text",
+            contentType : "application/json",
+            success: function (response) {
+                location.href="/pages/admin/rsIndex"
+            }
+        })
+    })
 })

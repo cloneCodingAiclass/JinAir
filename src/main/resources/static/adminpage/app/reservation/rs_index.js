@@ -268,37 +268,44 @@ $(()=> {
     let arrivePoint
 
     $('#searchBtn').on('click', function (){
-        $('.rs_list').css({'display' : 'block'});
         aptype = $('#aptype').find('option:selected').val();
         apname = $('#apname').find('option:selected').val();
         startTime = $('#start_date').val() + 'T' + $('#starttime').val() + ':00';
         startPoint = $('#departure_point').find('option:selected').val();
         arrivePoint = $('#arrive_point').find('option:selected').val();
-        $.post({
-            url: "/api/reservation/searchForUser",
-            data: "airType=" + aptype + "&airName=" + apname + "&startTime=" + startTime + "&startPoint=" + startPoint + "&arrivePoint=" + arrivePoint,
-            dataType: "text",
-            success: function (response) {
-                list(response, 0)
-            }
-        })
+        if(!aptype || !apname || !startTime || !startPoint || !arrivePoint){
+            alert('입력을 확인해주세요!')
+        }else{
+            $('.rs_list').css({'display' : 'block'});
+            $.post({
+                url: "/api/reservation/searchForUser",
+                data: "airType=" + aptype + "&airName=" + apname + "&startTime=" + startTime + "&startPoint=" + startPoint + "&arrivePoint=" + arrivePoint,
+                dataType: "text",
+                success: function (response) {
+                    list(response, 0)
+                }
+            })
+        }
     })
 
     function list(response, page){
         let jsonData = JSON.parse(response)
         console.dir(jsonData)
-        $('#airplaneType').text(jsonData.data[0].reAirplainType)
-        $('#airplaneName').text(jsonData.data[0].reSchName)
-        let startdate = jsonData.data[0].reSchStartTime.substr(0, 10)
-        $('#landingDate').text(startdate)
-        let starttime = jsonData.data[0].reSchStartTime.substr(11, 5)
-        $('#landingTime').text(starttime)
-        $('#landingPoint').text(jsonData.data[0].reSchDepPoint)
-        $('#arrPoint').text(jsonData.data[0].reSchArrPoint)
-        let endtime = jsonData.data[0].reSchEndTime.substr(0, 10)
-        $('#arrTime').text(endtime)
+        console.log(jsonData.data[0].reStatus)
+        if(jsonData.data[0].reStatus == 'PaymentFinished'){
+            $('#airplaneType').text(jsonData.data[0].reAirplainType)
+            $('#airplaneName').text(jsonData.data[0].reSchName)
+            let startdate = jsonData.data[0].reSchStartTime.substr(0, 10)
+            $('#landingDate').text(startdate)
+            let starttime = jsonData.data[0].reSchStartTime.substr(11, 5)
+            $('#landingTime').text(starttime)
+            $('#landingPoint').text(jsonData.data[0].reSchDepPoint)
+            $('#arrPoint').text(jsonData.data[0].reSchArrPoint)
+            let endtime = jsonData.data[0].reSchEndTime.substr(0, 10)
+            $('#arrTime').text(endtime)
 
-        resList.resList = jsonData.data
+            resList.resList = jsonData.data
+        }
 
         let lastPage = jsonData.pagination.totalPages;
         let str = "";

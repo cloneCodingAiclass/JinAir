@@ -907,6 +907,7 @@ public class PageController {
         return new ModelAndView("/userpage/pages/payment/getAvailabilityList")
                 .addObject("code", "getAvailabilityList");
     }
+
     // 사용자 항공권 예약 getAvailabilityList 편도
     @PostMapping("/getAvailabilityList/oneway")
     public ModelAndView getAvailabilityList(
@@ -1055,7 +1056,7 @@ public class PageController {
             }
         }
         if(Cook.size() == 0){
-            return new ModelAndView("/userpage/pages/index/error")
+            return new ModelAndView("/userpage/pages/index/Exception")
                     .addObject("code", "registerPassenger");
         }else{
             ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf((String) Cook.get(0))).getData();
@@ -1079,22 +1080,29 @@ public class PageController {
     @RequestMapping(value = {"/extras/oneway", "/extras/multiway", "/extras/twoway"})
     public ModelAndView extra(HttpServletRequest request, HttpServletResponse response, Model model) {
         Cookie[] myCookies = request.getCookies();
+        List Cook = new ArrayList<>();
         HttpSession session = request.getSession();
         ArrayList arrrr = new ArrayList<>();
 
         for(int i = 0; i < myCookies.length; i++) {
             if(myCookies[i].getValue().equals("reIndex")){
+                Cook.add(myCookies[i].getName());
                 ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf(myCookies[i].getName())).getData();
                 arrrr.add(reserveApiResponse);
             }
         }
-        model.addAttribute("reserveApiResponse", arrrr);
-        if (session.getAttribute("memberApiResponse") != null) {
-            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-        } else {
-            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        if(Cook.size() == 0) {
+            return new ModelAndView("/userpage/pages/index/Exception")
+                    .addObject("code", "registerPassenger");
+        }else {
+            model.addAttribute("reserveApiResponse", arrrr);
+            if (session.getAttribute("memberApiResponse") != null) {
+                model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            } else {
+                model.addAttribute("loginURL", "/userpage/fragment/menu");
+            }
+            return new ModelAndView("/userpage/pages/payment/extras");
         }
-        return new ModelAndView("/userpage/pages/payment/extras");
     }
     // 엑스트라 보험 인수 제한 국가
     @RequestMapping("/extras/restricted")
@@ -1114,13 +1122,14 @@ public class PageController {
         Cookie[] myCookies = request.getCookies();
 
         HttpSession session = request.getSession();
+        List Cook = new ArrayList<>();
         ArrayList arrrr = new ArrayList<>();
         ArrayList baggage = new ArrayList<>();
         ArrayList insurance = new ArrayList<>();
 
         for(int i = 0; i < myCookies.length; i++) {
             if (myCookies[i].getValue().equals("reIndex")) {
-                List list = new ArrayList();
+                Cook.add(myCookies[i].getName());
                 ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf(myCookies[i].getName())).getData();
                 BaggageApiResponse baggageApiResponse = baggageApiLogicService.read(reserveApiResponse.getReBaggageidx()).getData();
                 InsuranceApiResponse insuranceApiResponse = insuranceApiLogicService.read(reserveApiResponse.getReBaggageidx()).getData();
@@ -1136,31 +1145,35 @@ public class PageController {
                 }
             }
         }
-        System.out.println(arrrr);
-        System.out.println(baggage);
-        System.out.println(insurance);
-        model.addAttribute("baggage", baggage);
-        model.addAttribute("insurance", insurance);
-        model.addAttribute("reserveApiResponse1", arrrr);
-        if (session.getAttribute("memberApiResponse") != null) {
-            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-        } else {
-            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        if(Cook.size() == 0) {
+            return new ModelAndView("/userpage/pages/index/Exception")
+                    .addObject("code", "registerPassenger");
+        }else {
+            model.addAttribute("baggage", baggage);
+            model.addAttribute("insurance", insurance);
+            model.addAttribute("reserveApiResponse1", arrrr);
+            if (session.getAttribute("memberApiResponse") != null) {
+                model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            } else {
+                model.addAttribute("loginURL", "/userpage/fragment/menu");
+            }
+            return new ModelAndView("/userpage/pages/payment/payReservation")
+                    .addObject("code", "payReservation");
         }
-        return new ModelAndView("/userpage/pages/payment/payReservation")
-                .addObject("code", "payReservation");
     }
 
     // 사용자 결제 완료
     @RequestMapping("/complete")
     public ModelAndView complete(HttpServletRequest request, HttpServletResponse response, Model model) {
         Cookie[] myCookies = request.getCookies();
+        List Cook = new ArrayList<>();
         HttpSession session = request.getSession();
         ArrayList arrrr = new ArrayList<>();
 
         // 처음 진입할때
         for(int i = 0; i < myCookies.length; i++) {
             if(myCookies[i].getValue().equals("reIndex")){
+                Cook.add(myCookies[i].getName());
                 ReserveApiResponse reserveApiResponse = reservationApiLogicService.read(Long.valueOf(myCookies[i].getName())).getData();
                 if(reserveApiResponse.getReStatus() != null){
                     arrrr.add(reserveApiResponse);
@@ -1173,14 +1186,19 @@ public class PageController {
             }
         }
 
-        model.addAttribute("reserveApiResponse1", arrrr);
-        if(session.getAttribute("memberApiResponse") != null){
-            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-        }else{
-            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        if(Cook.size() == 0) {
+            return new ModelAndView("/userpage/pages/index/Exception")
+                    .addObject("code", "registerPassenger");
+        }else {
+            model.addAttribute("reserveApiResponse1", arrrr);
+            if (session.getAttribute("memberApiResponse") != null) {
+                model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            } else {
+                model.addAttribute("loginURL", "/userpage/fragment/menu");
+            }
+            return new ModelAndView("/userpage/pages/payment/complete")
+                    .addObject("code", "complete");
         }
-        return new ModelAndView("/userpage/pages/payment/complete")
-                .addObject("code", "complete");
     }
 
     // 최저가 항공권
