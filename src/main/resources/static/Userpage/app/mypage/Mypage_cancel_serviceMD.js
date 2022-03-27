@@ -91,6 +91,7 @@ $(function () {
     let reTripKind = $('#reTripKind').val() // 여정1 운항타입
     let rePeopleType = $('#rePeopleType').val() // 여정1 탑승구성
 
+
     let inonesoo = rePeopleType.split(' ');
     let modiAdult = 0;
     let modiChild = 0;
@@ -363,25 +364,48 @@ $(function () {
                 }
 
 
-                for(let i =  reIndex1 ; i <= endIdx ; i+=2){
-                    let jsonData;
-                    jsonData = {
-                        data : {
-                            reIndex: i,
-                            reTotal: Number($('#reTotal').val()) - addPrice
+                if(reIndex1%2 == 0){
+                    for(let i =  reIndex1-1 ; i < endIdx ; i++){
+                        let jsonData;
+                        jsonData = {
+                            data : {
+                                reIndex: i,
+                                reTotal: Number($('#reTotal').val()) - addPrice
+                            }
                         }
+                        $.ajax({
+                            url: "/api/reservation/retotal",
+                            data: JSON.stringify(jsonData),
+                            method: "PUT",
+                            dataType: "text",
+                            async : false,
+                            contentType : "application/json",
+                            success: function (response) {
+                                location.href='/pages/cancel/complete'
+                            }
+                        })
                     }
-                    $.ajax({
-                        url: "/api/reservation/retotal",
-                        data: JSON.stringify(jsonData),
-                        method: "PUT",
-                        dataType: "text",
-                        async : false,
-                        contentType : "application/json",
-                        success: function (response) {
-                            location.href='/pages/cancel/complete'
+                }{
+                    for(let i =  reIndex1 ; i <= endIdx ; i++){
+                        let jsonData;
+                        jsonData = {
+                            data : {
+                                reIndex: i,
+                                reTotal: Number($('#reTotal').val()) - addPrice
+                            }
                         }
-                    })
+                        $.ajax({
+                            url: "/api/reservation/retotal",
+                            data: JSON.stringify(jsonData),
+                            method: "PUT",
+                            dataType: "text",
+                            async : false,
+                            contentType : "application/json",
+                            success: function (response) {
+                                location.href='/pages/cancel/complete'
+                            }
+                        })
+                    }
                 }
             }
         }
