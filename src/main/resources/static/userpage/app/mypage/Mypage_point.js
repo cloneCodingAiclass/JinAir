@@ -179,11 +179,13 @@ $(function () {
         $(".save_container").css("display", "block");
     }
     // 출발지 도착지 레이어
-
     $(".go_layerbtn").on("click", function (e) {
-        e.stopPropagation();
+        let y = $(".go_layerbtn").offset().top-30;
+        let x = $(".go_layerbtn").offset().left+30;
+            e.stopPropagation();
         $(".go_layerbtn").addClass('close');
         $(".go_layerbtn").css({"color": "rgb(145, 0, 70)"});
+        $(".go_layerbtn").css({"top": x, "left": y});
         $(".go_select_opt").addClass('on');
         $(".go_layer").slideDown("fast");
 
@@ -237,9 +239,12 @@ $(function () {
     });
 
     $(".go_date_layerbtn").on("click", function (e) {
+        let y = $(".go_date_layerbtn").offset().top-30;
+        let x = $(".go_date_layerbtn").offset().left+30;
         e.stopPropagation();
         $(".go_date_layerbtn").addClass('close');
         $(".go_date_layerbtn").css({"color": "rgb(145, 0, 70)"});
+        $(".go_date_layerbtn").css({"top": y, "left" : x});
         $(".go_date_select_opt").addClass('on');
         $(".go_date_select").slideDown("fast");
 

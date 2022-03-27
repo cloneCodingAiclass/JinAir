@@ -1036,8 +1036,6 @@ table.bbsList td:last-child, thead tr th:last-child{
     padding: 40px 20px;
     position: absolute;
     display: none;
-    top: 630px;
-    left: 230px;
     height: auto;
     background-color: #fff;
     border: 1px solid rgb(0, 0, 0, 0.2);
@@ -1085,8 +1083,6 @@ table.bbsList td:last-child, thead tr th:last-child{
     padding: 40px 20px;
     position: absolute;
     display: none;
-    top: 630px;
-    left: 230px;
     height: auto;
     background-color: #fff;
     border: 1px solid rgb(0, 0, 0, 0.2);
@@ -1135,8 +1131,6 @@ table.bbsList td:last-child, thead tr th:last-child{
     padding: 40px 20px;
     position: absolute;
     display: none;
-    top: 630px;
-    left: 680px;
     height: auto;
     background-color: #fff;
     border: 1px solid rgb(0, 0, 0, 0.2);
@@ -1184,8 +1178,6 @@ table.bbsList td:last-child, thead tr th:last-child{
     padding: 40px 20px;
     position: absolute;
     display: none;
-    top: 630px;
-    left: 680px;
     height: auto;
     background-color: #fff;
     border: 1px solid rgb(0, 0, 0, 0.2);
