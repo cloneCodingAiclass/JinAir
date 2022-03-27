@@ -7,9 +7,11 @@ import com.project.jinair.model.enumclass.CouponStatus;
 import com.project.jinair.model.network.Header;
 import com.project.jinair.model.network.Pagination;
 import com.project.jinair.model.network.request.payment.UsercouponApiRequest;
+import com.project.jinair.model.network.response.member.MemberApiResponse;
 import com.project.jinair.model.network.response.payment.UsercouponApiResponse;
 import com.project.jinair.repository.MemberRepository;
 import com.project.jinair.repository.TbUsercouponRepository;
+import com.project.jinair.service.member.MemberApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,14 +24,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.project.jinair.model.enumclass.CouponStatus.Unused;
-
 @Service
 @RequiredArgsConstructor
 public class UserCouponApiService implements CrudInterface<UsercouponApiRequest, UsercouponApiResponse> {
 
     private final TbUsercouponRepository tbUsercouponRepository;
     private final MemberRepository memberRepository;
+    private final MemberApiLogicService memberApiLogicService;
     @PersistenceContext
     private EntityManager em;
 
@@ -37,12 +38,13 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
     //일반 쿠폰 생성
     @Override
     public Header<UsercouponApiResponse> create(Header<UsercouponApiRequest> request) {
-
         UsercouponApiRequest usercouponApiRequest = request.getData();
-        TbMember tbMember = memberRepository.findByMemIndex(usercouponApiRequest.getUcUserindex());
+        Header<MemberApiResponse> tbMember = memberApiLogicService.read(usercouponApiRequest.getUcUserindex());
         Long price = usercouponApiRequest.getUcPrice();
 
-        Long result = (Long) em.createQuery("select sum(p.poPoint) from TbPoint p where p.poUserindex = p.tbMember.memIndex").getSingleResult();
+        Long result = (Long) em.createQuery("select sum(p.poPoint) from TbPoint p where p.poUserindex = " + tbMember.getData().getMemIndex()).getSingleResult();
+
+        System.out.println(result);
 
         if (result > price){
             TbUsercoupon tbUsercoupon = TbUsercoupon.builder()
@@ -55,13 +57,12 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
                     .ucEndday(LocalDateTime.parse(usercouponApiRequest.getUcEndday()))
                     .ucIsUse(usercouponApiRequest.getUcIsUse())
                     .ucTotcoupon(usercouponApiRequest.getUcTotcoupon())
-                    .ucUserindex(tbMember.getMemIndex())
+                    .ucUserindex(tbMember.getData().getMemIndex())
                     .build();
-
             TbUsercoupon tbUsercoupon1 = tbUsercouponRepository.save(tbUsercoupon);
-
             return response(tbUsercoupon1);
         }else{
+            System.out.println("구매불가");
             Header.ERROR("포인트 부족");
             return null;
         }
