@@ -92,7 +92,7 @@
                                 </span>
                                 <div class="in_bl">
                                     <span th:text="${reserveApiResponse[1].reSchArrPoint}"></span>
-                                    <p>[도착]<span th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime,0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse[1].reSchStartTime,11, 16)}"></span>]</p>
+                                    <p>[도착]<span th:text="${#strings.substring(reserveApiResponse[1].reSchEndTime,0, 10)}"></span> [<span th:text="${#strings.substring(reserveApiResponse[1].reSchEndTime,11, 16)}"></span>]</p>
                                 </div>
                             </td>
                         </tr>
