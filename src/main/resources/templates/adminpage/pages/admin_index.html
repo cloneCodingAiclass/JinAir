@@ -140,7 +140,6 @@
                                     <td>출발시간</td>
                                     <td>도착지</td>
                                     <td>도착시간</td>
-                                    <td>예약 가능 좌석<br>(수용 좌석)</td>
                                 </tr>
                                 <tr v-for="list in scList">
                                     <td>
@@ -163,9 +162,6 @@
                                     </td>
                                     <td>
                                         <a :href=`/pages/admin/scheduleResultInfo/${list.schIndex}`>{{list.schArrivalDate.substr(11,16)}}</a>
-                                    </td>
-                                    <td>
-                                        <a :href=`/pages/admin/scheduleResultInfo/${list.schIndex}`>278(430)</a>
                                     </td>
                                 </tr>
                             </table>
