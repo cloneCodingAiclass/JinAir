@@ -1,6 +1,7 @@
 package com.project.jinair.service.payment;
 
 import com.project.jinair.ifs.CrudInterface;
+import com.project.jinair.model.entity.info.TbSeatDetail;
 import com.project.jinair.model.entity.member.TbMember;
 import com.project.jinair.model.entity.payment.TbCouponRegist;
 import com.project.jinair.model.entity.payment.TbPoint;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -159,5 +161,24 @@ public class PointApiService implements CrudInterface<PointApiRequest, PointApiR
                 .build();
 
         return Header.OK(pointApiResponseList, pagination);
+    }
+
+    // 다수 사용자 포인트 지급
+    public Header<PointApiResponse> saveAll(List<PointApiRequest> request){
+        System.out.println(request);
+
+        int size = request.size();
+        List<TbPoint> tbPointList = new ArrayList<>();
+
+        for(int i = 0; i < size; i++){
+            TbPoint tbPoint = TbPoint.builder()
+                    .poPoint(request.get(i).getPoPoint())
+                    .poMemo(request.get(i).getPoMemo())
+                    .poUserindex(request.get(i).getPoUserindex())
+                    .build();
+            tbPointList.add(tbPoint);
+        }
+        tbPointRepository.saveAll(tbPointList);
+        return null;
     }
 }

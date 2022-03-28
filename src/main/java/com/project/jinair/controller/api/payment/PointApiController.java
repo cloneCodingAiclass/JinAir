@@ -73,4 +73,11 @@ public class PointApiController implements CrudInterface<PointApiRequest, PointA
     public List<Header<Object>> userDelete(@PathVariable(name = "id")Long id){
         return pointApiService.userDelete(id);
     }
+
+    // 다수 사용자 포인트 지급
+    @PostMapping("/saveAll")
+    public Header<PointApiResponse> saveAll(@RequestBody List<PointApiRequest> request){
+        System.out.println(request);
+        return pointApiService.saveAll(request);
+    }
 }
