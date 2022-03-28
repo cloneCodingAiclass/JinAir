@@ -3003,6 +3003,7 @@ h2 {
     background-color: #661e43;
     height: 80px;
     color: #fff;
+    width: 100%;
     font-weight: 600;
     display: flex;
     justify-content: space-between;
