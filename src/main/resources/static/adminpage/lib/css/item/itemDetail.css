@@ -57,6 +57,19 @@
 #item_detail img {
     width: 60px;
 }
+p#isfind_P {
+    line-height: 2.5;
+    padding: 1px 15px;
+    border: none;
+    width: 100px;
+    height: 30px;
+    font-size: 12px;
+    font-weight: bolder;
+    border-radius: 2px;
+    background-color: #bdd600;
+    box-shadow: 1px 1px 4px rgb(0 0 0 / 37%);
+    display: inline-flex;
+}
 #item_detail > table td input {
     padding: 1px 15px;
     border: none;

@@ -614,73 +614,78 @@ body{
     text-align: center;
     margin-top: 30px;
 }
-.joinForm_step > .step1{
-    width: 175px;
-    height: 100%;
-    border: 1px solid gray;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 10px;
+
+#joinStepImg {
+    pointer-events: none;
 }
-.joinForm_step .step1::after{
-    content: "";
-    margin-left: 172px;
-    top: 252px;
-    width: 26px;
-    height: 70px;
-    position: absolute;
-    background: url('/userpage/lib/img/ico_member.png') 0 -200px;
-}
-.joinForm_step > .step2{
-    width: 175px;
-    height: 100%;
-    background-color: #661E43;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 10px;
-}
-.joinForm_step .step2::after{
-    content: "";
-    margin-left: 174px;
-    top: 252px;
-    width: 26px;
-    height: 70px;
-    position: absolute;
-    background: url('/userpage/lib/img/ico_member.png') -30px -200px;
-}
-.joinForm_step > .step3{
-    margin-right: 50px;
-    padding-left: 25px;
-    width: 175px;
-    height: 100%;
-    border: 1px solid gray;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 10px;
-}
-.joinForm_step .step3::after{
-    content: "";
-    margin-left: 147px;
-    top: 252px;
-    width: 26px;
-    height: 70px;
-    position: absolute;
-    background: url('/userpage/lib/img/ico_member.png') 0 -200px;
-}
-.joinForm_step .step_text{
-    font-size: 1rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-}
-.joinForm_step .step_sub{
-    font-size: 0.8rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
+
+/*.joinForm_step > .step1{*/
+/*    width: 175px;*/
+/*    height: 100%;*/
+/*    border: 1px solid gray;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    padding-top: 10px;*/
+/*}*/
+/*.joinForm_step .step1::after{*/
+/*    content: "";*/
+/*    margin-left: 172px;*/
+/*    top: 252px;*/
+/*    width: 26px;*/
+/*    height: 70px;*/
+/*    position: absolute;*/
+/*    background: url('/userpage/lib/img/ico_member.png') 0 -200px;*/
+/*}*/
+/*.joinForm_step > .step2{*/
+/*    width: 175px;*/
+/*    height: 100%;*/
+/*    background-color: #661E43;*/
+/*    color: white;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    padding-top: 10px;*/
+/*}*/
+/*.joinForm_step .step2::after{*/
+/*    content: "";*/
+/*    margin-left: 174px;*/
+/*    top: 252px;*/
+/*    width: 26px;*/
+/*    height: 70px;*/
+/*    position: absolute;*/
+/*    background: url('/userpage/lib/img/ico_member.png') -30px -200px;*/
+/*}*/
+/*.joinForm_step > .step3{*/
+/*    margin-right: 50px;*/
+/*    padding-left: 25px;*/
+/*    width: 175px;*/
+/*    height: 100%;*/
+/*    border: 1px solid gray;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    padding-top: 10px;*/
+/*}*/
+/*.joinForm_step .step3::after{*/
+/*    content: "";*/
+/*    margin-left: 147px;*/
+/*    top: 252px;*/
+/*    width: 26px;*/
+/*    height: 70px;*/
+/*    position: absolute;*/
+/*    background: url('/userpage/lib/img/ico_member.png') 0 -200px;*/
+/*}*/
+/*.joinForm_step .step_text{*/
+/*    font-size: 1rem;*/
+/*    font-weight: 800;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+/*.joinForm_step .step_sub{*/
+/*    font-size: 0.8rem;*/
+/*    font-weight: 700;*/
+/*    margin-bottom: 10px;*/
+/*}*/
 .joinForm_container h2{
     margin: 30px 0;
 }

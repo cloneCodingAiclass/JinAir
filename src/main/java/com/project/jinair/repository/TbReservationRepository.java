@@ -24,9 +24,10 @@ public interface TbReservationRepository extends JpaRepository<TbReservation, Lo
     List<TbReservation> findByReUserindexAndReSchStartTimeLessThanOrderByReSchStartTimeAsc(Long reUserindex, LocalDateTime local);
     Optional<TbReservation> findByReIndex(Long id);
     List<TbReservation> findByReSchNameAndReSchStartTime(String reSchName, LocalDateTime reSchStartTime);
-    Optional<TbReservation> findByReSchName(String reSchName);
+    List<TbReservation> findByReReserNum(String resCode);
 
     Page<TbReservation> findByReAirplainTypeAndReSchNameAndReSchStartTimeAndReSchDepPointAndReSchArrPoint(String airType, String airName, LocalDateTime StartTime, String startPoint, String ArrivePoint, Pageable pageable);
     List<TbReservation> findByReReserNumAndReFirstNameAndReLastName(String resCode, String firstName, String lastName);
     List<TbReservation> findByReUserindex(Long userIndex);
+
 }
