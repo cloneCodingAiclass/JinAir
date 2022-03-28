@@ -931,3 +931,8 @@ body{
     color: red;
     font-weight: 700;
 }
+
+
+#joinStepImg {
+    pointer-events: none;
+}

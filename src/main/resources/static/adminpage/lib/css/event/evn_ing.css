@@ -114,12 +114,13 @@
 .footer table td:hover a{
     color:white
 }
-.footer > .notice_write{ 
+.notice_write{
     display: inline;
     float: right;
     position: relative;
+    margin-top: 15px;
 }
-.footer > .notice_write > input{
+.notice_write > input{
     text-align: center;
     width: 100px;
     height: 30px;
