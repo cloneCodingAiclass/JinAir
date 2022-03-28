@@ -191,14 +191,7 @@ $(function () {
     function list(page){
         $.get("/api/faq/list?page="+page, function(response){
 
-            indexBtn = [];
-            pagination = response.pagination;
-
-            showPage.totalPages = pagination.currentPage;
-            showPage.currentPage = pagination.currentPage;
-
             // 전체 페이지
-            showPage.showPage = pagination.data;
             faqList.faqList = response.data;
 
             for(let i = 0; i < response.data.length; i++){

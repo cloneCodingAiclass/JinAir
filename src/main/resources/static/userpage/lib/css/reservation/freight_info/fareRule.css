@@ -879,14 +879,7 @@ legend, caption {
     font-size: 0;
     line-height: 0;
 }
-table {
-    display: table;
-    border-collapse: separate;
-    box-sizing: border-box;
-    text-indent: initial;
-    border-spacing: 2px;
-    border-color: grey;
-}
+
 
 .bbsList th[rowspan], .bbsList td[rowspan] {
     border-right: 1px solid #eaeaea;
@@ -922,4 +915,32 @@ table {
     line-height: 28px;
     text-align: center;
     word-wrap: break-word;
+}
+
+#popCont table {
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-collapse: collapse;
+    border-spacing: 2px;
+    border-color: grey;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000 !important;
+}
+
+#popCont table tr:last-child {
+    border-bottom: 1px solid #000 !important;
+}
+
+.bb {
+    border-bottom: 1px solid #000 !important;
+}
+
+.bt {
+    border-top: 1px solid #000 !important;
+}
+
+#fromKo th, #fromOt th {
+    border: 1px solid #f2f2f2;
 }
