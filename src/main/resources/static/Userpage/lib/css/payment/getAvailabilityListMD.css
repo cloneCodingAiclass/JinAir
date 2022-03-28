@@ -2638,7 +2638,7 @@ td.cur::before {
   width: 100%;
   height: 100px;
   background-color: rgb(247, 247, 246);
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
 }
 
@@ -2657,7 +2657,7 @@ td.cur::before {
 }
 
 .pay_info_wrap .pay_info_T td .Price_wrapped {
-  font-size: 20px;
+  font-size: 24px;
   display: flex;
   text-align: center;
   margin-left: 75px;
@@ -2669,14 +2669,14 @@ td.cur::before {
 }
 
 .pay_info_wrap .pay_info_T td .Price_wrapped span.tot {
-  font-size: 20px;
+  font-size: 22px;
 }
 .pay_card{
   font-size: 22px;
 }
 .pay_card_title{
   width: 100%;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 900;
   color: black;
   padding: 40px 30px 10px 30px;
