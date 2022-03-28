@@ -252,6 +252,10 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     public void update1(@RequestBody Header<ReserveApiRequest> request) {
         reservationApiLogicService.update1(request);
     }
+    @PutMapping("/update2")
+    public void update2(@RequestBody Header<ReserveApiRequest> request) {
+        reservationApiLogicService.update2(request);
+    }
 
     @GetMapping("/reFirstName/{id}")
     public String reFirstName(@PathVariable(name = "id") Long id) {
