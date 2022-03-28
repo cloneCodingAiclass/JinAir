@@ -297,4 +297,10 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     public Long reUserindex(@PathVariable(name = "id") Long id) {
         return reservationApiLogicService.reUserindex(id);
     }
+
+    // 사용자 탈퇴시 예약 리스트 삭제
+    @DeleteMapping("/deleteForUser/{id}")
+    public List<Header<Object>> deleteForUser(@PathVariable(name = "userIndex") Long userIndex){
+        return reservationApiLogicService.deleteForUser(userIndex);
+    }
 }

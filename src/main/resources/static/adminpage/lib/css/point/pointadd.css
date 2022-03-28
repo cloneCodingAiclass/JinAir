@@ -51,6 +51,7 @@
     width: 60%;
 }
 #container > .contents .point_category{
+    display: none;
     text-align: center;
     width: 100%;
     height: 330px;
@@ -140,7 +141,9 @@
     cursor: pointer;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
-
+.table_area .select_user {
+    display: none;
+}
 
 .table_area .select_user > table{
     width: 100%;
@@ -200,7 +203,7 @@
     font-weight: bold;
     font-size: 16px;
 }
-.point_footer #pointNumber{
+.point_footer .pointNumber{
     width: 100px;
     height: 26px;
     text-align: right;
@@ -208,14 +211,14 @@
     font-weight: bolder;
     outline: none;
 }
-.point_footer #pointMemo{
+.point_footer .pointMemo{
     width: 200px;
     height: 26px;
     font-size: 16px;
     font-weight: bolder;
     outline: none;
 }
-.point_footer input[type="submit"]{
+.point_footer input[type="button"]{
     text-align: center;
     width: 80px;
     height: 30px;

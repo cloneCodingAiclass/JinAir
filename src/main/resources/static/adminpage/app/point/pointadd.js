@@ -123,10 +123,6 @@ $(function () {
         $('.select_rs').show();
     });
 
-    $('.select_user').hide();
-    $('.btn_usersearch').on('click', function() {
-        $('.select_user').show();
-    });
 });
 
 (function ($){
@@ -144,6 +140,13 @@ $(function () {
         el : '#memList',
         data : {
             memList : {}
+        }
+    })
+
+    let resList = new Vue({
+        el : '#resList',
+        data : {
+            resList : {}
         }
     })
 
@@ -186,7 +189,6 @@ $(function () {
                 return arr2.indexOf(val) === index;
             })
 
-            console.log(arr);
             for(let i = 0; i < arr.length; i++){
                 let a = arr[i];
                 let option = document.createElement('option');
@@ -221,7 +223,12 @@ $(function () {
 
 
     $('#searchSch').on('click', function (){
-        searchSch($('#schAirplaneType').find('option:selected').val(), $('#airplaneName').find('option:selected').val(), $('#departure_point').find('option:selected').val(), $('#arrive_point').find('option:selected').val(), $('#start').val() + 'T08:00:00')
+        if(!$('#airplaneName').find('option:selected').val() || !$('#start').val()){
+            alert('입력을 확인해주세요')
+        }else {
+            searchSch($('#schAirplaneType').find('option:selected').val(), $('#airplaneName').find('option:selected').val(), $('#departure_point').find('option:selected').val(), $('#arrive_point').find('option:selected').val(), $('#start').val() + 'T08:00:00')
+            $('#schList').find('option').remove();
+        }
     })
 
     // 스케줄 목록
@@ -232,65 +239,77 @@ $(function () {
             dataType: 'text',
             success : function (response){
                 let dataJson = JSON.parse(response);
-                console.dir(dataJson);
                 for(let i = 0; i < dataJson.data.length; i++){
                     let option = document.createElement('option');
-                    option.innerText = dataJson.data[i].schDeparturePoint + '->' + dataJson.data[i].schArrivalPoint + ' ' + dataJson.data[i].schStartTime;
-                    option.value = dataJson.data[i].schDeparturePoint + '->' + dataJson.data[i].schArrivalPoint + ' ' + dataJson.data[i].schStartTime;
+                    option.innerText = dataJson.data[i].schStartTime.substr(11, 8);
+                    option.value = dataJson.data[i].schStartTime.substr(11, 8);
                     $('#schList').append(option);
                 }
             }
         })
     }
 
-    // 예약 로직 필요
-    // 스케줄을 통한 유저 검색
-    function searchSchofUser(data){
-        let time;
-        $.post({
-            url : "",
-            data : "time=" + time,
-            dataType : 'text',
-            success : function (response){
-                memList.memList = response.data;
-            }
-        })
-    }
 
     // 유저 아이디 검색
     function searchUserid(userid){
         $.get("/api/user/search/"+userid, function (response){
-            memList.memList = response.data;
-
-            for(let i = 0; i < response.data.length; i++){
-                console.log(response.data[i].memIndex)
+            console.dir(response)
+            if(response.data.length == 0){
+                alert("해당 유저가 없습니다")
+                $('.select_user').hide();
+            }else {
+                memList.memList = response.data;
             }
+
         })
     }
 
+    let size = 0;
+
     $('#reserveUserBtn').on('click', function (){
-        if(!$('.country_box').find('option:selected').val() || $('#start').val(), $('.airport_box').find('option:selected').val()){
+        let aptype = $('#schAirplaneType').find('option:selected').val();
+        let apname = $('#airplaneName').find('option:selected').val();
+        let startTime = $('#start').val() + 'T' + $('#schList').find('option:selected').val();
+        let startPoint = $('#departure_point').find('option:selected').val();
+        let arrPoint = $('#arrive_point').find('option:selected').val();
+        if(!startTime){
             alert('입력을 확인해주세요!')
         }else{
-            searchSchofUser($('.country_box').find('option:selected').val(), $('#start').val(), $('.airport_box').find('option:selected').val());
+            $.post({
+                url: "/api/reservation/searchForUser",
+                data : "airType=" + aptype + "&airName=" + apname + "&startTime=" + startTime + "&startPoint=" + startPoint + "&arrivePoint=" + arrPoint,
+                dataType: 'text',
+                success: function (response){
+                    let jsonData = JSON.parse(response)
+                    console.dir(jsonData)
+
+                    resList.resList = jsonData.data;
+
+                    size = jsonData.data.length;
+                }
+            })
         }
-        
+
     })
 
     $('.btn_usersearch').on('click', function (){
         if(!$('#userid').val()){
             alert('아이디를 입력해주세요')
         }else{
-            searchUserid($('#userid').val());
+            if(!searchUserid($('#userid').val())) {
+                searchUserid($('#userid').val());
+                $('.select_user').show();
+            }
         }
     })
 
+    // 1인 포인트 지금
     $(document).on('click', '#updatePoint', function (){
         console.log($('#searched:checked').val());
         let jsonData = {
             data : {
-                poPoint : $('#pointNumber').val(),
-                poMemo : $('#pointMemo').val(),
+                poPoint : $('#pointNumber2').val(),
+                poMemo : $('#pointMemo2').val(),
                 poUserindex: $('#searched:checked').val()
             }
         }
@@ -309,14 +328,37 @@ $(function () {
             }
         })
     })
-/*
-    // 인덱스 값을 못 뽑아옴
-    $('#updatePoint').on('click', function (){
+
+    // 다수 포인트 지급
+    $(document).on('click', '#updatePointList', function (){
+        let arr = [];
+        let userIdx;
+        for(let i = 0; i < size; i++){
+            userIdx = $(`#schUser${i}:checked`).val();
+            let arrData;
+            $('input:checkbox[class="schUser"]:checked').each(function (){
+                arrData = {};
+                arrData.poUserindex = userIdx;
+                arrData.poPoint = $('#pointNumber1').val();
+                arrData.poMemo = $('#pointMemo1').val();
+            })
+            arr.push(arrData);
+        }
+        console.dir(arr)
+        $.post({
+            url : '/api/point/saveAll',
+            data : JSON.stringify(arr),
+            dataType : 'text',
+            contentType : 'application/json',
+            success : function (){
+                alert('등록완료');
+                location.reload();
+            },
+            error : function (){
+                alert('등록 실패 \n 입력을 확인해주세요')
+                location.reload();
+            }
+        })
     })
- */
-    /*
-    function searchSch(){
-        $.get("")
-    }
-     */
+
 })(jQuery)

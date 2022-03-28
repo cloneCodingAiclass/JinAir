@@ -494,6 +494,7 @@ $(function () {
                                 console.log("포인트 차감 실패")
                             }else{
                                 console.log("포인트 차감 완료")
+                                location.reload();
                             }
                         }
                     })
