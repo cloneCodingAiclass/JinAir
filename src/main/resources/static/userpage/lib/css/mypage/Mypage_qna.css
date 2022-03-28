@@ -652,7 +652,7 @@ body{
     text-align: center;
 }
 .mypage_main .mypage_menu p{
-    width: 90px;
+    width: 160px;
     border-right: 1px solid #5f5f5f65;
     font-size: 1.3rem;
     font-weight: 700;
@@ -671,6 +671,9 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.mypage_main .mypage_menu ul li:last-child {
+    border-right: none;
 }
 .mypage_main .mypage_menu ul li a:before{
     content: "";

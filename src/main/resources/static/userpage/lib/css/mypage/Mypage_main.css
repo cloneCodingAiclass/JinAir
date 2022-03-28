@@ -654,7 +654,7 @@ body{
     z-index: 100;
 }
 .mypage_main .mypage_menu p{
-    width: 90px;
+    width: 160px;
     border-right: 1px solid #5f5f5f65;
     font-size: 1.3rem;
     font-weight: 700;
@@ -663,7 +663,7 @@ body{
 .mypage_main .mypage_menu ul{
     display: flex;
 }
-.mypage_main .mypage_menu ul li{
+.mypage_main .mypage_menu ul li {
     width: 200px;
     font-size: 0.9rem;
     color: #661E43;
@@ -673,6 +673,10 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.mypage_main .mypage_menu ul li:last-child {
+    border-right: none;
 }
 .mypage_main .mypage_menu ul li a:before{
     content: "";
