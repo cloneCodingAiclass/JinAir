@@ -185,6 +185,8 @@ $(function () {
 
 
 
+
+
             for(NumberPage; NumberPage < last; NumberPage++){
                 url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
             }
@@ -230,6 +232,17 @@ $(function () {
             let NumberPage = 0;
             let last = pagination.totalPages;
 
+            for(let i = 0; i < response.data.length; i++){
+                $.get('/api/faq/view/'+ response.data[i].faqIndex, function (){
+                    $(`#tr_answer${i}`).hide();
+                    $(`#faqNumber${i}`).on('click', function (){
+                        $(`#tr_answer${i}`).toggle();
+                    })
+
+
+                })
+
+            }
 
             for(NumberPage; NumberPage < last; NumberPage++){
                 url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
