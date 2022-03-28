@@ -79,8 +79,6 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
             Long p = (Long) query.getSingleResult();
             day.add(p);
         };
-
-        System.out.println(day);
         return day;
     }
 
@@ -100,7 +98,6 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
     public Header<List<ReserveApiResponse>> findseat(
             @RequestBody  Header<ReserveApiRequest> request)
     {
-        System.out.println(request);
         return reservationApiLogicService.findseat(request);
     }
 
@@ -143,7 +140,6 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
 
     @PutMapping("/paymentsUpdate")
     public ReserveApiResponse paymentsUpdate(@RequestBody List<ReserveApiRequest> request) {
-        System.out.println(request);
         return reservationApiLogicService.paymentsUpdate(request);
     }
 
@@ -227,7 +223,6 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
             @RequestParam(value = "arrivePoint", required = false) String arrivePoint,
             @PageableDefault(size = 10, sort = {"reIndex"}, direction = Sort.Direction.DESC)Pageable pageable
     ){
-        System.out.println(airType + airName + startTime + startPoint + arrivePoint);
         return reservationApiLogicService.searchForUser(airType, airName, startTime, startPoint, arrivePoint, pageable);
     }
 
@@ -238,7 +233,6 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
             @RequestParam(value = "firstName")String firstName,
             @RequestParam(value = "lastName")String lastName
     ){
-        System.out.println(resCode + firstName + lastName);
         return reservationApiLogicService.searchOfCode(resCode, firstName, lastName);
     }
 
@@ -304,7 +298,14 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
 
     // 사용자 탈퇴시 예약 리스트 삭제
     @DeleteMapping("/deleteForUser/{id}")
-    public List<Header<Object>> deleteForUser(@PathVariable(name = "userIndex") Long userIndex){
+    public List<Header<Object>> deleteForUser(@PathVariable(name = "id") Long userIndex){
         return reservationApiLogicService.deleteForUser(userIndex);
+    }
+
+    // 예약 코드로 사용자 인덱스 가져오기
+    @GetMapping("/resCode/{code}")
+    public Header<List<ReserveApiResponse>> searchForUserIndex(@PathVariable(name = "code") String resCode){
+        System.out.println(resCode);
+        return reservationApiLogicService.searchForUserIndex(resCode);
     }
 }

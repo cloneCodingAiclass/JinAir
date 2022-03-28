@@ -578,4 +578,13 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
         }).collect(Collectors.toList());
 
     }
+
+    // 예약 코드로 유저 인덱스 가져오기
+    public Header<List<ReserveApiResponse>> searchForUserIndex(String resCode){
+        List<TbReservation> tbReservation = tbReservationRepository.findByReReserNum(resCode);
+        List<ReserveApiResponse> tbReservationList = tbReservation.stream()
+                .map(res -> responseReservation(res))
+                .collect(Collectors.toList());
+        return Header.OK(tbReservationList);
+    }
 }

@@ -183,8 +183,16 @@ $(function () {
 
     // 적립 데이터 확인
 
+
+    // 비동기화
+    const sleep = (ms) => new Promise((resolve) => {
+        console.log(`sleep for ${ms}ms`);
+        return setTimeout(() => {
+            return resolve(console.log("woke up!"))
+        }, ms)
+    })
+
     // 포인트 적립
-    let percent;
     let userIndex;
     let point;
     let airName = $('#airName').text();
@@ -198,30 +206,37 @@ $(function () {
         url: '/api/schedule/forPoint',
         data: "airName=" + airName + "&startPoint=" + startPoint + "&arrPoint=" + arrPoint + "&startTime=" + startTime,
         dataType: 'text',
-        success: function (response){
+        success: async function (response) {
             let dataJson = JSON.parse(response);
             let percent = dataJson.data.schPoint;
 
             point = money * percent / 100;
+
+            await sleep(1000);
+            console.log($("#resCode").text());
+            $.get("/api/reservation/resCode/" + $("#resCode").text(), function (response) {
+                userIndex = response.data[0].reUserindex;
+
+                addPoint(point, userIndex);
+            })
         }
     })
 
-    console.log(point)
 
-    // function addPoint(point, userIndex){
-    //     let jsonData = {
-    //         data : {
-    //             poPoint : point,
-    //             poMemo: "항공권 예약",
-    //             poUserindex: userIndex
-    //         }
-    //     }
-    //     $.post({
-    //         url : '/api/point',
-    //         data : JSON.stringify(jsonData),
-    //         dataType : 'text',
-    //         contentType : 'application/json'
-    //     })
-    // }
+    function addPoint(point, userIndex){
+        let jsonData = {
+            data : {
+                poPoint : point,
+                poMemo: "항공권 예약",
+                poUserindex: userIndex
+            }
+        }
+        $.post({
+            url : '/api/point',
+            data : JSON.stringify(jsonData),
+            dataType : 'text',
+            contentType : 'application/json'
+        })
+    }
 
 });
