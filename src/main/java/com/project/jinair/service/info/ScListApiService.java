@@ -156,7 +156,7 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
 
     public Header<List<ScheduleApiResponse>> collaborate(String schDeparturePoint, Long wishPrice, String goDay, String comeDay){
         LocalDateTime goDaystr = LocalDateTime.parse((goDay + "T00:00:00"));
-        LocalDateTime comeDaystr = LocalDateTime.parse((comeDay + "T00:00:00"));
+        LocalDateTime comeDaystr = LocalDateTime.parse((comeDay + "T23:59:59"));
         List<TbSchedule> tbSchedule = tbScheduleRepository.findBySchDeparturePointAndSchBasicPriceLessThanEqualAndSchStartTimeBetweenOrderBySchStartTimeAsc(schDeparturePoint, wishPrice, goDaystr, comeDaystr);
         List<ScheduleApiResponse> scheduleApiResponseList = tbSchedule.stream()
                 .map(user -> responseSchedule(user))
