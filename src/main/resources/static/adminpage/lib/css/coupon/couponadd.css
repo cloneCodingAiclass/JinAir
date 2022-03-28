@@ -65,14 +65,13 @@
     justify-content: right;
 }
 #container > .contents >.contwrap > .contents_main .footer .coupon_btn{
-    width: 150px;
-    height: 35px;
+    width: 120px;
+    height: 30px;
     background-color:#BDD600;
     border-radius: 2px;
     border: 0;
     font-weight: 700;
     font-size: 0.8rem;
-    margin-right: 10px;
     cursor: pointer;
     display: flex;
     justify-content: center;

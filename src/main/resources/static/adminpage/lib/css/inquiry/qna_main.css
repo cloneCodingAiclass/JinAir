@@ -20,32 +20,30 @@
     height: 30px;
     font-size: 14px;
     font-weight: 600;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+    box-shadow: 1px 1px 4px #f2f2f2;
 }
 #container > .contents .contents_top .btn_top input[type="text"]{
-    width: 350px;
+    width: 150px;
     height: 30px;
     border-radius: 2px;
-    border: 1px solid grey;
+    border: 1px solid #f2f2f2;
     text-indent: 10px;
     font-size: 14px;
     color: grey;
     position: relative;
     bottom: 1px;
     font-weight: 600;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
 #container > .contents .contents_top .btn_top input[type="button"]{
     text-align: center;
-    width: 100px;
+    width: 40px;
     height: 30px;
-    border: none;
+    border: 1px solid #BDD600;
     border-radius: 2px;
-    background-color: #BDD600;
+    background-color: #fff;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
 #container > .contents .contents_main{
     width: 100%;

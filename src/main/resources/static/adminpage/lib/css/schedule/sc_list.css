@@ -15,16 +15,16 @@
     justify-content: space-between;
     height: 30px;
     width: 100%;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 }
 #container > .contents > .contwrap > .btn_top input[type="button"]{
-    width: 150px;
-    height: 26px;
+    width: 120px;
+    height: 30px;
     background-color:#BDD600;
     border-radius: 2px;
     clear: both;
     border: 0;
-    margin-right: 20px;
+    margin-right: 10px;
     font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;

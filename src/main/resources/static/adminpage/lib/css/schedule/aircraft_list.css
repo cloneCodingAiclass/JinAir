@@ -37,13 +37,13 @@
     height: 40px;
     text-align: center;
 }
-#container > .contents > .contwrap > .btn_box{
+#container > .contents > .contwrap .btn_box{
     width: 100%;
     display: flex;
     justify-content: right;
 }
-#container > .contents > .contwrap > .btn_box input[type="button"]{ 
-    width: 150px;
+#container > .contents > .contwrap .btn_box input{
+    width: 120px;
     height: 30px;
     border-radius: 2px;
     background-color:#BDD600;
@@ -51,7 +51,7 @@
     border: 0;
     font-size: 0.8rem;
     font-weight: 600;
-    margin-right: 20px;
+    margin-top: 8px;
     cursor: pointer;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }

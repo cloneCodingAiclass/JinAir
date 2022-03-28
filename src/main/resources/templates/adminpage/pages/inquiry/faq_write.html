@@ -21,6 +21,11 @@
                     <form action="./faq_main.html">
                         <div class="contents_main">
                             <table>
+                                <colgroup>
+                                    <col width="15%">
+                                    <col width="15%">
+                                    <col width="70%">
+                                </colgroup>
                                 <tr>
                                     <td><select id="faqType">
                                         <option>항공권 예매</option>
@@ -29,8 +34,7 @@
                                         <option>기내 서비스</option>
                                         <option>기타</option>
                                     </select></td>
-                                    <td><input name="title" type="text" placeholder="제목을 입력하세요" id="faqTitle"></td>
-                                    <td id="faqRegdate">등록일</td>
+                                    <td colspan="2"><input name="title" type="text" placeholder="제목을 입력하세요" id="faqTitle"></td>
                                 </tr>
                                 <tr>
                                     <td colspan="3"><textarea name="content" placeholder="내용을 입력하세요." id="faqContent"></textarea>

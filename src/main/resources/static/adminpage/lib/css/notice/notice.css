@@ -75,6 +75,21 @@
     border-bottom: 1px solid #ccc;
 }
 
+#searchText {
+    width: 150px;
+    height: 30px;
+    border: 1px solid #f2f2f2;
+    border-radius: 2px;
+    padding: 5px;
+}
+
+#searchNoti {
+    width: 40px;
+    height: 30px;
+    background-color: #fff;
+    border: 1px solid #BDD600;
+}
+
 .notice_write {
     width: 100%;
     display: flex;
@@ -94,6 +109,7 @@
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
     margin-top: 15px;
 }
+
 
 .footer{
     margin-top: 40px;

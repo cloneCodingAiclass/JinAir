@@ -16,10 +16,15 @@
     justify-content: space-between;
 }
 #container > .contents .contents_main select{
-    width: 130px;
+    width: 85%;
     height: 30px;
 }
-#container > .contents .contents_main table{
+
+#faqTitle {
+    width: 100%;
+}
+
+#container > .contents .contents_main table {
     margin-top: 20px;
     width: 100%;
     text-align: center;
@@ -61,11 +66,12 @@
 }
 #container > .contents .contents_main textarea{
     width: 98%;
-    height: 290px;
-    margin-top: 4px;
+    height: 270px;
+    margin-top: 10px;
     border: 1px solid rgb(199, 199, 199);
     outline: none;
     padding: 5px;
+    margin-bottom: 10px;
     resize: none;
 }
 #container > .contents .contents_bottom{
@@ -90,9 +96,11 @@
     margin: 0 5px;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
-#container > .contents .contents_bottom .faq_btn_add input[type="button"]{
-    border: 3px solid #BDD600;
-    background-color: white;
+
+#writeFaq {
+    border: 3px solid #BDD600 !important;;
+    background-color: white !important;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
+
 

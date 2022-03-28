@@ -17,19 +17,39 @@
     align-self: flex-start;
 }
 
+.searchName {
+    height: 30px;
+}
+
+.searchName .korN > div {
+    vertical-align: middle;
+}
+
 .searchName p {
     margin-bottom: 5px;
 }
 
 .search_butt {
     width: 40px;
+    height: 30px;
     background-color: #fff;
     border: 1px solid #BDD600;
 }
 
 .searchbox {
     margin: 0 5px;
-    height: 20px;
+    width: 80px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #f2f2f2;
+}
+
+.searchbox:first-child {
+    width: 120px;
+}
+
+#res_korFirstName {
+    margin-right: 5px;
 }
 
 
