@@ -61,8 +61,6 @@ a:visited{color:#444;}
 body{
     height: 1;
     color: #444;
-    white-space: normal;
-    word-wrap: break-word;
     line-height: 1;
 }
 #wrap{
@@ -709,9 +707,13 @@ header{
     height: 91px;
 }
 
+.qna_main {
+    width: 1080px;
+}
+
 
 table.bbsList {
-    width: 100%;
+    width: 1080px !important;
     border-top: 1px solid black;
     border-collapse: collapse;
     font-weight: 600;
@@ -722,10 +724,12 @@ table.bbsList {
 table.bbsList th {
     line-height: 40px;
     padding: 10px 30px;
+    word-break: break-all;
 }
 
 table.bbsList td {
     padding: 20px 30px;
+    word-break: break-all;
 }
 
 table#aView {
@@ -764,6 +768,7 @@ table#aView td {
     font-size: 1.1rem;
     font-weight: 700;
 }
+
 .footer_info{
     display: flex;
     justify-content: space-between;
