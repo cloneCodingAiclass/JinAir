@@ -541,6 +541,7 @@ $(() => {
   $(".checkbox_wrap #checkbox").on("click", () => {
     $("#modal_restricted_items_wrap").fadeIn();
     $(".modal_restricted_items_wrap").fadeIn();
+    $("#modal_restricted_items_wrap").css("display", "flex");
     $("body").css("overflow", "hidden");
   });
   $(
@@ -575,6 +576,7 @@ $(() => {
   $(".dis_int").on("click", () => {
     $("#modal_credit_int").fadeIn();
     $(".modal_credit_int").fadeIn();
+    $("#modal_credit_int").css("display", "flex");
     $("body").css("overflow", "hidden");
   });
   $(

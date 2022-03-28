@@ -1478,7 +1478,7 @@ td > ul > li::before {
   right: 0;
   top: 0;
   bottom: 0;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   z-index: 800;
@@ -1834,7 +1834,6 @@ td > ul > li::before {
   right: 0;
   top: 0;
   bottom: 0;
-  display: flex;
   justify-content: center;
   align-items: center;
   z-index: 800;
@@ -2228,7 +2227,7 @@ td:last-child {
   right: 0;
   top: 0;
   bottom: 0;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 }
