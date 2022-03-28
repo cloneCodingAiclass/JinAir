@@ -113,29 +113,28 @@
                             <col width="20%">
                         </colgroup>
                         <thead>
-                    <tr>
-                        <td scope="col">NO</td>
-                        <td scope="col">구간</td>
-                        <td scope="col">할인율</td>
-                        <td scope="col">사용 만료일</td>
-                        <td scope="col">사용 여부</td>
-                    </tr>
+                            <tr>
+                                <td scope="col">NO</td>
+                                <td scope="col">구간</td>
+                                <td scope="col">할인율</td>
+                                <td scope="col">사용 만료일</td>
+                                <td scope="col">사용 여부</td>
+                            </tr>
                         </thead>
                         <tbody>
-                    <tr v-for="dto in itemList">
-                        <td>{{dto.ucIndex}}</td>
-                        <td>{{dto.ucDesc}}</td>
-                        <td>{{dto.ucDiscount}}%</td>
-                        <td>{{dto.ucEndday.substr(0,10)}}</td>
-                        <td>{{dto.ucIsUse}}</td>
-                    </tr>
+                            <tr v-for="dto in itemList">
+                                <td class="numIndex"></td>
+                                <td>{{dto.ucDesc}}</td>
+                                <td>{{dto.ucDiscount}}%</td>
+                                <td>{{dto.ucEndday.substr(0,10)}}</td>
+                                <td>{{dto.ucIsUse}}</td>
+                            </tr>
                         </tbody>
                     </table>
                     <div class="footer">
                         <div class="center">
                             <table>
                                 <tr id="showPage">
-
                                 </tr>
                             </table>
                         </div>

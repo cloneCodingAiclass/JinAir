@@ -180,6 +180,7 @@ body{
     margin: 0 20px;
     box-sizing: border-box;
     padding-bottom: 30px;
+    cursor: pointer;
 }
 #header nav .nav_all > .open1{
     border-bottom: none;

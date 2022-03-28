@@ -216,6 +216,13 @@ $(function () {
             // 전체 페이지
             showPage.showPage = pagination.data;
 
+            let numIndex = response.data.length;
+            for(let i = 0; i < response.data.length; i++){
+                $('.numIndex').eq(i).html(numIndex);
+                console.log(numIndex)
+                numIndex--;
+            }
+
             if (pagination.totalPages != 0) {
                 itemList.itemList = response.data;
                 $('.couponY').show();

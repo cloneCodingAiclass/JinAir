@@ -19,7 +19,7 @@
     display: inline;
     align-self:flex-end
 }
-.contents > .con_wrap > .search > form > input[type="text"]{
+input#userid{
     width: 350px;
     height: 30px;
     border-radius: 2px;
@@ -32,7 +32,7 @@
     font-weight: 600;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
-.contents > .con_wrap > .search > form > input[type="submit"]{
+input#searchUser{
     text-align: center;
     width: 100px;
     height: 30px;

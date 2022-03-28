@@ -847,8 +847,12 @@ input {
   padding-right: 43px !important;
 }
 
+.pay_wrap > .service_wrap > .service_T tr {
+  height: 60px !important;
+}
+
 .pay_wrap > .service_wrap > .service_T td {
-  height: 60px;
+  height: 60px !important;
   padding: 20px;
   border-right: none;
   border-bottom: 1px solid rgba(168, 165, 165, 0.3);
@@ -920,6 +924,7 @@ input {
 }
 
 .pay_wrap > .service_wrap .detail_T td {
+  height: 60px !important;
   text-align: left;
   border-bottom: 1px solid rgba(168, 165, 165, 0.3);
 }
@@ -1481,7 +1486,7 @@ td > ul > li::before {
 
 #modal_restricted_items_wrap .modal_restricted_items_wrap {
   display: none;
-  width: 60%;
+  width: 980px;
   height: 800px;
   margin: 30px auto;
   background-color: #fff;
@@ -1572,6 +1577,7 @@ td > ul > li::before {
   text-align: center;
   word-break: keep-all;
   vertical-align: top;
+  align-items: center;
 }
 
 .list > table td p {

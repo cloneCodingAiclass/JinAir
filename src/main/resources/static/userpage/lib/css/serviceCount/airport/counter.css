@@ -761,7 +761,7 @@ tr {
 }
 .pointInfo_modal > .title {
     width: 600px;
-    height: 60px;
+    height: 80px;
     background-color: #661E43;
     text-indent: 20px;
     display: flex;
@@ -788,17 +788,23 @@ tr {
 }
 .modal_content > table{
     margin: 30px 10px 10px 10px;
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
     font-weight: bold;
 }
 .modal_content > table th{
-    border: 1px solid black;
+    /*border: 1px solid black;*/
+    padding: 15px;
     background-color: #f2f2f2;
+    border-top: 1px solid #000;
 }
 .modal_content > table td{
-    border: 1px solid #000;
+    /*border: 1px solid #000;*/
+    padding: 15px;
     text-align: center;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.modal_content > table > tr:first-child {
+    border-right: 1px solid #f2f2f2;
 }
 
 /* pointInfo_modal 끝 */

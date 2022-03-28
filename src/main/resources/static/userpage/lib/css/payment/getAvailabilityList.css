@@ -594,7 +594,7 @@ body {
 
 .air_list_wrap div.date_box > div > p.day {
   display: inline-block;
-  font-size: 16px;
+  font-size: 16px !important;
   height: 30px;
 }
 
