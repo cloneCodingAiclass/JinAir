@@ -25,7 +25,6 @@ $(function () {
             async: false,
             contentType : "application/json",
             success(finalCoupon) {
-                console.log(error)
             },
             error(error) {
                 alert(error);
@@ -162,12 +161,14 @@ $(function () {
 
     let spst1 = $('#startTime1').attr("value").split("T");
     let spend1 = $('#endTime1').attr("value").split("T");
-    let spst2 = $('#startTime2').attr("value").split("T");
-    let spend2 = $('#endTime2').attr("value").split("T");
     $('#startTime1').text(" " + spst1[0] + " " + spst1[1]);
     $('#endTime1').text(" " + spend1[0] + " " + spend1[1]);
-    $('#startTime2').text(" " + spst2[0] + " " + spst2[1]);
-    $('#endTime2').text(" " + spend2[0] + " " + spend2[1]);
+    if($('.cookies').val() % 2 == 0){
+        let spst2 = $('#startTime2').attr("value").split("T");
+        let spend2 = $('#endTime2').attr("value").split("T");
+        $('#startTime2').text(" " + spst2[0] + " " + spst2[1]);
+        $('#endTime2').text(" " + spend2[0] + " " + spend2[1]);
+    }
 
     let date = new Date();
     let week = new Array('일', '월', '화', '수', '목', '금', '토');
