@@ -1250,6 +1250,11 @@ $(() => {
       }
       let strrr = `${str[0]}-${str[1]}-${str[2]}`
       goSearch($('#schDeparturePoint').val(),$('#schArrivalPoint').val(), strrr);
+
+      $('.next_butt').on('click',function (){
+
+      })
+
     });
 
   }
@@ -1542,55 +1547,362 @@ $(() => {
     });
   }
 
+  $('.calbtn').on('click', function (){
+    $('.paymentModal').css('display', 'none')
+    $('.paymentModal1').css('display', 'none')
+  })
+
 })
 
-// 다음 버튼
+
+function searchTP1(){ // 구간 1에 대한 토탈
+  let TP;
+
+  $.ajax({
+    url: "/api/reservation/search/"+$("#0").val(),
+    data : {id : $("#0").val()},
+    type: "get",
+    dataType: "text",
+    async :false,
+    success : function(response){
+      TP = response;
+    }
+  })
+  return TP;
+}
+function searchTP2(){ // 구간 2에 대한 토탈
+  let TP;
+
+  $.ajax({
+    url: "/api/reservation/search/"+$("#1").val(),
+    data : {id : $("#1").val()},
+    type: "get",
+    dataType: "text",
+    async :false,
+    success : function(response){
+      TP = response;
+    }
+  })
+  return TP;
+}
+function searchTP3(){ // 원래 예약에 대한 토탈
+  let TP;
+
+  $.ajax({
+    url: "/api/reservation/search/"+$("#reIndexx0").val(),
+    data : {id : $("#reIndexx0").val()},
+    type: "get",
+    dataType: "text",
+    async :false,
+    success : function(response){
+      TP = response;
+    }
+  })
+  return TP;
+}
+
+// 성
+function reFirstName(i){
+  let reFirstName1 ;
+  $.ajax({
+    url: "/api/reservation/reFirstName/"+$(`#reIndexx${i}`).val(),
+    data : {id : $(`#reIndexx${i}`).val()},
+    type: "get",
+    dataType: "text",
+    async :false,
+    success : function(response){
+      reFirstName1 = response;
+    }
+  })
+  return reFirstName1;
+}
+
+
+// 이름
+function reLastName(i){
+  let reLastName1 ;
+  $.ajax({
+    url: "/api/reservation/reLastName/"+$(`#reIndexx${i}`).val(),
+    data : {id : $(`#reIndexx${i}`).val()},
+    type: "get",
+    dataType: "text",
+    async :false,
+    success : function(response){
+      reLastName1 = response;
+    }
+  })
+  return reLastName1;
+}
+
+// 생년월일
+function reBirth(i){
+  let reBirth1 ;
+  $.ajax({
+    url: "/api/reservation/reBirth/"+$(`#reIndexx${i}`).val(),
+    data : {id : $(`#reIndexx${i}`).val()},
+    type: "get",
+    dataType: "text",
+    async :false,
+    success : function(response){
+      reBirth1 = response;
+    }
+  })
+  return reBirth1;
+}
+
+// 생년월일
+function reGender(i){
+  let reGender1 ;
+  $.ajax({
+    url: "/api/reservation/reGender/"+$(`#reIndexx${i}`).val(),
+    data : {id : $(`#reIndexx${i}`).val()},
+    type: "get",
+    dataType: "text",
+    async :false,
+    success : function(response){
+      reGender1 = response;
+    }
+  })
+  return reGender1;
+}
+
+// 생년월일
+function reNation(i){
+  let reNation1 ;
+  $.ajax({
+    url: "/api/reservation/reNation/"+$(`#reIndexx${i}`).val(),
+    data : {id : $(`#reIndexx${i}`).val()},
+    type: "get",
+    dataType: "text",
+    async :false,
+    success : function(response){
+      reNation1 = response;
+    }
+  })
+  return reNation1;
+}
+
+// 유저 아이디
+function reMemberId(i){
+  let reMemberId1 ;
+  $.ajax({
+    url: "/api/reservation/reMemberId/"+$(`#reIndexx${i}`).val(),
+    data : {id : $(`#reIndexx${i}`).val()},
+    type: "get",
+    dataType: "text",
+    async :false,
+    success : function(response){
+      reMemberId1 = response;
+    }
+  })
+  return reMemberId1;
+}
+// 이메일
+function reEmail(i){
+  let reEmail1 ;
+  $.ajax({
+    url: "/api/reservation/reEmail/"+$(`#reIndexx${i}`).val(),
+    data : {id : $(`#reIndexx${i}`).val()},
+    type: "get",
+    dataType: "text",
+    async :false,
+    success : function(response){
+      reEmail1 = response;
+    }
+  })
+  return reEmail1;
+}
+
+// 전화번호 국적
+function reHpNation(i){
+  let reHpNation1 ;
+  $.ajax({
+    url: "/api/reservation/reHpNation/"+$(`#reIndexx${i}`).val(),
+    data : {id : $(`#reIndexx${i}`).val()},
+    type: "get",
+    dataType: "text",
+    async :false,
+    success : function(response){
+      reHpNation1 = response;
+    }
+  })
+  return reHpNation1;
+}
+// 전화번호
+function reHp(i){
+    let reHp1 ;
+    $.ajax({
+        url: "/api/reservation/reHp/"+$(`#reIndexx${i}`).val(),
+        data : {id : $(`#reIndexx${i}`).val()},
+        type: "get",
+        dataType: "text",
+        async :false,
+        success : function(response){
+            reHp1 = response;
+        }
+    })
+    return reHp1;
+}
+// 코드
+function reReserNum(i){
+  let reReserNum1 ;
+  $.ajax({
+    url: "/api/reservation/reReserNum/"+$(`#reIndexx${i}`).val(),
+    data : {id : $(`#reIndexx${i}`).val()},
+    type: "get",
+    dataType: "text",
+    async :false,
+    success : function(response){
+      reReserNum1 = response;
+    }
+  })
+  return reReserNum1;
+}
+
+// 코드
+function reUserindex(i){
+  let reUserindex1 ;
+  $.ajax({
+    url: "/api/reservation/reUserindex/"+$(`#reIndexx${i}`).val(),
+    data : {id : $(`#reIndexx${i}`).val()},
+    type: "get",
+    dataType: "text",
+    async :false,
+    success : function(response){
+      reUserindex1 = response;
+    }
+  })
+  return reUserindex1;
+}
+
+
+function onewayUpdating(){    // 가짜 인덱스 홀수번
+  for( let i = 0 ; i < 60; i+=2){
+    let reFirstName1;
+    let reLastName1;
+    let reBirth1;
+    let reGender1;
+    let reNation1;
+    let reMemberId1;
+    let reEmail1;
+    let reHpNation1;
+    let reHp1;
+    let reReserNum1;
+    let reUserindex1;
+
+    if(document.getElementById(`reIndexx${i}`)) {
+      reFirstName1 = reFirstName(i);
+      reLastName1 = reLastName(i);
+      reBirth1 = reBirth(i);
+      reGender1 = reGender(i);
+      reNation1 = reNation(i);
+      reMemberId1 = reMemberId(i);
+      reEmail1 = reEmail(i);
+      reHpNation1 = reHpNation(i);
+      reHp1 = reHp(i);
+      reReserNum1 = reReserNum(i);
+      reUserindex1 = reUserindex(i);
+    }
+
+    if(document.getElementById(`${i}`)){
+      if(i%2 == 0){
+        let jsonData;
+        jsonData = {
+          data : {
+            reIndex : $(`#${i}`).val(),
+            reStatus: "PaymentFinished",
+            reReserNum : reReserNum1,
+            rePayment : "KAKAOPAY",
+            reFirstName : reFirstName1,
+            reLastName : reLastName1,
+            reBirth : reBirth1,
+            reGender : reGender1,
+            reNation : reNation1,
+            reMemberId : reMemberId1,
+            reEmail : reEmail1,
+            reHpNation : reHpNation1,
+            reHp : reHp1,
+            reUserindex : reUserindex1
+          }
+        }
+        $.ajax({
+          url : "/api/reservation/update1",
+          type : "PUT",
+          data : JSON.stringify(jsonData),
+          dataType : "text",
+          contentType : "application/json"
+        });
+      }
+    }
+  }
+}
+
+
+
+
+
+
+// 결제 버튼
 $('#next_butt').on('click', function (){
   let urlrr = $(location).attr('href').split('/');
+
+
   if(urlrr[5] == 'twoway'){
     if($('.strrr1').html() == 0 || $('.strrr2').html() == 0){
       alert('구간 선택을 완료해주세요');
     }else if($('.strrr1').html() != 0 && $('.strrr2').html() != 0){
-      location.href="/pages/registerPassenger"
+      let TP1 = searchTP1()   // 값이 저장된 가짜 인덱스
+      let TP2 = searchTP2()   // 값이 저장된 가짜 인덱스
+      let TP3 = searchTP3()   // 원래 토탈 가격
+      if(Number(TP1)+Number(TP2) <= Number(TP3)){
+        $('.paymentModal1').css('display', 'block');
+      }else{
+        $('.paymentModal').css('display', 'block');
+      }
+
     }
   }
   if(urlrr[5] == 'oneway'){
     if($('.strrr1').html() == 0){
       console.log('구간 선택을 완료해주세요');
     }else if($('.strrr1').html() != 0){
-      location.href="/pages/registerPassenger"
+      let TP1 = searchTP1()   // 값이 저장된 가짜 인덱스
+      let TP3 = searchTP3()   // 원래 토탈 가격
+
+      if(Number(TP1) <= Number(TP3)){
+        $('.paymentModal1').css('display', 'block');
+        $('.totalPriceB').text(Number(TP3).toLocaleString('ko-KR'));
+        $('.totalPriceA').text(Number(TP1).toLocaleString('ko-KR'));
+        $('.totalPriceC').text((Number(TP3)-Number(TP1)).toLocaleString('ko-KR'))
+        $('.patbtn').on('click', function (){
+          onewayUpdating()
+        })
+
+
+
+      }else{
+        $('.paymentModal').css('display', 'block');
+        $('.totalPriceA').text(Number(TP1).toLocaleString('ko-KR'))
+        $('.totalPriceB').text(Number(TP3).toLocaleString('ko-KR'))
+        $('.totalPriceC').text((Number(TP1)-Number(TP3)).toLocaleString('ko-KR'))
+      }
+
+
     }
   }
   if(urlrr[5] == 'multiway'){
     if($('.strrr1').html() == 0 || $('.strrr2').html() == 0){
       console.log('구간 선택을 완료해주세요');
     }else if($('.strrr1').html() != 0 && $('.strrr2').html() != 0){
-      location.href="/pages/registerPassenger"
-    }
-  }
-})
-// 최종결제다음 버튼
-$('.fix_next_butt').on('click', function (){
-  let urlrr = $(location).attr('href').split('/');
-  if(urlrr[5] == 'twoway'){
-    if($('.strrr1').html() == 0 || $('.strrr2').html() == 0){
-      console.log('구간 선택을 완료해주세요');
-    }else{
-      location.href="/pages/registerPassenger"
-    }
-  }
-  if(urlrr[5] == 'oneway'){
-    if($('.strrr1').html() == 0){
-      console.log('구간 선택을 완료해주세요');
-    }else{
-      location.href="/pages/registerPassenger"
-    }
-  }
-  if(urlrr[5] == 'multiway'){
-    if($('.strrr1').html() == 0 || $('.strrr2').html() == 0){
-      console.log('구간 선택을 완료해주세요');
-    }else{
-      location.href="/pages/registerPassenger"
+      let TP1 = searchTP1()   // 값이 저장된 가짜 인덱스
+      let TP2 = searchTP2()   // 값이 저장된 가짜 인덱스
+      let TP3 = searchTP3()   // 원래 토탈 가격
+      if(Number(TP1)+Number(TP2) <= Number(TP3)){
+        $('.paymentModal1').css('display', 'block');
+      }else{
+        $('.paymentModal').css('display', 'block');
+      }
+
     }
   }
 })

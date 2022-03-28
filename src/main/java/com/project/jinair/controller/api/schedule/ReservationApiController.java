@@ -242,5 +242,59 @@ public class ReservationApiController implements CrudInterface<ReserveApiRequest
         return reservationApiLogicService.searchOfCode(resCode, firstName, lastName);
     }
 
+    // 가격 가져오기
+    @GetMapping("/search/{id}")
+    public Long search(@PathVariable(name = "id") Long id) {
+        return reservationApiLogicService.search(id);
+    }
 
+    @PutMapping("/update1")
+    public void update1(@RequestBody Header<ReserveApiRequest> request) {
+        reservationApiLogicService.update1(request);
+    }
+
+    @GetMapping("/reFirstName/{id}")
+    public String reFirstName(@PathVariable(name = "id") Long id) {
+        return reservationApiLogicService.reFirstName(id);
+    }
+    @GetMapping("/reLastName/{id}")
+    public String reLastName(@PathVariable(name = "id") Long id) {
+        return reservationApiLogicService.reLastName(id);
+    }
+    @GetMapping("/reBirth/{id}")
+    public String reBirth(@PathVariable(name = "id") Long id) {
+        return reservationApiLogicService.reBirth(id);
+    }
+    @GetMapping("/reGender/{id}")
+    public String reGender(@PathVariable(name = "id") Long id) {
+        return reservationApiLogicService.reGender(id);
+    }
+    @GetMapping("/reNation/{id}")
+    public String reNation(@PathVariable(name = "id") Long id) {
+        return reservationApiLogicService.reNation(id);
+    }
+    @GetMapping("/reMemberId/{id}")
+    public String reMemberId(@PathVariable(name = "id") Long id) {
+        return reservationApiLogicService.reMemberId(id);
+    }
+    @GetMapping("/reEmail/{id}")
+    public String reEmail(@PathVariable(name = "id") Long id) {
+        return reservationApiLogicService.reEmail(id);
+    }
+    @GetMapping("/reHpNation/{id}")
+    public String reHpNation(@PathVariable(name = "id") Long id) {
+        return reservationApiLogicService.reHpNation(id);
+    }
+    @GetMapping("/reHp/{id}")
+    public String reHp(@PathVariable(name = "id") Long id) {
+        return reservationApiLogicService.reHp(id);
+    }
+    @GetMapping("/reReserNum/{id}")
+    public String reReserNum(@PathVariable(name = "id") Long id) {
+        return reservationApiLogicService.reReserNum(id);
+    }
+    @GetMapping("/reUserindex/{id}")
+    public Long reUserindex(@PathVariable(name = "id") Long id) {
+        return reservationApiLogicService.reUserindex(id);
+    }
 }
