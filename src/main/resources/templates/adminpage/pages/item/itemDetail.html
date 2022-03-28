@@ -34,9 +34,9 @@
                                     <td><img :src=`/upload/${itemDetail.losImgName}` alt="이미지"></td>
                                     <td>{{itemDetail.losType}}</td>
                                     <td>{{itemDetail.losAirplane}}</td>
-                                    <td>{{itemDetail.losArrivedate}}</td>
+                                    <td>{{itemDetail.losArrivedate.substr(0,10)}}</td>
                                     <td>{{itemDetail.losAirportArea}}</td>
-                                    <td><input type="button" id="item_isfind_btn" value=""></td>
+                                    <td type="button" id="item_isfind_btn" value=""><p id="isfind_P">{{itemDetail.losIsfind}}</p></td>
                                     <td><input type="button" id="item_del_btn" value="삭제"></td>
                                 </tr>
                             </tbody>

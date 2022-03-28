@@ -133,7 +133,7 @@ $(() => {
         location.href = '/pages/admin/item';
     })
 
-    $(document).on("click", '#item_isfind_btn', function (){
+    $(document).on("click", '#isfind_P', function (){
         $("#modal_isfind").fadeIn(200);
 
     })
