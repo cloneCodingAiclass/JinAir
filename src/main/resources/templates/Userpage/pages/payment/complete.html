@@ -47,18 +47,18 @@
                         <tr>
                             <th>
                                 여정1
-                                <p>[[${reserveApiResponse1[0].reSchName}]]</p>
+                                <p id="airName">[[${reserveApiResponse1[0].reSchName}]]</p>
                             </th>
                             <td colspan="3" class="info">
                                 <div class="in_bl">
-                                    <span>[[${reserveApiResponse1[0].reSchDepPoint}]]</span>
+                                    <span id="startPoint">[[${reserveApiResponse1[0].reSchDepPoint}]]</span>
                                     <p>[출발] <span id="startTime1" th:value="${reserveApiResponse1[0].reSchStartTime}"></span></p>
                                 </div>
                                 <span class="arrow">
                                     <img src="/userpage/lib/img/right_arrow.PNG" alt="에서">
                                 </span>
                                 <div class="in_bl">
-                                    <span>[[${reserveApiResponse1[0].reSchArrPoint}]]</span>
+                                    <span id="arrPoint">[[${reserveApiResponse1[0].reSchArrPoint}]]</span>
                                     <p>[도착] <span id="endTime1" th:value="${reserveApiResponse1[0].reSchEndTime}"></span></p>
                                 </div>
                             </td>
