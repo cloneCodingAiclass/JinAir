@@ -28,4 +28,5 @@ public interface TbReservationRepository extends JpaRepository<TbReservation, Lo
 
     Page<TbReservation> findByReAirplainTypeAndReSchNameAndReSchStartTimeAndReSchDepPointAndReSchArrPoint(String airType, String airName, LocalDateTime StartTime, String startPoint, String ArrivePoint, Pageable pageable);
     List<TbReservation> findByReReserNumAndReFirstNameAndReLastName(String resCode, String firstName, String lastName);
+    List<TbReservation> findByReUserindex(Long userIndex);
 }

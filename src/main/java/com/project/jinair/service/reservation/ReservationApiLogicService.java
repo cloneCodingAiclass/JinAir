@@ -1,6 +1,7 @@
 package com.project.jinair.service.reservation;
 
 import com.project.jinair.ifs.CrudInterface;
+import com.project.jinair.model.entity.payment.TbUsercoupon;
 import com.project.jinair.model.entity.schedule.TbReservation;
 import com.project.jinair.model.enumclass.PaymentStatus;
 import com.project.jinair.model.network.Header;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.EntityManager;
@@ -482,5 +484,14 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
                 .collect(Collectors.toList());
 
         return Header.OK(tbReservationList);
+    }
+
+    public List<Header<Object>>  deleteForUser(Long userIndex){
+        List<TbReservation> tbUsercoupon = tbReservationRepository.findByReUserindex(userIndex);
+
+        return tbUsercoupon.stream().map(couponRegist ->{
+            tbReservationRepository.delete(couponRegist);
+            return Header.OK();
+        }).collect(Collectors.toList());
     }
 }
