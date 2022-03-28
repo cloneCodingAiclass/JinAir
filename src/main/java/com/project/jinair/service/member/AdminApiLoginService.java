@@ -85,4 +85,10 @@ public class AdminApiLoginService implements CrudInterface<AdminApiRequest, Admi
                 .map(admin -> response(admin))
                 .orElseGet(() -> Header.ERROR("데이터 없음"));
     }
+
+    public Header<AdminApiResponse> isRight(String adminId, String adminPw){
+        return adminRepository.findByAdminIdAndAdminPw(adminId, adminPw)
+                .map(admin -> response(admin))
+                .orElseGet(() -> Header.ERROR(("데이터 없음")));
+    }
 }

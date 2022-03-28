@@ -649,6 +649,10 @@ $(function () {
         $(".multi_wrap").css("display", "none");
         $(".edit_jour_wrap").css("height", "450px");
 
+        $('.searchClick').on('click', function (){
+            modification();
+        })
+
     }else{
         searchStart();
         searchStart2();
@@ -697,11 +701,12 @@ $(function () {
             $('.cancel_service').click(function () {
                 location.href = "/pages/index/mypageCancelService/"+reIndex1;
             })
-
             // 항공권 수정 편도
             $("input:radio[name='tripType'][value='왕복']").attr('checked', true);
             $("input:radio[name='tripType'][value='편도']").attr('disabled', true);
-
+            $('.searchClick').on('click', function (){
+                modification();
+            })
 
         }else{                          // 지난 스케줄이 하나라도 있는 경우
             /* 항공권 취소 */
@@ -726,6 +731,10 @@ $(function () {
             $(".oneway_wrap").css("display", "block");
             $(".multi_wrap").css("display", "none");
             $(".edit_jour_wrap").css("height", "450px");
+            $('.searchClick').on('click', function (){
+                alert('변경이 불가능한 여정이 포함되어있어\n항공권 변경이 불가능합니다.\n' +
+                    '항공권 취소 후 재예약 하시기 바랍니다. ')
+            })
         }
     }
 
@@ -1148,10 +1157,6 @@ $(() => {
     });
 });
 
-function change_ticket(){
-
-}
-
 
 function modification() {
     let inonesoo = $('.person_num').html().split(' ');
@@ -1178,10 +1183,12 @@ function modification() {
         modiBaby = Number(inonesoo[5]);
     }
 
+    let reIndex1 = Number($('#reIndex1').val())
 
     if($('input[type="radio"][name="tripType"]:checked').val() == "왕복"){
 
-        if($('.go_date_select_optt').val()=="가는날" || $('.come_date_select_optt').val()=="오는날"){
+        if($('.go_select_optt').val()=="출발지" || $('.arrive_select_optt').val()=="도착지" ||
+            $('.go_date_select_optt').val()=="가는날" || $('.come_date_select_optt').val()=="오는날"){
             alert('입력하신 내용을 확인해주세요');
         }else{
             let f = document.createElement('form');
@@ -1235,13 +1242,21 @@ function modification() {
             obj7.setAttribute('value', modiBaby);
             f.appendChild(obj7);
 
+            let obj8;
+            obj8 = document.createElement('input');
+            obj8.setAttribute('type', 'hidden');
+            obj8.setAttribute('name', 'reIndex1');
+            obj8.setAttribute('value', reIndex1); // 시작인덱스 ~ 시작인덱스 + 인원수*2-1
+            f.appendChild(obj8);
+
             f.setAttribute('method', 'post');
-            f.setAttribute('action', '/pages/getAvailabilityList/twoway');
+            f.setAttribute('action', '/pages/getAvailabilityListMD/twoway');
             document.body.appendChild(f);
             f.submit();
         }
     }else if($('input[type="radio"][name="tripType"]:checked').val() == "편도") {
-        if($('.go_date_select_optt').val()=="가는날"){
+        if($('.go_select_optt').val()=="출발지" || $('.arrive_select_optt').val()=="도착지" ||
+            $('.go_date_select_optt').val()=="가는날"){
             alert('입력하신 내용을 확인해주세요');
         }else{
             let f = document.createElement('form');
@@ -1288,8 +1303,16 @@ function modification() {
             obj6.setAttribute('value', modiBaby);
             f.appendChild(obj6);
 
+            let obj7;
+            obj7 = document.createElement('input');
+            obj7.setAttribute('type', 'hidden');
+            obj7.setAttribute('name', 'reIndex1');
+            obj7.setAttribute('value', reIndex1); // 시작인덱스 ~ 시작인덱스 + 인원수*2-1
+            f.appendChild(obj7);
+
+
             f.setAttribute('method', 'post');
-            f.setAttribute('action', '/pages/getAvailabilityList/oneway');
+            f.setAttribute('action', '/pages/getAvailabilityListMD/oneway');
             document.body.appendChild(f);
             f.submit();
         }
@@ -1364,8 +1387,15 @@ function modification() {
             obj9.setAttribute('value', modiBaby);
             f.appendChild(obj9);
 
+            let obj10;
+            obj10 = document.createElement('input');
+            obj10.setAttribute('type', 'hidden');
+            obj10.setAttribute('name', 'reIndex1');
+            obj10.setAttribute('value', reIndex1); // 시작인덱스 ~ 시작인덱스 + 인원수*2-1
+            f.appendChild(obj10);
+
             f.setAttribute('method', 'post');
-            f.setAttribute('action', '/pages/getAvailabilityList/multiway');
+            f.setAttribute('action', '/pages/getAvailabilityListMD/multiway');
             document.body.appendChild(f);
             f.submit();
         }

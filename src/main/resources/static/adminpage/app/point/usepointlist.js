@@ -156,7 +156,11 @@ $(function () {
                         let point = response3.data[j].poPoint;
                         sum += point;
                     }
-                    $(`#totalPoint${i}`).text(sum);
+                    if(sum < 0){
+                        $(`#totalPoint${i}`).text('0');
+                    }else{
+                        $(`#totalPoint${i}`).text(sum);
+                    }
                 })
             }
 
@@ -164,14 +168,10 @@ $(function () {
                 $.get('/api/point', function (response4){
                     if(response4.data[i].poPoint > 0){
                         // 적립 내역
-                        console.log('적립')
-                        console.log(response4.data[i].poPoint)
                         $(`#addPoint${i}`).text(response4.data[i].poPoint)
                         $(`#usePoint${i}`).text('-')
                     }else{
                         // 사용 내역
-                        console.log('사용')
-                        console.log(response4.data[i].poPoint)
                         $(`#addPoint${i}`).text('-')
                         $(`#usePoint${i}`).text(response4.data[i].poPoint)
                     }
@@ -180,7 +180,6 @@ $(function () {
 
             let lastPage = response.pagination.totalPages;
             let str = "";
-
             for (let i = 0; i < lastPage; i++) {
                 str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
             }
@@ -207,16 +206,21 @@ $(function () {
                 str += "<td class='lastPage1'>>></td>";
             }
             $("#showPage").on('click', '.firstPage1', function(){
-                list(0);
+                sclist(0);
             });
             $("#showPage").on('click', '.lastPage1', function(){
-                list(lastPage-1);
+                sclist(lastPage-1);
             });
         })
     }
 
     $('#searchUser').on('click', function (){
-        searchList($('#userid').val(), 0)
+        if(!$('#userid').val()){
+            alert('아이디를 입력해주세요')
+        }else {
+            searchList($('#userid').val(), 0)
+        }
+
     })
 
     // 사용자 아이디로 검색
@@ -310,15 +314,17 @@ $(function () {
         })
     }
 
-    $(document).on('click', '.pages', function(){
+    $("#showPage").on('click', '.pageNum', function(){
         let pageId = this.id;
+        console.log(pageId);
         list(pageId);
     });
 
-    $(document).on('click', '.pagesS', function(){
+    $("#showPage").on('click', '.pageNum3', function(){
         let userid = $('#userid').val();
         let pageId2 = this.id;
         searchList(userid, pageId2);
     });
+
 
 })(jQuery)
