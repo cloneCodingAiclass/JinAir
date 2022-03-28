@@ -81,15 +81,12 @@
     background-color: #bdd600;
     cursor: pointer;
     font-weight: bold;
-    height: 35px;
+    height: 30px;
     text-indent: 0px;
-    width: 150px;
+    width: 130px;
     font-size: 16px;
 }
-#item_search #item_search_btn input:hover {
-    color: #fff;
-    background-color: rgb(153, 153, 153, 0.5);
-}
+
 /* 유실물 리스트 */
 .item_list {
     width: 100%;
@@ -206,12 +203,12 @@
     font-weight: bolder;
 }
 .footer table td{
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 40px;
     border: 1px solid rgb(187, 187, 187);
     background-color: #fff;
     padding-top: 2px;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
+    font-size: 18px;
 }
 
 .footer > .notice_write{

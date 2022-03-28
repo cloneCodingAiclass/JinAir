@@ -39,20 +39,17 @@
 }
 #cm_list_box #cm_list_search input[type="submit"] {
     text-align: center;
-    width: 100px;
+    width: 40px;
     height: 30px;
-    border: none;
+    border: 1px solid #BDD600;
     border-radius: 2px;
-    background-color: #BDD600;
+    background-color: #fff;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
-#cm_list_box #cm_list_search input[type="submit"]:hover {
-    color: #fff;
-    background-color: rgb(153, 153, 153, 0.5);
-}
+
 
 /* cm table */
 #cm_list > table {

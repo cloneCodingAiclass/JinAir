@@ -57,17 +57,24 @@
     display: inline-block;
 }
 
+#findApName {
+    width: 40px;
+    height: 30px;
+    background-color: #fff;
+    border: 1px solid #BDD600;
+}
 
 .contents > .contwrap input.searchbutt{
     border-radius: 2px;
     outline: none;
-    width: 90px;
-    height: 40px;
+    width: 80px;
+    height: 30px;
     font-size: 14px;
     font-weight: bolder;
     cursor: pointer;
     background-color: #bdd600;
     border: none;
+    margin-top: 23px;
     color: #444;
     text-align: center;
     box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
