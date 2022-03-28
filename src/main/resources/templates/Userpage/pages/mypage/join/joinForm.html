@@ -3,7 +3,6 @@
       xmlns:th="http://www.thymeleaf.org/">
 <!-- head.html -->
 <div th:replace="userpage/fragment/head :: head"></div>
-<link rel="stylesheet" href="/userpage/lib/css/index/index.css"/>
     <link rel="stylesheet" href="/userpage/lib/css/mypage/joinForm.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -76,18 +75,20 @@
                     <p>회원가입</p>
                 </div>
                 <div class="joinForm_step">
-                    <div class="step1">
-                        <p class="step_text">Step1</p>
-                        <p class="step_sub">약관동의 및 본인인증</p>
-                    </div>
-                    <div class="step2">
-                        <p class="step_text">Step2</p>
-                        <p class="step_sub">정보입력</p>
-                    </div>
-                    <div class="step3">
-                        <p class="step_text">Step3</p>
-                        <p class="step_sub">가입완료</p>
-                    </div>
+<!--                    <div class="step1">-->
+<!--                        <p class="step_text">Step1</p>-->
+<!--                        <p class="step_sub">약관동의 및 본인인증</p>-->
+<!--                    </div>-->
+<!--                    <div class="step2">-->
+<!--                        <p class="step_text">Step2</p>-->
+<!--                        <p class="step_sub">정보입력</p>-->
+<!--                    </div>-->
+<!--                    <div class="step3">-->
+<!--                        <p class="step_text">Step3</p>-->
+<!--                        <p class="step_sub">가입완료</p>-->
+<!--                    </div>-->
+                    <img src="/userpage/lib/img/join2.png" class="joinStepImg" alt="회원가입2"
+                         oncontextmenu="return false" ondragstart="return false" onselectstart="return false"/>
                 </div>
                 <h2 class="typeA">정보입력 <span class="text fontTypeA">* 표시 항목은 필수 입력사항 입니다.</span></h2>
                 <form id="joinForm" name="joinForm" method="post" autocomplete="off" action="#">
