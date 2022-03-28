@@ -180,7 +180,6 @@ body{
     margin: 0 20px;
     box-sizing: border-box;
     padding-bottom: 30px;
-    cursor: pointer;
 }
 #header nav .nav_all > .open1{
     border-bottom: none;
@@ -922,4 +921,25 @@ table {
     line-height: 28px;
     text-align: center;
     word-wrap: break-word;
+}
+
+#fromKo, #fromOt {
+    border-top: 1px solid #000 !important;
+    border-bottom: 1px solid #000 !important;
+}
+
+#fromOt {
+    table-layout: fixed;
+}
+
+#fromKo th, fromOt th {
+    border: 1px solid #eaeaea !important;
+}
+
+#fromKo .bt, fromOt .bt {
+    border-top: 1px solid #000 !important;
+}
+
+.bn {
+    border-top: 1px solid #eaeaea !important;
 }
