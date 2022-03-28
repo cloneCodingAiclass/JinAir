@@ -205,27 +205,41 @@ $(function () {
                 $.get('/api/faq/view/'+ response.data[i].faqIndex, function (){
 
                 })
-
             }
+            let lastPage = response.pagination.totalPages;
+            let str = "";
 
-
-            let url = "";
-            let NumberPage = 0;
-            let last = pagination.totalPages;
-
-            for(NumberPage; NumberPage < last; NumberPage++){
-                url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
+            if (lastPage != 0) {
+                str += "<td class='firstPage1'><<</td>";
             }
-            document.getElementById("footer").innerHTML = url;
-
-
-
-            $(".pageButton").on('click', function (){
-                page = $(this).attr('id');
-                list(page);
-            })
-
-
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
+            }
+            if (lastPage != 0){
+                str += "<td class='lastPage1'>>></td>";
+            }
+            $("#showPage").html(str);
+            if(page == 0) {
+                $(".firstPage1").css("visibility", "hidden");
+            }
+            if(page == lastPage-1) {
+                $(".lastPage1").css("visibility", "hidden");
+            }
+            $(".pageNum").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+page+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            $("#showPage").on('click', '.firstPage1', function(){
+                list(0);
+            });
+            $("#showPage").on('click', '.lastPage1', function(){
+                list(lastPage-1);
+            });
         })
     };
 
@@ -234,9 +248,6 @@ $(function () {
         console.log(pageId);
         list(pageId);
     });
-
-
-
 
 
     // 검색어 데이터
@@ -256,56 +267,63 @@ $(function () {
     function Type(type, page){
         $.get("/api/faq/typeSearch/"+type+"?page="+page, function(response){
 
-
             faqList.faqList = response.data;
+            for(let i = 0; i < response.data.length; i++){
+                $.get('/api/faq/view/'+ response.data[i].faqIndex, function (){
 
-            pagination = response.pagination;
-
-            showPage.totalElements = pagination.currentPage;
-            showPage.currentPage = pagination.currentPage;
-
-
-            let url = "";
-            let NumberPage = 0;
-            let last = pagination.totalPages;
-
-
-            for(NumberPage; NumberPage < last; NumberPage++){
-                url += '<div id="' + NumberPage + '" class="pageButton">' + (NumberPage+1) + '</div>';
+                })
             }
-            document.getElementById("footer").innerHTML = url;
 
-            console.log(NumberPage)
-
-            $(".pageButton").on('click', function (){
-                page = $(this).attr('id');
-                Type(type, page);
-            })
-
-
-
+            let lastPage = response.pagination.totalPages;
+            let str2 = "";
+            str2 += "<td class='firstPage2'><<</td>";
+            for ( let i = 0; i < lastPage; i++ ) {
+                str2 += "<td class='pagesS' id="+i+">" + (i+1) + "</td>";
+            }
+            str2 += "<td class='lastPage2'>>></td>";
+            $("#showPage").html(str2);
+            if ( page == 0 ) {
+                $(".firstPage2").css("visibility", "hidden");
+            }
+            if ( page == lastPage-1 || response.totalElements != 0 ) {
+                $(".lastPage2").css("visibility", "hidden");
+            }
+            $(".pagesS").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+page+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            $(document).on('click', '.firstPage2', function(){
+                Type(type, 0);
+            });
+            $(document).on('click', '.lastPage2', function(){
+                Type(type, lastPage-1);
+            });
 
         });
     }
     $('#faq1').on('click', function () {
-        list();
-        list();
+        list(0);
     });
 
     $('#faq2').on('click', function () {
-        Type($('#faq2').attr("value"));
+        Type($('#faq2').attr("value"), 0);
     });
     $('#faq3').on('click', function () {
-        Type($('#faq3').attr("value"));
+        Type($('#faq3').attr("value"), 0);
     });
     $('#faq4').on('click', function () {
-        Type($('#faq4').attr("value"));
+        Type($('#faq4').attr("value"), 0);
     });
     $('#faq5').on('click', function () {
-        Type($('#faq5').attr("value"));
+        Type($('#faq5').attr("value"), 0);
     });
     $('#faq6').on('click', function () {
-        Type($('#faq6').attr("value"));
+        Type($('#faq6').attr("value"), 0);
     });
 
 
