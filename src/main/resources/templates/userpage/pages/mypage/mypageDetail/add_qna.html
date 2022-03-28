@@ -3,7 +3,6 @@
       xmlns:th="http://www.thymeleaf.org/">
 <!-- head.html -->
 <div th:replace="userpage/fragment/head :: head"></div>
-<link rel="stylesheet" href="/userpage/lib/css/index/index.css"/>
 <link rel="stylesheet" href="/userpage/lib/css/mypage/add_qna.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -218,7 +217,7 @@
                             </tr>
                             <tr>
                                 <th>내용</th>
-                                <td><textarea name="qnaContent" id="content"></textarea></td>
+                                <td><textarea name="qnaContent" id="content" maxlength="500"></textarea></td>
                             </tr>
                             <tr>
                                 <th>개인정보 수집동의</th>

@@ -58,10 +58,10 @@ a:visited{color:#444;}
     background-color: #BDD600;
 }
 body{
-    height: 1; 
+    height: 1;
     color: #444;
-    white-space: normal; 
-    word-wrap: break-word; 
+    white-space: normal;
+    word-wrap: break-word;
     line-height: 1;
 }
 #wrap{
@@ -101,7 +101,7 @@ body{
     right: -5px;
     top: -10px;
 }
-#header .login{ 
+#header .login{
     box-sizing: border-box;
     display: inline;
     position: relative;
@@ -465,7 +465,7 @@ body{
 .Aicon img:nth-child(2) {
     margin-top: -7px;
     height: 35px;
-}  
+}
 #info {
     padding: 7px;
     width: 65%;
@@ -695,7 +695,7 @@ ul li{
 
 }
 #fareRules2 .bundle_wrap .bundle_step{
-margin-bottom: 50px;
+    margin-bottom: 50px;
 }
 #fareRules2 .bundle_wrap .bundle_step li{
     float: left;
