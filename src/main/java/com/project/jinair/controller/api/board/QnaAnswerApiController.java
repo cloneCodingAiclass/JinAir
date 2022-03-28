@@ -40,4 +40,10 @@ public class QnaAnswerApiController implements CrudInterface<QnaAnswerApiRequest
         return null;
     }
 
+    // QnA 인덱스에 따른 답변 삭제
+    @PostMapping("/QnAofAns/delete")
+    public Header<QnaAnswerApiResponse> deleteOfQnA(@RequestBody List<QnaAnswerApiRequest> requests){
+        return qnaAnswerApiLogicService.deleteOfQnA(requests);
+    }
+
 }

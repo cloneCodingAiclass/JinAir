@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -196,5 +197,14 @@ public class UserCouponApiService implements CrudInterface<UsercouponApiRequest,
                 .orElseGet(
                         () -> Header.ERROR("NO DATA")
                 );
+    }
+
+    public List<Header<Object>> deleteForUser(Long userIndex){
+        List<TbUsercoupon> tbUsercoupon = tbUsercouponRepository.findByUcUserindex(userIndex);
+
+        return tbUsercoupon.stream().map(couponRegist ->{
+            tbUsercouponRepository.delete(couponRegist);
+            return Header.OK();
+        }).collect(Collectors.toList());
     }
 }

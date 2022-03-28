@@ -82,4 +82,10 @@ public class UserCouponApiController implements CrudInterface<UsercouponApiReque
         return userCouponApiService.updateCoupon(request);
     }
 
+    // 유저 쿠폰 삭제
+    @DeleteMapping("/deleteForUser/{id}")
+    public List<Header<Object>> deleteForUser(@PathVariable(name = "id") Long userIndex){
+        return userCouponApiService.deleteForUser(userIndex);
+    }
+
 }

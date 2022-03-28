@@ -216,4 +216,13 @@ public class QnaApiLogicService implements CrudInterface<QnaApiRequest, QnaApiRe
         tbQnaRepository.save(i);
     }
 
+    // 사용자에 따른 전체 Qna (페이지 없음)
+    public Header<List<QnaApiResponse>> userQnaList(Long id) {
+        List<TbQna> tbQna = tbQnaRepository.findByQnaUserindex(id);
+        List<QnaApiResponse> qnaApiResponseList = tbQna.stream()
+                .map(user -> responseQna(user))
+                .collect(Collectors.toList());
+        return Header.OK(qnaApiResponseList);
+    }
+
 }
