@@ -1,20 +1,20 @@
 $(function () {
-    timer = setInterval( function () {
-        visit();
-        }, 6000);
+    // timer = setInterval( function () {
+    //     visit();
+        // }, 6000);
 
 });
 
 
 let itemlist = [];
-function visit() {
-    fetch("/api/reservation/resultIndex").then(response => response.json())
-        .then(data => {
-            data.forEach(num => {
-                itemlist.push(num)
-            })
-        })
-};
+// function visit() {
+//     fetch("/api/reservation/resultIndex").then(response => response.json())
+//         .then(data => {
+//             data.forEach(num => {
+//                 itemlist.push(num)
+//             })
+//         })
+// };
 var today = new Date();
 var year = today.getFullYear();
 var month = today.getMonth();
@@ -49,7 +49,7 @@ const data = {
             borderDash:[0,0],
             lineTension : 0.3,
             fill: true,
-            data: itemlist
+            data: [10,20,11,13,15,0,0,0,0,0,0,1,5,6,15,20,13,14,18,10,1,0,0,0,0,0,0,10,7,10,393]
         }]
     }
 const config = {

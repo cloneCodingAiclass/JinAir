@@ -137,9 +137,9 @@ $(function () {
 
     couponResult(idx);
 
-    function couponResult(memIndex) {
-        console.log(memIndex);
-        $.get("/api/userCoupon/list/" + memIndex, function (response) {
+    function couponResult(idx) {
+        console.log(idx);
+        $.get("/api/userCoupon/list/" + idx, function (response) {
             console.dir(response);
             let coupon;
             if (response == "") {
@@ -155,9 +155,9 @@ $(function () {
     pointResult(idx);
 
 
-    function pointResult(index){
+    function pointResult(idx){
         let sum = 0;
-        $.get("/api/point/user/"+index, function (response){
+        $.get("/api/point/user/"+idx, function (response){
             for(let i = 0; i < response.data.length; i++){
                 let point = response.data[i].poPoint;
                 sum += point;
