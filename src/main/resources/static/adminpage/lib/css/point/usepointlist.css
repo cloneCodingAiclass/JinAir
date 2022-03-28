@@ -30,7 +30,6 @@ input#userid{
     position: relative;
     bottom: 1px;
     font-weight: 600;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
 input#searchUser{
     text-align: center;
@@ -42,7 +41,6 @@ input#searchUser{
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.37);
 }
 
 .contents > .con_wrap > table{
