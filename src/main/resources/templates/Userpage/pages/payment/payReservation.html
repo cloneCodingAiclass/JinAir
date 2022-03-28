@@ -321,14 +321,14 @@
                                         <tr>
                                             <td>구간 <span th:text="1" th:if="${k.count} % 2 != 0"></span><span th:text="2" th:if="${k.count} % 2 == 0"></span> : [[${opt1.reSchDepPoint}]]</td>
                                             <td></td>
-                                            <td></td>
+                                            <td style="height: 61px!important;"></td>
                                         </tr>
                                         <tr>
-                                            <td c><span class="name">[[${opt1.reFirstName}]]/[[${opt1.reLastName}]]</span></td>
+                                            <td><span class="name">[[${opt1.reFirstName}]]/[[${opt1.reLastName}]]</span></td>
                                             <td></td>
-                                            <td>
+                                            <td style="height: 61px!important;">
                                                 <div class="td_wrap">
-                                                    <span class="cul">KRW</span><span class="price priceOpt" th:if="${opt1.reSeatPrice} != null" th:value="${opt1.reSeatPrice}">
+                                                    <span class="cul">KRW</span><span class="price priceOpt" th:if="${opt1.reSeatPrice} != null" th:value="${opt1.reSeatPrice}"></span>
                                                     <span class="price" th:if="${opt1.reSeatPrice} == null" th:text="0"></span>
                                                 </div>
                                             </td>
@@ -363,6 +363,7 @@
                                         <tr>
                                             <td>구간 <span th:text="1" th:if="${k.count} % 2 != 0"></span><span th:text="2" th:if="${k.count} % 2 == 0"></span> : [[${opt2.reSchDepPoint}]]</td>
                                             <td></td>
+                                            <td style="height: 61px!important;"></td>
                                         </tr>
                                         <tr>
                                             <td><span class="name">[[${opt2.reFirstName}]]/[[${opt2.reLastName}]]</span></td>
@@ -405,11 +406,12 @@
                                         <tr>
                                             <td>구간 <span th:text="1" th:if="${k.count} % 2 != 0"></span><span th:text="2" th:if="${k.count} % 2 == 0"></span> : [[${opt3.reSchDepPoint}]]</td>
                                             <td></td>
+                                            <td style="height: 61px!important;"></td>
                                         </tr>
                                         <tr>
                                             <td><span class="name">[[${opt3.reFirstName}]]/[[${opt3.reLastName}]]</span></td>
                                             <td class="insType" th:if="${opt3.reInsuranceidx} != ''" th:class="issu" th:value="${opt3.reInsuranceidx}"></td>
-                                            <td>
+                                            <td style="height: 61px!important;">
                                                 <span class="cul">KRW</span>
                                                 <span th:if="${opt3.reInsuranceidx} != ''" class="price insPrice" th:value="${opt3.reInsuranceidx}">
                                                     </span>
@@ -728,7 +730,7 @@
                                     <li>항공기 및 개인 또는 타인의 재산에 위험을 가져올 수 있는 항공위험물 안내</li>
                                 </ul>
                                 <div class="detail_link cursor">
-                                    <a href="../serviceCount/airport/baggage/baggage.html" target="_blank">자세히 보기</a>
+                                    <a href="/pages/index/baggage" target="_blank">자세히 보기</a>
                                 </div>
                                 <div class="item_list_wrap">
                                     <div class="list list1">
