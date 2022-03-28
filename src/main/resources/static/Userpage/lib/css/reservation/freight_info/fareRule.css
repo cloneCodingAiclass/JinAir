@@ -943,3 +943,27 @@ table {
 .bn {
     border-top: 1px solid #eaeaea !important;
 }
+#fromKo, #fromOt {
+    border-top: 1px solid #000 !important;
+    border-bottom: 1px solid #000 !important;
+}
+
+#fromOt {
+    table-layout: fixed;
+}
+
+#fromKo th, fromOt th {
+    border: 1px solid #eaeaea !important;
+}
+
+#fromKo .bt, fromOt .bt {
+    border-top: 1px solid #000 !important;
+}
+
+.bn {
+    border-top: 1px solid #eaeaea !important;
+}
+
+
+
+
