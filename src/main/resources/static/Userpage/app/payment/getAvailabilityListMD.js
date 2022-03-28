@@ -1830,6 +1830,7 @@ function onewayUpdating(){    // 가짜 인덱스 홀수번
           type : "PUT",
           data : JSON.stringify(jsonData),
           dataType : "text",
+          async :false,
           contentType : "application/json"
         });
       }
@@ -1837,8 +1838,179 @@ function onewayUpdating(){    // 가짜 인덱스 홀수번
   }
 }
 
+function twowayUpdating(price){    // 가짜 인덱스 홀수번
+  for( let i = 0 ; i < 60; i+=2){
+    let reFirstName1;
+    let reLastName1;
+    let reBirth1;
+    let reGender1;
+    let reNation1;
+    let reMemberId1;
+    let reEmail1;
+    let reHpNation1;
+    let reHp1;
+    let reReserNum1;
+    let reUserindex1;
+
+    if(document.getElementById(`reIndexx${i}`)) {
+      reFirstName1 = reFirstName(i);
+      reLastName1 = reLastName(i);
+      reBirth1 = reBirth(i);
+      reGender1 = reGender(i);
+      reNation1 = reNation(i);
+      reMemberId1 = reMemberId(i);
+      reEmail1 = reEmail(i);
+      reHpNation1 = reHpNation(i);
+      reHp1 = reHp(i);
+      reReserNum1 = reReserNum(i);
+      reUserindex1 = reUserindex(i);
+    }
+
+    if(document.getElementById(`${i}`)){
+      if(i%2 == 0){
+        let jsonData;
+        jsonData = {
+          data : {
+            reIndex : $(`#${i}`).val(),
+            reStatus: "PaymentFinished",
+            reReserNum : reReserNum1,
+            rePayment : "KAKAOPAY",
+            reFirstName : reFirstName1,
+            reLastName : reLastName1,
+            reBirth : reBirth1,
+            reGender : reGender1,
+            reNation : reNation1,
+            reMemberId : reMemberId1,
+            reEmail : reEmail1,
+            reHpNation : reHpNation1,
+            reHp : reHp1,
+            reUserindex : reUserindex1,
+            reTotal : price
+          }
+        }
+        $.ajax({
+          url : "/api/reservation/update2",
+          type : "PUT",
+          data : JSON.stringify(jsonData),
+          dataType : "text",
+          async :false,
+          contentType : "application/json"
+        });
+      }
+    }
+  }
+  for( let i = 1 ; i < 60; i+=2){
+    let reFirstName1;
+    let reLastName1;
+    let reBirth1;
+    let reGender1;
+    let reNation1;
+    let reMemberId1;
+    let reEmail1;
+    let reHpNation1;
+    let reHp1;
+    let reReserNum1;
+    let reUserindex1;
+
+    if(document.getElementById(`reIndexx${i}`)) {
+      reFirstName1 = reFirstName(i);
+      reLastName1 = reLastName(i);
+      reBirth1 = reBirth(i);
+      reGender1 = reGender(i);
+      reNation1 = reNation(i);
+      reMemberId1 = reMemberId(i);
+      reEmail1 = reEmail(i);
+      reHpNation1 = reHpNation(i);
+      reHp1 = reHp(i);
+      reReserNum1 = reReserNum(i);
+      reUserindex1 = reUserindex(i);
+    }
+
+    if(document.getElementById(`${i}`)){
+      if(i%2 == 1){
+        let jsonData;
+        jsonData = {
+          data : {
+            reIndex : $(`#${i}`).val(),
+            reStatus: "PaymentFinished",
+            reReserNum : reReserNum1,
+            rePayment : "KAKAOPAY",
+            reFirstName : reFirstName1,
+            reLastName : reLastName1,
+            reBirth : reBirth1,
+            reGender : reGender1,
+            reNation : reNation1,
+            reMemberId : reMemberId1,
+            reEmail : reEmail1,
+            reHpNation : reHpNation1,
+            reHp : reHp1,
+            reUserindex : reUserindex1,
+            reTotal : price
+          }
+        }
+        $.ajax({
+          url : "/api/reservation/update2",
+          type : "PUT",
+          data : JSON.stringify(jsonData),
+          dataType : "text",
+          async :false,
+          contentType : "application/json"
+        });
+      }
+    }
+  }
+}
+
+// 삭제
+function deleting() {    // 가짜 인덱스 홀수번
+  for (let i = 0; i < 60; i++) {
+
+    if (document.getElementById(`reIndexx${i}`)) {
+      let jsonData;
+      jsonData = {
+        data: {
+          reIndex: $(`#reIndexx${i}`).val(),
+        }
+      }
+      $.ajax({
+        url: "/api/reservation",
+        data: JSON.stringify(jsonData),
+        method: "PUT",
+        dataType: "text",
+        contentType: "application/json",
+        success: function (response) {
+          location.href = "/pages/complete"
+        }
+      })
+    }
+  }
+}
+function deleting1() {    // 가짜 인덱스 홀수번
+  let reUserindex1 = reUserindex(0);
 
 
+  for (let i = 0; i < 60; i++) {
+
+    if (document.getElementById(`reIndexx${i}`)) {
+      let jsonData;
+      jsonData = {
+        data: {
+          reIndex: $(`#reIndexx${i}`).val(),
+        }
+      }
+      $.ajax({
+        url: "/api/reservation",
+        data: JSON.stringify(jsonData),
+        method: "PUT",
+        dataType: "text",
+        contentType: "application/json",
+        success: function (response) {
+          location.href = "/pages/pay/" + reUserindex1;
+        }
+      })
+    }
+  }
+}
 
 
 
@@ -1856,10 +2028,23 @@ $('#next_butt').on('click', function (){
       let TP3 = searchTP3()   // 원래 토탈 가격
       if(Number(TP1)+Number(TP2) <= Number(TP3)){
         $('.paymentModal1').css('display', 'block');
+        $('.totalPriceB').text(Number(TP3).toLocaleString('ko-KR'));
+        $('.totalPriceA').text((Number(TP1) + Number(TP2)).toLocaleString('ko-KR'));
+        $('.totalPriceC').text((Number(TP3)-(Number(TP1) + Number(TP2))).toLocaleString('ko-KR'))
+        $('.patbtn').on('click', function (){
+          twowayUpdating((Number(TP1) + Number(TP2)));
+          deleting()
+        })
       }else{
         $('.paymentModal').css('display', 'block');
+        $('.totalPriceA').text((Number(TP1) + Number(TP2)).toLocaleString('ko-KR'))
+        $('.totalPriceB').text(Number(TP3).toLocaleString('ko-KR'))
+        $('.totalPriceC').text(((Number(TP1) + Number(TP2))-Number(TP3)).toLocaleString('ko-KR'))
+        $('.patbtn').on('click', function (){
+          twowayUpdating((Number(TP1) + Number(TP2)));
+          deleting1()
+        })
       }
-
     }
   }
   if(urlrr[5] == 'oneway'){
@@ -1876,18 +2061,18 @@ $('#next_butt').on('click', function (){
         $('.totalPriceC').text((Number(TP3)-Number(TP1)).toLocaleString('ko-KR'))
         $('.patbtn').on('click', function (){
           onewayUpdating()
+          deleting()
         })
-
-
-
       }else{
         $('.paymentModal').css('display', 'block');
         $('.totalPriceA').text(Number(TP1).toLocaleString('ko-KR'))
         $('.totalPriceB').text(Number(TP3).toLocaleString('ko-KR'))
         $('.totalPriceC').text((Number(TP1)-Number(TP3)).toLocaleString('ko-KR'))
+        $('.patbtn').on('click', function (){
+          onewayUpdating()
+          deleting1()
+        })
       }
-
-
     }
   }
   if(urlrr[5] == 'multiway'){
@@ -1899,13 +2084,27 @@ $('#next_butt').on('click', function (){
       let TP3 = searchTP3()   // 원래 토탈 가격
       if(Number(TP1)+Number(TP2) <= Number(TP3)){
         $('.paymentModal1').css('display', 'block');
+        $('.totalPriceB').text(Number(TP3).toLocaleString('ko-KR'));
+        $('.totalPriceA').text((Number(TP1) + Number(TP2)).toLocaleString('ko-KR'));
+        $('.totalPriceC').text((Number(TP3)-(Number(TP1) + Number(TP2))).toLocaleString('ko-KR'))
+        $('.patbtn').on('click', function (){
+          twowayUpdating((Number(TP1) + Number(TP2)));
+          deleting()
+        })
       }else{
         $('.paymentModal').css('display', 'block');
+        $('.paymentModal').css('display', 'block');
+        $('.totalPriceA').text((Number(TP1) + Number(TP2)).toLocaleString('ko-KR'))
+        $('.totalPriceB').text(Number(TP3).toLocaleString('ko-KR'))
+        $('.totalPriceC').text(((Number(TP1) + Number(TP2))-Number(TP3)).toLocaleString('ko-KR'))
+        $('.patbtn').on('click', function (){
+          twowayUpdating((Number(TP1) + Number(TP2)));
+          deleting1()
+        })
       }
-
     }
   }
-})
+});
 
 
 
@@ -3164,4 +3363,5 @@ $(() => {
       height: "820px",
     });
   });
+
 });
