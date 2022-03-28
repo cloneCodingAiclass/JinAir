@@ -175,7 +175,6 @@ function hidePopupLayer(){
 
     let userid;
 
-    console.log(idx)
 
     let memberDetail = new Vue({
         el : '#joinForm',
@@ -187,10 +186,7 @@ function hidePopupLayer(){
     search(idx);
 
     function search(index){
-        console.log("index : " + index);
         $.get("/api/user/"+index, function (response){
-            console.dir(response);
-
             userid = response.data.memUserid;
 
             gender = response.data.memGender;
@@ -265,9 +261,7 @@ function hidePopupLayer(){
             $('#pwChange').on('click', function (){
                 if(sendPw()){
                     // 비밀번호 입력 완료
-                    console.log($('#newPw').val());
                     $('#pwField').val($('#newPw').val());
-                    console.log($('#pwField').val());
                     $('.confirm_modal1').fadeOut();
                     $('body').css('overflow', '');
                 }
@@ -366,6 +360,7 @@ function hidePopupLayer(){
 
     // 회원탈퇴
     $('.btnTypeB').click( ()=> {
+        // let arrQnA = [];
         $.ajax({
             url : "/api/user/"+idx,
             type : "DELETE",
@@ -374,11 +369,38 @@ function hidePopupLayer(){
                 location.href = '/pages/jinair/index';
             }
         })
+        // 유저 포인트 삭제
         $.ajax({
             url : "/api/point/user/" + idx,
             type : "DELETE"
         })
-
+        // // 유저 QnA 삭제
+        // $.get('/api/qna/userQna/'+idx, function (response){
+        //     let arrQnAIndex = {};
+        //     console.dir(response)
+        //     for(let i = 0; response.data.length; i++){
+        //         console.log(response.data[i].qnaIndex);
+        //         arrQnAIndex.qaQnaindex = response.data[i].qnaIndex;
+        //         arrQnA.push(arrQnAIndex);
+        //     }
+        //     console.dir(arrQnA)
+        //     $.post({
+        //         url: '/api/qnaAns/QnAofAns/delete',
+        //         data: JSON.stringify(arrQnA),
+        //         dataType: 'text',
+        //         contentType: 'application/json'
+        //     })
+        // })
+        // 유저 쿠폰 삭제
+        $.ajax({
+            url: "/api/userCoupon/deleteForUser/"+idx,
+            type : "DELETE",
+        })
+        // 유저 예약 리스트 삭제
+        // $.ajax({
+        //     url: "/api/reservation/deleteForUser/"+idx,
+        //     type : "DELETE",
+        // })
     })
 
 })(jQuery)

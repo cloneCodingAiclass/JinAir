@@ -21,5 +21,6 @@ public interface TbQnaRepository extends JpaRepository<TbQna, Long> {
     Page<TbQna> findByQnaTitleContaining(String qnaType, Pageable pageable);
     Page<TbQna> findByQnaUserindex(Long id, Pageable pageable);
     Page<TbQna> findAll(Pageable pageable);
+    List<TbQna> findByQnaUserindex(Long id);
 }
 

@@ -92,4 +92,11 @@ public class QnaApiController implements CrudInterface<QnaApiRequest, QnaApiResp
     public Header<QnaApiResponse> delete(@PathVariable(name = "id") Long id) {
         return qnaApiLogicService.delete(id);
     }
+
+
+    // 사용자 전체 QnA (페이지 없음)
+    @GetMapping("/userQna/{id}")
+    public Header<List<QnaApiResponse>> userQnaList(@PathVariable Long id) {
+        return qnaApiLogicService.userQnaList(id);
+    }
 }

@@ -13,7 +13,10 @@ import com.project.jinair.repository.TbQnaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.spec.OAEPParameterSpec;
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -75,4 +78,14 @@ public class QnaAnswerApiLogicService implements CrudInterface<QnaAnswerApiReque
         return Header.OK(qnaAnswerApiResponse);
     }
 
+    public Header deleteOfQnA(List<QnaAnswerApiRequest> requests){
+        for(int i = 0; i < requests.size(); i++){
+            Optional<TbQnaAnswer> qnaAnswer = tbQnaAnswerRepository.findByQaQnaindex(requests.get(i).getQaQnaindex());
+            return qnaAnswer.map( qna -> {
+                tbQnaAnswerRepository.delete(qna);
+                return Header.OK();
+            }).orElseGet(() -> Header.ERROR("데이터 없음"));
+        }
+        return null;
+    }
 }

@@ -4,7 +4,6 @@
 <div th:replace="userpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/userpage/lib/css/index/index.css"/>
 <link rel="stylesheet" href="/userpage/lib/css/reservation/freight_info/fareRule.css">
-
 <script src="/userpage/app/reservation/freight_info/fareRule.js"></script>
 
 <body>
@@ -1554,7 +1553,7 @@
                         <span class="guide">(단위 : KRW, 편도 1인당 부과)</span>
                     </h3>
                     <div class="divBodyScroll">
-                        <table class="bbsList tblScroll">
+                        <table class="bbsList tblScroll" id="fromKo">
                             <colgroup>
                                 <col width="15%">
                                 <col width="12%">
@@ -1566,10 +1565,10 @@
                             </colgroup>
                             <thead>
                                 <tr>
-                                    <th scope="col" rowspan="2">운임종류</th>
-                                    <th scope="col" colspan="5">환불 위약금</th>
-                                    <th scope="col" rowspan="2">부분 환불</th>
-                                    <th scope="col" rowspan="2">변경 수수료</th>
+                                    <th scope="col" rowspan="2" class="bt">운임종류</th>
+                                    <th scope="col" colspan="5" class="bt">환불 위약금</th>
+                                    <th scope="col" rowspan="2" class="bt">부분 환불</th>
+                                    <th scope="col" rowspan="2" class="bt">변경 수수료</th>
                                 </tr>
                                 <tr>
                                     <th scope="col">~ 출발 91일</th>
@@ -1615,7 +1614,7 @@
                         <span class="guide">(편도 1인당 부과)</span>
                     </h3>
                     <div class="divBodyScroll">
-                        <table class="bbsList tblScroll">
+                        <table class="bbsList tblScroll" id="fromOt">
                             <colgroup>
                                 <col>
                                 <col width="13%">
@@ -1631,9 +1630,9 @@
                             </colgroup>
                             <thead>
                                 <tr>
-                                    <th scope="col" rowspan="2">구분</th>
-                                    <th scope="col">지역<span class="pbr">(최초출발구간기준)</span></th>
-                                    <th scope="col">
+                                    <th scope="col" rowspan="2" class="bt">구분</th>
+                                    <th scope="col" class="bt">지역<span class="pbr">(최초출발구간기준)</span></th>
+                                    <th scope="col" class="bt">
                                         미주/
                                         대양주/
                                         <br>
@@ -1642,26 +1641,26 @@
                                         <br>
                                         라오스
                                     </th>
-                                    <th scope="col">일본</th>
-                                    <th scope="col">중국 본토</th>
-                                    <th scope="col">홍콩</th>
-                                    <th scope="col">대만</th>
-                                    <th scope="col">마카오</th>
-                                    <th scope="col">태국</th>
-                                    <th scope="col">말레이시아</th>
-                                    <th scope="col">러시아</th>
+                                    <th scope="col" class="bt">일본</th>
+                                    <th scope="col" class="bt">중국 본토</th>
+                                    <th scope="col" class="bt">홍콩</th>
+                                    <th scope="col" class="bt">대만</th>
+                                    <th scope="col" class="bt">마카오</th>
+                                    <th scope="col" class="bt">태국</th>
+                                    <th scope="col" class="bt">말레이시아</th>
+                                    <th scope="col" class="bt">러시아</th>
                                 </tr>
                                 <tr>
-                                    <th scope="col">통화</th>
-                                    <th scope="col">USD</th>
-                                    <th scope="col">JPY</th>
-                                    <th scope="col">CNY</th>
-                                    <th scope="col">HKD</th>
-                                    <th scope="col">TWD</th>
-                                    <th scope="col">MOP</th>
-                                    <th scope="col">THB</th>
-                                    <th scope="col">MYR</th>
-                                    <th scope="col">EUR</th>
+                                    <th scope="col" class="bn">통화</th>
+                                    <th scope="col" class="bn">USD</th>
+                                    <th scope="col" class="bn">JPY</th>
+                                    <th scope="col" class="bn">CNY</th>
+                                    <th scope="col" class="bn">HKD</th>
+                                    <th scope="col" class="bn">TWD</th>
+                                    <th scope="col" class="bn">MOP</th>
+                                    <th scope="col" class="bn">THB</th>
+                                    <th scope="col" class="bn">MYR</th>
+                                    <th scope="col" class="bn">EUR</th>
                                 </tr>
                             </thead>
                             <tbody>

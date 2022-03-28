@@ -21,7 +21,7 @@
                                 <div class="point_op">
                                     <p>구분</p>
                                     <select class="point_box" id="select_box" name="selectbox">
-                                        <option value="" selected="selected">선택</option>
+                                        <option value="선택" selected="selected">선택</option>
                                         <option value="이륙 지원 보상">이륙 지연 보상</option>
                                         <option value="이벤트 당첨">이벤트 당첨</option>
                                         <option value="우수 회원">우수 회원</option>
@@ -81,7 +81,7 @@
                             </div>
                             <div class="table_area">
                                 <!--  이륙 지연 보상  -->
-                                <div class="select_rs">
+                                <div class="select_rs" id="resList">
                                     <table>
                                         <colgroup>
                                             <col width="50">
@@ -111,23 +111,24 @@
                                                 <col width="100">
                                                 <col width="150">
                                             </colgroup>
-                                            <tr v-for="dto in memList">
+                                            <tr v-for="(dto, i) in resList">
                                                     <td>
-                                                        <input type="checkbox" id="schUser" name="schUser">
+                                                        <input type="checkbox" :id=`schUser${i}` name="schUser" class="schUser" :value=`${dto.reUserindex}`>
                                                     </td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>{{dto.reReserNum}}</td>
+                                                    <td>{{dto.reMemberId}}</td>
+                                                    <td>{{dto.reFirstName}}{{dto.reLastName}}</td>
+                                                    <td>{{dto.reEmail}}</td>
+                                                    <td>{{dto.reBirth}}</td>
+                                                    <td>{{dto.reHp}}</td>
                                             </tr>
                                         </table>
                                     </div>
                                     <div class="point_footer">
                                         <div>
-                                            <input type="text" class="pointnumber"><input type="text" value="%" readonly class="readonly">
-                                            <input type="submit" value="적립">
+                                            <span>Point : </span><input type="text" id="pointNumber1">
+                                            <span>Memo : </span><input type="text" id="pointMemo1">
+                                            <input type="button" value="적립" id="updatePointList">
                                         </div>
                                     </div>
                                 </div>
@@ -179,8 +180,8 @@
                                     </div>
                                     <div class="point_footer">
                                         <div class="select_user">
-                                            <span>Point : </span><input type="text" id="pointNumber">
-                                            <span>Memo : </span><input type="text" id="pointMemo">
+                                            <span>Point : </span><input type="text" id="pointNumber2">
+                                            <span>Memo : </span><input type="text" id="pointMemo2">
                                             <input type="button" id="updatePoint" value="지급">
                                         </div>
                                     </div>

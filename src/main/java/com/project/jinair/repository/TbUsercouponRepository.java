@@ -24,4 +24,5 @@ public interface TbUsercouponRepository extends JpaRepository<TbUsercoupon, Long
 
 
     Optional<TbUsercoupon> findByUcCodeAndUcUserindex(String code, Long id);
+    List<TbUsercoupon> findByUcUserindex(Long id);
 }
