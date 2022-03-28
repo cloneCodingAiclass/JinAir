@@ -486,6 +486,66 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
         return Header.OK(tbReservationList);
     }
 
+    public Long search(Long id) {
+        return tbReservationRepository.findById(id).get().getReTotal();
+    }
+
+    public void update1(Header<ReserveApiRequest> request) {
+        ReserveApiRequest reserveApiRequest = request.getData();
+        Optional<TbReservation> reservation = tbReservationRepository.findById(reserveApiRequest.getReIndex());
+        reservation.ifPresent(
+                select ->{
+                    select.setReReserNum(reserveApiRequest.getReReserNum());
+                    select.setReStatus(reserveApiRequest.getReStatus());
+                    select.setReFirstName(reserveApiRequest.getReFirstName());
+                    select.setReLastName(reserveApiRequest.getReLastName());
+                    select.setReBirth(reserveApiRequest.getReBirth());
+                    select.setReEmail(reserveApiRequest.getReEmail());
+                    select.setReNation(reserveApiRequest.getReNation());
+                    select.setReMemberId(reserveApiRequest.getReMemberId());
+                    select.setReGender(reserveApiRequest.getReGender());
+                    select.setReHpNation(reserveApiRequest.getReHpNation());
+                    select.setReHp(reserveApiRequest.getReHp());
+                    select.setRePayment(reserveApiRequest.getRePayment());
+                    select.setReUserindex(reserveApiRequest.getReUserindex());
+                    tbReservationRepository.save(select);
+                }
+        );
+    }
+
+    public String reFirstName(Long id) {
+        return tbReservationRepository.findById(id).get().getReFirstName();
+    }
+    public String reLastName(Long id) {
+        return tbReservationRepository.findById(id).get().getReLastName();
+    }
+    public String reBirth(Long id) {
+        return tbReservationRepository.findById(id).get().getReBirth();
+    }
+    public String reGender(Long id) {
+        return tbReservationRepository.findById(id).get().getReGender();
+    }
+    public String reNation(Long id) {
+        return tbReservationRepository.findById(id).get().getReNation();
+    }
+    public String reMemberId(Long id) {
+        return tbReservationRepository.findById(id).get().getReMemberId();
+    }
+    public String reEmail(Long id) {
+        return tbReservationRepository.findById(id).get().getReEmail();
+    }
+    public String reHpNation(Long id) {
+        return tbReservationRepository.findById(id).get().getReHpNation();
+    }
+    public String reHp(Long id) {
+        return tbReservationRepository.findById(id).get().getReHp();
+    }
+    public String reReserNum(Long id) {
+        return tbReservationRepository.findById(id).get().getReReserNum();
+    }
+    public Long reUserindex(Long id) {
+        return tbReservationRepository.findById(id).get().getReUserindex();
+    }
     public List<Header<Object>>  deleteForUser(Long userIndex){
         List<TbReservation> tbUsercoupon = tbReservationRepository.findByReUserindex(userIndex);
 
@@ -493,5 +553,6 @@ public class ReservationApiLogicService implements CrudInterface<ReserveApiReque
             tbReservationRepository.delete(couponRegist);
             return Header.OK();
         }).collect(Collectors.toList());
+
     }
 }

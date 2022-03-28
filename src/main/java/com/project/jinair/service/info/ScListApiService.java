@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -219,4 +220,12 @@ public class ScListApiService implements CrudInterface<ScheduleApiRequest, Sched
         return Header.OK(responseList);
     }
 
+    // 항공기명, 출발지, 도착지, 출발 시간
+    public Header<ScheduleApiResponse> forPoint(String airName, String startPoint, String arrPoint, String startTime){
+        Optional<TbSchedule> tbSchedule = tbScheduleRepository.findBySchAirplaneNameAndSchDeparturePointAndSchArrivalPointAndSchStartTime(airName, startPoint, arrPoint, LocalDateTime.parse(startTime));
+
+        return tbSchedule
+                .map(schedule -> response(schedule))
+                .orElseGet(() -> Header.ERROR("NO DATA"));
+    }
 }

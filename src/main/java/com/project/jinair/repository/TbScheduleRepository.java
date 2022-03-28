@@ -8,10 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TbScheduleRepository extends JpaRepository<TbSchedule, Long> {
-
+    Optional<TbSchedule> findBySchAirplaneNameAndSchDeparturePointAndSchArrivalPointAndSchStartTime(String airName, String startPoint, String arrPoint, LocalDateTime startTime);
 
     List<TbSchedule> findBySchAirplaneTypeAndSchAirplaneNameAndSchDepartureDateAndSchDeparturePointAndSchArrivalPoint(String schAirplaneType, String schAirplaneName, LocalDateTime schDepartureDate, String schDeparturePoint, String schArrivalPoint);
     List<TbSchedule> findBySchAirplaneNameAndSchDepartureDate(String schAirplaneName, LocalDateTime schDepartureDate);

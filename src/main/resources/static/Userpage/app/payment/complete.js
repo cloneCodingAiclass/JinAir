@@ -7,8 +7,7 @@ $(function () {
 
     function coupon(cupo){
         let ucIndex = $('.sale').attr("id");
-        console.log(ucIndex);
-        console.log(cupo);
+
         let finalCoupon
             finalCoupon = {
                 data: {
@@ -37,12 +36,10 @@ $(function () {
     let sumResult = 0;
     $('.cookies').each(function (i){
         let num = $('.cookies').eq(i).attr("value");
-        console.log(num);
         if(num % 2 != 0) {
             sumResult++;
         }
     });
-    console.log(sumResult);
     $('#peopleSum').html(sumResult + "명");
 
     $(".isAdult").each(function (i){
@@ -175,7 +172,7 @@ $(function () {
     let date = new Date();
     let week = new Array('일', '월', '화', '수', '목', '금', '토');
     let today = date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).toString().slice(-2) + "-" + ("00" + date.getDate()).toString().slice(-2) + " (" + week[date.getDay()] +")";
-    console.log("00"+date.getDay());
+
 
     $('#today, #reserDay').text(today);
 
@@ -184,4 +181,46 @@ $(function () {
     $('#totalPrice').text(" " + Math.ceil(money).toLocaleString() + "원");
 
     // 적립 데이터 확인
+
+    // 포인트 적립
+    let percent;
+    let userIndex;
+    let point;
+    let airName = $('#airName').text();
+    let startPoint = $('#startPoint').text();
+    let arrPoint = $('#arrPoint').text();
+    let startTime = $('#startTime1').text().trim().replace(' ', 'T') + ':00';
+
+    console.log(airName + startPoint + arrPoint + startTime);
+
+    $.post({
+        url: '/api/schedule/forPoint',
+        data: "airName=" + airName + "&startPoint=" + startPoint + "&arrPoint=" + arrPoint + "&startTime=" + startTime,
+        dataType: 'text',
+        success: function (response){
+            let dataJson = JSON.parse(response);
+            let percent = dataJson.data.schPoint;
+
+            point = money * percent / 100;
+        }
+    })
+
+    console.log(point)
+
+    // function addPoint(point, userIndex){
+    //     let jsonData = {
+    //         data : {
+    //             poPoint : point,
+    //             poMemo: "항공권 예약",
+    //             poUserindex: userIndex
+    //         }
+    //     }
+    //     $.post({
+    //         url : '/api/point',
+    //         data : JSON.stringify(jsonData),
+    //         dataType : 'text',
+    //         contentType : 'application/json'
+    //     })
+    // }
+
 });

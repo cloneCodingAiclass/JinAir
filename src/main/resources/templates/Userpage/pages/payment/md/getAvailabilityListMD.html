@@ -13,6 +13,11 @@
                class="cookies"
                th:id="${i.index}"
                th:value="${dto}">
+        <input type="hidden" name=""
+               th:each="dto, i : ${reIndex1}"
+               class="realIndex"
+               th:id="'reIndexx'+${i.index}"
+               th:value="${dto}">
     </div>
     <div>
         <input type="hidden" name="" id="schDeparturePoint" th:value="${schDeparturePoint}">
@@ -803,6 +808,117 @@
         </div>
     </div>
     <!-- 운임규정 모달 끝 -->
+    <div class="paymentModal">
+        <div class="paymentWindow">
+            <div class="paymentTitle">
+                <p>결제 정보</p>
+            </div>
+            <div class="pay_info_wrap">
+                <table class="pay_info_T">
+                    <colgroup>
+                        <col width="33.3%">
+                        <col width="33.3%">
+                        <col width="33.3%">
+                    </colgroup>
+                    <tr>
+                        <td>
+                            <p class="tit">총 운임</p>
+                            <p class="Price_wrapped"><span class="cul">KRW</span><span
+                                    class="price totalPriceA"></span></p>
+                        </td>
+                        <td>
+                            <p class="tit">기존 금액</p>
+                            <p class="Price_wrapped"><span class="cul">KRW</span><span class="price totalPriceB"></span>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="tit">최종 결제금액</p>
+                            <p class="Price_wrapped"><span class="cul">KRW</span><span
+                                    class="price tot totalPriceC"></span></p>
+                        </td>
+                    </tr>
+                </table>
+                <div class="pay_card">
+                    <p class="pay_card_title">결제 수단 선택</p>
+                    <div class="pay_card_content">
+                        <label class="coupone">
+                            <input type="checkbox" name="discount" id="coupone1" checked>저장된 결제 수단 선택
+                        </label>
+                        <span class="choiceCard">카드선택</span>
+                        <select class="cardSelect">
+                            <option value="">카드를 선택해 주십시오. </option>
+                            <option value="026" selected>카카오페이</option>
+                            <option value="029">신한카드</option>
+                            <option value="016">KB국민카드</option>
+                            <option value="031">삼성카드</option>
+                            <option value="027">현대카드</option>
+                            <option value="047">롯데카드</option>
+                        </select>
+
+                    </div>
+                    <div class="payBTN">
+                        <input type="button" class="patbtn" value="결제하기">
+                        <input type="button" class="calbtn" value="취소">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="paymentModal1">
+        <div class="paymentWindow">
+            <div class="paymentTitle">
+                <p>환불 정보</p>
+            </div>
+            <div class="pay_info_wrap">
+                <table class="pay_info_T">
+                    <colgroup>
+                        <col width="33.3%">
+                        <col width="33.3%">
+                        <col width="33.3%">
+                    </colgroup>
+                    <tr>
+                        <td>
+                            <p class="tit">기존 금액</p>
+                            <p class="Price_wrapped"><span class="cul">KRW</span><span class="price totalPriceB"></span>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="tit">총 운임</p>
+                            <p class="Price_wrapped"><span class="cul">KRW</span><span
+                                    class="price totalPriceA"></span></p>
+                        </td>
+                        <td>
+                            <p class="tit">최종 환불금액</p>
+                            <p class="Price_wrapped"><span class="cul">KRW</span><span
+                                    class="price tot totalPriceC"></span></p>
+                        </td>
+                    </tr>
+                </table>
+                <div class="pay_card">
+                    <p class="pay_card_title">환불 수단 선택</p>
+                    <div class="pay_card_content">
+                        <label class="coupone">
+                            <input type="checkbox" name="discount" id="coupone2" checked>저장된 결제 수단 선택
+                        </label>
+                        <span class="choiceCard">다른 환불 카드 선택</span>
+                        <select class="cardSelect">
+                            <option value=""selected>카드를 선택해 주십시오. </option>
+                            <option value="026">카카오페이</option>
+                            <option value="029">신한카드</option>
+                            <option value="016">KB국민카드</option>
+                            <option value="031">삼성카드</option>
+                            <option value="027">현대카드</option>
+                            <option value="047">롯데카드</option>
+                        </select>
+                    </div>
+                    <div class="payBTN">
+                        <input type="button" class="patbtn" value="환불하기">
+                        <input type="button" class="calbtn" value="취소">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script src="/userpage/app/payment/getAvailabilityListMD.js"></script>
 </html>

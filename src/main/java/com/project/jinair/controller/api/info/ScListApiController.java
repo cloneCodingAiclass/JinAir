@@ -151,4 +151,14 @@ public class ScListApiController implements CrudInterface<ScheduleApiRequest, Sc
         return scListApiService.oneway(goPoint, comePoint, goDate);
     }
 
+    @PostMapping("/forPoint")
+    public Header<ScheduleApiResponse> forPoint(
+            @RequestParam(value = "airName")String airName,
+            @RequestParam(value = "startPoint")String startPoint,
+            @RequestParam(value = "arrPoint")String arrPoint,
+            @RequestParam(value = "startTime")String startTime
+    ){
+        return scListApiService.forPoint(airName, startPoint, arrPoint, startTime);
+    }
+
 }

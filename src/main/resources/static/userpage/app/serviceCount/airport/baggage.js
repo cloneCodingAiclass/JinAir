@@ -149,7 +149,6 @@ $(function () {
         $('#baggage3').css({"display":"none"});
     }
 
-
 });
 
 $(() => {
@@ -376,4 +375,11 @@ $(() => {
         console.log(pageId2);
         search(pageId2, airplane, airport, type, start, end);
     });
+
+
 })
+
+function ReqAlert(){
+    alert('수령 신청이 완료 되었습니다!')
+    location.reload();
+}

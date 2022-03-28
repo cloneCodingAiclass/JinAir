@@ -1063,13 +1063,34 @@ public class PageController {
         model.addAttribute("goDateSelectOptt", goDateSelectOptt);
         model.addAttribute("comeDateSelectOptt", comeDateSelectOptt);
         Long peopleNum = AdultNumber+ChildNumber+InfantNumber;
-        List reIndex = new ArrayList<>();
+        List reIndex2 = new ArrayList<>();      // 진짜 인덱스
 
         for(int i = 0 ; i < peopleNum*2 ; i ++){
-            reIndex.add(reIndex1+i);
+            reIndex2.add(reIndex1+i);
         }
-        model.addAttribute("reIndex", reIndex);
+        model.addAttribute("reIndex1", reIndex2);
 
+        List Cook = new ArrayList<>();
+
+        Cookie[] myCookies = request.getCookies();
+        for(int i = 0; i < myCookies.length; i++) {
+            if(myCookies[i].getValue().equals("reIndex")){
+                reservationApiLogicService.delete(Long.valueOf(myCookies[i].getName()));
+                expiredCookie(response, myCookies[i].getName());
+            }
+        }
+        String reIndex = null;  // 가짜 인덱스
+        // 인원수에 만큼 테이블 생성
+        // 인당 예약 테이블 index로 쿠키 생성
+        for(int i = 0 ; i < peopleNum*2 ; i ++){
+            reIndex = String.valueOf(reservationApiLogicService.creating());
+            Cookie myCookie = new Cookie(reIndex, "reIndex");
+            myCookie.setMaxAge(1200);
+            myCookie.setPath("/");
+            response.addCookie(myCookie);
+            Cook.add(myCookie.getName());
+        }
+        model.addAttribute("reIndex", Cook);
         if(ChildNumber == 0){
             if(InfantNumber == 0){
                 model.addAttribute("people", "성인 " + AdultNumber);
@@ -1093,7 +1114,7 @@ public class PageController {
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-            return new ModelAndView("/userpage/pages/payment/getAvailabilityListMD")
+            return new ModelAndView("/userpage/pages/payment/md/getAvailabilityListMD")
                     .addObject("code", "getAvailabilityList");
         }else{
             return new ModelAndView("/userpage/pages/index/error")
@@ -1118,14 +1139,34 @@ public class PageController {
         model.addAttribute("schArrivalPoint", schArrivalPoint);
         model.addAttribute("goDateSelectOptt", goDateSelectOptt);
         Long peopleNum = AdultNumber+ChildNumber+InfantNumber;
-        List reIndex = new ArrayList<>();
-
-        System.out.println(reIndex1);
+        List reIndex2 = new ArrayList<>();      // 진짜 인덱스
 
         for(int i = 0 ; i < peopleNum*2 ; i ++){
-            reIndex.add(reIndex1+i);
+            reIndex2.add(reIndex1+i);
         }
-        model.addAttribute("reIndex", reIndex);
+        model.addAttribute("reIndex1", reIndex2);
+
+        List Cook = new ArrayList<>();
+
+        Cookie[] myCookies = request.getCookies();
+        for(int i = 0; i < myCookies.length; i++) {
+            if(myCookies[i].getValue().equals("reIndex")){
+                reservationApiLogicService.delete(Long.valueOf(myCookies[i].getName()));
+                expiredCookie(response, myCookies[i].getName());
+            }
+        }
+        String reIndex = null;  // 가짜 인덱스
+        // 인원수에 만큼 테이블 생성
+        // 인당 예약 테이블 index로 쿠키 생성
+        for(int i = 0 ; i < peopleNum*2 ; i ++){
+            reIndex = String.valueOf(reservationApiLogicService.creating());
+            Cookie myCookie = new Cookie(reIndex, "reIndex");
+            myCookie.setMaxAge(1200);
+            myCookie.setPath("/");
+            response.addCookie(myCookie);
+            Cook.add(myCookie.getName());
+        }
+        model.addAttribute("reIndex", Cook);
         if(ChildNumber == 0){
             if(InfantNumber == 0){
                 model.addAttribute("people", "성인 " + AdultNumber);
@@ -1148,7 +1189,7 @@ public class PageController {
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-            return new ModelAndView("/userpage/pages/payment/getAvailabilityListMD")
+            return new ModelAndView("/userpage/pages/payment/md/getAvailabilityListMD")
                     .addObject("code", "getAvailabilityList");
         }else{
             return new ModelAndView("/userpage/pages/index/error")
@@ -1179,11 +1220,34 @@ public class PageController {
         model.addAttribute("goDateSelectOptt1", goDateSelectOptt1);
 
         Long peopleNum = AdultNumber+ChildNumber+InfantNumber;
-        List reIndex = new ArrayList<>();
+        List reIndex2 = new ArrayList<>();      // 진짜 인덱스
 
         for(int i = 0 ; i < peopleNum*2 ; i ++){
-            reIndex.add(reIndex1+i);
+            reIndex2.add(reIndex1+i);
         }
+        model.addAttribute("reIndex1", reIndex2);
+
+        List Cook = new ArrayList<>();
+
+        Cookie[] myCookies = request.getCookies();
+        for(int i = 0; i < myCookies.length; i++) {
+            if(myCookies[i].getValue().equals("reIndex")){
+                reservationApiLogicService.delete(Long.valueOf(myCookies[i].getName()));
+                expiredCookie(response, myCookies[i].getName());
+            }
+        }
+        String reIndex = null;  // 가짜 인덱스
+        // 인원수에 만큼 테이블 생성
+        // 인당 예약 테이블 index로 쿠키 생성
+        for(int i = 0 ; i < peopleNum*2 ; i ++){
+            reIndex = String.valueOf(reservationApiLogicService.creating());
+            Cookie myCookie = new Cookie(reIndex, "reIndex");
+            myCookie.setMaxAge(1200);
+            myCookie.setPath("/");
+            response.addCookie(myCookie);
+            Cook.add(myCookie.getName());
+        }
+        model.addAttribute("reIndex", Cook);
         if(ChildNumber == 0){
             if(InfantNumber == 0){
                 model.addAttribute("people", "성인 " + AdultNumber);
@@ -1206,7 +1270,7 @@ public class PageController {
         HttpSession session = request.getSession();
         if(session.getAttribute("memberApiResponse") != null){
             model.addAttribute("loginURL", "/userpage/fragment/menu_login");
-            return new ModelAndView("/userpage/pages/payment/getAvailabilityListMD")
+            return new ModelAndView("/userpage/pages/payment/md/getAvailabilityListMD")
                     .addObject("code", "getAvailabilityList");
         }else{
             return new ModelAndView("/userpage/pages/index/error")

@@ -2565,3 +2565,173 @@ td.cur::before {
   margin: 40px 10px 0;
   cursor: pointer;
 }
+
+/* */
+.paymentModal {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.3);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.paymentModal1 {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.3);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.paymentWindow{
+  width: 70%;
+  height: 70%;
+  background-color: #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
+  border-radius: 1px;
+  border: 1px solid #bdd600;
+  margin: 100px auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.exchange{
+  width: 70%;
+  height: 70%;
+  background-color: #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
+  border-radius: 1px;
+  border: 1px solid #bdd600;
+  margin: 100px auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.paymentTitle{
+  width: 100%;
+  height: 20%;
+}
+.paymentTitle > p{
+  width: 100%;
+  font-size: 24px;
+  font-weight: 900;
+  color: black;
+  padding: 40px 30px 30px 30px;
+}
+.pay_info_wrap {
+  width: 100%;
+  height: 80%;
+  font-weight: 600;
+
+}
+
+.pay_info_wrap .pay_info_T {
+  text-align: center;
+  width: 100%;
+  height: 100px;
+  background-color: rgb(247, 247, 246);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.pay_info_wrap .pay_info_T td {
+  height: 130px;
+  text-align: center;
+  padding: 20px;
+}
+
+.pay_info_wrap .pay_info_T td:last-child {
+  border-right: none;
+}
+
+.pay_info_wrap .pay_info_T td p.tit {
+  margin-bottom: 30px;
+}
+
+.pay_info_wrap .pay_info_T td .Price_wrapped {
+  font-size: 20px;
+  display: flex;
+  text-align: center;
+  margin-left: 75px;
+}
+
+.pay_info_wrap .pay_info_T td .Price_wrapped span.cul {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.pay_info_wrap .pay_info_T td .Price_wrapped span.tot {
+  font-size: 20px;
+}
+.pay_card{
+  font-size: 22px;
+}
+.pay_card_title{
+  width: 100%;
+  font-size: 18px;
+  font-weight: 900;
+  color: black;
+  padding: 40px 30px 10px 30px;
+}
+.pay_card_content {
+  padding-top: 30px;
+  width: 100%;
+  height: 100px;
+  background-color: rgb(247, 247, 246);
+}
+.pay_card_content .coupone{
+  font-size: 14px;
+  display: block;
+  margin-left: 20px;
+  margin-bottom: 5px;
+}
+.pay_card_content input[type = "checkbox"] {
+  margin-right: 5px;
+  width: 17px;
+  height: 17px;
+  border: 1px solid rgba(128, 128, 128, 0.19);
+  background-color: rgb(247, 247, 246);
+  vertical-align: middle;
+
+}
+.cardSelect{
+  margin-left: 20px;
+  width: 150px;
+  height: 30px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.choiceCard{
+  font-size: 18px;
+  width: 900;
+  padding-left: 20px;
+}
+.payBTN{
+  width: 100%;
+  height: auto;
+  text-align: center;
+  margin-top: 25px;
+}
+.payBTN input{
+  font-size: 15px;
+  font-weight: 600;
+  width: 100px;
+  height: 36px;
+  border: 2px solid #bdd600;
+  background-color: #bdd600;
+  cursor: pointer;
+}
+.payBTN .calbtn{
+  width: 100px;
+  height: 36px;
+  border: 2px solid #bdd600;
+  background-color: white;
+}
