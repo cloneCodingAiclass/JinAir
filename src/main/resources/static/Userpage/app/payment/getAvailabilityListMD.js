@@ -1836,6 +1836,65 @@ function onewayUpdating(){    // 가짜 인덱스 홀수번
       }
     }
   }
+  for( let i = 1 ; i < 60; i+=2){
+    let reFirstName1;
+    let reLastName1;
+    let reBirth1;
+    let reGender1;
+    let reNation1;
+    let reMemberId1;
+    let reEmail1;
+    let reHpNation1;
+    let reHp1;
+    let reReserNum1;
+    let reUserindex1;
+
+    if(document.getElementById(`reIndexx${i-1}`)) {
+      reFirstName1 = reFirstName(i-1);
+      reLastName1 = reLastName(i-1);
+      reBirth1 = reBirth(i-1);
+      reGender1 = reGender(i-1);
+      reNation1 = reNation(i-1);
+      reMemberId1 = reMemberId(i-1);
+      reEmail1 = reEmail(i-1);
+      reHpNation1 = reHpNation(i-1);
+      reHp1 = reHp(i-1);
+      reReserNum1 = reReserNum(i-1);
+      reUserindex1 = reUserindex(i-1);
+    }
+
+    if(document.getElementById(`${i}`)){
+      if(i%2 == 1){
+        let jsonData;
+        jsonData = {
+          data : {
+            reIndex : $(`#${i}`).val(),
+            reStatus: "PaymentFinished",
+            reReserNum : reReserNum1,
+            rePayment : "KAKAOPAY",
+            reFirstName : reFirstName1,
+            reLastName : reLastName1,
+            reBirth : reBirth1,
+            reGender : reGender1,
+            reNation : reNation1,
+            reMemberId : reMemberId1,
+            reEmail : reEmail1,
+            reHpNation : reHpNation1,
+            reHp : reHp1,
+            reUserindex : reUserindex1
+          }
+        }
+        $.ajax({
+          url : "/api/reservation/update1",
+          type : "PUT",
+          data : JSON.stringify(jsonData),
+          dataType : "text",
+          async :false,
+          contentType : "application/json"
+        });
+      }
+    }
+  }
 }
 
 function twowayUpdating(price){    // 가짜 인덱스 홀수번
