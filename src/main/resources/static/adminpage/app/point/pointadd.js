@@ -269,11 +269,20 @@ $(function () {
     }
 
     $('#reserveUserBtn').on('click', function (){
-        searchSchofUser($('.country_box').find('option:selected').val(), $('#start').val(), $('.airport_box').find('option:selected').val());
+        if(!$('.country_box').find('option:selected').val() || $('#start').val(), $('.airport_box').find('option:selected').val()){
+            alert('입력을 확인해주세요!')
+        }else{
+            searchSchofUser($('.country_box').find('option:selected').val(), $('#start').val(), $('.airport_box').find('option:selected').val());
+        }
+        
     })
 
     $('.btn_usersearch').on('click', function (){
-        searchUserid($('#userid').val());
+        if(!$('#userid').val()){
+            alert('아이디를 입력해주세요')
+        }else{
+            searchUserid($('#userid').val());
+        }
     })
 
     $(document).on('click', '#updatePoint', function (){
