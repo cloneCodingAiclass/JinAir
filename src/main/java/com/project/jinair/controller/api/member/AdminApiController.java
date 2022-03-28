@@ -44,4 +44,11 @@ public class AdminApiController implements CrudInterface<AdminApiRequest, AdminA
     public Header<AdminApiResponse> IdPwRead(String admin_id) {
         return adminApiLoginService.IdPwRead(admin_id);
     }
+
+    @GetMapping("/isRight/{adminId}/{adminPw}")
+    public Header<AdminApiResponse> isRight(
+            @PathVariable(name = "adminId") String adminId,
+            @PathVariable(name = "adminPw") String adminPw){
+        return adminApiLoginService.isRight(adminId, adminPw);
+    }
 }
