@@ -206,10 +206,10 @@ $(function () {
                 str += "<td class='lastPage1'>>></td>";
             }
             $("#showPage").on('click', '.firstPage1', function(){
-                sclist(0);
+                list(0);
             });
             $("#showPage").on('click', '.lastPage1', function(){
-                sclist(lastPage-1);
+                list(lastPage-1);
             });
         })
     }

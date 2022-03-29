@@ -138,23 +138,39 @@ $(function () {
             // 검색 데이터
             itemList.itemList = response.data;
 
-            let url = "";
-            let numberPage = 0;
-            let last = showPage.totalPages;
-
-            if(last < 1){
-                url += '<td id="' + 0 + '" class="pageButton">' + 1 + '</td>';
-            }else{
-                for (numberPage; numberPage < last; numberPage++) {
-                    url += '<div id="' + numberPage + '" class="pageButton">' + (numberPage + 1) + '</div>';
-                }
+            let lastPage = response.pagination.totalPages;
+            let str = "";
+            for (let i = 0; i < lastPage; i++) {
+                str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
             }
-            document.getElementById("button").innerHTML = url;
-
-            $(".pageButton").on('click', function () {
-                index = $(this).attr("id");
-                cplist(index);
-            })
+            $("#showPage").html(str);
+            if(index == 0) {
+                $(".firstPage1").css("visibility", "hidden");
+            }
+            if(index == lastPage-1) {
+                $(".lastPage1").css("visibility", "hidden");
+            }
+            $(".pageNum").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+index+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            if (lastPage != 0) {
+                str += "<td class='firstPage1'><<</td>";
+            }
+            if (lastPage != 0){
+                str += "<td class='lastPage1'>>></td>";
+            }
+            $("#showPage").on('click', '.firstPage1', function(){
+                cplist(0);
+            });
+            $("#showPage").on('click', '.lastPage1', function(){
+                cplist(lastPage-1);
+            });
         })
     }
 
@@ -164,6 +180,40 @@ $(function () {
         $.get("/api/coupon/searchTxt/" + str + "?page=" + index, function (response) {
             console.dir(response)
             itemList.itemList = response.data;
+
+            let lastPage = response.pagination.totalPages;
+            let str2 = "";
+            str2 += "<td class='firstPage2'><<</td>";
+            for ( let i = 0; i < lastPage; i++ ) {
+                str2 += "<td class='pagesS' id="+i+">" + (i+1) + "</td>";
+            }
+            str2 += "<td class='lastPage2'>>></td>";
+            $("#showPage").html(str2);
+            if ( index == 0 ) {
+                $(".firstPage2").css("visibility", "hidden");
+            }
+            if ( index == lastPage-1 || response.totalElements != 0 ) {
+                $(".lastPage2").css("visibility", "hidden");
+            }
+            if ( response.pagination.totalElements == 0 ) {
+                alert("검색결과가 없습니다.");
+                cplist(0);
+            }
+            $(".pagesS").css({
+                "background-color" : "#fff",
+                "color" : "#444",
+                "cursor" : "pointer"
+            });
+            $("#"+index+"").css({
+                "background-color" : "#661e43",
+                "color" : "white"
+            });
+            $(document).on('click', '.firstPage2', function(){
+                searchTxt(str, 0);
+            });
+            $(document).on('click', '.lastPage2', function(){
+                searchTxt(str, lastPage-1);
+            });
         })
     };
 
@@ -175,4 +225,16 @@ $(function () {
             alert("검색어를 입력하세요.");
         }
     })
+
+    $("#showPage").on('click', '.pageNum', function(){
+        let pageId = this.id;
+        console.log(pageId);
+        cplist(pageId);
+    });
+
+    $("#showPage").on('click', '.pageNum3', function(){
+        let str = $('#text').val();
+        let pageId2 = this.id;
+        searchTxt(str, pageId2);
+    });
 });
