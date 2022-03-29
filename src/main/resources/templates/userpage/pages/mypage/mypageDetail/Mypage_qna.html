@@ -34,7 +34,7 @@
             <div class="qna_main">
                 <table id="myQnaList" class="bbsList">
                     <colgroup>
-                        <col width="15%"><col width="50%"><col width="18%"><col width="18%">
+                        <col width="15%"><col width="58%"><col width="18%"><col width="14%">
                     </colgroup>
                     <thead>
                     <tr>
@@ -42,6 +42,7 @@
                         <th scope="col">제목</th>
                         <th scope="col">등록일</th>
                         <th scope="col">답변</th>
+                        <th scope="col">답변일</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -50,6 +51,7 @@
                         <th scope="col"><a :href=`/pages/myQna/view/${list.qnaIndex}`>{{ list.qnaTitle }}</a></th>
                         <th scope="col">{{ list.qnaRegdate.substr(0, 10) }}</th>
                         <th scope="col">{{ list.qnaIsans }}</th>
+                        <th scope="col" id="qnaAnsdate">{{ list.qnaAnsdate }}</th>
                     </tr>
                     </tbody>
                 </table>
