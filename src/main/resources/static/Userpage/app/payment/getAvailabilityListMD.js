@@ -2038,7 +2038,7 @@ function deleting() {    // 가짜 인덱스 홀수번
         dataType: "text",
         contentType: "application/json",
         success: function (response) {
-          location.href = "/pages/complete"
+          location.href = "/pages/complete/update"
         }
       })
     }
@@ -2064,7 +2064,7 @@ function deleting1() {    // 가짜 인덱스 홀수번
         dataType: "text",
         contentType: "application/json",
         success: function (response) {
-          location.href = "/pages/pay/" + reUserindex1;
+          location.href = "/pages/payUpdate/" + reUserindex1;
         }
       })
     }
