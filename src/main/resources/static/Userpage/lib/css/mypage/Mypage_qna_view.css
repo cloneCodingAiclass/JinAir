@@ -712,13 +712,13 @@ header{
     height: 91px;
 }
 
-.qna_main {
-    width: 1080px;
-}
+/*.qna_main {*/
+/*    width: 1080px;*/
+/*}*/
 
 
 table.bbsList {
-    width: 1080px !important;
+    width: 100%;
     border-top: 1px solid black;
     border-collapse: collapse;
     font-weight: 600;
