@@ -1396,7 +1396,7 @@ public class PageController {
     }
 
     // 사용자 결제 완료
-    @RequestMapping("/complete")
+    @RequestMapping(value = {"/complete", "/complete/update"})
     public ModelAndView complete(HttpServletRequest request, HttpServletResponse response, Model model) {
         Cookie[] myCookies = request.getCookies();
         List Cook = new ArrayList<>();
