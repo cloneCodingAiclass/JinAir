@@ -412,13 +412,13 @@ $(function () {
             tripType = '편도';
         }
         if(weekday == '평일' && tripType == '편도'){
-            necessary = 100;
+            necessary = 1000;
         }else if(weekday == '평일' && tripType == '왕복'){
-            necessary = 200;
+            necessary = 2000;
         }else if(weekday == '주말' && tripType == '편도'){
-            necessary = 150;
+            necessary = 1500;
         }else if(weekday == '주말' && tripType == '왕복'){
-            necessary = 300;
+            necessary = 3000;
         }else {
             alert('입력 정보를 확인해주세요.');
             e.stopPropagation()

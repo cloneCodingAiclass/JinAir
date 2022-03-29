@@ -1396,7 +1396,7 @@ public class PageController {
     }
 
     // 사용자 결제 완료
-    @RequestMapping("/complete")
+    @RequestMapping(value = {"/complete", "/complete/update"})
     public ModelAndView complete(HttpServletRequest request, HttpServletResponse response, Model model) {
         Cookie[] myCookies = request.getCookies();
         List Cook = new ArrayList<>();
@@ -3280,6 +3280,26 @@ public class PageController {
             model.addAttribute("loginURL", "/userpage/fragment/menu");
         }
         return new ModelAndView("/userpage/pages/payment/pay")
+                .addObject("code", "pay");
+    }
+
+    @GetMapping("/payUpdate/{a}")
+    public ModelAndView updateticket(HttpServletRequest request, Model model, @PathVariable(name = "a") String a) {
+
+        List<ReserveApiResponse> reserveApiResponseList = reservationApiLogicService.paymentUpdate(a).getData();
+        System.out.println(reserveApiResponseList);
+
+        HttpSession session = request.getSession();
+        model.addAttribute("reservation", session.getAttribute(String.valueOf(reserveApiResponseList)));
+        if (session.getAttribute("memberApiResponse") != null) {
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/payment/payUpdate")
+                    .addObject("code", "genieListView")
+                    .addObject("menuList", menuService.getadminMenu());
+        } else {
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/payment/payUpdate")
                 .addObject("code", "pay");
     }
 }

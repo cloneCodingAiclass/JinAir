@@ -4,8 +4,6 @@
 <!-- head -->
 <div th:replace="userpage/fragment/head :: head"></div>
 <link rel="stylesheet" href="/userpage/lib/css/payment/payReservation.css"/>
-<script src="/userpage/app/payment/payReservation.js"></script>
-<script src="/userpage/app/payment/payment.js"></script>
 <!-- head 끝 -->
 <body>
 <div>
@@ -185,7 +183,7 @@
                                     </colgroup>
                                     <th:block th:each="area, i : ${reserveApiResponse1}">
                                         <tr>
-                                            <td>구간 <span th:text="1" th:if="${i.count} % 2 != 0"></span><span th:text="2" th:if="${i.count} % 2 == 0"></span> : [[${area.reNation}]]</td>
+                                            <td>구간 <span th:text="1" th:if="${i.count} % 2 != 0"></span><span th:text="2" th:if="${i.count} % 2 == 0"></span> : [[${area.reSchDepPoint}]]</td>
                                             <td></td>
                                         </tr>
                                         <tr>
@@ -2325,5 +2323,6 @@
     </div>
 </div>
 </body>
-
+<script src="/userpage/app/payment/payReservation.js"></script>
+<script src="/userpage/app/payment/payment.js"></script>
 </html>
