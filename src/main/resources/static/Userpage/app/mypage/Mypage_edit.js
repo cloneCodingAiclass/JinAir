@@ -360,47 +360,50 @@ function hidePopupLayer(){
 
     // 회원탈퇴
     $('.btnTypeB').click( ()=> {
-        // let arrQnA = [];
-        $.ajax({
-            url : "/api/user/"+idx,
-            type : "DELETE",
-            success : function (){
-                alert('탈퇴 완료');
-                location.href = '/pages/jinair/index';
-            }
-        })
-        // 유저 포인트 삭제
-        $.ajax({
-            url : "/api/point/user/" + idx,
-            type : "DELETE"
-        })
-        // // 유저 QnA 삭제
-        // $.get('/api/qna/userQna/'+idx, function (response){
-        //     let arrQnAIndex = {};
-        //     console.dir(response)
-        //     for(let i = 0; response.data.length; i++){
-        //         console.log(response.data[i].qnaIndex);
-        //         arrQnAIndex.qaQnaindex = response.data[i].qnaIndex;
-        //         arrQnA.push(arrQnAIndex);
-        //     }
-        //     console.dir(arrQnA)
-        //     $.post({
-        //         url: '/api/qnaAns/QnAofAns/delete',
-        //         data: JSON.stringify(arrQnA),
-        //         dataType: 'text',
-        //         contentType: 'application/json'
-        //     })
-        // })
-        // 유저 쿠폰 삭제
-        $.ajax({
-            url: "/api/userCoupon/deleteForUser/"+idx,
-            type : "DELETE",
-        })
-        // 유저 예약 리스트 삭제
-        // $.ajax({
-        //     url: "/api/reservation/deleteForUser/"+idx,
-        //     type : "DELETE",
-        // })
+        if(!confirm('탈퇴 하시겠습니까?\n탈퇴시 포인트, 쿠폰, 예약 정보가 삭제됩니다.')){
+            console.log('탈퇴 취소');
+        }else {
+            // let arrQnA = [];
+            $.ajax({
+                url : "/api/user/"+idx,
+                type : "DELETE",
+                success : function (){
+                    location.href = '/pages/jinair/index';
+                }
+            })
+            // 유저 포인트 삭제
+            $.ajax({
+                url : "/api/point/user/" + idx,
+                type : "DELETE"
+            })
+            // // 유저 QnA 삭제
+            // $.get('/api/qna/userQna/'+idx, function (response){
+            //     let arrQnAIndex = {};
+            //     console.dir(response)
+            //     for(let i = 0; response.data.length; i++){
+            //         console.log(response.data[i].qnaIndex);
+            //         arrQnAIndex.qaQnaindex = response.data[i].qnaIndex;
+            //         arrQnA.push(arrQnAIndex);
+            //     }
+            //     console.dir(arrQnA)
+            //     $.post({
+            //         url: '/api/qnaAns/QnAofAns/delete',
+            //         data: JSON.stringify(arrQnA),
+            //         dataType: 'text',
+            //         contentType: 'application/json'
+            //     })
+            // })
+            // 유저 쿠폰 삭제
+            $.ajax({
+                url: "/api/userCoupon/deleteForUser/"+idx,
+                type : "DELETE",
+            })
+            // 유저 예약 리스트 삭제
+            // $.ajax({
+            //     url: "/api/reservation/deleteForUser/"+idx,
+            //     type : "DELETE",
+            // })
+        }
     })
 
 })(jQuery)

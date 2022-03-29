@@ -181,7 +181,7 @@ $(function () {
 
             $("#memIndex").text(response.data.memIndex);
             $("#userid").text(response.data.memUserid);
-            $("#userpw").text(response.data.memUserpw);
+            $("#userpw").val(response.data.memUserpw);
             $("#zipcode").val(response.data.memZipcode);
             $("#address1").val(response.data.memAddress1);
             $("#address2").val(response.data.memAddress2);
@@ -247,7 +247,7 @@ $(function () {
         jsonData = {
             data : {
                 memIndex : idx,
-                memUserpw : $("#userpw").text(),
+                memUserpw : $("#userpw").val(),
                 memZipcode : $("#zipcode").val(),
                 memAddress1 : $("#address1").val(),
                 memAddress2 : $("#address2").val(),
