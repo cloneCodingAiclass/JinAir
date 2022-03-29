@@ -3282,4 +3282,24 @@ public class PageController {
         return new ModelAndView("/userpage/pages/payment/pay")
                 .addObject("code", "pay");
     }
+
+    @GetMapping("/payUpdate/{a}")
+    public ModelAndView updateticket(HttpServletRequest request, Model model, @PathVariable(name = "a") String a) {
+
+        List<ReserveApiResponse> reserveApiResponseList = reservationApiLogicService.paymentUpdate(a).getData();
+        System.out.println(reserveApiResponseList);
+
+        HttpSession session = request.getSession();
+        model.addAttribute("reservation", session.getAttribute(String.valueOf(reserveApiResponseList)));
+        if (session.getAttribute("memberApiResponse") != null) {
+            model.addAttribute("loginURL", "/userpage/fragment/menu_login");
+            return new ModelAndView("/userpage/pages/payment/payUpdate")
+                    .addObject("code", "genieListView")
+                    .addObject("menuList", menuService.getadminMenu());
+        } else {
+            model.addAttribute("loginURL", "/userpage/fragment/menu");
+        }
+        return new ModelAndView("/userpage/pages/payment/payUpdate")
+                .addObject("code", "pay");
+    }
 }
