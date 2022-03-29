@@ -313,6 +313,9 @@ $(()=> {
             str += "<td class='firstPage1'><<</td>";
         }
         for (let i = 0; i < lastPage; i++) {
+            if(lastPage > 10){
+                break;
+            }
             str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
         }
         if (lastPage != 0){
