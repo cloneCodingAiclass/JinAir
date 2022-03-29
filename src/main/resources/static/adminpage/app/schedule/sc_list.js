@@ -151,8 +151,15 @@ $(function () {
 
             let lastPage = response.pagination.totalPages;
             let str = "";
+
+            if (lastPage != 0) {
+                str += "<td class='firstPage1'><<</td>";
+            }
             for (let i = 0; i < lastPage; i++) {
                 str += "<td class='pageNum' id="+i+">" + (i+1) + "</td>";
+            }
+            if (lastPage != 0){
+                str += "<td class='lastPage1'>>></td>";
             }
             $("#showPage").html(str);
             if(page == 0) {
