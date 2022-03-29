@@ -5,6 +5,10 @@ $(function () {
     let cupo = $('.sale').attr("value");
     coupon(cupo);
 
+    let isUpdate = $(location).attr('href').split('/')[5];
+
+    console.log(isUpdate)
+
     function coupon(cupo){
         let ucIndex = $('.sale').attr("id");
 
@@ -202,25 +206,30 @@ $(function () {
 
     console.log(airName + startPoint + arrPoint + startTime);
 
-    $.post({
-        url: '/api/schedule/forPoint',
-        data: "airName=" + airName + "&startPoint=" + startPoint + "&arrPoint=" + arrPoint + "&startTime=" + startTime,
-        dataType: 'text',
-        success: async function (response) {
-            let dataJson = JSON.parse(response);
-            let percent = dataJson.data.schPoint;
+    if(!isUpdate){
+        $.post({
+            url: '/api/schedule/forPoint',
+            data: "airName=" + airName + "&startPoint=" + startPoint + "&arrPoint=" + arrPoint + "&startTime=" + startTime,
+            dataType: 'text',
+            success: async function (response) {
+                let dataJson = JSON.parse(response);
+                let percent = dataJson.data.schPoint;
 
-            point = money * percent / 100;
+                point = money * percent / 100;
 
-            await sleep(1000);
-            console.log($("#resCode").text());
-            $.get("/api/reservation/resCode/" + $("#resCode").text(), function (response) {
-                userIndex = response.data[0].reUserindex;
+                await sleep(1000);
+                console.log($("#resCode").text());
+                $.get("/api/reservation/resCode/" + $("#resCode").text(), function (response) {
+                    userIndex = response.data[0].reUserindex;
 
-                addPoint(point, userIndex);
-            })
-        }
-    })
+                    addPoint(point, userIndex);
+                })
+            }
+        })
+    }else{
+        console.log('항공권 업데이트 완료')
+    }
+
 
 
     function addPoint(point, userIndex){
